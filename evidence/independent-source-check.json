@@ -1,0 +1,9 @@
+{
+  "passed": true,
+  "exact_source_item_names_checked": 557,
+  "stack_limits_checked": 557,
+  "original_png_and_animation_bytes_equal": true,
+  "independently_parsed_coin_recipes": 112,
+  "pending_item_hazard_behaviors": 4,
+  "scope": "Static exact-source reconciliation, not runtime validation"
+}

@@ -1,0 +1,10 @@
+{
+  "test": "compiled_legacy_retrieval_counter",
+  "passed": true,
+  "random_observations": 10000,
+  "partial_regression_reset": true,
+  "completed_latch": true,
+  "two_player_sum": true,
+  "repeated_detection_no_accumulation": true,
+  "actual_mixin_in_game_verified": false
+}

@@ -1,0 +1,9 @@
+{
+  "test": "exact_fuel_blocks_and_recipes",
+  "passed": true,
+  "blocks": 16,
+  "recipes": 28,
+  "original_coal_tier_exception_preserved": true,
+  "long_burn_value_preserved": true,
+  "scope": "Generated scripts executed against recording stubs, NOT game block/recipe behavior"
+}

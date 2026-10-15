@@ -1,0 +1,196 @@
+[
+  {
+    "project": "ftb-quests",
+    "version": "2101.1.36",
+    "artifact": "ftb-quests-neoforge",
+    "filename": "ftb-quests-neoforge-2101.1.36.jar",
+    "url": "https://maven.ftb.dev/releases/dev/ftb/mods/ftb-quests-neoforge/2101.1.36/ftb-quests-neoforge-2101.1.36.jar",
+    "sha1": "b2ede29b98a3022c22065fbe9b1761e385a28683",
+    "sha256": "6a39982c4b3afc00b1e788041a4f0d394e1659e3b3a6e5d078cd790bc36d0018",
+    "downloaded": true,
+    "active": true,
+    "metadata": {
+      "modLoader": "javafml",
+      "loaderVersion": "[4,)",
+      "issueTrackerURL": "https://github.com/FTBTeam/FTB-Mods-Issues/issues",
+      "license": "All Rights Reserved",
+      "mixins": [
+        {
+          "config": "ftbquests-common.mixins.json"
+        }
+      ],
+      "mods": [
+        {
+          "modId": "ftbquests",
+          "version": "2101.1.36",
+          "displayName": "FTB Quests",
+          "authors": "FTB Team",
+          "description": "Lets you easily create and play with quests\n"
+        }
+      ],
+      "dependencies": {
+        "ftbquests": [
+          {
+            "modId": "neoforge",
+            "type": "required",
+            "versionRange": "[21.1.0,)",
+            "ordering": "NONE",
+            "side": "BOTH"
+          },
+          {
+            "modId": "minecraft",
+            "type": "required",
+            "versionRange": "[1.21.1,)",
+            "ordering": "NONE",
+            "side": "BOTH"
+          },
+          {
+            "modId": "architectury",
+            "type": "required",
+            "versionRange": "[13.0.8,)",
+            "ordering": "NONE",
+            "side": "BOTH"
+          },
+          {
+            "modId": "ftblibrary",
+            "type": "required",
+            "versionRange": "[2101.1.36,)",
+            "ordering": "AFTER",
+            "side": "BOTH"
+          },
+          {
+            "modId": "ftbteams",
+            "type": "required",
+            "versionRange": "[2101.1.9,)",
+            "ordering": "AFTER",
+            "side": "BOTH"
+          },
+          {
+            "modId": "ftbxmodcompat",
+            "type": "optional",
+            "versionRange": "[21.1.7,)",
+            "side": "BOTH"
+          }
+        ]
+      }
+    },
+    "license_files": [],
+    "sources_jar": "<LOCAL_WORKSPACE>\\work\\cache\\ftb\\ftb-quests-neoforge-2101.1.36-sources.jar"
+  },
+  {
+    "project": "ftb-library",
+    "version": "2101.1.37",
+    "artifact": "ftb-library-neoforge",
+    "filename": "ftb-library-neoforge-2101.1.37.jar",
+    "url": "https://maven.ftb.dev/releases/dev/ftb/mods/ftb-library-neoforge/2101.1.37/ftb-library-neoforge-2101.1.37.jar",
+    "sha1": "b6e503587afcd678ec257e4abdc6362ff18c2fef",
+    "sha256": "624c2d2d1cbadb946d967e17757bd5b2d129d4d3ed71f2da0c70607d04476ac2",
+    "downloaded": true,
+    "active": true,
+    "metadata": {
+      "modLoader": "javafml",
+      "loaderVersion": "[4,)",
+      "issueTrackerURL": "https://go.ftb.team/support-mod-issues",
+      "license": "All Rights Reserved",
+      "mixins": [
+        {
+          "config": "ftblibrary-common.mixins.json"
+        }
+      ],
+      "mods": [
+        {
+          "modId": "ftblibrary",
+          "version": "2101.1.37",
+          "displayName": "FTB Library",
+          "authors": "FTB Team",
+          "description": "FTB Library adds nothing.\n"
+        }
+      ],
+      "dependencies": {
+        "ftblibrary": [
+          {
+            "modId": "neoforge",
+            "type": "required",
+            "versionRange": "[21.1.0,)",
+            "ordering": "NONE",
+            "side": "BOTH"
+          },
+          {
+            "modId": "minecraft",
+            "type": "required",
+            "versionRange": "[1.21.1,)",
+            "ordering": "NONE",
+            "side": "BOTH"
+          },
+          {
+            "modId": "architectury",
+            "type": "required",
+            "versionRange": "[13.0.6,)",
+            "ordering": "AFTER",
+            "side": "BOTH"
+          }
+        ]
+      }
+    },
+    "license_files": []
+  },
+  {
+    "project": "ftb-teams",
+    "version": "2101.1.11",
+    "artifact": "ftb-teams-neoforge",
+    "filename": "ftb-teams-neoforge-2101.1.11.jar",
+    "url": "https://maven.ftb.dev/releases/dev/ftb/mods/ftb-teams-neoforge/2101.1.11/ftb-teams-neoforge-2101.1.11.jar",
+    "sha1": "62b65f752d0326edd13244e58d5f2aec035da4e9",
+    "sha256": "e6bcd670493624e6906df872a9c6af4a33fe6405cac57a32c59cd4cd5838c655",
+    "downloaded": true,
+    "active": true,
+    "metadata": {
+      "modLoader": "javafml",
+      "loaderVersion": "[4,)",
+      "issueTrackerURL": "https://go.ftb.team/support-mod-issues",
+      "license": "All Rights Reserved",
+      "mods": [
+        {
+          "modId": "ftbteams",
+          "version": "2101.1.11",
+          "displayName": "FTB Teams",
+          "authors": "FTB Team",
+          "description": "FTB Teams adds ability to create your own teams that can be used for quests etc.\n"
+        }
+      ],
+      "dependencies": {
+        "ftbteams": [
+          {
+            "modId": "neoforge",
+            "type": "required",
+            "versionRange": "[21.1.0,)",
+            "ordering": "NONE",
+            "side": "BOTH"
+          },
+          {
+            "modId": "minecraft",
+            "type": "required",
+            "versionRange": "[1.21.1,)",
+            "ordering": "NONE",
+            "side": "BOTH"
+          },
+          {
+            "modId": "architectury",
+            "type": "required",
+            "versionRange": "[13.0.8,)",
+            "ordering": "AFTER",
+            "side": "BOTH"
+          },
+          {
+            "modId": "ftblibrary",
+            "type": "required",
+            "versionRange": "[2101.1.30,)",
+            "ordering": "AFTER",
+            "side": "BOTH"
+          }
+        ]
+      }
+    },
+    "license_files": []
+  }
+]

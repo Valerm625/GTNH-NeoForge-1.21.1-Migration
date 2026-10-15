@@ -1,0 +1,1510 @@
+{
+  "schema": 1,
+  "minecraft": "1.21.1",
+  "loader": "neoforge",
+  "checked_at": "2026-10-15T10:04:55.266343+00:00",
+  "roots": [
+    "gregtechceu-modern",
+    "ae2",
+    "jei",
+    "storagedrawers",
+    "jade",
+    "modernfix",
+    "ferrite-core",
+    "kubejs",
+    "architectury-api",
+    "railcraft-reborn",
+    "ender-storage"
+  ],
+  "selection": "Curated exact 1.21.1 NeoForge artifacts with internal metadata/embedded dependency checks. Added Railcraft Reborn and Ender Storage as candidates pending full functional regression.",
+  "artifacts": [
+    {
+      "project_id": "XxWD5pD3",
+      "slug": "ae2",
+      "title": "Applied Energistics 2",
+      "source_url": "https://modrinth.com/mod/ae2",
+      "source_code_url": "https://github.com/AppliedEnergistics/Applied-Energistics-2",
+      "license": {
+        "id": "LicenseRef-Multiple",
+        "name": "",
+        "url": "https://github.com/AppliedEnergistics/Applied-Energistics-2#license"
+      },
+      "client_side": "required",
+      "server_side": "required",
+      "version_id": "KDnFUmMm",
+      "version": "19.2.18",
+      "release_type": "release",
+      "game_versions": [
+        "1.21.1"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "published": "2026-09-27T17:43:18.221788Z",
+      "filename": "appliedenergistics2-19.2.18.jar",
+      "url": "https://cdn.modrinth.com/data/XxWD5pD3/versions/KDnFUmMm/appliedenergistics2-19.2.18.jar",
+      "hashes": {
+        "sha512": "39bc4cf733a4321631e2637a1a6dfd3527135fdac1b572534e6fd1f9eab7a6dd92d56c5fa066263c95149c9b20cabdd1fd3dff80bea515381b1d2d754cad26c3",
+        "sha1": "bcd04bc7f181b2ffa314625f284c8eca6fee7fe4"
+      },
+      "size": 8236552,
+      "dependencies": [
+        {
+          "version_id": null,
+          "project_id": "nfn13YXA",
+          "file_name": null,
+          "dependency_type": "optional"
+        },
+        {
+          "version_id": null,
+          "project_id": "fRiHVvU7",
+          "file_name": null,
+          "dependency_type": "optional"
+        },
+        {
+          "version_id": null,
+          "project_id": "Ck4E7v7R",
+          "file_name": null,
+          "dependency_type": "required"
+        },
+        {
+          "version_id": null,
+          "project_id": "nvQzSEkH",
+          "file_name": null,
+          "dependency_type": "optional"
+        },
+        {
+          "version_id": null,
+          "project_id": "tq47Uqpn",
+          "file_name": null,
+          "dependency_type": "incompatible"
+        },
+        {
+          "version_id": null,
+          "project_id": "6AQIaxuO",
+          "file_name": null,
+          "dependency_type": "optional"
+        },
+        {
+          "version_id": null,
+          "project_id": "Eyw0UxEx",
+          "file_name": null,
+          "dependency_type": "optional"
+        }
+      ],
+      "jar_metadata": {
+        "manifest": {
+          "modLoader": "javafml",
+          "loaderVersion": "[1,)",
+          "logoFile": "logo.png",
+          "license": "See GitHub repository for details",
+          "issueTrackerURL": "https://github.com/AppliedEnergistics/Applied-Energistics-2/issues",
+          "mods": [
+            {
+              "modId": "ae2",
+              "version": "19.2.18",
+              "displayName": "Applied Energistics 2",
+              "description": "A Mod about Matter, Energy and using them to conquer the world...",
+              "authors": "Team AppliedEnergistics",
+              "displayURL": "https://appliedenergistics.org"
+            }
+          ],
+          "mixins": [
+            {
+              "config": "ae2.mixins.json"
+            }
+          ],
+          "dependencies": {
+            "ae2": [
+              {
+                "modId": "neoforge",
+                "type": "REQUIRED",
+                "versionRange": "[21.1.169,)",
+                "ordering": "NONE",
+                "side": "BOTH"
+              },
+              {
+                "modId": "minecraft",
+                "type": "REQUIRED",
+                "versionRange": "[1.21.1]",
+                "ordering": "NONE",
+                "side": "BOTH"
+              },
+              {
+                "modId": "guideme",
+                "type": "REQUIRED",
+                "versionRange": "[21.1.1,)",
+                "side": "BOTH"
+              },
+              {
+                "modId": "emi",
+                "type": "OPTIONAL",
+                "ordering": "AFTER",
+                "side": "BOTH"
+              },
+              {
+                "modId": "theoneprobe",
+                "type": "OPTIONAL",
+                "versionRange": "[1.20.0,)",
+                "ordering": "AFTER",
+                "side": "BOTH"
+              },
+              {
+                "modId": "jade",
+                "type": "OPTIONAL",
+                "versionRange": "[15.0.0,)",
+                "ordering": "AFTER",
+                "side": "BOTH"
+              },
+              {
+                "modId": "vanillafix",
+                "type": "discouraged",
+                "reason": "VanillaFix breaks some NeoForge features that AE2 depends on. Do not report AE2 bugs if VanillaFix is present."
+              }
+            ]
+          }
+        },
+        "jarjar": []
+      },
+      "status": "downloaded_hash_verified_not_runtime_or_parity_verified"
+    },
+    {
+      "project_id": "lhGA9TYQ",
+      "slug": "architectury-api",
+      "title": "Architectury API",
+      "source_url": "https://modrinth.com/mod/architectury-api",
+      "source_code_url": "https://github.com/architectury/architectury",
+      "license": {
+        "id": "LGPL-3.0-only",
+        "name": "GNU Lesser General Public License v3.0 only",
+        "url": null
+      },
+      "client_side": "required",
+      "server_side": "required",
+      "version_id": "1IiqEQGl",
+      "version": "13.0.11+neoforge",
+      "release_type": "release",
+      "game_versions": [
+        "1.21",
+        "1.21.1"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "published": "2026-07-23T09:57:30.306316Z",
+      "filename": "architectury-13.0.11-neoforge.jar",
+      "url": "https://cdn.modrinth.com/data/lhGA9TYQ/versions/1IiqEQGl/architectury-13.0.11-neoforge.jar",
+      "hashes": {
+        "sha1": "008656a0702801174b8ec245ed7aad1921d6e9f1",
+        "sha512": "d9f7c3bb8162577dfb461ffdf04bd6a3563c7586934a0e2a744c14421beffb8286f0d88d4c758317003f20f99fe8072a39b9d675af061e036970d36db36027f0"
+      },
+      "size": 584734,
+      "dependencies": [],
+      "jar_metadata": {
+        "manifest": {
+          "modLoader": "javafml",
+          "loaderVersion": "[1,)",
+          "issueTrackerURL": "https://github.com/shedaniel/architectury/issues",
+          "license": "GNU LGPLv3",
+          "mods": [
+            {
+              "modId": "architectury",
+              "version": "13.0.11",
+              "displayName": "Architectury",
+              "authors": "shedaniel",
+              "description": "A intermediary api aimed to ease developing multiplatform mods.\n",
+              "logoFile": "icon.png",
+              "license": "LGPL-3"
+            }
+          ],
+          "dependencies": {
+            "architectury": [
+              {
+                "modId": "minecraft",
+                "type": "required",
+                "versionRange": "[1.21,)",
+                "ordering": "NONE",
+                "side": "BOTH"
+              },
+              {
+                "modId": "neoforge",
+                "type": "required",
+                "versionRange": "[21.0.110-beta,)",
+                "ordering": "NONE",
+                "side": "BOTH"
+              }
+            ]
+          },
+          "mixins": [
+            {
+              "config": "architectury.mixins.json"
+            },
+            {
+              "config": "architectury-common.mixins.json"
+            }
+          ]
+        },
+        "jarjar": []
+      },
+      "status": "downloaded_hash_verified_not_runtime_or_parity_verified"
+    },
+    {
+      "project_id": "iHLDc0eo",
+      "slug": "better-advanced-tooltips",
+      "title": "Better Advanced Tooltips",
+      "source_url": "https://modrinth.com/mod/better-advanced-tooltips",
+      "source_code_url": "https://github.com/latvian-dev/better-advanced-tooltips",
+      "license": {
+        "id": "MIT",
+        "name": "MIT License",
+        "url": null
+      },
+      "client_side": "required",
+      "server_side": "required",
+      "version_id": "uPFbnD32",
+      "version": "2101.1.0-build.5",
+      "release_type": "release",
+      "game_versions": [
+        "1.21.1"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "published": "2026-08-04T14:08:57.395935Z",
+      "filename": "better-advanced-tooltips-2101.1.0-build.5.jar",
+      "url": "https://cdn.modrinth.com/data/iHLDc0eo/versions/uPFbnD32/better-advanced-tooltips-2101.1.0-build.5.jar",
+      "hashes": {
+        "sha1": "5b73537b908764f2d3fd593a0f56a8b1b034bc50",
+        "sha512": "05b5cdad948d1735eab7a67a16aaf32814678c392014ec2ada61b8341c0ed1c1ac181cab1de9da3f2c4632592f4a1a5db254bd0543e6778897c8ccd260894142"
+      },
+      "size": 37653,
+      "dependencies": [],
+      "jar_metadata": {
+        "manifest": {
+          "modLoader": "javafml",
+          "loaderVersion": "[2,)",
+          "license": "MIT",
+          "mods": [
+            {
+              "modId": "betteradvancedtooltips",
+              "version": "2101.1.0-build.5",
+              "displayName": "Better Advanced Tooltips",
+              "description": "Adds tag, component and other tooltips to items in F3+H mode",
+              "authors": "latvian.dev",
+              "logoFile": "betteradvancedtooltips_logo.png",
+              "logoBlur": false
+            }
+          ],
+          "dependencies": {
+            "betteradvancedtooltips": [
+              {
+                "modId": "neoforge",
+                "type": "required",
+                "versionRange": "[21.1.199,)",
+                "ordering": "NONE",
+                "side": "CLIENT"
+              }
+            ]
+          },
+          "mixins": [
+            {
+              "config": "betteradvancedtooltips.mixins.json"
+            }
+          ]
+        },
+        "jarjar": []
+      },
+      "status": "downloaded_hash_verified_not_runtime_or_parity_verified"
+    },
+    {
+      "project_id": "2gq0ALnz",
+      "slug": "codechicken-lib",
+      "title": "CodeChicken Lib",
+      "source_url": "https://modrinth.com/mod/codechicken-lib",
+      "source_code_url": "https://github.com/TheCBProject/CodeChickenLib",
+      "license": {
+        "id": "LGPL-2.1-or-later",
+        "name": "GNU Lesser General Public License v2.1 or later",
+        "url": null
+      },
+      "client_side": "optional",
+      "server_side": "optional",
+      "version_id": "vLDGhjNJ",
+      "version": "4.6.1.529",
+      "release_type": "release",
+      "game_versions": [
+        "1.21.1"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "published": "2026-07-23T05:19:19.117706Z",
+      "filename": "CodeChickenLib-1.21.1-4.6.1.529.jar",
+      "url": "https://cdn.modrinth.com/data/2gq0ALnz/versions/vLDGhjNJ/CodeChickenLib-1.21.1-4.6.1.529.jar",
+      "hashes": {
+        "sha1": "354d850ca72568b88d67e3c903efced7e62dc90f",
+        "sha512": "acc300da463672a4091e0f48266df4a5b0704bc23e044e71ca47c3d56390d09eef3690baad8f8744d657bac8d5e02a2b4a2bb77ed0478dba9ad9b8c35901645f"
+      },
+      "size": 1538382,
+      "dependencies": [],
+      "jar_metadata": {
+        "manifest": {
+          "modLoader": "javafml",
+          "loaderVersion": "[2,)",
+          "issueTrackerURL": "https://github.com/TheCBProject/CodeChickenLib",
+          "license": "GNU Lesser General Public License v2.1",
+          "mods": [
+            {
+              "modId": "codechickenlib",
+              "displayName": "CodeChicken Lib",
+              "version": "4.6.1.529",
+              "updateJSONURL": "https://version-check.covers1624.net/check/?mod=CodeChickenLib&mc=1.21.1",
+              "displayURL": "https://www.curseforge.com/minecraft/mc-mods/codechicken-lib-1-8",
+              "authors": "ChickenBones, covers1624",
+              "description": "CodeChickenLib is a library of systems to help make various aspects of minecraft modding easier.\nIt contains libraries for 3D math and transformations, model rendering, packets, config, colours, asm and a few other things..\n    "
+            }
+          ],
+          "dependencies": {
+            "codechickenlib": [
+              {
+                "modId": "neoforge",
+                "type": "required",
+                "versionRange": "[21.1.72,)",
+                "ordering": "NONE",
+                "side": "BOTH"
+              },
+              {
+                "modId": "minecraft",
+                "type": "required",
+                "versionRange": "[1.21.1]",
+                "ordering": "NONE",
+                "side": "BOTH"
+              }
+            ]
+          }
+        },
+        "jarjar": {
+          "jars": [
+            {
+              "identifier": {
+                "group": "net.covers1624",
+                "artifact": "Quack"
+              },
+              "version": {
+                "range": "[0.4.10,0.5)",
+                "artifactVersion": "0.4.10.115"
+              },
+              "path": "META-INF/jarjar/Quack-0.4.10.115.jar",
+              "isObfuscated": false
+            }
+          ]
+        }
+      },
+      "status": "downloaded_hash_verified_not_runtime_or_parity_verified"
+    },
+    {
+      "project_id": "BbrHg80P",
+      "slug": "ender-storage",
+      "title": "Ender Storage",
+      "source_url": "https://modrinth.com/mod/ender-storage",
+      "source_code_url": "https://github.com/TheCBProject/EnderStorage",
+      "license": {
+        "id": "MIT",
+        "name": "MIT License",
+        "url": null
+      },
+      "client_side": "required",
+      "server_side": "required",
+      "version_id": "iDxzdaLT",
+      "version": "2.13.0.191",
+      "release_type": "release",
+      "game_versions": [
+        "1.21.1"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "published": "2025-02-05T01:18:37.802729Z",
+      "filename": "EnderStorage-1.21.1-2.13.0.191.jar",
+      "url": "https://cdn.modrinth.com/data/BbrHg80P/versions/iDxzdaLT/EnderStorage-1.21.1-2.13.0.191.jar",
+      "hashes": {
+        "sha1": "5b5fc717242a9eb2d8b4a5e57ea1a38446722864",
+        "sha512": "4a65d6c2d098e4db61237ff83b68f7d03d5dcd16572c6c12d159c9c1f2f49c7abcc1792432b0bd88589549cec8a4705b292492fbe1913b624537c2e4fbc968f2"
+      },
+      "size": 264089,
+      "dependencies": [
+        {
+          "version_id": null,
+          "project_id": "2gq0ALnz",
+          "file_name": null,
+          "dependency_type": "required"
+        }
+      ],
+      "jar_metadata": {
+        "manifest": {
+          "modLoader": "javafml",
+          "loaderVersion": "[2,)",
+          "issueTrackerURL": "https://github.com/TheCBProject/EnderStorage",
+          "license": "The MIT License (MIT)",
+          "mods": [
+            {
+              "modId": "enderstorage",
+              "displayName": "EnderStorage",
+              "version": "2.13.0.191",
+              "updateJSONURL": "https://version-check.covers1624.net/check/?mod=EnderStorage&mc=1.21.1",
+              "displayURL": "https://www.curseforge.com/minecraft/mc-mods/ender-storage-1-8",
+              "authors": "ChickenBones, covers1624",
+              "description": "Stores your stuff in the END!\n    Credits: Ecu - original idea, design, chest and pouch texture\n    Rosethorns - tank model\n    Soaryn - tank texture\n\t"
+            }
+          ],
+          "dependencies": {
+            "enderstorage": [
+              {
+                "modId": "neoforge",
+                "type": "required",
+                "versionRange": "[21.1.72,)",
+                "ordering": "NONE",
+                "side": "BOTH"
+              },
+              {
+                "modId": "minecraft",
+                "type": "required",
+                "versionRange": "[1.21.1]",
+                "ordering": "NONE",
+                "side": "BOTH"
+              },
+              {
+                "modId": "codechickenlib",
+                "type": "required",
+                "versionRange": "[4.6.0,5.0.0)",
+                "ordering": "AFTER",
+                "side": "BOTH"
+              }
+            ]
+          }
+        },
+        "jarjar": []
+      },
+      "status": "downloaded_hash_verified_not_runtime_or_parity_verified"
+    },
+    {
+      "project_id": "uXXizFIs",
+      "slug": "ferrite-core",
+      "title": "FerriteCore",
+      "source_url": "https://modrinth.com/mod/ferrite-core",
+      "source_code_url": "https://github.com/malte0811/FerriteCore",
+      "license": {
+        "id": "MIT",
+        "name": "MIT License",
+        "url": null
+      },
+      "client_side": "optional",
+      "server_side": "optional",
+      "version_id": "x7kQWVju",
+      "version": "7.0.3-neoforge",
+      "release_type": "release",
+      "game_versions": [
+        "1.21.1"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "published": "2026-01-25T12:59:45.271417Z",
+      "filename": "ferritecore-7.0.3-neoforge.jar",
+      "url": "https://cdn.modrinth.com/data/uXXizFIs/versions/x7kQWVju/ferritecore-7.0.3-neoforge.jar",
+      "hashes": {
+        "sha512": "19af89a2075bb10a63884fa853ebf84b02c79dc3242430ecdad056fd764fdcde367a7303276b329df01b0736e2ef264c5d80c7dc92c6aebd244f556a230bb417",
+        "sha1": "9563692efb708b6b568df27a01ec52f6311928ef"
+      },
+      "size": 121559,
+      "dependencies": [],
+      "jar_metadata": {
+        "manifest": {
+          "modLoader": "javafml",
+          "loaderVersion": "[1,)",
+          "license": "MIT",
+          "mods": [
+            {
+              "modId": "ferritecore",
+              "version": "7.0.3",
+              "displayName": "Ferrite Core",
+              "authors": "malte0811",
+              "description": "Reduces memory usage.\n",
+              "logoFile": "logo.png"
+            }
+          ],
+          "dependencies": {
+            "ferritecore": [
+              {
+                "modId": "neoforge",
+                "type": "required",
+                "versionRange": "[21.1.218,)",
+                "ordering": "NONE",
+                "side": "BOTH"
+              },
+              {
+                "modId": "minecraft",
+                "type": "required",
+                "versionRange": "[1.21.1,1.22)",
+                "ordering": "NONE",
+                "side": "BOTH"
+              }
+            ]
+          },
+          "mixins": [
+            {
+              "config": "ferritecore.predicates.mixin.json"
+            },
+            {
+              "config": "ferritecore.fastmap.mixin.json"
+            },
+            {
+              "config": "ferritecore.mrl.mixin.json"
+            },
+            {
+              "config": "ferritecore.dedupmultipart.mixin.json"
+            },
+            {
+              "config": "ferritecore.blockstatecache.mixin.json"
+            },
+            {
+              "config": "ferritecore.dedupbakedquad.mixin.json"
+            },
+            {
+              "config": "ferritecore.threaddetec.mixin.json"
+            },
+            {
+              "config": "ferritecore.modelsides.mixin.json"
+            },
+            {
+              "config": "ferritecore.datacomponents.mixin.json"
+            },
+            {
+              "config": "ferritecore.accessors.mixin.json"
+            }
+          ]
+        },
+        "jarjar": []
+      },
+      "status": "downloaded_hash_verified_not_runtime_or_parity_verified"
+    },
+    {
+      "project_id": "7tG215v7",
+      "slug": "gregtechceu-modern",
+      "title": "GregTech CEu Modern",
+      "source_url": "https://modrinth.com/mod/gregtechceu-modern",
+      "source_code_url": "https://github.com/GregTechCEu/GregTech-Modern",
+      "license": {
+        "id": "LGPL-3.0-or-later",
+        "name": "GNU Lesser General Public License v3.0 or later",
+        "url": null
+      },
+      "client_side": "required",
+      "server_side": "required",
+      "version_id": "iFPVZs0V",
+      "version": "mc1.21.1-7.0.2",
+      "release_type": "beta",
+      "game_versions": [
+        "1.21",
+        "1.21.1"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "published": "2025-07-20T21:30:14.880506Z",
+      "filename": "gtceu-1.21.1-7.0.2.jar",
+      "url": "https://cdn.modrinth.com/data/7tG215v7/versions/iFPVZs0V/gtceu-1.21.1-7.0.2.jar",
+      "hashes": {
+        "sha512": "2bfc0a3691e5c259a816967048a0b5b59126864edf689a2a67ae2828fc90e1db287f098cd9e6eb4f6f179d8a25b53ad8f02becb74155aa10f679477d7a3dc5a7",
+        "sha1": "a608438b6f50515daa986c7852e7284a038ed619"
+      },
+      "size": 16555448,
+      "dependencies": [
+        {
+          "version_id": null,
+          "project_id": "B1CBVXHX",
+          "file_name": null,
+          "dependency_type": "required"
+        },
+        {
+          "version_id": null,
+          "project_id": "nvQzSEkH",
+          "file_name": null,
+          "dependency_type": "optional"
+        },
+        {
+          "version_id": null,
+          "project_id": "3WjjSM5O",
+          "file_name": null,
+          "dependency_type": "required"
+        },
+        {
+          "version_id": null,
+          "project_id": "u6dRKJwZ",
+          "file_name": null,
+          "dependency_type": "optional"
+        },
+        {
+          "version_id": null,
+          "project_id": "fRiHVvU7",
+          "file_name": null,
+          "dependency_type": "optional"
+        },
+        {
+          "version_id": null,
+          "project_id": "umyGl7zF",
+          "file_name": null,
+          "dependency_type": "optional"
+        }
+      ],
+      "jar_metadata": {
+        "manifest": {
+          "modLoader": "javafml",
+          "loaderVersion": "[4,)",
+          "issueTrackerURL": "https://github.com/GregTechCEu/GregTech-Modern/issues/",
+          "license": "LGPL-3.0 license",
+          "mods": [
+            {
+              "modId": "gtceu",
+              "version": "7.0.2",
+              "displayName": "GregTech",
+              "authors": "KilaBash, screret, Mikerooni, serenibyss, Tech22, YoungOnion, Mikerooni, Ghostipedia",
+              "description": "GregTech CE Unofficial, ported from 1.12.2",
+              "logoFile": "icon.png",
+              "displayURL": "https://github.com/GregTechCEu/GregTech-Modern/",
+              "credits": "GregoriusT, Mr_Touchyou, Zerrens for making GregTech and textures, the GT5u authors and maintainers for providing the original code, and the community.",
+              "enumExtensions": "META-INF/enum_extensions.json",
+              "modernfix:integration": {
+                "client_entrypoint": "com.gregtechceu.gtceu.integration.modernfix.GTModernFixIntegration"
+              }
+            }
+          ],
+          "mixins": [
+            {
+              "config": "gtceu.mixins.json"
+            }
+          ],
+          "accessTransformers": [
+            {
+              "file": "META-INF/accesstransformer.cfg"
+            }
+          ],
+          "dependencies": {
+            "gtceu": [
+              {
+                "modId": "neoforge",
+                "type": "required",
+                "versionRange": "[21.1,)",
+                "ordering": "NONE",
+                "side": "BOTH"
+              },
+              {
+                "modId": "minecraft",
+                "type": "required",
+                "versionRange": "[1.21, 1.21.1]",
+                "ordering": "NONE",
+                "side": "BOTH"
+              },
+              {
+                "modId": "ldlib",
+                "type": "required",
+                "embedded": true,
+                "versionRange": "[1.0.35.a,)",
+                "ordering": "AFTER",
+                "side": "BOTH",
+                "mc-publish": {
+                  "ignore": false,
+                  "modrinth": "ldlib",
+                  "curseforge": "ldlib"
+                }
+              },
+              {
+                "modId": "configuration",
+                "type": "required",
+                "embedded": true,
+                "versionRange": "[3.1.0,)",
+                "ordering": "AFTER",
+                "side": "BOTH",
+                "mc-publish": {
+                  "ignore": false,
+                  "modrinth": "configuration",
+                  "curseforge": "configuration"
+                }
+              },
+              {
+                "modId": "kubejs",
+                "type": "optional",
+                "versionRange": "[2101,)",
+                "ordering": "AFTER",
+                "side": "BOTH"
+              },
+              {
+                "modId": "jei",
+                "type": "optional",
+                "versionRange": "[19.21.0.247,)",
+                "ordering": "AFTER",
+                "side": "BOTH"
+              },
+              {
+                "modId": "emi",
+                "type": "optional",
+                "versionRange": "[1.1.21+1.21.1,)",
+                "ordering": "AFTER",
+                "side": "BOTH"
+              },
+              {
+                "modId": "theoneprobe",
+                "type": "optional",
+                "versionRange": "[1.21_neo-12.0.4-6,)",
+                "ordering": "NONE",
+                "side": "BOTH"
+              },
+              {
+                "modId": "jade",
+                "type": "optional",
+                "versionRange": "[15.10.0+neoforge,)",
+                "ordering": "NONE",
+                "side": "BOTH"
+              }
+            ]
+          }
+        },
+        "jarjar": {
+          "jars": [
+            {
+              "identifier": {
+                "group": "com.lowdragmc.ldlib",
+                "artifact": "ldlib-neoforge-1.21.1"
+              },
+              "version": {
+                "range": "[1.0.35.a,)",
+                "artifactVersion": "1.0.35.a"
+              },
+              "path": "META-INF/jarjar/ldlib-neoforge-1.21.1-1.0.35.a.jar",
+              "isObfuscated": false
+            },
+            {
+              "identifier": {
+                "group": "com.tterrag.registrate",
+                "artifact": "Registrate"
+              },
+              "version": {
+                "range": "[MC1.21-1.3.0+67,)",
+                "artifactVersion": "MC1.21-1.3.0+67"
+              },
+              "path": "META-INF/jarjar/Registrate-MC1.21-1.3.0+67.jar",
+              "isObfuscated": false
+            },
+            {
+              "identifier": {
+                "group": "dev.toma.configuration",
+                "artifact": "configuration-1.21.1"
+              },
+              "version": {
+                "range": "[3.1.0-neoforge,)",
+                "artifactVersion": "3.1.0-neoforge"
+              },
+              "path": "META-INF/jarjar/configuration-1.21.1-3.1.0-neoforge.jar",
+              "isObfuscated": false
+            }
+          ]
+        }
+      },
+      "status": "downloaded_hash_verified_not_runtime_or_parity_verified"
+    },
+    {
+      "project_id": "Ck4E7v7R",
+      "slug": "guideme",
+      "title": "GuideME",
+      "source_url": "https://modrinth.com/mod/guideme",
+      "source_code_url": "https://github.com/AppliedEnergistics/GuideME/",
+      "license": {
+        "id": "LicenseRef-Multiple-OSS-Licenses",
+        "name": "",
+        "url": "https://github.com/AppliedEnergistics/GuideME/blob/main/LICENSE.MD"
+      },
+      "client_side": "required",
+      "server_side": "required",
+      "version_id": "hFpGwC6q",
+      "version": "21.1.19",
+      "release_type": "release",
+      "game_versions": [
+        "1.21.1"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "published": "2026-09-16T17:18:45.961167Z",
+      "filename": "guideme-21.1.19.jar",
+      "url": "https://cdn.modrinth.com/data/Ck4E7v7R/versions/hFpGwC6q/guideme-21.1.19.jar",
+      "hashes": {
+        "sha1": "e85cd4c266f974dd360c46e8dad7ecf4c7ee96c6",
+        "sha512": "4dfa132e5cfd69a86c958867067f1c5ab39bb69ae35b2a62c24bb9924e9c688f1a4930ab75d335b22378d9f98cd7fceae8d030812b8f90c9aa282de8ea129f5a"
+      },
+      "size": 9311992,
+      "dependencies": [],
+      "jar_metadata": {
+        "manifest": {
+          "modLoader": "javafml",
+          "loaderVersion": "*",
+          "logoFile": "logo.png",
+          "authors": "shartte",
+          "license": "See GitHub repository for details",
+          "mixins": [
+            {
+              "config": "guideme.optional.mixins.json"
+            }
+          ],
+          "mods": [
+            {
+              "modId": "guideme",
+              "version": "21.1.19",
+              "displayName": "GuideME",
+              "description": "GuideME offers the foundation for your mods or modpacks guidebook.",
+              "issueTrackerURL": "https://github.com/AppliedEnergistics/GuideME/issues",
+              "displayURL": "https://github.com/AppliedEnergistics/GuideME/"
+            }
+          ],
+          "dependencies": {
+            "guideme": [
+              {
+                "modId": "neoforge",
+                "type": "REQUIRED",
+                "versionRange": "[21.1.1,)",
+                "ordering": "NONE",
+                "side": "BOTH"
+              },
+              {
+                "modId": "minecraft",
+                "type": "REQUIRED",
+                "versionRange": "[1.21.1]",
+                "ordering": "NONE",
+                "side": "BOTH"
+              }
+            ]
+          }
+        },
+        "jarjar": []
+      },
+      "status": "downloaded_hash_verified_not_runtime_or_parity_verified"
+    },
+    {
+      "project_id": "nvQzSEkH",
+      "slug": "jade",
+      "title": "Jade 🔍",
+      "source_url": "https://modrinth.com/mod/jade",
+      "source_code_url": "https://github.com/Snownee/Jade",
+      "license": {
+        "id": "CC-BY-NC-SA-4.0",
+        "name": "Creative Commons Attribution Non Commercial Share Alike 4.0 International",
+        "url": null
+      },
+      "client_side": "optional",
+      "server_side": "optional",
+      "version_id": "eYz2YBGT",
+      "version": "15.10.6+neoforge",
+      "release_type": "release",
+      "game_versions": [
+        "1.21.1"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "published": "2026-08-06T23:11:55.577664Z",
+      "filename": "Jade-1.21.1-NeoForge-15.10.6.jar",
+      "url": "https://cdn.modrinth.com/data/nvQzSEkH/versions/eYz2YBGT/Jade-1.21.1-NeoForge-15.10.6.jar",
+      "hashes": {
+        "sha512": "dad9755dce8d85d914fc4df2baa0211f13e5839a71c1925fdd01f69081a95e30a2934e6273f8b01f0169adebe7a9dae57a8d904de0c4cb36dc17369bb474f0f2",
+        "sha1": "88ee316e68900080b017f60c12162e2731924cf8"
+      },
+      "size": 726853,
+      "dependencies": [
+        {
+          "version_id": null,
+          "project_id": "u6dRKJwZ",
+          "file_name": null,
+          "dependency_type": "optional"
+        }
+      ],
+      "jar_metadata": {
+        "manifest": {
+          "modLoader": "javafml",
+          "loaderVersion": "[1,)",
+          "license": "CC-BY-NC-SA-4.0",
+          "mods": [
+            {
+              "modId": "jade",
+              "version": "${file.jarVersion}",
+              "displayName": "Jade",
+              "authors": "Snownee",
+              "displayURL": "https://www.curseforge.com/minecraft/mc-mods/jade",
+              "description": "Minecraft mod shows what you are looking at. (Hwyla fork)",
+              "logoFile": "icon.png",
+              "credits": "TehNut, ProfMobius, kalkafox"
+            }
+          ],
+          "mixins": [
+            {
+              "config": "jade.mixins.json"
+            }
+          ],
+          "dependencies": {
+            "jade": [
+              {
+                "modId": "neoforge",
+                "type": "required",
+                "versionRange": "[21.0.143, )",
+                "ordering": "NONE",
+                "side": "BOTH"
+              }
+            ]
+          }
+        },
+        "jarjar": []
+      },
+      "status": "downloaded_hash_verified_not_runtime_or_parity_verified"
+    },
+    {
+      "project_id": "u6dRKJwZ",
+      "slug": "jei",
+      "title": "Just Enough Items (JEI)",
+      "source_url": "https://modrinth.com/mod/jei",
+      "source_code_url": "https://github.com/mezz/JustEnoughItems",
+      "license": {
+        "id": "MIT",
+        "name": "MIT License",
+        "url": null
+      },
+      "client_side": "optional",
+      "server_side": "optional",
+      "version_id": "ufHUqt9b",
+      "version": "19.51.0.418",
+      "release_type": "release",
+      "game_versions": [
+        "1.21",
+        "1.21.1"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "published": "2026-09-02T13:30:20.012105Z",
+      "filename": "jei-1.21.1-neoforge-19.51.0.418.jar",
+      "url": "https://cdn.modrinth.com/data/u6dRKJwZ/versions/ufHUqt9b/jei-1.21.1-neoforge-19.51.0.418.jar",
+      "hashes": {
+        "sha512": "a6ca3abc3080f6f41033a77cb955fefe9f9ebae795c33546227f555b2d31e8d4131cc705126d14a3fbabb31097fc0e876dc0bbeb05ad907a1b796f21e57527bf",
+        "sha1": "d19552586f686eae4ef5e7199f31604d1d3cfca7"
+      },
+      "size": 1804792,
+      "dependencies": [],
+      "jar_metadata": {
+        "manifest": {
+          "modLoader": "javafml",
+          "loaderVersion": "[4,)",
+          "issueTrackerURL": "https://github.com/mezz/JustEnoughItems/issues?q=is%3Aissue",
+          "license": "The MIT License (MIT)",
+          "mods": [
+            {
+              "modId": "jei",
+              "version": "19.51.0.418",
+              "displayName": "Just Enough Items",
+              "displayURL": "https://www.curseforge.com/minecraft/mc-mods/jei",
+              "displayTest": "IGNORE_SERVER_VERSION",
+              "authors": "mezz",
+              "description": "JEI is an item and recipe viewing mod for Minecraft, built from the ground up for stability and performance.\n"
+            }
+          ],
+          "dependencies": {
+            "jei": [
+              {
+                "modId": "neoforge",
+                "type": "required",
+                "versionRange": "[21.1.238,)",
+                "ordering": "NONE",
+                "side": "BOTH"
+              },
+              {
+                "modId": "minecraft",
+                "type": "required",
+                "versionRange": "[1.21, 1.21.1)",
+                "ordering": "NONE",
+                "side": "BOTH"
+              }
+            ]
+          },
+          "modproperties": {
+            "jei": {
+              "catalogueImageIcon": "jei-icon.png"
+            }
+          }
+        },
+        "jarjar": []
+      },
+      "status": "downloaded_hash_verified_not_runtime_or_parity_verified"
+    },
+    {
+      "project_id": "umyGl7zF",
+      "slug": "kubejs",
+      "title": "KubeJS",
+      "source_url": "https://modrinth.com/mod/kubejs",
+      "source_code_url": "https://github.com/KubeJS-Mods/KubeJS",
+      "license": {
+        "id": "LGPL-3.0-only",
+        "name": "GNU Lesser General Public License v3.0 only",
+        "url": null
+      },
+      "client_side": "optional",
+      "server_side": "optional",
+      "version_id": "THIGFPwf",
+      "version": "2101.7.2-build.377",
+      "release_type": "release",
+      "game_versions": [
+        "1.21",
+        "1.21.1"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "published": "2026-09-09T12:27:24.922502Z",
+      "filename": "kubejs-neoforge-2101.7.2-build.377.jar",
+      "url": "https://cdn.modrinth.com/data/umyGl7zF/versions/THIGFPwf/kubejs-neoforge-2101.7.2-build.377.jar",
+      "hashes": {
+        "sha1": "7313fcd99318834c642ee9f3a05ed7fd7bcb6ef4",
+        "sha512": "fcdbee8790f8f39c106ab4bf606808c9c5bf0f13a41e216207a6fe4d15bf4a5722ce57078781e3a1823e7fdd2928e8e042d104d8ae255a36db8f12a9f46d8089"
+      },
+      "size": 2294111,
+      "dependencies": [
+        {
+          "version_id": null,
+          "project_id": "sk9knFPE",
+          "file_name": null,
+          "dependency_type": "required"
+        },
+        {
+          "version_id": null,
+          "project_id": "iHLDc0eo",
+          "file_name": null,
+          "dependency_type": "required"
+        }
+      ],
+      "jar_metadata": {
+        "manifest": {
+          "modLoader": "javafml",
+          "loaderVersion": "[2,)",
+          "issueTrackerURL": "https://kubejs.com/support?source=kubejs&mc=2101&loader=neoforge",
+          "license": "GNU LGPLv3",
+          "mods": [
+            {
+              "modId": "kubejs",
+              "version": "2101.7.2-build.377",
+              "displayName": "KubeJS",
+              "authors": "latvian.dev",
+              "description": "Customize your modpack or server with JavaScript!\n",
+              "logoFile": "kubejs_logo.png",
+              "modUrl": "https://kubejs.com",
+              "displayURL": "https://kubejs.com"
+            }
+          ],
+          "dependencies": {
+            "kubejs": [
+              {
+                "modId": "neoforge",
+                "type": "required",
+                "versionRange": "[21.1.199,)",
+                "ordering": "AFTER",
+                "side": "BOTH"
+              },
+              {
+                "modId": "rhino",
+                "type": "required",
+                "versionRange": "[2101.2.7-build.81,)",
+                "ordering": "AFTER",
+                "side": "BOTH"
+              },
+              {
+                "modId": "jei",
+                "type": "optional",
+                "versionRange": "[19.25.0.322,)",
+                "ordering": "AFTER",
+                "side": "CLIENT"
+              },
+              {
+                "modId": "roughlyenoughitems",
+                "type": "optional",
+                "versionRange": "[16.0.799,)",
+                "ordering": "AFTER",
+                "side": "CLIENT"
+              },
+              {
+                "modId": "emi",
+                "type": "optional",
+                "versionRange": "[1.1.22,)",
+                "ordering": "AFTER",
+                "side": "CLIENT"
+              },
+              {
+                "modId": "betteradvancedtooltips",
+                "type": "optional",
+                "versionRange": "[2101.1.0-build.1,)",
+                "ordering": "BEFORE",
+                "side": "CLIENT"
+              }
+            ]
+          },
+          "mixins": [
+            {
+              "config": "kubejs.mixins.json"
+            }
+          ]
+        },
+        "jarjar": {
+          "jars": [
+            {
+              "identifier": {
+                "group": "com.github.rtyley",
+                "artifact": "animated-gif-lib-for-java"
+              },
+              "version": {
+                "range": "[animated-gif-lib-1.7,)",
+                "artifactVersion": "animated-gif-lib-1.7"
+              },
+              "path": "META-INF/jarjar/animated-gif-lib-for-java-animated-gif-lib-1.7.jar",
+              "isObfuscated": false
+            },
+            {
+              "identifier": {
+                "group": "dev.latvian.apps",
+                "artifact": "tiny-java-server"
+              },
+              "version": {
+                "range": "[1.0.0-build.33,)",
+                "artifactVersion": "1.0.0-build.33"
+              },
+              "path": "META-INF/jarjar/tiny-java-server-1.0.0-build.33.jar",
+              "isObfuscated": false
+            },
+            {
+              "identifier": {
+                "group": "dev.latvian.mods",
+                "artifact": "better-advanced-tooltips"
+              },
+              "version": {
+                "range": "[2101.1.0-build.1,)",
+                "artifactVersion": "2101.1.0-build.1"
+              },
+              "path": "META-INF/jarjar/better-advanced-tooltips-2101.1.0-build.1.jar",
+              "isObfuscated": false
+            }
+          ]
+        }
+      },
+      "status": "downloaded_hash_verified_not_runtime_or_parity_verified"
+    },
+    {
+      "project_id": "nmDcB62a",
+      "slug": "modernfix",
+      "title": "ModernFix",
+      "source_url": "https://modrinth.com/mod/modernfix",
+      "source_code_url": "https://github.com/embeddedt/ModernFix",
+      "license": {
+        "id": "LGPL-3.0-only",
+        "name": "GNU Lesser General Public License v3.0 only",
+        "url": null
+      },
+      "client_side": "optional",
+      "server_side": "optional",
+      "version_id": "7Jy58lnT",
+      "version": "5.27.26+mc1.21.1",
+      "release_type": "release",
+      "game_versions": [
+        "1.21.1"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "published": "2026-10-08T20:28:04.556303Z",
+      "filename": "modernfix-neoforge-5.27.26+mc1.21.1.jar",
+      "url": "https://cdn.modrinth.com/data/nmDcB62a/versions/7Jy58lnT/modernfix-neoforge-5.27.26%2Bmc1.21.1.jar",
+      "hashes": {
+        "sha512": "37c76fc5bc72cfc1035260f891ffeb45b4f32651d2e490c5eb8c60f3b5686deca3145b32d4fab9036f65f5277b0ac66f4ad3855e52cd973e791b09e9c4b896d8",
+        "sha1": "69d468b70e53f6a014c778a81116a41a38fbab33"
+      },
+      "size": 611043,
+      "dependencies": [],
+      "jar_metadata": {
+        "manifest": {
+          "modLoader": "javafml",
+          "loaderVersion": "[1,)",
+          "license": "GNU LGPL 3.0",
+          "issueTrackerURL": "https://github.com/embeddedt/ModernFix/issues",
+          "mixins": [
+            {
+              "config": "modernfix-modernfix.mixins.json"
+            }
+          ],
+          "mods": [
+            {
+              "modId": "modernfix",
+              "version": "5.27.26+mc1.21.1",
+              "displayName": "ModernFix",
+              "displayURL": "https://modrinth.com/mod/modernfix",
+              "logoFile": "icon.png",
+              "authors": "embeddedt",
+              "description": "Egregious, yet effective performance improvements for modern Minecraft\n"
+            }
+          ],
+          "dependencies": {
+            "modernfix": [
+              {
+                "modId": "neoforge",
+                "type": "required",
+                "versionRange": "[21.0.111-beta,)",
+                "ordering": "NONE",
+                "side": "BOTH"
+              },
+              {
+                "modId": "minecraft",
+                "type": "required",
+                "versionRange": "[1.21, 1.22)",
+                "ordering": "NONE",
+                "side": "BOTH"
+              },
+              {
+                "modId": "jei",
+                "type": "optional",
+                "versionRange": "[15.8.0.11,)",
+                "ordering": "NONE",
+                "side": "CLIENT"
+              }
+            ]
+          }
+        },
+        "jarjar": []
+      },
+      "status": "downloaded_hash_verified_not_runtime_or_parity_verified"
+    },
+    {
+      "project_id": "rO6kKst6",
+      "slug": "railcraft-reborn",
+      "title": "Railcraft Reborn",
+      "source_url": "https://modrinth.com/mod/railcraft-reborn",
+      "source_code_url": "https://github.com/railcraft-reborn/railcraft",
+      "license": {
+        "id": "LicenseRef-Railcraft-Reborn-License",
+        "name": "",
+        "url": "https://github.com/railcraft-reborn/railcraft/blob/1.20.x/LICENSE.md"
+      },
+      "client_side": "required",
+      "server_side": "required",
+      "version_id": "Wgc1S5Km",
+      "version": "1.2.12",
+      "release_type": "release",
+      "game_versions": [
+        "1.21.1"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "published": "2026-10-14T16:21:52.406351Z",
+      "filename": "railcraft-reborn-1.21.1-1.2.12.jar",
+      "url": "https://cdn.modrinth.com/data/rO6kKst6/versions/Wgc1S5Km/railcraft-reborn-1.21.1-1.2.12.jar",
+      "hashes": {
+        "sha512": "70f50a4c935222268d17550283d79438e17fe5f1ec4062b4e648d545a46f5de5cba2fd3c43276c811ac5f158456f691cdcbf6389fc1bab0406e99338335f6bd0",
+        "sha1": "03b3df36413f70fbf1bb72058eca804b64714148"
+      },
+      "size": 5307544,
+      "dependencies": [],
+      "jar_metadata": {
+        "manifest": {
+          "modLoader": "javafml",
+          "loaderVersion": "[4,)",
+          "license": "https://github.com/railcraft-reborn/railcraft/blob/1.21.x/LICENSE.md",
+          "issueTrackerURL": "https://github.com/railcraft-reborn/railcraft/issues",
+          "mods": [
+            {
+              "modId": "railcraft",
+              "version": "1.2.12",
+              "displayName": "Railcraft Reborn",
+              "updateJSONURL": "https://api.modrinth.com/updates/railcraft-reborn/forge_updates.json?neoforge=include",
+              "logoFile": "pack.png",
+              "credits": "From an original idea by CovertJaguar, developed for modern versions of Minecraft by the community",
+              "modUrl": "https://www.curseforge.com/minecraft/mc-mods/railcraft-reborn",
+              "authors": "Sm0keySa1m0n, Edivad99"
+            }
+          ],
+          "mixins": [
+            {
+              "config": "railcraft.mixins.json"
+            }
+          ],
+          "dependencies": {
+            "railcraft": [
+              {
+                "type": "required",
+                "modId": "neoforge",
+                "ordering": "AFTER",
+                "side": "BOTH",
+                "versionRange": "[21.1.50,)"
+              },
+              {
+                "type": "required",
+                "modId": "minecraft",
+                "ordering": "NONE",
+                "side": "BOTH",
+                "versionRange": "[1.21.1,1.22)"
+              },
+              {
+                "type": "optional",
+                "modId": "jei",
+                "ordering": "NONE",
+                "side": "BOTH",
+                "versionRange": "[19.21.0.247,)"
+              }
+            ]
+          }
+        },
+        "jarjar": []
+      },
+      "status": "downloaded_hash_verified_not_runtime_or_parity_verified"
+    },
+    {
+      "project_id": "sk9knFPE",
+      "slug": "rhino",
+      "title": "Rhino",
+      "source_url": "https://modrinth.com/mod/rhino",
+      "source_code_url": "https://github.com/KubeJS-Mods/Rhino",
+      "license": {
+        "id": "MPL-2.0",
+        "name": "Mozilla Public License 2.0",
+        "url": null
+      },
+      "client_side": "optional",
+      "server_side": "optional",
+      "version_id": "cQ4POTah",
+      "version": "2101.2.7-build.85+Rhino-1.21",
+      "release_type": "release",
+      "game_versions": [
+        "1.21",
+        "1.21.1",
+        "1.21.2",
+        "1.21.3",
+        "1.21.4",
+        "26.1.2"
+      ],
+      "loaders": [
+        "fabric",
+        "forge",
+        "neoforge"
+      ],
+      "published": "2026-06-08T22:08:50.636541Z",
+      "filename": "rhino-2101.2.7-build.85.jar",
+      "url": "https://cdn.modrinth.com/data/sk9knFPE/versions/cQ4POTah/rhino-2101.2.7-build.85.jar",
+      "hashes": {
+        "sha512": "0a6c7f4410281aeb03b815ec03487a8e80a4d3dae013d81282e447bf9c08144ef57318af614ea6d40b7d9a8c25031c557890ec792a5895a82467c1643116f693",
+        "sha1": "3c8d34c7efe9e42fc90506acbf9fc842d36f9a42"
+      },
+      "size": 882075,
+      "dependencies": [],
+      "jar_metadata": {
+        "manifest": {
+          "modLoader": "lowcodefml",
+          "loaderVersion": "[2,)",
+          "issueTrackerURL": "https://kubejs.com/support?source=rhino&mc=2101&loader=neoforge",
+          "license": "MPL-2.0",
+          "mods": [
+            {
+              "modId": "rhino",
+              "version": "2101.2.7-build.85",
+              "displayName": "Rhino",
+              "authors": "latvian.dev, Mozilla",
+              "description": "A fork of Mozilla's Rhino library, modified for use in mods\n",
+              "logoFile": "rhino_logo.png",
+              "modUrl": "https://kubejs.com",
+              "displayURL": "https://kubejs.com"
+            }
+          ]
+        },
+        "jarjar": []
+      },
+      "status": "downloaded_hash_verified_not_runtime_or_parity_verified"
+    },
+    {
+      "project_id": "guitPqEi",
+      "slug": "storagedrawers",
+      "title": "Storage Drawers",
+      "source_url": "https://modrinth.com/mod/storagedrawers",
+      "source_code_url": "https://github.com/jaquadro/StorageDrawers",
+      "license": {
+        "id": "MIT",
+        "name": "MIT License",
+        "url": null
+      },
+      "client_side": "required",
+      "server_side": "required",
+      "version_id": "px0CCB06",
+      "version": "1.21.1-13.11.4",
+      "release_type": "release",
+      "game_versions": [
+        "1.21",
+        "1.21.1"
+      ],
+      "loaders": [
+        "neoforge"
+      ],
+      "published": "2025-09-14T09:40:24.506275Z",
+      "filename": "StorageDrawers-neoforge-1.21.1-13.11.4.jar",
+      "url": "https://cdn.modrinth.com/data/guitPqEi/versions/px0CCB06/StorageDrawers-neoforge-1.21.1-13.11.4.jar",
+      "hashes": {
+        "sha1": "b8e11e3d1fd63fd1a0d9277ec3f966c7e5cff385",
+        "sha512": "df97b8b5053a902264a236a71e7585b78d9d48a0bce585033aa8b169896d775f6fda462cfc77431af79cc596ab356eb9642e0c69a205a46b02d4d6f7ab3e74e9"
+      },
+      "size": 1131420,
+      "dependencies": [],
+      "jar_metadata": {
+        "manifest": {
+          "modLoader": "javafml",
+          "loaderVersion": "[4,)",
+          "issueTrackerURL": "https://github.com/jaquadro/StorageDrawers/issues",
+          "displayURL": "https://minecraft.curseforge.com/projects/storagedrawers",
+          "authors": "Texelsaur",
+          "license": "MIT",
+          "mods": [
+            {
+              "modId": "storagedrawers",
+              "version": "13.11.4",
+              "displayName": "Storage Drawers",
+              "description": "Interactive compartment storage for your workshops"
+            }
+          ],
+          "dependencies": {
+            "storagedrawers": [
+              {
+                "modId": "minecraft",
+                "type": "required",
+                "versionRange": "[1.21,1.21.1]",
+                "ordering": "NONE",
+                "side": "BOTH"
+              },
+              {
+                "modId": "neoforge",
+                "type": "required",
+                "versionRange": "[21.0.0,)",
+                "ordering": "NONE",
+                "side": "BOTH"
+              }
+            ]
+          }
+        },
+        "jarjar": []
+      },
+      "status": "downloaded_hash_verified_not_runtime_or_parity_verified"
+    }
+  ],
+  "gaps": [],
+  "parity_verified": false,
+  "curation_notes": [
+    "Removed separately downloaded LDLib2 (different mod ID) and unnecessary standalone Configuration; retained GTCEu embedded artifacts.",
+    "JEI Minecraft interval is accepted by actual NeoForge 4.0.45 VersionSupportMatrix. No manifest or dependency overrides modified.",
+    "15 top-level JARs plus embedded libraries reach pre-EULA discovery only; gameplay and mod initialization remain unverified."
+  ],
+  "additional_artifact_lock": "docs/ftb-candidates.json"
+}

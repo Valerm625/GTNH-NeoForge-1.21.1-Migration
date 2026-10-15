@@ -1,0 +1,31 @@
+{
+  "cases": [
+    {
+      "case": "chunkloader_wrong_stack",
+      "baseline_passed": true,
+      "mutation_rejected": true,
+      "error": "Error: Item mismatch gtnh_migration:coinchunkloadertieri"
+    },
+    {
+      "case": "coin_missing_overlay",
+      "baseline_passed": true,
+      "mutation_rejected": true,
+      "error": "Error: Item mismatch gtnh_migration:coinchunkloadertieri"
+    },
+    {
+      "case": "assembler_wrong_energy",
+      "baseline_passed": true,
+      "mutation_rejected": true,
+      "error": "Error: Source value mismatch gtnh_migration:coin_exchange/coinadventure_to_coinadventurei"
+    },
+    {
+      "case": "brick_form_off_by_one",
+      "baseline_passed": true,
+      "mutation_rejected": true,
+      "error": "Error: wrong damage transition 299"
+    }
+  ],
+  "scope": "Regression harness sensitivity, not Minecraft runtime",
+  "fixtures": "<LOCAL_WORKSPACE>\\work\\migration\\test-fixtures\\eb0b7e3d-9192-40d3-909f-f2f56373ae96",
+  "production_inputs_mutated": false
+}

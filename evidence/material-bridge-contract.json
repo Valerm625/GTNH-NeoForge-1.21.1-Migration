@@ -1,0 +1,7 @@
+{
+  "test": "material_bridge_recipe_contract",
+  "passed": true,
+  "recipes": 8,
+  "unification_tags_preserved": true,
+  "scope": "Actual generated JS against recording API; no Minecraft recipe reload or GT machine test"
+}

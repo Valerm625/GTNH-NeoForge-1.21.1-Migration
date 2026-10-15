@@ -1,0 +1,11 @@
+const fs=require('fs'),vm=require('vm'),path=require('path');const root=path.resolve(process.argv[2]);let config=null;
+const EMPTY={isEmpty:true};const ctx={Item:{empty:EMPTY},StartupEvents:{registry(type,fn){if(type!=='item')throw Error('registry');fn({create(id){if(config)throw Error('duplicate');config={id};const b={textures(v){config.textures=v;return b;},translationKey(v){config.key=v;return b;},maxStackSize(v){config.stack=v;return b;},maxDamage(v){config.damage=v;return b;},disableRepair(){config.repairable=false;return b;},craftingRemainingItem(fn){config.remainder=fn;return b;}};return b;}});}}};
+vm.runInNewContext(fs.readFileSync(path.join(root,'kubejs/startup_scripts/05_gtnh_wooden_brick_form.js'),'utf8'),ctx,{timeout:1000});
+if(config.id!=='gtnh_migration:woodenbrickform'||config.stack!==1||config.damage!==300||config.repairable!==false)throw Error('wrong form properties');
+class Stack{constructor(d=0,count=1){this.damage=d;this.count=count;}getDamageValue(){return this.damage;}copy(){return new Stack(this.damage,this.count);}setCount(v){this.count=v;}setDamageValue(v){this.damage=v;}}
+let checks=0;for(let damage=0;damage<=301;damage++){const s=new Stack(damage,1),before=JSON.stringify(s),a=config.remainder(s),b=config.remainder(s);
+ if(JSON.stringify(s)!==before)throw Error('Mutates original stack');
+ if(damage<300){if(a===EMPTY||a.damage!==damage+1||a.count!==1||a===s||JSON.stringify(a)!==JSON.stringify(b))throw Error('wrong damage transition '+damage);}else if(a!==EMPTY||b!==EMPTY)throw Error('broken form not consumed');checks++;}
+const dir=path.join(root,'kubejs/data/gtnh_migration/recipe/early_game');const bulk=JSON.parse(fs.readFileSync(path.join(dir,'unfired_bricks_bulk.json'))),single=JSON.parse(fs.readFileSync(path.join(dir,'unfired_brick_single.json'))),smelt=JSON.parse(fs.readFileSync(path.join(dir,'fire_unfired_clay_brick.json')));
+if(bulk.pattern.join('')!=='CCCCFCCCC'||bulk.result.count!==8||single.result.count!==1||smelt.experience!==0||smelt.cookingtime!==200)throw Error('Source recipe data mismatch');
+console.log(JSON.stringify({test:'wooden_brick_form_behavior',passed:true,damage_states_checked:checks,original_stack_unchanged:true,boundaries:{from299:300,from300:'empty'},data_recipes:3,scope:'Generated callback exercised with value-model stacks, NOT Minecraft crafting engine'}));

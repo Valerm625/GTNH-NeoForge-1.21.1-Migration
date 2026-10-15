@@ -1,0 +1,12 @@
+{
+  "test": "soldering_alloy_source_correction",
+  "passed": true,
+  "components": {
+    "tin": 9,
+    "antimony": 1
+  },
+  "recipes": 2,
+  "unknown_source_rejected": true,
+  "missing_startup_stops_before_recipe_changes": true,
+  "scope": "Real generated JS with modelled GT API; no game material/recipe initialization has run"
+}

@@ -1,0 +1,8 @@
+{
+  "test": "exact_source_core_recipes",
+  "recipes": 127,
+  "coin_recipes": 112,
+  "additional_core_recipes": 15,
+  "passed": true,
+  "scope": "JS API recording stubs and source-transcribed values; NOT GTCEu runtime integration"
+}

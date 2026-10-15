@@ -1,0 +1,18 @@
+const fs=require('fs'),vm=require('vm'),path=require('path');
+const root=path.resolve(process.argv[2]);const spec=JSON.parse(fs.readFileSync(path.join(root,'docs/fuel-block-migration/fuel-blocks.json'),'utf8'));
+const expected=new Map(spec.blocks.map(b=>[b.target_id,b]));const got=new Map();let tab=null;
+const ctx={Item:{of:id=>id},StartupEvents:{registry(type,fn){if(type==='block')fn({create(id){
+ if(got.has(id)||!expected.has(id))throw Error('Unexpected block '+id);const b={id,tags:[]};got.set(id,b);
+ const chain={translationKey(v){b.translationKey=v;return chain;},texture(v){b.texture=v;return chain;},stoneSoundType(){b.sound='stone';return chain;},mapColor(v){b.mapColor=v;return chain;},hardness(v){b.hardness=v;return chain;},resistance(v){b.resistance=v;return chain;},requiresTool(){b.requiresTool=true;return chain;},tagBlock(...v){b.tags.push(...v);return chain;},item(fn){const item={burnTime(v){b.burnTicks=v;return item;},maxStackSize(v){b.maxStack=v;return item;}};fn(item);return chain;}};return chain;
+}});else if(type==='creative_mode_tab')fn({create(id){tab={id};const c={translationKey(v){tab.translationKey=v;return c;},icon(fn){tab.icon=fn();return c;},content(fn){tab.items=Array.from(fn());return c;}};return c;}});else throw Error('Wrong registry '+type);}}};
+for(const name of ['06_gtnh_fuel_blocks.js','07_gtnh_blocks_tab.js'])vm.runInNewContext(fs.readFileSync(path.join(root,'kubejs/startup_scripts',name),'utf8'),ctx,{timeout:1000});
+if(got.size!==16)throw Error('Incomplete block registry');
+for(const [id,a] of got){const b=expected.get(id);if(a.hardness!==b.hardness||a.resistance!==b.explosion_resistance||a.burnTicks!==b.burn_ticks||a.maxStack!==64||a.sound!=='stone'||a.mapColor!=='stone'||a.requiresTool!==true||a.translationKey!==b.translation_key||!a.tags.includes(b.tool_tag)||!a.tags.includes('minecraft:mineable/pickaxe'))throw Error('Block properties differ '+id);if(a.texture!=='gtnh_migration:block/'+id.split(':')[1])throw Error('Texture mismatch '+id);}
+if(tab.id!=='gtnh_migration:blocks'||tab.icon!=='minecraft:stone'||JSON.stringify(tab.items)!==JSON.stringify(spec.blocks.map(x=>x.target_id)))throw Error('Block tab mismatch');
+const wantRecipes=new Map(spec.recipes.map(r=>[r.id,r]));const recipes=new Map();const gtceu=new Proxy({},{get(_,machine){return id=>{if(recipes.has(id)||!wantRecipes.has(id))throw Error('Unexpected recipe');const a={machine,id};recipes.set(id,a);const c={inputItems(v){a.input=v;return c;},outputItems(v){a.output=v;return c;},duration(v){a.ticks=v;return c;},EUt(v,amp){a.eu=v;a.amp=amp;return c;}};return c;}}});
+vm.runInNewContext(fs.readFileSync(path.join(root,'kubejs/server_scripts/12_gtnh_fuel_processing.js'),'utf8'),{ServerEvents:{recipes(fn){fn({recipes:{gtceu}});}}},{timeout:1000});
+const stack=s=>(s.count===1?'':s.count+'x ')+s.id;
+if(recipes.size!==28)throw Error('Incomplete fuel recipes');for(const [id,a] of recipes){const b=wantRecipes.get(id);if(a.machine!==b.machine||a.input!==stack(b.input)||a.output!==stack(b.output)||a.ticks!==b.ticks||a.eu!==b.eut||a.amp!==1)throw Error('Recipe mismatch '+id);}
+if(got.get('gtnh_migration:quintuplecompressedcoal').hardness!==30||!got.get('gtnh_migration:quintuplecompressedcoal').tags.includes('minecraft:needs_iron_tool'))throw Error('Nonuniform original coal tier was normalized incorrectly');
+if(got.get('gtnh_migration:quintuplecompressedcoalcoke').burnTicks!==1889568000)throw Error('Fuel truncation/unit regression');
+console.log(JSON.stringify({test:'exact_fuel_blocks_and_recipes',passed:true,blocks:got.size,recipes:recipes.size,original_coal_tier_exception_preserved:true,long_burn_value_preserved:true,scope:'Generated scripts executed against recording stubs, NOT game block/recipe behavior'}));

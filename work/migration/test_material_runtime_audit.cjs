@@ -1,0 +1,8 @@
+const fs=require('fs'),vm=require('vm'),path=require('path');const root=path.resolve(process.argv[2]);const spec=JSON.parse(fs.readFileSync(path.join(root,'docs/material-migration/runtime-registry-check-spec.json'),'utf8'));const code=fs.readFileSync(path.join(root,spec.script),'utf8');const byid=new Map(spec.checks.map(x=>[x.id,x]));
+function run(mode){let report=null,errors=0;const first=spec.checks.find(x=>x.tag);const missing=spec.checks[0].id;
+ const ctx={ServerEvents:{loaded(fn){fn({});}},Item:{exists:id=>byid.has(id)&&!(mode==='missing_item'&&id===missing),of:id=>({id})},Ingredient:{of:tag=>({isEmpty:()=>mode==='missing_tag'&&tag==='#'+first.tag,test:stack=>mode==='wrong_member'&&tag==='#'+first.tag?false:byid.get(stack.id)?.tag===tag.slice(1)})},JsonIO:{write(file,data){if(file!=='kubejs/export/gtnh-material-registry-check.json')throw Error('Unexpected output');report=JSON.parse(JSON.stringify(data));}},console:{error(){errors++;},info(){}}};
+ vm.runInNewContext(code,ctx,{timeout:1500});if(!report||report.checkedItems!==spec.checks.length||report.fullFeatureParity!==false)throw Error('Misleading/incomplete report');
+ if(mode==='valid'&&(!report.registryChecksPassed||errors))throw Error('Valid fixture fails');
+ if(mode!=='valid'&&(report.registryChecksPassed||errors!==1))throw Error('Diagnostic misses '+mode);
+ return {mode,passed:true,registry_result:report.registryChecksPassed};}
+console.log(JSON.stringify({test:'material_registry_audit_diagnostic',cases:['valid','missing_item','missing_tag','wrong_member'].map(run),scope:'Registry API fixture tests only; script has NOT run inside Minecraft'}));

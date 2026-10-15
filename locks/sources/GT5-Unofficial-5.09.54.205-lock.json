@@ -1,0 +1,10 @@
+{
+  "repository": "GTNewHorizons/GT5-Unofficial",
+  "tag": "5.09.54.205",
+  "commit": "a3e1e11241a814c9fa0dd0973d5699548428f689",
+  "tag_api": "https://api.github.com/repos/GTNewHorizons/GT5-Unofficial/git/ref/tags/5.09.54.205",
+  "archive_url": "https://codeload.github.com/GTNewHorizons/GT5-Unofficial/zip/a3e1e11241a814c9fa0dd0973d5699548428f689",
+  "archive_sha256": "3044b6cfeec1b1aad554739409af09e314f2f07c8138be08bd478bf183ae6b0f",
+  "local_path": "<LOCAL_WORKSPACE>\\work\\exact-sources\\GT5-Unofficial\\5.09.54.205",
+  "download_complete": true
+}

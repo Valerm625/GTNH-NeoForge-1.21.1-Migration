@@ -1,0 +1,15 @@
+{
+  "passed": true,
+  "source_anchored_quests": 2,
+  "actual_parser_trees_compared": 4,
+  "deliberate_mutations_rejected": [
+    "count",
+    "dependency",
+    "consume",
+    "reward"
+  ],
+  "dependency_closed": true,
+  "eula_accepted": false,
+  "game_runtime_verified": false,
+  "full_quest_parity": false
+}

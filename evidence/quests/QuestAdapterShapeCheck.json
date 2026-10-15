@@ -1,0 +1,7 @@
+{
+  "test": "compiled_quest_adapter_target_shape",
+  "passed": true,
+  "shadow_methods": 5,
+  "actual_mixin_transformation_tested": false,
+  "game_runtime_verified": false
+}

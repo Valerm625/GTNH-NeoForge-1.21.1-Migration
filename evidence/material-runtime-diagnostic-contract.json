@@ -1,0 +1,26 @@
+{
+  "test": "material_registry_audit_diagnostic",
+  "cases": [
+    {
+      "mode": "valid",
+      "passed": true,
+      "registry_result": true
+    },
+    {
+      "mode": "missing_item",
+      "passed": true,
+      "registry_result": false
+    },
+    {
+      "mode": "missing_tag",
+      "passed": true,
+      "registry_result": false
+    },
+    {
+      "mode": "wrong_member",
+      "passed": true,
+      "registry_result": false
+    }
+  ],
+  "scope": "Registry API fixture tests only; script has NOT run inside Minecraft"
+}

@@ -1,0 +1,9 @@
+{
+  "repository": "GTNewHorizons/BetterQuesting",
+  "tag": "3.8.89-GTNH",
+  "commit": "815d738923d46e9083f988421e5329193e2e5940",
+  "api": "https://api.github.com/repos/GTNewHorizons/BetterQuesting/git/ref/tags/3.8.89-GTNH",
+  "archive_url": "https://codeload.github.com/GTNewHorizons/BetterQuesting/zip/815d738923d46e9083f988421e5329193e2e5940",
+  "archive_sha256": "7717db6ce9d8b70f6ef9601b3b23b9e339e7a33000a792d7ac145b3eb0183d10",
+  "source_root": "<LOCAL_WORKSPACE>\\work\\exact-sources\\BetterQuesting\\3.8.89-GTNH"
+}

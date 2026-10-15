@@ -1,0 +1,10 @@
+{
+  "test": "actual_ftb_snbt_parser_roundtrip",
+  "passed": true,
+  "files": 4,
+  "quests": 2,
+  "tasks": 2,
+  "rewards": 2,
+  "dependency_ids_resolved": true,
+  "game_quest_initialization_verified": false
+}

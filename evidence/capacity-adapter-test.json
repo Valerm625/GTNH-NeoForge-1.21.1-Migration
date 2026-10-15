@@ -1,0 +1,9 @@
+{
+  "test": "compiled_capacity_adapter_contract",
+  "passed": true,
+  "actual_target_matches": 1,
+  "actual_handler_output_buckets": 256,
+  "unexpected_originals_rejected": 4,
+  "actual_mixin_transformation_tested": false,
+  "game_storage_verified": false
+}

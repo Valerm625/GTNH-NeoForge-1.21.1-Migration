@@ -1,0 +1,59 @@
+{
+  "new_artifacts": [
+    {
+      "project": "railcraft-reborn",
+      "version": "1.2.12",
+      "filename": "railcraft-reborn-1.21.1-1.2.12.jar",
+      "source_url": "https://modrinth.com/mod/railcraft-reborn",
+      "code_url": "https://github.com/railcraft-reborn/railcraft",
+      "license": {
+        "id": "LicenseRef-Railcraft-Reborn-License",
+        "name": "",
+        "url": "https://github.com/railcraft-reborn/railcraft/blob/1.20.x/LICENSE.md"
+      }
+    },
+    {
+      "project": "ender-storage",
+      "version": "2.13.0.191",
+      "filename": "EnderStorage-1.21.1-2.13.0.191.jar",
+      "source_url": "https://modrinth.com/mod/ender-storage",
+      "code_url": "https://github.com/TheCBProject/EnderStorage",
+      "license": {
+        "id": "MIT",
+        "name": "MIT License",
+        "url": null
+      }
+    },
+    {
+      "project": "codechicken-lib",
+      "version": "4.6.1.529",
+      "filename": "CodeChickenLib-1.21.1-4.6.1.529.jar",
+      "source_url": "https://modrinth.com/mod/codechicken-lib",
+      "code_url": "https://github.com/TheCBProject/CodeChickenLib",
+      "license": {
+        "id": "LGPL-2.1-or-later",
+        "name": "GNU Lesser General Public License v2.1 or later",
+        "url": null
+      }
+    }
+  ],
+  "original_functions_not_yet_audited": {
+    "Railcraft": [
+      "track types and signaling",
+      "steam/boilers",
+      "multiblocks",
+      "coke/creosote production",
+      "item/fluid carts",
+      "GTNH-specific recipes and balance"
+    ],
+    "EnderStorage": [
+      "three-color frequencies",
+      "owner/private channels",
+      "item/liquid transfer",
+      "cross-dimensional chunk lifecycle",
+      "GTNH gated recipes"
+    ]
+  },
+  "runtime_tested": false,
+  "feature_parity_verified": false
+}

@@ -1,0 +1,36 @@
+{
+  "engine": "FTB Quests 2101.1.36",
+  "source_quests": 3814,
+  "structurally_supported_candidates": 24,
+  "dependency_closed_active_quests": 2,
+  "active_quest_ids": [
+    "0:0",
+    "0:2874"
+  ],
+  "chapters": 1,
+  "active_trial_import": true,
+  "game_runtime_verified": false,
+  "full_quest_parity": false,
+  "limitations": [
+    "Only exact single-item non-consuming retrieval plus original checkbox tasks; custom adapter required.",
+    "Full party join/leave/history semantics are not equivalent yet.",
+    "Original text mentions unported systems; conspicuous preview note added, not removed.",
+    "Coordinates scaled from top-left pixel geometry to node centers; visual overlap not yet game-tested.",
+    "Theme-specific visual effects/notifications still not ported."
+  ],
+  "blocked_quests_count": 3812,
+  "files": {
+    "data.snbt": {
+      "sha256": "639d0a65bf1510ee861797397d7b12e528953628d0c4114136d09ac61be5402e"
+    },
+    "chapter_groups.snbt": {
+      "sha256": "c79378ac5107f0014142a9977067abdf918b7c5b87a4e5c6025bda3e542ea072"
+    },
+    "lang/en_us.snbt": {
+      "sha256": "a973698244fbeca7515f8ecf7f70549c6163a883c0e5f2ca8841e4a5558e9571"
+    },
+    "chapters/gtnh_0_0.snbt": {
+      "sha256": "b0b9de9717e64469c5b63df0600dc6e20cd98ddcc940f40ad99bd667edf5acff"
+    }
+  }
+}

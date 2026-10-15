@@ -1,0 +1,10 @@
+{
+  "repository": "GTNewHorizons/NewHorizonsCoreMod",
+  "tag": "2.9.84",
+  "commit": "f769c65f68a352160b1e35770f6f7c579716baa5",
+  "tag_api": "https://api.github.com/repos/GTNewHorizons/NewHorizonsCoreMod/git/ref/tags/2.9.84",
+  "archive_url": "https://codeload.github.com/GTNewHorizons/NewHorizonsCoreMod/zip/f769c65f68a352160b1e35770f6f7c579716baa5",
+  "archive_sha256": "927b1cfb5e2686ec6398dd8a6d94927767ed69ed0ea54fb2df934784e9a09071",
+  "local_path": "<LOCAL_WORKSPACE>\\work\\exact-sources\\NewHorizonsCoreMod\\2.9.84",
+  "download_complete": true
+}

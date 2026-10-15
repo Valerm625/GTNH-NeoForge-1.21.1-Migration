@@ -1,0 +1,8 @@
+{
+  "test": "railcraft_coke_progression",
+  "passed": true,
+  "machine_recipes": 2,
+  "verified_crafting_removals": 2,
+  "coking_production_left_intact": true,
+  "scope": "Generated script contract only; full Railcraft progression and runtime unverified"
+}

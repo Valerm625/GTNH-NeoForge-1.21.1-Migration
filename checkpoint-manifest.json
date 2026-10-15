@@ -1,0 +1,611 @@
+{
+  "created_at": "2026-10-15T12:18:59.539786+00:00",
+  "scope": "source-only public checkpoint; third-party game inputs excluded",
+  "files": [
+    {
+      "path": ".gitattributes",
+      "bytes": 102,
+      "sha256": "0be04cfeaf81b316575e60b9dfcdcaeb2e40708b521cfcb15e2e69a657f75de7"
+    },
+    {
+      "path": ".gitignore",
+      "bytes": 531,
+      "sha256": "64b9f64382af695cd0783509e5ab99e45a6b343e38916e89568d7dc25d238d00"
+    },
+    {
+      "path": "docs/local-validation-detail.zh-CN.md",
+      "bytes": 8696,
+      "sha256": "6e22541d3d360e6d6efdeffa98a7542b71874fc7772c9d2f16479f7411fa4332"
+    },
+    {
+      "path": "docs/migration-matrix.md",
+      "bytes": 2219,
+      "sha256": "9ac4fcb60ddf13ea71cfd2f9aa380ce12a9ec4ccc796c34f799e04327b07887c"
+    },
+    {
+      "path": "docs/upstream-license-notices/BetterQuesting-LICENSE",
+      "bytes": 1066,
+      "sha256": "b3d0d6972715589785e3850d40d91099e84c32da09aa4f8b57b441e68ff909b2"
+    },
+    {
+      "path": "docs/upstream-license-notices/GT5-Unofficial-LICENSE.txt",
+      "bytes": 7652,
+      "sha256": "e3a994d82e644b03a792a930f574002658412f62407f5fee083f2555c5f23118"
+    },
+    {
+      "path": "docs/upstream-license-notices/NewHorizonsCoreMod-LICENSE",
+      "bytes": 35121,
+      "sha256": "e1c0ad728983d8a57335e52cf1064f1affd1d454173d8cebd3ed8b4a72b48704"
+    },
+    {
+      "path": "evidence/capacity-adapter-test.json",
+      "bytes": 258,
+      "sha256": "aae8b467d91abaf84b88bd36754cf512c9cacbdf29bd9c850403985b4e5f202d"
+    },
+    {
+      "path": "evidence/coin-recipes-js-contract-test.json",
+      "bytes": 232,
+      "sha256": "646fb7bfe4ced791b4f379ecb724ba051318f5ad9ceb3eb33aa43386a9fed2fe"
+    },
+    {
+      "path": "evidence/currency-js-contract-test.json",
+      "bytes": 254,
+      "sha256": "17c55f263430a461f81b15a5789d98bb3809b32f2af3b8f0d51a76fc879d01f9"
+    },
+    {
+      "path": "evidence/ender-config-roundtrip.json",
+      "bytes": 194,
+      "sha256": "3de5697006e40c3a0818c5562985ca6ca498a573092a2476c5264a2dcecbd14c"
+    },
+    {
+      "path": "evidence/fuel-script-contract.json",
+      "bytes": 281,
+      "sha256": "05b9cd3aa39d70fa6c2a75c9973a65693d58128aea3b0c5e20622c685a13f629"
+    },
+    {
+      "path": "evidence/independent-source-check.json",
+      "bytes": 299,
+      "sha256": "4f15746859d48f8bea8c92fcc40f0ce14b0df690b9fe20e7e63c751951567992"
+    },
+    {
+      "path": "evidence/long-fuel-verification.json",
+      "bytes": 1070,
+      "sha256": "1a224a9f2572fea521c2011b006f85018f1e77bf0102b4f6f02a9dca54b0b296"
+    },
+    {
+      "path": "evidence/material-bridge-contract.json",
+      "bytes": 223,
+      "sha256": "92f46069368f34eebfeae7d7398aa9be289398c8f8ecd82b77700c795800e3d0"
+    },
+    {
+      "path": "evidence/material-runtime-diagnostic-contract.json",
+      "bytes": 526,
+      "sha256": "d4183db7a36ec15ebcfada79d54e5667068c6dd592889f0c5cfc30e71801ac4e"
+    },
+    {
+      "path": "evidence/mutation-tests.json",
+      "bytes": 1004,
+      "sha256": "5bfb0bbea4ade96b45c980985b05f410817a5aaf357898e5b2d65cfb92f51f80"
+    },
+    {
+      "path": "evidence/output-runtime-loader.json",
+      "bytes": 477,
+      "sha256": "f4404278484d0d93f3316c53c48922cda1a5d07efb20b34d639b7b51ba1b5b0e"
+    },
+    {
+      "path": "evidence/quest-export-summary.json",
+      "bytes": 1299,
+      "sha256": "eff5180690e0f9306a4f00aa98529a5220e61affb8132a7161a27382a41bc896"
+    },
+    {
+      "path": "evidence/quests/checkpoint-verification.json",
+      "bytes": 309,
+      "sha256": "833e30618a40e169ef559d3c260334829d9d2e3c7d4daf914fce234d53354ea5"
+    },
+    {
+      "path": "evidence/quests/LegacyRetrievalCounterCheck.json",
+      "bytes": 277,
+      "sha256": "113d429c243287116557da0154051a5b3f7230a739b847f459b945e0ee13476a"
+    },
+    {
+      "path": "evidence/quests/QuestAdapterShapeCheck.json",
+      "bytes": 174,
+      "sha256": "0c0ef9c46c86172673865e7b198509a7feb7e20c029b6f50b92f403db40e10cf"
+    },
+    {
+      "path": "evidence/quests/QuestSnbtCheck.json",
+      "bytes": 208,
+      "sha256": "218faa43916fe9bd7da03e54946d4e05a8c3a75ae1ac7c64c6652a4cbc148bb5"
+    },
+    {
+      "path": "evidence/railcraft-coke-contract.json",
+      "bytes": 257,
+      "sha256": "ddc46f20e9a1f451ea6539a720a761422ffbae70451e75f154f7bb4f49d74291"
+    },
+    {
+      "path": "evidence/soldering-alloy-contract.json",
+      "bytes": 330,
+      "sha256": "ed7a9564828f085424eecd203d22bc4d7ecee9073284437cbe7bdc2bc46c959c"
+    },
+    {
+      "path": "evidence/validation-state.json",
+      "bytes": 1479,
+      "sha256": "741235929a1e1c2c889cc9053e926b8e922cfff3cb6f810d9693c450a4a84fc7"
+    },
+    {
+      "path": "evidence/validation-summary.json",
+      "bytes": 5061,
+      "sha256": "0e72ddca2932b5e89e8ebc60484dd870f306ae2d9417490216225758ca229758"
+    },
+    {
+      "path": "evidence/wooden-form-contract-test.json",
+      "bytes": 314,
+      "sha256": "10ea419ba3b74b60b5265d9a4c498fa878333278ff569ea65e76eb6496ed6b7e"
+    },
+    {
+      "path": "locks/artifacts.lock.json",
+      "bytes": 50510,
+      "sha256": "aa2e61b06d3d5c7b585662f4f18a34c9113bceea67fff7cb46a67373de191812"
+    },
+    {
+      "path": "locks/compat-mod.lock.json",
+      "bytes": 1220,
+      "sha256": "e60600a8363c900cc997e88b7b18f13d002f8051c5d21b23eaf0b46e02f7862a"
+    },
+    {
+      "path": "locks/ftb-candidates.json",
+      "bytes": 5803,
+      "sha256": "eb3ba3b48b75a4e78cef7eeb8b99b5c571a6578c63f6b9c3ec1c4a52efaec8d4"
+    },
+    {
+      "path": "locks/local-runtime-file-hashes.json",
+      "bytes": 418284,
+      "sha256": "0c1c84ff6393d8852c125fcf3d843da3e68322bccaf3eeb1662ca7abf302d6ef"
+    },
+    {
+      "path": "locks/modern-transport-candidates.json",
+      "bytes": 1767,
+      "sha256": "ddf55763a7445b544360493f0a457d895c968548504a119c0d651484070609cb"
+    },
+    {
+      "path": "locks/platform-lock.json",
+      "bytes": 423,
+      "sha256": "af4fc6ebd0ca5f5ae9f24b4d224fea59b9bc6030d67bba1afadae745b0c28142"
+    },
+    {
+      "path": "locks/sources/BetterQuesting-3.8.89-GTNH-lock.json",
+      "bytes": 524,
+      "sha256": "e5dd1079d6e01b346dfdda5ac0dc6d7ceac2df82e9c7c64299d9b5c0f5f28263"
+    },
+    {
+      "path": "locks/sources/FTB-Quests-v2101.1.36-lock.json",
+      "bytes": 487,
+      "sha256": "5f0fd7550308bd6fe4e81dc2a26e1d26b12bc3036deec914108eab3d154e09a5"
+    },
+    {
+      "path": "locks/sources/GT5-Unofficial-5.09.54.205-lock.json",
+      "bytes": 556,
+      "sha256": "1d82ec79eef3195aea71ff518af0970f21cb1b95962314c1babff65548b24f5f"
+    },
+    {
+      "path": "locks/sources/NewHorizonsCoreMod-2.9.84-lock.json",
+      "bytes": 557,
+      "sha256": "68314f3b04a99f1e071e368a439f90932fb820f76403045189e0c59ca4002b17"
+    },
+    {
+      "path": "locks/sources/Railcraft-9.17.31-lock.json",
+      "bytes": 524,
+      "sha256": "b317c8cce804944032281dedd0793df5dae1f91a50662ac6888bb0f3ac3b3ea9"
+    },
+    {
+      "path": "NOTICE.md",
+      "bytes": 1447,
+      "sha256": "6da16788f1b59769905eff7661bb2021f7121c89d9f2f44b4d26bf1a5c368853"
+    },
+    {
+      "path": "README.md",
+      "bytes": 2833,
+      "sha256": "63809e2f1f0f376f63dbd3171dd7e6e1aac9d394ab75d89989bbdae7e8b92356"
+    },
+    {
+      "path": "requirements.txt",
+      "bytes": 15,
+      "sha256": "41b54a6fb2918667ca47a61d73b522629d84490f3d78f0f20b21135faba10d35"
+    },
+    {
+      "path": "RESUME.md",
+      "bytes": 3021,
+      "sha256": "8441060448005802f29a47109589b887c1618d3dd8b8458528416e363817aa06"
+    },
+    {
+      "path": "STATUS.zh-CN.md",
+      "bytes": 1627,
+      "sha256": "a539b3710776bdf34179a320e6b82aa5ea6d8bc629d7a08e01e0ae0dcaf9488e"
+    },
+    {
+      "path": "work/compat-mod/src/main/java/org/gtnhmigration/compat/EnderTankCapacityMixin.java",
+      "bytes": 956,
+      "sha256": "6c41b3813c2dee6fb855e9c45aa27704adc1af9a4f74cb8cc9ffc4211d406c88"
+    },
+    {
+      "path": "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalCounter.java",
+      "bytes": 1082,
+      "sha256": "fcc46c2feca182c886e645e63c0508c01290b18a2cda716708bd724b93dbd7ae"
+    },
+    {
+      "path": "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalItemTaskMixin.java",
+      "bytes": 3030,
+      "sha256": "d2e51cb869290212bbe29a58da6a28a7b72ad9a38c26d2b0655fe2aa602c5fbf"
+    },
+    {
+      "path": "work/compat-mod/src/main/java/org/gtnhmigration/compat/MigrationCompat.java",
+      "bytes": 242,
+      "sha256": "e9a13972214a938782bad94dac5afef810b2568138172a78c8f6953ca681687b"
+    },
+    {
+      "path": "work/compat-mod/src/main/resources/gtnh_migration_compat.mixins.json",
+      "bytes": 251,
+      "sha256": "519d04dd3e13e42a6ecf358134c9a189781f9ca50c94416daa657044ffe554e8"
+    },
+    {
+      "path": "work/compat-mod/src/main/resources/LICENSE",
+      "bytes": 1081,
+      "sha256": "83880a3eb22deedd0e08c817aa32690af1684ce7d2db893903fea015fede98fd"
+    },
+    {
+      "path": "work/compat-mod/src/main/resources/META-INF/neoforge.mods.toml",
+      "bytes": 871,
+      "sha256": "4db01a29757b278dde7eb97a9888a9031528c66510a3bca17e9b098d4da6b62a"
+    },
+    {
+      "path": "work/migration/acquire_exact_sources.py",
+      "bytes": 2256,
+      "sha256": "cb5ecfab654a51591cb0ceb8ffe5c026776f285b3bef463cbec5630af18f7d4e"
+    },
+    {
+      "path": "work/migration/acquire_ftb.py",
+      "bytes": 2361,
+      "sha256": "6d5e0ca25dc1742a4b52d2ade198da743b52d1f22a60f1782638d58053a36202"
+    },
+    {
+      "path": "work/migration/acquire_legacy_platform.py",
+      "bytes": 1649,
+      "sha256": "12966487f09de7a63d43b38f687ac6735d82d08cac6f05c7ffd8703d5794a7c2"
+    },
+    {
+      "path": "work/migration/acquire_quest_sources.py",
+      "bytes": 1753,
+      "sha256": "e6b64ac2596e934e96e22a5280de18033cf149baa7f114bee5e8ac45b3ef283f"
+    },
+    {
+      "path": "work/migration/add_migration_runtime.py",
+      "bytes": 2758,
+      "sha256": "7fd76262d5e8d2e6b6135a00e0f3b27aee963580e1c623cca37dd9768d130bb9"
+    },
+    {
+      "path": "work/migration/add_quest_parity_adapter.py",
+      "bytes": 5884,
+      "sha256": "5fcec1f21e1fb99b1fa04e3a5847b31189d27799b992b9aad18eaf4408d26bc0"
+    },
+    {
+      "path": "work/migration/add_transport_candidates.py",
+      "bytes": 2482,
+      "sha256": "3ac906e8145c177364da33e667b03df1dcd49d21e489f3393436d1c3fb13b281"
+    },
+    {
+      "path": "work/migration/bootstrap.py",
+      "bytes": 4637,
+      "sha256": "b38b7e6bdc811fad481eee0abf55e26717d47bbb5e4c0777a95e28c721ef40a9"
+    },
+    {
+      "path": "work/migration/build_capacity_compat.py",
+      "bytes": 7226,
+      "sha256": "29f14ea466f8f00c8a4091c7ffc43055780ec0004319e7500cf2f45282f05d94"
+    },
+    {
+      "path": "work/migration/build_quest_ir.py",
+      "bytes": 7887,
+      "sha256": "20dd213ee8be272bdcc6e03bc770b00167aad8877e838e7cb614a797e3856a68"
+    },
+    {
+      "path": "work/migration/CapacityPatchCheck.java",
+      "bytes": 3408,
+      "sha256": "eccacaa085f24ae5aac5a78c804d32523514dc4d2b7b3b7cba60a4fec7263191"
+    },
+    {
+      "path": "work/migration/CheckVersionRanges.java",
+      "bytes": 1445,
+      "sha256": "c5b49671e44b29a1c5541d2acecb554a42593f046de4b7d2efb6eacb72985caf"
+    },
+    {
+      "path": "work/migration/curate_core.py",
+      "bytes": 4055,
+      "sha256": "c2ddc68e3568be1aa4730c951587059feb4a185cc5fa5297a127bbc4ee6905f7"
+    },
+    {
+      "path": "work/migration/document_ender_differences.py",
+      "bytes": 4525,
+      "sha256": "ba735a6332b20dfa4195dd48e7f3bf8f3b682b9048f2b37133ec412183cb594c"
+    },
+    {
+      "path": "work/migration/document_reference.py",
+      "bytes": 8671,
+      "sha256": "4e6ce752708a57a804f745b7661c51031b86045facb67e3adbc87b076d8b0ed0"
+    },
+    {
+      "path": "work/migration/EnderConfigRoundTrip.java",
+      "bytes": 1338,
+      "sha256": "9844fabddee13908d4d10d9243bee4ea1e8ad407cff90ea8907f77d77ccff6b0"
+    },
+    {
+      "path": "work/migration/export_supported_quests.py",
+      "bytes": 14080,
+      "sha256": "67a2e76d5e048a88e79fe3305ece1708dc25c2f9fa1f522014a8d0ceeea148b8"
+    },
+    {
+      "path": "work/migration/generate_material_runtime_audit.py",
+      "bytes": 3199,
+      "sha256": "fe58635a0636ec97f4714083bce170a8cdba0f0dddc37fb9486678b629eb5a41"
+    },
+    {
+      "path": "work/migration/ingest_release.py",
+      "bytes": 7696,
+      "sha256": "8d0b5ae1b8e021963d6ce5dd16f3b6ab502b72150de3cd522a504f5b55560c52"
+    },
+    {
+      "path": "work/migration/install_platform.py",
+      "bytes": 2212,
+      "sha256": "76b7c87bfd079e17571a1a594af6933ac70d5b745f4c7558e8bb6f21b3b59c2b"
+    },
+    {
+      "path": "work/migration/LegacyRetrievalCounterCheck.java",
+      "bytes": 2406,
+      "sha256": "a1b31e4dbde362a088d4710a9116a1484a9dbbb6a4c82e537f5109dc5904a94b"
+    },
+    {
+      "path": "work/migration/loader_probe.py",
+      "bytes": 1810,
+      "sha256": "252e6031cbaf3f1e89dfb9cb5d2e404865bb71554ebcbd48b569a663a235349a"
+    },
+    {
+      "path": "work/migration/locate_ftb.py",
+      "bytes": 1191,
+      "sha256": "92bd1afa015ab73fc7b3b43f3d6595fb71193fbdfcbe5651d1df473ede73406c"
+    },
+    {
+      "path": "work/migration/LongFuelRoundTrip.java",
+      "bytes": 2398,
+      "sha256": "d970e4ddce8ffdeae8e1128b5312cc99ec94527c4b056030e7e854f67e1f88eb"
+    },
+    {
+      "path": "work/migration/material_catalog.py",
+      "bytes": 15483,
+      "sha256": "a8b49249a9466c88a85e4630daccd7b8f25c3776d0059743c57ca98f47563454"
+    },
+    {
+      "path": "work/migration/port_coin_recipes.py",
+      "bytes": 5790,
+      "sha256": "73cd19868f71440e0452d92bea5a8611c50ce42d3dddb48f5a3a9b346e3b8fa2"
+    },
+    {
+      "path": "work/migration/port_core_integrations.py",
+      "bytes": 5288,
+      "sha256": "0c5abbfb55a3a9398ec5ab4e8634b91318c5344c9f1d0d2d6b957cf541ce738d"
+    },
+    {
+      "path": "work/migration/port_currency.py",
+      "bytes": 5870,
+      "sha256": "e7f914c040991acdd50996adc2370fbaf69b97be2e337a69dbfd6038ec191933"
+    },
+    {
+      "path": "work/migration/port_exact_core_items.py",
+      "bytes": 11298,
+      "sha256": "16ed6a1456c13306060e6e8e4a86224c1b233c96b39f038f4b9b227b53c2d59d"
+    },
+    {
+      "path": "work/migration/port_exact_core_recipes.py",
+      "bytes": 10085,
+      "sha256": "f9320f257612e9dcfef3375edf701d2d5aeb9791027b7afe3f65662fc1bf90c4"
+    },
+    {
+      "path": "work/migration/port_extra_localization.py",
+      "bytes": 1994,
+      "sha256": "ea3dadf0d985e1e26269ceba895ab98f621df3213595cf67570fe47c70ab5d19"
+    },
+    {
+      "path": "work/migration/port_fuel_blocks.py",
+      "bytes": 10510,
+      "sha256": "fc0bbb034b07a5df85117b9d600f603552ec028ce599b59741dbc7f14b2cf17c"
+    },
+    {
+      "path": "work/migration/port_material_bridges.py",
+      "bytes": 10359,
+      "sha256": "87d018fe6fababc8fa4d0691e34641c3b5ec2ef75c1e9f004d03e58a991891ab"
+    },
+    {
+      "path": "work/migration/port_railcraft_coke.py",
+      "bytes": 7616,
+      "sha256": "efefb0ec398633eeb7d14f1964bcaebac9140de0e8dea6f064725fefbb7d48a7"
+    },
+    {
+      "path": "work/migration/port_resources.py",
+      "bytes": 9679,
+      "sha256": "2e243172d018bb9c6d34646065e77eb9d0e34869e93aa6db41585b0d8b2ef8b8"
+    },
+    {
+      "path": "work/migration/port_soldering_alloy.py",
+      "bytes": 8624,
+      "sha256": "6d3e024b7bf0f38681b3810a96b3d224c9bdcfa5249b78ee4b08833ccb8cfeec"
+    },
+    {
+      "path": "work/migration/port_wooden_form.py",
+      "bytes": 7476,
+      "sha256": "45b666af2a0e4f2f9e0f4f563717173700c95ecdef8c577f12596b4ea804004d"
+    },
+    {
+      "path": "work/migration/QuestAdapterShapeCheck.java",
+      "bytes": 2780,
+      "sha256": "8fdd2deed02ddcd5c6bb33708876bf5bd10ff565d6a7b831c2f2ac86d7e9f74b"
+    },
+    {
+      "path": "work/migration/QuestSnbtCheck.java",
+      "bytes": 3125,
+      "sha256": "8650fb77e923871f285fca1d99eb14b010f600b72617b793f641d53f91cada78"
+    },
+    {
+      "path": "work/migration/rebuild_current_phase.py",
+      "bytes": 1227,
+      "sha256": "b061a4057f286dfbd6596859fd9295f06e4160ef4927d1eff8253aaf54f8ac74"
+    },
+    {
+      "path": "work/migration/recover_java.py",
+      "bytes": 2145,
+      "sha256": "04c05b8566c199ba3e4563dea7a68cc36c4363ab88743d0156e2cdc16616fe1b"
+    },
+    {
+      "path": "work/migration/resolve_mods.py",
+      "bytes": 6415,
+      "sha256": "2b16f5fbcc3c7c8bc558e4ba0e23bce9a1bf8a1961b5a05ac6c6639802d0b5fd"
+    },
+    {
+      "path": "work/migration/stage_test_runtime.py",
+      "bytes": 5324,
+      "sha256": "b34b99c76f55923461cd85c8d6d867f02bc6548fd969df868284520d50001903"
+    },
+    {
+      "path": "work/migration/test_coin_recipes.cjs",
+      "bytes": 130,
+      "sha256": "3d9a594b9313b000570a77ccb86f94b1a25a7fefa9b4491b2642096e13dface3"
+    },
+    {
+      "path": "work/migration/test_currency.cjs",
+      "bytes": 128,
+      "sha256": "602676a35c5aa89e909b98ec16d9d05d7bc6ce69264ba2368b4f05d343a47e7e"
+    },
+    {
+      "path": "work/migration/test_exact_core_items.cjs",
+      "bytes": 3169,
+      "sha256": "51d1f4780d8bd5e2e14d9a12b2c4a52cee5c749c41f87d78f5ad3623e5084fde"
+    },
+    {
+      "path": "work/migration/test_exact_core_recipes.cjs",
+      "bytes": 1959,
+      "sha256": "6444552931fb0f780439ba34b17d9f2e84340a1ddb814181ac53d02f05314a0a"
+    },
+    {
+      "path": "work/migration/test_fuel_blocks.cjs",
+      "bytes": 3757,
+      "sha256": "e3c625c305e13baabf23bb427836f363e08cca33acf00b7366f8136c5969f417"
+    },
+    {
+      "path": "work/migration/test_generated_regressions.py",
+      "bytes": 2469,
+      "sha256": "f0c1a90d802821ce093dbc873fbe8324eabf74c18d741eb48c6ac53373e8d8dd"
+    },
+    {
+      "path": "work/migration/test_material_bridges.cjs",
+      "bytes": 2147,
+      "sha256": "d082a98dbd99500c3470b2559e7110ece8f17aae6d073a67484f7d1d634b4387"
+    },
+    {
+      "path": "work/migration/test_material_runtime_audit.cjs",
+      "bytes": 1632,
+      "sha256": "6d7999d31fca880135bbc75822859e7275d40222de393e5417894c467b83a185"
+    },
+    {
+      "path": "work/migration/test_quest_export_java.py",
+      "bytes": 2318,
+      "sha256": "e5a20bb0d12774b569c014bc0a79a8745bdf2a52478909c596d13bb1eba04957"
+    },
+    {
+      "path": "work/migration/test_railcraft_coke.cjs",
+      "bytes": 1702,
+      "sha256": "6d19c5c9b8f637b4c56ba76fe414e8e935dfec8db52777c02e22f46c8275e8d6"
+    },
+    {
+      "path": "work/migration/test_soldering_alloy.cjs",
+      "bytes": 3468,
+      "sha256": "ce2427e94ce55245e498f3a4d4293265afd06141f4c1809c28de7300934bae8f"
+    },
+    {
+      "path": "work/migration/test_wooden_form.cjs",
+      "bytes": 2351,
+      "sha256": "6d54d1c97b2c3d63d16f869dab1de38d6522898fa7e09a6347b2d77d9d39af7a"
+    },
+    {
+      "path": "work/migration/verify_capacity_compat.py",
+      "bytes": 1494,
+      "sha256": "90939d83251b8c5041e959e48fa081478f5605aba2206e19428a50be78ea74ea"
+    },
+    {
+      "path": "work/migration/verify_ender_config.py",
+      "bytes": 2296,
+      "sha256": "830c29e0874fe14f0fd878d14f6766370ba8e0989caa0d0f938189b9f1e923e6"
+    },
+    {
+      "path": "work/migration/verify_exact_source.py",
+      "bytes": 4457,
+      "sha256": "fed4b3f86b01cdd93893bd4ff9255838bf59a8bc4839b8a0d1acb52a0a29bbf2"
+    },
+    {
+      "path": "work/migration/verify_fuel_blocks.py",
+      "bytes": 6190,
+      "sha256": "93efd2edc8821742108c023d957500aaeb1c8bc2f2d10ee3ea06812cec7c3538"
+    },
+    {
+      "path": "work/migration/verify_long_fuels.py",
+      "bytes": 3787,
+      "sha256": "4aa7be0a897e6731907ef70f04191d856422562bc1b715a8ec754f73610c7411"
+    },
+    {
+      "path": "work/migration/verify_material_mapping.py",
+      "bytes": 7184,
+      "sha256": "5e9c1a9ae6e335cd3cd73ea14a68821382e8b99fa26860cbdf1ca61fb2e0faeb"
+    },
+    {
+      "path": "work/migration/verify_migration.py",
+      "bytes": 11145,
+      "sha256": "457e217035332f866190483c66835ab0b1eace406ee21554a9e43d056fc4d3ce"
+    },
+    {
+      "path": "work/migration/verify_quest_checkpoint.py",
+      "bytes": 4140,
+      "sha256": "15d4312c0e038a995de58b15b1b7d4f5aa327ce30c52eeeb26886830136c3d42"
+    },
+    {
+      "path": "work/migration/verify_soldering_alloy.py",
+      "bytes": 4069,
+      "sha256": "582725ba6f7b223b561b2718c8c91a320c0cc369a8afe4007ec53014d370c0cc"
+    },
+    {
+      "path": "work/migration/write_exact_phase_status.py",
+      "bytes": 16408,
+      "sha256": "09be722c988e2328772349ffcdacb33609575e144257671e7b76f8b915e77c88"
+    },
+    {
+      "path": "work/migration/write_fuel_phase_status.py",
+      "bytes": 15650,
+      "sha256": "60361cd75585f61067689b57e5fa0151f2ba4777678958a5f9e83427820b57e2"
+    },
+    {
+      "path": "work/migration/write_material_phase_status.py",
+      "bytes": 13689,
+      "sha256": "305306cbf43876f651e71051738011880fa1a75c0591cfb7ae1b696bdaf2e6c6"
+    },
+    {
+      "path": "work/migration/write_quest_checkpoint_status.py",
+      "bytes": 4978,
+      "sha256": "825289e1f1f8e93825eaf7fa8112ecc924b2cc38e96829b5fcf44da22187182e"
+    },
+    {
+      "path": "work/migration/write_status.py",
+      "bytes": 14115,
+      "sha256": "1ddca3d85fc05ee3e8502a504f99bc2a6d2e7f5a43c255e97000e5c5d9577018"
+    }
+  ],
+  "file_count": 120,
+  "source_archive_inputs_included": false,
+  "runtime_binaries_included": false,
+  "full_parity": false,
+  "continuation": "pause after upload verification; wait for explicit user resume"
+}

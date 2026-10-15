@@ -1,0 +1,7 @@
+from pathlib import Path
+import json,re,subprocess,zipfile,hashlib,shutil
+R=Path(__file__).resolve().parents[2];W=R/'work';O=R/'outputs/GTNH-NeoForge-1.21.1-Migration-Foundation';java=Path(json.loads((W/'migration/runtime.json').read_text(encoding='utf-8'))['java']);classes=W/'migration/java-checks';classes.mkdir(exist_ok=True)
+asm=[O/f'libraries/org/ow2/asm/{name}/9.10.1/{name}-9.10.1.jar' for name in ['asm','asm-tree']];mixin=next((O/'libraries/net/fabricmc/sponge-mixin').rglob('*.jar'));compat=O/'mods/gtnh-migration-compat-0.1.0.jar';cp=';'.join(str(p) for p in asm+[mixin,compat])
+r=subprocess.run([str(java.with_name('javac.exe')),'-proc:none','-cp',cp,'-d',str(classes),str(W/'migration/CapacityPatchCheck.java')],capture_output=True,timeout=40);assert r.returncode==0,r.stderr.decode(errors='replace')
+r=subprocess.run([str(java),'-cp',str(classes)+';'+cp,'CapacityPatchCheck',str(O/'mods/EnderStorage-1.21.1-2.13.0.191.jar'),str(compat)],capture_output=True,timeout=40);assert r.returncode==0,r.stderr.decode(errors='replace');report=json.loads(r.stdout.decode());print(json.dumps(report));(O/'docs/verification/capacity-adapter-test.json').write_text(json.dumps(report,indent=2),encoding='utf-8')
+lockfile=O/'docs/compat-mod.lock.json';lock=json.loads(lockfile.read_text(encoding='utf-8'));assert hashlib.sha256(compat.read_bytes()).hexdigest()==lock['sha256'];lock['compiled_handler_and_target_shape_test']=report;lockfile.write_text(json.dumps(lock,indent=2),encoding='utf-8')

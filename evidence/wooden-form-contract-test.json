@@ -1,0 +1,12 @@
+{
+  "test": "wooden_brick_form_behavior",
+  "passed": true,
+  "damage_states_checked": 302,
+  "original_stack_unchanged": true,
+  "boundaries": {
+    "from299": 300,
+    "from300": "empty"
+  },
+  "data_recipes": 3,
+  "scope": "Generated callback exercised with value-model stacks, NOT Minecraft crafting engine"
+}

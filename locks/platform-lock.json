@@ -1,0 +1,9 @@
+{
+  "minecraft": "1.21.1",
+  "neoforge": "21.1.262",
+  "java": 21,
+  "metadata_url": "https://maven.neoforged.net/releases/net/neoforged/neoforge/maven-metadata.xml",
+  "installer_url": "https://maven.neoforged.net/releases/net/neoforged/neoforge/21.1.262/neoforge-21.1.262-installer.jar",
+  "sha256": "e86f5d78ed310465bd1ecf79823abcbc58782699b068ac776f4c5e226d994a8f",
+  "checked_at": "2026-10-15T08:11:55.324645+00:00"
+}

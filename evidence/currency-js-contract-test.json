@@ -1,0 +1,9 @@
+{
+  "test": "exact_core_item_scripts",
+  "passed": true,
+  "items": 557,
+  "creative_tabs": 7,
+  "tooltip_lines": 24,
+  "fuels": 2,
+  "scope": "actual generated scripts executed against recording API stubs, NOT game initialization/render verification"
+}

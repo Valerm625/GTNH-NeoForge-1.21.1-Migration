@@ -1,0 +1,15 @@
+{
+  "checked_at": "2026-10-15T12:15:41.719028+00:00",
+  "actual_output_folder_probed": true,
+  "input_files_verified": 2035,
+  "active_top_level_jars": 19,
+  "eula_gate_reached": true,
+  "eula_accepted": false,
+  "world_created": false,
+  "material_startup_events_executed": false,
+  "runtime_registry_audit_executed": false,
+  "capacity_mixin_transformed_verified": false,
+  "quest_mixin_transformed_verified": false,
+  "client_rendering_verified": false,
+  "returncode": 0
+}

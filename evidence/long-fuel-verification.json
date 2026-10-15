@@ -1,0 +1,22 @@
+{
+  "test": "actual_minecraft_nbt_and_neoforge_payload_roundtrip",
+  "passed": true,
+  "cases": 120,
+  "values_truncated_by_short_control": 116,
+  "max_tested": 2147483647,
+  "scope": "Real binary codecs only; no server/world, reload or connected client was started.",
+  "patched_furnace_save_uses_int": true,
+  "server_uses_advanced_channel_when_available": true,
+  "custom_patch_added": false,
+  "exact_launcher_classpath_used": true,
+  "limitations": [
+    "No world save/reload or connected client was exercised.",
+    "Vanilla clients without the NeoForge advanced data channel fall back to short packets.",
+    "Behavior after consuming last fuel item and restarting still needs full runtime validation."
+  ],
+  "source_jar_sha256": {
+    "neoforge-21.1.262-server.jar": "f57ce3018e21459d24b50508e8c1b4fd5c16324ec1dc5f316c192aa0130e7fe0",
+    "server-1.21.1-20240808.144430-srg.jar": "26ca9c40d7e1681190b428583c38816852218e78df3f8bdb60a59a78503aec71",
+    "neoforge-21.1.262-universal.jar": "4070305f97a08409d9b4e714f619f0ec2d97d29c9939ef43a89d927259942f98"
+  }
+}

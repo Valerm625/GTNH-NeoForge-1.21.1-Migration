@@ -1,0 +1,8 @@
+{
+  "test": "actual_codechicken_config_roundtrip",
+  "passed": true,
+  "personal_item": "minecraft:diamond",
+  "anarchy": false,
+  "storage_size": 1,
+  "game_mod_initialization_tested": false
+}

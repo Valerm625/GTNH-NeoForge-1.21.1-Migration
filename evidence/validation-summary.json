@@ -1,0 +1,140 @@
+{
+  "checked_at": "2026-10-15T12:12:00.562326+00:00",
+  "top_level_artifacts": [
+    {
+      "filename": "CodeChickenLib-1.21.1-4.6.1.529.jar",
+      "sha256": "8c453d5c49092860e9d7a692eb858ea54c15d0f9598daae524f9590f8edf276f",
+      "bytes": 1538382
+    },
+    {
+      "filename": "EnderStorage-1.21.1-2.13.0.191.jar",
+      "sha256": "f52f23f9df8925c7aec26154c2f1816cc76422c67a4fa4e30fa8b80b7a854202",
+      "bytes": 264089
+    },
+    {
+      "filename": "Jade-1.21.1-NeoForge-15.10.6.jar",
+      "sha256": "276f1f65a20d04f536989c4f311949d770b52c440c23c2b904a08860f3c93810",
+      "bytes": 726853
+    },
+    {
+      "filename": "StorageDrawers-neoforge-1.21.1-13.11.4.jar",
+      "sha256": "7d768aaaecbd0228c57d3a3c1fcee0c04469a42ea218925f93763ed33afe566c",
+      "bytes": 1131420
+    },
+    {
+      "filename": "appliedenergistics2-19.2.18.jar",
+      "sha256": "df15a07f86ca1ca93aa66373f9d5d84dd3d4586631fceb38f4fbc85dad591e39",
+      "bytes": 8236552
+    },
+    {
+      "filename": "architectury-13.0.11-neoforge.jar",
+      "sha256": "9cc92f2c09533fc5482c60f993bd891c655a0e32b637037cdcb7c2b23adedeeb",
+      "bytes": 584734
+    },
+    {
+      "filename": "better-advanced-tooltips-2101.1.0-build.5.jar",
+      "sha256": "0f76d46f2f18eb67e67c7974170d7b27deb66473396461c8dc50d6949de1449b",
+      "bytes": 37653
+    },
+    {
+      "filename": "ferritecore-7.0.3-neoforge.jar",
+      "sha256": "d87ea28262715ebff45b8a82d493e6b468e7a4521bc021df5d88302196d030a8",
+      "bytes": 121559
+    },
+    {
+      "filename": "ftb-library-neoforge-2101.1.37.jar",
+      "sha256": "624c2d2d1cbadb946d967e17757bd5b2d129d4d3ed71f2da0c70607d04476ac2",
+      "bytes": 1439881
+    },
+    {
+      "filename": "ftb-quests-neoforge-2101.1.36.jar",
+      "sha256": "6a39982c4b3afc00b1e788041a4f0d394e1659e3b3a6e5d078cd790bc36d0018",
+      "bytes": 1609984
+    },
+    {
+      "filename": "ftb-teams-neoforge-2101.1.11.jar",
+      "sha256": "e6bcd670493624e6906df872a9c6af4a33fe6405cac57a32c59cd4cd5838c655",
+      "bytes": 308236
+    },
+    {
+      "filename": "gtceu-1.21.1-7.0.2.jar",
+      "sha256": "c09a550523e931342a575193cbaad2e4b643e5de2cefe280cd1de540022c6388",
+      "bytes": 16555448
+    },
+    {
+      "filename": "gtnh-migration-compat-0.1.0.jar",
+      "sha256": "619f2397cda0e41ffdb5f38e347dc9f49d734a3761ee0f68b2f544941ed2394e",
+      "bytes": 5964
+    },
+    {
+      "filename": "guideme-21.1.19.jar",
+      "sha256": "2ce254edb931c3c3cf81d69abaf8f4ce5b871bf85e64984f366bf044173bd66a",
+      "bytes": 9311992
+    },
+    {
+      "filename": "jei-1.21.1-neoforge-19.51.0.418.jar",
+      "sha256": "8bc3936d869e4040a5649c58b7e8be1c78c82a245c0dc07bdd68ab49121a222c",
+      "bytes": 1804792
+    },
+    {
+      "filename": "kubejs-neoforge-2101.7.2-build.377.jar",
+      "sha256": "df9a8458b1f83fed06ba54684977911795a5153a462b81a610895f5b1f2f0cbf",
+      "bytes": 2294111
+    },
+    {
+      "filename": "modernfix-neoforge-5.27.26+mc1.21.1.jar",
+      "sha256": "09f6842c63d14b3f1707f1f4a6f4602052f237f7efa9be135e41d3d97acf2a13",
+      "bytes": 611043
+    },
+    {
+      "filename": "railcraft-reborn-1.21.1-1.2.12.jar",
+      "sha256": "9dc23403c3b8a987ae4a9161bb9495bbf1c27b1ba3b6b558a46c99272c24932e",
+      "bytes": 5307544
+    },
+    {
+      "filename": "rhino-2101.2.7-build.85.jar",
+      "sha256": "e0e9b0e78edd380440266c0f4ea8d489dac851ef075a4566a66a6dae2f7bbb66",
+      "bytes": 882075
+    }
+  ],
+  "active_top_level_jars": 19,
+  "registered_mod_ids_listed_by_discovery": 23,
+  "required_dependencies_missing": [],
+  "version_ranges_checked": 58,
+  "version_range_failures": 0,
+  "neoforge_compatibility_matrix_applied": true,
+  "decoded_png_count": 644,
+  "json_mcmeta_parsed_count": 651,
+  "coin_items": 81,
+  "simple_and_layered_item_definitions": 557,
+  "specialized_item_definitions": 1,
+  "total_implemented_item_definitions": 558,
+  "animated_source_texture_files": 31,
+  "creative_tabs": 8,
+  "custom_tooltip_lines": 24,
+  "vanilla_fuel_overrides": 2,
+  "fuel_block_definitions": 16,
+  "fuel_block_burn_values": 16,
+  "long_fuel_codec_cases": 120,
+  "capacity_adapter_compiled": true,
+  "capacity_adapter_runtime_verified": false,
+  "gtceu_machine_recipe_definitions": 167,
+  "material_quest_stack_mappings": 249,
+  "soldering_composition_adapter_implemented": true,
+  "soldering_composition_runtime_verified": false,
+  "early_game_recipe_definitions": 3,
+  "coin_exchange_recipes": 112,
+  "coin_recipe_contract_test_passed": true,
+  "coin_script_contract_test_passed": true,
+  "eula_gate_reached": true,
+  "server_world_started": false,
+  "client_started": false,
+  "resource_reload_tested": false,
+  "feature_parity_verified": false,
+  "notes": [
+    "All passed checks are static or pre-EULA loader discovery; no full mod initialization asserted.",
+    "Item, recipe and form behavior scripts execute against recording stubs only; not game integration.",
+    "JEI raw interval excludes 1.21.1, but the exact NeoForge loader officially accepts 1.21 as compatible.",
+    "Missing refmap warnings remain; evaluate after full mod initialization."
+  ]
+}

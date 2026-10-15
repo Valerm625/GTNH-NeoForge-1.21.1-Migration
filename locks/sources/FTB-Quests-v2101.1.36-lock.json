@@ -1,0 +1,9 @@
+{
+  "repository": "FTBTeam/FTB-Quests",
+  "tag": "v2101.1.36",
+  "commit": "8c53f35a97d8897c861b097f1e39f4fc3beb3a15",
+  "api": "https://api.github.com/repos/FTBTeam/FTB-Quests/git/ref/tags/v2101.1.36",
+  "archive_url": "https://codeload.github.com/FTBTeam/FTB-Quests/zip/8c53f35a97d8897c861b097f1e39f4fc3beb3a15",
+  "archive_sha256": "dfd24a4a2fce1d4e281ab05fa4cb44b228c5536e44de522b8140cd52f74a99c6",
+  "source_root": "<LOCAL_WORKSPACE>\\work\\exact-sources\\FTB-Quests\\v2101.1.36"
+}
