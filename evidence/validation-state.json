@@ -31,5 +31,7 @@
   "quest_adapter": "compiled; pure reducer and target-shape tests pass; actual Mixin/game unverified",
   "unmapped_quest_stack_identities": 7668,
   "vanilla_identity_mappings_added": 241,
-  "vanilla_identity_occurrences_covered": 4905
+  "vanilla_identity_occurrences_covered": 4905,
+  "crafting_task_candidates": 2,
+  "crafting_task_runtime_verified": false
 }

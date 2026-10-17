@@ -1,0 +1,45 @@
+{
+  "phase": "conservative-crafting-task-subset",
+  "checked_at": "2026-10-17T12:56:41.548360+08:00",
+  "before": {
+    "structurally_supported_candidates": 41,
+    "crafting_task_candidates": 0,
+    "dependency_closed_active_quests": 2
+  },
+  "after": {
+    "structurally_supported_candidates": 43,
+    "crafting_task_candidates": 2,
+    "dependency_closed_active_quests": 2,
+    "crafting_candidate_source_ids": [
+      "0:11",
+      "9012220195932555052:-5816092802750880657"
+    ]
+  },
+  "evidence": {
+    "passed": true,
+    "crafting_candidate_source_ids": [
+      "0:11",
+      "9012220195932555052:-5816092802750880657"
+    ],
+    "crafting_candidate_count": 2,
+    "source_event_policy": "craft and smelt only; statistics and anvil rejected",
+    "all_required_items_exactly_mapped": true,
+    "ore_and_nbt_predicates_rejected": true,
+    "runtime_game_verified": false,
+    "full_quest_parity": false
+  },
+  "tests": [
+    "verify_crafting_adapter_contract.py",
+    "test_quest_export_java.py",
+    "verify_quest_checkpoint.py",
+    "verify_migration.py",
+    "full rebuild_current_phase.py"
+  ],
+  "runtime_game_verified": false,
+  "full_quest_parity": false,
+  "notes": [
+    "Only crafting tasks with exact mapped outputs, craft and smelt events enabled, anvil and statistics completion disabled are admitted.",
+    "FTB native only_from_crafting event handling is not yet verified in a running world.",
+    "This did not increase dependency-closed active quests because remaining prerequisites are still blocked."
+  ]
+}

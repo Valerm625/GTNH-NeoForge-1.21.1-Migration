@@ -2,14 +2,17 @@
 
 这是非官方迁移工作的**源码与进度检查点**，不是可直接安装游玩的整合包，不代表 GTNH、GregTech CEu、NeoForge 或 FTB 官方支持。
 
-截至 2026-10-17，本阶段完成了显式旧版原版物品身份翻译：对照实际 1.21.1 `Items` 类的 1333 个字段，新增 241 个身份、覆盖 4905 次来源出现；累计 720 / 8388 个身份有定义映射，仍有 7668 个未映射。结构上可转换任务候选为 41 个，但依赖闭合的实导出仍为 2 个，3812 个任务未导出。
+截至 2026-10-17，本阶段完成了显式旧版原版物品身份翻译：对照实际 1.21.1 `Items` 类的 1333 个字段，新增 241 个身份、覆盖 4905 次来源出现；累计 720 / 8388 个身份有定义映射，仍有 7668 个未映射。结构上可转换任务候选为 43 个，其中 2 个包含受限 crafting 任务；但依赖闭合的实导出仍为 2 个，3812 个任务未导出。
 
 ## 本阶段证据
 
 - `work/migration/legacy_vanilla_items.py`：显式同名、重命名和有限 metadata 映射；拒绝模糊匹配。
 - `evidence/vanilla-identity-mapping.json`：现代字段数量、源证据哈希、冲突数量和负例边界。
 - `evidence/vanilla-modern-Items.javap.txt`：本地锁定 Minecraft 1.21.1 server `Items` 类的文本字段证据，不包含游戏二进制。
-- `evidence/phase-2026-10-17-vanilla-identity.json`：本阶段前后覆盖率与测试边界。
+- `evidence/phase-2026-10-17-vanilla-identity.json`：身份映射阶段前后覆盖率与测试边界。
+- `evidence/phase-2026-10-17-crafting-subset.json`、`evidence/crafting-task-adapter.json`：受限 crafting 任务候选的源码约束和验证边界。
+
+本阶段仍未完成完整任务迁移或游戏内验证。
 
 ## 全局边界
 

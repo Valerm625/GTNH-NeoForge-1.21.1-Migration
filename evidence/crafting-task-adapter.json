@@ -1,0 +1,13 @@
+{
+  "passed": true,
+  "crafting_candidate_source_ids": [
+    "0:11",
+    "9012220195932555052:-5816092802750880657"
+  ],
+  "crafting_candidate_count": 2,
+  "source_event_policy": "craft and smelt only; statistics and anvil rejected",
+  "all_required_items_exactly_mapped": true,
+  "ore_and_nbt_predicates_rejected": true,
+  "runtime_game_verified": false,
+  "full_quest_parity": false
+}

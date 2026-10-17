@@ -1,7 +1,7 @@
 {
   "engine": "FTB Quests 2101.1.36",
   "source_quests": 3814,
-  "structurally_supported_candidates": 41,
+  "structurally_supported_candidates": 43,
   "dependency_closed_active_quests": 2,
   "active_quest_ids": [
     "0:0",
@@ -11,6 +11,11 @@
   "active_trial_import": true,
   "game_runtime_verified": false,
   "full_quest_parity": false,
+  "crafting_task_candidates": 2,
+  "crafting_candidate_source_ids": [
+    "0:11",
+    "9012220195932555052:-5816092802750880657"
+  ],
   "limitations": [
     "Only exact single-item non-consuming retrieval plus original checkbox tasks; custom adapter required.",
     "Full party join/leave/history semantics are not equivalent yet.",
