@@ -17,7 +17,7 @@
   "animated_texture_files": 31,
   "creative_tabs": 8,
   "runtime_input_files": 2035,
-  "quest_stack_identities_mapped": 479,
+  "quest_stack_identities_mapped": 720,
   "active_modern_quests": 2,
   "active_top_level_jars": 19,
   "fuel_block_definitions": 16,
@@ -28,5 +28,8 @@
   "runtime_material_registry_audit": "253 generated checks, NOT yet executed",
   "active_modern_quests_runtime_verified": false,
   "remaining_quests_not_exported": 3812,
-  "quest_adapter": "compiled; pure reducer and target-shape tests pass; actual Mixin/game unverified"
+  "quest_adapter": "compiled; pure reducer and target-shape tests pass; actual Mixin/game unverified",
+  "unmapped_quest_stack_identities": 7668,
+  "vanilla_identity_mappings_added": 241,
+  "vanilla_identity_occurrences_covered": 4905
 }

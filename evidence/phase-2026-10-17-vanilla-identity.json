@@ -1,0 +1,54 @@
+{
+  "phase": "explicit-vanilla-identity-mapping",
+  "checked_at": "2026-10-17T12:37:11.201970+08:00",
+  "before": {
+    "mapped_identity_total": 479,
+    "unmapped_identity_total": 7909,
+    "structurally_supported_candidates": 24,
+    "dependency_closed_active_quests": 2
+  },
+  "after": {
+    "mapped_identity_total": 720,
+    "unmapped_identity_total": 7668,
+    "newly_mapped_vanilla_identities": 241,
+    "newly_mapped_vanilla_occurrences": 4905,
+    "structurally_supported_candidates": 41,
+    "dependency_closed_active_quests": 2
+  },
+  "evidence": {
+    "modern_items_field_count": 1333,
+    "modern_items_evidence_sha256": "0b5ae4bd1aca50f3f9d206ac3fdab48fb0fd7a3ecbdb4d23582630de841d592e",
+    "overridden_existing_target_count": 0,
+    "fuzzy_matching": false,
+    "explicit_semantic_guards": [
+      "grass->grass_block",
+      "netherbrick->nether_brick",
+      "melon->melon_slice",
+      "snow->snow_block",
+      "stone_stairs->cobblestone_stairs",
+      "pumpkin->carved_pumpkin",
+      "filled_map rejected",
+      "stone damage 1..6 rejected"
+    ],
+    "tests": [
+      "verify_vanilla_identity_mapping.py",
+      "test_quest_export_java.py",
+      "verify_quest_checkpoint.py",
+      "verify_migration.py",
+      "full rebuild_current_phase.py"
+    ],
+    "eula_accepted": false,
+    "game_runtime_verified": false,
+    "full_parity": false
+  },
+  "collaboration": {
+    "claude_review": "completed; high-confidence findings independently checked and applied",
+    "deepseek_review": "timed out twice; no conclusions used"
+  },
+  "notes": [
+    "Registry identity mapping is source/static evidence, not in-game registry execution.",
+    "Existing reviewed registry mappings remain authoritative; conflicts are rejected.",
+    "Unsupported NBT, ore-dictionary, potion, spawn-egg and unknown mod identities remain blocked.",
+    "This phase did not increase dependency-closed active quest count; it broadens the safe candidate pool and identity coverage."
+  ]
+}

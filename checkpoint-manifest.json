@@ -1,5 +1,5 @@
 {
-  "created_at": "2026-10-15T12:18:59.539786+00:00",
+  "created_at": "2026-10-17T12:40:39.361676+08:00",
   "scope": "source-only public checkpoint; third-party game inputs excluded",
   "files": [
     {
@@ -19,8 +19,8 @@
     },
     {
       "path": "docs/migration-matrix.md",
-      "bytes": 2219,
-      "sha256": "9ac4fcb60ddf13ea71cfd2f9aa380ce12a9ec4ccc796c34f799e04327b07887c"
+      "bytes": 2073,
+      "sha256": "6864afc9114bc0c1f736ad80fe54ac589998d53e67da0d56ed5c885ae1756d1d"
     },
     {
       "path": "docs/upstream-license-notices/BetterQuesting-LICENSE",
@@ -89,13 +89,18 @@
     },
     {
       "path": "evidence/output-runtime-loader.json",
-      "bytes": 477,
-      "sha256": "f4404278484d0d93f3316c53c48922cda1a5d07efb20b34d639b7b51ba1b5b0e"
+      "bytes": 490,
+      "sha256": "5b496ceaf4e807fbd12e66a9ba69726ffef26f8fad86a931e6ce390f29928140"
+    },
+    {
+      "path": "evidence/phase-2026-10-17-vanilla-identity.json",
+      "bytes": 2034,
+      "sha256": "4a2e52eda44a34bcf80198daf8cc5ede4276486719042e8505f83cf9a37ee056"
     },
     {
       "path": "evidence/quest-export-summary.json",
-      "bytes": 1299,
-      "sha256": "eff5180690e0f9306a4f00aa98529a5220e61affb8132a7161a27382a41bc896"
+      "bytes": 1335,
+      "sha256": "a47ee4c08d664c5fdc48cc2351d87e0ecf8dabd29201f110d3c69afb9b5b8499"
     },
     {
       "path": "evidence/quests/checkpoint-verification.json",
@@ -129,13 +134,23 @@
     },
     {
       "path": "evidence/validation-state.json",
-      "bytes": 1479,
-      "sha256": "741235929a1e1c2c889cc9053e926b8e922cfff3cb6f810d9693c450a4a84fc7"
+      "bytes": 1647,
+      "sha256": "44e91f14f9e9c7dc7b1d243958ec84452360791ca887589c4ee844028763195f"
     },
     {
       "path": "evidence/validation-summary.json",
-      "bytes": 5061,
-      "sha256": "0e72ddca2932b5e89e8ebc60484dd870f306ae2d9417490216225758ca229758"
+      "bytes": 5199,
+      "sha256": "264b045b5caf876ce25b0dfe133d61b685a70624115c74c8071f181feea6b3b2"
+    },
+    {
+      "path": "evidence/vanilla-identity-mapping.json",
+      "bytes": 622,
+      "sha256": "27217d66b009c9a7626cd44d0ea20982b5e690fe35db409755788ac6d79d0791"
+    },
+    {
+      "path": "evidence/vanilla-modern-Items.javap.txt",
+      "bytes": 96247,
+      "sha256": "0b5ae4bd1aca50f3f9d206ac3fdab48fb0fd7a3ecbdb4d23582630de841d592e"
     },
     {
       "path": "evidence/wooden-form-contract-test.json",
@@ -204,8 +219,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 2833,
-      "sha256": "63809e2f1f0f376f63dbd3171dd7e6e1aac9d394ab75d89989bbdae7e8b92356"
+      "bytes": 1592,
+      "sha256": "d39f76f9fb174ba433394ecda161be1ed9b188b423a64a805378f78cbce6de0a"
     },
     {
       "path": "requirements.txt",
@@ -214,13 +229,13 @@
     },
     {
       "path": "RESUME.md",
-      "bytes": 3021,
-      "sha256": "8441060448005802f29a47109589b887c1618d3dd8b8458528416e363817aa06"
+      "bytes": 3097,
+      "sha256": "0f584179a28a50667148ae1a9f67dac85bd692569308f9e0cf169f6296487f9d"
     },
     {
       "path": "STATUS.zh-CN.md",
-      "bytes": 1627,
-      "sha256": "a539b3710776bdf34179a320e6b82aa5ea6d8bc629d7a08e01e0ae0dcaf9488e"
+      "bytes": 9339,
+      "sha256": "519ea7a0bbb34339356c113bc8c0673edf7408880811bfa6f1191fe9099509dd"
     },
     {
       "path": "work/compat-mod/src/main/java/org/gtnhmigration/compat/EnderTankCapacityMixin.java",
@@ -339,8 +354,8 @@
     },
     {
       "path": "work/migration/export_supported_quests.py",
-      "bytes": 14080,
-      "sha256": "67a2e76d5e048a88e79fe3305ece1708dc25c2f9fa1f522014a8d0ceeea148b8"
+      "bytes": 13653,
+      "sha256": "0c03909d32ddc3c44367bf61717c93bf8746f279731d7018c349e61cbaa383fb"
     },
     {
       "path": "work/migration/generate_material_runtime_audit.py",
@@ -356,6 +371,11 @@
       "path": "work/migration/install_platform.py",
       "bytes": 2212,
       "sha256": "76b7c87bfd079e17571a1a594af6933ac70d5b745f4c7558e8bb6f21b3b59c2b"
+    },
+    {
+      "path": "work/migration/legacy_vanilla_items.py",
+      "bytes": 9311,
+      "sha256": "27a040a53a3c0a81ae7e92a4c48c954c7fdce78f3dbc20d876a0a1fc2982f489"
     },
     {
       "path": "work/migration/LegacyRetrievalCounterCheck.java",
@@ -454,8 +474,8 @@
     },
     {
       "path": "work/migration/rebuild_current_phase.py",
-      "bytes": 1227,
-      "sha256": "b061a4057f286dfbd6596859fd9295f06e4160ef4927d1eff8253aaf54f8ac74"
+      "bytes": 1264,
+      "sha256": "3a18fbf2bc5839eb597742c12dcc4e7eb2728e9de29f1e91ee839b2ace4ab0d6"
     },
     {
       "path": "work/migration/recover_java.py",
@@ -578,6 +598,11 @@
       "sha256": "582725ba6f7b223b561b2718c8c91a320c0cc369a8afe4007ec53014d370c0cc"
     },
     {
+      "path": "work/migration/verify_vanilla_identity_mapping.py",
+      "bytes": 4165,
+      "sha256": "bda57fe0ddfad9d702282d079f9641bba52c4a347db535e9dfc822eab8273a94"
+    },
+    {
       "path": "work/migration/write_exact_phase_status.py",
       "bytes": 16408,
       "sha256": "09be722c988e2328772349ffcdacb33609575e144257671e7b76f8b915e77c88"
@@ -594,8 +619,8 @@
     },
     {
       "path": "work/migration/write_quest_checkpoint_status.py",
-      "bytes": 4978,
-      "sha256": "825289e1f1f8e93825eaf7fa8112ecc924b2cc38e96829b5fcf44da22187182e"
+      "bytes": 10805,
+      "sha256": "d871e8aaccb4cb077f4d9d08b91166c6b3ef6a1387d33a70430cd0e25144790b"
     },
     {
       "path": "work/migration/write_status.py",
@@ -603,9 +628,9 @@
       "sha256": "1ddca3d85fc05ee3e8502a504f99bc2a6d2e7f5a43c255e97000e5c5d9577018"
     }
   ],
-  "file_count": 120,
+  "file_count": 125,
   "source_archive_inputs_included": false,
   "runtime_binaries_included": false,
   "full_parity": false,
-  "continuation": "pause after upload verification; wait for explicit user resume"
+  "continuation": "continue migration only after explicit user instruction; upload each completed phase"
 }

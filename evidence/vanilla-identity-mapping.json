@@ -1,0 +1,15 @@
+{
+  "passed": true,
+  "modern_items_field_count": 1333,
+  "modern_items_evidence_sha256": "0b5ae4bd1aca50f3f9d206ac3fdab48fb0fd7a3ecbdb4d23582630de841d592e",
+  "direct_same_name_identities": 162,
+  "renamed_meta0_identities": 36,
+  "metadata_variant_identities": 108,
+  "resolved_identity_count": 306,
+  "newly_mapped_source_identity_count": 241,
+  "newly_mapped_source_occurrences": 4905,
+  "overridden_existing_target_count": 0,
+  "unsupported_nbt_ore_potion_spawn_egg_rejected": true,
+  "fuzzy_matching": false,
+  "source": "Minecraft 1.21.1 server Items class, locally installed pinned server artifact"
+}

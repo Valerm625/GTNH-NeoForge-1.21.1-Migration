@@ -1,10 +1,10 @@
 """Conservative FTB export. Unsupported quests retain source + explicit blockers, never placeholders."""
 from pathlib import Path
 import json,re,hashlib,collections,shutil
+from legacy_vanilla_items import resolve_legacy_vanilla
 R=Path(__file__).resolve().parents[2];W=R/'work';O=R/'outputs/GTNH-NeoForge-1.21.1-Migration-Foundation';Q=W/'source/GT-New-Horizons-Modpack-master/config/betterquesting/DefaultQuests';D=O/'docs/quest-migration/ftb-export';D.mkdir(parents=True,exist_ok=True);DEST=O/'config/ftbquests/quests'
-# Explicit reviewed vanilla identity subset; not blanket lowercasing of old names/metadata.
-VANILLA={name:'minecraft:'+name for name in ['dirt','gravel','stone','cobblestone','wheat','apple','cookie','torch','stick','flint','carrot','potato','baked_potato','bread','string','feather','egg','writable_book','book','paper','leather','bone','sand','glass','diamond','gold_ingot','iron_ingot','blaze_rod','blaze_powder','coal','ender_pearl','ender_eye','nether_star','redstone','gunpowder','slime_ball','obsidian','clay_ball','brick']}
-refs=json.loads((O/'docs/quest-migration/item-registry-references.json').read_text(encoding='utf-8'));registry={(x['identity']['id'],x['identity']['damage']):x['target_id'] for x in refs if x.get('target_id') and not x['identity']['tag'] and not x['identity']['ore_dict']};registry[('minecraft:bed',0)]='minecraft:red_bed'
+
+refs=json.loads((O/'docs/quest-migration/item-registry-references.json').read_text(encoding='utf-8'));registry={(x['identity']['id'],x['identity']['damage']):x['target_id'] for x in refs if x.get('target_id') and not x['identity']['tag'] and not x['identity']['ore_dict']}
 # Keep the complete old ID space stable through deterministic 64-bit collision-checked FTB IDs.
 ids={}
 def new_id(kind,source):
@@ -16,8 +16,10 @@ def stack(x):
  if x.get('tag:10') or x.get('OreDict:8'):raise ValueError('NBT/ore dictionary predicate not yet adapted')
  id=x['id:8'];meta=x.get('Damage:2',0);count=x.get('Count:3',1)
  if not 1<=count<=8192:raise ValueError('Invalid/custom count')
- target=VANILLA.get(id.split(':',1)[1]) if id.startswith('minecraft:') and meta==0 else None
- target=target or registry.get((id,meta))
+ reg=registry.get((id,meta))
+ van=resolve_legacy_vanilla(id,meta,x.get('OreDict:8',''),x.get('tag:10'))
+ if reg and van and reg != van: raise ValueError(f'Conflicting identity mapping {id}:{meta}: {reg} vs {van}')
+ target=reg or van
  if not target:raise ValueError('Unmapped item/icon/reward: '+id+':'+str(meta))
  return target,count
 
