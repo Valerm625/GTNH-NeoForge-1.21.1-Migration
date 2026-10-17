@@ -1,31 +1,44 @@
 {
-  "phase": "location-task-boundary",
-  "checked_at": "2026-10-17T13:39:21.598065+08:00",
+  "phase": "dimension-only-location-adapter",
+  "checked_at": "2026-10-17T14:04:09.641992+08:00",
   "before": {
-    "location_task_count": 34,
-    "safe_conversion_candidates": 0
+    "safe_conversion_candidates": 0,
+    "dimension_only_adapter": false
   },
   "after": {
+    "safe_source_dimension_task_count": 4,
+    "exported_location_task_count": 0,
+    "dimension_resource_keys": {
+      "-1": "minecraft:the_nether",
+      "0": "minecraft:overworld",
+      "1": "minecraft:the_end"
+    },
+    "dimension_only_adapter": true,
+    "active_dependency_closed_quests": 2
+  },
+  "evidence": {
     "passed": true,
     "legacy_location_task_count": 34,
     "legacy_location_quest_count": 33,
     "all_are_dimension_only_unbounded": true,
+    "safe_source_dimension_task_count": 4,
     "finite_coordinate_box_candidates": 0,
     "ftb_location_task_requires_finite_box": true,
-    "safe_conversion_candidates": 0,
-    "explicit_export_blocker": "Location dimension-only semantics are not representable by FTB LocationTask",
+    "exported_location_task_count": 0,
+    "dimension_resource_keys": {
+      "-1": "minecraft:the_nether",
+      "0": "minecraft:overworld",
+      "1": "minecraft:the_end"
+    },
+    "explicit_opt_in_marker": "gtnh_legacy_dimension_only",
     "runtime_game_verified": false,
     "full_quest_parity": false,
     "dependency_closed_active_quests": 2
   },
-  "evidence": {
-    "old_source": "BetterQuesting TaskLocation exact source",
-    "modern_source": "FTB Quests LocationTask exact source",
-    "bridge_review": "Claude and DeepSeek bridge review requested; suggestions treated as untrusted and checked against local source",
-    "exporter_explicit_blocker": true
-  },
   "tests": [
+    "LegacyDimensionLocationShapeCheck.java",
     "verify_location_task_boundary.py",
+    "test_quest_export_java.py",
     "verify_quest_checkpoint.py",
     "verify_migration.py",
     "full rebuild_current_phase.py"
@@ -34,8 +47,8 @@
   "full_quest_parity": false,
   "pause_requested_by_user": true,
   "notes": [
-    "All current legacy location tasks are dimension-only with range=-1 and zero coordinates.",
-    "FTB LocationTask requires a finite coordinate box and cannot express this semantics without a dedicated dimension-only adapter.",
-    "No approximate origin box or automatic overworld mapping was generated."
+    "The adapter is opt-in via gtnh_legacy_dimension_only and only overrides dimension comparison for marked LocationTask instances.",
+    "Only old dimension IDs -1, 0 and 1 have verified modern ResourceKey mappings; other dimensions remain blocked.",
+    "No active exported location quest exists yet because dependency closure and other quest blockers remain."
   ]
 }

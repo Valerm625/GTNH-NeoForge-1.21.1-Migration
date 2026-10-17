@@ -23,6 +23,9 @@ def stack(x):
  if not target:raise ValueError('Unmapped item/icon/reward: '+id+':'+str(meta))
  return target,count
 
+class IntArray(list):
+    pass
+
 # Preserve rich text and exact visible strings. Default light theme colors verified in BQ FormattingTag.java.
 colors={'0':'black','1':'dark_blue','2':'dark_green','3':'dark_aqua','4':'dark_red','5':'dark_purple','6':'gold','7':'gray','8':'dark_gray','9':'blue','a':'green','b':'aqua','c':'red','d':'light_purple','e':'yellow','f':'white'}
 style_tags={'note':{'color':'dark_aqua'},'warn':{'color':'dark_red'},'quest':{'color':'dark_green','underlined':True},'bold':{'bold':True},'italic':{'italic':True},'underline':{'underlined':True},'strikethrough':{'strikethrough':True},'obfuscated':{'obfuscated':True}}
@@ -59,6 +62,7 @@ def snbt(v):
  if isinstance(v,str):return json.dumps(v,ensure_ascii=False)
  if isinstance(v,int):return str(v)
  if isinstance(v,float):return repr(v)+'d'
+ if isinstance(v,IntArray):return '[I; '+', '.join(str(int(x)) for x in v)+' ]'
  if isinstance(v,list):return '[ '+', '.join(snbt(x) for x in v)+' ]'
  if isinstance(v,dict):return '{\n'+',\n'.join(json.dumps(k,ensure_ascii=False)+': '+snbt(x) for k,x in v.items())+'\n}'
  raise TypeError(type(v))
@@ -87,6 +91,13 @@ for qid,src in sources.items():
     if target not in entities or not t.get('ignoreNBT:1',0) or t.get('damageType:8','') or t.get('targetNBT:10',{}).get('CustomName:8',''):
      raise ValueError('Hunt task requires unsupported entity/NBT/damage semantics')
     tasks.append({'id':tid,'type':'kill','entity':entities[target],'value':t.get('required:3',1),'custom_name':'','nbt_filter':''})
+    continue
+   if typ=='bq_standard:location':
+    dim_map={-1:'minecraft:the_nether',0:'minecraft:overworld',1:'minecraft:the_end'}
+    if t.get('range:3')!=-1 or t.get('biome:3')!=-1 or t.get('structure:8','') or t.get('invert:1',0) or t.get('taxiCabDist:1',0) or any(t.get(k,0)!=0 for k in ['posX:3','posY:3','posZ:3']):
+     raise ValueError('Location task requires unsupported finite/biome/structure/inverted semantics')
+    if t.get('dimension:3') not in dim_map: raise ValueError('Location dimension has no verified modern ResourceKey mapping')
+    tasks.append({'id':tid,'type':'location','dimension':dim_map[t['dimension:3']],'ignore_dimension':False,'position':IntArray([0,0,0]),'size':IntArray([1,1,1]),'tags':['gtnh_legacy_dimension_only']})
     continue
    if typ=='bq_standard:crafting':
     # BQ crafting detects craft and smelt events, but not anvil events in this
@@ -171,7 +182,7 @@ if prior.exists():
    p=DEST/rel
    if p.exists():p.unlink()
 for rel,value in files.items():p=DEST/rel;p.parent.mkdir(parents=True,exist_ok=True);p.write_text(snbt(value)+'\n',encoding='utf-8')
-report={'engine':'FTB Quests 2101.1.36','source_quests':len(sources),'structurally_supported_candidates':len(candidates),'crafting_task_candidates':sum(1 for c in candidates.values() for t in c['tasks'] if 'gtnh_legacy_crafting' in t.get('tags',[])),'hunt_task_candidates':sum(1 for c in candidates.values() for t in c['tasks'] if t.get('type')=='kill'),'hunt_candidate_source_ids':sorted(c['_source_id'] for c in candidates.values() if any(t.get('type')=='kill' for t in c['tasks'])),'choice_reward_candidates':sum(1 for c in candidates.values() for r in c['rewards'] if r.get('type')=='choice'),'choice_reward_candidate_source_ids':sorted(c['_source_id'] for c in candidates.values() if any(r.get('type')=='choice' for r in c['rewards'])),'crafting_candidate_source_ids':sorted(c['_source_id'] for c in candidates.values() if any('gtnh_legacy_crafting' in t.get('tags',[]) for t in c['tasks'])),'dependency_closed_active_quests':len(exported),'active_quest_ids':sorted(assigned),'chapters':len(chapters),'exported':exported,'files':{k:{'sha256':hashlib.sha256((DEST/k).read_bytes()).hexdigest(),'data':v} for k,v in files.items()},'blocked_quests':[{'source_id':qid,'name':sources[qid]['data']['properties:10']['betterquesting:10'].get('name:8'),'reason':reason} for qid,reason in blocked.items()],'unsupported_not_replaced':True,'original_text_preserved_as_rich_components':True,'active_trial_import':True,'game_runtime_verified':False,'full_quest_parity':False,'limitations':['Only exact single-item non-consuming retrieval plus original checkbox tasks; custom adapter required.','Full party join/leave/history semantics are not equivalent yet.','Original text mentions unported systems; conspicuous preview note added, not removed.','Coordinates scaled from top-left pixel geometry to node centers; visual overlap not yet game-tested.','Theme-specific visual effects/notifications still not ported.']}
+report={'engine':'FTB Quests 2101.1.36','source_quests':len(sources),'structurally_supported_candidates':len(candidates),'crafting_task_candidates':sum(1 for c in candidates.values() for t in c['tasks'] if 'gtnh_legacy_crafting' in t.get('tags',[])),'dimension_location_task_candidates':sum(1 for c in candidates.values() for t in c['tasks'] if t.get('type')=='location'),'dimension_location_candidate_source_ids':sorted(c['_source_id'] for c in candidates.values() if any(t.get('type')=='location' for t in c['tasks'])),'hunt_task_candidates':sum(1 for c in candidates.values() for t in c['tasks'] if t.get('type')=='kill'),'hunt_candidate_source_ids':sorted(c['_source_id'] for c in candidates.values() if any(t.get('type')=='kill' for t in c['tasks'])),'choice_reward_candidates':sum(1 for c in candidates.values() for r in c['rewards'] if r.get('type')=='choice'),'choice_reward_candidate_source_ids':sorted(c['_source_id'] for c in candidates.values() if any(r.get('type')=='choice' for r in c['rewards'])),'crafting_candidate_source_ids':sorted(c['_source_id'] for c in candidates.values() if any('gtnh_legacy_crafting' in t.get('tags',[]) for t in c['tasks'])),'dependency_closed_active_quests':len(exported),'active_quest_ids':sorted(assigned),'chapters':len(chapters),'exported':exported,'files':{k:{'sha256':hashlib.sha256((DEST/k).read_bytes()).hexdigest(),'data':v} for k,v in files.items()},'blocked_quests':[{'source_id':qid,'name':sources[qid]['data']['properties:10']['betterquesting:10'].get('name:8'),'reason':reason} for qid,reason in blocked.items()],'unsupported_not_replaced':True,'original_text_preserved_as_rich_components':True,'active_trial_import':True,'game_runtime_verified':False,'full_quest_parity':False,'limitations':['Only exact single-item non-consuming retrieval plus original checkbox tasks; custom adapter required.','Full party join/leave/history semantics are not equivalent yet.','Original text mentions unported systems; conspicuous preview note added, not removed.','Coordinates scaled from top-left pixel geometry to node centers; visual overlap not yet game-tested.','Theme-specific visual effects/notifications still not ported.']}
 prior.write_text(json.dumps(report,ensure_ascii=False,indent=2),encoding='utf-8');(D/'stable-id-map.json').write_text(json.dumps(ids,indent=2),encoding='utf-8')
 # Copy source losslessly for this bounded active surface, not as substitute quests.
 for rec in exported:

@@ -1,0 +1,33 @@
+{
+  "filename": "gtnh-migration-compat-0.1.0.jar",
+  "sha256": "2410bc0089e0b7eb742fe48db9cf848ef0e0085c77b1ae021c36e132c598dc86",
+  "version": "0.1.0",
+  "mod_id": "gtnh_migration_compat",
+  "source": "tools/compat-mod/src",
+  "original_config_sha256": "3e4dd6c9499d50c27175f68c17d0602dc0648be84139067c790aff4ec7bc0c77",
+  "target_artifact": "EnderStorage-1.21.1-2.13.0.191.jar",
+  "target_artifact_sha256": "f52f23f9df8925c7aec26154c2f1816cc76422c67a4fa4e30fa8b80b7a854202",
+  "target_class": "codechicken.enderstorage.storage.EnderLiquidStorage",
+  "original_capacity_buckets": 16,
+  "migrated_capacity_buckets": 256,
+  "migrated_capacity_mb": 256000,
+  "injection_expected_matches": 1,
+  "compile_passed": true,
+  "actual_mixin_transformation_verified": false,
+  "runtime_storage_verified": false,
+  "quest_adapter": "scoped retrieval + opt-in dimension-only location",
+  "quest_adapters": [
+    "scoped single-item legacy retrieval",
+    "opt-in dimension-only location"
+  ],
+  "quest_adapter_live_verified": false,
+  "compiled_handler_and_target_shape_test": {
+    "test": "compiled_capacity_adapter_contract",
+    "passed": true,
+    "actual_target_matches": 1,
+    "actual_handler_output_buckets": 256,
+    "unexpected_originals_rejected": 4,
+    "actual_mixin_transformation_tested": false,
+    "game_storage_verified": false
+  }
+}

@@ -1,5 +1,5 @@
 {
-  "created_at": "2026-10-17T13:44:33.556837+08:00",
+  "created_at": "2026-10-17T14:04:46.199605+08:00",
   "scope": "source-only public checkpoint; third-party game inputs excluded",
   "files": [
     {
@@ -53,6 +53,11 @@
       "sha256": "646fb7bfe4ced791b4f379ecb724ba051318f5ad9ceb3eb33aa43386a9fed2fe"
     },
     {
+      "path": "evidence/compat-mod.lock.json",
+      "bytes": 1372,
+      "sha256": "8618722480ee09484b45eaf85535eb526db32a38182c950485e9c0e83fcf090d"
+    },
+    {
       "path": "evidence/crafting-task-adapter.json",
       "bytes": 398,
       "sha256": "d135b21e2c2b9f93a56bb14357329387dde781d27fce5418459fa9355e166f0f"
@@ -84,8 +89,8 @@
     },
     {
       "path": "evidence/location-task-boundary.json",
-      "bytes": 486,
-      "sha256": "00b22fe24b10683e29e55365d18936ec12b3f5ccc6c45d4154b5a3f287af870e"
+      "bytes": 616,
+      "sha256": "d686f57b2ba0b4dc4b430ccc52a42648fe9a048cda4b300e7955adb6d3283f36"
     },
     {
       "path": "evidence/long-fuel-verification.json",
@@ -129,8 +134,8 @@
     },
     {
       "path": "evidence/phase-2026-10-17-location-boundary.json",
-      "bytes": 1626,
-      "sha256": "993e0c707aae2256f60cc1788770b5b9edaec2b4b76cdee046bb446cc20c477b"
+      "bytes": 1928,
+      "sha256": "a128655141f247ed5f1117a4e30b40eb9e629f025976937f64233c6696583930"
     },
     {
       "path": "evidence/phase-2026-10-17-vanilla-identity.json",
@@ -180,7 +185,7 @@
     {
       "path": "evidence/validation-summary.json",
       "bytes": 5199,
-      "sha256": "8e4ffd48d71f2b6b4f9cc3265167083996ecddcc65799af0b2c473b996052046"
+      "sha256": "a7d4155fe842d08b6e24943a35badc90eec5d6fdcc68bee82265803928474f70"
     },
     {
       "path": "evidence/vanilla-identity-mapping.json",
@@ -279,43 +284,48 @@
     },
     {
       "path": "STATUS.zh-CN.md",
-      "bytes": 10180,
-      "sha256": "34fe63798bdfa12f5a1547434b8f957a9cbeaefda000332042cb727ac46111d1"
+      "bytes": 9466,
+      "sha256": "994a2a5495a910252e198a576ea0a4e52b9f61627ff83c3ff80f50c809444c40"
     },
     {
       "path": "work/compat-mod/src/main/java/org/gtnhmigration/compat/EnderTankCapacityMixin.java",
-      "bytes": 956,
-      "sha256": "6c41b3813c2dee6fb855e9c45aa27704adc1af9a4f74cb8cc9ffc4211d406c88"
+      "bytes": 973,
+      "sha256": "75197dbe2e98efc579081067c6ed78b7174134b1658f99258ce8e3551409ab39"
+    },
+    {
+      "path": "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyDimensionLocationTaskMixin.java",
+      "bytes": 1427,
+      "sha256": "1cfc934d4b4f73d67805157a90a26fe7f215a8dda764da3b246955d66692e6ed"
     },
     {
       "path": "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalCounter.java",
-      "bytes": 1082,
-      "sha256": "fcc46c2feca182c886e645e63c0508c01290b18a2cda716708bd724b93dbd7ae"
+      "bytes": 1105,
+      "sha256": "2e5fe65647a206eb308d0d35aaf4d7d84b550b0ca46c693de3fa8155ddc35080"
     },
     {
       "path": "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalItemTaskMixin.java",
-      "bytes": 3030,
-      "sha256": "d2e51cb869290212bbe29a58da6a28a7b72ad9a38c26d2b0655fe2aa602c5fbf"
+      "bytes": 3080,
+      "sha256": "6460215ad09fdc8b804f1b0225bc2709e7619d9e5be59a950f5ef9e2e92e582b"
     },
     {
       "path": "work/compat-mod/src/main/java/org/gtnhmigration/compat/MigrationCompat.java",
-      "bytes": 242,
-      "sha256": "e9a13972214a938782bad94dac5afef810b2568138172a78c8f6953ca681687b"
+      "bytes": 247,
+      "sha256": "0b6ee20f3a46613dd203b6e8d685301ed69cbea587c608a64b9e8f4337eafb52"
     },
     {
       "path": "work/compat-mod/src/main/resources/gtnh_migration_compat.mixins.json",
-      "bytes": 251,
-      "sha256": "519d04dd3e13e42a6ecf358134c9a189781f9ca50c94416daa657044ffe554e8"
+      "bytes": 304,
+      "sha256": "9ff8282b0584ee533f099caee18d8bbe9bb3e338d94c643576a0faf76153a51f"
     },
     {
       "path": "work/compat-mod/src/main/resources/LICENSE",
-      "bytes": 1081,
-      "sha256": "83880a3eb22deedd0e08c817aa32690af1684ce7d2db893903fea015fede98fd"
+      "bytes": 1086,
+      "sha256": "05dbb099a12a73ed50b752e8a1b2e320e3307c4c29b8d5a2d32a90ff536e3876"
     },
     {
       "path": "work/compat-mod/src/main/resources/META-INF/neoforge.mods.toml",
-      "bytes": 871,
-      "sha256": "4db01a29757b278dde7eb97a9888a9031528c66510a3bca17e9b098d4da6b62a"
+      "bytes": 906,
+      "sha256": "9ea4ed310f75ff40933aa73637a7eeff4fea19e10cfcc4d891e0180ab1189b2d"
     },
     {
       "path": "work/migration/acquire_exact_sources.py",
@@ -344,8 +354,8 @@
     },
     {
       "path": "work/migration/add_quest_parity_adapter.py",
-      "bytes": 5884,
-      "sha256": "5fcec1f21e1fb99b1fa04e3a5847b31189d27799b992b9aad18eaf4408d26bc0"
+      "bytes": 7365,
+      "sha256": "744cc4e1fc3e70a924d2ac1d5308b22c04c7b971f7156eac09c6575f0e63b3d5"
     },
     {
       "path": "work/migration/add_transport_candidates.py",
@@ -359,8 +369,8 @@
     },
     {
       "path": "work/migration/build_capacity_compat.py",
-      "bytes": 7226,
-      "sha256": "29f14ea466f8f00c8a4091c7ffc43055780ec0004319e7500cf2f45282f05d94"
+      "bytes": 7452,
+      "sha256": "d31ade329e904c4a5d0c5cd98e558f94f97faebf7643d52fdf1a8f8209fa45ed"
     },
     {
       "path": "work/migration/build_quest_ir.py",
@@ -399,8 +409,8 @@
     },
     {
       "path": "work/migration/export_supported_quests.py",
-      "bytes": 16927,
-      "sha256": "0befcb1a72e85cc477c0fe0132638e1aa0a5db226f6d8ad04885eb2399087167"
+      "bytes": 18065,
+      "sha256": "70304b536f79d552f189e2d5237cb5e9a63c23731f59ef95e56dac4ef2a14727"
     },
     {
       "path": "work/migration/generate_material_runtime_audit.py",
@@ -421,6 +431,11 @@
       "path": "work/migration/legacy_vanilla_items.py",
       "bytes": 9311,
       "sha256": "27a040a53a3c0a81ae7e92a4c48c954c7fdce78f3dbc20d876a0a1fc2982f489"
+    },
+    {
+      "path": "work/migration/LegacyDimensionLocationShapeCheck.java",
+      "bytes": 2626,
+      "sha256": "63710d37838893719f31f98c48929f51fbb97ed649a4c680ae72c4a0e24e1470"
     },
     {
       "path": "work/migration/LegacyRetrievalCounterCheck.java",
@@ -579,8 +594,8 @@
     },
     {
       "path": "work/migration/test_quest_export_java.py",
-      "bytes": 2318,
-      "sha256": "e5a20bb0d12774b569c014bc0a79a8745bdf2a52478909c596d13bb1eba04957"
+      "bytes": 2553,
+      "sha256": "73b33285acd33a3d3880841b134bf3cffffd52ba7752abcdc2a4bbb5c6ed4004"
     },
     {
       "path": "work/migration/test_railcraft_coke.cjs",
@@ -634,8 +649,8 @@
     },
     {
       "path": "work/migration/verify_location_task_boundary.py",
-      "bytes": 1845,
-      "sha256": "7057b6c4a8d746a0361d5611d7543b2cc5cd23301df7ba845f67a10bcc06a1ce"
+      "bytes": 2421,
+      "sha256": "f7522e7b40c05e056d9e772eb8c46fc8377c231bc1d71ada3a4f191498a09731"
     },
     {
       "path": "work/migration/verify_long_fuels.py",
@@ -693,7 +708,7 @@
       "sha256": "1ddca3d85fc05ee3e8502a504f99bc2a6d2e7f5a43c255e97000e5c5d9577018"
     }
   ],
-  "file_count": 138,
+  "file_count": 141,
   "source_archive_inputs_included": false,
   "runtime_binaries_included": false,
   "full_parity": false,
