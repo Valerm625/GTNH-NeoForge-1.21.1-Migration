@@ -1,5 +1,5 @@
 {
-  "created_at": "2026-10-17T14:04:46.199605+08:00",
+  "created_at": "2026-10-17T14:08:19.244796+08:00",
   "scope": "source-only public checkpoint; third-party game inputs excluded",
   "files": [
     {
@@ -264,8 +264,8 @@
     },
     {
       "path": "PAUSED-HANDOFF.zh-CN.md",
-      "bytes": 741,
-      "sha256": "8ad2766892e9b5b4eb06bed81abf265709e1e8328ce53f9a8c104c74bb9bef63"
+      "bytes": 1007,
+      "sha256": "01305d6ed378fa258341178769efdc6b1f8b4531901408dd406ba94976684fdb"
     },
     {
       "path": "README.md",
@@ -284,8 +284,8 @@
     },
     {
       "path": "STATUS.zh-CN.md",
-      "bytes": 9466,
-      "sha256": "994a2a5495a910252e198a576ea0a4e52b9f61627ff83c3ff80f50c809444c40"
+      "bytes": 10354,
+      "sha256": "284390d4f6abc68435ad157815122572f4a9343f8aedd45f76813c53dd714508"
     },
     {
       "path": "work/compat-mod/src/main/java/org/gtnhmigration/compat/EnderTankCapacityMixin.java",
