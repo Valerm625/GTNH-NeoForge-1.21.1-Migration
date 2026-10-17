@@ -10,7 +10,7 @@ q=json.loads((D/'export-manifest.json').read_text(encoding='utf-8'))
 v=json.loads((O/'docs/verification/validation-summary.json').read_text(encoding='utf-8'))
 r=json.loads((O/'docs/verification/test-runtime-files.json').read_text(encoding='utf-8'))
 vm=json.loads((O/'docs/quest-migration/vanilla-identity-mapping.json').read_text(encoding='utf-8'))
-for name in ['QuestAdapterShapeCheck','LegacyRetrievalCounterCheck','QuestSnbtCheck','checkpoint-verification','crafting-task-adapter']:
+for name in ['QuestAdapterShapeCheck','LegacyRetrievalCounterCheck','QuestSnbtCheck','checkpoint-verification','crafting-task-adapter','choice-reward-adapter']:
     assert json.loads((D/(name+'.json')).read_text(encoding='utf-8'))['passed']
 refs=json.loads((O/'docs/quest-migration/item-registry-references.json').read_text(encoding='utf-8'))
 mapped=[x for x in refs if x.get('target_id') or resolve_legacy_vanilla(x['identity']['id'],x['identity']['damage'],x['identity']['ore_dict'],x['identity']['tag'])]
@@ -19,10 +19,11 @@ unmapped=len(refs)-mapped_total
 n=q['dependency_closed_active_quests']
 remaining=q['source_quests']-n
 crafting=q.get('crafting_task_candidates',0)
+choice=q.get('choice_reward_candidates',0)
 p=O/'migration-metadata.json'
 m=json.loads(p.read_text(encoding='utf-8'))
 m['last_phase']='explicit vanilla identity translation, conservative crafting-task subset, bounded quest export and independent verification'
-m['validation_state'].update({'active_modern_quests':n,'active_modern_quests_runtime_verified':False,'crafting_task_candidates':crafting,'crafting_task_runtime_verified':False,'remaining_quests_not_exported':remaining,'quest_stack_identities_mapped':mapped_total,'unmapped_quest_stack_identities':unmapped,'vanilla_identity_mappings_added':vm['newly_mapped_source_identity_count'],'vanilla_identity_occurrences_covered':vm['newly_mapped_source_occurrences'],'quest_adapter':'compiled; pure reducer and target-shape tests pass; actual Mixin/game unverified','runtime_input_files':len(r['files']),'modern_artifacts':f"18 downloaded JARs + 1 local version-pinned adapter; {v['version_ranges_checked']} dependency ranges passed",'feature_parity':False,'server_world_started':False,'client_rendering_verified':False})
+m['validation_state'].update({'active_modern_quests':n,'active_modern_quests_runtime_verified':False,'crafting_task_candidates':crafting,'crafting_task_runtime_verified':False,'choice_reward_candidates':q.get('choice_reward_candidates',0),'choice_reward_runtime_verified':False,'remaining_quests_not_exported':remaining,'quest_stack_identities_mapped':mapped_total,'unmapped_quest_stack_identities':unmapped,'vanilla_identity_mappings_added':vm['newly_mapped_source_identity_count'],'vanilla_identity_occurrences_covered':vm['newly_mapped_source_occurrences'],'quest_adapter':'compiled; pure reducer and target-shape tests pass; actual Mixin/game unverified','runtime_input_files':len(r['files']),'modern_artifacts':f"18 downloaded JARs + 1 local version-pinned adapter; {v['version_ranges_checked']} dependency ranges passed",'feature_parity':False,'server_world_started':False,'client_rendering_verified':False})
 p.write_text(json.dumps(m,ensure_ascii=False,indent=2),encoding='utf-8')
 p=O/'docs/quest-migration/coverage.json'
 d=json.loads(p.read_text(encoding='utf-8'))
@@ -46,7 +47,7 @@ s += f'''
 
 ## 任务试导出检查点
 
-- 结构上可转换候选从上一检查点的24个增加到本阶段的{q['structurally_supported_candidates']}个，其中 {crafting} 个候选包含受限 crafting 任务；依赖闭合并实际导出的任务仍为{n}个，1章、4个真实FTB SNBT配置文件。原3814个任务中仍有{remaining}个未导出，不能称为完整任务迁移。
+- 结构上可转换候选从上一检查点的24个增加到本阶段的{q['structurally_supported_candidates']}个，其中 {crafting} 个候选包含受限 crafting 任务、{choice} 个候选包含受限 choice 奖励；依赖闭合并实际导出的任务仍为{n}个，1章、4个真实FTB SNBT配置文件。原3814个任务中仍有{remaining}个未导出，不能称为完整任务迁移。
 - 非消耗、单种物品检索使用明确标签启用的适配器：汇总在线成员主背包和盔甲栏；部分进度可下降，完成后锁定，不因反复扫描累加。原1.7.10没有副手，因此不统计副手。完整队伍成员变动/历史行为尚未等价。
 - 真实FTB SNBT解析器往返4份配置通过；独立源码对照验证2个任务、数量、前置与奖励，4种故意损坏均被拒绝；已编译计数器10000次随机观察与目标类5个shadow方法/注入形状检查通过。
 - 上述检查不等于游戏实际Mixin应用、任务初始化、世界开服或客户端渲染通过。仍保持eula=false；不代用户同意。
@@ -97,6 +98,6 @@ Quest checkpoint: {n} of {q['source_quests']} dependency-closed trial quests; 4 
 ''',encoding='utf-8')
 tools=O/'tools/migration-sources'
 tools.mkdir(parents=True,exist_ok=True)
-for name in ['legacy_vanilla_items.py','verify_vanilla_identity_mapping.py','export_supported_quests.py','write_quest_checkpoint_status.py','rebuild_current_phase.py','verify_crafting_adapter_contract.py']:
+for name in ['legacy_vanilla_items.py','verify_vanilla_identity_mapping.py','export_supported_quests.py','write_quest_checkpoint_status.py','rebuild_current_phase.py','verify_crafting_adapter_contract.py','verify_choice_reward_contract.py']:
     shutil.copy2(R/'work/migration'/name,tools/name)
 print(json.dumps({'active_trial_quests':n,'remaining_quests':remaining,'mapped_identity_total':mapped_total,'unmapped_identity_total':unmapped,'new_vanilla_identities':vm['newly_mapped_source_identity_count'],'new_vanilla_occurrences':vm['newly_mapped_source_occurrences'],'full_parity':False},ensure_ascii=False))

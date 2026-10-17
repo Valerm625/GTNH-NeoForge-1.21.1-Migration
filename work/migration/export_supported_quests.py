@@ -97,6 +97,14 @@ for qid,src in sources.items():
   if not tasks:raise ValueError('Empty task list not auto-completed by export')
   if all(t.get('optional_task',False) for t in tasks):raise ValueError('All-optional completion differs between engines')
   for key,r in d.get('rewards:9',{}).items():
+   if r['rewardID:8']=='bq_standard:choice':
+    choices=list(r.get('choices:9',{}).items())
+    if not choices: raise ValueError('Empty choice reward')
+    table_rewards=[]
+    for sub,st in choices:
+     item,count=stack(st);table_rewards.append({'id':new_id('choice_item',qid+'/'+key+'/'+sub),'item':{'id':item,'count':1},'count':count})
+    rewards.append({'id':new_id('reward',qid+'/'+key),'type':'choice','table_id':-1,'table_data':{'loot_size':1,'rewards':table_rewards},'team_reward':False,'auto':'disabled'})
+    continue
    if r['rewardID:8']!='bq_standard:item':raise ValueError('Reward type not implemented: '+r['rewardID:8'])
    for sub,st in r.get('rewards:9',{}).items():
     item,count=stack(st);rewards.append({'id':new_id('reward',qid+'/'+key+'/'+sub),'type':'item','item':{'id':item,'count':1},'count':count,'team_reward':False,'auto':'disabled'})
@@ -152,7 +160,7 @@ if prior.exists():
    p=DEST/rel
    if p.exists():p.unlink()
 for rel,value in files.items():p=DEST/rel;p.parent.mkdir(parents=True,exist_ok=True);p.write_text(snbt(value)+'\n',encoding='utf-8')
-report={'engine':'FTB Quests 2101.1.36','source_quests':len(sources),'structurally_supported_candidates':len(candidates),'crafting_task_candidates':sum(1 for c in candidates.values() for t in c['tasks'] if 'gtnh_legacy_crafting' in t.get('tags',[])),'crafting_candidate_source_ids':sorted(c['_source_id'] for c in candidates.values() if any('gtnh_legacy_crafting' in t.get('tags',[]) for t in c['tasks'])),'dependency_closed_active_quests':len(exported),'active_quest_ids':sorted(assigned),'chapters':len(chapters),'exported':exported,'files':{k:{'sha256':hashlib.sha256((DEST/k).read_bytes()).hexdigest(),'data':v} for k,v in files.items()},'blocked_quests':[{'source_id':qid,'name':sources[qid]['data']['properties:10']['betterquesting:10'].get('name:8'),'reason':reason} for qid,reason in blocked.items()],'unsupported_not_replaced':True,'original_text_preserved_as_rich_components':True,'active_trial_import':True,'game_runtime_verified':False,'full_quest_parity':False,'limitations':['Only exact single-item non-consuming retrieval plus original checkbox tasks; custom adapter required.','Full party join/leave/history semantics are not equivalent yet.','Original text mentions unported systems; conspicuous preview note added, not removed.','Coordinates scaled from top-left pixel geometry to node centers; visual overlap not yet game-tested.','Theme-specific visual effects/notifications still not ported.']}
+report={'engine':'FTB Quests 2101.1.36','source_quests':len(sources),'structurally_supported_candidates':len(candidates),'crafting_task_candidates':sum(1 for c in candidates.values() for t in c['tasks'] if 'gtnh_legacy_crafting' in t.get('tags',[])),'choice_reward_candidates':sum(1 for c in candidates.values() for r in c['rewards'] if r.get('type')=='choice'),'choice_reward_candidate_source_ids':sorted(c['_source_id'] for c in candidates.values() if any(r.get('type')=='choice' for r in c['rewards'])),'crafting_candidate_source_ids':sorted(c['_source_id'] for c in candidates.values() if any('gtnh_legacy_crafting' in t.get('tags',[]) for t in c['tasks'])),'dependency_closed_active_quests':len(exported),'active_quest_ids':sorted(assigned),'chapters':len(chapters),'exported':exported,'files':{k:{'sha256':hashlib.sha256((DEST/k).read_bytes()).hexdigest(),'data':v} for k,v in files.items()},'blocked_quests':[{'source_id':qid,'name':sources[qid]['data']['properties:10']['betterquesting:10'].get('name:8'),'reason':reason} for qid,reason in blocked.items()],'unsupported_not_replaced':True,'original_text_preserved_as_rich_components':True,'active_trial_import':True,'game_runtime_verified':False,'full_quest_parity':False,'limitations':['Only exact single-item non-consuming retrieval plus original checkbox tasks; custom adapter required.','Full party join/leave/history semantics are not equivalent yet.','Original text mentions unported systems; conspicuous preview note added, not removed.','Coordinates scaled from top-left pixel geometry to node centers; visual overlap not yet game-tested.','Theme-specific visual effects/notifications still not ported.']}
 prior.write_text(json.dumps(report,ensure_ascii=False,indent=2),encoding='utf-8');(D/'stable-id-map.json').write_text(json.dumps(ids,indent=2),encoding='utf-8')
 # Copy source losslessly for this bounded active surface, not as substitute quests.
 for rec in exported:

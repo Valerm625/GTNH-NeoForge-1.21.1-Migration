@@ -9,7 +9,7 @@
 | EnderStorage | Real artifact, original supported config, compiled 256-bucket adapter | Mixin application, storage behavior, ownership/frequencies, Thaumcraft gates, visuals |
 | Core recipes | 167 machine +3 early-game definitions | All remaining GTNH recipe systems and progression |
 | Item identities | 720/8388 mapped; 241 new explicit vanilla identities in this phase | 7668 identities, NBT/ore-dictionary/potion/entity semantics |
-| Quests | 3814/46 lossless IR, 43 structural candidates (2 crafting-task candidates), 2 trial quests exported | 3812 quests, task/reward logic, runtime initialization |
+| Quests | 3814/46 lossless IR, 44 structural candidates (2 crafting-task candidates), 2 trial quests exported | 3812 quests, task/reward logic, runtime initialization |
 | Graphics/audio | Authored core assets, 3 preview packs | Full atlas/models/render/audio testing |
 | Tests | Static source checks, real serialization codecs, parser and script/function contracts | End-to-end game, save/load, multi-user, full feature fidelity |
 

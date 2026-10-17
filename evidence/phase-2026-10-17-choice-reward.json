@@ -1,0 +1,43 @@
+{
+  "phase": "conservative-choice-reward-subset",
+  "checked_at": "2026-10-17T13:14:05.664290+08:00",
+  "before": {
+    "structurally_supported_candidates": 43,
+    "choice_reward_candidates": 0,
+    "dependency_closed_active_quests": 2
+  },
+  "after": {
+    "structurally_supported_candidates": 44,
+    "choice_reward_candidates": 1,
+    "dependency_closed_active_quests": 2,
+    "choice_reward_candidate_source_ids": [
+      "0:417"
+    ]
+  },
+  "evidence": {
+    "passed": true,
+    "choice_reward_candidate_source_ids": [
+      "0:417"
+    ],
+    "choice_reward_candidate_count": 1,
+    "all_choices_exactly_mapped": true,
+    "ore_and_nbt_choices_rejected": true,
+    "runtime_game_verified": false,
+    "full_quest_parity": false
+  },
+  "tests": [
+    "verify_choice_reward_contract.py",
+    "verify_crafting_adapter_contract.py",
+    "test_quest_export_java.py",
+    "verify_quest_checkpoint.py",
+    "verify_migration.py",
+    "full rebuild_current_phase.py"
+  ],
+  "runtime_game_verified": false,
+  "full_quest_parity": false,
+  "notes": [
+    "Only item choices with exact mapped outputs and no NBT or ore-dictionary predicates are admitted.",
+    "ChoiceReward SNBT is not yet parsed by an active exported quest because dependency closure remains blocked.",
+    "This did not increase dependency-closed active quests; remaining prerequisites are still blocked."
+  ]
+}

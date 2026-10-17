@@ -1,0 +1,11 @@
+{
+  "passed": true,
+  "choice_reward_candidate_source_ids": [
+    "0:417"
+  ],
+  "choice_reward_candidate_count": 1,
+  "all_choices_exactly_mapped": true,
+  "ore_and_nbt_choices_rejected": true,
+  "runtime_game_verified": false,
+  "full_quest_parity": false
+}

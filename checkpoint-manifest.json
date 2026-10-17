@@ -1,5 +1,5 @@
 {
-  "created_at": "2026-10-17T12:58:03.585857+08:00",
+  "created_at": "2026-10-17T13:14:47.228025+08:00",
   "scope": "source-only public checkpoint; third-party game inputs excluded",
   "files": [
     {
@@ -20,7 +20,7 @@
     {
       "path": "docs/migration-matrix.md",
       "bytes": 2102,
-      "sha256": "ba9cf9a163557769d569e9098012774f1f197141968e84774a167504b7551fe7"
+      "sha256": "c07e15a4eda5cfb4abf6ee694b5afd9a180e6e85e5745c57cd98188174a693c4"
     },
     {
       "path": "docs/upstream-license-notices/BetterQuesting-LICENSE",
@@ -41,6 +41,11 @@
       "path": "evidence/capacity-adapter-test.json",
       "bytes": 258,
       "sha256": "aae8b467d91abaf84b88bd36754cf512c9cacbdf29bd9c850403985b4e5f202d"
+    },
+    {
+      "path": "evidence/choice-reward-adapter.json",
+      "bytes": 269,
+      "sha256": "b39a26d89d74fb81f3e547620aa8feaca70b65367c33822343fae08870f7b68a"
     },
     {
       "path": "evidence/coin-recipes-js-contract-test.json",
@@ -98,6 +103,11 @@
       "sha256": "5b496ceaf4e807fbd12e66a9ba69726ffef26f8fad86a931e6ce390f29928140"
     },
     {
+      "path": "evidence/phase-2026-10-17-choice-reward.json",
+      "bytes": 1420,
+      "sha256": "e951eeed8fc29eb36ad7e9afdd2f1d5d30288b4d934519d432ee10d0b6fd58a4"
+    },
+    {
       "path": "evidence/phase-2026-10-17-crafting-subset.json",
       "bytes": 1577,
       "sha256": "ddf10712b8657e87570521a2b2dcd3e5b62c2bb16be09b771adfcc322c70f08b"
@@ -110,7 +120,7 @@
     {
       "path": "evidence/quest-export-summary.json",
       "bytes": 1474,
-      "sha256": "35cd7b1f222adeea933cfc7780db76324ad63db310f927697969bf5042e700e9"
+      "sha256": "406f8117710b7491230a68371b495de2ff0f1c08511f621db5e416acaa5008a3"
     },
     {
       "path": "evidence/quests/checkpoint-verification.json",
@@ -144,13 +154,13 @@
     },
     {
       "path": "evidence/validation-state.json",
-      "bytes": 1725,
-      "sha256": "91726e5f4f862867acd1a5a2fb2605216283b352d2cf9db4dcfb2095414860f0"
+      "bytes": 1803,
+      "sha256": "e060f1ff7bbf2357fa8c43399241425309bee7cebd804d1b25e04eb0318a6e99"
     },
     {
       "path": "evidence/validation-summary.json",
       "bytes": 5199,
-      "sha256": "5fb44806cb8b10225a71c6246fd21bc048c3f11c47a0767f52286c3333b58f7d"
+      "sha256": "9559068d3b531b4b5f1cb84feb5377024eb30881535ebb9dad9cb18c7095821a"
     },
     {
       "path": "evidence/vanilla-identity-mapping.json",
@@ -229,8 +239,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 1864,
-      "sha256": "e49a665ea920f7bfeb6adebaf0d165c94f86a43d157263874cb1de8c1f407d16"
+      "bytes": 2021,
+      "sha256": "55c84b6c24fee45c61e05ecba1f01daf57012651d65d43f2f2367448bed4036b"
     },
     {
       "path": "requirements.txt",
@@ -244,8 +254,8 @@
     },
     {
       "path": "STATUS.zh-CN.md",
-      "bytes": 9388,
-      "sha256": "ce13194d2c5914fcc48c8be7119ddb7f6e185c7b6351fa68aafbfcfcb308709f"
+      "bytes": 9428,
+      "sha256": "40f31a6236d4990ba972737a6f7e41edcb5246727dbf6192dd4ed78ca894749d"
     },
     {
       "path": "work/compat-mod/src/main/java/org/gtnhmigration/compat/EnderTankCapacityMixin.java",
@@ -364,8 +374,8 @@
     },
     {
       "path": "work/migration/export_supported_quests.py",
-      "bytes": 14998,
-      "sha256": "9a0ab56b927f300b31ab0c8f6bc3894cae740c31766f5131101b1fce3ba2ec33"
+      "bytes": 15785,
+      "sha256": "25bcc6daf73e695de2be48d2a5382385057b1d5a195feaa38a615b648bd3d68c"
     },
     {
       "path": "work/migration/generate_material_runtime_audit.py",
@@ -484,8 +494,8 @@
     },
     {
       "path": "work/migration/rebuild_current_phase.py",
-      "bytes": 1302,
-      "sha256": "d533cbb472850db5d23ad8271bdb52fe06789718af09dd6adcb268d263f39a0a"
+      "bytes": 1337,
+      "sha256": "85565a3545a3d90fdc58c8d3e0e109f731680423b53c5cf3440216f71b5a0e05"
     },
     {
       "path": "work/migration/recover_java.py",
@@ -568,6 +578,11 @@
       "sha256": "90939d83251b8c5041e959e48fa081478f5605aba2206e19428a50be78ea74ea"
     },
     {
+      "path": "work/migration/verify_choice_reward_contract.py",
+      "bytes": 1970,
+      "sha256": "9ac59ca8824a10a681f6a131d6fc8ba1357abdba60a34920b0b40433222fa7e3"
+    },
+    {
       "path": "work/migration/verify_crafting_adapter_contract.py",
       "bytes": 2203,
       "sha256": "154a22b56da4edc0a841bd33ee39ab3e9bd2c2dd9955653f8d74d123a313278b"
@@ -634,8 +649,8 @@
     },
     {
       "path": "work/migration/write_quest_checkpoint_status.py",
-      "bytes": 11148,
-      "sha256": "93c4875518df69c009d5f02ef3089d15a9426362509a1ed95db01d2de4d2e334"
+      "bytes": 11399,
+      "sha256": "d10ac24e96be2569874c44a42239a42c3f1f64643e22c73ab81bd0ba139f2876"
     },
     {
       "path": "work/migration/write_status.py",
@@ -643,7 +658,7 @@
       "sha256": "1ddca3d85fc05ee3e8502a504f99bc2a6d2e7f5a43c255e97000e5c5d9577018"
     }
   ],
-  "file_count": 128,
+  "file_count": 131,
   "source_archive_inputs_included": false,
   "runtime_binaries_included": false,
   "full_parity": false,
