@@ -1,0 +1,41 @@
+{
+  "phase": "location-task-boundary",
+  "checked_at": "2026-10-17T13:39:21.598065+08:00",
+  "before": {
+    "location_task_count": 34,
+    "safe_conversion_candidates": 0
+  },
+  "after": {
+    "passed": true,
+    "legacy_location_task_count": 34,
+    "legacy_location_quest_count": 33,
+    "all_are_dimension_only_unbounded": true,
+    "finite_coordinate_box_candidates": 0,
+    "ftb_location_task_requires_finite_box": true,
+    "safe_conversion_candidates": 0,
+    "explicit_export_blocker": "Location dimension-only semantics are not representable by FTB LocationTask",
+    "runtime_game_verified": false,
+    "full_quest_parity": false,
+    "dependency_closed_active_quests": 2
+  },
+  "evidence": {
+    "old_source": "BetterQuesting TaskLocation exact source",
+    "modern_source": "FTB Quests LocationTask exact source",
+    "bridge_review": "Claude and DeepSeek bridge review requested; suggestions treated as untrusted and checked against local source",
+    "exporter_explicit_blocker": true
+  },
+  "tests": [
+    "verify_location_task_boundary.py",
+    "verify_quest_checkpoint.py",
+    "verify_migration.py",
+    "full rebuild_current_phase.py"
+  ],
+  "runtime_game_verified": false,
+  "full_quest_parity": false,
+  "pause_requested_by_user": true,
+  "notes": [
+    "All current legacy location tasks are dimension-only with range=-1 and zero coordinates.",
+    "FTB LocationTask requires a finite coordinate box and cannot express this semantics without a dedicated dimension-only adapter.",
+    "No approximate origin box or automatic overworld mapping was generated."
+  ]
+}

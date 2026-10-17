@@ -10,7 +10,7 @@ q=json.loads((D/'export-manifest.json').read_text(encoding='utf-8'))
 v=json.loads((O/'docs/verification/validation-summary.json').read_text(encoding='utf-8'))
 r=json.loads((O/'docs/verification/test-runtime-files.json').read_text(encoding='utf-8'))
 vm=json.loads((O/'docs/quest-migration/vanilla-identity-mapping.json').read_text(encoding='utf-8'))
-for name in ['QuestAdapterShapeCheck','LegacyRetrievalCounterCheck','QuestSnbtCheck','checkpoint-verification','crafting-task-adapter','choice-reward-adapter','hunt-task-adapter']:
+for name in ['QuestAdapterShapeCheck','LegacyRetrievalCounterCheck','QuestSnbtCheck','checkpoint-verification','crafting-task-adapter','choice-reward-adapter','hunt-task-adapter','location-task-boundary']:
     assert json.loads((D/(name+'.json')).read_text(encoding='utf-8'))['passed']
 refs=json.loads((O/'docs/quest-migration/item-registry-references.json').read_text(encoding='utf-8'))
 mapped=[x for x in refs if x.get('target_id') or resolve_legacy_vanilla(x['identity']['id'],x['identity']['damage'],x['identity']['ore_dict'],x['identity']['tag'])]
@@ -98,6 +98,6 @@ Quest checkpoint: {n} of {q['source_quests']} dependency-closed trial quests; 4 
 ''',encoding='utf-8')
 tools=O/'tools/migration-sources'
 tools.mkdir(parents=True,exist_ok=True)
-for name in ['legacy_vanilla_items.py','verify_vanilla_identity_mapping.py','export_supported_quests.py','write_quest_checkpoint_status.py','rebuild_current_phase.py','verify_crafting_adapter_contract.py','verify_choice_reward_contract.py','verify_hunt_adapter_contract.py']:
+for name in ['legacy_vanilla_items.py','verify_vanilla_identity_mapping.py','export_supported_quests.py','write_quest_checkpoint_status.py','rebuild_current_phase.py','verify_crafting_adapter_contract.py','verify_choice_reward_contract.py','verify_hunt_adapter_contract.py','verify_location_task_boundary.py']:
     shutil.copy2(R/'work/migration'/name,tools/name)
 print(json.dumps({'active_trial_quests':n,'remaining_quests':remaining,'mapped_identity_total':mapped_total,'unmapped_identity_total':unmapped,'new_vanilla_identities':vm['newly_mapped_source_identity_count'],'new_vanilla_occurrences':vm['newly_mapped_source_occurrences'],'full_parity':False},ensure_ascii=False))

@@ -1,5 +1,5 @@
 {
-  "created_at": "2026-10-17T13:26:21.296911+08:00",
+  "created_at": "2026-10-17T13:44:33.556837+08:00",
   "scope": "source-only public checkpoint; third-party game inputs excluded",
   "files": [
     {
@@ -9,8 +9,8 @@
     },
     {
       "path": ".gitignore",
-      "bytes": 531,
-      "sha256": "64b9f64382af695cd0783509e5ab99e45a6b343e38916e89568d7dc25d238d00"
+      "bytes": 557,
+      "sha256": "4e003008f618689a60a9260695759280daea55021625ab5a6acdd8143784006e"
     },
     {
       "path": "docs/local-validation-detail.zh-CN.md",
@@ -83,6 +83,11 @@
       "sha256": "4f15746859d48f8bea8c92fcc40f0ce14b0df690b9fe20e7e63c751951567992"
     },
     {
+      "path": "evidence/location-task-boundary.json",
+      "bytes": 486,
+      "sha256": "00b22fe24b10683e29e55365d18936ec12b3f5ccc6c45d4154b5a3f287af870e"
+    },
+    {
       "path": "evidence/long-fuel-verification.json",
       "bytes": 1070,
       "sha256": "1a224a9f2572fea521c2011b006f85018f1e77bf0102b4f6f02a9dca54b0b296"
@@ -121,6 +126,11 @@
       "path": "evidence/phase-2026-10-17-hunt-subset.json",
       "bytes": 1555,
       "sha256": "81893e40a0dfac7558a8848d59d77e2ec2ccdb6a4a9049913ec5b53a5a973b2e"
+    },
+    {
+      "path": "evidence/phase-2026-10-17-location-boundary.json",
+      "bytes": 1626,
+      "sha256": "993e0c707aae2256f60cc1788770b5b9edaec2b4b76cdee046bb446cc20c477b"
     },
     {
       "path": "evidence/phase-2026-10-17-vanilla-identity.json",
@@ -170,7 +180,7 @@
     {
       "path": "evidence/validation-summary.json",
       "bytes": 5199,
-      "sha256": "4ae47decafe4911343ccb5ddf166a8a522d33ed347eecbd6c6daa7fe0b99057a"
+      "sha256": "8e4ffd48d71f2b6b4f9cc3265167083996ecddcc65799af0b2c473b996052046"
     },
     {
       "path": "evidence/vanilla-identity-mapping.json",
@@ -248,9 +258,14 @@
       "sha256": "6da16788f1b59769905eff7661bb2021f7121c89d9f2f44b4d26bf1a5c368853"
     },
     {
+      "path": "PAUSED-HANDOFF.zh-CN.md",
+      "bytes": 741,
+      "sha256": "8ad2766892e9b5b4eb06bed81abf265709e1e8328ce53f9a8c104c74bb9bef63"
+    },
+    {
       "path": "README.md",
-      "bytes": 2170,
-      "sha256": "7529d6fa0ae209582e7afe0b01c49030314e8e114db097423c246e06e8c638e1"
+      "bytes": 2382,
+      "sha256": "e850235ee976419c17b471a300c31ef499fbcc1fd69176a6704399b812c5dc4b"
     },
     {
       "path": "requirements.txt",
@@ -264,8 +279,8 @@
     },
     {
       "path": "STATUS.zh-CN.md",
-      "bytes": 9466,
-      "sha256": "994a2a5495a910252e198a576ea0a4e52b9f61627ff83c3ff80f50c809444c40"
+      "bytes": 10180,
+      "sha256": "34fe63798bdfa12f5a1547434b8f957a9cbeaefda000332042cb727ac46111d1"
     },
     {
       "path": "work/compat-mod/src/main/java/org/gtnhmigration/compat/EnderTankCapacityMixin.java",
@@ -384,8 +399,8 @@
     },
     {
       "path": "work/migration/export_supported_quests.py",
-      "bytes": 16797,
-      "sha256": "222be4fc6a3ad7c3f4585214cb357d0f4e183dd08eb6cf79351a67428f40801b"
+      "bytes": 16927,
+      "sha256": "0befcb1a72e85cc477c0fe0132638e1aa0a5db226f6d8ad04885eb2399087167"
     },
     {
       "path": "work/migration/generate_material_runtime_audit.py",
@@ -504,8 +519,8 @@
     },
     {
       "path": "work/migration/rebuild_current_phase.py",
-      "bytes": 1371,
-      "sha256": "c9049b010556b1a8df0ac382b673849c94c1be5d9fdbbe0c66daedcd8a9da5d9"
+      "bytes": 1406,
+      "sha256": "723c54e66b13f6bfc5f21369eccc6b1cfa1947d452df8db26f9dcb911137a7cd"
     },
     {
       "path": "work/migration/recover_java.py",
@@ -618,6 +633,11 @@
       "sha256": "3a804468cb891fe46bae540453f1256fe1a648cabb2105d692ec90aa700f38b7"
     },
     {
+      "path": "work/migration/verify_location_task_boundary.py",
+      "bytes": 1845,
+      "sha256": "7057b6c4a8d746a0361d5611d7543b2cc5cd23301df7ba845f67a10bcc06a1ce"
+    },
+    {
       "path": "work/migration/verify_long_fuels.py",
       "bytes": 3787,
       "sha256": "4aa7be0a897e6731907ef70f04191d856422562bc1b715a8ec754f73610c7411"
@@ -664,8 +684,8 @@
     },
     {
       "path": "work/migration/write_quest_checkpoint_status.py",
-      "bytes": 11613,
-      "sha256": "9cff58eee62da3483e4f83d9a80315541a03c0caf2cf4b676499f7defd90911f"
+      "bytes": 11673,
+      "sha256": "f42ce27bd482a343e1fec3b507769be987d3f625660a9d581096e9ad581cf0a8"
     },
     {
       "path": "work/migration/write_status.py",
@@ -673,9 +693,9 @@
       "sha256": "1ddca3d85fc05ee3e8502a504f99bc2a6d2e7f5a43c255e97000e5c5d9577018"
     }
   ],
-  "file_count": 134,
+  "file_count": 138,
   "source_archive_inputs_included": false,
   "runtime_binaries_included": false,
   "full_parity": false,
-  "continuation": "continue migration only after explicit user instruction; upload each completed phase"
+  "continuation": "paused after location-task boundary phase by explicit user request; wait for resume instruction"
 }

@@ -13,6 +13,7 @@
 - `evidence/phase-2026-10-17-crafting-subset.json`、`evidence/crafting-task-adapter.json`：受限 crafting 任务候选的源码约束和验证边界。
 - `evidence/phase-2026-10-17-choice-reward.json`、`evidence/choice-reward-adapter.json`：受限 item choice 奖励候选的源码约束和验证边界。
 - `evidence/phase-2026-10-17-hunt-subset.json`、`evidence/hunt-task-adapter.json`：受限实体 hunt/kill 候选的源码约束和验证边界。
+- `evidence/phase-2026-10-17-location-boundary.json`、`evidence/location-task-boundary.json`：location 任务无法安全转换的源码证据和阻塞边界。
 
 本阶段仍未完成完整任务迁移或游戏内验证。
 
@@ -20,4 +21,4 @@
 
 目标仍是完整功能迁移，不是当前检查点的子集。未上传原始 ZIP、Minecraft/模组/JDK 二进制、第三方完整源码、纹理/声音、原任务正文、存档或凭据。没有完整世界启动、实际 Mixin 应用、完整任务初始化或客户端渲染证据；EULA 保持 false。
 
-恢复原工作区前先读 `RESUME.md`。恢复后必须重新运行真实验证，而不能把本仓库的文本证据当作完整游戏验证。
+恢复原工作区前先读 `RESUME.md`。本阶段完成后按用户要求暂停开发；恢复后必须重新运行真实验证，而不能把本仓库的文本证据当作完整游戏验证。

@@ -100,6 +100,7 @@ for qid,src in sources.items():
     for index,required in enumerate(req):
      item,count=stack(required);tasks.append({'id':new_id('task',qid+'/'+key+'/'+str(index)),'type':'item','item':{'id':item,'count':1},'count':count,'consume_items':False,'only_from_crafting':True,'match_components':component,'optional_task':False,'tags':['gtnh_legacy_crafting']})
     continue
+   if typ=='bq_standard:location':raise ValueError('Location dimension-only semantics are not representable by FTB LocationTask')
    if typ not in ['bq_standard:retrieval','bq_standard:optional_retrieval']:raise ValueError('Task type not implemented: '+typ)
    req=list(t.get('requiredItems:9',{}).values())
    if len(req)!=1 or t.get('consume:1',0) or t.get('autoConsume:1',0) or t.get('groupDetect:1',0) or t.get('requireOnlyOneItem:1',0):raise ValueError('Grouped/consuming/multi-item retrieval requires further adapter')

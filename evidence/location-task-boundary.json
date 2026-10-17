@@ -1,0 +1,13 @@
+{
+  "passed": true,
+  "legacy_location_task_count": 34,
+  "legacy_location_quest_count": 33,
+  "all_are_dimension_only_unbounded": true,
+  "finite_coordinate_box_candidates": 0,
+  "ftb_location_task_requires_finite_box": true,
+  "safe_conversion_candidates": 0,
+  "explicit_export_blocker": "Location dimension-only semantics are not representable by FTB LocationTask",
+  "runtime_game_verified": false,
+  "full_quest_parity": false,
+  "dependency_closed_active_quests": 2
+}
