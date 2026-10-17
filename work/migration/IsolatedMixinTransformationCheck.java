@@ -21,7 +21,11 @@ public final class IsolatedMixinTransformationCheck {
         new Contract("dev.ftb.mods.ftbquests.quest.task.ItemTask","submitTask","gtnhMigration$legacyRetrieval"),
         new Contract("dev.ftb.mods.ftbquests.quest.task.ItemTask","test","gtnhMigration$legacyCraftingMatch"),
         new Contract("dev.ftb.mods.ftbquests.quest.task.KillTask","match","gtnhMigration$legacyHunt"),
-        new Contract("dev.ftb.mods.ftbquests.quest.task.LocationTask","canSubmit","gtnhMigration$dimensionOnly")
+        new Contract("dev.ftb.mods.ftbquests.quest.task.LocationTask","canSubmit","gtnhMigration$dimensionOnly"),
+        new Contract("dev.ftb.mods.ftbquests.util.FTBQuestsInventoryListener","slotChanged","gtnhMigration$queueLegacySlot"),
+        new Contract("dev.ftb.mods.ftbquests.util.FTBQuestsInventoryListener","lambda$detect$0","gtnhMigration$deferLegacyAutomatic"),
+        new Contract("dev.ftb.mods.ftbquests.quest.task.Task","checkOnLogin","gtnhMigration$deferLegacyLogin"),
+        new Contract("net.minecraft.world.inventory.AbstractContainerMenu","addSlotListener","gtnhMigration$initialLegacyInventory")
     );
     static void require(boolean ok,String message) {
         assertions++;
@@ -109,9 +113,9 @@ public final class IsolatedMixinTransformationCheck {
             Files.write(Path.of(target.substring(target.lastIndexOf('.')+1)+".class.transformed"),after);
         }
         require(mode.equals("baseline"),"Negative control did not reach its target");
-        require(injections==5,"Expected all five registered injections");
+        require(injections==9,"Expected all nine registered injections");
         System.out.println("{\"test\":\"isolated_real_sponge_mixin_transformation\",\"passed\":true,\"assertions\":"+assertions
-            +",\"targets_transformed\":4,\"injections_verified\":"+injections+",\"asm_basic_dataflow_methods\":"+verifiedMethods
+            +",\"targets_transformed\":7,\"injections_verified\":"+injections+",\"asm_basic_dataflow_methods\":"+verifiedMethods
             +",\"actual_sponge_transformer_executed\":true,\"isolated_mixin_transformation_verified\":true,\"neoforge_transform_chain_verified\":false,\"game_runtime_verified\":false}");
     }
 }

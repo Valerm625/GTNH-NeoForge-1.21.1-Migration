@@ -65,7 +65,7 @@ side="BOTH"
 [[mixins]]
 config="gtnh_migration_compat.mixins.json"
 ''',encoding='utf-8',newline='\n')
-(resources/'gtnh_migration_compat.mixins.json').write_text(json.dumps({'required':True,'minVersion':'0.8','package':'org.gtnhmigration.compat','compatibilityLevel':'JAVA_21','mixins':['EnderTankCapacityMixin','LegacyRetrievalItemTaskMixin','LegacyDimensionLocationTaskMixin','LegacyHuntTaskMixin','LegacyCraftingItemTaskMixin'],'injectors':{'defaultRequire':1}},indent=2),encoding='utf-8',newline='\n')
+(resources/'gtnh_migration_compat.mixins.json').write_text(json.dumps({'required':True,'minVersion':'0.8','package':'org.gtnhmigration.compat','compatibilityLevel':'JAVA_21','mixins':['EnderTankCapacityMixin','LegacyRetrievalItemTaskMixin','LegacyDimensionLocationTaskMixin','LegacyHuntTaskMixin','LegacyCraftingItemTaskMixin','LegacyInventoryListenerMixin','LegacyTaskLoginTimingMixin','LegacyInitialInventorySyncMixin'],'injectors':{'defaultRequire':1}},indent=2),encoding='utf-8',newline='\n')
 (resources/'LICENSE').write_text('''MIT License
 Copyright (c) 2026 Local GTNH migration project
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
@@ -89,4 +89,10 @@ with zipfile.ZipFile(jar,'w',zipfile.ZIP_DEFLATED) as z:
 shutil.copy2(jar,W/'neoforge-smoke/mods'/jar.name)
 sourceout=O/'tools/compat-mod';shutil.copytree(P/'src',sourceout/'src',dirs_exist_ok=True)
 lock={'filename':jar.name,'sha256':hashlib.sha256(jar.read_bytes()).hexdigest(),'version':'0.1.0','mod_id':'gtnh_migration_compat','source':'tools/compat-mod/src','original_config_sha256':hashlib.sha256(legacy.read_bytes()).hexdigest(),'target_artifact':es.name,'target_artifact_sha256':hashlib.sha256(es.read_bytes()).hexdigest(),'target_class':'codechicken.enderstorage.storage.EnderLiquidStorage','original_capacity_buckets':16,'migrated_capacity_buckets':buckets,'migrated_capacity_mb':buckets*1000,'injection_expected_matches':1,'compile_passed':True,'actual_mixin_transformation_verified':False,'runtime_storage_verified':False,'quest_adapter':'scoped retrieval/crafting matching; opt-in dimension and hunt predicates','quest_adapters':['scoped single-item legacy retrieval','scoped crafting matching','opt-in dimension-only location','opt-in hunt exact/subtype predicate'],'unintegrated_helpers':['LegacyRetrievalEngine; differential-test prototype, not exported or connected to game events'],'quest_adapter_live_verified':False}
+lock['quest_adapters'].append('marked single-retrieval initial sync and all main-slot changes deferred to ServerTickEvent.Pre')
+lock['inventory_event_world_verified']=False
+lock['unintegrated_helpers'] += [
+ 'LegacyRetrievalProgressCodec; source-compared NBT model, not connected to FTB save storage',
+ 'LegacyQuestRetrievalPlanner; ordered calculation model, no inventory transaction or quest export',
+]
 (O/'docs/compat-mod.lock.json').write_text(json.dumps(lock,indent=2),encoding='utf-8',newline='\n');print(json.dumps(lock))

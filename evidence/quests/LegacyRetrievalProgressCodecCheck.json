@@ -1,0 +1,42 @@
+{
+  "test": "source_differential_retrieval_progress_codec",
+  "passed": true,
+  "assertions": 3748,
+  "source_comparisons": 1811,
+  "binary_nbt_roundtrips": 633,
+  "actual_minecraft_nbt": true,
+  "runtime_integrated": false,
+  "ftb_storage_integrated": false,
+  "export_enabled": false,
+  "game_runtime_verified": false,
+  "source_commit": "815d738923d46e9083f988421e5329193e2e5940",
+  "source_file_sha256": {
+    "bq_standard/tasks/base/TaskBase.java": "cc2383b39e7d24f9cffb2a57076e8aee6434b1e120236320b63afcbb9c704fce",
+    "bq_standard/tasks/base/TaskProgressableBase.java": "6b4f2e0ff58e355ccec32c31174ef6f0fd07eafff1092ff1d797356d5b994a99",
+    "bq_standard/tasks/TaskRetrieval.java": "8ac57331877e643a95c5c5d39966cce8a3d854d27319df80bee8514d19a22f71"
+  },
+  "codec_source_sha256": "596a64ed0ed06bad0f70731773078376ea9ab7ec3cba7dacdd8c10faac0fe856",
+  "test_source_sha256": "a306b8df6a4ff7b959eed0e289f808dc4ef073edf5fec53c39ba2f2d1ce2c8e7",
+  "runner_sha256": "6d90de446dac357a0047d44f20b4f62e02e37be462ad7d8c46c7966d86152310",
+  "minecraft_jar_sha256": "26ca9c40d7e1681190b428583c38816852218e78df3f8bdb60a59a78503aec71",
+  "oracle_fixture_sha256": "0e4f79900c396b3e4a309d7dd73e438c5f22e673f2252bca754eea614ec7b1fa",
+  "source_methods_extracted_unchanged": [
+    "TaskBase.readProgressFromNBT",
+    "TaskBase.writeProgressToNBT",
+    "TaskProgressableBase.readProgressFromNBT",
+    "TaskProgressableBase.writeProgressToNBT",
+    "TaskRetrieval.getUsersProgress",
+    "TaskRetrieval.readUserProgressFromNBT",
+    "TaskRetrieval.writeUserProgressToNBT"
+  ],
+  "oracle_boundaries": [
+    "Old NBT names delegate to actual 1.21.1 NBT classes; no 1.7.10 Minecraft runtime.",
+    "Logger and requiredItems count are fixtures; methods execute pinned source unchanged.",
+    "Source equivalence covers recognized nonnegative progress payloads only."
+  ],
+  "limitations": [
+    "Unknown versions/fields/types, invalid UUIDs and negative counters retain raw NBT but cannot activate.",
+    "Raw NBT-tree preservation does not imply identical compressed bytes.",
+    "No FTB save bridge, task registry, events, party lifecycle, packet/UI integration or world/server startup."
+  ]
+}

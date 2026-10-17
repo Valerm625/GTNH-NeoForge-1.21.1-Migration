@@ -1,0 +1,70 @@
+{
+  "test": "compiled_inventory_observer_and_actual_vanilla_menu",
+  "passed": true,
+  "assertions": 439,
+  "source_comparisons": 123,
+  "packaged_queue_executed": true,
+  "actual_vanilla_menu_executed": true,
+  "initial_callback_absence_reproduced": true,
+  "bridge_shapes_checked": true,
+  "actual_mixin_transformation_tested": false,
+  "game_events_executed": false,
+  "game_runtime_verified": false,
+  "bq_source_commit": "815d738923d46e9083f988421e5329193e2e5940",
+  "ftb_source_commit": "8c53f35a97d8897c861b097f1e39f4fc3beb3a15",
+  "source_file_sha256": {
+    "BetterQuesting/3.8.89-GTNH/src/main/java/bq_standard/handlers/PlayerContainerListener.java": "416c037c5ab874cc953ca485bf47afca3df30ea5bfc64fdee1ad4b2bdb5b36ea",
+    "BetterQuesting/3.8.89-GTNH/src/main/java/bq_standard/handlers/EventHandler.java": "cf81446168721ec29a0634042f0c3052aca7dd13d0a4ad86f7f27a4ec0b73ce1",
+    "FTB-Quests/v2101.1.36/common/src/main/java/dev/ftb/mods/ftbquests/util/FTBQuestsInventoryListener.java": "80486cff499c2393ee95a36707a52e90def300d221b151fdb6afce95b53962fa",
+    "FTB-Quests/v2101.1.36/common/src/main/java/dev/ftb/mods/ftbquests/quest/ServerQuestFile.java": "becb3d571f490203a9893034543a62d7847ba890b387045235fb437fcde7ebbf",
+    "FTB-Quests/v2101.1.36/common/src/main/java/dev/ftb/mods/ftbquests/quest/task/Task.java": "f11d0979aa9418579a083cf60b0c070141dbcc1724daac214091d178ca2f649a"
+  },
+  "adapter_source_sha256": {
+    "LegacyInventoryRescanQueue": "45a9bde139aa08011803652837ca48a462381286754f3b302542d24504e75e5e",
+    "LegacyInventoryObserver": "540afa5b92dab9c7208e2b334e06102b486696b524c322f4697e262647d9c99e",
+    "LegacyInventoryListenerMixin": "6b6d20089f7b3698eb5e4427c34c6e63190461b9455570532c352b65e5c2fe81",
+    "LegacyTaskLoginTimingMixin": "d1aef60a59dfa0a3a22f925fa07bbbcb8405b3d0c34fa6e8ab5a03de256a4c57",
+    "LegacyInitialInventorySyncMixin": "f56298f2176cdbb799a1d2b50359549b26f0a2944c98fda851efe86fcb9568bd"
+  },
+  "source_sha256": {
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyInventoryRescanQueue.java": "45a9bde139aa08011803652837ca48a462381286754f3b302542d24504e75e5e",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyInventoryObserver.java": "540afa5b92dab9c7208e2b334e06102b486696b524c322f4697e262647d9c99e",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyInventoryListenerMixin.java": "6b6d20089f7b3698eb5e4427c34c6e63190461b9455570532c352b65e5c2fe81",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyTaskLoginTimingMixin.java": "d1aef60a59dfa0a3a22f925fa07bbbcb8405b3d0c34fa6e8ab5a03de256a4c57",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyInitialInventorySyncMixin.java": "f56298f2176cdbb799a1d2b50359549b26f0a2944c98fda851efe86fcb9568bd",
+    "work/migration/LegacyInventoryObserverCheck.java": "aed919c8f8caccf54a5c619b0f5b5294859ce8522c35398f941d146903f99d41",
+    "work/migration/test_legacy_inventory_observer.py": "fb6d375d4f805b0bc8393e3211d9b2eaf04d50ab9dea744a2dc20393b848fe65"
+  },
+  "adapter_compiled_sha256": {
+    "LegacyInventoryRescanQueue": "3dcc19b1aa19298b123ec771d12a91b8b7cedc59423880b73a547c26b407618c",
+    "LegacyInventoryObserver": "42c85cc14eec144ab304fc88f421f16fd3e0b8e9a6bc0f1e7cdb20dfb6396036",
+    "LegacyInventoryListenerMixin": "9f7afbead85a44aa45b53d5cce84fd44835a179926c154092dc06754e8127a25",
+    "LegacyTaskLoginTimingMixin": "a410f6ce0eb04a072ae90739e1a2e5461ec8bbbcfac5d0a51687e2313c7395d3",
+    "LegacyInitialInventorySyncMixin": "00575b282649434318968d5edeeb74079bd3d94cffb039479db6d2425b542713"
+  },
+  "test_source_sha256": "aed919c8f8caccf54a5c619b0f5b5294859ce8522c35398f941d146903f99d41",
+  "runner_sha256": "fb6d375d4f805b0bc8393e3211d9b2eaf04d50ab9dea744a2dc20393b848fe65",
+  "oracle_fixture_sha256": "24c3d959554108708f56ba755d089edfabd2f3a828af050169081b1c08953ab9",
+  "compat_jar_sha256": "f906ba61566d77132e03d9e2f092419fab3cae5b6050143159aefb39bf93408c",
+  "ftb_artifact_sha256": "6a39982c4b3afc00b1e788041a4f0d394e1659e3b3a6e5d078cd790bc36d0018",
+  "minecraft_artifact_sha256": "26ca9c40d7e1681190b428583c38816852218e78df3f8bdb60a59a78503aec71",
+  "packaged_bridge_matches_sources": true,
+  "source_methods_extracted_unchanged": [
+    "PlayerContainerListener.sendContainerAndContentsToPlayer",
+    "PlayerContainerListener.sendSlotContents",
+    "PlayerContainerListener.updateTasks",
+    "EventHandler.schedulePlayerInventoryCheck",
+    "EventHandler.cleanup",
+    "EventHandler.onServerTick"
+  ],
+  "oracle_boundaries": [
+    "BQ source executes against fixture player/quest/task objects, without 1.7.10 game runtime.",
+    "Source comparison covers slot policy, initial notification, START phase and deduplication for eligible inventory tasks.",
+    "Server isolation and post-drain scheduling are queue-contract checks, not claims about every BQ reentrant callback."
+  ],
+  "limitations": [
+    "Actual vanilla menus prove absence of guaranteed initial slot callbacks; patched callback dispatch is shape-checked only here.",
+    "NeoForge event-bus registration, fake-player integration, team lookup, disconnect/respawn lifecycle and game timing are not run.",
+    "Real Sponge transformation is covered by the separate isolated transformation report, not this test."
+  ]
+}

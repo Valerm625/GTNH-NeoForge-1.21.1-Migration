@@ -8,7 +8,10 @@
     "LegacyRetrievalItemTaskMixin",
     "LegacyDimensionLocationTaskMixin",
     "LegacyHuntTaskMixin",
-    "LegacyCraftingItemTaskMixin"
+    "LegacyCraftingItemTaskMixin",
+    "LegacyInventoryListenerMixin",
+    "LegacyTaskLoginTimingMixin",
+    "LegacyInitialInventorySyncMixin"
   ],
   "injectors": {
     "defaultRequire": 1

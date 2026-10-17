@@ -1,6 +1,6 @@
 {
   "filename": "gtnh-migration-compat-0.1.0.jar",
-  "sha256": "43302d0b7a699dd199de537c0c73cb2e6d8554d5486c24ea2834886cfb14915e",
+  "sha256": "f906ba61566d77132e03d9e2f092419fab3cae5b6050143159aefb39bf93408c",
   "version": "0.1.0",
   "mod_id": "gtnh_migration_compat",
   "source": "tools/compat-mod/src",
@@ -20,12 +20,16 @@
     "scoped single-item legacy retrieval",
     "scoped crafting matching",
     "opt-in dimension-only location",
-    "opt-in hunt exact/subtype predicate"
+    "opt-in hunt exact/subtype predicate",
+    "marked single-retrieval initial sync and all main-slot changes deferred to ServerTickEvent.Pre"
   ],
   "unintegrated_helpers": [
-    "LegacyRetrievalEngine; differential-test prototype, not exported or connected to game events"
+    "LegacyRetrievalEngine; differential-test prototype, not exported or connected to game events",
+    "LegacyRetrievalProgressCodec; source-compared NBT model, not connected to FTB save storage",
+    "LegacyQuestRetrievalPlanner; ordered calculation model, no inventory transaction or quest export"
   ],
   "quest_adapter_live_verified": false,
+  "inventory_event_world_verified": false,
   "compiled_handler_and_target_shape_test": {
     "test": "compiled_capacity_adapter_contract",
     "passed": true,

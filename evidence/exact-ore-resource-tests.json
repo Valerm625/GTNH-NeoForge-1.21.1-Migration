@@ -1,0 +1,19 @@
+{
+  "passed": true,
+  "tests_run": 8,
+  "production_sources_or_asset_outputs_mutated_by_tests": false,
+  "test_cases": [
+    "test_derived_layer_cannot_claim_source_copy",
+    "test_extra_resource_is_not_hidden_by_manifest_counts",
+    "test_missing_mapping_row_cannot_shrink_expected_scope",
+    "test_pixel_equal_2_8_4_fallback_rejected_even_with_forged_manifest",
+    "test_real_archive_to_target_and_idempotent_port",
+    "test_unexpected_animation_sidecar_rejected_and_rebase_restores_absence",
+    "test_unknown_existing_base_aborts_before_any_output_write",
+    "test_visible_secondary_rejected_even_when_manifest_hash_matches"
+  ],
+  "test_source_sha256": "d9aca2e0938e0ecaa6ec22eab911ecd668160968a5f3c7fb49a58079007af35c",
+  "porter_source_sha256": "e94b6048168aef2c34a7219bedfaec28cbc8bbe02faaf09cc16eed1b08c29314",
+  "verifier_source_sha256": "32cfa7123c1c4cb268bd9d6e55b1b9a87502dc5469c57c8af77a51aff4b581ac",
+  "scope": "Real-source static verification and isolated output mutation tests; not Minecraft rendering or world validation."
+}

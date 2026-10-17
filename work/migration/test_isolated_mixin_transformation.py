@@ -31,8 +31,8 @@ services.mkdir(parents=True, exist_ok=True)
 with zipfile.ZipFile(compat) as jar:
     config = json.loads(jar.read('gtnh_migration_compat.mixins.json'))
     expected = {'EnderTankCapacityMixin', 'LegacyRetrievalItemTaskMixin', 'LegacyDimensionLocationTaskMixin',
-                'LegacyHuntTaskMixin', 'LegacyCraftingItemTaskMixin'}
-    assert len(config['mixins']) == 5 and set(config['mixins']) == expected
+                'LegacyHuntTaskMixin', 'LegacyCraftingItemTaskMixin', 'LegacyInventoryListenerMixin', 'LegacyTaskLoginTimingMixin', 'LegacyInitialInventorySyncMixin'}
+    assert len(config['mixins']) == 8 and set(config['mixins']) == expected
     assert config['required'] and config['package'] == 'org.gtnhmigration.compat'
     config['mixins'].remove('LegacyHuntTaskMixin')
     (out / 'missing-registration.mixins.json').write_text(json.dumps(config), encoding='utf-8', newline='\n')

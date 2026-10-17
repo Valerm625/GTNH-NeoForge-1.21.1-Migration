@@ -1,0 +1,109 @@
+{
+  "passed": true,
+  "primary_source": {
+    "repository": "GTNewHorizons/GT5-Unofficial",
+    "tag": "5.09.54.205",
+    "commit": "a3e1e11241a814c9fa0dd0973d5699548428f689",
+    "archive_sha256": "3044b6cfeec1b1aad554739409af09e314f2f07c8138be08bd478bf183ae6b0f"
+  },
+  "reference_only_jar_sha256": "4ab7ce174a8f6fb7a90d8d11d56056aab2de577c36c6084b37ce890d7b1d67bf",
+  "primary_base_pngs_verified_from_archive_through_target": 34,
+  "primary_animation_sidecars_present": 0,
+  "primary_animation_sidecars_absent_verified": 34,
+  "derived_secondary_pngs_verified_transparent": 34,
+  "reference_byte_identical_count": 27,
+  "reference_byte_different_count": 7,
+  "reference_rgba_pixel_identical_count": 34,
+  "reference_differences": [
+    {
+      "source_path": "src/main/resources/assets/gregtech/textures/blocks/materialicons/FINE/oreSmall.png",
+      "target_path": "assets/gtceu/textures/block/material_sets/fine/ore_small.png",
+      "primary_sha256": "3f9e096782fae5066bdf14b1681ebdbfc24532e012e93592d7c2b9b9f5bc7136",
+      "reference_2_8_4_sha256": "8f4a566df5213d0cc3b7e84ae5556bcd05362e7e6f0e58f2c6050275c77a09d1",
+      "byte_identical_to_reference": false,
+      "rgba_pixels_identical_to_reference": true,
+      "primary_rgba_sha256": "d3bdfbda55c50dadd47a224ee3798b40b6e4855878fa66dc7e6135c42d91bae9",
+      "reference_rgba_sha256": "d3bdfbda55c50dadd47a224ee3798b40b6e4855878fa66dc7e6135c42d91bae9",
+      "source_animation_present": false
+    },
+    {
+      "source_path": "src/main/resources/assets/gregtech/textures/blocks/materialicons/FLINT/ore.png",
+      "target_path": "assets/gtceu/textures/block/material_sets/flint/ore.png",
+      "primary_sha256": "6cf9e0318b83fd6870c913ae58b89dadba35f252eaaf7d8b6c540c2e70e40d1e",
+      "reference_2_8_4_sha256": "37ba1782ed2090a6000f9ccd0b88e79dc75507561d832b02937bb244f3dea698",
+      "byte_identical_to_reference": false,
+      "rgba_pixels_identical_to_reference": true,
+      "primary_rgba_sha256": "71239cb2b0750e0af8df04a7fb284eafa4be5baf97b4c734dfbec4038a85cdab",
+      "reference_rgba_sha256": "71239cb2b0750e0af8df04a7fb284eafa4be5baf97b4c734dfbec4038a85cdab",
+      "source_animation_present": false
+    },
+    {
+      "source_path": "src/main/resources/assets/gregtech/textures/blocks/materialicons/FLINT/oreSmall.png",
+      "target_path": "assets/gtceu/textures/block/material_sets/flint/ore_small.png",
+      "primary_sha256": "b8ef9701ea6f7cd0d47ebaddf20b4b0866a1006a0735d75c7fb9eb79346120da",
+      "reference_2_8_4_sha256": "aed2759d206da8ae261cc8ce8fe80e96eb1ba7e803fa1933d0b47bab6dab92ce",
+      "byte_identical_to_reference": false,
+      "rgba_pixels_identical_to_reference": true,
+      "primary_rgba_sha256": "00a2700b468f97f9adef2f14ac6ed2dff4f9f8693e7fcd7cc3ccd5ab1cefc6b7",
+      "reference_rgba_sha256": "00a2700b468f97f9adef2f14ac6ed2dff4f9f8693e7fcd7cc3ccd5ab1cefc6b7",
+      "source_animation_present": false
+    },
+    {
+      "source_path": "src/main/resources/assets/gregtech/textures/blocks/materialicons/LAPIS/ore.png",
+      "target_path": "assets/gtceu/textures/block/material_sets/lapis/ore.png",
+      "primary_sha256": "6cf9e0318b83fd6870c913ae58b89dadba35f252eaaf7d8b6c540c2e70e40d1e",
+      "reference_2_8_4_sha256": "37ba1782ed2090a6000f9ccd0b88e79dc75507561d832b02937bb244f3dea698",
+      "byte_identical_to_reference": false,
+      "rgba_pixels_identical_to_reference": true,
+      "primary_rgba_sha256": "71239cb2b0750e0af8df04a7fb284eafa4be5baf97b4c734dfbec4038a85cdab",
+      "reference_rgba_sha256": "71239cb2b0750e0af8df04a7fb284eafa4be5baf97b4c734dfbec4038a85cdab",
+      "source_animation_present": false
+    },
+    {
+      "source_path": "src/main/resources/assets/gregtech/textures/blocks/materialicons/LIGNITE/oreSmall.png",
+      "target_path": "assets/gtceu/textures/block/material_sets/lignite/ore_small.png",
+      "primary_sha256": "3f9e096782fae5066bdf14b1681ebdbfc24532e012e93592d7c2b9b9f5bc7136",
+      "reference_2_8_4_sha256": "8f4a566df5213d0cc3b7e84ae5556bcd05362e7e6f0e58f2c6050275c77a09d1",
+      "byte_identical_to_reference": false,
+      "rgba_pixels_identical_to_reference": true,
+      "primary_rgba_sha256": "d3bdfbda55c50dadd47a224ee3798b40b6e4855878fa66dc7e6135c42d91bae9",
+      "reference_rgba_sha256": "d3bdfbda55c50dadd47a224ee3798b40b6e4855878fa66dc7e6135c42d91bae9",
+      "source_animation_present": false
+    },
+    {
+      "source_path": "src/main/resources/assets/gregtech/textures/blocks/materialicons/QUARTZ/oreSmall.png",
+      "target_path": "assets/gtceu/textures/block/material_sets/quartz/ore_small.png",
+      "primary_sha256": "3f9e096782fae5066bdf14b1681ebdbfc24532e012e93592d7c2b9b9f5bc7136",
+      "reference_2_8_4_sha256": "8f4a566df5213d0cc3b7e84ae5556bcd05362e7e6f0e58f2c6050275c77a09d1",
+      "byte_identical_to_reference": false,
+      "rgba_pixels_identical_to_reference": true,
+      "primary_rgba_sha256": "d3bdfbda55c50dadd47a224ee3798b40b6e4855878fa66dc7e6135c42d91bae9",
+      "reference_rgba_sha256": "d3bdfbda55c50dadd47a224ee3798b40b6e4855878fa66dc7e6135c42d91bae9",
+      "source_animation_present": false
+    },
+    {
+      "source_path": "src/main/resources/assets/gregtech/textures/blocks/materialicons/SAND/oreSmall.png",
+      "target_path": "assets/gtceu/textures/block/material_sets/sand/ore_small.png",
+      "primary_sha256": "3f9e096782fae5066bdf14b1681ebdbfc24532e012e93592d7c2b9b9f5bc7136",
+      "reference_2_8_4_sha256": "8f4a566df5213d0cc3b7e84ae5556bcd05362e7e6f0e58f2c6050275c77a09d1",
+      "byte_identical_to_reference": false,
+      "rgba_pixels_identical_to_reference": true,
+      "primary_rgba_sha256": "d3bdfbda55c50dadd47a224ee3798b40b6e4855878fa66dc7e6135c42d91bae9",
+      "reference_rgba_sha256": "d3bdfbda55c50dadd47a224ee3798b40b6e4855878fa66dc7e6135c42d91bae9",
+      "source_animation_present": false
+    }
+  ],
+  "input_sha256": {
+    "source_lock": "1d82ec79eef3195aea71ff518af0970f21cb1b95962314c1babff65548b24f5f",
+    "source_archive": "3044b6cfeec1b1aad554739409af09e314f2f07c8138be08bd478bf183ae6b0f",
+    "reference_jar": "4ab7ce174a8f6fb7a90d8d11d56056aab2de577c36c6084b37ce890d7b1d67bf",
+    "resource_mapping": "1c584415636ad67a8aae14f9b8f2b6ee532e95b2908285c24c87fd876716956f",
+    "rebase_report": "d0767a4743fdd2bff0d94f231a9e4294e77d391c92b79fc2fd7c23aa78d476ab",
+    "pack_mcmeta": "e6e741e10134056b07436d00ca903d13b83d26d10b038659fa1dc7d1862bada5",
+    "porter": "e94b6048168aef2c34a7219bedfaec28cbc8bbe02faaf09cc16eed1b08c29314",
+    "verifier": "32cfa7123c1c4cb268bd9d6e55b1b9a87502dc5469c57c8af77a51aff4b581ac"
+  },
+  "runtime_visual_verification": false,
+  "full_fidelity": false,
+  "scope": "Independent static byte and decoded-RGBA checks of this 34-base-image subset only. Derived layers are not source assets; rendering, material/color assignment, pack precedence and world behaviour remain unverified."
+}

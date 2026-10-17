@@ -38,5 +38,9 @@
   "choice_reward_runtime_verified": false,
   "hunt_task_candidates": 3,
   "hunt_task_runtime_verified": false,
-  "full_feature_parity": false
+  "full_feature_parity": false,
+  "retrieval_progress_codec": "source-compared actual NBT model; no save bridge",
+  "quest_retrieval_planner": "source-compared ordered model; no inventory transaction",
+  "inventory_observer": "source queue comparison and actual menu/compiled bridge checks; game events unverified",
+  "ore_resource_subset": "34 exact primary-source PNGs and 34 transparent derived layers; rendering unverified"
 }

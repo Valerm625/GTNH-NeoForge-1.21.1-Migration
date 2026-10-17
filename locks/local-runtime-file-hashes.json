@@ -1,5 +1,5 @@
 {
-  "created_at": "2026-10-17T17:17:24.007860+00:00",
+  "created_at": "2026-10-17T17:38:56.957425+00:00",
   "files": [
     {
       "path": "runtime/zulu21.52.203-ca-crac-jdk21.0.12.1-win_x64/bin/api-ms-win-core-console-l1-1-0.dll",
@@ -3498,8 +3498,8 @@
     },
     {
       "path": "mods/gtnh-migration-compat-0.1.0.jar",
-      "bytes": 27056,
-      "sha256": "43302d0b7a699dd199de537c0c73cb2e6d8554d5486c24ea2834886cfb14915e"
+      "bytes": 51417,
+      "sha256": "f906ba61566d77132e03d9e2f092419fab3cae5b6050143159aefb39bf93408c"
     },
     {
       "path": "mods/guideme-21.1.19.jar",
@@ -9778,8 +9778,8 @@
     },
     {
       "path": "resourcepacks/GTNH-2.8.4-Shared-Ore-Assets-1.21.1/assets/gtceu/textures/block/material_sets/fine/ore_small.png",
-      "bytes": 294,
-      "sha256": "8f4a566df5213d0cc3b7e84ae5556bcd05362e7e6f0e58f2c6050275c77a09d1"
+      "bytes": 289,
+      "sha256": "3f9e096782fae5066bdf14b1681ebdbfc24532e012e93592d7c2b9b9f5bc7136"
     },
     {
       "path": "resourcepacks/GTNH-2.8.4-Shared-Ore-Assets-1.21.1/assets/gtceu/textures/block/material_sets/fine/ore_small_layer2.png",
@@ -9788,8 +9788,8 @@
     },
     {
       "path": "resourcepacks/GTNH-2.8.4-Shared-Ore-Assets-1.21.1/assets/gtceu/textures/block/material_sets/flint/ore.png",
-      "bytes": 283,
-      "sha256": "37ba1782ed2090a6000f9ccd0b88e79dc75507561d832b02937bb244f3dea698"
+      "bytes": 274,
+      "sha256": "6cf9e0318b83fd6870c913ae58b89dadba35f252eaaf7d8b6c540c2e70e40d1e"
     },
     {
       "path": "resourcepacks/GTNH-2.8.4-Shared-Ore-Assets-1.21.1/assets/gtceu/textures/block/material_sets/flint/ore_layer2.png",
@@ -9798,8 +9798,8 @@
     },
     {
       "path": "resourcepacks/GTNH-2.8.4-Shared-Ore-Assets-1.21.1/assets/gtceu/textures/block/material_sets/flint/ore_small.png",
-      "bytes": 234,
-      "sha256": "aed2759d206da8ae261cc8ce8fe80e96eb1ba7e803fa1933d0b47bab6dab92ce"
+      "bytes": 230,
+      "sha256": "b8ef9701ea6f7cd0d47ebaddf20b4b0866a1006a0735d75c7fb9eb79346120da"
     },
     {
       "path": "resourcepacks/GTNH-2.8.4-Shared-Ore-Assets-1.21.1/assets/gtceu/textures/block/material_sets/flint/ore_small_layer2.png",
@@ -9888,8 +9888,8 @@
     },
     {
       "path": "resourcepacks/GTNH-2.8.4-Shared-Ore-Assets-1.21.1/assets/gtceu/textures/block/material_sets/lapis/ore.png",
-      "bytes": 283,
-      "sha256": "37ba1782ed2090a6000f9ccd0b88e79dc75507561d832b02937bb244f3dea698"
+      "bytes": 274,
+      "sha256": "6cf9e0318b83fd6870c913ae58b89dadba35f252eaaf7d8b6c540c2e70e40d1e"
     },
     {
       "path": "resourcepacks/GTNH-2.8.4-Shared-Ore-Assets-1.21.1/assets/gtceu/textures/block/material_sets/lapis/ore_layer2.png",
@@ -9918,8 +9918,8 @@
     },
     {
       "path": "resourcepacks/GTNH-2.8.4-Shared-Ore-Assets-1.21.1/assets/gtceu/textures/block/material_sets/lignite/ore_small.png",
-      "bytes": 294,
-      "sha256": "8f4a566df5213d0cc3b7e84ae5556bcd05362e7e6f0e58f2c6050275c77a09d1"
+      "bytes": 289,
+      "sha256": "3f9e096782fae5066bdf14b1681ebdbfc24532e012e93592d7c2b9b9f5bc7136"
     },
     {
       "path": "resourcepacks/GTNH-2.8.4-Shared-Ore-Assets-1.21.1/assets/gtceu/textures/block/material_sets/lignite/ore_small_layer2.png",
@@ -9998,8 +9998,8 @@
     },
     {
       "path": "resourcepacks/GTNH-2.8.4-Shared-Ore-Assets-1.21.1/assets/gtceu/textures/block/material_sets/quartz/ore_small.png",
-      "bytes": 294,
-      "sha256": "8f4a566df5213d0cc3b7e84ae5556bcd05362e7e6f0e58f2c6050275c77a09d1"
+      "bytes": 289,
+      "sha256": "3f9e096782fae5066bdf14b1681ebdbfc24532e012e93592d7c2b9b9f5bc7136"
     },
     {
       "path": "resourcepacks/GTNH-2.8.4-Shared-Ore-Assets-1.21.1/assets/gtceu/textures/block/material_sets/quartz/ore_small_layer2.png",
@@ -10038,8 +10038,8 @@
     },
     {
       "path": "resourcepacks/GTNH-2.8.4-Shared-Ore-Assets-1.21.1/assets/gtceu/textures/block/material_sets/sand/ore_small.png",
-      "bytes": 294,
-      "sha256": "8f4a566df5213d0cc3b7e84ae5556bcd05362e7e6f0e58f2c6050275c77a09d1"
+      "bytes": 289,
+      "sha256": "3f9e096782fae5066bdf14b1681ebdbfc24532e012e93592d7c2b9b9f5bc7136"
     },
     {
       "path": "resourcepacks/GTNH-2.8.4-Shared-Ore-Assets-1.21.1/assets/gtceu/textures/block/material_sets/sand/ore_small_layer2.png",
@@ -10068,13 +10068,13 @@
     },
     {
       "path": "resourcepacks/GTNH-2.8.4-Shared-Ore-Assets-1.21.1/pack.mcmeta",
-      "bytes": 176,
-      "sha256": "47c304b6a5db00c0b6305085b9cb0bade47e930d284f3f21344e0bdeddf56013"
+      "bytes": 175,
+      "sha256": "e6e741e10134056b07436d00ca903d13b83d26d10b038659fa1dc7d1862bada5"
     },
     {
       "path": "resourcepacks/GTNH-2.8.4-Shared-Ore-Assets-1.21.1/README.txt",
-      "bytes": 775,
-      "sha256": "8630070a23a28a1d5a8c8b52148d96b9f68b56b45c6366c112aec23aa8d11212"
+      "bytes": 901,
+      "sha256": "851b3dbbfcf7be4122a6f367d754d0f51d6a4199144d45cc26340536f0ddc1b0"
     },
     {
       "path": "resourcepacks/GTNH-Original-Alarm-Audio-1.21.1/assets/gtnh_migration/sounds/alarms/alarm_sg1.ogg",

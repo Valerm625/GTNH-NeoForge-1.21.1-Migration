@@ -1,0 +1,49 @@
+{
+  "test": "source_differential_legacy_quest_retrieval_planner",
+  "passed": true,
+  "assertions": 9707,
+  "source_comparisons": 2412,
+  "source_quest_detect_executed": true,
+  "source_database_order_executed": true,
+  "independent_input_snapshots_verified": true,
+  "atomic_calculation_only": true,
+  "runtime_integrated": false,
+  "export_enabled": false,
+  "game_runtime_verified": false,
+  "source_commit": "815d738923d46e9083f988421e5329193e2e5940",
+  "upstream_source_sha256": {
+    "bq_standard/tasks/TaskRetrieval.java": "8ac57331877e643a95c5c5d39966cce8a3d854d27319df80bee8514d19a22f71",
+    "betterquesting/questing/QuestInstance.java": "723ed08931294710f7e287eccc7f6c042c9ff4bf5dd500183522758b4726bffb",
+    "betterquesting/questing/tasks/TaskStorage.java": "2d72c4226afa772240cd883d386b0eac5c6770e6679d725e5282f4368a38b8ac",
+    "betterquesting/api2/storage/SimpleDatabase.java": "7a9addf9389a651325d5e27c0004f182d3548389e36ec96b6131110569ceda89",
+    "betterquesting/api2/storage/LookupLogic.java": "220c6021ac4edb2c6259b3650873acd3dbc3f5e458fcc97cc1df6ae3882cf60c"
+  },
+  "source_sha256": {
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalEngine.java": "974899a867d5f9b2b18295e02c3fc56827064bdfa19c863158ea4b06b0a45758",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestRetrievalPlanner.java": "bf680e9df76a8844bfed402feaf4b535624baf6644ec3de4093f0aab7b68c0e2",
+    "work/migration/LegacyQuestRetrievalPlannerCheck.java": "177c3c72c9c326304c33c083384a37702283cf561413c5468ee5516d05635938",
+    "work/migration/test_legacy_quest_retrieval_planner.py": "ad7cdea188a80cbc12a726086ac43636396d39a636567d2ae41fca332fbf6b2e",
+    "work/migration/test_legacy_retrieval_engine.py": "98ebede8e42c99ee285c76202f20a330b3c8d674cbedbb4b0b6c49be56fdbfd0"
+  },
+  "oracle_sha256": {
+    "BqRetrievalReference.java": "16ce13e768f6b1fbad36f5352cedb6f7b3dff0fdf2620553ba594db65abcf1b7",
+    "BqQuestRetrievalReference.java": "264851eceed3f5ec56260484655aac07a11a14fd0a55d50796e8aa6124102367"
+  },
+  "source_methods_extracted_unchanged": [
+    "QuestInstance.detect",
+    "SimpleDatabase.getEntries",
+    "LookupLogic.getRefCache",
+    "LookupLogic.computeRefCache",
+    "TaskRetrieval.detect",
+    "TaskRetrieval.checkAndComplete",
+    "TaskRetrieval.onInventoryChange",
+    "TaskRetrieval.Detector"
+  ],
+  "limitations": [
+    "Only AND, nonrepeat, nonsimultaneous, nonglobal, nonignored retrieval tasks; unsupported declarations block the whole plan.",
+    "Gate values, player/quest/cache classes and AND property logic are deterministic fixtures, not runtime authorization evidence.",
+    "The original task loop and database ordering run; Minecraft inventories, NBT/item predicates and task storage are fixture adapters.",
+    "K must be immutable or a deep snapshot owned by the caller; predicates must be pure.",
+    "No persistence, durable transaction, FTB callback, actual inventory write, quest completion or reward is implemented."
+  ]
+}
