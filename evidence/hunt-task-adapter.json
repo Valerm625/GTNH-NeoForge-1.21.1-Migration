@@ -1,0 +1,17 @@
+{
+  "passed": true,
+  "hunt_candidate_source_ids": [
+    "0:10",
+    "0:42",
+    "0:456"
+  ],
+  "hunt_candidate_count": 3,
+  "entity_name_mapping": {
+    "Cow": "minecraft:cow",
+    "Pig": "minecraft:pig",
+    "WitherBoss": "minecraft:wither"
+  },
+  "nbt_damage_custom_name_rejected": true,
+  "runtime_game_verified": false,
+  "full_quest_parity": false
+}

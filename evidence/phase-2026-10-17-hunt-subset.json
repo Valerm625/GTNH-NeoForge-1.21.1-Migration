@@ -1,0 +1,52 @@
+{
+  "phase": "conservative-hunt-kill-subset",
+  "checked_at": "2026-10-17T13:26:20.911502+08:00",
+  "before": {
+    "structurally_supported_candidates": 44,
+    "hunt_task_candidates": 0,
+    "dependency_closed_active_quests": 2
+  },
+  "after": {
+    "structurally_supported_candidates": 47,
+    "hunt_task_candidates": 3,
+    "dependency_closed_active_quests": 2,
+    "hunt_candidate_source_ids": [
+      "0:10",
+      "0:42",
+      "0:456"
+    ]
+  },
+  "evidence": {
+    "passed": true,
+    "hunt_candidate_source_ids": [
+      "0:10",
+      "0:42",
+      "0:456"
+    ],
+    "hunt_candidate_count": 3,
+    "entity_name_mapping": {
+      "Cow": "minecraft:cow",
+      "Pig": "minecraft:pig",
+      "WitherBoss": "minecraft:wither"
+    },
+    "nbt_damage_custom_name_rejected": true,
+    "runtime_game_verified": false,
+    "full_quest_parity": false
+  },
+  "tests": [
+    "verify_hunt_adapter_contract.py",
+    "verify_choice_reward_contract.py",
+    "verify_crafting_adapter_contract.py",
+    "test_quest_export_java.py",
+    "verify_quest_checkpoint.py",
+    "verify_migration.py",
+    "full rebuild_current_phase.py"
+  ],
+  "runtime_game_verified": false,
+  "full_quest_parity": false,
+  "notes": [
+    "Only Pig, Cow and WitherBoss were mapped to explicit modern entity IDs with legacy NBT ignored.",
+    "Modded entities, entity NBT, damage types and custom names remain blocked.",
+    "This did not increase dependency-closed active quests because remaining prerequisites are still blocked."
+  ]
+}

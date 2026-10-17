@@ -1,7 +1,7 @@
 {
   "engine": "FTB Quests 2101.1.36",
   "source_quests": 3814,
-  "structurally_supported_candidates": 44,
+  "structurally_supported_candidates": 47,
   "dependency_closed_active_quests": 2,
   "active_quest_ids": [
     "0:0",

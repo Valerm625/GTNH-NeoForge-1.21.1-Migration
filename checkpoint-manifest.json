@@ -1,5 +1,5 @@
 {
-  "created_at": "2026-10-17T13:14:47.228025+08:00",
+  "created_at": "2026-10-17T13:26:21.296911+08:00",
   "scope": "source-only public checkpoint; third-party game inputs excluded",
   "files": [
     {
@@ -20,7 +20,7 @@
     {
       "path": "docs/migration-matrix.md",
       "bytes": 2102,
-      "sha256": "c07e15a4eda5cfb4abf6ee694b5afd9a180e6e85e5745c57cd98188174a693c4"
+      "sha256": "23a9df5a9c1e710ae56f1a69a411e73f6df3cc44367c526a182d7e103fd39777"
     },
     {
       "path": "docs/upstream-license-notices/BetterQuesting-LICENSE",
@@ -44,8 +44,8 @@
     },
     {
       "path": "evidence/choice-reward-adapter.json",
-      "bytes": 269,
-      "sha256": "b39a26d89d74fb81f3e547620aa8feaca70b65367c33822343fae08870f7b68a"
+      "bytes": 282,
+      "sha256": "fcb2e6cee8cc7ef2e0cdf13ec7a628939a6756fba8b3f67c59b457da3f722a27"
     },
     {
       "path": "evidence/coin-recipes-js-contract-test.json",
@@ -71,6 +71,11 @@
       "path": "evidence/fuel-script-contract.json",
       "bytes": 281,
       "sha256": "05b9cd3aa39d70fa6c2a75c9973a65693d58128aea3b0c5e20622c685a13f629"
+    },
+    {
+      "path": "evidence/hunt-task-adapter.json",
+      "bytes": 371,
+      "sha256": "2c9b9e4e8fa7b647ae8c1c09e142505cdeb74b0ac79acb65b8a38476ed01f04b"
     },
     {
       "path": "evidence/independent-source-check.json",
@@ -113,6 +118,11 @@
       "sha256": "ddf10712b8657e87570521a2b2dcd3e5b62c2bb16be09b771adfcc322c70f08b"
     },
     {
+      "path": "evidence/phase-2026-10-17-hunt-subset.json",
+      "bytes": 1555,
+      "sha256": "81893e40a0dfac7558a8848d59d77e2ec2ccdb6a4a9049913ec5b53a5a973b2e"
+    },
+    {
       "path": "evidence/phase-2026-10-17-vanilla-identity.json",
       "bytes": 2034,
       "sha256": "4a2e52eda44a34bcf80198daf8cc5ede4276486719042e8505f83cf9a37ee056"
@@ -120,7 +130,7 @@
     {
       "path": "evidence/quest-export-summary.json",
       "bytes": 1474,
-      "sha256": "406f8117710b7491230a68371b495de2ff0f1c08511f621db5e416acaa5008a3"
+      "sha256": "c6fee64277ae5030248e937f120fd4f8e78c4ab0af146c147412bac410b5187c"
     },
     {
       "path": "evidence/quests/checkpoint-verification.json",
@@ -154,13 +164,13 @@
     },
     {
       "path": "evidence/validation-state.json",
-      "bytes": 1803,
-      "sha256": "e060f1ff7bbf2357fa8c43399241425309bee7cebd804d1b25e04eb0318a6e99"
+      "bytes": 1873,
+      "sha256": "e91432953c43eeb342f8ed668432216d6df5a3e456ad5e8fe037c346602226de"
     },
     {
       "path": "evidence/validation-summary.json",
       "bytes": 5199,
-      "sha256": "9559068d3b531b4b5f1cb84feb5377024eb30881535ebb9dad9cb18c7095821a"
+      "sha256": "4ae47decafe4911343ccb5ddf166a8a522d33ed347eecbd6c6daa7fe0b99057a"
     },
     {
       "path": "evidence/vanilla-identity-mapping.json",
@@ -239,8 +249,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 2021,
-      "sha256": "55c84b6c24fee45c61e05ecba1f01daf57012651d65d43f2f2367448bed4036b"
+      "bytes": 2170,
+      "sha256": "7529d6fa0ae209582e7afe0b01c49030314e8e114db097423c246e06e8c638e1"
     },
     {
       "path": "requirements.txt",
@@ -254,8 +264,8 @@
     },
     {
       "path": "STATUS.zh-CN.md",
-      "bytes": 9428,
-      "sha256": "40f31a6236d4990ba972737a6f7e41edcb5246727dbf6192dd4ed78ca894749d"
+      "bytes": 9466,
+      "sha256": "994a2a5495a910252e198a576ea0a4e52b9f61627ff83c3ff80f50c809444c40"
     },
     {
       "path": "work/compat-mod/src/main/java/org/gtnhmigration/compat/EnderTankCapacityMixin.java",
@@ -374,8 +384,8 @@
     },
     {
       "path": "work/migration/export_supported_quests.py",
-      "bytes": 15785,
-      "sha256": "25bcc6daf73e695de2be48d2a5382385057b1d5a195feaa38a615b648bd3d68c"
+      "bytes": 16797,
+      "sha256": "222be4fc6a3ad7c3f4585214cb357d0f4e183dd08eb6cf79351a67428f40801b"
     },
     {
       "path": "work/migration/generate_material_runtime_audit.py",
@@ -494,8 +504,8 @@
     },
     {
       "path": "work/migration/rebuild_current_phase.py",
-      "bytes": 1337,
-      "sha256": "85565a3545a3d90fdc58c8d3e0e109f731680423b53c5cf3440216f71b5a0e05"
+      "bytes": 1371,
+      "sha256": "c9049b010556b1a8df0ac382b673849c94c1be5d9fdbbe0c66daedcd8a9da5d9"
     },
     {
       "path": "work/migration/recover_java.py",
@@ -603,6 +613,11 @@
       "sha256": "93efd2edc8821742108c023d957500aaeb1c8bc2f2d10ee3ea06812cec7c3538"
     },
     {
+      "path": "work/migration/verify_hunt_adapter_contract.py",
+      "bytes": 2028,
+      "sha256": "3a804468cb891fe46bae540453f1256fe1a648cabb2105d692ec90aa700f38b7"
+    },
+    {
       "path": "work/migration/verify_long_fuels.py",
       "bytes": 3787,
       "sha256": "4aa7be0a897e6731907ef70f04191d856422562bc1b715a8ec754f73610c7411"
@@ -649,8 +664,8 @@
     },
     {
       "path": "work/migration/write_quest_checkpoint_status.py",
-      "bytes": 11399,
-      "sha256": "d10ac24e96be2569874c44a42239a42c3f1f64643e22c73ab81bd0ba139f2876"
+      "bytes": 11613,
+      "sha256": "9cff58eee62da3483e4f83d9a80315541a03c0caf2cf4b676499f7defd90911f"
     },
     {
       "path": "work/migration/write_status.py",
@@ -658,7 +673,7 @@
       "sha256": "1ddca3d85fc05ee3e8502a504f99bc2a6d2e7f5a43c255e97000e5c5d9577018"
     }
   ],
-  "file_count": 131,
+  "file_count": 134,
   "source_archive_inputs_included": false,
   "runtime_binaries_included": false,
   "full_parity": false,

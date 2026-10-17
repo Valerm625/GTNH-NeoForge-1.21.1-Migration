@@ -34,6 +34,8 @@
   "vanilla_identity_occurrences_covered": 4905,
   "crafting_task_candidates": 2,
   "crafting_task_runtime_verified": false,
-  "choice_reward_candidates": 1,
-  "choice_reward_runtime_verified": false
+  "choice_reward_candidates": 2,
+  "choice_reward_runtime_verified": false,
+  "hunt_task_candidates": 3,
+  "hunt_task_runtime_verified": false
 }
