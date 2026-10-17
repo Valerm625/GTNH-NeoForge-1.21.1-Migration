@@ -20,6 +20,12 @@
 !/work/migration/*.py
 !/work/migration/*.cjs
 !/work/migration/*.java
+# Local third-party inspection inputs restored from the private checkpoint.
+/work/migration/GTRecipeSchema.java
+/work/migration/MaterialIconSet.java
+/work/migration/MaterialIconType.java
+/work/migration/OreBlockRenderer.java
+/work/migration/OreProperty.java
 /work/compat-mod/*
 !/work/compat-mod/src/
 **/__pycache__/

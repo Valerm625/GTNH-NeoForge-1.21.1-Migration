@@ -11,5 +11,6 @@
   "capacity_mixin_transformed_verified": false,
   "quest_mixin_transformed_verified": false,
   "client_rendering_verified": false,
-  "returncode": 0
+  "returncode": 0,
+  "historical_checkpoint_evidence": true
 }

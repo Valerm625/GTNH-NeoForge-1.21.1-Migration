@@ -6,12 +6,44 @@
     "0:456"
   ],
   "hunt_candidate_count": 3,
-  "entity_name_mapping": {
-    "Cow": "minecraft:cow",
-    "Pig": "minecraft:pig",
-    "WitherBoss": "minecraft:wither"
+  "candidate_task_predicates_checked": 3,
+  "source_hunt_tasks": 104,
+  "source_subtype_tasks": 103,
+  "candidate_subtype_tasks": 2,
+  "deliberate_predicate_mutations_rejected": [
+    "subtype",
+    "entity",
+    "count",
+    "name",
+    "nbt",
+    "entity_tag",
+    "candidate_row_removed",
+    "candidate_and_source_id_removed"
+  ],
+  "independent_expected_candidate_source_ids": [
+    "0:10",
+    "0:42",
+    "0:456"
+  ],
+  "independent_expected_candidate_task_count": 3,
+  "candidate_source_quest_sha256": {
+    "0:10": "fa6c1b2604e358942fecc2b47d910537875ca9088ecc283a67d9a59c776fc139",
+    "0:456": "e6556c4a267e1bde83949d2e3a93d5ad53fed963557db2188990de3ded14e28c",
+    "0:42": "cadcc2de303f04719db7e2021ae6e61b5649780d8d69d96b3c90019c5f69aced"
   },
-  "nbt_damage_custom_name_rejected": true,
+  "export_manifest_sha256": "688d4abd7aa1eeffe5d27680f0a8f9da5652a976eab0efc81ce69c3c95814690",
+  "verifier_sha256": "8dcf6ec98717afc21d831c641090803935abe0926fa864d4b0d85f6453e1d79c",
+  "source_sha256": "96669f3e782ca8ce3a92d1225e0adddf5519595ad193e44ac52035c67235be41",
+  "target_source_sha256": "ff4345ea224da2889fab822050619448e71da420eebff206218c2bfec9505b1f",
+  "entity_name_mapping": {
+    "Pig": "minecraft:pig",
+    "Cow": "minecraft:cow",
+    "WitherBoss": "minecraft:wither",
+    "EnderDragon": "minecraft:ender_dragon"
+  },
+  "ignored_nbt_remains_ignored": true,
+  "unsupported_nbt_and_damage_predicates_rejected": true,
+  "actual_mixin_transformation_verified": false,
   "runtime_game_verified": false,
   "full_quest_parity": false
 }

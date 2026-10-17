@@ -26,6 +26,6 @@
     }
   ],
   "scope": "Regression harness sensitivity, not Minecraft runtime",
-  "fixtures": "<LOCAL_WORKSPACE>\\work\\migration\\test-fixtures\\eb0b7e3d-9192-40d3-909f-f2f56373ae96",
+  "fixtures": "<LOCAL_WORKSPACE>\\work\\migration\\test-fixtures\\0d610db4-7d45-48d5-aa8c-3ecd3b009b96",
   "production_inputs_mutated": false
 }

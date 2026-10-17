@@ -24,9 +24,10 @@ public class QuestAdapterShapeCheck {
   require(Integer.valueOf(1).equals(v.get("require"))&&Boolean.FALSE.equals(v.get("remap"))&&Boolean.TRUE.equals(v.get("cancellable")),"Unsafe injection flags");
   require(List.of("submitTask").equals(v.get("method")),"Unexpected target method");
   AnnotationNode at=(AnnotationNode)((List<?>)v.get("at")).getFirst();require("HEAD".equals(params(at).get("value")),"Not HEAD injection");
-  boolean marker=false,offhand=false;
-  for(AbstractInsnNode i:handler.instructions){if(i instanceof LdcInsnNode l && "gtnh_legacy_single_retrieval".equals(l.cst))marker=true;if(i instanceof FieldInsnNode f && "offhand".equals(f.name))offhand=true;}
+  boolean marker=false,offhand=false;int durabilityMatchers=0;
+  for(AbstractInsnNode i:handler.instructions){if(i instanceof LdcInsnNode l && "gtnh_legacy_single_retrieval".equals(l.cst))marker=true;if(i instanceof FieldInsnNode f && "offhand".equals(f.name))offhand=true;if(i instanceof MethodInsnNode m && m.owner.equals("org/gtnhmigration/compat/LegacyRetrievalStackMatcher") && m.name.equals("matches"))durabilityMatchers++;}
   require(marker&&!offhand,"Missing opt-in guard or unexpected offhand scan");
-  System.out.println("{\"test\":\"compiled_quest_adapter_target_shape\",\"passed\":true,\"shadow_methods\":5,\"actual_mixin_transformation_tested\":false,\"game_runtime_verified\":false}");
+  require(durabilityMatchers==2,"Main inventory and armor must both preserve legacy durability semantics");
+  System.out.println("{\"test\":\"compiled_quest_adapter_target_shape\",\"passed\":true,\"shadow_methods\":5,\"legacy_durability_matcher_calls\":2,\"actual_mixin_transformation_tested\":false,\"game_runtime_verified\":false}");
  }
 }

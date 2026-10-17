@@ -8,6 +8,10 @@
   "source_event_policy": "craft and smelt only; statistics and anvil rejected",
   "all_required_items_exactly_mapped": true,
   "ore_and_nbt_predicates_rejected": true,
+  "empty_legacy_nbt_uses_strict_components": true,
+  "partial_match_does_not_admit_extra_components": true,
+  "durability_ignored_by_scoped_matcher": true,
+  "packaged_crafting_mixin_present": true,
   "runtime_game_verified": false,
   "full_quest_parity": false
 }

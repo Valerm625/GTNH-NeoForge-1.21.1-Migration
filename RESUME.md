@@ -17,11 +17,21 @@
 1. 用户已明确要求继续；恢复时先检查仓库检查点与本地差异，不要覆盖新的手工变更。
 2. 恢复上述本地依赖和目录，安装 `requirements.txt` 中的 Pillow，确认 Python、Node.js 和 JDK21 可用。不改系统 Java、不接受 EULA。
 3. 在原项目根目录运行 `python -u work/migration/rebuild_current_phase.py`。此入口重建当前支持范围，并保留功能不完整标志。
-4. 复核 `verify_quest_checkpoint.py`、Java 三组任务测试、依赖/配方/材质源一致性与运行输入清单。记录是静态、stub、实际解析器还是实际游戏测试，不能混淆。
-5. 仅在 EULA 未接受状态运行 `loader_probe.py` 的受限探测。任何真正世界/客户端测试需要用户自行处理条款、并另行记录真实结果。
-6. 当前检查点已新增显式原版身份映射。下一阶段应先验证试导出任务和适配器实机行为/队伍语义，再继续扩大任务与内容覆盖；不得为了通过校验删除任务、放宽科技门槛或用空实现冒充等价。
+4. 复核 `verify_quest_checkpoint.py`、Java 任务解析、匹配器与适配器测试、依赖/配方/材质源一致性与运行输入清单。记录是静态、stub、实际解析器还是实际游戏测试，不能混淆。
+5. 重建入口包含 `loader_probe.py`，仅在 EULA 未接受状态进行受限探测。任何真正世界/客户端测试需要用户自行处理条款、并另行记录真实结果。
+6. 当前检查点包含显式原版身份映射、检索/合成/狩猎匹配修复、多物品检索纯引擎和真实 Sponge 隔离转换测试。下一阶段继续实现逐 UUID 进度持久化、源任务顺序和提交协议，补齐 logWood 精确成员及队伍生命周期，再接入经过验证的任务和游戏测试；不得为了通过校验删除任务、放宽科技门槛或用空实现冒充等价。
 
 `port_currency.py`、`port_coin_recipes.py`、旧 `write_*phase_status.py` 等历史入口部分已显式禁用；不要绕过它们的退休保护。`document_reference.py` 等历史 intake 步骤也不是当前状态写入入口，乱序执行可能使元数据倒退。
+
+## 从保留的本地工作区恢复
+
+新增 `work/migration/restore_local_checkpoint.py --source-root <旧工作区根目录>`，用于将保留的本地输入恢复到当前克隆。可先加 `--check-only` 进行只读检查。此入口不下载、不执行旧归档脚本、不接受 EULA，也不修改旧工作区。它按当前 `locks/` 检查平台、五份精确源码归档及对应解压树、上游模组和运行输入；master 与 2.8.4 解压内容另按历史逐文件清单核验，不能把该清单校验说成重新验证了原始 ZIP。
+
+复制仅创建缺失文件；目标已存在但内容不一致时停止并保留目标，已跟踪源码始终保留。`runtime.json` 在新位置生成，仅记录历史 Java 探测为来源证据。恢复报告位于 `work/migration/local-checkpoint-restore.json`，其中导入的历史测试结果不代表本次构建或游戏验证成功。
+
+本地生成的 `gtnh-migration-compat-0.1.0.jar` 不从旧区复制，也不修改公开锁期望值；该派生产物需要重新编译。恢复后先确认本地 Java 可运行，再执行 `rebuild_current_phase.py`。当前重建入口已包含适配器生成、编译、新的 `loader_probe.py` 及匹配器检查，无需手动重复这些步骤。`loader_probe.py` 仍只允许 EULA 未接受状态下的受限加载探测。
+
+以下五个 `work/migration/` 文件仅是历史第三方本地取证输入，并非项目自编源码：`GTRecipeSchema.java`、`MaterialIconSet.java`、`MaterialIconType.java`、`OreBlockRenderer.java`、`OreProperty.java`。它们可在本地恢复使用（其中 `port_resources.py` 读取 `MaterialIconSet.java`），已按精确路径加入 `.gitignore`，不得因恢复而混入公开源码检查点。项目自编 Java 适配器和测试仍正常跟踪。
 
 ## 上传范围
 

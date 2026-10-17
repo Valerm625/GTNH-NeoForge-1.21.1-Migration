@@ -1,0 +1,8 @@
+{
+  "test": "compiled_legacy_crafting_mixin_shape",
+  "passed": true,
+  "unmarked_early_return": true,
+  "recursive_test_call": false,
+  "actual_mixin_transformation_tested": false,
+  "game_runtime_verified": false
+}

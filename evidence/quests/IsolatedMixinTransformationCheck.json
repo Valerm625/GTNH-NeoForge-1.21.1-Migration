@@ -1,0 +1,46 @@
+{
+  "test": "isolated_real_sponge_mixin_transformation",
+  "passed": true,
+  "assertions": 27,
+  "targets_transformed": 4,
+  "injections_verified": 5,
+  "asm_basic_dataflow_methods": 110,
+  "actual_sponge_transformer_executed": true,
+  "isolated_mixin_transformation_verified": true,
+  "neoforge_transform_chain_verified": false,
+  "game_runtime_verified": false,
+  "negative_controls": {
+    "missing_hunt_target": {
+      "passed": true,
+      "control": "missing_hunt_target",
+      "mixin_rejected_mutated_target": true
+    },
+    "changed_capacity_constant": {
+      "passed": true,
+      "control": "changed_capacity_constant",
+      "mixin_rejected_mutated_target": true
+    },
+    "missing_registration": {
+      "passed": true,
+      "control": "missing_registration",
+      "missing_injection_detected": true
+    }
+  },
+  "compat_jar_sha256": "43302d0b7a699dd199de537c0c73cb2e6d8554d5486c24ea2834886cfb14915e",
+  "source_sha256": {
+    "work/migration/OfflineMixinService.java": "a7ea57ef2ea959f69885cca79076690724e82a17c768df2d4521e23fddc897df",
+    "work/migration/OfflineProperties.java": "10ad2622af4698009243667fac346ad23621d38f86c583aebcb99593059f9f3d",
+    "work/migration/IsolatedMixinTransformationCheck.java": "8fb7c712b3810683e326934d48241b33947db7058f3014a22e2d4a8f7dd9f7ed",
+    "work/migration/test_isolated_mixin_transformation.py": "4e4d4cb8c47cf2ee6aba141243f1fefa4879537a250680805e2bb359561773db"
+  },
+  "dependency_sha256": {
+    "sponge-mixin-0.16.4+mixin.0.8.7.jar": "921a2ca066d82d15d2939efd5eb22754e308db74b1e4277130a76625c3638dfd",
+    "ftb-quests-neoforge-2101.1.36.jar": "6a39982c4b3afc00b1e788041a4f0d394e1659e3b3a6e5d078cd790bc36d0018",
+    "EnderStorage-1.21.1-2.13.0.191.jar": "f52f23f9df8925c7aec26154c2f1816cc76422c67a4fa4e30fa8b80b7a854202"
+  },
+  "limitations": [
+    "Uses a dedicated test Mixin service, not NeoForge ModLauncher.",
+    "No access transformers, other mods' Mixins, class-definition execution, game event or world is exercised.",
+    "ASM BasicVerifier checks transformed method dataflow, not full JVM linkage or gameplay behavior."
+  ]
+}

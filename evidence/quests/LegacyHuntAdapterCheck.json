@@ -1,0 +1,27 @@
+{
+  "passed": true,
+  "checks": 62,
+  "legacy_and_modern_mooshroom_ancestry_verified": true,
+  "real_modern_class_policy_executed": true,
+  "ordinary_ftb_policy_not_overridden": true,
+  "invalid_markers_and_filters_rejected": true,
+  "actual_jar_mixin_registration_verified": true,
+  "missing_registration_mutation_rejected": true,
+  "wrong_class_mapping_mutation_rejected": true,
+  "actual_mixin_transformation_verified": false,
+  "game_runtime_verified": false,
+  "compat_jar_sha256": "43302d0b7a699dd199de537c0c73cb2e6d8554d5486c24ea2834886cfb14915e",
+  "source_sha256": {
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyHuntTaskMixin.java": "62e74aa7175a44471a99fefb5ef09374c51fcec548238a4c49c84aafaafb9a93",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyHuntEntityMatcher.java": "1435b87ae0bf98e2a44d31eae9262041cd9d610214d6412839496ada8b5c48d8",
+    "work/migration/LegacyHuntAdapterCheck.java": "0fae09131e096daa2bd171ef300746ef8e49679a5036d51a2f0cb3dba3e44a17",
+    "work/migration/test_hunt_adapter_java.py": "5a7be80891f449e135b5f8f2bf28f94dd644dd11035a3996099c9b94b84a94d3"
+  },
+  "dependency_sha256": {
+    "minecraft-server-1.7.10.jar": "c70870f00c4024d829e154f7e5f4e885b02dd87991726a3308d81f513972f3fc",
+    "joined.srg": "d246eb94eca9ec4a2148e900ed55ab2247440fcec149a47a4091709ddd6bfcaa",
+    "server-1.21.1-20240808.144430-srg.jar": "26ca9c40d7e1681190b428583c38816852218e78df3f8bdb60a59a78503aec71",
+    "ftb-quests-neoforge-2101.1.36.jar": "6a39982c4b3afc00b1e788041a4f0d394e1659e3b3a6e5d078cd790bc36d0018"
+  },
+  "isolated_dependency_root": false
+}

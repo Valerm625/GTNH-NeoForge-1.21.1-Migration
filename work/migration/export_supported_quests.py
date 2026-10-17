@@ -2,6 +2,7 @@
 from pathlib import Path
 import json,re,hashlib,collections,shutil
 from legacy_vanilla_items import resolve_legacy_vanilla
+from legacy_hunt_tasks import convert_hunt
 R=Path(__file__).resolve().parents[2];W=R/'work';O=R/'outputs/GTNH-NeoForge-1.21.1-Migration-Foundation';Q=W/'source/GT-New-Horizons-Modpack-master/config/betterquesting/DefaultQuests';D=O/'docs/quest-migration/ftb-export';D.mkdir(parents=True,exist_ok=True);DEST=O/'config/ftbquests/quests'
 
 refs=json.loads((O/'docs/quest-migration/item-registry-references.json').read_text(encoding='utf-8'));registry={(x['identity']['id'],x['identity']['damage']):x['target_id'] for x in refs if x.get('target_id') and not x['identity']['tag'] and not x['identity']['ore_dict']}
@@ -83,14 +84,7 @@ for qid,src in sources.items():
    tid=new_id('task',qid+'/'+key);typ=t['taskID:8']
    if typ=='bq_standard:checkbox':tasks.append({'id':tid,'type':'checkmark'});continue
    if typ=='bq_standard:hunt':
-    # Only exact vanilla living-entity IDs with ignored legacy NBT are admitted.
-    # Modded entity names, damage-type restrictions and custom NBT need a
-    # registry/entity-component adapter and remain blocked.
-    entities={'Pig':'minecraft:pig','Cow':'minecraft:cow','WitherBoss':'minecraft:wither','EnderDragon':'minecraft:ender_dragon'}
-    target=t.get('target:8','')
-    if target not in entities or not t.get('ignoreNBT:1',0) or t.get('damageType:8','') or t.get('targetNBT:10',{}).get('CustomName:8',''):
-     raise ValueError('Hunt task requires unsupported entity/NBT/damage semantics')
-    tasks.append({'id':tid,'type':'kill','entity':entities[target],'value':t.get('required:3',1),'custom_name':'','nbt_filter':''})
+    tasks.append(convert_hunt(t,tid))
     continue
    if typ=='bq_standard:location':
     dim_map={-1:'minecraft:the_nether',0:'minecraft:overworld',1:'minecraft:the_end'}
@@ -107,7 +101,10 @@ for qid,src in sources.items():
      raise ValueError('Crafting task allows unsupported statistics/anvil/event semantics')
     req=list(t.get('requiredItems:9',{}).values())
     if not req: raise ValueError('Empty crafting requirement list')
-    component='none' if t.get('ignoreNBT:1',0) else ('fuzzy' if t.get('partialMatch:1',0) else 'strict')
+    # This branch admits no legacy NBT below. BQ rejects any nonempty sample
+    # NBT even when partialMatch=true; FTB fuzzy would accept extra components.
+    # The opt-in crafting matcher separately ignores damageable-item wear.
+    component='none' if t.get('ignoreNBT:1',0) else 'strict'
     for index,required in enumerate(req):
      item,count=stack(required);tasks.append({'id':new_id('task',qid+'/'+key+'/'+str(index)),'type':'item','item':{'id':item,'count':1},'count':count,'consume_items':False,'only_from_crafting':True,'match_components':component,'optional_task':False,'tags':['gtnh_legacy_crafting']})
     continue
@@ -183,6 +180,7 @@ if prior.exists():
    if p.exists():p.unlink()
 for rel,value in files.items():p=DEST/rel;p.parent.mkdir(parents=True,exist_ok=True);p.write_text(snbt(value)+'\n',encoding='utf-8')
 report={'engine':'FTB Quests 2101.1.36','source_quests':len(sources),'structurally_supported_candidates':len(candidates),'crafting_task_candidates':sum(1 for c in candidates.values() for t in c['tasks'] if 'gtnh_legacy_crafting' in t.get('tags',[])),'dimension_location_task_candidates':sum(1 for c in candidates.values() for t in c['tasks'] if t.get('type')=='location'),'dimension_location_candidate_source_ids':sorted(c['_source_id'] for c in candidates.values() if any(t.get('type')=='location' for t in c['tasks'])),'hunt_task_candidates':sum(1 for c in candidates.values() for t in c['tasks'] if t.get('type')=='kill'),'hunt_candidate_source_ids':sorted(c['_source_id'] for c in candidates.values() if any(t.get('type')=='kill' for t in c['tasks'])),'choice_reward_candidates':sum(1 for c in candidates.values() for r in c['rewards'] if r.get('type')=='choice'),'choice_reward_candidate_source_ids':sorted(c['_source_id'] for c in candidates.values() if any(r.get('type')=='choice' for r in c['rewards'])),'crafting_candidate_source_ids':sorted(c['_source_id'] for c in candidates.values() if any('gtnh_legacy_crafting' in t.get('tags',[]) for t in c['tasks'])),'dependency_closed_active_quests':len(exported),'active_quest_ids':sorted(assigned),'chapters':len(chapters),'exported':exported,'files':{k:{'sha256':hashlib.sha256((DEST/k).read_bytes()).hexdigest(),'data':v} for k,v in files.items()},'blocked_quests':[{'source_id':qid,'name':sources[qid]['data']['properties:10']['betterquesting:10'].get('name:8'),'reason':reason} for qid,reason in blocked.items()],'unsupported_not_replaced':True,'original_text_preserved_as_rich_components':True,'active_trial_import':True,'game_runtime_verified':False,'full_quest_parity':False,'limitations':['Only exact single-item non-consuming retrieval plus original checkbox tasks; custom adapter required.','Full party join/leave/history semantics are not equivalent yet.','Original text mentions unported systems; conspicuous preview note added, not removed.','Coordinates scaled from top-left pixel geometry to node centers; visual overlap not yet game-tested.','Theme-specific visual effects/notifications still not ported.']}
+report['hunt_candidate_tasks']=[{'source_id':c['_source_id'],'task':t} for c in candidates.values() for t in c['tasks'] if t.get('type')=='kill']
 prior.write_text(json.dumps(report,ensure_ascii=False,indent=2),encoding='utf-8');(D/'stable-id-map.json').write_text(json.dumps(ids,indent=2),encoding='utf-8')
 # Copy source losslessly for this bounded active surface, not as substitute quests.
 for rec in exported:

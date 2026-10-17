@@ -1,0 +1,19 @@
+{
+  "test": "actual_legacy_retrieval_durability_matcher",
+  "passed": true,
+  "assertions": 440,
+  "vanilla_damageable_items": 68,
+  "actual_vanilla_itemstacks": true,
+  "actual_ftb_item_matcher": true,
+  "crafting_empty_nbt_predicate_verified": true,
+  "absent_and_empty_custom_data_equivalent": true,
+  "nonempty_custom_data_preserved": true,
+  "ordinary_ftb_matching_unchanged": true,
+  "mixin_application_verified": false,
+  "game_runtime_verified": false,
+  "ftb_artifact_sha256": "6a39982c4b3afc00b1e788041a4f0d394e1659e3b3a6e5d078cd790bc36d0018",
+  "adapter_source_sha256": "5a33162382b6b47e64c16c2ff499d9976d4491ad55ad4ee7df843b5d93fe439c",
+  "generator_source_matches": true,
+  "retrieval_and_crafting_mixin_shape_checked": true,
+  "test_environment": "actual vanilla 1.21.1 classes + FTB 2101.1.36 matcher, no world/server startup"
+}

@@ -40,8 +40,8 @@ public abstract class LegacyRetrievalItemTaskMixin {
         Map<UUID,List<Integer>> inventory=new LinkedHashMap<>();
         for (ServerPlayer member:members.values()) {
             List<Integer> counts=new ArrayList<>();
-            for (ItemStack stack:member.getInventory().items) if (!stack.isEmpty() && test(stack)) counts.add(stack.getCount());
-            for (ItemStack stack:member.getInventory().armor) if (!stack.isEmpty() && test(stack)) counts.add(stack.getCount());
+            for (ItemStack stack:member.getInventory().items) if (!stack.isEmpty() && LegacyRetrievalStackMatcher.matches(getItemStack(),stack,this::test)) counts.add(stack.getCount());
+            for (ItemStack stack:member.getInventory().armor) if (!stack.isEmpty() && LegacyRetrievalStackMatcher.matches(getItemStack(),stack,this::test)) counts.add(stack.getCount());
             inventory.put(member.getUUID(),counts);
         }
         long progress=LegacyRetrievalCounter.next(data.getProgress(task),required,inventory);

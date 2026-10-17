@@ -28,7 +28,7 @@
   "runtime_material_registry_audit": "253 generated checks, NOT yet executed",
   "active_modern_quests_runtime_verified": false,
   "remaining_quests_not_exported": 3812,
-  "quest_adapter": "compiled; pure reducer and target-shape tests pass; actual Mixin/game unverified",
+  "quest_adapter": "actual MC/FTB matcher and isolated Sponge Mixin application verified; full NeoForge transformer chain and game unverified",
   "unmapped_quest_stack_identities": 7668,
   "vanilla_identity_mappings_added": 241,
   "vanilla_identity_occurrences_covered": 4905,
@@ -37,5 +37,6 @@
   "choice_reward_candidates": 2,
   "choice_reward_runtime_verified": false,
   "hunt_task_candidates": 3,
-  "hunt_task_runtime_verified": false
+  "hunt_task_runtime_verified": false,
+  "full_feature_parity": false
 }

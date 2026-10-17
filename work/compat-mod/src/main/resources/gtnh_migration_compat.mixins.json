@@ -6,7 +6,9 @@
   "mixins": [
     "EnderTankCapacityMixin",
     "LegacyRetrievalItemTaskMixin",
-    "LegacyDimensionLocationTaskMixin"
+    "LegacyDimensionLocationTaskMixin",
+    "LegacyHuntTaskMixin",
+    "LegacyCraftingItemTaskMixin"
   ],
   "injectors": {
     "defaultRequire": 1

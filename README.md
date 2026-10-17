@@ -1,24 +1,31 @@
-# GTNH → NeoForge 1.21.1 迁移检查点（未完成）
+# GTNH → NeoForge 1.21.1 迁移工程（未完成）
 
-这是非官方迁移工作的**源码与进度检查点**，不是可直接安装游玩的整合包，不代表 GTNH、GregTech CEu、NeoForge 或 FTB 官方支持。
+目标是完整保留 GTNH 的功能、任务、科技门槛、配方、物品行为及资源效果。现代 NeoForge 模组可复用，但同名物品、能启动或有图标都不构成功能等价证明。
 
-截至 2026-10-17，本阶段完成了显式旧版原版物品身份翻译：对照实际 1.21.1 `Items` 类的 1333 个字段，新增 241 个身份、覆盖 4905 次来源出现；累计 720 / 8388 个身份有定义映射，仍有 7668 个未映射。结构上可转换任务候选为 47 个，其中 2 个包含受限 crafting 任务；但依赖闭合的实导出仍为 2 个，3812 个任务未导出。
+2026-10-18 已按用户要求恢复开发。此仓库仍是源码与验证检查点，不是可安装游玩的完整整合包。
 
-## 本阶段证据
+## 本阶段实现
 
-- `work/migration/legacy_vanilla_items.py`：显式同名、重命名和有限 metadata 映射；拒绝模糊匹配。
-- `evidence/vanilla-identity-mapping.json`：现代字段数量、源证据哈希、冲突数量和负例边界。
-- `evidence/vanilla-modern-Items.javap.txt`：本地锁定 Minecraft 1.21.1 server `Items` 类的文本字段证据，不包含游戏二进制。
-- `evidence/phase-2026-10-17-vanilla-identity.json`：身份映射阶段前后覆盖率与测试边界。
-- `evidence/phase-2026-10-17-crafting-subset.json`、`evidence/crafting-task-adapter.json`：受限 crafting 任务候选的源码约束和验证边界。
-- `evidence/phase-2026-10-17-choice-reward.json`、`evidence/choice-reward-adapter.json`：受限 item choice 奖励候选的源码约束和验证边界。
-- `evidence/phase-2026-10-17-hunt-subset.json`、`evidence/hunt-task-adapter.json`：受限实体 hunt/kill 候选的源码约束和验证边界。
-- `evidence/phase-2026-10-17-location-boundary.json`、`evidence/location-task-boundary.json`：location 任务无法安全转换的源码证据和阻塞边界。
+- 从保留的本地工作区按版本锁恢复输入；恢复工具仅创建缺失文件、保留当前源码，记录历史兼容 JAR 与公开锁不一致并要求重新编译。
+- 对两个用户 ZIP 做逐文件及内嵌归档审计。保留 master 与 2.8.4 的任务身份差异、大小写路径问题和资源哈希，不将来源审计计作迁移完成。
+- 检索任务保留旧版可损耗物品的耐久匹配规则，同时继续检查其余组件。
+- 合成任务的无 NBT 子集采用严格组件匹配，修正原先 fuzzy 匹配会额外接受命名物品的问题；忽略 NBT 模式单独保留。
+- 狩猎任务保留精确实体 ID 与子类匹配两种模式，包括牛与蘑菇牛；只作用于显式标记的迁移任务。
+- 新检查覆盖真实 Minecraft/FTB 物品匹配、两代游戏类继承和故意损坏负例。锁定 Sponge Mixin 已在隔离服务中将五个注入应用到四个真实目标类；完整 NeoForge 转换链和游戏运行仍未验证。
+- 多物品检索纯引擎已通过锁定旧版源码算法对照，覆盖槽位预算、进度锁定、离线成员和重复提交；尚未接入游戏事件、存储、网络或任务导出。
 
-本阶段仍未完成完整任务迁移或游戏内验证。
+依赖闭合并实际导出的任务仍为 **2 / 3814**；结构候选为 **47**，物品身份映射仍为 **720 / 8388**。本阶段修复没有冒充新增完整任务覆盖。
 
-## 全局边界
+## 复现与证据
 
-目标仍是完整功能迁移，不是当前检查点的子集。未上传原始 ZIP、Minecraft/模组/JDK 二进制、第三方完整源码、纹理/声音、原任务正文、存档或凭据。没有完整世界启动、实际 Mixin 应用、完整任务初始化或客户端渲染证据；EULA 保持 false。
+先读 [RESUME.md](RESUME.md)。本地恢复与原始 ZIP 审计都有独立入口；完整重建入口是 work/migration/rebuild_current_phase.py，按当前源码重编译后执行新的受限加载探测和验证。
 
-恢复原工作区前先读 `RESUME.md`。本阶段完成后按用户要求暂停开发；恢复后必须重新运行真实验证，而不能把本仓库的文本证据当作完整游戏验证。
+- evidence/source-archive-audit.json：输入 SHA256、版本证据、任务身份差异和资源数量。
+- evidence/phase-2026-10-18-task-semantics.json：当前阶段测试与边界。
+- evidence/quests/：实际物品匹配、任务谓词与编译产物检查。
+- [多物品检索设计](docs/multi-retrieval-design.zh-CN.md)：下一主线任务 0:2 的槽预算、多人进度、按钮顺序与原木矿辞缺口。
+- [STATUS.zh-CN.md](STATUS.zh-CN.md)：累计实现及仍未完成的系统。
+
+以仓库锁定的 master 配置快照为迁移主线，2.8.4 独立保留作参考。master 的 README 与主菜单版本文字不一致，已如实记录；不能使用当前浮动 master 替代输入。
+
+未包含原始 ZIP、第三方完整源码、游戏/JDK/模组二进制、原任务正文、纹理音频、存档或凭据。EULA 未由工程代为接受。完整世界启动、全部任务/多人行为、所有系统与客户端视觉仍未验证；完整迁移目标保持未完成。

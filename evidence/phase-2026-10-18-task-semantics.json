@@ -1,0 +1,287 @@
+{
+  "phase_date_shanghai": "2026-10-18",
+  "phase": "restored checkpoint; retrieval/crafting durability and hunt subtype semantics",
+  "checks": {
+    "IsolatedMixinTransformationCheck": {
+      "test": "isolated_real_sponge_mixin_transformation",
+      "passed": true,
+      "assertions": 27,
+      "targets_transformed": 4,
+      "injections_verified": 5,
+      "asm_basic_dataflow_methods": 110,
+      "actual_sponge_transformer_executed": true,
+      "isolated_mixin_transformation_verified": true,
+      "neoforge_transform_chain_verified": false,
+      "game_runtime_verified": false,
+      "negative_controls": {
+        "missing_hunt_target": {
+          "passed": true,
+          "control": "missing_hunt_target",
+          "mixin_rejected_mutated_target": true
+        },
+        "changed_capacity_constant": {
+          "passed": true,
+          "control": "changed_capacity_constant",
+          "mixin_rejected_mutated_target": true
+        },
+        "missing_registration": {
+          "passed": true,
+          "control": "missing_registration",
+          "missing_injection_detected": true
+        }
+      },
+      "compat_jar_sha256": "43302d0b7a699dd199de537c0c73cb2e6d8554d5486c24ea2834886cfb14915e",
+      "source_sha256": {
+        "work/migration/OfflineMixinService.java": "a7ea57ef2ea959f69885cca79076690724e82a17c768df2d4521e23fddc897df",
+        "work/migration/OfflineProperties.java": "10ad2622af4698009243667fac346ad23621d38f86c583aebcb99593059f9f3d",
+        "work/migration/IsolatedMixinTransformationCheck.java": "8fb7c712b3810683e326934d48241b33947db7058f3014a22e2d4a8f7dd9f7ed",
+        "work/migration/test_isolated_mixin_transformation.py": "4e4d4cb8c47cf2ee6aba141243f1fefa4879537a250680805e2bb359561773db"
+      },
+      "dependency_sha256": {
+        "sponge-mixin-0.16.4+mixin.0.8.7.jar": "921a2ca066d82d15d2939efd5eb22754e308db74b1e4277130a76625c3638dfd",
+        "ftb-quests-neoforge-2101.1.36.jar": "6a39982c4b3afc00b1e788041a4f0d394e1659e3b3a6e5d078cd790bc36d0018",
+        "EnderStorage-1.21.1-2.13.0.191.jar": "f52f23f9df8925c7aec26154c2f1816cc76422c67a4fa4e30fa8b80b7a854202"
+      },
+      "limitations": [
+        "Uses a dedicated test Mixin service, not NeoForge ModLauncher.",
+        "No access transformers, other mods' Mixins, class-definition execution, game event or world is exercised.",
+        "ASM BasicVerifier checks transformed method dataflow, not full JVM linkage or gameplay behavior."
+      ]
+    },
+    "LegacyRetrievalEngineCheck": {
+      "test": "source_differential_legacy_retrieval_engine",
+      "passed": true,
+      "assertions": 9651,
+      "source_comparisons": 9618,
+      "source_algorithm_executed": true,
+      "predicate_fixture": true,
+      "runtime_integrated": false,
+      "export_enabled": false,
+      "game_runtime_verified": false,
+      "source_commit": "815d738923d46e9083f988421e5329193e2e5940",
+      "source_file_sha256": "8ac57331877e643a95c5c5d39966cce8a3d854d27319df80bee8514d19a22f71",
+      "engine_source_sha256": "974899a867d5f9b2b18295e02c3fc56827064bdfa19c863158ea4b06b0a45758",
+      "test_source_sha256": "27e67f2eca05e99c89e21265e6d0b87d90dccc3d05f6ed8b887c18c782aa1bb6",
+      "runner_sha256": "98ebede8e42c99ee285c76202f20a330b3c8d674cbedbb4b0b6c49be56fdbfd0",
+      "oracle_fixture_sha256": "e4dd3712003fd544fd47eee058dd5406689b042edcd92bd273d422c8527e468e",
+      "source_methods_extracted_unchanged": [
+        "detect",
+        "checkAndComplete",
+        "onInventoryChange",
+        "Detector"
+      ],
+      "oracle_fixture_boundaries": [
+        "ItemStack and InventoryPlayer are deterministic count/slot fixtures.",
+        "ItemComparison delegates to an injected match predicate; ore branch returns false.",
+        "ParticipantInfo, progress storage and completion marking are in-memory fixtures."
+      ],
+      "supported_modes": [
+        "AND, groupDetect=false, nonconsuming multiple requirements",
+        "single-requirement manual consumption"
+      ],
+      "inventory_slot_selection_is_caller_contract": true,
+      "limitations": [
+        "Item/NBT/ore matching is injected; fixture predicates are not Minecraft registry evidence.",
+        "No actual game inventory writes, persistence, party lifecycle, UI or packet integration.",
+        "groupDetect, OR, auto-consume and multi-requirement consumption are rejected.",
+        "Positive requirements and nonnegative saved counters are required; overflow rejects the plan instead of reproducing legacy Java wraparound."
+      ]
+    },
+    "LegacyRetrievalStackMatcherCheck": {
+      "test": "actual_legacy_retrieval_durability_matcher",
+      "passed": true,
+      "assertions": 440,
+      "vanilla_damageable_items": 68,
+      "actual_vanilla_itemstacks": true,
+      "actual_ftb_item_matcher": true,
+      "crafting_empty_nbt_predicate_verified": true,
+      "absent_and_empty_custom_data_equivalent": true,
+      "nonempty_custom_data_preserved": true,
+      "ordinary_ftb_matching_unchanged": true,
+      "mixin_application_verified": false,
+      "game_runtime_verified": false,
+      "ftb_artifact_sha256": "6a39982c4b3afc00b1e788041a4f0d394e1659e3b3a6e5d078cd790bc36d0018",
+      "adapter_source_sha256": "5a33162382b6b47e64c16c2ff499d9976d4491ad55ad4ee7df843b5d93fe439c",
+      "generator_source_matches": true,
+      "retrieval_and_crafting_mixin_shape_checked": true,
+      "test_environment": "actual vanilla 1.21.1 classes + FTB 2101.1.36 matcher, no world/server startup"
+    },
+    "LegacyCraftingShapeCheck": {
+      "test": "compiled_legacy_crafting_mixin_shape",
+      "passed": true,
+      "unmarked_early_return": true,
+      "recursive_test_call": false,
+      "actual_mixin_transformation_tested": false,
+      "game_runtime_verified": false
+    },
+    "LegacyHuntAdapterCheck": {
+      "passed": true,
+      "checks": 62,
+      "legacy_and_modern_mooshroom_ancestry_verified": true,
+      "real_modern_class_policy_executed": true,
+      "ordinary_ftb_policy_not_overridden": true,
+      "invalid_markers_and_filters_rejected": true,
+      "actual_jar_mixin_registration_verified": true,
+      "missing_registration_mutation_rejected": true,
+      "wrong_class_mapping_mutation_rejected": true,
+      "actual_mixin_transformation_verified": false,
+      "game_runtime_verified": false,
+      "compat_jar_sha256": "43302d0b7a699dd199de537c0c73cb2e6d8554d5486c24ea2834886cfb14915e",
+      "source_sha256": {
+        "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyHuntTaskMixin.java": "62e74aa7175a44471a99fefb5ef09374c51fcec548238a4c49c84aafaafb9a93",
+        "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyHuntEntityMatcher.java": "1435b87ae0bf98e2a44d31eae9262041cd9d610214d6412839496ada8b5c48d8",
+        "work/migration/LegacyHuntAdapterCheck.java": "0fae09131e096daa2bd171ef300746ef8e49679a5036d51a2f0cb3dba3e44a17",
+        "work/migration/test_hunt_adapter_java.py": "5a7be80891f449e135b5f8f2bf28f94dd644dd11035a3996099c9b94b84a94d3"
+      },
+      "dependency_sha256": {
+        "minecraft-server-1.7.10.jar": "c70870f00c4024d829e154f7e5f4e885b02dd87991726a3308d81f513972f3fc",
+        "joined.srg": "d246eb94eca9ec4a2148e900ed55ab2247440fcec149a47a4091709ddd6bfcaa",
+        "server-1.21.1-20240808.144430-srg.jar": "26ca9c40d7e1681190b428583c38816852218e78df3f8bdb60a59a78503aec71",
+        "ftb-quests-neoforge-2101.1.36.jar": "6a39982c4b3afc00b1e788041a4f0d394e1659e3b3a6e5d078cd790bc36d0018"
+      },
+      "isolated_dependency_root": false
+    },
+    "QuestAdapterShapeCheck": {
+      "test": "compiled_quest_adapter_target_shape",
+      "passed": true,
+      "shadow_methods": 5,
+      "legacy_durability_matcher_calls": 2,
+      "actual_mixin_transformation_tested": false,
+      "game_runtime_verified": false
+    },
+    "LegacyRetrievalCounterCheck": {
+      "test": "compiled_legacy_retrieval_counter",
+      "passed": true,
+      "random_observations": 10000,
+      "partial_regression_reset": true,
+      "completed_latch": true,
+      "two_player_sum": true,
+      "repeated_detection_no_accumulation": true,
+      "actual_mixin_in_game_verified": false
+    },
+    "QuestSnbtCheck": {
+      "test": "actual_ftb_snbt_parser_roundtrip",
+      "passed": true,
+      "files": 4,
+      "quests": 2,
+      "tasks": 2,
+      "rewards": 2,
+      "dependency_ids_resolved": true,
+      "game_quest_initialization_verified": false
+    },
+    "checkpoint-verification": {
+      "passed": true,
+      "source_anchored_quests": 2,
+      "actual_parser_trees_compared": 4,
+      "deliberate_mutations_rejected": [
+        "count",
+        "dependency",
+        "consume",
+        "reward"
+      ],
+      "dependency_closed": true,
+      "eula_accepted": false,
+      "game_runtime_verified": false,
+      "full_quest_parity": false
+    },
+    "crafting-task-adapter": {
+      "passed": true,
+      "crafting_candidate_source_ids": [
+        "0:11",
+        "9012220195932555052:-5816092802750880657"
+      ],
+      "crafting_candidate_count": 2,
+      "source_event_policy": "craft and smelt only; statistics and anvil rejected",
+      "all_required_items_exactly_mapped": true,
+      "ore_and_nbt_predicates_rejected": true,
+      "empty_legacy_nbt_uses_strict_components": true,
+      "partial_match_does_not_admit_extra_components": true,
+      "durability_ignored_by_scoped_matcher": true,
+      "packaged_crafting_mixin_present": true,
+      "runtime_game_verified": false,
+      "full_quest_parity": false
+    },
+    "hunt-task-adapter": {
+      "passed": true,
+      "hunt_candidate_source_ids": [
+        "0:10",
+        "0:42",
+        "0:456"
+      ],
+      "hunt_candidate_count": 3,
+      "candidate_task_predicates_checked": 3,
+      "source_hunt_tasks": 104,
+      "source_subtype_tasks": 103,
+      "candidate_subtype_tasks": 2,
+      "deliberate_predicate_mutations_rejected": [
+        "subtype",
+        "entity",
+        "count",
+        "name",
+        "nbt",
+        "entity_tag",
+        "candidate_row_removed",
+        "candidate_and_source_id_removed"
+      ],
+      "independent_expected_candidate_source_ids": [
+        "0:10",
+        "0:42",
+        "0:456"
+      ],
+      "independent_expected_candidate_task_count": 3,
+      "candidate_source_quest_sha256": {
+        "0:10": "fa6c1b2604e358942fecc2b47d910537875ca9088ecc283a67d9a59c776fc139",
+        "0:456": "e6556c4a267e1bde83949d2e3a93d5ad53fed963557db2188990de3ded14e28c",
+        "0:42": "cadcc2de303f04719db7e2021ae6e61b5649780d8d69d96b3c90019c5f69aced"
+      },
+      "export_manifest_sha256": "688d4abd7aa1eeffe5d27680f0a8f9da5652a976eab0efc81ce69c3c95814690",
+      "verifier_sha256": "8dcf6ec98717afc21d831c641090803935abe0926fa864d4b0d85f6453e1d79c",
+      "source_sha256": "96669f3e782ca8ce3a92d1225e0adddf5519595ad193e44ac52035c67235be41",
+      "target_source_sha256": "ff4345ea224da2889fab822050619448e71da420eebff206218c2bfec9505b1f",
+      "entity_name_mapping": {
+        "Pig": "minecraft:pig",
+        "Cow": "minecraft:cow",
+        "WitherBoss": "minecraft:wither",
+        "EnderDragon": "minecraft:ender_dragon"
+      },
+      "ignored_nbt_remains_ignored": true,
+      "unsupported_nbt_and_damage_predicates_rejected": true,
+      "actual_mixin_transformation_verified": false,
+      "runtime_game_verified": false,
+      "full_quest_parity": false
+    },
+    "location-task-boundary": {
+      "passed": true,
+      "legacy_location_task_count": 34,
+      "legacy_location_quest_count": 33,
+      "all_are_dimension_only_unbounded": true,
+      "safe_source_dimension_task_count": 4,
+      "finite_coordinate_box_candidates": 0,
+      "ftb_location_task_requires_finite_box": true,
+      "exported_location_task_count": 0,
+      "dimension_resource_keys": {
+        "-1": "minecraft:the_nether",
+        "0": "minecraft:overworld",
+        "1": "minecraft:the_end"
+      },
+      "explicit_opt_in_marker": "gtnh_legacy_dimension_only",
+      "runtime_game_verified": false,
+      "full_quest_parity": false,
+      "dependency_closed_active_quests": 2
+    }
+  },
+  "compat_jar_sha256": "43302d0b7a699dd199de537c0c73cb2e6d8554d5486c24ea2834886cfb14915e",
+  "source_quests": 3814,
+  "structural_candidates": 47,
+  "dependency_closed_active_quests": 2,
+  "remaining_quests_not_exported": 3812,
+  "runtime_inputs_hashed": 2035,
+  "full_parity": false,
+  "game_runtime_verified": false,
+  "isolated_mixin_transformation_verified": true,
+  "live_mixin_transformation_verified": false,
+  "neoforge_transform_chain_verified": false,
+  "client_visuals_verified": false,
+  "eula_changed": false,
+  "source_archive_audit": "evidence/source-archive-audit.json in the source checkpoint; asset hashes do not prove visual parity"
+}

@@ -25,7 +25,46 @@ public final class LegacyRetrievalCounter {
         return total;
     }
 }
-''',encoding='utf-8')
+''',encoding='utf-8',newline='\n')
+(P/'LegacyRetrievalStackMatcher.java').write_text('''package org.gtnhmigration.compat;
+
+import java.util.function.Predicate;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.CustomData;
+
+/** Preserves BQ 3.8.89 ItemComparison.StackMatch's damageable-item rule.
+ * Only the opt-in, exact-identity legacy retrieval adapter calls this helper.
+ * Damage was a separate 1.7.10 stack field, not part of its compared NBT.
+ * Absent and empty legacy custom NBT are equivalent in CompareNBTTag.
+ * All other components still pass through the task's original predicate.
+ */
+public final class LegacyRetrievalStackMatcher {
+    private LegacyRetrievalStackMatcher() {}
+
+    public static boolean matches(ItemStack required, ItemStack sample, Predicate<ItemStack> predicate) {
+        if (!ItemStack.isSameItem(required, sample)) {
+            return predicate.test(sample);
+        }
+        boolean normalizeDamage = required.isDamageableItem();
+        CustomData requiredData = required.get(DataComponents.CUSTOM_DATA);
+        CustomData sampleData = sample.get(DataComponents.CUSTOM_DATA);
+        boolean normalizeEmptyNbt = (requiredData == null || requiredData.isEmpty())
+                && (sampleData == null || sampleData.isEmpty())
+                && (requiredData == null) != (sampleData == null);
+        if (!normalizeDamage && !normalizeEmptyNbt) return predicate.test(sample);
+        ItemStack normalized = sample.copy();
+        if (normalizeDamage) normalized.setDamageValue(required.getDamageValue());
+        if (normalizeEmptyNbt) {
+            // Keep the predicate's requirement intact; give its sample the same
+            // representation of semantically empty custom NBT.
+            if (requiredData == null) normalized.remove(DataComponents.CUSTOM_DATA);
+            else normalized.set(DataComponents.CUSTOM_DATA, requiredData);
+        }
+        return predicate.test(normalized);
+    }
+}
+''',encoding='utf-8',newline='\n')
 (P/'LegacyRetrievalItemTaskMixin.java').write_text('''package org.gtnhmigration.compat;
 import dev.ftb.mods.ftbquests.quest.TeamData;
 import dev.ftb.mods.ftbquests.quest.task.ItemTask;
@@ -68,15 +107,73 @@ public abstract class LegacyRetrievalItemTaskMixin {
         Map<UUID,List<Integer>> inventory=new LinkedHashMap<>();
         for (ServerPlayer member:members.values()) {
             List<Integer> counts=new ArrayList<>();
-            for (ItemStack stack:member.getInventory().items) if (!stack.isEmpty() && test(stack)) counts.add(stack.getCount());
-            for (ItemStack stack:member.getInventory().armor) if (!stack.isEmpty() && test(stack)) counts.add(stack.getCount());
+            for (ItemStack stack:member.getInventory().items) if (!stack.isEmpty() && LegacyRetrievalStackMatcher.matches(getItemStack(),stack,this::test)) counts.add(stack.getCount());
+            for (ItemStack stack:member.getInventory().armor) if (!stack.isEmpty() && LegacyRetrievalStackMatcher.matches(getItemStack(),stack,this::test)) counts.add(stack.getCount());
             inventory.put(member.getUUID(),counts);
         }
         long progress=LegacyRetrievalCounter.next(data.getProgress(task),required,inventory);
         if (progress != data.getProgress(task)) data.setProgress(task,progress);
     }
 }
-''',encoding='utf-8')
+''',encoding='utf-8',newline='\n')
+(P/'LegacyCraftingStackMatcher.java').write_text('''package org.gtnhmigration.compat;
+
+import dev.ftb.mods.ftbquests.integration.item_filtering.ItemMatchingSystem;
+import dev.ftb.mods.ftbquests.integration.item_filtering.ItemMatchingSystem.ComponentMatchType;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.world.item.ItemStack;
+
+/** Matching for exported crafting requirements with no legacy NBT/ore predicate. */
+public final class LegacyCraftingStackMatcher {
+    private LegacyCraftingStackMatcher() {}
+
+    /** Null means the ordinary FTB task must keep its original implementation. */
+    public static Boolean override(boolean legacyCrafting, ItemStack required, ItemStack sample,
+            ComponentMatchType mode, HolderLookup.Provider registry) {
+        if (!legacyCrafting) return null;
+        if (mode != ComponentMatchType.STRICT && mode != ComponentMatchType.NONE) {
+            throw new IllegalStateException("Unsupported legacy crafting component policy: " + mode);
+        }
+        if (required.isEmpty() || ItemMatchingSystem.INSTANCE.isItemFilter(required)) {
+            throw new IllegalStateException("Legacy crafting requires a concrete nonempty item identity");
+        }
+        return LegacyRetrievalStackMatcher.matches(required, sample,
+                normalized -> ItemMatchingSystem.INSTANCE.doesItemMatch(required, normalized, mode, registry));
+    }
+}
+''',encoding='utf-8',newline='\n')
+(P/'LegacyCraftingItemTaskMixin.java').write_text('''package org.gtnhmigration.compat;
+
+import dev.ftb.mods.ftbquests.integration.item_filtering.ItemMatchingSystem.ComponentMatchType;
+import dev.ftb.mods.ftbquests.quest.task.ItemTask;
+import dev.ftb.mods.ftbquests.quest.task.Task;
+import net.minecraft.world.item.ItemStack;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+
+/** Opt-in no-NBT crafting match correction; does not change event accounting. */
+@Mixin(value=ItemTask.class, remap=false)
+public abstract class LegacyCraftingItemTaskMixin {
+    @Shadow private ComponentMatchType matchComponents;
+    @Shadow public abstract ItemStack getItemStack();
+    @Shadow public abstract boolean isOnlyFromCrafting();
+    @Shadow public abstract boolean consumesResources();
+
+    @Inject(method="test", at=@At("HEAD"), cancellable=true, require=1, remap=false)
+    private void gtnhMigration$legacyCraftingMatch(ItemStack sample, CallbackInfoReturnable<Boolean> ci) {
+        Task task=(Task)(Object)this;
+        if (!task.hasTag("gtnh_legacy_crafting")) return;
+        if (!isOnlyFromCrafting() || consumesResources()) {
+            throw new IllegalStateException("Unsupported legacy crafting marker configuration: " + task.id);
+        }
+        ci.setReturnValue(LegacyCraftingStackMatcher.override(true, getItemStack(), sample,
+                matchComponents, task.getQuestFile().holderLookup()));
+    }
+}
+''',encoding='utf-8',newline='\n')
 (P/'LegacyDimensionLocationTaskMixin.java').write_text('''package org.gtnhmigration.compat;
 import dev.ftb.mods.ftbquests.quest.TeamData;
 import dev.ftb.mods.ftbquests.quest.task.LocationTask;
@@ -103,7 +200,7 @@ public abstract class LegacyDimensionLocationTaskMixin {
         ci.setReturnValue(dimension == player.level().dimension());
     }
 }
-''',encoding='utf-8')
+''',encoding='utf-8',newline='\n')
 # Patch existing reproducible build without changing the published filename; hash/source locks identify this build.
 p=W/'migration/build_capacity_compat.py';s=p.read_text(encoding='utf-8')
 needle='[[mixins]]\nconfig="gtnh_migration_compat.mixins.json"';dep='''[[dependencies.gtnh_migration_compat]]
@@ -120,5 +217,5 @@ replacement=";libs += [O/'libraries/net/neoforged/neoforge/21.1.262/neoforge-21.
 assert needle in s or 'libs += [O/' in s
 if 'libs += [O/' not in s:s=s.replace(needle,replacement)
 s=s.replace("'runtime_storage_verified':False}","'runtime_storage_verified':False,'quest_adapter':'scoped single-item legacy retrieval','quest_adapter_live_verified':False}")
-p.write_text(s,encoding='utf-8')
+p.write_text(s,encoding='utf-8',newline='\n')
 print('LEGACY_RETRIEVAL_ADAPTER_SOURCE_WRITTEN')

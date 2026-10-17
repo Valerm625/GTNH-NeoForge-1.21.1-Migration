@@ -1,0 +1,39 @@
+{
+  "test": "source_differential_legacy_retrieval_engine",
+  "passed": true,
+  "assertions": 9651,
+  "source_comparisons": 9618,
+  "source_algorithm_executed": true,
+  "predicate_fixture": true,
+  "runtime_integrated": false,
+  "export_enabled": false,
+  "game_runtime_verified": false,
+  "source_commit": "815d738923d46e9083f988421e5329193e2e5940",
+  "source_file_sha256": "8ac57331877e643a95c5c5d39966cce8a3d854d27319df80bee8514d19a22f71",
+  "engine_source_sha256": "974899a867d5f9b2b18295e02c3fc56827064bdfa19c863158ea4b06b0a45758",
+  "test_source_sha256": "27e67f2eca05e99c89e21265e6d0b87d90dccc3d05f6ed8b887c18c782aa1bb6",
+  "runner_sha256": "98ebede8e42c99ee285c76202f20a330b3c8d674cbedbb4b0b6c49be56fdbfd0",
+  "oracle_fixture_sha256": "e4dd3712003fd544fd47eee058dd5406689b042edcd92bd273d422c8527e468e",
+  "source_methods_extracted_unchanged": [
+    "detect",
+    "checkAndComplete",
+    "onInventoryChange",
+    "Detector"
+  ],
+  "oracle_fixture_boundaries": [
+    "ItemStack and InventoryPlayer are deterministic count/slot fixtures.",
+    "ItemComparison delegates to an injected match predicate; ore branch returns false.",
+    "ParticipantInfo, progress storage and completion marking are in-memory fixtures."
+  ],
+  "supported_modes": [
+    "AND, groupDetect=false, nonconsuming multiple requirements",
+    "single-requirement manual consumption"
+  ],
+  "inventory_slot_selection_is_caller_contract": true,
+  "limitations": [
+    "Item/NBT/ore matching is injected; fixture predicates are not Minecraft registry evidence.",
+    "No actual game inventory writes, persistence, party lifecycle, UI or packet integration.",
+    "groupDetect, OR, auto-consume and multi-requirement consumption are rejected.",
+    "Positive requirements and nonnegative saved counters are required; overflow rejects the plan instead of reproducing legacy Java wraparound."
+  ]
+}

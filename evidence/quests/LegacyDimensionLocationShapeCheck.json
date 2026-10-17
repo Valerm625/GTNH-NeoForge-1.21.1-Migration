@@ -1,0 +1,6 @@
+{
+  "test": "compiled_dimension_location_adapter_shape",
+  "passed": true,
+  "actual_mixin_transformation_tested": false,
+  "game_runtime_verified": false
+}
