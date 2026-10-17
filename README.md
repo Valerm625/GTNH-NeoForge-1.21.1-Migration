@@ -13,8 +13,10 @@
 - 狩猎任务保留精确实体 ID 与子类匹配两种模式，包括牛与蘑菇牛；只作用于显式标记的迁移任务。
 - 新检查覆盖真实 Minecraft/FTB 物品匹配、两代游戏类继承和故意损坏负例。锁定 Sponge Mixin 已在隔离服务中将 **9 个注入应用到 7 个真实目标类**，通过 230 个方法的数据流检查；完整 NeoForge 转换链和游戏运行仍未验证。
 - 多物品检索纯引擎保留槽位预算、进度锁定和离线成员；新增逐 UUID 进度 codec 与按原 task index 执行的纯提交规划器。codec 通过 3,748 项断言、1,811 次源对照、633 次真实 NBT 二进制往返；规划器通过 9,707 项断言、2,412 次源对照，验证 `9 gravel + 5 logs → 两任务完成且剩 3 logs`。两者尚未接入存档、游戏提交或任务导出。
+- Phase 3 新增旧格式 typed JSON 读取器与任务身份 envelope 纯模型。读取器通过 **2,932 项断言、577 次固定源码对照、74 个拒绝案例**；envelope 通过 **4,857 项断言、1,017 次路由源码对照、567 次真实 NBT 往返、32 个整份拒绝案例**。22 项组合断言将真实 `0:2` 定义、合成进度和来源符号物品谓词连到规划器；`logWood` 仍未映射，玩家存档导入、保存与运行时均未完成。
 - 现有明确标记的单物品检索任务新增库存时机适配：初始同步、主背包槽 9..44（含变空）入队，下一次 Pre tick 去重检测。它不等于多物品规划器已接入，事件总线、队伍及完整世界行为仍未验证。
 - 矿石资源以锁定主线 GT5U `5.09.54.205` 重建基准：34 张基础 PNG 精确复制，另有 34 张明确标注为派生的透明次层。与 2.8.4 参考相比，7 张编码字节不同但解码 RGBA 相同；客户端着色、资源优先级及最终视觉仍未验证。
+- 四份锁定源码归档的 `src/main/resources/assets` 资源冲突审计记录 **16,267 次出现、16,237 个唯一路径、30 组同路径资源（60 个候选，24 组字节不同）、0 组大小写折叠冲突**，7 项独立检查（含错误注入）通过。CoreMod 的 `src/test/resources/assets` 中两个测试 XML 不属于运行资源，不计入此范围。审计保留全部候选，没有选定覆盖赢家，不计作已迁移资产。
 
 依赖闭合并实际导出的任务仍为 **2 / 3814**；结构候选为 **47**，物品身份映射仍为 **720 / 8388**。本阶段修复没有冒充新增完整任务覆盖。
 
@@ -22,14 +24,18 @@
 
 先读 [RESUME.md](RESUME.md)。本地恢复与原始 ZIP 审计都有独立入口；完整重建入口是 work/migration/rebuild_current_phase.py，按当前源码重编译后执行新的受限加载探测和验证。
 
+Phase 3 完整重建的22份汇总检查通过，纯模型编译类与兼容 JAR 内对应类逐字节一致；这仍不代表世界、真实存档或联网已验证。
+
 - evidence/source-archive-audit.json：输入 SHA256、版本证据、任务身份差异和资源数量。
 - evidence/phase-2026-10-18-task-semantics.json：当前阶段测试与边界。
 - evidence/quests/：实际物品匹配、任务谓词与编译产物检查。
 - [多物品检索设计](docs/multi-retrieval-design.zh-CN.md)：下一主线任务 0:2 的槽预算、多人进度、按钮顺序与原木矿辞缺口。
 - [进度持久化 codec](docs/retrieval-progress-persistence.zh-CN.md)与[顺序规划器](docs/quest-retrieval-planner.zh-CN.md)：已实现模型、源对照方法和未接入的运行时边界。
 - [库存检测时机](docs/inventory-detection-timing.zh-CN.md)：初始同步、槽位清空、Pre tick 和打开其他容器时的原版行为依据。
-- [进度存档外层设计](docs/quest-progress-envelope-design.zh-CN.md)：完整任务身份、局部合并与 placeholder 原件保留要求；尚未实现导入器。
+- [typed JSON 读取器](docs/typed-nbt-json-reader.zh-CN.md)与[进度身份外层](docs/quest-progress-envelope-design.zh-CN.md)：已实现独立读取与候选合并；完整定义不能充当进度输入，未知 schema、placeholder 和负零等未支持输入保留原件并拒绝。真实玩家存档 fixture 仍为 0。
+- [运行时桥接设计](docs/retrieval-runtime-bridge-design.zh-CN.md)：自有 UUID 账本、整个 quest 的提交协议、完成/奖励与队伍语义、跨文件崩溃恢复的待实现边界。
 - evidence/exact-ore-resource-check.json 与 evidence/exact-ore-resource-tests.json：34 张基础资源的主线来源、透明派生层及错误注入检查。
+- evidence/exact-resource-collisions.json 与 evidence/exact-resource-collision-tests.json：四份源码归档的资源路径冲突及错误注入检查。
 - [STATUS.zh-CN.md](STATUS.zh-CN.md)：累计实现及仍未完成的系统。
 
 以仓库锁定的 master 配置快照为迁移主线，2.8.4 独立保留作参考。master 的 README 与主菜单版本文字不一致，已如实记录；不能使用当前浮动 master 替代输入。

@@ -1,6 +1,6 @@
 {
   "phase_date_shanghai": "2026-10-18",
-  "phase": "inventory detection timing; retrieval persistence and ordered planner models; exact mainline ore resource bytes",
+  "phase": "typed legacy JSON and exact progress identity models; composed retrieval planning; unresolved source asset collisions",
   "checks": {
     "IsolatedMixinTransformationCheck": {
       "test": "isolated_real_sponge_mixin_transformation",
@@ -30,7 +30,7 @@
           "missing_injection_detected": true
         }
       },
-      "compat_jar_sha256": "f906ba61566d77132e03d9e2f092419fab3cae5b6050143159aefb39bf93408c",
+      "compat_jar_sha256": "243b9117436e6d9f27ebd8a8af7a26f168a5a13f934284e8766238d741007ae6",
       "source_sha256": {
         "work/migration/OfflineMixinService.java": "a7ea57ef2ea959f69885cca79076690724e82a17c768df2d4521e23fddc897df",
         "work/migration/OfflineProperties.java": "10ad2622af4698009243667fac346ad23621d38f86c583aebcb99593059f9f3d",
@@ -126,7 +126,7 @@
       "wrong_class_mapping_mutation_rejected": true,
       "actual_mixin_transformation_verified": false,
       "game_runtime_verified": false,
-      "compat_jar_sha256": "f906ba61566d77132e03d9e2f092419fab3cae5b6050143159aefb39bf93408c",
+      "compat_jar_sha256": "243b9117436e6d9f27ebd8a8af7a26f168a5a13f934284e8766238d741007ae6",
       "source_sha256": {
         "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyHuntTaskMixin.java": "62e74aa7175a44471a99fefb5ef09374c51fcec548238a4c49c84aafaafb9a93",
         "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyHuntEntityMatcher.java": "1435b87ae0bf98e2a44d31eae9262041cd9d610214d6412839496ada8b5c48d8",
@@ -279,7 +279,7 @@
       "test_source_sha256": "aed919c8f8caccf54a5c619b0f5b5294859ce8522c35398f941d146903f99d41",
       "runner_sha256": "fb6d375d4f805b0bc8393e3211d9b2eaf04d50ab9dea744a2dc20393b848fe65",
       "oracle_fixture_sha256": "24c3d959554108708f56ba755d089edfabd2f3a828af050169081b1c08953ab9",
-      "compat_jar_sha256": "f906ba61566d77132e03d9e2f092419fab3cae5b6050143159aefb39bf93408c",
+      "compat_jar_sha256": "243b9117436e6d9f27ebd8a8af7a26f168a5a13f934284e8766238d741007ae6",
       "ftb_artifact_sha256": "6a39982c4b3afc00b1e788041a4f0d394e1659e3b3a6e5d078cd790bc36d0018",
       "minecraft_artifact_sha256": "26ca9c40d7e1681190b428583c38816852218e78df3f8bdb60a59a78503aec71",
       "packaged_bridge_matches_sources": true,
@@ -300,6 +300,164 @@
         "Actual vanilla menus prove absence of guaranteed initial slot callbacks; patched callback dispatch is shape-checked only here.",
         "NeoForge event-bus registration, fake-player integration, team lookup, disconnect/respawn lifecycle and game timing are not run.",
         "Real Sponge transformation is covered by the separate isolated transformation report, not this test."
+      ]
+    },
+    "LegacyTypedNbtJsonReaderCheck": {
+      "test": "legacy_typed_nbt_json_reader",
+      "passed": true,
+      "assertions": 2932,
+      "pinned_source_decoder_comparisons": 577,
+      "rejected_fixtures": 74,
+      "real_task_definition_fixtures": 2,
+      "real_player_save_fixtures": 0,
+      "actual_1_21_nbt_executed": true,
+      "negative_zero_blocked_with_raw_retained": true,
+      "world_or_storage_integration": false,
+      "source_commit": "815d738923d46e9083f988421e5329193e2e5940",
+      "source_file_sha256": {
+        "work/exact-sources/BetterQuesting/3.8.89-GTNH/src/main/java/betterquesting/api/utils/NBTConverter.java": "f6a0362455bc0d226974313cd507e8be304bcb52175e3a40f9a14da8516e0db0"
+      },
+      "source_sha256": {
+        "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyTypedNbtJsonReader.java": "39bb4cc485f6948ae43cd22445bc5b83dcbfce007c224f2536a4fe1469eba274",
+        "work/migration/LegacyTypedNbtJsonReaderCheck.java": "43dafe65ed7c1f2276f173295babb9c631c21dc13351fcec29691dc1494b6afd",
+        "work/migration/test_legacy_typed_nbt_json_reader.py": "2e141a532183c8797043ba619565829123236ed4bb79366f23fae5bb37544e7f"
+      },
+      "reader_source_sha256": "39bb4cc485f6948ae43cd22445bc5b83dcbfce007c224f2536a4fe1469eba274",
+      "test_source_sha256": "43dafe65ed7c1f2276f173295babb9c631c21dc13351fcec29691dc1494b6afd",
+      "runner_sha256": "2e141a532183c8797043ba619565829123236ed4bb79366f23fae5bb37544e7f",
+      "compiled_reader_sha256": {
+        "org/gtnhmigration/compat/LegacyTypedNbtJsonReader$Diagnostic.class": "7ff1703fb95ac7698a48447ba847b316497aa8b29785ef498b7198d3315036f3",
+        "org/gtnhmigration/compat/LegacyTypedNbtJsonReader$Parser.class": "ea2858598307615ac031124cf8379d040d60141163d80b2c021fc796f914e2b9",
+        "org/gtnhmigration/compat/LegacyTypedNbtJsonReader$Rejected.class": "3eb237da999ca490199eddfa81a7acc0ba2414a496b2e956ff3345936ee2f3be",
+        "org/gtnhmigration/compat/LegacyTypedNbtJsonReader$Result.class": "67c66409376e3778f9d8e233e8f3bdc62eff717c8320fd2b7b4c0550d0a3aafd",
+        "org/gtnhmigration/compat/LegacyTypedNbtJsonReader.class": "2c02c97e090629873dde5689abb686eae0f4c0722e886ff4c03f2285896524b0"
+      },
+      "oracle_fixture_sha256": "781917ff71954e677a719089df41113d9222c0c5ad723498ac2293ae3c57c3bf",
+      "minecraft_jar_sha256": "26ca9c40d7e1681190b428583c38816852218e78df3f8bdb60a59a78503aec71",
+      "gson_jar_sha256": {
+        "gson-2.10.1.jar": "4241c14a7727c34feea6507ec801318a3d4a90f070e4525681079fb94ee4c593"
+      },
+      "task_definition_fixture_sha256": {
+        "work/source/GT-New-Horizons-Modpack-master/config/betterquesting/DefaultQuests/Quests/AndSoItBegins-AAAAAAAAAAAAAAAAAAAAAA==/SticksnStones-AAAAAAAAAAAAAAAAAAAAAg==.json": "b10a26b4012b0b407dd97bb5d486fbf4d819ee85c37248ea8ab61946e2d05f6b",
+        "work/source/GT-New-Horizons-Modpack-master/config/betterquesting/DefaultQuests/Quests/TheGreenRevoluti-GbGDSZsbQUekpRKT9ZPdjw==/CropSticks-O65QUnR0QuGSoQrsUMTB1g==.json": "f3a9e572ac771aef9f76c6121ad7a4cb3f5238df6b9adc76238df056d389a52e"
+      },
+      "source_methods_extracted_unchanged": [
+        "JSONtoNBT_Object",
+        "JSONtoNBT_Element",
+        "instanceNumber",
+        "fallbackTagID"
+      ],
+      "supported_tag_ids": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "unsupported_tag_zero": "Original reader uses ID 0 for fallback inference; no lossless EndTag decoding is claimed.",
+      "negative_zero_gap": "Actual 1.21.1 FloatTag/DoubleTag public factories and loaders normalize negative zero. Such inputs retain original bytes and are rejected; no reflection or global access adaptation is used.",
+      "runtime_integrated": false,
+      "export_enabled": false,
+      "compat_jar_verified": false,
+      "oracle_boundaries": [
+        "Original BQ decoder methods execute unchanged with old NBT names backed by real 1.21.1 NBT; the old game runtime is not launched.",
+        "Logger and NBT-name adapters are fixtures. Source comparisons cover accepted, explicitly typed values, excluding lossy coercions and modern negative-zero limitations.",
+        "The two supplied files are task definitions, never player saves; all rejection and numeric-boundary fixtures are synthetic."
+      ],
+      "limitations": [
+        "Accepted means only this typed JSON decoding succeeded, not that a save is safe to activate.",
+        "Original UTF-8 bytes and JSON member-order ledger are retained separately; CompoundTag itself does not promise object-key iteration order.",
+        "Missing/zero/noncanonical tag suffixes, inferred arrays, malformed or ambiguous input, integer coercions, float overflow/underflow and negative zero are retained but not accepted.",
+        "Gson 2.10.1 non-lenient mode needs an additional lexical gate for raw string control characters, invalid escapes and uppercase literals; UTF-8 BOM inputs are conservatively retained but rejected.",
+        "Input limits: 16 MiB, depth 128, 1,000,000 nodes, numeric tokens at most 128 characters; limits reject without discarding original bytes.",
+        "No quest identity routing, envelope integration, FTB registry/save/event integration, world startup or on-disk player save modification."
+      ]
+    },
+    "LegacyQuestProgressEnvelopeCheck": {
+      "passed": true,
+      "assertions": 4857,
+      "source_comparisons": 1017,
+      "binary_round_trips": 567,
+      "rejected_documents": 32,
+      "actual_minecraft_nbt": true,
+      "source_routing_methods_executed": true,
+      "accepted_candidate_only": true,
+      "runtime_integrated": false,
+      "file_storage_integrated": false,
+      "json_import_supported": false,
+      "export_enabled": false,
+      "game_runtime_verified": false,
+      "source_commit": "815d738923d46e9083f988421e5329193e2e5940",
+      "source_sha256": {
+        "work/exact-sources/BetterQuesting/3.8.89-GTNH/src/main/java/betterquesting/questing/QuestDatabase.java": "5a127eb3c1cc6d329a9ee98fca27197383903c4f634baca80ef265b1481743e4",
+        "work/exact-sources/BetterQuesting/3.8.89-GTNH/src/main/java/betterquesting/questing/QuestInstance.java": "723ed08931294710f7e287eccc7f6c042c9ff4bf5dd500183522758b4726bffb",
+        "work/exact-sources/BetterQuesting/3.8.89-GTNH/src/main/java/betterquesting/questing/tasks/TaskStorage.java": "2d72c4226afa772240cd883d386b0eac5c6770e6679d725e5282f4368a38b8ac",
+        "work/exact-sources/BetterQuesting/3.8.89-GTNH/src/main/java/betterquesting/api/utils/NBTConverter.java": "f6a0362455bc0d226974313cd507e8be304bcb52175e3a40f9a14da8516e0db0",
+        "work/exact-sources/BetterQuesting/3.8.89-GTNH/src/main/java/betterquesting/api/utils/UuidConverter.java": "5f926386eeeb753dc0c18012ba5e4a6129211668e905fc0deb6d821e3819bc9f",
+        "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalEngine.java": "974899a867d5f9b2b18295e02c3fc56827064bdfa19c863158ea4b06b0a45758",
+        "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalProgressCodec.java": "596a64ed0ed06bad0f70731773078376ea9ab7ec3cba7dacdd8c10faac0fe856",
+        "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestProgressEnvelope.java": "43ed5abb2ed2595efa101b9e89d8d8409f84b62ca01cd9c62191ea5e92b9b9a0",
+        "work/migration/LegacyQuestProgressEnvelopeCheck.java": "32744fee6d9cab270a455e559d4c7a36d14f67b703349236545ad0e332f34c67",
+        "work/migration/test_legacy_quest_progress_envelope.py": "475b06e405a0f1152b784b86efbf39c509d53d9c6c425e66676ccc789c731902"
+      },
+      "minecraft_jar_sha256": "26ca9c40d7e1681190b428583c38816852218e78df3f8bdb60a59a78503aec71",
+      "oracle_fixture_sha256": "6e9c3b182020a69d94a6d7c597a02983012b19e7949a071b66e759ed1e581e93",
+      "compiled_classes_directory": "work/migration/quest-progress-envelope-check/classes",
+      "source_methods_extracted_unchanged": [
+        "QuestDatabase.readProgressFromNBT",
+        "QuestInstance.readProgressFromNBT",
+        "TaskStorage.readProgressFromNBT",
+        "NBTConverter.UuidValueType.tryReadId",
+        "NBTConverter.UuidValueType.readId",
+        "UuidConverter.convertLegacyId"
+      ],
+      "oracle_boundaries": [
+        "Six fixed routing methods execute unchanged; old NBT method names delegate to real 1.21.1 NBT.",
+        "The inner retrieval codec is reused, not an independent inner-persistence oracle in this test.",
+        "Canonical factory equality, definition registry, logger and touched-state bookkeeping are fixtures.",
+        "Strict rejection tests intentionally differ from source coercion, silent skip and placeholder fallback."
+      ],
+      "limitations": [
+        "Accepted means interpreted candidate state, not a runnable game save.",
+        "Quest completion compounds are opaque except their UUID; no claimed/timestamp or reward behavior is executed.",
+        "No JSON parsing, real player-save import, file order selection, storage writes or cross-file lifecycle.",
+        "No FTB task registration, events, network, game runtime, server/world startup or export integration.",
+        "Raw NBT tree preservation does not assert identical serialized/compressed bytes."
+      ]
+    },
+    "LegacyProgressImportPipelineCheck": {
+      "test": "typed_json_envelope_planner_composition",
+      "passed": true,
+      "assertions": 22,
+      "actual_definition_fixtures": 1,
+      "actual_player_save_fixtures": 0,
+      "synthetic_progress_used": true,
+      "item_predicate_fixture": true,
+      "runtime_integrated": false,
+      "export_enabled": false,
+      "game_runtime_verified": false,
+      "source_sha256": {
+        "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalEngine.java": "974899a867d5f9b2b18295e02c3fc56827064bdfa19c863158ea4b06b0a45758",
+        "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalProgressCodec.java": "596a64ed0ed06bad0f70731773078376ea9ab7ec3cba7dacdd8c10faac0fe856",
+        "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestRetrievalPlanner.java": "bf680e9df76a8844bfed402feaf4b535624baf6644ec3de4093f0aab7b68c0e2",
+        "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestProgressEnvelope.java": "43ed5abb2ed2595efa101b9e89d8d8409f84b62ca01cd9c62191ea5e92b9b9a0",
+        "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyTypedNbtJsonReader.java": "39bb4cc485f6948ae43cd22445bc5b83dcbfce007c224f2536a4fe1469eba274",
+        "work/migration/LegacyProgressImportPipelineCheck.java": "ce771b954616b6aa68eea7a65a8640b747a4292c7f5b3b40e7b1fb6e10f5420d",
+        "work/migration/test_legacy_progress_import_pipeline.py": "89cc384af88085c2e1a834d3546e7bb7a64c56f2591a1d4a8429240b866d3a6c"
+      },
+      "definition_fixture_sha256": "b10a26b4012b0b407dd97bb5d486fbf4d819ee85c37248ea8ab61946e2d05f6b",
+      "minecraft_jar_sha256": "26ca9c40d7e1681190b428583c38816852218e78df3f8bdb60a59a78503aec71",
+      "limitations": [
+        "Uses a real mainline quest definition but synthetic player progress, authorization and immutable symbolic item predicates.",
+        "logWood is a source-symbol fixture, not a mapped modern item tag or a verified registry membership set.",
+        "Accepted data is only an in-memory candidate; no file storage, quest completion, reward, party lifecycle or FTB operation runs.",
+        "Individual fixed-source differential checks remain separate; this is a composition check, not a new original runtime oracle."
       ]
     },
     "QuestAdapterShapeCheck": {
@@ -395,7 +553,7 @@
         "0:456": "e6556c4a267e1bde83949d2e3a93d5ad53fed963557db2188990de3ded14e28c",
         "0:42": "cadcc2de303f04719db7e2021ae6e61b5649780d8d69d96b3c90019c5f69aced"
       },
-      "export_manifest_sha256": "4452bb9813777fe6372e34e9063abe7fe0b5796815239c7ec7f504a6dd994f39",
+      "export_manifest_sha256": "eed8b14032e60e52017f3f8b3d9a29bdce8449d8ac357973a5fd0fc5bd76eade",
       "verifier_sha256": "8dcf6ec98717afc21d831c641090803935abe0926fa864d4b0d85f6453e1d79c",
       "source_sha256": "96669f3e782ca8ce3a92d1225e0adddf5519595ad193e44ac52035c67235be41",
       "target_source_sha256": "ff4345ea224da2889fab822050619448e71da420eebff206218c2bfec9505b1f",
@@ -557,9 +715,748 @@
       "porter_source_sha256": "e94b6048168aef2c34a7219bedfaec28cbc8bbe02faaf09cc16eed1b08c29314",
       "verifier_source_sha256": "32cfa7123c1c4cb268bd9d6e55b1b9a87502dc5469c57c8af77a51aff4b581ac",
       "scope": "Real-source static verification and isolated output mutation tests; not Minecraft rendering or world validation."
+    },
+    "exact_resource_collisions": {
+      "passed": true,
+      "sources": [
+        {
+          "source": "NewHorizonsCoreMod/2.9.84",
+          "commit": "f769c65f68a352160b1e35770f6f7c579716baa5",
+          "archive_sha256": "927b1cfb5e2686ec6398dd8a6d94927767ed69ed0ea54fb2df934784e9a09071",
+          "lock_sha256": "68314f3b04a99f1e071e368a439f90932fb820f76403045189e0c59ca4002b17",
+          "resource_files": 833,
+          "resource_bytes": 47479617
+        },
+        {
+          "source": "GT5-Unofficial/5.09.54.205",
+          "commit": "a3e1e11241a814c9fa0dd0973d5699548428f689",
+          "archive_sha256": "3044b6cfeec1b1aad554739409af09e314f2f07c8138be08bd478bf183ae6b0f",
+          "lock_sha256": "1d82ec79eef3195aea71ff518af0970f21cb1b95962314c1babff65548b24f5f",
+          "resource_files": 14897,
+          "resource_bytes": 44237259
+        },
+        {
+          "source": "Railcraft/9.17.31",
+          "commit": "e8f755cd5eb22774d76eba4f8cd57057e2dfd5b9",
+          "archive_sha256": "13e11049a7b7cd6be2ba3ca8026dbbb6c8b36470d41905f3b96b5c8380834c76",
+          "lock_sha256": "b317c8cce804944032281dedd0793df5dae1f91a50662ac6888bb0f3ac3b3ea9",
+          "resource_files": 503,
+          "resource_bytes": 1928639
+        },
+        {
+          "source": "BetterQuesting/3.8.89-GTNH",
+          "commit": "815d738923d46e9083f988421e5329193e2e5940",
+          "archive_sha256": "7717db6ce9d8b70f6ef9601b3b23b9e339e7a33000a792d7ac145b3eb0183d10",
+          "lock_sha256": "e5dd1079d6e01b346dfdda5ac0dc6d7ceac2df82e9c7c64299d9b5c0f5f28263",
+          "resource_files": 34,
+          "resource_bytes": 886962
+        }
+      ],
+      "source_resource_occurrences": 16267,
+      "unique_exact_resource_paths": 16237,
+      "same_path_groups": 30,
+      "same_path_different_content_groups": 24,
+      "casefold_alias_groups": 0,
+      "extensions": {
+        ".bin": 1,
+        ".der": 2,
+        ".glsl": 48,
+        ".jpg": 1,
+        ".json": 15,
+        ".lang": 91,
+        ".mcmeta": 2115,
+        ".md": 202,
+        ".nbt": 2,
+        ".obj": 14,
+        ".ogg": 160,
+        ".png": 13474,
+        ".properties": 131,
+        ".wav": 2,
+        ".xcf": 4,
+        ".xml": 5
+      },
+      "collisions": [
+        {
+          "resource_path": "assets/gregtech/textures/blocks/iconsets/OVERLAY_ACCELERATOR.png",
+          "candidates": [
+            {
+              "resource_path": "assets/gregtech/textures/blocks/iconsets/OVERLAY_ACCELERATOR.png",
+              "source": "GT5-Unofficial/5.09.54.205",
+              "archive_entry": "GT5-Unofficial-a3e1e11241a814c9fa0dd0973d5699548428f689/src/main/resources/assets/gregtech/textures/blocks/iconsets/OVERLAY_ACCELERATOR.png",
+              "bytes": 159,
+              "sha256": "a3f6d0ea9530b8f950cc04318bbd2814af0ba1c61f1e6193206decabbe058e9d"
+            },
+            {
+              "resource_path": "assets/gregtech/textures/blocks/iconsets/OVERLAY_ACCELERATOR.png",
+              "source": "NewHorizonsCoreMod/2.9.84",
+              "archive_entry": "NewHorizonsCoreMod-f769c65f68a352160b1e35770f6f7c579716baa5/src/main/resources/assets/gregtech/textures/blocks/iconsets/OVERLAY_ACCELERATOR.png",
+              "bytes": 174,
+              "sha256": "1c4f108132538c97d6e9f916731595fce8c0bc2069cec3f75ceb121663cbe796"
+            }
+          ],
+          "distinct_content_hashes": 2,
+          "precedence": "unknown",
+          "selected_source": null
+        },
+        {
+          "resource_path": "assets/gregtech/textures/blocks/iconsets/OVERLAY_ACCELERATOR_ACTIVE.png",
+          "candidates": [
+            {
+              "resource_path": "assets/gregtech/textures/blocks/iconsets/OVERLAY_ACCELERATOR_ACTIVE.png",
+              "source": "GT5-Unofficial/5.09.54.205",
+              "archive_entry": "GT5-Unofficial-a3e1e11241a814c9fa0dd0973d5699548428f689/src/main/resources/assets/gregtech/textures/blocks/iconsets/OVERLAY_ACCELERATOR_ACTIVE.png",
+              "bytes": 197,
+              "sha256": "5430dd45fa982ec82c603346f62e32acfa4d67f83086e35b940c9ea8dd2bc5b2"
+            },
+            {
+              "resource_path": "assets/gregtech/textures/blocks/iconsets/OVERLAY_ACCELERATOR_ACTIVE.png",
+              "source": "NewHorizonsCoreMod/2.9.84",
+              "archive_entry": "NewHorizonsCoreMod-f769c65f68a352160b1e35770f6f7c579716baa5/src/main/resources/assets/gregtech/textures/blocks/iconsets/OVERLAY_ACCELERATOR_ACTIVE.png",
+              "bytes": 248,
+              "sha256": "f16fcfb75beb612345e6c342e9a80f14b2eda856484534a694f89a54b7b4d9bc"
+            }
+          ],
+          "distinct_content_hashes": 2,
+          "precedence": "unknown",
+          "selected_source": null
+        },
+        {
+          "resource_path": "assets/gregtech/textures/blocks/iconsets/OVERLAY_ACCELERATOR_ACTIVE.png.mcmeta",
+          "candidates": [
+            {
+              "resource_path": "assets/gregtech/textures/blocks/iconsets/OVERLAY_ACCELERATOR_ACTIVE.png.mcmeta",
+              "source": "GT5-Unofficial/5.09.54.205",
+              "archive_entry": "GT5-Unofficial-a3e1e11241a814c9fa0dd0973d5699548428f689/src/main/resources/assets/gregtech/textures/blocks/iconsets/OVERLAY_ACCELERATOR_ACTIVE.png.mcmeta",
+              "bytes": 45,
+              "sha256": "127f0fe4e07e04776a014c3e60879e0ce0bfcba4a783618cea975cbc94fe560f"
+            },
+            {
+              "resource_path": "assets/gregtech/textures/blocks/iconsets/OVERLAY_ACCELERATOR_ACTIVE.png.mcmeta",
+              "source": "NewHorizonsCoreMod/2.9.84",
+              "archive_entry": "NewHorizonsCoreMod-f769c65f68a352160b1e35770f6f7c579716baa5/src/main/resources/assets/gregtech/textures/blocks/iconsets/OVERLAY_ACCELERATOR_ACTIVE.png.mcmeta",
+              "bytes": 46,
+              "sha256": "b4f1c55c03896f33aa152ba30fe379137703c30b14e801214ed2720bc0ab5c92"
+            }
+          ],
+          "distinct_content_hashes": 2,
+          "precedence": "unknown",
+          "selected_source": null
+        },
+        {
+          "resource_path": "assets/gregtech/textures/blocks/iconsets/OVERLAY_ACCELERATOR_TE.png",
+          "candidates": [
+            {
+              "resource_path": "assets/gregtech/textures/blocks/iconsets/OVERLAY_ACCELERATOR_TE.png",
+              "source": "GT5-Unofficial/5.09.54.205",
+              "archive_entry": "GT5-Unofficial-a3e1e11241a814c9fa0dd0973d5699548428f689/src/main/resources/assets/gregtech/textures/blocks/iconsets/OVERLAY_ACCELERATOR_TE.png",
+              "bytes": 175,
+              "sha256": "2ecaee50bdd0cef8e2030ea4c22a1216d4db19e0e0e0d96f2d0034b997b95e2c"
+            },
+            {
+              "resource_path": "assets/gregtech/textures/blocks/iconsets/OVERLAY_ACCELERATOR_TE.png",
+              "source": "NewHorizonsCoreMod/2.9.84",
+              "archive_entry": "NewHorizonsCoreMod-f769c65f68a352160b1e35770f6f7c579716baa5/src/main/resources/assets/gregtech/textures/blocks/iconsets/OVERLAY_ACCELERATOR_TE.png",
+              "bytes": 197,
+              "sha256": "7a1fd2ee059121bce2e7ff25a7ab91d624dbc38922e44e41b49b9344b44ea590"
+            }
+          ],
+          "distinct_content_hashes": 2,
+          "precedence": "unknown",
+          "selected_source": null
+        },
+        {
+          "resource_path": "assets/gregtech/textures/blocks/iconsets/OVERLAY_ACCELERATOR_TE_ACTIVE.png",
+          "candidates": [
+            {
+              "resource_path": "assets/gregtech/textures/blocks/iconsets/OVERLAY_ACCELERATOR_TE_ACTIVE.png",
+              "source": "GT5-Unofficial/5.09.54.205",
+              "archive_entry": "GT5-Unofficial-a3e1e11241a814c9fa0dd0973d5699548428f689/src/main/resources/assets/gregtech/textures/blocks/iconsets/OVERLAY_ACCELERATOR_TE_ACTIVE.png",
+              "bytes": 209,
+              "sha256": "c1f6691f75f77ffd4db46d52933140145513df4cf77cee23b772fa67fa5864c3"
+            },
+            {
+              "resource_path": "assets/gregtech/textures/blocks/iconsets/OVERLAY_ACCELERATOR_TE_ACTIVE.png",
+              "source": "NewHorizonsCoreMod/2.9.84",
+              "archive_entry": "NewHorizonsCoreMod-f769c65f68a352160b1e35770f6f7c579716baa5/src/main/resources/assets/gregtech/textures/blocks/iconsets/OVERLAY_ACCELERATOR_TE_ACTIVE.png",
+              "bytes": 279,
+              "sha256": "123914d00d12840e9484783142408856b908e25c084bbf40363f7713bea6f76e"
+            }
+          ],
+          "distinct_content_hashes": 2,
+          "precedence": "unknown",
+          "selected_source": null
+        },
+        {
+          "resource_path": "assets/gregtech/textures/blocks/iconsets/OVERLAY_ACCELERATOR_TE_ACTIVE.png.mcmeta",
+          "candidates": [
+            {
+              "resource_path": "assets/gregtech/textures/blocks/iconsets/OVERLAY_ACCELERATOR_TE_ACTIVE.png.mcmeta",
+              "source": "GT5-Unofficial/5.09.54.205",
+              "archive_entry": "GT5-Unofficial-a3e1e11241a814c9fa0dd0973d5699548428f689/src/main/resources/assets/gregtech/textures/blocks/iconsets/OVERLAY_ACCELERATOR_TE_ACTIVE.png.mcmeta",
+              "bytes": 45,
+              "sha256": "127f0fe4e07e04776a014c3e60879e0ce0bfcba4a783618cea975cbc94fe560f"
+            },
+            {
+              "resource_path": "assets/gregtech/textures/blocks/iconsets/OVERLAY_ACCELERATOR_TE_ACTIVE.png.mcmeta",
+              "source": "NewHorizonsCoreMod/2.9.84",
+              "archive_entry": "NewHorizonsCoreMod-f769c65f68a352160b1e35770f6f7c579716baa5/src/main/resources/assets/gregtech/textures/blocks/iconsets/OVERLAY_ACCELERATOR_TE_ACTIVE.png.mcmeta",
+              "bytes": 46,
+              "sha256": "b4f1c55c03896f33aa152ba30fe379137703c30b14e801214ed2720bc0ab5c92"
+            }
+          ],
+          "distinct_content_hashes": 2,
+          "precedence": "unknown",
+          "selected_source": null
+        },
+        {
+          "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/606.png",
+          "candidates": [
+            {
+              "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/606.png",
+              "source": "GT5-Unofficial/5.09.54.205",
+              "archive_entry": "GT5-Unofficial-a3e1e11241a814c9fa0dd0973d5699548428f689/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/606.png",
+              "bytes": 380,
+              "sha256": "b4df55ae4c63a995dcd940643d4024fde819b485fbb40a2d78715138f3aef2a3"
+            },
+            {
+              "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/606.png",
+              "source": "NewHorizonsCoreMod/2.9.84",
+              "archive_entry": "NewHorizonsCoreMod-f769c65f68a352160b1e35770f6f7c579716baa5/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/606.png",
+              "bytes": 399,
+              "sha256": "547bfc1bb8a4702c787f4c2bde741a0f34c2d86d37900e62314e855c37af27f1"
+            }
+          ],
+          "distinct_content_hashes": 2,
+          "precedence": "unknown",
+          "selected_source": null
+        },
+        {
+          "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/607.png",
+          "candidates": [
+            {
+              "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/607.png",
+              "source": "GT5-Unofficial/5.09.54.205",
+              "archive_entry": "GT5-Unofficial-a3e1e11241a814c9fa0dd0973d5699548428f689/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/607.png",
+              "bytes": 350,
+              "sha256": "33ac7a69c982fbd4c7933ec07dd2956532def24201d89a5c75ae1125ca91340b"
+            },
+            {
+              "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/607.png",
+              "source": "NewHorizonsCoreMod/2.9.84",
+              "archive_entry": "NewHorizonsCoreMod-f769c65f68a352160b1e35770f6f7c579716baa5/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/607.png",
+              "bytes": 429,
+              "sha256": "e2a46e46357f3e7b8281c9c8f6de1715518cde6546dca884506c6e572994ea35"
+            }
+          ],
+          "distinct_content_hashes": 2,
+          "precedence": "unknown",
+          "selected_source": null
+        },
+        {
+          "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/608.png",
+          "candidates": [
+            {
+              "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/608.png",
+              "source": "GT5-Unofficial/5.09.54.205",
+              "archive_entry": "GT5-Unofficial-a3e1e11241a814c9fa0dd0973d5699548428f689/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/608.png",
+              "bytes": 372,
+              "sha256": "000638e6bcddb989cba9c339f7f6902a160530dfa7eb2175f65040881b9069d9"
+            },
+            {
+              "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/608.png",
+              "source": "NewHorizonsCoreMod/2.9.84",
+              "archive_entry": "NewHorizonsCoreMod-f769c65f68a352160b1e35770f6f7c579716baa5/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/608.png",
+              "bytes": 393,
+              "sha256": "12dfcba5a312e6a6a2953ec46920c6f137bd14130e5a10a6fb9bfe25d7fcac84"
+            }
+          ],
+          "distinct_content_hashes": 2,
+          "precedence": "unknown",
+          "selected_source": null
+        },
+        {
+          "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/615.png",
+          "candidates": [
+            {
+              "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/615.png",
+              "source": "GT5-Unofficial/5.09.54.205",
+              "archive_entry": "GT5-Unofficial-a3e1e11241a814c9fa0dd0973d5699548428f689/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/615.png",
+              "bytes": 519,
+              "sha256": "93391df47f998d5bc35a8c08948ed47eebabe8ba7933235fc162fc8c55bb4dfd"
+            },
+            {
+              "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/615.png",
+              "source": "NewHorizonsCoreMod/2.9.84",
+              "archive_entry": "NewHorizonsCoreMod-f769c65f68a352160b1e35770f6f7c579716baa5/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/615.png",
+              "bytes": 519,
+              "sha256": "93391df47f998d5bc35a8c08948ed47eebabe8ba7933235fc162fc8c55bb4dfd"
+            }
+          ],
+          "distinct_content_hashes": 1,
+          "precedence": "unknown",
+          "selected_source": null
+        },
+        {
+          "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/616.png",
+          "candidates": [
+            {
+              "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/616.png",
+              "source": "GT5-Unofficial/5.09.54.205",
+              "archive_entry": "GT5-Unofficial-a3e1e11241a814c9fa0dd0973d5699548428f689/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/616.png",
+              "bytes": 507,
+              "sha256": "079feebda7bb18ceaf482e99772778bb3f06aa668ea229fd4cd8cc6c3ef7c4b3"
+            },
+            {
+              "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/616.png",
+              "source": "NewHorizonsCoreMod/2.9.84",
+              "archive_entry": "NewHorizonsCoreMod-f769c65f68a352160b1e35770f6f7c579716baa5/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/616.png",
+              "bytes": 507,
+              "sha256": "079feebda7bb18ceaf482e99772778bb3f06aa668ea229fd4cd8cc6c3ef7c4b3"
+            }
+          ],
+          "distinct_content_hashes": 1,
+          "precedence": "unknown",
+          "selected_source": null
+        },
+        {
+          "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/617.png",
+          "candidates": [
+            {
+              "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/617.png",
+              "source": "GT5-Unofficial/5.09.54.205",
+              "archive_entry": "GT5-Unofficial-a3e1e11241a814c9fa0dd0973d5699548428f689/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/617.png",
+              "bytes": 512,
+              "sha256": "95345946386fc0d246fca78e8ed41f6e13ad478411776633d827c13405aea33d"
+            },
+            {
+              "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/617.png",
+              "source": "NewHorizonsCoreMod/2.9.84",
+              "archive_entry": "NewHorizonsCoreMod-f769c65f68a352160b1e35770f6f7c579716baa5/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/617.png",
+              "bytes": 512,
+              "sha256": "95345946386fc0d246fca78e8ed41f6e13ad478411776633d827c13405aea33d"
+            }
+          ],
+          "distinct_content_hashes": 1,
+          "precedence": "unknown",
+          "selected_source": null
+        },
+        {
+          "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/635.png",
+          "candidates": [
+            {
+              "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/635.png",
+              "source": "GT5-Unofficial/5.09.54.205",
+              "archive_entry": "GT5-Unofficial-a3e1e11241a814c9fa0dd0973d5699548428f689/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/635.png",
+              "bytes": 308,
+              "sha256": "666e0e0ae95c2c3e44796ab85cb01ead5396bba8c0f4298b120ec0df80670ddd"
+            },
+            {
+              "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/635.png",
+              "source": "NewHorizonsCoreMod/2.9.84",
+              "archive_entry": "NewHorizonsCoreMod-f769c65f68a352160b1e35770f6f7c579716baa5/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/635.png",
+              "bytes": 338,
+              "sha256": "b8ee500e173d79297a5624823c1190fe84a998bc12103cf80047ebac28d87258"
+            }
+          ],
+          "distinct_content_hashes": 2,
+          "precedence": "unknown",
+          "selected_source": null
+        },
+        {
+          "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/636.png",
+          "candidates": [
+            {
+              "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/636.png",
+              "source": "GT5-Unofficial/5.09.54.205",
+              "archive_entry": "GT5-Unofficial-a3e1e11241a814c9fa0dd0973d5699548428f689/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/636.png",
+              "bytes": 308,
+              "sha256": "b148f03b0ed603aa04c7a1f9d6c13b20c80fd00f21640b50948863d0eaae8522"
+            },
+            {
+              "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/636.png",
+              "source": "NewHorizonsCoreMod/2.9.84",
+              "archive_entry": "NewHorizonsCoreMod-f769c65f68a352160b1e35770f6f7c579716baa5/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/636.png",
+              "bytes": 338,
+              "sha256": "c89484fcc06c58d112b52cd010342411a0418dc73f5fb29ce7aab820d86967e7"
+            }
+          ],
+          "distinct_content_hashes": 2,
+          "precedence": "unknown",
+          "selected_source": null
+        },
+        {
+          "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/637.png",
+          "candidates": [
+            {
+              "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/637.png",
+              "source": "GT5-Unofficial/5.09.54.205",
+              "archive_entry": "GT5-Unofficial-a3e1e11241a814c9fa0dd0973d5699548428f689/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/637.png",
+              "bytes": 308,
+              "sha256": "058bace9a2c7c4889100425ebc1cfabf062a09a5ba537a8ddfac6b8c09fdb70e"
+            },
+            {
+              "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/637.png",
+              "source": "NewHorizonsCoreMod/2.9.84",
+              "archive_entry": "NewHorizonsCoreMod-f769c65f68a352160b1e35770f6f7c579716baa5/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/637.png",
+              "bytes": 338,
+              "sha256": "977a10b621c0df23713c37acc991a7f4ba6945327e777a5678ad67c9d5be815c"
+            }
+          ],
+          "distinct_content_hashes": 2,
+          "precedence": "unknown",
+          "selected_source": null
+        },
+        {
+          "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/645.png",
+          "candidates": [
+            {
+              "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/645.png",
+              "source": "GT5-Unofficial/5.09.54.205",
+              "archive_entry": "GT5-Unofficial-a3e1e11241a814c9fa0dd0973d5699548428f689/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/645.png",
+              "bytes": 418,
+              "sha256": "07d31ebf1c3701699795f26e1e224dbcef3dc1e7ee780444efe38cd552e0b3f4"
+            },
+            {
+              "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/645.png",
+              "source": "NewHorizonsCoreMod/2.9.84",
+              "archive_entry": "NewHorizonsCoreMod-f769c65f68a352160b1e35770f6f7c579716baa5/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/645.png",
+              "bytes": 435,
+              "sha256": "95df9b3cc740b51235d311f3db284f04930dc0babc34fb441fa7abb60382ec6f"
+            }
+          ],
+          "distinct_content_hashes": 2,
+          "precedence": "unknown",
+          "selected_source": null
+        },
+        {
+          "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/646.png",
+          "candidates": [
+            {
+              "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/646.png",
+              "source": "GT5-Unofficial/5.09.54.205",
+              "archive_entry": "GT5-Unofficial-a3e1e11241a814c9fa0dd0973d5699548428f689/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/646.png",
+              "bytes": 411,
+              "sha256": "e8328fde478fb5ecffdaa994e4d1b4966c2c5f4fc58c0c9c9aa1a72cbd59d727"
+            },
+            {
+              "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/646.png",
+              "source": "NewHorizonsCoreMod/2.9.84",
+              "archive_entry": "NewHorizonsCoreMod-f769c65f68a352160b1e35770f6f7c579716baa5/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/646.png",
+              "bytes": 433,
+              "sha256": "96c67d46409644f43022ae3648679f588e0d4de734a55bcdcdae8574d99c3c22"
+            }
+          ],
+          "distinct_content_hashes": 2,
+          "precedence": "unknown",
+          "selected_source": null
+        },
+        {
+          "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/647.png",
+          "candidates": [
+            {
+              "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/647.png",
+              "source": "GT5-Unofficial/5.09.54.205",
+              "archive_entry": "GT5-Unofficial-a3e1e11241a814c9fa0dd0973d5699548428f689/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/647.png",
+              "bytes": 421,
+              "sha256": "9b292d074c8ac313727c9bcc939b85e6fd42e593d0d6bdde6b362ec77eb146bb"
+            },
+            {
+              "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/647.png",
+              "source": "NewHorizonsCoreMod/2.9.84",
+              "archive_entry": "NewHorizonsCoreMod-f769c65f68a352160b1e35770f6f7c579716baa5/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/647.png",
+              "bytes": 447,
+              "sha256": "e3a6748f0fa05f1f0512db1bf3fd1de88aec642fe0ff8ec216aa051c6f214bf2"
+            }
+          ],
+          "distinct_content_hashes": 2,
+          "precedence": "unknown",
+          "selected_source": null
+        },
+        {
+          "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/655.png",
+          "candidates": [
+            {
+              "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/655.png",
+              "source": "GT5-Unofficial/5.09.54.205",
+              "archive_entry": "GT5-Unofficial-a3e1e11241a814c9fa0dd0973d5699548428f689/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/655.png",
+              "bytes": 444,
+              "sha256": "d0078b1c2db7c3449a8e4bcc4697c71b72c42aae7583e39684c7e45355a7ce0c"
+            },
+            {
+              "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/655.png",
+              "source": "NewHorizonsCoreMod/2.9.84",
+              "archive_entry": "NewHorizonsCoreMod-f769c65f68a352160b1e35770f6f7c579716baa5/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/655.png",
+              "bytes": 864,
+              "sha256": "5e8f2b92e6bf5240a85ef2c13ae29c2a18ab733ad963e42611f51a9a34a6b06d"
+            }
+          ],
+          "distinct_content_hashes": 2,
+          "precedence": "unknown",
+          "selected_source": null
+        },
+        {
+          "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/656.png",
+          "candidates": [
+            {
+              "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/656.png",
+              "source": "GT5-Unofficial/5.09.54.205",
+              "archive_entry": "GT5-Unofficial-a3e1e11241a814c9fa0dd0973d5699548428f689/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/656.png",
+              "bytes": 442,
+              "sha256": "c9c3eaea9d01ecb5847ee292b9fa00c4059f50281299fcd5d02d907d027e4bca"
+            },
+            {
+              "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/656.png",
+              "source": "NewHorizonsCoreMod/2.9.84",
+              "archive_entry": "NewHorizonsCoreMod-f769c65f68a352160b1e35770f6f7c579716baa5/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/656.png",
+              "bytes": 864,
+              "sha256": "a0eae57bbd083d43677bb338e4ecbbe8b824af4e22b9e484e84a06250b7789da"
+            }
+          ],
+          "distinct_content_hashes": 2,
+          "precedence": "unknown",
+          "selected_source": null
+        },
+        {
+          "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/657.png",
+          "candidates": [
+            {
+              "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/657.png",
+              "source": "GT5-Unofficial/5.09.54.205",
+              "archive_entry": "GT5-Unofficial-a3e1e11241a814c9fa0dd0973d5699548428f689/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/657.png",
+              "bytes": 455,
+              "sha256": "b8c1ba252ace0256c89fa4c971ee89af38c08748a1831b9571fd996654daaa2a"
+            },
+            {
+              "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/657.png",
+              "source": "NewHorizonsCoreMod/2.9.84",
+              "archive_entry": "NewHorizonsCoreMod-f769c65f68a352160b1e35770f6f7c579716baa5/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/657.png",
+              "bytes": 866,
+              "sha256": "8449c358b6559b65c320264e50586f5e724c4e28ea0c41820d2d297ddf4f9030"
+            }
+          ],
+          "distinct_content_hashes": 2,
+          "precedence": "unknown",
+          "selected_source": null
+        },
+        {
+          "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/675.png",
+          "candidates": [
+            {
+              "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/675.png",
+              "source": "GT5-Unofficial/5.09.54.205",
+              "archive_entry": "GT5-Unofficial-a3e1e11241a814c9fa0dd0973d5699548428f689/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/675.png",
+              "bytes": 628,
+              "sha256": "789de95ad3d11fdce815de34b2fd7faf38b0fc4f35d8fdba0a3b91f96fce829a"
+            },
+            {
+              "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/675.png",
+              "source": "NewHorizonsCoreMod/2.9.84",
+              "archive_entry": "NewHorizonsCoreMod-f769c65f68a352160b1e35770f6f7c579716baa5/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/675.png",
+              "bytes": 628,
+              "sha256": "789de95ad3d11fdce815de34b2fd7faf38b0fc4f35d8fdba0a3b91f96fce829a"
+            }
+          ],
+          "distinct_content_hashes": 1,
+          "precedence": "unknown",
+          "selected_source": null
+        },
+        {
+          "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/676.png",
+          "candidates": [
+            {
+              "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/676.png",
+              "source": "GT5-Unofficial/5.09.54.205",
+              "archive_entry": "GT5-Unofficial-a3e1e11241a814c9fa0dd0973d5699548428f689/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/676.png",
+              "bytes": 617,
+              "sha256": "b8cbe1c4a7e07ead949a62351a86e52d64937c753c5f61bbd30e076ef95976d8"
+            },
+            {
+              "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/676.png",
+              "source": "NewHorizonsCoreMod/2.9.84",
+              "archive_entry": "NewHorizonsCoreMod-f769c65f68a352160b1e35770f6f7c579716baa5/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/676.png",
+              "bytes": 617,
+              "sha256": "b8cbe1c4a7e07ead949a62351a86e52d64937c753c5f61bbd30e076ef95976d8"
+            }
+          ],
+          "distinct_content_hashes": 1,
+          "precedence": "unknown",
+          "selected_source": null
+        },
+        {
+          "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/677.png",
+          "candidates": [
+            {
+              "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/677.png",
+              "source": "GT5-Unofficial/5.09.54.205",
+              "archive_entry": "GT5-Unofficial-a3e1e11241a814c9fa0dd0973d5699548428f689/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/677.png",
+              "bytes": 624,
+              "sha256": "7d07e4a2703d086af66378d0f509ae031e9641b6b9fa31ebe418468af8dc3f2b"
+            },
+            {
+              "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/677.png",
+              "source": "NewHorizonsCoreMod/2.9.84",
+              "archive_entry": "NewHorizonsCoreMod-f769c65f68a352160b1e35770f6f7c579716baa5/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/677.png",
+              "bytes": 624,
+              "sha256": "7d07e4a2703d086af66378d0f509ae031e9641b6b9fa31ebe418468af8dc3f2b"
+            }
+          ],
+          "distinct_content_hashes": 1,
+          "precedence": "unknown",
+          "selected_source": null
+        },
+        {
+          "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/685.png",
+          "candidates": [
+            {
+              "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/685.png",
+              "source": "GT5-Unofficial/5.09.54.205",
+              "archive_entry": "GT5-Unofficial-a3e1e11241a814c9fa0dd0973d5699548428f689/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/685.png",
+              "bytes": 408,
+              "sha256": "a7afeb5a900895e5bf79482cf2f2c301d1701668d8e006385bd7630efbece61d"
+            },
+            {
+              "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/685.png",
+              "source": "NewHorizonsCoreMod/2.9.84",
+              "archive_entry": "NewHorizonsCoreMod-f769c65f68a352160b1e35770f6f7c579716baa5/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/685.png",
+              "bytes": 519,
+              "sha256": "46c54a305c239413ff47237c9abaa2716b4421d77707536433f3f75ed3a81d58"
+            }
+          ],
+          "distinct_content_hashes": 2,
+          "precedence": "unknown",
+          "selected_source": null
+        },
+        {
+          "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/686.png",
+          "candidates": [
+            {
+              "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/686.png",
+              "source": "GT5-Unofficial/5.09.54.205",
+              "archive_entry": "GT5-Unofficial-a3e1e11241a814c9fa0dd0973d5699548428f689/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/686.png",
+              "bytes": 403,
+              "sha256": "ad726d711ffb4c10734d89cef83772ee5d703927b0bf66809ee4c613f30aab66"
+            },
+            {
+              "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/686.png",
+              "source": "NewHorizonsCoreMod/2.9.84",
+              "archive_entry": "NewHorizonsCoreMod-f769c65f68a352160b1e35770f6f7c579716baa5/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/686.png",
+              "bytes": 514,
+              "sha256": "08fd051e8e066e27a2bcf88cf19868219c8eb852f939d3f8e491aba00e0a4b6b"
+            }
+          ],
+          "distinct_content_hashes": 2,
+          "precedence": "unknown",
+          "selected_source": null
+        },
+        {
+          "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/687.png",
+          "candidates": [
+            {
+              "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/687.png",
+              "source": "GT5-Unofficial/5.09.54.205",
+              "archive_entry": "GT5-Unofficial-a3e1e11241a814c9fa0dd0973d5699548428f689/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/687.png",
+              "bytes": 447,
+              "sha256": "015a4685cb9c5fdf022242418937b92f3b40c5379a6dd24886153e009719b5d2"
+            },
+            {
+              "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/687.png",
+              "source": "NewHorizonsCoreMod/2.9.84",
+              "archive_entry": "NewHorizonsCoreMod-f769c65f68a352160b1e35770f6f7c579716baa5/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/687.png",
+              "bytes": 537,
+              "sha256": "c18a10f23bb1051144a14e115f3c6471923fe05f1ce265d8b91e57df861b062d"
+            }
+          ],
+          "distinct_content_hashes": 2,
+          "precedence": "unknown",
+          "selected_source": null
+        },
+        {
+          "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/695.png",
+          "candidates": [
+            {
+              "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/695.png",
+              "source": "GT5-Unofficial/5.09.54.205",
+              "archive_entry": "GT5-Unofficial-a3e1e11241a814c9fa0dd0973d5699548428f689/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/695.png",
+              "bytes": 419,
+              "sha256": "22ee5f79d195bf341916a2c58069b821ab4406e76ffa078e2e333913f7c2c4b8"
+            },
+            {
+              "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/695.png",
+              "source": "NewHorizonsCoreMod/2.9.84",
+              "archive_entry": "NewHorizonsCoreMod-f769c65f68a352160b1e35770f6f7c579716baa5/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/695.png",
+              "bytes": 1166,
+              "sha256": "e877d489e9478f51ba7d872a4ffd2185369aa27d990a217e397f4264b6916785"
+            }
+          ],
+          "distinct_content_hashes": 2,
+          "precedence": "unknown",
+          "selected_source": null
+        },
+        {
+          "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/696.png",
+          "candidates": [
+            {
+              "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/696.png",
+              "source": "GT5-Unofficial/5.09.54.205",
+              "archive_entry": "GT5-Unofficial-a3e1e11241a814c9fa0dd0973d5699548428f689/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/696.png",
+              "bytes": 409,
+              "sha256": "a8c930644b3d0233bf5fd8a7724bd6eb9f8060d56e74a7cc997980d89bb8ff51"
+            },
+            {
+              "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/696.png",
+              "source": "NewHorizonsCoreMod/2.9.84",
+              "archive_entry": "NewHorizonsCoreMod-f769c65f68a352160b1e35770f6f7c579716baa5/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/696.png",
+              "bytes": 1169,
+              "sha256": "32de04adbd185ab976c020e025319b8cb926b09ba569b36164e9c552d2b62d4c"
+            }
+          ],
+          "distinct_content_hashes": 2,
+          "precedence": "unknown",
+          "selected_source": null
+        },
+        {
+          "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/697.png",
+          "candidates": [
+            {
+              "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/697.png",
+              "source": "GT5-Unofficial/5.09.54.205",
+              "archive_entry": "GT5-Unofficial-a3e1e11241a814c9fa0dd0973d5699548428f689/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/697.png",
+              "bytes": 412,
+              "sha256": "5116277c9a9b251ea0e81ef965675a3d4c78dfea014276d9e4ed8614e5f1cea0"
+            },
+            {
+              "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/697.png",
+              "source": "NewHorizonsCoreMod/2.9.84",
+              "archive_entry": "NewHorizonsCoreMod-f769c65f68a352160b1e35770f6f7c579716baa5/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/697.png",
+              "bytes": 1171,
+              "sha256": "041b83b1f4498aefba2120c35ee216cda52e1443f8cecc0e77b21993f70c532f"
+            }
+          ],
+          "distinct_content_hashes": 2,
+          "precedence": "unknown",
+          "selected_source": null
+        }
+      ],
+      "casefold_aliases": [],
+      "full_manifest_sha256": "bf06d4f032119a44006766f34fe7ba29ed366368388e04cda798f4cd72a87848",
+      "auditor_source_sha256": "524f328a3357ad00b4cea449393676a78cce588e916e991a5f8603ae72e889aa",
+      "all_enumerated_asset_bytes_match_archive_and_tree": true,
+      "resource_precedence_verified": false,
+      "runtime_visual_verified": false,
+      "target_resources_modified": false,
+      "full_resource_migration": false,
+      "scope": "Four pinned legacy source archives only, not all GTNH mods or assembled runtime JARs. All candidate bytes retained; enumeration order is not load precedence. Generated build resources and external resource packs remain outside this inventory."
+    },
+    "exact_resource_collision_tests": {
+      "passed": true,
+      "tests_run": 7,
+      "test_source_sha256": "9f8e96a54905637fc59e21fd61f97aa0f2581548755c30e63414ae271c04dd89",
+      "auditor_source_sha256": "524f328a3357ad00b4cea449393676a78cce588e916e991a5f8603ae72e889aa",
+      "scope": "Synthetic temporary archives and extracted-tree mutations; real-source inventory is separately hash-bound.",
+      "production_assets_modified": false
     }
   },
-  "compat_jar_sha256": "f906ba61566d77132e03d9e2f092419fab3cae5b6050143159aefb39bf93408c",
+  "compat_jar_sha256": "243b9117436e6d9f27ebd8a8af7a26f168a5a13f934284e8766238d741007ae6",
   "source_quests": 3814,
   "structural_candidates": 47,
   "dependency_closed_active_quests": 2,
@@ -568,6 +1465,8 @@
   "full_parity": false,
   "game_runtime_verified": false,
   "isolated_mixin_transformation_verified": true,
+  "tested_model_classes_match_packaged_jar": true,
+  "typed_json_envelope_planner_composition_verified": true,
   "live_mixin_transformation_verified": false,
   "neoforge_transform_chain_verified": false,
   "client_visuals_verified": false,

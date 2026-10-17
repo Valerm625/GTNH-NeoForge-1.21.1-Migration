@@ -1,0 +1,77 @@
+{
+  "test": "legacy_typed_nbt_json_reader",
+  "passed": true,
+  "assertions": 2932,
+  "pinned_source_decoder_comparisons": 577,
+  "rejected_fixtures": 74,
+  "real_task_definition_fixtures": 2,
+  "real_player_save_fixtures": 0,
+  "actual_1_21_nbt_executed": true,
+  "negative_zero_blocked_with_raw_retained": true,
+  "world_or_storage_integration": false,
+  "source_commit": "815d738923d46e9083f988421e5329193e2e5940",
+  "source_file_sha256": {
+    "work/exact-sources/BetterQuesting/3.8.89-GTNH/src/main/java/betterquesting/api/utils/NBTConverter.java": "f6a0362455bc0d226974313cd507e8be304bcb52175e3a40f9a14da8516e0db0"
+  },
+  "source_sha256": {
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyTypedNbtJsonReader.java": "39bb4cc485f6948ae43cd22445bc5b83dcbfce007c224f2536a4fe1469eba274",
+    "work/migration/LegacyTypedNbtJsonReaderCheck.java": "43dafe65ed7c1f2276f173295babb9c631c21dc13351fcec29691dc1494b6afd",
+    "work/migration/test_legacy_typed_nbt_json_reader.py": "2e141a532183c8797043ba619565829123236ed4bb79366f23fae5bb37544e7f"
+  },
+  "reader_source_sha256": "39bb4cc485f6948ae43cd22445bc5b83dcbfce007c224f2536a4fe1469eba274",
+  "test_source_sha256": "43dafe65ed7c1f2276f173295babb9c631c21dc13351fcec29691dc1494b6afd",
+  "runner_sha256": "2e141a532183c8797043ba619565829123236ed4bb79366f23fae5bb37544e7f",
+  "compiled_reader_sha256": {
+    "org/gtnhmigration/compat/LegacyTypedNbtJsonReader$Diagnostic.class": "7ff1703fb95ac7698a48447ba847b316497aa8b29785ef498b7198d3315036f3",
+    "org/gtnhmigration/compat/LegacyTypedNbtJsonReader$Parser.class": "ea2858598307615ac031124cf8379d040d60141163d80b2c021fc796f914e2b9",
+    "org/gtnhmigration/compat/LegacyTypedNbtJsonReader$Rejected.class": "3eb237da999ca490199eddfa81a7acc0ba2414a496b2e956ff3345936ee2f3be",
+    "org/gtnhmigration/compat/LegacyTypedNbtJsonReader$Result.class": "67c66409376e3778f9d8e233e8f3bdc62eff717c8320fd2b7b4c0550d0a3aafd",
+    "org/gtnhmigration/compat/LegacyTypedNbtJsonReader.class": "2c02c97e090629873dde5689abb686eae0f4c0722e886ff4c03f2285896524b0"
+  },
+  "oracle_fixture_sha256": "781917ff71954e677a719089df41113d9222c0c5ad723498ac2293ae3c57c3bf",
+  "minecraft_jar_sha256": "26ca9c40d7e1681190b428583c38816852218e78df3f8bdb60a59a78503aec71",
+  "gson_jar_sha256": {
+    "gson-2.10.1.jar": "4241c14a7727c34feea6507ec801318a3d4a90f070e4525681079fb94ee4c593"
+  },
+  "task_definition_fixture_sha256": {
+    "work/source/GT-New-Horizons-Modpack-master/config/betterquesting/DefaultQuests/Quests/AndSoItBegins-AAAAAAAAAAAAAAAAAAAAAA==/SticksnStones-AAAAAAAAAAAAAAAAAAAAAg==.json": "b10a26b4012b0b407dd97bb5d486fbf4d819ee85c37248ea8ab61946e2d05f6b",
+    "work/source/GT-New-Horizons-Modpack-master/config/betterquesting/DefaultQuests/Quests/TheGreenRevoluti-GbGDSZsbQUekpRKT9ZPdjw==/CropSticks-O65QUnR0QuGSoQrsUMTB1g==.json": "f3a9e572ac771aef9f76c6121ad7a4cb3f5238df6b9adc76238df056d389a52e"
+  },
+  "source_methods_extracted_unchanged": [
+    "JSONtoNBT_Object",
+    "JSONtoNBT_Element",
+    "instanceNumber",
+    "fallbackTagID"
+  ],
+  "supported_tag_ids": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+  ],
+  "unsupported_tag_zero": "Original reader uses ID 0 for fallback inference; no lossless EndTag decoding is claimed.",
+  "negative_zero_gap": "Actual 1.21.1 FloatTag/DoubleTag public factories and loaders normalize negative zero. Such inputs retain original bytes and are rejected; no reflection or global access adaptation is used.",
+  "runtime_integrated": false,
+  "export_enabled": false,
+  "compat_jar_verified": false,
+  "oracle_boundaries": [
+    "Original BQ decoder methods execute unchanged with old NBT names backed by real 1.21.1 NBT; the old game runtime is not launched.",
+    "Logger and NBT-name adapters are fixtures. Source comparisons cover accepted, explicitly typed values, excluding lossy coercions and modern negative-zero limitations.",
+    "The two supplied files are task definitions, never player saves; all rejection and numeric-boundary fixtures are synthetic."
+  ],
+  "limitations": [
+    "Accepted means only this typed JSON decoding succeeded, not that a save is safe to activate.",
+    "Original UTF-8 bytes and JSON member-order ledger are retained separately; CompoundTag itself does not promise object-key iteration order.",
+    "Missing/zero/noncanonical tag suffixes, inferred arrays, malformed or ambiguous input, integer coercions, float overflow/underflow and negative zero are retained but not accepted.",
+    "Gson 2.10.1 non-lenient mode needs an additional lexical gate for raw string control characters, invalid escapes and uppercase literals; UTF-8 BOM inputs are conservatively retained but rejected.",
+    "Input limits: 16 MiB, depth 128, 1,000,000 nodes, numeric tokens at most 128 characters; limits reject without discarding original bytes.",
+    "No quest identity routing, envelope integration, FTB registry/save/event integration, world startup or on-disk player save modification."
+  ]
+}

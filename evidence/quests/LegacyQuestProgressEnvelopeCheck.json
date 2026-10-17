@@ -1,0 +1,52 @@
+{
+  "passed": true,
+  "assertions": 4857,
+  "source_comparisons": 1017,
+  "binary_round_trips": 567,
+  "rejected_documents": 32,
+  "actual_minecraft_nbt": true,
+  "source_routing_methods_executed": true,
+  "accepted_candidate_only": true,
+  "runtime_integrated": false,
+  "file_storage_integrated": false,
+  "json_import_supported": false,
+  "export_enabled": false,
+  "game_runtime_verified": false,
+  "source_commit": "815d738923d46e9083f988421e5329193e2e5940",
+  "source_sha256": {
+    "work/exact-sources/BetterQuesting/3.8.89-GTNH/src/main/java/betterquesting/questing/QuestDatabase.java": "5a127eb3c1cc6d329a9ee98fca27197383903c4f634baca80ef265b1481743e4",
+    "work/exact-sources/BetterQuesting/3.8.89-GTNH/src/main/java/betterquesting/questing/QuestInstance.java": "723ed08931294710f7e287eccc7f6c042c9ff4bf5dd500183522758b4726bffb",
+    "work/exact-sources/BetterQuesting/3.8.89-GTNH/src/main/java/betterquesting/questing/tasks/TaskStorage.java": "2d72c4226afa772240cd883d386b0eac5c6770e6679d725e5282f4368a38b8ac",
+    "work/exact-sources/BetterQuesting/3.8.89-GTNH/src/main/java/betterquesting/api/utils/NBTConverter.java": "f6a0362455bc0d226974313cd507e8be304bcb52175e3a40f9a14da8516e0db0",
+    "work/exact-sources/BetterQuesting/3.8.89-GTNH/src/main/java/betterquesting/api/utils/UuidConverter.java": "5f926386eeeb753dc0c18012ba5e4a6129211668e905fc0deb6d821e3819bc9f",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalEngine.java": "974899a867d5f9b2b18295e02c3fc56827064bdfa19c863158ea4b06b0a45758",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalProgressCodec.java": "596a64ed0ed06bad0f70731773078376ea9ab7ec3cba7dacdd8c10faac0fe856",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestProgressEnvelope.java": "43ed5abb2ed2595efa101b9e89d8d8409f84b62ca01cd9c62191ea5e92b9b9a0",
+    "work/migration/LegacyQuestProgressEnvelopeCheck.java": "32744fee6d9cab270a455e559d4c7a36d14f67b703349236545ad0e332f34c67",
+    "work/migration/test_legacy_quest_progress_envelope.py": "475b06e405a0f1152b784b86efbf39c509d53d9c6c425e66676ccc789c731902"
+  },
+  "minecraft_jar_sha256": "26ca9c40d7e1681190b428583c38816852218e78df3f8bdb60a59a78503aec71",
+  "oracle_fixture_sha256": "6e9c3b182020a69d94a6d7c597a02983012b19e7949a071b66e759ed1e581e93",
+  "compiled_classes_directory": "work/migration/quest-progress-envelope-check/classes",
+  "source_methods_extracted_unchanged": [
+    "QuestDatabase.readProgressFromNBT",
+    "QuestInstance.readProgressFromNBT",
+    "TaskStorage.readProgressFromNBT",
+    "NBTConverter.UuidValueType.tryReadId",
+    "NBTConverter.UuidValueType.readId",
+    "UuidConverter.convertLegacyId"
+  ],
+  "oracle_boundaries": [
+    "Six fixed routing methods execute unchanged; old NBT method names delegate to real 1.21.1 NBT.",
+    "The inner retrieval codec is reused, not an independent inner-persistence oracle in this test.",
+    "Canonical factory equality, definition registry, logger and touched-state bookkeeping are fixtures.",
+    "Strict rejection tests intentionally differ from source coercion, silent skip and placeholder fallback."
+  ],
+  "limitations": [
+    "Accepted means interpreted candidate state, not a runnable game save.",
+    "Quest completion compounds are opaque except their UUID; no claimed/timestamp or reward behavior is executed.",
+    "No JSON parsing, real player-save import, file order selection, storage writes or cross-file lifecycle.",
+    "No FTB task registration, events, network, game runtime, server/world startup or export integration.",
+    "Raw NBT tree preservation does not assert identical serialized/compressed bytes."
+  ]
+}

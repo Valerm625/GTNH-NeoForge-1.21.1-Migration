@@ -94,5 +94,7 @@ lock['inventory_event_world_verified']=False
 lock['unintegrated_helpers'] += [
  'LegacyRetrievalProgressCodec; source-compared NBT model, not connected to FTB save storage',
  'LegacyQuestRetrievalPlanner; ordered calculation model, no inventory transaction or quest export',
+ 'LegacyTypedNbtJsonReader; strict typed legacy JSON decoder, retains raw bytes; no world/save import',
+ 'LegacyQuestProgressEnvelope; exact identity and local merge candidate, no file store or task activation',
 ]
 (O/'docs/compat-mod.lock.json').write_text(json.dumps(lock,indent=2),encoding='utf-8',newline='\n');print(json.dumps(lock))

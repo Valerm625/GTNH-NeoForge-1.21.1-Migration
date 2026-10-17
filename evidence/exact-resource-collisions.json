@@ -1,0 +1,731 @@
+{
+  "passed": true,
+  "sources": [
+    {
+      "source": "NewHorizonsCoreMod/2.9.84",
+      "commit": "f769c65f68a352160b1e35770f6f7c579716baa5",
+      "archive_sha256": "927b1cfb5e2686ec6398dd8a6d94927767ed69ed0ea54fb2df934784e9a09071",
+      "lock_sha256": "68314f3b04a99f1e071e368a439f90932fb820f76403045189e0c59ca4002b17",
+      "resource_files": 833,
+      "resource_bytes": 47479617
+    },
+    {
+      "source": "GT5-Unofficial/5.09.54.205",
+      "commit": "a3e1e11241a814c9fa0dd0973d5699548428f689",
+      "archive_sha256": "3044b6cfeec1b1aad554739409af09e314f2f07c8138be08bd478bf183ae6b0f",
+      "lock_sha256": "1d82ec79eef3195aea71ff518af0970f21cb1b95962314c1babff65548b24f5f",
+      "resource_files": 14897,
+      "resource_bytes": 44237259
+    },
+    {
+      "source": "Railcraft/9.17.31",
+      "commit": "e8f755cd5eb22774d76eba4f8cd57057e2dfd5b9",
+      "archive_sha256": "13e11049a7b7cd6be2ba3ca8026dbbb6c8b36470d41905f3b96b5c8380834c76",
+      "lock_sha256": "b317c8cce804944032281dedd0793df5dae1f91a50662ac6888bb0f3ac3b3ea9",
+      "resource_files": 503,
+      "resource_bytes": 1928639
+    },
+    {
+      "source": "BetterQuesting/3.8.89-GTNH",
+      "commit": "815d738923d46e9083f988421e5329193e2e5940",
+      "archive_sha256": "7717db6ce9d8b70f6ef9601b3b23b9e339e7a33000a792d7ac145b3eb0183d10",
+      "lock_sha256": "e5dd1079d6e01b346dfdda5ac0dc6d7ceac2df82e9c7c64299d9b5c0f5f28263",
+      "resource_files": 34,
+      "resource_bytes": 886962
+    }
+  ],
+  "source_resource_occurrences": 16267,
+  "unique_exact_resource_paths": 16237,
+  "same_path_groups": 30,
+  "same_path_different_content_groups": 24,
+  "casefold_alias_groups": 0,
+  "extensions": {
+    ".bin": 1,
+    ".der": 2,
+    ".glsl": 48,
+    ".jpg": 1,
+    ".json": 15,
+    ".lang": 91,
+    ".mcmeta": 2115,
+    ".md": 202,
+    ".nbt": 2,
+    ".obj": 14,
+    ".ogg": 160,
+    ".png": 13474,
+    ".properties": 131,
+    ".wav": 2,
+    ".xcf": 4,
+    ".xml": 5
+  },
+  "collisions": [
+    {
+      "resource_path": "assets/gregtech/textures/blocks/iconsets/OVERLAY_ACCELERATOR.png",
+      "candidates": [
+        {
+          "resource_path": "assets/gregtech/textures/blocks/iconsets/OVERLAY_ACCELERATOR.png",
+          "source": "GT5-Unofficial/5.09.54.205",
+          "archive_entry": "GT5-Unofficial-a3e1e11241a814c9fa0dd0973d5699548428f689/src/main/resources/assets/gregtech/textures/blocks/iconsets/OVERLAY_ACCELERATOR.png",
+          "bytes": 159,
+          "sha256": "a3f6d0ea9530b8f950cc04318bbd2814af0ba1c61f1e6193206decabbe058e9d"
+        },
+        {
+          "resource_path": "assets/gregtech/textures/blocks/iconsets/OVERLAY_ACCELERATOR.png",
+          "source": "NewHorizonsCoreMod/2.9.84",
+          "archive_entry": "NewHorizonsCoreMod-f769c65f68a352160b1e35770f6f7c579716baa5/src/main/resources/assets/gregtech/textures/blocks/iconsets/OVERLAY_ACCELERATOR.png",
+          "bytes": 174,
+          "sha256": "1c4f108132538c97d6e9f916731595fce8c0bc2069cec3f75ceb121663cbe796"
+        }
+      ],
+      "distinct_content_hashes": 2,
+      "precedence": "unknown",
+      "selected_source": null
+    },
+    {
+      "resource_path": "assets/gregtech/textures/blocks/iconsets/OVERLAY_ACCELERATOR_ACTIVE.png",
+      "candidates": [
+        {
+          "resource_path": "assets/gregtech/textures/blocks/iconsets/OVERLAY_ACCELERATOR_ACTIVE.png",
+          "source": "GT5-Unofficial/5.09.54.205",
+          "archive_entry": "GT5-Unofficial-a3e1e11241a814c9fa0dd0973d5699548428f689/src/main/resources/assets/gregtech/textures/blocks/iconsets/OVERLAY_ACCELERATOR_ACTIVE.png",
+          "bytes": 197,
+          "sha256": "5430dd45fa982ec82c603346f62e32acfa4d67f83086e35b940c9ea8dd2bc5b2"
+        },
+        {
+          "resource_path": "assets/gregtech/textures/blocks/iconsets/OVERLAY_ACCELERATOR_ACTIVE.png",
+          "source": "NewHorizonsCoreMod/2.9.84",
+          "archive_entry": "NewHorizonsCoreMod-f769c65f68a352160b1e35770f6f7c579716baa5/src/main/resources/assets/gregtech/textures/blocks/iconsets/OVERLAY_ACCELERATOR_ACTIVE.png",
+          "bytes": 248,
+          "sha256": "f16fcfb75beb612345e6c342e9a80f14b2eda856484534a694f89a54b7b4d9bc"
+        }
+      ],
+      "distinct_content_hashes": 2,
+      "precedence": "unknown",
+      "selected_source": null
+    },
+    {
+      "resource_path": "assets/gregtech/textures/blocks/iconsets/OVERLAY_ACCELERATOR_ACTIVE.png.mcmeta",
+      "candidates": [
+        {
+          "resource_path": "assets/gregtech/textures/blocks/iconsets/OVERLAY_ACCELERATOR_ACTIVE.png.mcmeta",
+          "source": "GT5-Unofficial/5.09.54.205",
+          "archive_entry": "GT5-Unofficial-a3e1e11241a814c9fa0dd0973d5699548428f689/src/main/resources/assets/gregtech/textures/blocks/iconsets/OVERLAY_ACCELERATOR_ACTIVE.png.mcmeta",
+          "bytes": 45,
+          "sha256": "127f0fe4e07e04776a014c3e60879e0ce0bfcba4a783618cea975cbc94fe560f"
+        },
+        {
+          "resource_path": "assets/gregtech/textures/blocks/iconsets/OVERLAY_ACCELERATOR_ACTIVE.png.mcmeta",
+          "source": "NewHorizonsCoreMod/2.9.84",
+          "archive_entry": "NewHorizonsCoreMod-f769c65f68a352160b1e35770f6f7c579716baa5/src/main/resources/assets/gregtech/textures/blocks/iconsets/OVERLAY_ACCELERATOR_ACTIVE.png.mcmeta",
+          "bytes": 46,
+          "sha256": "b4f1c55c03896f33aa152ba30fe379137703c30b14e801214ed2720bc0ab5c92"
+        }
+      ],
+      "distinct_content_hashes": 2,
+      "precedence": "unknown",
+      "selected_source": null
+    },
+    {
+      "resource_path": "assets/gregtech/textures/blocks/iconsets/OVERLAY_ACCELERATOR_TE.png",
+      "candidates": [
+        {
+          "resource_path": "assets/gregtech/textures/blocks/iconsets/OVERLAY_ACCELERATOR_TE.png",
+          "source": "GT5-Unofficial/5.09.54.205",
+          "archive_entry": "GT5-Unofficial-a3e1e11241a814c9fa0dd0973d5699548428f689/src/main/resources/assets/gregtech/textures/blocks/iconsets/OVERLAY_ACCELERATOR_TE.png",
+          "bytes": 175,
+          "sha256": "2ecaee50bdd0cef8e2030ea4c22a1216d4db19e0e0e0d96f2d0034b997b95e2c"
+        },
+        {
+          "resource_path": "assets/gregtech/textures/blocks/iconsets/OVERLAY_ACCELERATOR_TE.png",
+          "source": "NewHorizonsCoreMod/2.9.84",
+          "archive_entry": "NewHorizonsCoreMod-f769c65f68a352160b1e35770f6f7c579716baa5/src/main/resources/assets/gregtech/textures/blocks/iconsets/OVERLAY_ACCELERATOR_TE.png",
+          "bytes": 197,
+          "sha256": "7a1fd2ee059121bce2e7ff25a7ab91d624dbc38922e44e41b49b9344b44ea590"
+        }
+      ],
+      "distinct_content_hashes": 2,
+      "precedence": "unknown",
+      "selected_source": null
+    },
+    {
+      "resource_path": "assets/gregtech/textures/blocks/iconsets/OVERLAY_ACCELERATOR_TE_ACTIVE.png",
+      "candidates": [
+        {
+          "resource_path": "assets/gregtech/textures/blocks/iconsets/OVERLAY_ACCELERATOR_TE_ACTIVE.png",
+          "source": "GT5-Unofficial/5.09.54.205",
+          "archive_entry": "GT5-Unofficial-a3e1e11241a814c9fa0dd0973d5699548428f689/src/main/resources/assets/gregtech/textures/blocks/iconsets/OVERLAY_ACCELERATOR_TE_ACTIVE.png",
+          "bytes": 209,
+          "sha256": "c1f6691f75f77ffd4db46d52933140145513df4cf77cee23b772fa67fa5864c3"
+        },
+        {
+          "resource_path": "assets/gregtech/textures/blocks/iconsets/OVERLAY_ACCELERATOR_TE_ACTIVE.png",
+          "source": "NewHorizonsCoreMod/2.9.84",
+          "archive_entry": "NewHorizonsCoreMod-f769c65f68a352160b1e35770f6f7c579716baa5/src/main/resources/assets/gregtech/textures/blocks/iconsets/OVERLAY_ACCELERATOR_TE_ACTIVE.png",
+          "bytes": 279,
+          "sha256": "123914d00d12840e9484783142408856b908e25c084bbf40363f7713bea6f76e"
+        }
+      ],
+      "distinct_content_hashes": 2,
+      "precedence": "unknown",
+      "selected_source": null
+    },
+    {
+      "resource_path": "assets/gregtech/textures/blocks/iconsets/OVERLAY_ACCELERATOR_TE_ACTIVE.png.mcmeta",
+      "candidates": [
+        {
+          "resource_path": "assets/gregtech/textures/blocks/iconsets/OVERLAY_ACCELERATOR_TE_ACTIVE.png.mcmeta",
+          "source": "GT5-Unofficial/5.09.54.205",
+          "archive_entry": "GT5-Unofficial-a3e1e11241a814c9fa0dd0973d5699548428f689/src/main/resources/assets/gregtech/textures/blocks/iconsets/OVERLAY_ACCELERATOR_TE_ACTIVE.png.mcmeta",
+          "bytes": 45,
+          "sha256": "127f0fe4e07e04776a014c3e60879e0ce0bfcba4a783618cea975cbc94fe560f"
+        },
+        {
+          "resource_path": "assets/gregtech/textures/blocks/iconsets/OVERLAY_ACCELERATOR_TE_ACTIVE.png.mcmeta",
+          "source": "NewHorizonsCoreMod/2.9.84",
+          "archive_entry": "NewHorizonsCoreMod-f769c65f68a352160b1e35770f6f7c579716baa5/src/main/resources/assets/gregtech/textures/blocks/iconsets/OVERLAY_ACCELERATOR_TE_ACTIVE.png.mcmeta",
+          "bytes": 46,
+          "sha256": "b4f1c55c03896f33aa152ba30fe379137703c30b14e801214ed2720bc0ab5c92"
+        }
+      ],
+      "distinct_content_hashes": 2,
+      "precedence": "unknown",
+      "selected_source": null
+    },
+    {
+      "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/606.png",
+      "candidates": [
+        {
+          "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/606.png",
+          "source": "GT5-Unofficial/5.09.54.205",
+          "archive_entry": "GT5-Unofficial-a3e1e11241a814c9fa0dd0973d5699548428f689/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/606.png",
+          "bytes": 380,
+          "sha256": "b4df55ae4c63a995dcd940643d4024fde819b485fbb40a2d78715138f3aef2a3"
+        },
+        {
+          "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/606.png",
+          "source": "NewHorizonsCoreMod/2.9.84",
+          "archive_entry": "NewHorizonsCoreMod-f769c65f68a352160b1e35770f6f7c579716baa5/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/606.png",
+          "bytes": 399,
+          "sha256": "547bfc1bb8a4702c787f4c2bde741a0f34c2d86d37900e62314e855c37af27f1"
+        }
+      ],
+      "distinct_content_hashes": 2,
+      "precedence": "unknown",
+      "selected_source": null
+    },
+    {
+      "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/607.png",
+      "candidates": [
+        {
+          "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/607.png",
+          "source": "GT5-Unofficial/5.09.54.205",
+          "archive_entry": "GT5-Unofficial-a3e1e11241a814c9fa0dd0973d5699548428f689/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/607.png",
+          "bytes": 350,
+          "sha256": "33ac7a69c982fbd4c7933ec07dd2956532def24201d89a5c75ae1125ca91340b"
+        },
+        {
+          "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/607.png",
+          "source": "NewHorizonsCoreMod/2.9.84",
+          "archive_entry": "NewHorizonsCoreMod-f769c65f68a352160b1e35770f6f7c579716baa5/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/607.png",
+          "bytes": 429,
+          "sha256": "e2a46e46357f3e7b8281c9c8f6de1715518cde6546dca884506c6e572994ea35"
+        }
+      ],
+      "distinct_content_hashes": 2,
+      "precedence": "unknown",
+      "selected_source": null
+    },
+    {
+      "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/608.png",
+      "candidates": [
+        {
+          "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/608.png",
+          "source": "GT5-Unofficial/5.09.54.205",
+          "archive_entry": "GT5-Unofficial-a3e1e11241a814c9fa0dd0973d5699548428f689/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/608.png",
+          "bytes": 372,
+          "sha256": "000638e6bcddb989cba9c339f7f6902a160530dfa7eb2175f65040881b9069d9"
+        },
+        {
+          "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/608.png",
+          "source": "NewHorizonsCoreMod/2.9.84",
+          "archive_entry": "NewHorizonsCoreMod-f769c65f68a352160b1e35770f6f7c579716baa5/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/608.png",
+          "bytes": 393,
+          "sha256": "12dfcba5a312e6a6a2953ec46920c6f137bd14130e5a10a6fb9bfe25d7fcac84"
+        }
+      ],
+      "distinct_content_hashes": 2,
+      "precedence": "unknown",
+      "selected_source": null
+    },
+    {
+      "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/615.png",
+      "candidates": [
+        {
+          "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/615.png",
+          "source": "GT5-Unofficial/5.09.54.205",
+          "archive_entry": "GT5-Unofficial-a3e1e11241a814c9fa0dd0973d5699548428f689/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/615.png",
+          "bytes": 519,
+          "sha256": "93391df47f998d5bc35a8c08948ed47eebabe8ba7933235fc162fc8c55bb4dfd"
+        },
+        {
+          "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/615.png",
+          "source": "NewHorizonsCoreMod/2.9.84",
+          "archive_entry": "NewHorizonsCoreMod-f769c65f68a352160b1e35770f6f7c579716baa5/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/615.png",
+          "bytes": 519,
+          "sha256": "93391df47f998d5bc35a8c08948ed47eebabe8ba7933235fc162fc8c55bb4dfd"
+        }
+      ],
+      "distinct_content_hashes": 1,
+      "precedence": "unknown",
+      "selected_source": null
+    },
+    {
+      "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/616.png",
+      "candidates": [
+        {
+          "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/616.png",
+          "source": "GT5-Unofficial/5.09.54.205",
+          "archive_entry": "GT5-Unofficial-a3e1e11241a814c9fa0dd0973d5699548428f689/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/616.png",
+          "bytes": 507,
+          "sha256": "079feebda7bb18ceaf482e99772778bb3f06aa668ea229fd4cd8cc6c3ef7c4b3"
+        },
+        {
+          "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/616.png",
+          "source": "NewHorizonsCoreMod/2.9.84",
+          "archive_entry": "NewHorizonsCoreMod-f769c65f68a352160b1e35770f6f7c579716baa5/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/616.png",
+          "bytes": 507,
+          "sha256": "079feebda7bb18ceaf482e99772778bb3f06aa668ea229fd4cd8cc6c3ef7c4b3"
+        }
+      ],
+      "distinct_content_hashes": 1,
+      "precedence": "unknown",
+      "selected_source": null
+    },
+    {
+      "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/617.png",
+      "candidates": [
+        {
+          "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/617.png",
+          "source": "GT5-Unofficial/5.09.54.205",
+          "archive_entry": "GT5-Unofficial-a3e1e11241a814c9fa0dd0973d5699548428f689/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/617.png",
+          "bytes": 512,
+          "sha256": "95345946386fc0d246fca78e8ed41f6e13ad478411776633d827c13405aea33d"
+        },
+        {
+          "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/617.png",
+          "source": "NewHorizonsCoreMod/2.9.84",
+          "archive_entry": "NewHorizonsCoreMod-f769c65f68a352160b1e35770f6f7c579716baa5/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/617.png",
+          "bytes": 512,
+          "sha256": "95345946386fc0d246fca78e8ed41f6e13ad478411776633d827c13405aea33d"
+        }
+      ],
+      "distinct_content_hashes": 1,
+      "precedence": "unknown",
+      "selected_source": null
+    },
+    {
+      "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/635.png",
+      "candidates": [
+        {
+          "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/635.png",
+          "source": "GT5-Unofficial/5.09.54.205",
+          "archive_entry": "GT5-Unofficial-a3e1e11241a814c9fa0dd0973d5699548428f689/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/635.png",
+          "bytes": 308,
+          "sha256": "666e0e0ae95c2c3e44796ab85cb01ead5396bba8c0f4298b120ec0df80670ddd"
+        },
+        {
+          "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/635.png",
+          "source": "NewHorizonsCoreMod/2.9.84",
+          "archive_entry": "NewHorizonsCoreMod-f769c65f68a352160b1e35770f6f7c579716baa5/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/635.png",
+          "bytes": 338,
+          "sha256": "b8ee500e173d79297a5624823c1190fe84a998bc12103cf80047ebac28d87258"
+        }
+      ],
+      "distinct_content_hashes": 2,
+      "precedence": "unknown",
+      "selected_source": null
+    },
+    {
+      "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/636.png",
+      "candidates": [
+        {
+          "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/636.png",
+          "source": "GT5-Unofficial/5.09.54.205",
+          "archive_entry": "GT5-Unofficial-a3e1e11241a814c9fa0dd0973d5699548428f689/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/636.png",
+          "bytes": 308,
+          "sha256": "b148f03b0ed603aa04c7a1f9d6c13b20c80fd00f21640b50948863d0eaae8522"
+        },
+        {
+          "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/636.png",
+          "source": "NewHorizonsCoreMod/2.9.84",
+          "archive_entry": "NewHorizonsCoreMod-f769c65f68a352160b1e35770f6f7c579716baa5/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/636.png",
+          "bytes": 338,
+          "sha256": "c89484fcc06c58d112b52cd010342411a0418dc73f5fb29ce7aab820d86967e7"
+        }
+      ],
+      "distinct_content_hashes": 2,
+      "precedence": "unknown",
+      "selected_source": null
+    },
+    {
+      "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/637.png",
+      "candidates": [
+        {
+          "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/637.png",
+          "source": "GT5-Unofficial/5.09.54.205",
+          "archive_entry": "GT5-Unofficial-a3e1e11241a814c9fa0dd0973d5699548428f689/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/637.png",
+          "bytes": 308,
+          "sha256": "058bace9a2c7c4889100425ebc1cfabf062a09a5ba537a8ddfac6b8c09fdb70e"
+        },
+        {
+          "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/637.png",
+          "source": "NewHorizonsCoreMod/2.9.84",
+          "archive_entry": "NewHorizonsCoreMod-f769c65f68a352160b1e35770f6f7c579716baa5/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/637.png",
+          "bytes": 338,
+          "sha256": "977a10b621c0df23713c37acc991a7f4ba6945327e777a5678ad67c9d5be815c"
+        }
+      ],
+      "distinct_content_hashes": 2,
+      "precedence": "unknown",
+      "selected_source": null
+    },
+    {
+      "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/645.png",
+      "candidates": [
+        {
+          "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/645.png",
+          "source": "GT5-Unofficial/5.09.54.205",
+          "archive_entry": "GT5-Unofficial-a3e1e11241a814c9fa0dd0973d5699548428f689/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/645.png",
+          "bytes": 418,
+          "sha256": "07d31ebf1c3701699795f26e1e224dbcef3dc1e7ee780444efe38cd552e0b3f4"
+        },
+        {
+          "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/645.png",
+          "source": "NewHorizonsCoreMod/2.9.84",
+          "archive_entry": "NewHorizonsCoreMod-f769c65f68a352160b1e35770f6f7c579716baa5/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/645.png",
+          "bytes": 435,
+          "sha256": "95df9b3cc740b51235d311f3db284f04930dc0babc34fb441fa7abb60382ec6f"
+        }
+      ],
+      "distinct_content_hashes": 2,
+      "precedence": "unknown",
+      "selected_source": null
+    },
+    {
+      "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/646.png",
+      "candidates": [
+        {
+          "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/646.png",
+          "source": "GT5-Unofficial/5.09.54.205",
+          "archive_entry": "GT5-Unofficial-a3e1e11241a814c9fa0dd0973d5699548428f689/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/646.png",
+          "bytes": 411,
+          "sha256": "e8328fde478fb5ecffdaa994e4d1b4966c2c5f4fc58c0c9c9aa1a72cbd59d727"
+        },
+        {
+          "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/646.png",
+          "source": "NewHorizonsCoreMod/2.9.84",
+          "archive_entry": "NewHorizonsCoreMod-f769c65f68a352160b1e35770f6f7c579716baa5/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/646.png",
+          "bytes": 433,
+          "sha256": "96c67d46409644f43022ae3648679f588e0d4de734a55bcdcdae8574d99c3c22"
+        }
+      ],
+      "distinct_content_hashes": 2,
+      "precedence": "unknown",
+      "selected_source": null
+    },
+    {
+      "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/647.png",
+      "candidates": [
+        {
+          "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/647.png",
+          "source": "GT5-Unofficial/5.09.54.205",
+          "archive_entry": "GT5-Unofficial-a3e1e11241a814c9fa0dd0973d5699548428f689/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/647.png",
+          "bytes": 421,
+          "sha256": "9b292d074c8ac313727c9bcc939b85e6fd42e593d0d6bdde6b362ec77eb146bb"
+        },
+        {
+          "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/647.png",
+          "source": "NewHorizonsCoreMod/2.9.84",
+          "archive_entry": "NewHorizonsCoreMod-f769c65f68a352160b1e35770f6f7c579716baa5/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/647.png",
+          "bytes": 447,
+          "sha256": "e3a6748f0fa05f1f0512db1bf3fd1de88aec642fe0ff8ec216aa051c6f214bf2"
+        }
+      ],
+      "distinct_content_hashes": 2,
+      "precedence": "unknown",
+      "selected_source": null
+    },
+    {
+      "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/655.png",
+      "candidates": [
+        {
+          "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/655.png",
+          "source": "GT5-Unofficial/5.09.54.205",
+          "archive_entry": "GT5-Unofficial-a3e1e11241a814c9fa0dd0973d5699548428f689/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/655.png",
+          "bytes": 444,
+          "sha256": "d0078b1c2db7c3449a8e4bcc4697c71b72c42aae7583e39684c7e45355a7ce0c"
+        },
+        {
+          "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/655.png",
+          "source": "NewHorizonsCoreMod/2.9.84",
+          "archive_entry": "NewHorizonsCoreMod-f769c65f68a352160b1e35770f6f7c579716baa5/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/655.png",
+          "bytes": 864,
+          "sha256": "5e8f2b92e6bf5240a85ef2c13ae29c2a18ab733ad963e42611f51a9a34a6b06d"
+        }
+      ],
+      "distinct_content_hashes": 2,
+      "precedence": "unknown",
+      "selected_source": null
+    },
+    {
+      "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/656.png",
+      "candidates": [
+        {
+          "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/656.png",
+          "source": "GT5-Unofficial/5.09.54.205",
+          "archive_entry": "GT5-Unofficial-a3e1e11241a814c9fa0dd0973d5699548428f689/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/656.png",
+          "bytes": 442,
+          "sha256": "c9c3eaea9d01ecb5847ee292b9fa00c4059f50281299fcd5d02d907d027e4bca"
+        },
+        {
+          "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/656.png",
+          "source": "NewHorizonsCoreMod/2.9.84",
+          "archive_entry": "NewHorizonsCoreMod-f769c65f68a352160b1e35770f6f7c579716baa5/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/656.png",
+          "bytes": 864,
+          "sha256": "a0eae57bbd083d43677bb338e4ecbbe8b824af4e22b9e484e84a06250b7789da"
+        }
+      ],
+      "distinct_content_hashes": 2,
+      "precedence": "unknown",
+      "selected_source": null
+    },
+    {
+      "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/657.png",
+      "candidates": [
+        {
+          "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/657.png",
+          "source": "GT5-Unofficial/5.09.54.205",
+          "archive_entry": "GT5-Unofficial-a3e1e11241a814c9fa0dd0973d5699548428f689/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/657.png",
+          "bytes": 455,
+          "sha256": "b8c1ba252ace0256c89fa4c971ee89af38c08748a1831b9571fd996654daaa2a"
+        },
+        {
+          "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/657.png",
+          "source": "NewHorizonsCoreMod/2.9.84",
+          "archive_entry": "NewHorizonsCoreMod-f769c65f68a352160b1e35770f6f7c579716baa5/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/657.png",
+          "bytes": 866,
+          "sha256": "8449c358b6559b65c320264e50586f5e724c4e28ea0c41820d2d297ddf4f9030"
+        }
+      ],
+      "distinct_content_hashes": 2,
+      "precedence": "unknown",
+      "selected_source": null
+    },
+    {
+      "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/675.png",
+      "candidates": [
+        {
+          "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/675.png",
+          "source": "GT5-Unofficial/5.09.54.205",
+          "archive_entry": "GT5-Unofficial-a3e1e11241a814c9fa0dd0973d5699548428f689/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/675.png",
+          "bytes": 628,
+          "sha256": "789de95ad3d11fdce815de34b2fd7faf38b0fc4f35d8fdba0a3b91f96fce829a"
+        },
+        {
+          "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/675.png",
+          "source": "NewHorizonsCoreMod/2.9.84",
+          "archive_entry": "NewHorizonsCoreMod-f769c65f68a352160b1e35770f6f7c579716baa5/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/675.png",
+          "bytes": 628,
+          "sha256": "789de95ad3d11fdce815de34b2fd7faf38b0fc4f35d8fdba0a3b91f96fce829a"
+        }
+      ],
+      "distinct_content_hashes": 1,
+      "precedence": "unknown",
+      "selected_source": null
+    },
+    {
+      "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/676.png",
+      "candidates": [
+        {
+          "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/676.png",
+          "source": "GT5-Unofficial/5.09.54.205",
+          "archive_entry": "GT5-Unofficial-a3e1e11241a814c9fa0dd0973d5699548428f689/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/676.png",
+          "bytes": 617,
+          "sha256": "b8cbe1c4a7e07ead949a62351a86e52d64937c753c5f61bbd30e076ef95976d8"
+        },
+        {
+          "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/676.png",
+          "source": "NewHorizonsCoreMod/2.9.84",
+          "archive_entry": "NewHorizonsCoreMod-f769c65f68a352160b1e35770f6f7c579716baa5/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/676.png",
+          "bytes": 617,
+          "sha256": "b8cbe1c4a7e07ead949a62351a86e52d64937c753c5f61bbd30e076ef95976d8"
+        }
+      ],
+      "distinct_content_hashes": 1,
+      "precedence": "unknown",
+      "selected_source": null
+    },
+    {
+      "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/677.png",
+      "candidates": [
+        {
+          "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/677.png",
+          "source": "GT5-Unofficial/5.09.54.205",
+          "archive_entry": "GT5-Unofficial-a3e1e11241a814c9fa0dd0973d5699548428f689/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/677.png",
+          "bytes": 624,
+          "sha256": "7d07e4a2703d086af66378d0f509ae031e9641b6b9fa31ebe418468af8dc3f2b"
+        },
+        {
+          "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/677.png",
+          "source": "NewHorizonsCoreMod/2.9.84",
+          "archive_entry": "NewHorizonsCoreMod-f769c65f68a352160b1e35770f6f7c579716baa5/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/677.png",
+          "bytes": 624,
+          "sha256": "7d07e4a2703d086af66378d0f509ae031e9641b6b9fa31ebe418468af8dc3f2b"
+        }
+      ],
+      "distinct_content_hashes": 1,
+      "precedence": "unknown",
+      "selected_source": null
+    },
+    {
+      "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/685.png",
+      "candidates": [
+        {
+          "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/685.png",
+          "source": "GT5-Unofficial/5.09.54.205",
+          "archive_entry": "GT5-Unofficial-a3e1e11241a814c9fa0dd0973d5699548428f689/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/685.png",
+          "bytes": 408,
+          "sha256": "a7afeb5a900895e5bf79482cf2f2c301d1701668d8e006385bd7630efbece61d"
+        },
+        {
+          "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/685.png",
+          "source": "NewHorizonsCoreMod/2.9.84",
+          "archive_entry": "NewHorizonsCoreMod-f769c65f68a352160b1e35770f6f7c579716baa5/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/685.png",
+          "bytes": 519,
+          "sha256": "46c54a305c239413ff47237c9abaa2716b4421d77707536433f3f75ed3a81d58"
+        }
+      ],
+      "distinct_content_hashes": 2,
+      "precedence": "unknown",
+      "selected_source": null
+    },
+    {
+      "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/686.png",
+      "candidates": [
+        {
+          "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/686.png",
+          "source": "GT5-Unofficial/5.09.54.205",
+          "archive_entry": "GT5-Unofficial-a3e1e11241a814c9fa0dd0973d5699548428f689/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/686.png",
+          "bytes": 403,
+          "sha256": "ad726d711ffb4c10734d89cef83772ee5d703927b0bf66809ee4c613f30aab66"
+        },
+        {
+          "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/686.png",
+          "source": "NewHorizonsCoreMod/2.9.84",
+          "archive_entry": "NewHorizonsCoreMod-f769c65f68a352160b1e35770f6f7c579716baa5/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/686.png",
+          "bytes": 514,
+          "sha256": "08fd051e8e066e27a2bcf88cf19868219c8eb852f939d3f8e491aba00e0a4b6b"
+        }
+      ],
+      "distinct_content_hashes": 2,
+      "precedence": "unknown",
+      "selected_source": null
+    },
+    {
+      "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/687.png",
+      "candidates": [
+        {
+          "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/687.png",
+          "source": "GT5-Unofficial/5.09.54.205",
+          "archive_entry": "GT5-Unofficial-a3e1e11241a814c9fa0dd0973d5699548428f689/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/687.png",
+          "bytes": 447,
+          "sha256": "015a4685cb9c5fdf022242418937b92f3b40c5379a6dd24886153e009719b5d2"
+        },
+        {
+          "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/687.png",
+          "source": "NewHorizonsCoreMod/2.9.84",
+          "archive_entry": "NewHorizonsCoreMod-f769c65f68a352160b1e35770f6f7c579716baa5/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/687.png",
+          "bytes": 537,
+          "sha256": "c18a10f23bb1051144a14e115f3c6471923fe05f1ce265d8b91e57df861b062d"
+        }
+      ],
+      "distinct_content_hashes": 2,
+      "precedence": "unknown",
+      "selected_source": null
+    },
+    {
+      "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/695.png",
+      "candidates": [
+        {
+          "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/695.png",
+          "source": "GT5-Unofficial/5.09.54.205",
+          "archive_entry": "GT5-Unofficial-a3e1e11241a814c9fa0dd0973d5699548428f689/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/695.png",
+          "bytes": 419,
+          "sha256": "22ee5f79d195bf341916a2c58069b821ab4406e76ffa078e2e333913f7c2c4b8"
+        },
+        {
+          "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/695.png",
+          "source": "NewHorizonsCoreMod/2.9.84",
+          "archive_entry": "NewHorizonsCoreMod-f769c65f68a352160b1e35770f6f7c579716baa5/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/695.png",
+          "bytes": 1166,
+          "sha256": "e877d489e9478f51ba7d872a4ffd2185369aa27d990a217e397f4264b6916785"
+        }
+      ],
+      "distinct_content_hashes": 2,
+      "precedence": "unknown",
+      "selected_source": null
+    },
+    {
+      "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/696.png",
+      "candidates": [
+        {
+          "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/696.png",
+          "source": "GT5-Unofficial/5.09.54.205",
+          "archive_entry": "GT5-Unofficial-a3e1e11241a814c9fa0dd0973d5699548428f689/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/696.png",
+          "bytes": 409,
+          "sha256": "a8c930644b3d0233bf5fd8a7724bd6eb9f8060d56e74a7cc997980d89bb8ff51"
+        },
+        {
+          "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/696.png",
+          "source": "NewHorizonsCoreMod/2.9.84",
+          "archive_entry": "NewHorizonsCoreMod-f769c65f68a352160b1e35770f6f7c579716baa5/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/696.png",
+          "bytes": 1169,
+          "sha256": "32de04adbd185ab976c020e025319b8cb926b09ba569b36164e9c552d2b62d4c"
+        }
+      ],
+      "distinct_content_hashes": 2,
+      "precedence": "unknown",
+      "selected_source": null
+    },
+    {
+      "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/697.png",
+      "candidates": [
+        {
+          "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/697.png",
+          "source": "GT5-Unofficial/5.09.54.205",
+          "archive_entry": "GT5-Unofficial-a3e1e11241a814c9fa0dd0973d5699548428f689/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/697.png",
+          "bytes": 412,
+          "sha256": "5116277c9a9b251ea0e81ef965675a3d4c78dfea014276d9e4ed8614e5f1cea0"
+        },
+        {
+          "resource_path": "assets/gregtech/textures/items/gt.metaitem.01/697.png",
+          "source": "NewHorizonsCoreMod/2.9.84",
+          "archive_entry": "NewHorizonsCoreMod-f769c65f68a352160b1e35770f6f7c579716baa5/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/697.png",
+          "bytes": 1171,
+          "sha256": "041b83b1f4498aefba2120c35ee216cda52e1443f8cecc0e77b21993f70c532f"
+        }
+      ],
+      "distinct_content_hashes": 2,
+      "precedence": "unknown",
+      "selected_source": null
+    }
+  ],
+  "casefold_aliases": [],
+  "full_manifest_sha256": "bf06d4f032119a44006766f34fe7ba29ed366368388e04cda798f4cd72a87848",
+  "auditor_source_sha256": "524f328a3357ad00b4cea449393676a78cce588e916e991a5f8603ae72e889aa",
+  "all_enumerated_asset_bytes_match_archive_and_tree": true,
+  "resource_precedence_verified": false,
+  "runtime_visual_verified": false,
+  "target_resources_modified": false,
+  "full_resource_migration": false,
+  "scope": "Four pinned legacy source archives only, not all GTNH mods or assembled runtime JARs. All candidate bytes retained; enumeration order is not load precedence. Generated build resources and external resource packs remain outside this inventory."
+}

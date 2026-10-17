@@ -1,0 +1,29 @@
+{
+  "test": "typed_json_envelope_planner_composition",
+  "passed": true,
+  "assertions": 22,
+  "actual_definition_fixtures": 1,
+  "actual_player_save_fixtures": 0,
+  "synthetic_progress_used": true,
+  "item_predicate_fixture": true,
+  "runtime_integrated": false,
+  "export_enabled": false,
+  "game_runtime_verified": false,
+  "source_sha256": {
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalEngine.java": "974899a867d5f9b2b18295e02c3fc56827064bdfa19c863158ea4b06b0a45758",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalProgressCodec.java": "596a64ed0ed06bad0f70731773078376ea9ab7ec3cba7dacdd8c10faac0fe856",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestRetrievalPlanner.java": "bf680e9df76a8844bfed402feaf4b535624baf6644ec3de4093f0aab7b68c0e2",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestProgressEnvelope.java": "43ed5abb2ed2595efa101b9e89d8d8409f84b62ca01cd9c62191ea5e92b9b9a0",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyTypedNbtJsonReader.java": "39bb4cc485f6948ae43cd22445bc5b83dcbfce007c224f2536a4fe1469eba274",
+    "work/migration/LegacyProgressImportPipelineCheck.java": "ce771b954616b6aa68eea7a65a8640b747a4292c7f5b3b40e7b1fb6e10f5420d",
+    "work/migration/test_legacy_progress_import_pipeline.py": "89cc384af88085c2e1a834d3546e7bb7a64c56f2591a1d4a8429240b866d3a6c"
+  },
+  "definition_fixture_sha256": "b10a26b4012b0b407dd97bb5d486fbf4d819ee85c37248ea8ab61946e2d05f6b",
+  "minecraft_jar_sha256": "26ca9c40d7e1681190b428583c38816852218e78df3f8bdb60a59a78503aec71",
+  "limitations": [
+    "Uses a real mainline quest definition but synthetic player progress, authorization and immutable symbolic item predicates.",
+    "logWood is a source-symbol fixture, not a mapped modern item tag or a verified registry membership set.",
+    "Accepted data is only an in-memory candidate; no file storage, quest completion, reward, party lifecycle or FTB operation runs.",
+    "Individual fixed-source differential checks remain separate; this is a composition check, not a new original runtime oracle."
+  ]
+}

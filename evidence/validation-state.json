@@ -42,5 +42,7 @@
   "retrieval_progress_codec": "source-compared actual NBT model; no save bridge",
   "quest_retrieval_planner": "source-compared ordered model; no inventory transaction",
   "inventory_observer": "source queue comparison and actual menu/compiled bridge checks; game events unverified",
-  "ore_resource_subset": "34 exact primary-source PNGs and 34 transparent derived layers; rendering unverified"
+  "ore_resource_subset": "34 exact primary-source PNGs and 34 transparent derived layers; rendering unverified",
+  "legacy_progress_import": "typed JSON and identity envelope composed with planner in memory; synthetic player progress, no world/file-save import",
+  "source_asset_collisions": "four exact archives checked; all same-path candidates retained, precedence unresolved"
 }

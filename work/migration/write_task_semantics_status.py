@@ -11,6 +11,9 @@ E=R/'work/migration/retrieval-engine-check'
 C=R/'work/migration/retrieval-progress-check'
 L=R/'work/migration/quest-planner-check'
 I=R/'work/migration/inventory-observer-check'
+J=R/'work/migration/typed-nbt-json-check'
+G=R/'work/migration/quest-progress-envelope-check'
+T=R/'work/migration/progress-import-pipeline-check'
 
 
 def read(path):
@@ -58,6 +61,12 @@ for name,expected in observer['adapter_source_sha256'].items():
     assert sha(R/'work/compat-mod/src/main/java/org/gtnhmigration/compat'/(name+'.java'))==expected,name
 assert observer['test_source_sha256']==sha(R/'work/migration/LegacyInventoryObserverCheck.java')
 assert observer['runner_sha256']==sha(R/'work/migration/test_legacy_inventory_observer.py')
+for directory,name in [(J,'LegacyTypedNbtJsonReaderCheck'),(G,'LegacyQuestProgressEnvelopeCheck'),(T,'LegacyProgressImportPipelineCheck')]:
+    value=read(directory/(name+'.json'))
+    assert value['passed'] and not value['runtime_integrated'] and not value['export_enabled'],name
+    for relative,expected in value['source_sha256'].items():
+        assert sha(R/relative)==expected,relative
+    shutil.copy2(directory/(name+'.json'),Q/(name+'.json'))
 hunt=read(Q/'LegacyHuntAdapterCheck.json')
 jar=O/'mods/gtnh-migration-compat-0.1.0.jar'
 assert observer['compat_jar_sha256']==sha(jar)
@@ -71,7 +80,7 @@ for relative, expected in hunt['source_sha256'].items():
     assert sha(R/relative)==expected,relative
 assert matcher['adapter_source_sha256']==sha(R/'work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalStackMatcher.java')
 with zipfile.ZipFile(jar) as compiled:
-    for directory,prefix in [(C,'LegacyRetrievalProgressCodec'),(L,'LegacyQuestRetrievalPlanner')]:
+    for directory,prefix in [(C,'LegacyRetrievalProgressCodec'),(L,'LegacyQuestRetrievalPlanner'),(J,'LegacyTypedNbtJsonReader'),(G/'classes','LegacyQuestProgressEnvelope')]:
         classes=sorted((directory/'org/gtnhmigration/compat').glob(prefix+'*.class'))
         assert classes,prefix
         expected_entries={path.relative_to(directory).as_posix() for path in classes}
@@ -79,6 +88,8 @@ with zipfile.ZipFile(jar) as compiled:
         assert packaged_entries==expected_entries,'Stale or missing model class: '+prefix
         for path in classes:
             assert compiled.read(path.relative_to(directory).as_posix())==path.read_bytes(),'Packaged model differs from tested model: '+prefix
+    for path in (T/'org/gtnhmigration/compat').glob('*.class'):
+        assert compiled.read(path.relative_to(T).as_posix())==path.read_bytes(),'Composition used a different model class: '+path.name
     engine_classes=sorted((E/'org/gtnhmigration/compat').glob('LegacyRetrievalEngine*.class'))
     assert engine_classes
     expected_engine_entries={path.relative_to(E).as_posix() for path in engine_classes}
@@ -92,6 +103,7 @@ with zipfile.ZipFile(jar) as compiled:
 checks={}
 for name in ['IsolatedMixinTransformationCheck','LegacyRetrievalEngineCheck','LegacyRetrievalStackMatcherCheck','LegacyCraftingShapeCheck','LegacyHuntAdapterCheck',
              'LegacyRetrievalProgressCodecCheck','LegacyQuestRetrievalPlannerCheck','LegacyInventoryObserverCheck',
+             'LegacyTypedNbtJsonReaderCheck','LegacyQuestProgressEnvelopeCheck','LegacyProgressImportPipelineCheck',
              'QuestAdapterShapeCheck','LegacyRetrievalCounterCheck','QuestSnbtCheck',
              'checkpoint-verification','crafting-task-adapter','hunt-task-adapter','location-task-boundary']:
     checks[name]=read(Q/(name+'.json'))
@@ -105,6 +117,15 @@ for field,filename in [('test_source_sha256','test_exact_ore_resources.py'),('po
     assert ore_tests[field]==sha(R/'work/migration'/filename),filename
 checks['exact_ore_resources']=ore
 checks['exact_ore_resource_tests']=ore_tests
+collisions=read(R/'evidence/exact-resource-collisions.json')
+collision_tests=read(R/'evidence/exact-resource-collision-tests.json')
+assert collisions['passed'] and collision_tests['passed']
+assert collisions['auditor_source_sha256']==sha(R/'work/migration/audit_exact_resource_collisions.py')
+assert collision_tests['auditor_source_sha256']==collisions['auditor_source_sha256']
+assert collision_tests['test_source_sha256']==sha(R/'work/migration/test_exact_resource_collisions.py')
+assert collisions['full_manifest_sha256']==sha(R/'work/migration/resource-collision-check/asset-manifest.json')
+checks['exact_resource_collisions']=collisions
+checks['exact_resource_collision_tests']=collision_tests
 
 manifest=read(Q/'export-manifest.json')
 runtime=read(V/'test-runtime-files.json')
@@ -113,7 +134,7 @@ assert compat_row['sha256']==sha(jar)
 assert 'eula=false' in (O/'eula.txt').read_text(encoding='utf-8')
 report={
     'phase_date_shanghai':'2026-10-18',
-    'phase':'inventory detection timing; retrieval persistence and ordered planner models; exact mainline ore resource bytes',
+    'phase':'typed legacy JSON and exact progress identity models; composed retrieval planning; unresolved source asset collisions',
     'checks':checks,
     'compat_jar_sha256':sha(jar),
     'source_quests':manifest['source_quests'],
@@ -124,6 +145,8 @@ report={
     'full_parity':False,
     'game_runtime_verified':False,
     'isolated_mixin_transformation_verified':True,
+    'tested_model_classes_match_packaged_jar':True,
+    'typed_json_envelope_planner_composition_verified':True,
     'live_mixin_transformation_verified':False,
     'neoforge_transform_chain_verified':False,
     'client_visuals_verified':False,
@@ -139,6 +162,8 @@ metadata['validation_state'].update({
     'quest_retrieval_planner':'source-compared ordered model; no inventory transaction',
     'inventory_observer':'source queue comparison and actual menu/compiled bridge checks; game events unverified',
     'ore_resource_subset':'34 exact primary-source PNGs and 34 transparent derived layers; rendering unverified',
+    'legacy_progress_import':'typed JSON and identity envelope composed with planner in memory; synthetic player progress, no world/file-save import',
+    'source_asset_collisions':'four exact archives checked; all same-path candidates retained, precedence unresolved',
     'full_feature_parity':False,'client_rendering_verified':False,
 })
 (O/'migration-metadata.json').write_text(json.dumps(metadata,ensure_ascii=False,indent=2),encoding='utf-8')
@@ -154,5 +179,7 @@ text+=f"\n多物品检索纯引擎通过 {engine['source_comparisons']} 次锁�
 text+=f"\n新增进度编解码模型通过 {codec['source_comparisons']} 次源码对照与 {codec['binary_nbt_roundtrips']} 次真实 1.21 NBT 往返；有序任务规划模型通过 {planner['source_comparisons']} 次源码对照。两者仍未接入游戏存档、库存事务或导出。\n"
 text+='\n已接入标记检索任务的库存变化排队：包含空槽变化及初始监听器同步，在 Pre tick 重新扫描。完整游戏事件执行仍未验证。\n'
 text+=f"\n{ore['primary_base_pngs_verified_from_archive_through_target']} 张矿石基础图已与锁定主线源码归档逐字节一致；另外 {ore['derived_secondary_pngs_verified_transparent']} 张透明派生层不算原图。仍需客户端渲染、加载优先级及材质着色验证。\n"
+text+='\n旧格式 typed JSON、完整 quest UUID/task index/factory 进度外层与纯规划器已串联验证；真实任务定义参与检查，玩家进度仍为合成数据。未知字段或身份整份拒绝并保留原件；未实现世界存档导入、库存事务或 FTB 完成/奖励桥接。现代 NBT 负零归一化仍是明确拒绝的值域缺口。\n'
+text+=f"\n四份锁定旧源码共有 {collisions['source_resource_occurrences']} 个资源出现记录；{collisions['same_path_groups']} 组同路径候选中 {collisions['same_path_different_content_groups']} 组字节不同，双方来源均保留，未猜测加载优先级或覆盖目标资源。\n"
 status.write_text(text,encoding='utf-8')
 print(json.dumps({k:v for k,v in report.items() if k!='checks'},ensure_ascii=False))

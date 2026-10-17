@@ -1,0 +1,8 @@
+{
+  "passed": true,
+  "tests_run": 7,
+  "test_source_sha256": "9f8e96a54905637fc59e21fd61f97aa0f2581548755c30e63414ae271c04dd89",
+  "auditor_source_sha256": "524f328a3357ad00b4cea449393676a78cce588e916e991a5f8603ae72e889aa",
+  "scope": "Synthetic temporary archives and extracted-tree mutations; real-source inventory is separately hash-bound.",
+  "production_assets_modified": false
+}

@@ -1,6 +1,6 @@
 # 主线 0:2 多物品检索：模型已实现，运行时尚未接入
 
-核对日期：2026-10-18。状态：纯检索引擎、进度 codec 与任务顺序规划器已实现并完成源对照；尚未接入本任务的存档、游戏提交或导出，不得据此增加完成度。基线是已锁定 master 快照的 3814 个任务、BetterQuesting `3.8.89-GTNH`（`815d738923d46e9083f988421e5329193e2e5940`）与 FTB Quests `2101.1.36`（`8c53f35a97d8897c861b097f1e39f4fc3beb3a15`）。2.8.4 发行包的运行数据不能冒充该快照的注册表证据。
+核对日期：2026-10-18。状态：纯检索引擎、进度 codec、任务顺序规划器、typed JSON 读取器与身份 envelope 已实现并完成独立对照，另有真实 `0:2` 定义配合合成进度的组合验证；尚未接入本任务的存档、游戏提交或导出，不得据此增加完成度。基线是已锁定 master 快照的 3814 个任务、BetterQuesting `3.8.89-GTNH`（`815d738923d46e9083f988421e5329193e2e5940`）与 FTB Quests `2101.1.36`（`8c53f35a97d8897c861b097f1e39f4fc3beb3a15`）。2.8.4 发行包的运行数据不能冒充该快照的注册表证据。
 
 ## 要保留的具体行为
 
@@ -39,7 +39,7 @@ BQ 协议为 `betterquesting:quest_action`，`action=1`，携带 quest UUID 列�
 | 模块 | 可实施接口与责任 | 尚缺证据/约束 |
 | --- | --- | --- |
 | `LegacyRetrievalEngine` | 纯状态转换；保留要求顺序、每行槽预算、单项锁定、完成集合；输出明确的槽消耗计划 | 用锁定 BQ 算法作为独立参考，覆盖重叠要求、历史进度及多人差异 |
-| `LegacyRetrievalProgressCodec` 与待实现存储桥 | codec 已保留逐 UUID 行、独立完成集合、merge 和磁盘 shape 语义；实际存储仍需以原 quest UUID、task index、factory ID 定位 | FTB `TeamData.taskProgress` 是每任务一个 long；不能把数组塞成一个数字或把成员历史存在共享 Task 对象；codec 尚未接入实际存档 |
+| `LegacyTypedNbtJsonReader`、`LegacyQuestProgressEnvelope`、`LegacyRetrievalProgressCodec` 与待实现存储桥 | 已实现有类型解码、完整 quest UUID/task index/factory 路由、原件保留、逐 UUID 行、独立完成集合、merge 和磁盘 shape 语义；只生成内存候选 | FTB `TeamData.taskProgress` 是每任务一个 long；不能把数组塞成一个数字或把成员历史存在共享 Task 对象；实际存档/定义版本绑定及原件持久化仍未接入 |
 | `LegacyQuestRetrievalPlanner` 与待实现提交协议 | 纯规划器已按 index 串行计算并传递库存结果；服务端身份/前置/队伍校验和客户端按钮仍待接入 | 保留 UI 的两组要求、消耗提示、逐项进度；网络重放、双击、无权限、掉线和真实提交事务需实测 |
 | `LegacyInventoryObserver` | 现有标记单物品任务已增加初次同步、主背包槽改变（含空槽）入队及下一次 Pre tick 去重；本多物品模型尚未接入 | 不把本任务的手动交付变成自动扣物；不扩大为盔甲/副手自动触发；事件总线和完整世界生命周期未验证 |
 | `LegacyPartyBridge` | 建立本轮在线/全部参与者，接入加入、退出、重置、离线加载与奖励历史 | BQ 加队会重置加入者并同步已完成 quest/领取状态；FTB 共用 TeamData 不自动证明等价，需专门队伍适配 |
@@ -68,7 +68,7 @@ BQ 的加入流程 `PartyInvitations.acceptInvite` 会先 `resetUser(..., true)`
 
 ## 最小验收集合与推进顺序
 
-纯引擎、进度 codec 与顺序规划器及其源对照已建立；下一步是实际存档/按钮/队伍桥接，再接入经过证明的身份集合与游戏验证。完整验收仍须包含：单槽重叠要求不在一轮双计；单项完成后跨轮锁定；未完成进度在槽清空后归零；多人背包相加但不拼接历史行；离线成员同步；只扣发起者；手动需求不自动扣；`9 gravel + 5 logs → 两task完成且剩3 logs`；数量不足可累计交付；重复按钮不重复扣；副手排除；加入/退出、重载、崩溃恢复、奖励不得重复领取。
+纯引擎、进度 codec、顺序规划器、typed JSON/envelope 及其独立对照和组合检查已建立；下一步是实际存档/按钮/队伍桥接，再接入经过证明的身份集合与游戏验证。完整验收仍须包含：单槽重叠要求不在一轮双计；单项完成后跨轮锁定；未完成进度在槽清空后归零；多人背包相加但不拼接历史行；离线成员同步；只扣发起者；手动需求不自动扣；`9 gravel + 5 logs → 两task完成且剩3 logs`；数量不足可累计交付；重复按钮不重复扣；副手排除；加入/退出、重载、崩溃恢复、奖励不得重复领取。
 
 本设计没有减少任何要求。已实现的模型继续作为桥接和取证的基础；`logWood` 完整成员、队伍生命周期、外部设备和真实游戏验证尚未闭合，仍然阻止“完整 retrieval 已迁移”或“0:2 已等价可用”的声明。
 
@@ -80,9 +80,13 @@ BQ 的加入流程 `PartyInvitations.acceptInvite` 会先 `resetUser(..., true)`
 
 `LegacyQuestRetrievalPlanner` 通过 **9,707 项断言、2,412 次原任务循环与排序对照**。它按原 index 串行检测未完成任务，后续任务使用前一库存结果，验证5原木足够、反向索引结果不同、稀疏 index、重复提交与离线成员；未知任务和未支持模式整体拒绝。它只返回完整计算计划，不实际扣物、写存档或触发 FTB 回调。详见 [顺序规划器](quest-retrieval-planner.zh-CN.md)。
 
+Phase 3 的 `LegacyTypedNbtJsonReader` 通过 **2,932 项断言、577 次固定源码对照、74 个拒绝案例**；`LegacyQuestProgressEnvelope` 通过 **4,857 项断言、1,017 次路由源码对照、567 次真实 NBT 往返、32 个整份拒绝案例**。前者保留原 UTF-8 字节与类型/顺序，后者验证定义侧身份、按输入顺序合并并保留完整原 NBT；quest 的完成 compound 与 task 的完成集合保持独立。完整定义不能充当进度，未知 schema、placeholder、非法记录及负零等仍按相应层保留原件并拒绝。详见 [typed JSON 读取器](typed-nbt-json-reader.zh-CN.md)与[身份 envelope](quest-progress-envelope-design.zh-CN.md)。
+
+组合测试通过 **22 项断言**：真实主线 `0:2` 定义提供身份、原 task index 和要求，合成 typed JSON 进度经 reader/envelope 接到 codec/planner，仍得到5原木先检测后交2、剩3及重复提交不多扣的模型结果。物品谓词是来源符号夹具，`logWood` 未映射现代成员；授权、参与者与进度也非真实玩家存档。`accepted` 仅指内存候选，`runtime_integrated=false`、`export_enabled=false` 不变。
+
 库存时机适配目前只用于已明确标记的既有单物品任务，不能视作本多物品模型已接入。整个兼容模块的隔离 Sponge 测试已通过9个注入、7个真实目标类及230个方法的数据流检查，但完整 NeoForge 转换链和世界事件仍未验证。
 
-下一步实现 codec/planner 的真实存档和提交协议、任务身份包装、队伍生命周期、准确物品集合与崩溃恢复。本阶段依赖闭合并导出的任务仍为 **2 / 3814**、结构候选仍为 **47**；未支持模式保留为需求，不增加已迁移任务计数。
+下一步实现已建立模型的真实存档和提交协议、定义版本及原件保存、队伍生命周期、准确物品集合与崩溃恢复；自定义类型、UI、UUID 完成/奖励和 FTB 默认共享进度的冲突见 [运行时桥接设计](retrieval-runtime-bridge-design.zh-CN.md)。没有进行真实玩家存档、联网或世界验证。本阶段依赖闭合并导出的任务仍为 **2 / 3814**、结构候选仍为 **47**，物品身份仍为 **720 / 8388**；未支持模式保留为需求，不增加已迁移任务计数。
 
 [BQ-R]: https://github.com/GTNewHorizons/BetterQuesting/blob/815d738923d46e9083f988421e5329193e2e5940/src/main/java/bq_standard/tasks/TaskRetrieval.java
 [BQ-Q]: https://github.com/GTNewHorizons/BetterQuesting/blob/815d738923d46e9083f988421e5329193e2e5940/src/main/java/betterquesting/questing/QuestInstance.java

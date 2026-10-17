@@ -17,15 +17,23 @@
 1. 用户已明确要求继续；恢复时先检查仓库检查点与本地差异，不要覆盖新的手工变更。
 2. 恢复上述本地依赖和目录，安装 `requirements.txt` 中的 Pillow，确认 Python、Node.js 和 JDK21 可用。不改系统 Java、不接受 EULA。
 3. 在原项目根目录运行 `python -u work/migration/rebuild_current_phase.py`。此入口重建当前支持范围，并保留功能不完整标志。
-4. 复核 `verify_quest_checkpoint.py`、Java 任务解析、匹配器与适配器测试、依赖/配方/材质源一致性与运行输入清单。完整入口现包含检索引擎、进度 codec、任务顺序规划器、库存观察器、真实 Sponge 隔离变换，以及矿石资源重基准和独立检查；无需手动重复执行。记录是静态、夹具、实际解析器还是实际游戏测试，不能混淆。
+4. 复核 `verify_quest_checkpoint.py`、Java 任务解析、匹配器与适配器测试、依赖/配方/材质源一致性与运行输入清单。当前阶段检查还包括检索引擎、进度 codec、任务顺序规划器、typed JSON 读取器、身份 envelope、模型组合、库存观察器、真实 Sponge 隔离变换，以及矿石资源重基准和源码资源冲突审计。以完整入口的本次结果为准；记录是静态、夹具、实际解析器还是实际游戏测试，不能混淆。
 5. 重建入口包含 `loader_probe.py`，仅在 EULA 未接受状态进行受限探测。任何真正世界/客户端测试需要用户自行处理条款、并另行记录真实结果。
-6. 当前检查点包含显式原版身份映射、检索/合成/狩猎匹配修复、多物品检索纯引擎、逐 UUID 进度 codec、按原任务 index 的纯提交规划器及现有单物品任务的库存时机适配。下一阶段实现 codec/planner 的实际存档和提交桥接，补齐 logWood 精确成员、任务身份包装、队伍生命周期、网络/UI 与崩溃恢复，再进行真实游戏验证；不得为了通过校验删除任务、放宽科技门槛或用空实现冒充等价。
+6. 当前检查点包含显式原版身份映射、检索/合成/狩猎匹配修复、多物品检索纯引擎、逐 UUID 进度 codec、按原任务 index 的纯提交规划器、typed JSON 读取器、任务身份 envelope 及现有单物品任务的库存时机适配。下一阶段实现实际存档和提交桥接，补齐 logWood 精确成员、已验证定义目录与原件保存、队伍生命周期、网络/UI 与崩溃恢复，再进行真实游戏验证；不得为了通过校验删除任务、放宽科技门槛或用空实现冒充等价。
 
 本轮模型验收基线：codec 为 **3,748 项断言 / 1,811 次源对照 / 633 次 NBT 二进制往返**；规划器为 **9,707 项断言 / 2,412 次源对照**。相关独立 runner 是 `test_legacy_retrieval_progress_codec.py`、`test_legacy_quest_retrieval_planner.py`，报告分别在 `work/migration/retrieval-progress-check/` 与 `work/migration/quest-planner-check/`。两者尚未接入存档、游戏或任务导出，依赖闭合任务仍为 **2 / 3814**、结构候选仍为 **47**。
+
+Phase 3 另有 `test_legacy_typed_nbt_json_reader.py`（**2,932 项断言 / 577 次固定源码对照 / 74 个拒绝案例**）、`test_legacy_quest_progress_envelope.py`（**4,857 项断言 / 1,017 次路由源码对照 / 567 次真实 NBT 往返 / 32 个整份拒绝案例**）和 `test_legacy_progress_import_pipeline.py`（**22 项组合断言**）。报告依次位于 `work/migration/typed-nbt-json-check/`、`quest-progress-envelope-check/`、`progress-import-pipeline-check/`。组合测试使用真实主线 `0:2` 定义、合成进度和来源符号谓词；`logWood` 没有现代成员映射，真实玩家存档 fixture 为 0。完整定义不能直接交给进度 envelope；未知 schema、placeholder、损坏记录及现代 NBT 无法保留的负零均保留原件并拒绝，不允许以局部成功替代完整输入。
+
+这里的 `accepted` 只表示内存候选可解释，不能称为保存、玩家存档导入、联网或世界运行完成。物品身份映射仍为 **720 / 8388**。读取器与运行时桥接边界见 [typed JSON 规范](docs/typed-nbt-json-reader.zh-CN.md)、[身份 envelope](docs/quest-progress-envelope-design.zh-CN.md)和[运行时桥接设计](docs/retrieval-runtime-bridge-design.zh-CN.md)。
+
+Phase 3 完整重建的22份汇总检查已通过，包括模型组合及纯模型编译类与兼容 JAR 对应类的逐字节一致性；当前 JAR SHA256 为 `243b9117436e6d9f27ebd8a8af7a26f168a5a13f934284e8766238d741007ae6`。恢复后必须按本地当前源码重建，不把这个历史成功结果替代新运行结果。
 
 `test_legacy_inventory_observer.py` 检查既有标记单物品任务的初始同步、主背包槽 9..44（含变空）及下一次 Pre tick 去重时机；真实事件总线与完整世界生命周期尚未验证。隔离 Mixin 报告当前验证 **9 个注入、7 个目标、230 个方法**，不得把它说成完整 NeoForge 转换链已通过。
 
 矿石资源入口 `port_exact_ore_resources.py` 现使用锁定主线 GT5U `5.09.54.205`，并由 `verify_exact_ore_resources.py`、`test_exact_ore_resources.py` 检查。预期为 **34 张主线精确基础 PNG + 34 张派生透明次层**；2.8.4 参考中7张PNG编码字节不同但像素相同，不能据此回退为参考包资产。资源副本正确不等于客户端最终视觉正确。
+
+`audit_exact_resource_collisions.py` 直接审计四份锁定源码归档的 `src/main/resources/assets`：**16,267 次资源出现 / 16,237 个唯一路径 / 30 组同路径（60 个候选）/ 24 组字节不同 / 0 组大小写折叠冲突**；`test_exact_resource_collisions.py` 的7项独立检查（含错误注入）通过。CoreMod 的 `src/test/resources/assets` 中两个测试 XML 不属于运行资源，不计入此范围。输出为 `evidence/exact-resource-collisions.json` 与 `evidence/exact-resource-collision-tests.json`。没有选择资源覆盖赢家，不增加已迁移资产数，也不能代表运行资源包优先级已验证。
 
 `port_currency.py`、`port_coin_recipes.py`、旧 `write_*phase_status.py` 等历史入口部分已显式禁用；不要绕过它们的退休保护。`document_reference.py` 等历史 intake 步骤也不是当前状态写入入口，乱序执行可能使元数据倒退。
 
