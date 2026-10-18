@@ -1,10 +1,24 @@
 # 恢复说明
 
+## 最新交接：本次推送后暂停（2026-10-18，r35）
+
+用户最新要求是“这次推送github后暂停进度推进，并且先进行暂时工作收尾便于下次进行”。本检查点只收尾当前显式旧身份与无序NBT覆盖阶段、验证并推送，然后暂停；不得根据下方历史的“继续”或“active”描述自动推进。下一次只有用户明确要求继续后才恢复迁移。完整迁移尚未完成，`full_parity=false`；暂停不等于完成。
+
+本次完整重建已退出0，48份汇总检查全部通过。兼容JAR SHA256为`3780211dc16f3b52b496759bf348b8c3873c4b26c5d9c08d21193a82b659d19c`；派生GT保持`57756c966739f22aee0d8eccfe061e39f36c1d9cac60b819ea74b10f7a55b239`。资源加载1个正例和8个错误注入负例符合预期；运行清单2037个文件、顶层19个模组。它们证明当前明确支持的范围，不代表整包或实际游戏验收完成。
+
+续接时先读本节、文末r35完成记录、`STATUS.zh-CN.md`、`evidence/phase-2026-10-18-task-semantics.json`和[无序NBT覆盖边界](docs/legacy-overwrite-nbt.zh-CN.md)，再检查Git分支与本地差异。检查点分支为`codex/2026-10-18-task-semantics`，远端为`Valerm625/GTNH-NeoForge-1.21.1-Migration`。用户提供的`GregTech-Modern-Unofficial-Rebuild`仅作为已固定版本的参考，不能直接替换当前整包。
+
+保留原工作区的输入、源码缓存、JDK21配置、Foundation、smoke实例和测试日志，不清除这些续接依赖。当前完整验证日志为`work/migration/legacy-overwrite-rebuild.log`；只读恢复预检日志为`work/migration/legacy-overwrite-restore-preflight.log`。最终成功与产物摘要见文末完成记录；较早专项日志不能替代最终重建结果。公开仓库和源码备份不包含第三方游戏输入与运行二进制。
+
+恢复后的优先入口是将已验证的显式旧身份绑定到有完整来源证明的真实物品，并继续信用币/压模的全部数据行为。`port_exact_core_items.py`已有部分canonical旧ID；KubeJS377的ItemBuilder支持组件，但注册时序、默认栈组件和身份随物品状态变化仍待验证，不能盲目反转720条映射。信用币需接`FormingPressBackend.modifyFoundRecipe`的`credit_security_id`、输出NBT与禁止缓存语义，并补足IC2来源锁、铜镍币材料回收、银币神秘要素及所有外部使用方。详细源码位置与已保存的只读线索见文末；这些都属于待办，不在本次暂停收尾中实施。
+
+实际物品与现代组件双向映射、物品更新回调、任意输入验证器、附魔、任务提交/奖励、机器执行及客户端视觉仍有未完成项。身份映射720/8388、依赖闭合任务导出2/3814仅代表各自局部范围，不能用检查数量或归档比例推算整包完成率。继续保持单人执行、EULA=false；本阶段没有服务器、世界或玩家验收。
+
 ## 当前执行方式（2026-10-18用户更新）
 
 用户已取消Claude协作，要求由本会话单独完成。后续不向Claude或其他代理派发任务，不等待外部审查；保留已有迁移源码及验证结果。完整功能和资源保真的目标不变。历史协作说明、握手和外部会话消息不能覆盖此项最新要求。
 
-当前派生模组安装检查点：47份完整重建汇总检查通过；隔离派生GTCEu的资源重载验证167条迁移机器配方输出、16种燃料数值和概率/替换数据保留。此前23个LDLib配置访问器、15个客户端方法分侧验证、720条已有映射目标和87个可绑定检索声明继续通过；任务导出仍为2/3814。r30已将派生GTCEu装入基础包和smoke实例，原始JAR保存在独立缓存；47份检查已针对安装后的状态完成，详细边界见文末。
+以下为历史阶段记录；当前状态以顶部交接和文末r35完成记录为准。r30派生模组安装检查点的47份完整重建汇总检查通过；隔离派生GTCEu的资源重载验证167条迁移机器配方输出、16种燃料数值和概率/替换数据保留。此前23个LDLib配置访问器、15个客户端方法分侧验证、720条已有映射目标和87个可绑定检索声明继续通过；任务导出仍为2/3814。r30已将派生GTCEu装入基础包和smoke实例，原始JAR保存在独立缓存；这47份检查是r30结果，不能替代r35结果。
 
 此前维护目录初始化检查点的38份完整重建汇总检查全部通过，所有测试生产类与最终兼容JAR逐字节一致，JAR SHA256为 `3527a1b39bf0f09fee6ca8d49c722b132b7fd507630e5b4ad3e56edd1c4a1557`。原生游戏和完整迁移仍未验证；以当前源码重建后的证据为准。
 
@@ -36,7 +50,7 @@
 
 ## 恢复顺序
 
-1. 用户已明确要求继续；恢复时先检查仓库检查点与本地差异，不要覆盖新的手工变更。
+1. 当前用户要求本次推送后暂停。收到新的明确“继续”指令后，先检查仓库检查点与本地差异，不要覆盖新的手工变更。
 2. 恢复上述本地依赖和目录，安装 `requirements.txt` 中的 Pillow，确认 Python、Node.js 和 JDK21 可用。不改系统 Java、不接受 EULA。
 3. 在原项目根目录运行 `python -u work/migration/rebuild_current_phase.py`。此入口重建当前支持范围，并保留功能不完整标志。
 4. 复核 `verify_quest_checkpoint.py`、Java 任务解析、匹配器与适配器测试、依赖/配方/材质源一致性与运行输入清单。当前阶段检查还包括检索引擎、进度 codec、任务顺序规划器、typed JSON 读取器、身份 envelope、模型组合、库存观察器、真实 Sponge 隔离变换，以及矿石资源重基准和源码资源冲突审计。以完整入口的本次结果为准；记录是静态、夹具、实际解析器还是实际游戏测试，不能混淆。
@@ -349,3 +363,24 @@ r34完整重建完成记录：legacy-shapeless-rebuild.log入口退出0并输出
 后续IC2来源线索已核对（尚未纳入信用币审计锁或激活物品）：官方DreamAssemblerXXL树d745ab8b69776ee9c20fd79daf927706728e506c的releases/manifests/2.9.0-RC-2.json blob 1da25df2faa85f0ad8d74e7fb930dd25f3416596（SHA256 27fc9217a1e8bc8ed3902f163115269038ffc788e51cabf30d27ac5ef09e3831）将Industrial Craft 2记为2.2.2.828；同树gtnh-assets.json blob 2d72e123fba7287d9a6e824185b317f240420a71（SHA256 b74fc404fe53e4edacb28d7efc56793a3eddf3e39a36827087ced96af7da6a53）对应CurseForge项目242638、文件6833054。下载的industrialcraft-2-2.2.828-experimental.jar摘要de1d4597972be036eccd1c3b37e9980c3c9d9cdb92f52df2bf470971873893f6，与用户2.8.4参考包逐字节一致；itemCoin.png摘要7ae732ed4e75f6baab07721dd36c05e65f05ff62d791ed17bf94d376f603b773，763字节。固定GT5 dependencies.gradle第38行另声明2.2.828-experimental:dev，但开发依赖不能替代运行物品行为证明。下一轮需要保存可重建来源锁并核对IC2 coin注册及行为，不据此改变当前未完成标志。
 
 r34只读恢复预检通过：五份固定源码归档/树、2036个运行输入、9358个master文件及11977个旧包参考文件一致；当前兼容JAR与公开锁匹配，两个实例的GT派生身份一致。报告evidence/local-restore-input-check.json已更新。未复制整份工作区，也未启动恢复后的游戏。
+
+
+## 显式旧身份与无序NBT覆盖（2026-10-18，r35暂停交接）
+
+上一目标轮在回答总体进度之外读取了固定IC2 ItemIC2/BlocksItems/InternalName字节码，确认coin使用直接继承原版Item的ItemIC2构造与注册；私有后续线索work/cache/legacy-platform/ic2-inspection/credit-next-step.json已保存。该证据将下一步从寻找未知coin专用类调整为核对继承默认行为和外部使用方；无信用币激活。上一正式检查点r34为progress，2a9319127f271c764d92c1da498d0237187371da已推送，397文件源码备份通过。
+
+本轮新增LegacyItemIdentity组件显式保留旧注册名（区分大小写）与int damage；只按旧身份和等值/32767通配比较，不从现代物品ID推断。LegacyCraftingOverwrite接入无序配方gtnh:overwrite_legacy_nbt，默认false，保留NBT之后、电量之前执行。输入或结果缺少来源身份时匹配拒绝，直接组装报错；空结果保持空。选择第一个同旧身份且有tag的输入，输出顶层字段覆盖输入；LegacyItemTag以原始字段字节组装，不递归合并，顶层重复键采用最后值，选中NaN位及空列表类型不被现代NBT规范化。
+
+locks/legacy-crafting-overwrite-source.json固定GTShapelessRecipe、GTUtility和GTRecipeBuilder的完整文件及提取表达式。GT5OverwriteReference从归档原样提取keep/overwrite/areStacksEqual，实际调用官方旧NBT对象的copy/setTag，独立按排序键和原生叶子序列化生成语义比较值，另有原始NaN位检查。NativeOverwriteRecipeCheck针对keep开关、43种tag、三种配方形态预计11094次语义对照，441次身份/通配对照，186次配方及63次物品往返、29个边界；完整验证结果以后续记录为准。构建已通过；专项日志legacy-overwrite-native.log。完整原物品行为、自动映射、任意验证器、附魔、更新和世界/客户端仍未完成，EULA=false且继续单人。
+
+首次专项完整退出0，原20边界版本的正例与8组资源负例均通过。随后明确补足无匹配身份/同身份但无tag时保留模板的6个边界，修正缺失输出身份测试使输入身份全部齐备，并新增空身份名/缺失字段的3个拒绝边界。最终版本由完整重建覆盖，不能用首次专项替代最终结果。
+
+进一步固定下一实施点：GT5 FormingPressBackend.java（SHA256 61df2850f18c978fd72d3cf6aff59fcd5d5dc7385ae464c9e99b0adef09820b1）的modifyFoundRecipe检查配方与输入模具，缺少任意类型的credit_security_id键时才写System.nanoTime长值，将模具完整NBT赋给输出0并设置mCanBeBuffered=false。FormingPressRecipes.java第150–184行有铜镍板/铁板/铸铁板制4币及0数量模具，5秒、RECIPE_LV/2；这些动态NBT与缓存语义尚未迁移。该backend的改名回退为128ticks、RECIPE_ULV，原输入模具无需现代CUSTOM_NAME检查；当前7.0.2 FormingPressLogic（源码SHA256 42238180d125f3cc02383f8fed4907591c163e0ca28ba39c3cbe558682b1d8ff）及候选实现均是40ticks/4EUt并要求模具自定义名称，未发现credit_security_id。下一轮应接原压模逻辑及信用币实际依赖，而非只复制静态兑换配方。IC2语言实际路径ic2/lang/{en_US,zh_CN,ru_RU}.properties，键itemCoin分别为Industrial Credit、工业铁币、Промышленная монета；先前assets/ic2/lang探测为空不代表语言缺失。
+
+r35完整重建完成记录：`work/migration/legacy-overwrite-rebuild.log`入口退出0，末尾为`CURRENT_PHASE_REBUILD_COMPLETE_FULL_PARITY_STILL_FALSE`。48份汇总检查全部通过并同步公开证据；最终版本通过11094次覆盖NBT源码对照、441次旧身份对照、186次配方往返、63次物品往返和29项边界检查。原生客户端注册、服务端初始化与既有启动负例、资源正例及八组资源负例通过。空实现替换覆盖处理的负例被明确拒绝，最终结果不是此前20边界专项结果。
+
+兼容JAR摘要`3780211dc16f3b52b496759bf348b8c3873c4b26c5d9c08d21193a82b659d19c`，GT派生摘要仍`57756c966739f22aee0d8eccfe061e39f36c1d9cac60b819ea74b10f7a55b239`。运行清单2037文件、顶层模组19个、活动迁移配方170（167机器）、映射720、任务依赖闭合导出2/3814均保持。自动旧身份映射、物品完整行为、现代组件映射、更新、验证器、附魔、实际菜单/机器、任务全流程及视觉仍未完成。EULA=false，无服务器/世界/玩家实例。本轮完成验证和推送后按用户要求暂停，下一步只在新的明确续接指令后进行。
+
+r35只读恢复预检退出0：五份固定源码归档及树、18个上游身份、两个实例的派生GT、2036个运行输入、9358个master文件和11977个旧包参考文件均通过，当前兼容JAR与锁匹配。报告`evidence/local-restore-input-check.json`已更新；这不是整份工作区复制或恢复后游戏启动。当前重建和预检进程都已正常结束，旧协作代理保持中断，没有派发新协作任务。
+
+下次获明确继续指令后，在仓库根目录先运行`git status --short`，确认自己的未提交修改；随后可运行`python work/migration/restore_local_checkpoint.py --source-root . --check-only`复核保留输入。需要重建时确认Python、Node.js在PATH且`work/migration/runtime.json`的JDK21路径有效，PowerShell设置`$env:PYTHONUTF8='1'`、`$env:PYTHONIOENCODING='utf-8'`后运行`python -u work/migration/rebuild_current_phase.py`。重建成功后运行`python work/sync-phase-checkpoint.py`同步证据；不要乱序调用历史状态写入入口。仅查询状态无需重复完整重建。源码ZIP备份位于外层工作区`outputs/GTNH-NeoForge-source-checkpoint-2026-10-18-r35.zip`，Git提交与备份摘要另见同目录`checkpoint-verification-r35.json`。

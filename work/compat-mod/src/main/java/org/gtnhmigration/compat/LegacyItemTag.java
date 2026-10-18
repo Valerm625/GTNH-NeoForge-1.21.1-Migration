@@ -46,6 +46,35 @@ public final class LegacyItemTag {
     }
 
     public byte[] bytes() { return raw.clone(); }
+    /** Replace whole top-level entries. Keep selected encoded payloads verbatim,
+     * including NaN bits and empty-list types; never recursively merge compounds.
+     * Duplicate top-level names resolve to their last value, as in old NBT maps.
+     */
+    public LegacyItemTag withTopLevelOverrides(LegacyItemTag overrides) {
+        try {
+            Map<String,byte[]> fields = topLevelFields(raw);
+            fields.putAll(topLevelFields(overrides.raw));
+            ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+            DataInputStream input = new DataInputStream(new ByteArrayInputStream(raw));
+            input.readUnsignedByte(); input.readUTF();
+            bytes.write(raw, 0, raw.length - input.available());
+            for (byte[] entry : fields.values()) bytes.write(entry);
+            bytes.write(0);
+            return new LegacyItemTag(bytes.toByteArray());
+        } catch (IOException error) { throw new IllegalArgumentException(error.getMessage(), error); }
+    }
+    private static Map<String,byte[]> topLevelFields(byte[] raw) throws IOException {
+        Map<String,byte[]> fields = new LinkedHashMap<>();
+        DataInputStream input = new DataInputStream(new ByteArrayInputStream(raw));
+        input.readUnsignedByte(); input.readUTF();
+        while (true) {
+            int start = raw.length - input.available(), type = input.readUnsignedByte();
+            if (type == 0) return fields;
+            String key = input.readUTF();
+            read(input, type, 1);
+            fields.put(key, Arrays.copyOfRange(raw, start, raw.length - input.available()));
+        }
+    }
     /** Separate from component equality: legacy numeric NaNs are not equal.
      * Compare independent decoded trees even if the immutable component is shared.
      */

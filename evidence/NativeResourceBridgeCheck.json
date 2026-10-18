@@ -4,7 +4,7 @@
   "checks": {
     "migration_machine_recipes_with_outputs": 167,
     "migration_namespace_recipes": 170,
-    "fixture_recipes": 27,
+    "fixture_recipes": 28,
     "shaped_behavior": {
       "source_geometry_comparisons": 10395,
       "json_network_round_trips": 22,
@@ -45,6 +45,18 @@
       "overwrite_and_custom_validator_complete": false,
       "world_or_player_executed": false
     },
+    "legacy_overwrite": {
+      "source_nbt_comparisons": 11094,
+      "source_identity_comparisons": 441,
+      "recipe_round_trips": 186,
+      "item_round_trips": 63,
+      "boundary_checks": 29,
+      "original_1_7_10_nbt_objects": true,
+      "automatic_source_identity_mapping_complete": false,
+      "modern_component_mapping_complete": false,
+      "item_updates_and_enchantments_complete": false,
+      "world_or_player_executed": false
+    },
     "fuel_values_verified": 16,
     "component_round_trips": 5,
     "boost_copy_codec_network_round_trips": 18,
@@ -56,59 +68,65 @@
   "cases": {
     "ported": {
       "exit": 0,
-      "log_sha256": "8231cc32d15745df9b62ce2d0fc991366acfaca86cd261417dbc46f8554fd371",
-      "dump_sha256": "f6766e2737f203cfa0ea2c3751fa9be1d38eef74dc1335472789e9ecc15de054",
+      "log_sha256": "20ffa2c3110511fbee9bb2aee2628b019c74cc7df881bfb85dd8652455667572",
+      "dump_sha256": "4182e50e1513114e3e3a249df88ecd486b0c66249cb6b7b498451e1647dc7791",
       "passed_semantic_checks": true
     },
     "old_output": {
       "exit": 0,
-      "log_sha256": "fe0213d5000edc6819acd82edd02447064c1e3eca8d3ae385df1d5c9807b3bed",
-      "dump_sha256": "777351993d35039f519bde560c3d811dc913ddb48efb5dbe469e93fc47ade149",
+      "log_sha256": "9c0ad5136308e6e6a9147a8ffc9da324ab123f573a1725969aa83eee75234c65",
+      "dump_sha256": "59b9d61a67d44458cdd991eb810b9cec182729e03d0756ebe265bf82b16be37e",
       "rejected_missing_machine_outputs": true
     },
     "original_api": {
       "exit": 1,
-      "log_sha256": "21a4632dac1d13960a07d49a2df233733ec87481528e065059b034e6e9751d69",
+      "log_sha256": "ea2d45201be36ba8f4a19a9e19d0d4a8f79bf8f3e905bc4dc3e443c5c39fa913",
       "rejected_missing_old_server_events_api": true
     },
     "without_grid_origin": {
       "exit": 1,
-      "log_sha256": "2eb24ffbb3b8c55972eb2d512fc8ee0941d1218b54f0b86bab0e3d3b5701e7bc",
+      "log_sha256": "6ec6477b7c514a9a4d003dd35b4efa1c844543c3d2a895e996f1f6e925052ee8",
       "rejected_missing_original_grid_coordinates": true
     },
     "without_cache_origin": {
       "exit": 1,
-      "log_sha256": "1dcb4bf51cb3de8fb36bc8fbba2a098fda9db58aad85138361cf4a2ffcebdb45",
+      "log_sha256": "8c4ecfb73bae3c3ac5ee1d3559f97f371b18e7f008fd262b73b845e0ec0ae9d1",
       "rejected_missing_cache_origin_invalidation": true
     },
     "without_energy_transfer": {
       "exit": 1,
-      "log_sha256": "311128f400b47aba7b3702f0628429aaeada87d5d72a4c5b20b73b07a5386a44",
+      "log_sha256": "8b182c604d433823bbbe97774b63789de63068fdb7e4ab49d2693ea12bfcec8c",
       "rejected_missing_legacy_energy_transfer": true
     },
     "without_legacy_nbt": {
       "exit": 1,
-      "log_sha256": "415a31c75a09fcd00ac4089d82eed64b4b8aea8af1e211c5bfeaa8236c89af4b",
+      "log_sha256": "ff739784d6799246fcb180a787e80fc893071f78f9d06ba994f34948fcd07eb9",
       "rejected_missing_legacy_nbt": true
     },
     "bipartite_shapeless": {
       "exit": 1,
-      "log_sha256": "b677870a7bfb72344ca12a25a6da1315ff1e107b339fc2b7af23d188a1d1017e",
+      "log_sha256": "c4b00b003d23255c8cc3e46e3505e2afd6c5b6cb194ec3312df1d854e1e1d239",
       "rejected_changed_matching_algorithm": true
+    },
+    "without_overwrite": {
+      "exit": 1,
+      "log_sha256": "542350eebf3adcdca59e9f04ac3b332fde2b2f4e4ed5a4f890beb417a5257815",
+      "rejected_missing_overwrite": true
     }
   },
   "derived_jar_sha256": "57756c966739f22aee0d8eccfe061e39f36c1d9cac60b819ea74b10f7a55b239",
   "preserved_original_entries": 14084,
   "source_sha256": {
     "work/migration/NativeResourceAuditLaunchHandler.java": "52bbd626cb612ebe66dbb80847bf29aefb661c4744baed49570e5a38a5b34c3e",
-    "work/migration/NativeResourceAuditMain.java": "808efbc90ae59567b084aeea8f4c073c545e59423eedafd5817d42906d62a9e1",
+    "work/migration/NativeResourceAuditMain.java": "d4b51d2c9ed56d3bada942d62fcec9705f0d1ea7ad07f64100d3920d91c3e88d",
     "work/migration/NativeShapedRecipeCheck.java": "d08f5141b2177d3316e870d7dd61e087afc059e5fefd7390273e71d3ecad8880",
     "work/migration/NativeCraftingEnergyCheck.java": "147503df00384eeadf945ab9a27c90705cb32456a59b4f1cf4d86884c8ddeb3e",
     "work/migration/NativeCraftingNbtCheck.java": "42cbe55ee45fa359bd2d08207ed9adeb0c71b742db733a953e8fb7f8cd53687f",
     "work/migration/NativeShapelessRecipeCheck.java": "e85befc8724f24fc5c969f6fb7a17f8d72184bb1d28989bd0b8bc54e5fbd3041",
-    "work/migration/test_native_resource_bridge.py": "8b065f6a87978c52b03dd1973be17285d96c1b1ae8275224d24828f03d83a0b3",
+    "work/migration/NativeOverwriteRecipeCheck.java": "a08feed947f9344de01c56891bfb2ba4437950aae6f351d1bd0874f89ab8b1e4",
+    "work/migration/test_native_resource_bridge.py": "fa66ca4bf77c854cd63b82de80ab5a95e4b31f1bd037bd6a0a8b5a80f9ad5e78",
     "work/migration/build_gtceu_kubejs_bridge.py": "d4fda70d2595be62c5fc60b326bde822f3c3f2c5b9382732a1ec30c63cab0215",
-    "work/migration/KubeJSBridgeFixtures.js": "b98242bc442d07eba6e4818b2e2bad52910fc3023e59e72d333683e5cf4f72ca",
+    "work/migration/KubeJSBridgeFixtures.js": "e77149aa4959ebbb14ffcae2b5b28fddfeddb2518d92132bb400c759c50d4dd9",
     "work/compat-mod/patches/gtceu-kubejs72.json": "15472a152f3433da4ecff5dffc23ef9270064ca5ce458c0da40d62529dde2dcb",
     "locks/gtceu-kubejs72-build.json": "c4a770075370a4be34137fecc27681716f9d9e3187b5960729dc1c0620f8acb6",
     "locks/native-client-audit-inputs.json": "1542616c4c55281eec4dc906d9a2d0375e45aa50939eb29f67230d80fefa1093",
@@ -123,19 +141,23 @@
     "locks/sources/GT5-Unofficial-5.09.54.205-lock.json": "1d82ec79eef3195aea71ff518af0970f21cb1b95962314c1babff65548b24f5f",
     "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyCraftingEnergy.java": "fe0f19fafa4fa1c1db2264163aec5f41854ee2a5f8947a3addf021d1ad3089cd",
     "locks/legacy-shaped-source.json": "20be82c9c0781d7fccebb84c0a2e8bc02be0825fe6799c1b1750cba0aa39023d",
-    "work/migration/build_capacity_compat.py": "cc6b12a4367979216dc039e31145dec0c5f944c1f257aca3b36eaacf25c2f240",
+    "work/migration/build_capacity_compat.py": "25cd99c294122cc5df45847c16190d37614c59bd61f926075a9f2432c8a8d67a",
     "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyShapedRecipe.java": "9c391e8e73c9e81a451ecf1f609158de7af4583f45f144abc05fc93b53c77997",
     "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyCraftingGrid.java": "40c79cb17087a1464156ff0963cb7d5a6a79e222535b9d49debdeaab0d89b3cc",
     "work/compat-mod/src/main/java/org/gtnhmigration/compat/mixin/LegacyCraftingGridMixin.java": "09446dfb97decbf1284945fa3339ef2f32775ab92469b86c0a6d6abc06e95db7",
     "work/compat-mod/src/main/java/org/gtnhmigration/compat/mixin/LegacyCraftingCacheMixin.java": "ead103c135be55149b94e7664120ba866dd126845b54d606fd9e3a91e3f05049",
     "work/migration/build_legacy_nbt_reference.py": "f0dd276d91bd6f4a77426a27bfb2afd0af44e4bd7ceeb07bac39661add6cb68f",
     "locks/legacy-crafting-nbt-source.json": "1288d53fb3c71d9d58d88766112e0685675f2c6b1b562ecd83a9d5bee8b81203",
-    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyItemTag.java": "b77f70105eb9bee5b4dabaf314ea224ee1e4459732fa22f4c0a34904f1d0d433",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyItemTag.java": "e8c7c8097ce1568a2db9e61c9bd2bc15d1c9f658b58dac78e6a7d187160f6128",
     "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyCraftingNbt.java": "82d3011163acc91810e25be1bacf11811831a43ad5a3c962252a361cfe5ade0d",
     "work/migration/build_legacy_shapeless_reference.py": "d8a5c0e9fc67038541b4624c6da4756848be25cb40eae0c840fd24e22f580496",
     "locks/legacy-shapeless-source.json": "c474701e10e8ef0c93953ca52f8f2e072e55c80df9646584e7e0ace379266215",
-    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyShapelessRecipe.java": "f3cfb7c2e33ca136d4893a1320aadd679adcfce13a52f7d9f6d4998ae709dff8",
-    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyShapelessMatch.java": "7bf839873eb87949d2fb12c699a30dfb19e90ddaff7e5a5298b118a2e96ff14d"
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyShapelessRecipe.java": "74f17dbd40fde401f5da53948dc89d7777fb626ad62b60034d71a4354591e97e",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyShapelessMatch.java": "7bf839873eb87949d2fb12c699a30dfb19e90ddaff7e5a5298b118a2e96ff14d",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyItemIdentity.java": "b54706d22242198d6b0d0dc96a2658817e892088a9843015ccd2183bbb64e1bf",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyCraftingOverwrite.java": "8fbfbb44284989b20d3bb5e9f7f58607d0e942ce81a34f4f28f29d8383a947ec",
+    "work/migration/build_legacy_overwrite_reference.py": "675cfc3184826b6b53a5645b8a58954254b55ac289ce3da8c349950cc8c49199",
+    "locks/legacy-crafting-overwrite-source.json": "9b2bc1aab9653d5c109d29326653a3981401b8368352a9eb686fa404d5f5d713"
   },
   "foundation_unchanged": true,
   "eula_accepted": false,
@@ -153,7 +175,7 @@
     "mods/ftb-quests-neoforge-2101.1.36.jar": "6a39982c4b3afc00b1e788041a4f0d394e1659e3b3a6e5d078cd790bc36d0018",
     "mods/ftb-teams-neoforge-2101.1.11.jar": "e6bcd670493624e6906df872a9c6af4a33fe6405cac57a32c59cd4cd5838c655",
     "mods/gtceu-1.21.1-7.0.2-gtnh-kubejs72.jar": "57756c966739f22aee0d8eccfe061e39f36c1d9cac60b819ea74b10f7a55b239",
-    "mods/gtnh-migration-compat-0.1.0.jar": "7272a8b1cbdb0bd5da20acdaeb6c8b93611cbfd3d8e6fd9c52ba4c9fe55b7ce9",
+    "mods/gtnh-migration-compat-0.1.0.jar": "3780211dc16f3b52b496759bf348b8c3873c4b26c5d9c08d21193a82b659d19c",
     "mods/guideme-21.1.19.jar": "2ce254edb931c3c3cf81d69abaf8f4ce5b871bf85e64984f366bf044173bd66a",
     "mods/Jade-1.21.1-NeoForge-15.10.6.jar": "276f1f65a20d04f536989c4f311949d770b52c440c23c2b904a08860f3c93810",
     "mods/jei-1.21.1-neoforge-19.51.0.418.jar": "8bc3936d869e4040a5649c58b7e8be1c78c82a245c0dc07bdd68ab49121a222c",

@@ -172,7 +172,7 @@
     "illegal_mixin_package_rejected": true,
     "exit_code": 1
   },
-  "compat_jar_sha256": "7272a8b1cbdb0bd5da20acdaeb6c8b93611cbfd3d8e6fd9c52ba4c9fe55b7ce9",
+  "compat_jar_sha256": "3780211dc16f3b52b496759bf348b8c3873c4b26c5d9c08d21193a82b659d19c",
   "crafting_grid_origin_verified": true,
   "archive_sha256": "cf0367344bfa10587719e9a919d04dfd2877fe1e5c2a96b24a4323e0fb7973dc",
   "registry_details_sha256": "e20df4165e1b80a8b905bacf5f9351aeb991e8ab1b2ed9105a03814feebc6bea",
@@ -292,7 +292,7 @@
     "mods/ftb-quests-neoforge-2101.1.36.jar": "6a39982c4b3afc00b1e788041a4f0d394e1659e3b3a6e5d078cd790bc36d0018",
     "mods/ftb-teams-neoforge-2101.1.11.jar": "e6bcd670493624e6906df872a9c6af4a33fe6405cac57a32c59cd4cd5838c655",
     "mods/gtceu-1.21.1-7.0.2-gtnh-kubejs72.jar": "57756c966739f22aee0d8eccfe061e39f36c1d9cac60b819ea74b10f7a55b239",
-    "mods/gtnh-migration-compat-0.1.0.jar": "7272a8b1cbdb0bd5da20acdaeb6c8b93611cbfd3d8e6fd9c52ba4c9fe55b7ce9",
+    "mods/gtnh-migration-compat-0.1.0.jar": "3780211dc16f3b52b496759bf348b8c3873c4b26c5d9c08d21193a82b659d19c",
     "mods/guideme-21.1.19.jar": "2ce254edb931c3c3cf81d69abaf8f4ce5b871bf85e64984f366bf044173bd66a",
     "mods/Jade-1.21.1-NeoForge-15.10.6.jar": "276f1f65a20d04f536989c4f311949d770b52c440c23c2b904a08860f3c93810",
     "mods/jei-1.21.1-neoforge-19.51.0.418.jar": "8bc3936d869e4040a5649c58b7e8be1c78c82a245c0dc07bdd68ab49121a222c",

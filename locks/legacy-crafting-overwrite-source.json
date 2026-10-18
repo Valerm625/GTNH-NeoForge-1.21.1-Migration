@@ -1,0 +1,25 @@
+{
+  "source_lock": "locks/sources/GT5-Unofficial-5.09.54.205-lock.json",
+  "shapeless_file": "src/main/java/gregtech/api/util/GTShapelessRecipe.java",
+  "shapeless_sha256": "469f65d7b7d5c80890070976351dcfc5c5efda93cb5f172d3c77134e9d8a6557",
+  "overwrite_fragment_sha256": "036f8eec7eff96a081077c5fa7d99838ec6abbf54bac96093283df64ea74058e",
+  "utility_file": "src/main/java/gregtech/api/util/GTUtility.java",
+  "utility_sha256": "551643046a448fc4e2d6de73c2bf005b90b673b31a5f760cb827745c33ebdc41",
+  "identity_fragment_sha256": "341e563a9225e042ab1a89158931eab2c6fb8b616bb2b4886bcbd5e412014037",
+  "builder_file": "src/main/java/gregtech/api/util/GTRecipeBuilder.java",
+  "builder_sha256": "b28f3f0ea2072c34eba649688618f0a55cb172f6ad9d1b7c465832fa2b751efe",
+  "legacy_server": {
+    "url": "https://launcher.mojang.com/v1/objects/952438ac4e01b4d115c5fc38f891710c4941df29/server.jar",
+    "sha1": "952438ac4e01b4d115c5fc38f891710c4941df29",
+    "sha256": "c70870f00c4024d829e154f7e5f4e885b02dd87991726a3308d81f513972f3fc",
+    "classes": {
+      "dh.class": "7153e0ab037fd41d499e34a3dcf472cab3d0b74eb79ef9c071261abba843aedd",
+      "dm.class": "9fa6b6eb86c34dbe03a71a0d649ce5b31bc9d96b9180a764442077d7c9b5baea",
+      "dk.class": "b60c58458109038be8166effaa55bc38e7135d2f9ad476f65a30e966b2646ad1",
+      "dq.class": "d48170938195486d1b6942bde3baddc305e93f93f2d418939dbc30f399c04a75",
+      "du.class": "74826c7d484a5dcd6d91dc2a377c9af30edbf04ba9654e2f889205b38979e892",
+      "dy.class": "a6c652e865adffb66f2c7cbb0e05a1edfff77d032c57e67e1d08c0a98d9c97dd"
+    }
+  },
+  "scope": "Explicit source identities and top-level overwrite, after keep and before energy; full item updates and automatic native identity/NBT mapping remain incomplete"
+}

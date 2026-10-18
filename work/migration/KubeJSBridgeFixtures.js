@@ -95,3 +95,14 @@ ServerEvents.recipes(event => {
   event.recipes.gtceu.shaped('minecraft:clay_ball', ['   ', ' M ', '   '], {M:'minecraft:milk_bucket'})
     .noShrink().noMirror().keepIngredient('minecraft:milk_bucket').id('gtnh_audit:shape_keep');
 });
+
+// Explicit source identities are test annotations, not real item mappings.
+ServerEvents.recipes(event => {
+  var choice=[{item:'minecraft:iron_ingot'},{item:'minecraft:gold_ingot'}];
+  event.custom({type:'gtnh_migration:legacy_shapeless',category:'misc',ingredients:[choice,choice,choice],
+    result:{id:'minecraft:diamond',count:2,components:{
+      'gtnh_migration:legacy_item_identity':{item:'fixture:old_tool',damage:12},
+      'gtnh_migration:legacy_item_tag':'CgAAAQAIdGVtcGxhdGUHAA==',
+      'minecraft:custom_name':'"overwrite template"'}},
+    'gtnh:overwrite_legacy_nbt':true}).id('gtnh_audit:shapeless_overwrite');
+});

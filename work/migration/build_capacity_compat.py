@@ -21,7 +21,7 @@ entry='''package org.gtnhmigration.compat;
 import net.neoforged.fml.common.Mod;
 /** Explicit GTNH migration adaptations, not a claim of complete port. */
 @Mod("gtnh_migration_compat")
-public final class MigrationCompat { public MigrationCompat(net.neoforged.bus.api.IEventBus bus) { LegacyShapedRecipe.register(bus); LegacyShapelessRecipe.register(bus); LegacyItemTag.register(bus); } }
+public final class MigrationCompat { public MigrationCompat(net.neoforged.bus.api.IEventBus bus) { LegacyShapedRecipe.register(bus); LegacyShapelessRecipe.register(bus); LegacyItemTag.register(bus); LegacyItemIdentity.register(bus); } }
 '''
 mixin='''package org.gtnhmigration.compat.mixin;
 
@@ -102,7 +102,7 @@ side="BOTH"
 (resources/'LICENSE').write_text('''Local adapter code is MIT except LegacyShapedRecipe.java, LegacyShapelessMatch.java and their compiled classes,
 which are under the Minecraft Forge Public Licence 1.0. See NOTICE and
 MinecraftForge-License.txt for the source attribution and applicable licence.
-LegacyCraftingEnergy.java and LegacyCraftingNbt.java and their compiled classes are under LGPL-3.0;
+LegacyCraftingEnergy.java, LegacyCraftingNbt.java and LegacyCraftingOverwrite.java and their compiled classes are under LGPL-3.0;
 see LGPL-3.0.txt, GPL-3.0.txt and NOTICE.
 
 MIT License

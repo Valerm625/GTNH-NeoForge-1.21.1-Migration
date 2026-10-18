@@ -19,6 +19,7 @@ from build_legacy_shaped_oracle import build as build_shaped_oracle
 from build_legacy_energy_reference import build as build_energy_reference
 from build_legacy_nbt_reference import build as build_nbt_reference
 from build_legacy_shapeless_reference import build as build_shapeless_reference
+from build_legacy_overwrite_reference import build as build_overwrite_reference
 
 
 def sha(path):
@@ -73,13 +74,14 @@ def check_dump(dump):
     assert shaped["pattern"] == ["hI"] and shaped["key"]["h"] == {"tag": "gtceu:crafting_tools/hammer"}
     assert dump["shaped_behavior"] == {"source_geometry_comparisons":10395,"json_network_round_trips":22,"default_and_reset_shrink_checks":26,"remaining_item_and_action_checks":6,"cache_origin_entry_checks":4,"input_identity_checks":5,"no_world":True}
     assert dump["legacy_crafting_energy"] == {"source_comparisons":9375,"json_network_round_trips":10,"boundary_checks":6,"real_gt_capabilities":True,"input_and_template_unchanged":True,"ic2_runtime_verified":False,"world_or_player_executed":False}
-    assert sum(k.startswith("gtnh_audit:") for k in rows) == 27
+    assert sum(k.startswith("gtnh_audit:") for k in rows) == 28
     assert dump["legacy_crafting_nbt"] == {"source_comparisons":11094,"tag_variants":43,"recipe_round_trips":4,"item_round_trips":129,"rejected_inputs":6,"original_1_7_10_nbt_classes":True,"modern_component_mapping_complete":False,"item_update_hooks_complete":False,"world_or_player_executed":False}
     assert dump["legacy_shapeless"] == {"source_match_comparisons":76800,"source_nbt_comparisons":5547,"source_energy_comparisons":81,"json_network_round_trips":812,"boundary_checks":9,"remaining_item_checks":6,"source_item_set_mapping_complete":False,"overwrite_and_custom_validator_complete":False,"world_or_player_executed":False}
+    assert dump["legacy_overwrite"] == {"source_nbt_comparisons":11094,"source_identity_comparisons":441,"recipe_round_trips":186,"item_round_trips":63,"boundary_checks":29,"original_1_7_10_nbt_objects":True,"automatic_source_identity_mapping_complete":False,"modern_component_mapping_complete":False,"item_updates_and_enchantments_complete":False,"world_or_player_executed":False}
     expected_fuels = {v["target_id"]: v["burn_ticks"] for v in read(O / "docs/fuel-block-migration/fuel-blocks.json")["blocks"]}
     assert len(expected_fuels) == 16 and dump["fuels"] == expected_fuels
     return {"migration_machine_recipes_with_outputs": len(migrated), "migration_namespace_recipes": 170,
-            "fixture_recipes": 27, "shaped_behavior": dump["shaped_behavior"], "legacy_crafting_energy":dump["legacy_crafting_energy"], "legacy_crafting_nbt":dump["legacy_crafting_nbt"], "legacy_shapeless":dump["legacy_shapeless"], "fuel_values_verified": 16, "component_round_trips": 5,
+            "fixture_recipes": 28, "shaped_behavior": dump["shaped_behavior"], "legacy_crafting_energy":dump["legacy_crafting_energy"], "legacy_crafting_nbt":dump["legacy_crafting_nbt"], "legacy_shapeless":dump["legacy_shapeless"], "legacy_overwrite":dump["legacy_overwrite"], "fuel_values_verified": 16, "component_round_trips": 5,
             "boost_copy_codec_network_round_trips": 18,
             "ordinary_and_tick_directions": True, "chance_and_fraction_preserved": True,
             "replacement_counts_and_chance_preserved": True, "tool_symbol_and_no_mirror": True}
@@ -106,18 +108,19 @@ def main():
     run = OUT / ("resource-check-" + str(uuid.uuid4()))
     classes = run / "classes"
     classes.mkdir(parents=True)
-    sources = [R / "work/migration" / n for n in ("NativeResourceAuditLaunchHandler.java", "NativeResourceAuditMain.java", "NativeShapedRecipeCheck.java", "NativeCraftingEnergyCheck.java", "NativeCraftingNbtCheck.java", "NativeShapelessRecipeCheck.java")]
+    sources = [R / "work/migration" / n for n in ("NativeResourceAuditLaunchHandler.java", "NativeResourceAuditMain.java", "NativeShapedRecipeCheck.java", "NativeCraftingEnergyCheck.java", "NativeCraftingNbtCheck.java", "NativeShapelessRecipeCheck.java", "NativeOverwriteRecipeCheck.java")]
     reference = build_energy_reference(run)
     nbt_reference, legacy_nbt_jar = build_nbt_reference(run)
     shapeless_reference = build_shapeless_reference(run)
     shapeless_nbt_reference, _ = build_nbt_reference(run, shapeless=True)
+    overwrite_reference = build_overwrite_reference(run)
     library_pin = read(R / "locks/library-client-callbacks.json")
     ldlib = (R / positive["jar"]).parent / Path(library_pin["ldlib_entry"]).name
     assert sha(ldlib) == library_pin["ldlib_sha256"]
     cp = os.pathsep.join(p.resolve().as_posix() for p in classpath()+[ldlib])
     argfile = run / "compile.args"
     arguments(argfile, ["-proc:none", "--release", "21", "-encoding", "UTF-8", "-cp", cp,
-                        "-d", str(classes)] + [str(p) for p in sources+[reference,nbt_reference,shapeless_reference,shapeless_nbt_reference]], True)
+                        "-d", str(classes)] + [str(p) for p in sources+[reference,nbt_reference,shapeless_reference,shapeless_nbt_reference,overwrite_reference]], True)
     result = subprocess.run([str(java.with_name("javac.exe")), "-J-Duser.language=en", "-J-Duser.country=US", "@" + str(argfile)], capture_output=True, timeout=60)
     assert result.returncode == 0, result.stderr.decode(errors="replace")
     negative_energy = run / "negative-energy"
@@ -141,6 +144,13 @@ def main():
     arguments(negative_shapeless/'compile.args',['-proc:none','--release','21','-encoding','UTF-8','-cp',cp,'-d',str(negative_shapeless),str(solver)],True)
     result=subprocess.run([str(java.with_name('javac.exe')),'-J-Duser.language=en','@'+str(negative_shapeless/'compile.args')],capture_output=True,timeout=60)
     assert result.returncode==0,result.stderr.decode(errors='replace')
+    negative_overwrite = run / 'negative-overwrite'
+    negative_overwrite.mkdir()
+    no_overwrite = negative_overwrite / 'LegacyCraftingOverwrite.java'
+    no_overwrite.write_text('package org.gtnhmigration.compat; public final class LegacyCraftingOverwrite { public static boolean identitiesAvailable(net.minecraft.world.item.crafting.CraftingInput input,net.minecraft.world.item.ItemStack output){return true;} public static net.minecraft.world.item.ItemStack apply(net.minecraft.world.item.crafting.CraftingInput input,net.minecraft.world.item.ItemStack output){return output.copy();} }',encoding='utf-8')
+    arguments(negative_overwrite/'compile.args',['-proc:none','--release','21','-encoding','UTF-8','-cp',cp,'-d',str(negative_overwrite),str(no_overwrite)],True)
+    result=subprocess.run([str(java.with_name('javac.exe')),'-J-Duser.language=en','@'+str(negative_overwrite/'compile.args')],capture_output=True,timeout=60)
+    assert result.returncode==0,result.stderr.decode(errors='replace')
     launcher = run / "resource-audit-launcher.jar"
     with zipfile.ZipFile(launcher, "w") as output:
         name = "org/gtnhmigration/audit/launcher/NativeResourceAuditLaunchHandler.class"
@@ -155,7 +165,7 @@ def main():
     launch_text = (O / "libraries/net/neoforged/neoforge/21.1.262/win_args.txt").read_text(encoding="utf-8")
     cases = {}
     details = None
-    for case, bridge in (("ported", positive), ("old_output", negative), ("original_api", None), ("without_grid_origin", positive), ("without_cache_origin", positive), ("without_energy_transfer",positive), ("without_legacy_nbt",positive), ("bipartite_shapeless",positive)):
+    for case, bridge in (("ported", positive), ("old_output", negative), ("original_api", None), ("without_grid_origin", positive), ("without_cache_origin", positive), ("without_energy_transfer",positive), ("without_legacy_nbt",positive), ("bipartite_shapeless",positive), ("without_overwrite",positive)):
         directory = run / case
         directory.mkdir()
         for folder in ("mods", "config", "kubejs"):
@@ -168,7 +178,7 @@ def main():
             copied.unlink()
             control = R / bridge["jar"] if bridge else original_jar()
             shutil.copy2(control, directory / "mods" / control.name)
-        if case in ("without_grid_origin", "without_cache_origin", "without_energy_transfer", "without_legacy_nbt", "bipartite_shapeless"):
+        if case in ("without_grid_origin", "without_cache_origin", "without_energy_transfer", "without_legacy_nbt", "bipartite_shapeless", "without_overwrite"):
             copied_compat = directory / "mods/gtnh-migration-compat-0.1.0.jar"
             replacement_compat = directory / "compat-without-grid.tmp"
             with zipfile.ZipFile(copied_compat) as before_jar, zipfile.ZipFile(replacement_compat, "w") as after_jar:
@@ -180,7 +190,9 @@ def main():
                         data = (negative_nbt / info.filename).read_bytes()
                     elif case == 'bipartite_shapeless' and info.filename == 'org/gtnhmigration/compat/LegacyShapelessMatch.class':
                         data = (negative_shapeless / info.filename).read_bytes()
-                    elif case not in ('without_energy_transfer','without_legacy_nbt','bipartite_shapeless') and info.filename == "gtnh_migration_compat.mixins.json":
+                    elif case == 'without_overwrite' and info.filename == 'org/gtnhmigration/compat/LegacyCraftingOverwrite.class':
+                        data = (negative_overwrite / info.filename).read_bytes()
+                    elif case not in ('without_energy_transfer','without_legacy_nbt','bipartite_shapeless','without_overwrite') and info.filename == "gtnh_migration_compat.mixins.json":
                         config = json.loads(data)
                         config["mixins"].remove("LegacyCraftingGridMixin" if case == "without_grid_origin" else "LegacyCraftingCacheMixin")
                         data = json.dumps(config).encode()
@@ -229,6 +241,9 @@ def main():
         elif case == "without_cache_origin":
             assert result.returncode != 0 and "Crafting cache retained a position-dependent entry" in log
             entry["rejected_missing_cache_origin_invalidation"] = True
+        elif case == 'without_overwrite':
+            assert result.returncode != 0 and 'Legacy overwrite differs from fixed GT5 source' in log
+            entry['rejected_missing_overwrite'] = True
         elif case == 'bipartite_shapeless':
             assert result.returncode != 0 and 'Legacy shapeless matching differs from fixed Forge source' in log
             entry['rejected_changed_matching_algorithm'] = True
@@ -276,7 +291,10 @@ def main():
                        'work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyCraftingNbt.java',
                        'work/migration/build_legacy_shapeless_reference.py','locks/legacy-shapeless-source.json',
                        'work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyShapelessRecipe.java',
-                       'work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyShapelessMatch.java']]
+                       'work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyShapelessMatch.java',
+                       'work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyItemIdentity.java',
+                       'work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyCraftingOverwrite.java',
+                       'work/migration/build_legacy_overwrite_reference.py','locks/legacy-crafting-overwrite-source.json']]
     report = {"passed": True, "scope": "installed source-built artifact copied into isolated resource checks; no game world",
               "checks": details, "cases": cases, "derived_jar_sha256": positive["jar_sha256"],
               "preserved_original_entries": positive["unchanged_original_entries"],

@@ -37,8 +37,8 @@
     "local_compat_jar_imported": false,
     "local_compat_requires_rebuild": {
       "filename": "gtnh-migration-compat-0.1.0.jar",
-      "checkpoint_sha256": "7272a8b1cbdb0bd5da20acdaeb6c8b93611cbfd3d8e6fd9c52ba4c9fe55b7ce9",
-      "source_workspace_sha256": "7272a8b1cbdb0bd5da20acdaeb6c8b93611cbfd3d8e6fd9c52ba4c9fe55b7ce9",
+      "checkpoint_sha256": "3780211dc16f3b52b496759bf348b8c3873c4b26c5d9c08d21193a82b659d19c",
+      "source_workspace_sha256": "3780211dc16f3b52b496759bf348b8c3873c4b26c5d9c08d21193a82b659d19c",
       "matches_checkpoint": true,
       "reason": "Rebuild locally generated code from the preserved tracked source before any loader run."
     },
@@ -54,7 +54,7 @@
     "work/migration/restore_local_checkpoint.py": "f7d13e47c4c4c13f33bd7bfa2cf0a556adc23cd3b6aa8a17f4887e0a02a4f794",
     "work/migration/gtceu_artifact.py": "0b00b39e644e1abdcb2dc9c99d4b85c77ba6eb777377be2f3cd8138c0fd9926a",
     "locks/gtceu-derived-artifact.json": "47bf81042582f858d8feabfb11f996496c7f0716e12ff6b684a39b7d71f0c44c",
-    "locks/local-runtime-file-hashes.json": "765d50a4eca0860eb5ba3282b0515f220e6cdd25e49500a17f28a34edf018ce9"
+    "locks/local-runtime-file-hashes.json": "f313532806b406e975f3d6eed62b43574805bb74bee672ce432041b570c40022"
   },
   "eula_changed": false,
   "full_parity": false
