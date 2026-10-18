@@ -4,6 +4,8 @@
     "original_requires_install",
     "verified_replacement",
     "idempotent_install",
+    "previous_version_load_rejected",
+    "pinned_previous_version_upgrade_retained",
     "dual_identity_load_rejected",
     "dual_identity_install_resumed",
     "missing_receipt_load_rejected",
@@ -18,18 +20,18 @@
     "restore_mod_identity_verified",
     "restore_rebuild_outputs_skipped_original_cache_retained"
   ],
-  "case_count": 16,
+  "case_count": 18,
   "original_download_lock_unchanged": true,
   "original_jar_retained": true,
   "configuration_and_eula_unchanged": true,
   "fixture_only": true,
-  "derived_jar_sha256": "86ce239bfd36df2b137c303067aab0dc88b1ae8233101a5431f8a2caa269d6fc",
+  "derived_jar_sha256": "57756c966739f22aee0d8eccfe061e39f36c1d9cac60b819ea74b10f7a55b239",
   "full_parity": false,
   "source_sha256": {
-    "work/migration/test_gtceu_artifact.py": "42200149096c44ec7efdef599ec55f3039776c46d8b763ac1adbecfb8e027508",
-    "work/migration/gtceu_artifact.py": "b7fd70b937fd10833f64dbd26e9daba67b01fbd56fd9e248f294b068b41bc9cc",
+    "work/migration/test_gtceu_artifact.py": "58597d296c1e290ccf159aa7031586eb7c542ada2d6743eb50aed2f6d220dc3d",
+    "work/migration/gtceu_artifact.py": "0b00b39e644e1abdcb2dc9c99d4b85c77ba6eb777377be2f3cd8138c0fd9926a",
     "work/migration/install_gtceu_bridge.py": "6b7d32ca462646ecad9001ffd48696a498ac3218a685564b845fddf90330419a",
     "work/migration/restore_local_checkpoint.py": "f7d13e47c4c4c13f33bd7bfa2cf0a556adc23cd3b6aa8a17f4887e0a02a4f794",
-    "locks/gtceu-derived-artifact.json": "b02b680f6a127fe43da6aa811cb212be8c7cb705793b965fcc4b3f1be034dfde"
+    "locks/gtceu-derived-artifact.json": "47bf81042582f858d8feabfb11f996496c7f0716e12ff6b684a39b7d71f0c44c"
   }
 }

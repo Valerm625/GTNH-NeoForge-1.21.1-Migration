@@ -29,3 +29,28 @@ ServerEvents.recipes(event => {
   event.recipes.gtceu.shaped('minecraft:iron_nugget', ['hI'], {I: 'minecraft:iron_ingot'})
     .noMirror().noShrink().id('gtnh_audit:tool_shaped');
 });
+
+// The expected positions come from unedited Forge 10.13.4.1614 source.
+ServerEvents.recipes(event => {
+  var cases = [
+    ['center', ['   ', ' A ', '   '], false], ['right', ['  A'], false],
+    ['right_mirror', ['  A'], true], ['leading', [' A'], false],
+    ['leading_mirror', [' A'], true], ['vertical', ['A', ' ', 'B'], false],
+    ['pair', ['AB'], false], ['pair_mirror', ['AB'], true], ['offset', [' A ', ' B '], false]
+  ];
+  cases.forEach(c => {
+    var keys = {A: 'minecraft:iron_ingot'};
+    if (c[1].join('').indexOf('B') >= 0) keys.B = 'minecraft:gold_ingot';
+    var r = event.recipes.gtceu.shaped('minecraft:diamond', c[1], keys).kjsMirror(c[2]).kjsCategory('misc');
+    if (c[0] === 'right') r.kjsShrink(false); else r.noShrink();
+    r.id('gtnh_audit:shape_' + c[0]);
+  });
+  event.recipes.gtceu.shaped('minecraft:diamond', ['   ', ' A ', '   '], {A:'minecraft:iron_ingot'})
+    .noMirror().id('gtnh_audit:shape_default');
+  event.recipes.gtceu.shaped('minecraft:diamond', ['   ', ' A ', '   '], {A:'minecraft:iron_ingot'})
+    .noMirror().noShrink().kjsShrink(true).id('gtnh_audit:shape_reset');
+  event.recipes.gtceu.shaped('minecraft:clay_ball', ['   ', ' M ', '   '], {M:'minecraft:milk_bucket'})
+    .noShrink().noMirror().id('gtnh_audit:shape_bucket');
+  event.recipes.gtceu.shaped('minecraft:clay_ball', ['   ', ' M ', '   '], {M:'minecraft:milk_bucket'})
+    .noShrink().noMirror().keepIngredient('minecraft:milk_bucket').id('gtnh_audit:shape_keep');
+});

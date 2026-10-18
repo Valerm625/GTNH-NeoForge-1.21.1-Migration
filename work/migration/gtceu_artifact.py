@@ -140,7 +140,23 @@ def install(pack, artifact, root=ROOT):
         require(path.resolve().is_relative_to(mods.resolve()), 'Artifact path escapes mod directory')
     if old.exists():
         verify_original(old, root)
-    if new.exists():
+    installed_hash = sha(new) if new.exists() else None
+    if installed_hash and installed_hash != pin['sha256']:
+        previous = next((row for row in pin.get('previous_artifacts', [])
+                         if row['filename'] == new.name and row['sha256'] == installed_hash), None)
+        require(previous is not None, 'Derived GTCEu SHA256 differs: ' + str(new))
+        with zipfile.ZipFile(new) as archive:
+            require(hashlib.sha256(archive.read('META-INF/gtnh-migration-kubejs72.json')).hexdigest()
+                    == previous['provenance_sha256'], 'Previous GTCEu provenance differs')
+        retained = root / 'work/cache/derived-artifacts' / installed_hash / new.name
+        if retained.exists():
+            require(sha(retained) == installed_hash, 'Changed retained previous GTCEu')
+        else:
+            retained.parent.mkdir(parents=True, exist_ok=True)
+            with retained.open('xb') as stream:
+                stream.write(new.read_bytes())
+        require(sha(retained) == installed_hash, 'Previous GTCEu retention failed')
+    if installed_hash == pin['sha256']:
         verify_derived(new, root)
     else:
         temporary = mods / ('.gtceu-install-' + uuid.uuid4().hex + '.tmp')
@@ -149,7 +165,11 @@ def install(pack, artifact, root=ROOT):
             stream.flush()
             os.fsync(stream.fileno())
         verify_derived(temporary, root)
-        temporary.rename(new)
+        if installed_hash:
+            require(sha(new) == installed_hash, 'GTCEu changed during upgrade; preserved')
+            temporary.replace(new)
+        else:
+            temporary.rename(new)
     # If interrupted before this point both known JARs remain and runtime_jar
     # refuses loading. Rerunning this function resumes only after strict hashes.
     if old.exists():

@@ -1,0 +1,17 @@
+{
+  "filename": "forge-1.7.10-10.13.4.1614-userdev.jar",
+  "url": "https://maven.minecraftforge.net/net/minecraftforge/forge/1.7.10-10.13.4.1614-1.7.10/forge-1.7.10-10.13.4.1614-1.7.10-userdev.jar",
+  "sha256": "6ed364c0defdb481a41ef2d99c02d382f16fc42a6ea0ea1c2b849848d8466e91",
+  "entry": "src/main/java/net/minecraftforge/oredict/ShapedOreRecipe.java",
+  "source_sha256": "8dd11b5687d3dc98934e6b17ad7c56004aa0a397b75b55b8dd690f303db07e7e",
+  "gt5_forge_version": "10.13.4.1614",
+  "scope": "Unedited fixed Forge source; geometry-only item/inventory stubs; not full legacy crafting behavior",
+  "license": {
+    "name": "Minecraft Forge Public Licence 1.0",
+    "source_url": "https://maven.minecraftforge.net/net/minecraftforge/forge/1.7.10-10.13.4.1614-1.7.10/forge-1.7.10-10.13.4.1614-1.7.10-universal.jar",
+    "archive_sha256": "00d1ca02192c7efb87da95552ebf247021f1e1d642f86d0a03076314def11529",
+    "entry": "MinecraftForge-License.txt",
+    "sha256": "5d5b5983827c197ac2f352b8580e38b182389985cf0a5b5650c35de81fde9026",
+    "local_path": "work/compat-mod/src/main/resources/MinecraftForge-License.txt"
+  }
+}

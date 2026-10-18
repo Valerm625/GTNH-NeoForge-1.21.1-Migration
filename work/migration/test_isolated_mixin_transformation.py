@@ -34,7 +34,8 @@ with zipfile.ZipFile(compat) as jar:
     expected = {'EnderTankCapacityMixin', 'LegacyRetrievalItemTaskMixin', 'LegacyDimensionLocationTaskMixin',
                 'LegacyHuntTaskMixin', 'LegacyCraftingItemTaskMixin', 'LegacyInventoryListenerMixin', 'LegacyTaskLoginTimingMixin', 'LegacyInitialInventorySyncMixin'}
     expected |= {'LegacyServerSaveScopeMixin','LegacyPlayerListSaveScopeMixin','LegacyPlayerFileSaveScopeMixin','LegacyWorldFileSaveScopeMixin','LegacyPlayerLifecycleSaveScopeMixin','LegacyPlayerDataLoadScopeMixin'}
-    assert len(config['mixins']) == 14 and set(config['mixins']) == expected
+    expected.update({'LegacyCraftingGridMixin','LegacyCraftingCacheMixin'})
+    assert len(config['mixins']) == 16 and set(config['mixins']) == expected
     assert config['client'] == ['LegacyOwnerCacheSaveScopeMixin']
     assert config['required'] and config['package'] == 'org.gtnhmigration.compat.mixin'
     config['mixins'].remove('LegacyHuntTaskMixin')

@@ -17,7 +17,9 @@
     "LegacyPlayerFileSaveScopeMixin",
     "LegacyWorldFileSaveScopeMixin",
     "LegacyPlayerLifecycleSaveScopeMixin",
-    "LegacyPlayerDataLoadScopeMixin"
+    "LegacyPlayerDataLoadScopeMixin",
+    "LegacyCraftingGridMixin",
+    "LegacyCraftingCacheMixin"
   ],
   "client": [
     "LegacyOwnerCacheSaveScopeMixin"

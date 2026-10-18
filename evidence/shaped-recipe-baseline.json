@@ -1,0 +1,66 @@
+{
+  "scope": "Observed r30 noShrink defect; padded center recipe accepts every tested cell, not a pass report",
+  "observed_matches": {
+    "2": [
+      true,
+      true,
+      true,
+      true
+    ],
+    "3": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ]
+  },
+  "recipe": {
+    "kubejs:mirror": false,
+    "category": "misc",
+    "key": {
+      "I": {
+        "item": "minecraft:iron_ingot"
+      }
+    },
+    "pattern": [
+      "   ",
+      " I ",
+      "   "
+    ],
+    "result": {
+      "id": "minecraft:gold_ingot",
+      "count": 1
+    },
+    "type": "kubejs:shaped"
+  },
+  "expected_center_only": {
+    "2": [
+      false,
+      false,
+      false,
+      true
+    ],
+    "3": [
+      false,
+      false,
+      false,
+      false,
+      true,
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  "gtceu_sha256": "86ce239bfd36df2b137c303067aab0dc88b1ae8233101a5431f8a2caa269d6fc",
+  "compat_sha256": "532d9295e203a0f779cedd754685ebc766e58455e5d1ee7baa1a4a5f90fe4c1b",
+  "log_sha256": "d37853d3be5c9b06ea6eb87f59de1c4150e45e890443e36f7a40fbb2cb4b21f8",
+  "resource_dump_sha256": "c7d8a71f63a68e136848e18910a6de95406897a7b61a35948c4e7f4b640c4e29",
+  "server_world_player_constructed": false,
+  "full_parity": false
+}

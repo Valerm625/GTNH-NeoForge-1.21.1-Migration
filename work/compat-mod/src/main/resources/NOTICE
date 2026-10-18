@@ -1,0 +1,24 @@
+LegacyShapedRecipe.java and its compiled classes contain a shaped-grid matching
+port from Minecraft Forge 10.13.4.1614, ShapedOreRecipe, by the Minecraft Forge
+contributors. They are provided under the Minecraft Forge Public Licence,
+Version 1.0; the complete licence text is MinecraftForge-License.txt.
+
+Fixed upstream source archive:
+https://maven.minecraftforge.net/net/minecraftforge/forge/1.7.10-10.13.4.1614-1.7.10/forge-1.7.10-10.13.4.1614-1.7.10-userdev.jar
+Source entry: src/main/java/net/minecraftforge/oredict/ShapedOreRecipe.java
+Source SHA256: 8dd11b5687d3dc98934e6b17ad7c56004aa0a397b75b55b8dd690f303db07e7e
+
+Changes: modern Ingredient predicates, original-grid coordinate adapter,
+KubeJS actions, recipe registration and JSON/network codecs. The old fixed 3x3
+translation and mirror search remain. This is a partial migration, not a claim
+of complete Forge or GTNH behavior.
+
+Modified source, build tools, dependency locks and scope documentation:
+https://github.com/Valerm625/GTNH-NeoForge-1.21.1-Migration/tree/codex/2026-10-18-task-semantics
+work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyShapedRecipe.java
+work/migration/build_capacity_compat.py
+locks/legacy-shaped-source.json
+docs/legacy-shaped-geometry.zh-CN.md
+
+Other local adapter code retains the MIT notice in LICENSE. Third-party code
+and dependencies retain their own licences; no blanket relicensing is intended.

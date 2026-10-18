@@ -19,7 +19,7 @@
     {
       "path": "src/main/java/com/gregtechceu/gtceu/integration/kjs/recipe/GTShapedRecipeSchema.java",
       "original_sha256": "f1fc6184d8deeb0a079953a6463a1f6bfe819afbc16840ec1c69bb64a58e268d",
-      "patched_sha256": "efa9d56ca5c65c2085aac35deb153e101be6eb3fbd299b08ba38bf122f44964b",
+      "patched_sha256": "4d86c2cb71765767fb0fdbb63261a7c1d9ddbfc3d6bf41238a11787991f3c8b7",
       "edits": [
         {
           "start": 18,
@@ -34,6 +34,12 @@
           "after": "        public void validate(dev.latvian.mods.kubejs.recipe.component.RecipeValidationContext cx) {\n            super.validate(cx);\n"
         },
         {
+          "start": 106,
+          "end": 106,
+          "before": "",
+          "after": "            if (!getValue(SHRINK)) {\n                return java.util.Objects.requireNonNull(type.event.getRecipeFunction(\"gtnh_migration:legacy_shaped\"),\n                        \"GTNH legacy shaped recipe serializer is not registered\");\n            }\n"
+        },
+        {
           "start": 110,
           "end": 111,
           "before": "                    !json.has(KubeJSCraftingRecipe.MODIFY_RESULT_KEY) && !json.has(KubeJSCraftingRecipe.STAGE_KEY) &&\n",
@@ -44,6 +50,12 @@
           "end": 125,
           "before": "    RecipeKey<ItemStack> RESULT = ItemStackComponent.STRICT_ITEM_STACK.outputKey(\"result\");\n    RecipeKey<List<String>> PATTERN = StringGridComponent.STRING_GRID.otherKey(\"pattern\");\n    RecipeKey<TinyMap<Character, Ingredient>> KEY = IngredientComponent.INGREDIENT.asPatternKey().inputKey(\"key\");\n",
           "after": "    RecipeKey<ItemStack> RESULT = ItemStackComponent.ITEM_STACK.outputKey(\"result\");\n    RecipeKey<List<String>> PATTERN = StringComponent.STRING.instance().asList().otherKey(\"pattern\");\n    RecipeKey<TinyMap<Character, Ingredient>> KEY = IngredientComponent.INGREDIENT.instance().asPatternKey().inputKey(\"key\");\n"
+        },
+        {
+          "start": 131,
+          "end": 132,
+          "before": "            .functionNames(List.of(\"kjsShrink\"));\n",
+          "after": "            .functionNames(List.of(\"kjsCategory\"));\n"
         },
         {
           "start": 139,

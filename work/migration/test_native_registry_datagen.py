@@ -176,7 +176,7 @@ def execute(mode):
     assert '/ERROR]' not in log, 'Datagen logged an error; inspect positive.log'
     report=json.loads((run/'native-registry-result.json').read_text(encoding='utf-8'))
     assert report['passed'] and not report['world_or_player_executed']
-    assert report['native_hook_interfaces_verified']==7 and len(report['defined_classes'])==16
+    assert report['native_hook_interfaces_verified']==7 and len(report['defined_classes'])==17
     assert report['ender_storage_capacity_mb']==256000 and report['kubejs_data_generation_mode']
     assert report['client_helpers_retained']==2 and report['client_lamp_renderers_constructed']==512
     assert report['library_client_callbacks']['passed'] and report['library_client_callbacks']['client_distribution']
@@ -204,6 +204,7 @@ report={
     'client_lamp_renderers_constructed':details['client_lamp_renderers_constructed'],
     'library_client_callbacks':details['library_client_callbacks'],
     'negative_control':negative,'compat_jar_sha256':sha(COMPAT),
+    'crafting_grid_origin_verified':details['crafting_grid_origin_verified'],
     'archive_sha256':details['archive_sha256'],'registry_details_sha256':sha(OUT/'registry-details.json'),
     'source_sha256':{p.relative_to(R).as_posix():sha(p) for p in [SOURCE,CALLBACK_SOURCE,LIBRARY_COREMOD,LIBRARY_PIN,Path(__file__),R/'work/migration/acquire_native_client_audit.py']},
     'overlay_inputs_sha256':{p.name:sha(p) for p in overlay_inputs},

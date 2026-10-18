@@ -6,3 +6,7 @@
 *.json text eol=lf
 *.md text eol=lf
 *.pin text eol=lf
+work/compat-mod/src/main/resources/NOTICE text eol=lf
+work/compat-mod/src/main/resources/META-INF/neoforge.mods.toml text eol=lf
+# Preserve the pinned upstream licence bytes, including upstream trailing spaces.
+work/compat-mod/src/main/resources/MinecraftForge-License.txt -text whitespace=-blank-at-eol

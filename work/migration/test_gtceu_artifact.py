@@ -51,6 +51,15 @@ def main():
     install(pack, artifact)
     assert snapshot(pack) == state
     cases += ['verified_replacement', 'idempotent_install']
+    previous = pin['previous_artifacts'][0]
+    retained = ROOT / 'work/cache/derived-artifacts' / previous['sha256'] / previous['filename']
+    assert sha(retained) == previous['sha256']
+    shutil.copy2(retained, pack / 'mods' / pin['filename'])
+    rejects('previous_version_load_rejected', lambda: runtime_jar(pack), 'SHA256 differs', pack)
+    install(pack, artifact)
+    assert snapshot(pack) == state and sha(retained) == previous['sha256']
+    cases.append('pinned_previous_version_upgrade_retained')
+
 
     # Interruption after publishing the derivative but before removing the base.
     shutil.copy2(original, pack / 'mods' / original.name)

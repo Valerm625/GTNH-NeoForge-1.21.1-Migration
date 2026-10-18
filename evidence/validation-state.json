@@ -1,7 +1,7 @@
 {
   "portable_java_21": "packaged binary -version passes",
   "neoforge_server_installation": "21.1.262 installed; actual loader stops at unaccepted EULA",
-  "modern_artifacts": "17 original upstream JARs + 1 source-built GTCEu derivative + 1 local version-pinned adapter; 60 dependency ranges passed",
+  "modern_artifacts": "17 original upstream JARs + 1 source-built GTCEu derivative + 1 local version-pinned adapter; 61 dependency ranges passed",
   "original_release": "2.8.4 isolated and CRC-verified",
   "currency_items": 81,
   "currency_assembler_recipes": 112,
@@ -64,6 +64,8 @@
   "quest_completion_planner": "source 60-tick passive completion and active-membership expression compared for 39 bound nonrepeat retrieval declarations; per-UUID records and event/dirty/notice intents preserved; synthetic ledger reopen verified, native tick/cache/party/rewards unimplemented",
   "retrieval_modes": "all 16 consume/autoConsume/groupDetect/requireOnlyOneItem combinations source-compared; multiple requirements, early stop and aliased group-reset state preserved; source exhausted-slot errors reject whole plans; native automatic event integration remains unavailable",
   "native_datagen_registry": "official NeoForge data target registered installed native mods; 492 native mapping rows resolve, 68 retrieval declarations bind; KubeJS skips startup scripts in this mode; two client helpers and 512 original lamp renderers retained; no rendering or world/player",
-  "mixin_package_isolation": "15 Mixins moved out of runtime helper package; real ModLauncher rejects old-layout negative control and defines 16 selected classes with seven native hook interfaces; no player/world lifecycle execution",
-  "native_startup_registration": "production server distribution executes ordinary KubeJS startup; 574 custom items and all 720 mapped targets registered; 87 retrieval declarations bind; tin:9/antimony:1 actual material and 16 generated fuel data-map entries checked; LDLib reflection errors unresolved; no resource reload, world/player, complete lifecycle or gameplay"
+  "mixin_package_isolation": "17 Mixins live outside the runtime helper package; real ModLauncher rejects old-layout negative control and defines 17 selected classes with seven native hook interfaces; no player/world lifecycle execution",
+  "native_startup_registration": "production server distribution executes ordinary KubeJS startup; 574 custom items and all 720 mapped targets registered; 87 retrieval declarations bind; tin:9/antimony:1 actual material and 16 fuel values checked; LDLib reflection errors resolved with 23 configurators and 15 side-correct callbacks; no world/player, complete lifecycle or gameplay",
+  "derived_gtceu_resource_reload": "installed source-built GTCEu passes real resource loading; 167 migration machine recipes have outputs, five component codecs and 18 Content boost round trips pass; original API and old output direction controls rejected; no machine execution or complete recipe parity",
+  "legacy_shaped_geometry": "10395 fixed Forge source comparisons and 22 JSON/network round trips through real loaded recipes; original grid identity and cache-entry invalidation checks pass, missing-origin and missing-cache controls rejected; no world-backed cache reuse, menu, GTNH NBT/charge/enchantment or stage-gate parity"
 }

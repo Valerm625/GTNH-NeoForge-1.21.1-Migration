@@ -32,12 +32,24 @@ public final class NativeRegistryAudit {
             registries.add("fluids", keys(BuiltInRegistries.FLUID));
             registries.add("entities", keys(BuiltInRegistries.ENTITY_TYPE));
             report.add("registries", registries);
+            var slots = new ArrayList<net.minecraft.world.item.ItemStack>(Collections.nCopies(9, net.minecraft.world.item.ItemStack.EMPTY));
+            slots.set(4, new net.minecraft.world.item.ItemStack(net.minecraft.world.item.Items.IRON_INGOT));
+            var grid = net.minecraft.world.item.crafting.CraftingInput.of(3, 3, slots);
+            if (!(grid instanceof LegacyCraftingGrid original) || original.gtnhMigration$left()!=1 || original.gtnhMigration$top()!=1
+                    || original.gtnhMigration$gridWidth()!=3 || original.gtnhMigration$gridHeight()!=3 || grid.width()!=1 || grid.height()!=1) {
+                throw new IllegalStateException("CLIENT crafting input lost original grid coordinates");
+            }
+            if (((LegacyCraftingGrid)net.minecraft.world.item.crafting.CraftingInput.EMPTY).gtnhMigration$gridWidth()!=-1) {
+                throw new IllegalStateException("Shared empty crafting input was mutated");
+            }
+            report.addProperty("crafting_grid_origin_verified", true);
+
 
             // Defining these classes exercises the real ModLauncher transformer chain.
             // No server, player, inventory, or world is instantiated.
             JsonArray defined = new JsonArray();
             String[] targets = {
-                "net.minecraft.world.entity.Entity", "net.minecraft.server.MinecraftServer",
+                "net.minecraft.world.item.crafting.RecipeCache", "net.minecraft.world.entity.Entity", "net.minecraft.server.MinecraftServer",
                 "net.minecraft.server.players.PlayerList", "net.minecraft.world.level.storage.PlayerDataStorage",
                 "net.minecraft.world.level.storage.LevelStorageSource$LevelStorageAccess",
                 "net.minecraft.server.level.ServerPlayer", "net.minecraft.client.server.IntegratedPlayerList",
@@ -53,14 +65,20 @@ public final class NativeRegistryAudit {
                 Class.forName(target, false, getClass().getClassLoader()); defined.add(target);
             }
             report.add("defined_classes", defined);
-            String[] hooks = {"PlayerDataLoadHooks", "ServerAccess", "PlayerListHooks", "PlayerFileHooks",
-                "WorldFileHooks", "PlayerLifecycleHooks", "OwnerCacheHooks"};
-            for (int i = 0; i < hooks.length; i++) {
-                Class<?> hook = Class.forName("org.gtnhmigration.compat.LegacyRetrievalNativeSaveScope$"+hooks[i]);
-                if (!hook.isAssignableFrom(Class.forName(targets[i], false, getClass().getClassLoader())))
-                    throw new IllegalStateException("Missing applied native Mixin: "+hooks[i]);
+            Map<String, String> hooks = Map.of(
+                "PlayerDataLoadHooks", "net.minecraft.world.entity.Entity",
+                "ServerAccess", "net.minecraft.server.MinecraftServer",
+                "PlayerListHooks", "net.minecraft.server.players.PlayerList",
+                "PlayerFileHooks", "net.minecraft.world.level.storage.PlayerDataStorage",
+                "WorldFileHooks", "net.minecraft.world.level.storage.LevelStorageSource$LevelStorageAccess",
+                "PlayerLifecycleHooks", "net.minecraft.server.level.ServerPlayer",
+                "OwnerCacheHooks", "net.minecraft.client.server.IntegratedPlayerList");
+            for (var entry : hooks.entrySet()) {
+                Class<?> hook = Class.forName("org.gtnhmigration.compat.LegacyRetrievalNativeSaveScope$"+entry.getKey());
+                if (!hook.isAssignableFrom(Class.forName(entry.getValue(), false, getClass().getClassLoader())))
+                    throw new IllegalStateException("Missing applied native Mixin: "+entry.getKey());
             }
-            report.addProperty("native_hook_interfaces_verified", hooks.length);
+            report.addProperty("native_hook_interfaces_verified", hooks.size());
             int capacity = Class.forName("codechicken.enderstorage.storage.EnderLiquidStorage")
                 .getField("CAPACITY").getInt(null);
             if (capacity != 256_000) throw new IllegalStateException("EnderStorage capacity differs: "+capacity);

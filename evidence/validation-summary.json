@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-10-18T12:49:51.465479+00:00",
+  "checked_at": "2026-10-18T13:39:53.836989+00:00",
   "top_level_artifacts": [
     {
       "filename": "CodeChickenLib-1.21.1-4.6.1.529.jar",
@@ -58,13 +58,13 @@
     },
     {
       "filename": "gtceu-1.21.1-7.0.2-gtnh-kubejs72.jar",
-      "sha256": "86ce239bfd36df2b137c303067aab0dc88b1ae8233101a5431f8a2caa269d6fc",
-      "bytes": 16579883
+      "sha256": "57756c966739f22aee0d8eccfe061e39f36c1d9cac60b819ea74b10f7a55b239",
+      "bytes": 16580097
     },
     {
       "filename": "gtnh-migration-compat-0.1.0.jar",
-      "sha256": "532d9295e203a0f779cedd754685ebc766e58455e5d1ee7baa1a4a5f90fe4c1b",
-      "bytes": 311570
+      "sha256": "221f26a1637aed0f7c7b9d3ce8ea856a6377e110f9c37098b028c183d49e1944",
+      "bytes": 322523
     },
     {
       "filename": "guideme-21.1.19.jar",
@@ -100,7 +100,7 @@
   "active_top_level_jars": 19,
   "registered_mod_ids_listed_by_discovery": 23,
   "required_dependencies_missing": [],
-  "version_ranges_checked": 60,
+  "version_ranges_checked": 61,
   "version_range_failures": 0,
   "neoforge_compatibility_matrix_applied": true,
   "decoded_png_count": 644,

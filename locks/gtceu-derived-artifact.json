@@ -1,11 +1,11 @@
 {
   "format": 1,
   "filename": "gtceu-1.21.1-7.0.2-gtnh-kubejs72.jar",
-  "sha256": "86ce239bfd36df2b137c303067aab0dc88b1ae8233101a5431f8a2caa269d6fc",
+  "sha256": "57756c966739f22aee0d8eccfe061e39f36c1d9cac60b819ea74b10f7a55b239",
   "original_filename": "gtceu-1.21.1-7.0.2.jar",
   "original_sha256": "c09a550523e931342a575193cbaad2e4b643e5de2cefe280cd1de540022c6388",
   "source_commit": "f6200e018582c3e26e8db06c289d9e01c8250ac8",
-  "patch_sha256": "09d2f697111a776c345a440f4ca1f61ccb3b2d393cde7c5487b4a17c4756ce65",
+  "patch_sha256": "15472a152f3433da4ecff5dffc23ef9270064ca5ce458c0da40d62529dde2dcb",
   "compiled_class_sha256": {
     "com/gregtechceu/gtceu/api/recipe/content/Content$1.class": "c93bf8a27985848b534c8b0411ae59688cdb6913194f235f86e3f87c65a0efac",
     "com/gregtechceu/gtceu/api/recipe/content/Content.class": "e172a09913556c3072ea2064298ec0942c496d24f74b48916987ee137b174e9f",
@@ -27,15 +27,15 @@
     "com/gregtechceu/gtceu/integration/kjs/recipe/components/JavaMapRecipeComponent.class": "baab56504955f2afafe8adb31a1425dced8fd453dc4bb4122ee81793393cbd65",
     "com/gregtechceu/gtceu/integration/kjs/recipe/GTRecipeSchema$GTKubeRecipe.class": "8dc1d58925bb9f231aa5c2625755bf22304e076c1273de4428318a489d1de0cd",
     "com/gregtechceu/gtceu/integration/kjs/recipe/GTRecipeSchema.class": "6ae39e4c31b756271e3c0d467289373eea8f941ddd451476eb40f08b83882e3a",
-    "com/gregtechceu/gtceu/integration/kjs/recipe/GTShapedRecipeSchema$ShapedKubeRecipe.class": "3705097e27dfdb5997c5ba9f06a7a1f47cedaec6d959e7fabfdef952fdb88963",
-    "com/gregtechceu/gtceu/integration/kjs/recipe/GTShapedRecipeSchema.class": "6e79cdb9cca6b34c21285546870319ae92dcc03f25255d520d9842be47a94b4c",
+    "com/gregtechceu/gtceu/integration/kjs/recipe/GTShapedRecipeSchema$ShapedKubeRecipe.class": "aa69236e7d575adf5eafc25e40accd3642c431676a780b85f3abfebec176ff31",
+    "com/gregtechceu/gtceu/integration/kjs/recipe/GTShapedRecipeSchema.class": "deb3002b498a9c027ffae725cd4d47c1194c8b62436d8c3ea695a9d8c2f0f126",
     "com/gregtechceu/gtceu/integration/kjs/recipe/IDRecipeConstructor.class": "35eaff0b05b722ad6599df0fae014a6380bf991489507a89dcf9b1bcae769c1e",
     "com/gregtechceu/gtceu/integration/kjs/recipe/KJSHelpers.class": "cb22159c96deb6611197ed1299f9640a04c0deeb2b519939715d7e44379abcd7",
     "com/gregtechceu/gtceu/integration/kjs/recipe/WrappingRecipeSchemaType.class": "5c2925000003adb64a5305ef03bb4cf7006b6448f061aec5e29ae76894cad062"
   },
   "source_sha256": {
     "src/main/java/com/gregtechceu/gtceu/integration/kjs/recipe/GTRecipeSchema.java": "833b700ed395c04fb6777f981bb72536b5d9689400b8f0d54f367a5ebfccc4fb",
-    "src/main/java/com/gregtechceu/gtceu/integration/kjs/recipe/GTShapedRecipeSchema.java": "efa9d56ca5c65c2085aac35deb153e101be6eb3fbd299b08ba38bf122f44964b",
+    "src/main/java/com/gregtechceu/gtceu/integration/kjs/recipe/GTShapedRecipeSchema.java": "4d86c2cb71765767fb0fdbb63261a7c1d9ddbfc3d6bf41238a11787991f3c8b7",
     "src/main/java/com/gregtechceu/gtceu/integration/kjs/recipe/IDRecipeConstructor.java": "fb268677985802b90eca147463de54671baf7a250c9008fa1306eef615a5038e",
     "src/main/java/com/gregtechceu/gtceu/integration/kjs/recipe/KJSHelpers.java": "2cc36b13befed111bfbfe17afba810a40f9f67a9ad6dc8f386afad4931b19c79",
     "src/main/java/com/gregtechceu/gtceu/integration/kjs/recipe/WrappingRecipeSchemaType.java": "3680f6bf81cdbbda03cbdad202bc5d120c8643f0cc4693d6a027d5c3b0a92375",
@@ -51,5 +51,12 @@
   },
   "unchanged_original_entries": 14084,
   "license": "LGPL-3.0; preserve upstream declarations",
-  "full_parity": false
+  "full_parity": false,
+  "previous_artifacts": [
+    {
+      "filename": "gtceu-1.21.1-7.0.2-gtnh-kubejs72.jar",
+      "sha256": "86ce239bfd36df2b137c303067aab0dc88b1ae8233101a5431f8a2caa269d6fc",
+      "provenance_sha256": "17a2672a645503a76a5a9a0c28120d2047ba84b183549899bb4c60ec3f7497af"
+    }
+  ]
 }

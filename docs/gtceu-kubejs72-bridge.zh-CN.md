@@ -25,7 +25,7 @@
 - 16 种迁移燃料的 `ItemStack.getBurnTime` 与固定源规格一致，包括木炭 16000 tick；不是检查生成文件后伪造燃料映射。
 - 原始 GTCEu API 负例在旧 `ServerEvents` 类处失败；仅恢复旧输出方向的负例能够加载，却被配方语义检查拒绝。正例不允许 ERROR 或脚本事件错误。
 
-保留了 Storage Drawers 可选依赖配方回退及上游缺失标签等 WARN，没有将它们隐藏或计作已解决。检查不证明所有配方、所有工具行为、`noShrink` 的定位行为或旧阶段门槛已迁移；这些仍须单独验收。
+保留了 Storage Drawers 可选依赖配方回退及上游缺失标签等 WARN，没有将它们隐藏或计作已解决。检查不证明所有配方、所有工具行为或旧阶段门槛已迁移。后续已补[noShrink格子定位](legacy-shaped-geometry.zh-CN.md)：13条新增夹具、10395次旧源码格子对照及22次JSON/网络往返，并增加原点和缓存缺失负例。真实工作台、GTNH的NBT/充电/附魔及阶段门槛仍须继续验收。
 
 ## 构建与复现
 
@@ -41,4 +41,4 @@ python work/migration/test_native_resource_bridge.py
 
 依赖现有基础包、JDK 21 和 `locks/native-client-audit-inputs.json` 对应的本地编译输入。构建目录、派生 JAR、原始输入和详细运行日志在忽略目录 `work/migration/gtceu-kubejs-bridge/`；公开检查结果为 `evidence/NativeResourceBridgeCheck.json`。完整重建入口已加入此检查，旧检查继续保留。
 
-安装、来源校验和恢复见[派生模组管理](gtceu-derived-artifact.zh-CN.md)。既有 CoreMod 的目标类、LDLib 及其回调摘要锁保持不变，独立派生锁只允许经过验证的 25 个重编译类和来源元数据。后续继续验证真实机器执行、客户端渲染、noShrink定位与阶段门槛。本阶段由 Codex 单人实现；完整目标保持未完成，任务导出仍为 2/3814。
+安装、来源校验和恢复见[派生模组管理](gtceu-derived-artifact.zh-CN.md)。既有 CoreMod 的目标类、LDLib 及其回调摘要锁保持不变，独立派生锁只允许经过验证的 25 个重编译类和来源元数据。后续继续验证真实机器执行、客户端渲染、真实工作台与阶段门槛。本阶段由 Codex 单人实现；完整目标保持未完成，任务导出仍为 2/3814。

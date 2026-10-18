@@ -44,12 +44,12 @@
     "neoforge_transform_chain_verified": false,
     "game_runtime_verified": false
   },
-  "compat_jar_sha256": "532d9295e203a0f779cedd754685ebc766e58455e5d1ee7baa1a4a5f90fe4c1b",
+  "compat_jar_sha256": "221f26a1637aed0f7c7b9d3ce8ea856a6377e110f9c37098b028c183d49e1944",
   "source_sha256": {
     "work/migration/OfflineMixinService.java": "a7ea57ef2ea959f69885cca79076690724e82a17c768df2d4521e23fddc897df",
     "work/migration/OfflineProperties.java": "10ad2622af4698009243667fac346ad23621d38f86c583aebcb99593059f9f3d",
     "work/migration/NativeSaveScopeMixinCheck.java": "6f8bdfd9dbdd4fe9da4835236e8bf559ef0f31fec05b7fa828758607a506237d",
-    "work/migration/test_native_save_scope_mixins.py": "5c5a0b20513c54f5a45a8c25825e3a03c860887397fc22077ceafa781ee17f75",
+    "work/migration/test_native_save_scope_mixins.py": "8b8c3824d2571707be4f8951c7dd0eb7240621782c8157ce2be8b71486e6a28d",
     "work/migration/acquire_native_client_audit.py": "38aa830027cf861928db5f18f2990ed33b38052ea5f671493f05e8c825a1e366",
     "locks/native-client-audit-inputs.json": "1542616c4c55281eec4dc906d9a2d0375e45aa50939eb29f67230d80fefa1093",
     "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalNativeSaveScope.java": "b04f9a6828b069cfed5fc4507ac71a5f5847f8a655f6f966163cf08c9bdf1e28",

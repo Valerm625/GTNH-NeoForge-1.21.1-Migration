@@ -112,6 +112,7 @@
   "scripted_identity_mappings_not_exercised": 228,
   "bound_retrieval_declarations": 68,
   "defined_classes": [
+    "net.minecraft.world.item.crafting.RecipeCache",
     "net.minecraft.world.entity.Entity",
     "net.minecraft.server.MinecraftServer",
     "net.minecraft.server.players.PlayerList",
@@ -171,15 +172,16 @@
     "illegal_mixin_package_rejected": true,
     "exit_code": 1
   },
-  "compat_jar_sha256": "532d9295e203a0f779cedd754685ebc766e58455e5d1ee7baa1a4a5f90fe4c1b",
+  "compat_jar_sha256": "221f26a1637aed0f7c7b9d3ce8ea856a6377e110f9c37098b028c183d49e1944",
+  "crafting_grid_origin_verified": true,
   "archive_sha256": "cf0367344bfa10587719e9a919d04dfd2877fe1e5c2a96b24a4323e0fb7973dc",
-  "registry_details_sha256": "14b86fb33b766ab4647e9499630c7ea630436010a933aaa5c6ffa8aa5d6beb90",
+  "registry_details_sha256": "e20df4165e1b80a8b905bacf5f9351aeb991e8ab1b2ed9105a03814feebc6bea",
   "source_sha256": {
-    "work/migration/NativeRegistryAudit.java": "2e6704046ec686eef6f143f7c7555b4162f74b10403e674fee439a98a751c68e",
+    "work/migration/NativeRegistryAudit.java": "9473e358f98632f111619ad182ba7f7b70964512dd5795e1e6b4c4709657e7c8",
     "work/migration/LibraryClientCallbacksCheck.java": "322c1ba908781e1d0d6b20e5e110ce58c09af30256e2c89fe929970c16a68d2d",
     "work/compat-mod/src/main/resources/coremods/library_client_callbacks.js": "334478bc8d57e236d25d93ed181d8ab034f10b4211fdd640c3f8f524737e68e8",
     "locks/library-client-callbacks.json": "be4ce16e2fcdc9b0a913484dfa146d260ddd40b59e8c7846331aeb715c770a47",
-    "work/migration/test_native_registry_datagen.py": "8230cbfcd895f6aab3d27c54cd8b43a4cc5e05913e5e6dda08450b9250befe98",
+    "work/migration/test_native_registry_datagen.py": "0d319e33694abf835ec30e1c99413e790b9784d472f69b26d38d64bcaf80bfc5",
     "work/migration/acquire_native_client_audit.py": "38aa830027cf861928db5f18f2990ed33b38052ea5f671493f05e8c825a1e366"
   },
   "overlay_inputs_sha256": {
@@ -289,8 +291,8 @@
     "mods/ftb-library-neoforge-2101.1.37.jar": "624c2d2d1cbadb946d967e17757bd5b2d129d4d3ed71f2da0c70607d04476ac2",
     "mods/ftb-quests-neoforge-2101.1.36.jar": "6a39982c4b3afc00b1e788041a4f0d394e1659e3b3a6e5d078cd790bc36d0018",
     "mods/ftb-teams-neoforge-2101.1.11.jar": "e6bcd670493624e6906df872a9c6af4a33fe6405cac57a32c59cd4cd5838c655",
-    "mods/gtceu-1.21.1-7.0.2-gtnh-kubejs72.jar": "86ce239bfd36df2b137c303067aab0dc88b1ae8233101a5431f8a2caa269d6fc",
-    "mods/gtnh-migration-compat-0.1.0.jar": "532d9295e203a0f779cedd754685ebc766e58455e5d1ee7baa1a4a5f90fe4c1b",
+    "mods/gtceu-1.21.1-7.0.2-gtnh-kubejs72.jar": "57756c966739f22aee0d8eccfe061e39f36c1d9cac60b819ea74b10f7a55b239",
+    "mods/gtnh-migration-compat-0.1.0.jar": "221f26a1637aed0f7c7b9d3ce8ea856a6377e110f9c37098b028c183d49e1944",
     "mods/guideme-21.1.19.jar": "2ce254edb931c3c3cf81d69abaf8f4ce5b871bf85e64984f366bf044173bd66a",
     "mods/Jade-1.21.1-NeoForge-15.10.6.jar": "276f1f65a20d04f536989c4f311949d770b52c440c23c2b904a08860f3c93810",
     "mods/jei-1.21.1-neoforge-19.51.0.418.jar": "8bc3936d869e4040a5649c58b7e8be1c78c82a245c0dc07bdd68ab49121a222c",

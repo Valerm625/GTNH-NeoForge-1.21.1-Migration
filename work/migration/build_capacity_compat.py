@@ -21,7 +21,7 @@ entry='''package org.gtnhmigration.compat;
 import net.neoforged.fml.common.Mod;
 /** Explicit GTNH migration adaptations, not a claim of complete port. */
 @Mod("gtnh_migration_compat")
-public final class MigrationCompat { public MigrationCompat() {} }
+public final class MigrationCompat { public MigrationCompat(net.neoforged.bus.api.IEventBus bus) { LegacyShapedRecipe.register(bus); } }
 '''
 mixin='''package org.gtnhmigration.compat.mixin;
 
@@ -46,7 +46,7 @@ public abstract class EnderTankCapacityMixin {
 (src/'MigrationCompat.java').write_text(entry,encoding='utf-8',newline='\n');(src/'mixin/EnderTankCapacityMixin.java').write_text(mixin,encoding='utf-8',newline='\n')
 (resources/'META-INF/neoforge.mods.toml').write_text('''modLoader="javafml"
 loaderVersion="[4,)"
-license="MIT"
+license="MIT; Minecraft Forge Public Licence 1.0 (see NOTICE)"
 [[mods]]
 modId="gtnh_migration_compat"
 version="0.1.0"
@@ -91,14 +91,25 @@ type="required"
 versionRange="[1.0.35.a]"
 ordering="AFTER"
 side="BOTH"
+[[dependencies.gtnh_migration_compat]]
+modId="kubejs"
+type="required"
+versionRange="[2101.7.2-build.377]"
+ordering="AFTER"
+side="BOTH"
 ''',encoding='utf-8',newline='\n')
-(resources/'gtnh_migration_compat.mixins.json').write_text(json.dumps({'required':True,'minVersion':'0.8','package':'org.gtnhmigration.compat.mixin','compatibilityLevel':'JAVA_21','mixins':['EnderTankCapacityMixin','LegacyRetrievalItemTaskMixin','LegacyDimensionLocationTaskMixin','LegacyHuntTaskMixin','LegacyCraftingItemTaskMixin','LegacyInventoryListenerMixin','LegacyTaskLoginTimingMixin','LegacyInitialInventorySyncMixin','LegacyServerSaveScopeMixin','LegacyPlayerListSaveScopeMixin','LegacyPlayerFileSaveScopeMixin','LegacyWorldFileSaveScopeMixin','LegacyPlayerLifecycleSaveScopeMixin','LegacyPlayerDataLoadScopeMixin'],'client':['LegacyOwnerCacheSaveScopeMixin'],'injectors':{'defaultRequire':1}},indent=2),encoding='utf-8',newline='\n')
-(resources/'LICENSE').write_text('''MIT License
+(resources/'gtnh_migration_compat.mixins.json').write_text(json.dumps({'required':True,'minVersion':'0.8','package':'org.gtnhmigration.compat.mixin','compatibilityLevel':'JAVA_21','mixins':['EnderTankCapacityMixin','LegacyRetrievalItemTaskMixin','LegacyDimensionLocationTaskMixin','LegacyHuntTaskMixin','LegacyCraftingItemTaskMixin','LegacyInventoryListenerMixin','LegacyTaskLoginTimingMixin','LegacyInitialInventorySyncMixin','LegacyServerSaveScopeMixin','LegacyPlayerListSaveScopeMixin','LegacyPlayerFileSaveScopeMixin','LegacyWorldFileSaveScopeMixin','LegacyPlayerLifecycleSaveScopeMixin','LegacyPlayerDataLoadScopeMixin','LegacyCraftingGridMixin','LegacyCraftingCacheMixin'],'client':['LegacyOwnerCacheSaveScopeMixin'],'injectors':{'defaultRequire':1}},indent=2),encoding='utf-8',newline='\n')
+(resources/'LICENSE').write_text('''Local adapter code is MIT except LegacyShapedRecipe.java and its compiled classes,
+which are under the Minecraft Forge Public Licence 1.0. See NOTICE and
+MinecraftForge-License.txt for the source attribution and applicable licence.
+
+MIT License
 Copyright (c) 2026 Local GTNH migration project
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ''',encoding='utf-8',newline='\n')
+assert hashlib.sha256((resources/'MinecraftForge-License.txt').read_bytes()).hexdigest() == '5d5b5983827c197ac2f352b8580e38b182389985cf0a5b5650c35de81fde9026'
 args=(O/'libraries/net/neoforged/neoforge/21.1.262/win_args.txt').read_text(encoding='utf-8');libs=[O/x for x in re.search(r'^-DlegacyClassPath=(.*)$',args,re.M).group(1).strip().split(';')];libs += [O/'libraries/net/neoforged/neoforge/21.1.262/neoforge-21.1.262-server.jar', O/'libraries/net/minecraft/server/1.21.1-20240808.144430/server-1.21.1-20240808.144430-srg.jar', O/'libraries/net/neoforged/neoforge/21.1.262/neoforge-21.1.262-universal.jar'] + list((O/'mods').glob('*.jar'));cp=';'.join(p.relative_to(R).as_posix() for p in libs);classes=P/'build/classes';classes.mkdir(parents=True,exist_ok=True)
 # Remove only stale compiled classes inside this known build output.
 assert classes.resolve().is_relative_to((P/'build').resolve())

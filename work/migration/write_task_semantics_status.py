@@ -166,6 +166,11 @@ assert not resource_bridge['server_world_player_constructed'] and not resource_b
 assert resource_bridge['checks']['migration_machine_recipes_with_outputs']==167
 assert resource_bridge['checks']['fuel_values_verified']==16
 assert resource_bridge['checks']['boost_copy_codec_network_round_trips']==18
+assert resource_bridge['checks']['shaped_behavior']['source_geometry_comparisons']==10395
+assert resource_bridge['checks']['shaped_behavior']['input_identity_checks']==5
+assert resource_bridge['cases']['without_grid_origin']['rejected_missing_original_grid_coordinates']
+assert resource_bridge['cases']['without_cache_origin']['rejected_missing_cache_origin_invalidation']
+assert native_registry['crafting_grid_origin_verified']
 assert resource_bridge['cases']['original_api']['rejected_missing_old_server_events_api']
 assert resource_bridge['cases']['old_output']['rejected_missing_machine_outputs']
 for relative,expected in resource_bridge['source_sha256'].items():assert sha(R/relative)==expected,relative
@@ -173,7 +178,7 @@ bridge_build=read(R/'work/migration/gtceu-kubejs-bridge/build.json')
 assert resource_bridge['derived_jar_sha256']==bridge_build['jar_sha256']==sha(R/bridge_build['jar'])
 checks['NativeResourceBridgeCheck']=resource_bridge
 artifact=read(R/'evidence/GTCEuArtifactCheck.json')
-assert artifact['passed'] and artifact['case_count']==16
+assert artifact['passed'] and artifact['case_count']==18
 assert artifact['original_download_lock_unchanged'] and artifact['original_jar_retained']
 assert artifact['derived_jar_sha256']==resource_bridge['derived_jar_sha256']
 for relative,expected in artifact['source_sha256'].items():assert sha(R/relative)==expected,relative
@@ -237,6 +242,9 @@ report={
     'all_native_startup_errors_resolved':startup['all_startup_errors_resolved'],
     'isolated_derived_gtceu_resource_reload_verified':True,
     'derived_gtceu_installed_into_foundation':True,
+    'legacy_shaped_geometry_native_verified':True,
+    'legacy_shaped_cache_entry_head_verified':True,
+    'legacy_shaped_world_cache_and_menu_verified':False,
     'isolated_mixin_transformation_verified':True,
     'tested_model_classes_match_packaged_jar':True,
     'typed_json_envelope_planner_composition_verified':True,
@@ -299,8 +307,10 @@ metadata=read(O/'migration-metadata.json')
 metadata['last_phase']=report['phase']
 metadata['validation_state'].update({
     'native_datagen_registry':'official NeoForge data target registered installed native mods; 492 native mapping rows resolve, 68 retrieval declarations bind; KubeJS skips startup scripts in this mode; two client helpers and 512 original lamp renderers retained; no rendering or world/player',
-    'native_startup_registration':f"production server distribution executes ordinary KubeJS startup; 574 custom items and all 720 mapped targets registered; {startup['bound_retrieval_declarations']} retrieval declarations bind; tin:9/antimony:1 actual material and 16 generated fuel data-map entries checked; LDLib reflection errors unresolved; no resource reload, world/player, complete lifecycle or gameplay",
-    'mixin_package_isolation':'15 Mixins moved out of runtime helper package; real ModLauncher rejects old-layout negative control and defines 16 selected classes with seven native hook interfaces; no player/world lifecycle execution',
+    'native_startup_registration':f"production server distribution executes ordinary KubeJS startup; 574 custom items and all 720 mapped targets registered; {startup['bound_retrieval_declarations']} retrieval declarations bind; tin:9/antimony:1 actual material and 16 fuel values checked; LDLib reflection errors resolved with 23 configurators and 15 side-correct callbacks; no world/player, complete lifecycle or gameplay",
+    'derived_gtceu_resource_reload':'installed source-built GTCEu passes real resource loading; 167 migration machine recipes have outputs, five component codecs and 18 Content boost round trips pass; original API and old output direction controls rejected; no machine execution or complete recipe parity',
+    'legacy_shaped_geometry':'10395 fixed Forge source comparisons and 22 JSON/network round trips through real loaded recipes; original grid identity and cache-entry invalidation checks pass, missing-origin and missing-cache controls rejected; no world-backed cache reuse, menu, GTNH NBT/charge/enchantment or stage-gate parity',
+    'mixin_package_isolation':'17 Mixins live outside the runtime helper package; real ModLauncher rejects old-layout negative control and defines 17 selected classes with seven native hook interfaces; no player/world lifecycle execution',
     'quest_adapter':'actual MC/FTB matcher and isolated Sponge Mixin application verified; full NeoForge transformer chain and game unverified',
     'retrieval_progress_codec':'source-compared actual NBT model; no save bridge',
     'quest_retrieval_planner':'source-compared ordered model; no inventory transaction',
@@ -336,9 +346,9 @@ text=text.replace('**2026-10-15（上海）。','**2026-10-18（上海更新）�
 text+='\n\n'+heading+'\n\n'
 text+='已恢复锁定输入并重新执行本阶段验证。检索与合成的无 NBT 子集现在保留旧版耐久损耗规则，同时拒绝额外名称等不符组件；狩猎任务保留精确 ID 与子类匹配两种模式（包括牛与蘑菇牛的区别）。这些适配只作用于明确标记的迁移任务。\n\n'
 text+=f"依赖闭合的实际任务配置仍为 {report['dependency_closed_active_quests']} / {report['source_quests']}；结构候选 {report['structural_candidates']} 个。修复检测语义没有冒充新增完整任务覆盖。\n\n"
-text+=f"详细新证据见 docs/verification/task-semantics-phase.json。隔离 Sponge 服务已将 {isolated['injections_verified']} 个注入应用到 {isolated['targets_transformed']} 个真实目标类，并通过 {isolated['asm_basic_dataflow_methods']} 个方法的数据流检查和三组破坏性负例。新增官方数据生成模式已执行真实 NeoForge 注册和16个选定类的加载，7个原生钩子接口存在；世界运行、多人全语义和客户端贴图仍未验证。\n"
+text+=f"详细新证据见 docs/verification/task-semantics-phase.json。隔离 Sponge 服务已将 {isolated['injections_verified']} 个注入应用到 {isolated['targets_transformed']} 个真实目标类，并通过 {isolated['asm_basic_dataflow_methods']} 个方法的数据流检查和三组破坏性负例。新增官方数据生成模式已执行真实 NeoForge 注册和17个选定类的加载，7个原生钩子接口存在；世界运行、多人全语义和客户端贴图仍未验证。\n"
 text+=f"\n真实加载发现并修复了普通运行时类与Mixin共用保留包导致的IllegalClassLoadError；15个Mixin移至独立子包，旧布局负例在真实ModLauncher中仍被拒绝。数据生成注册表包含 {native_registry['registries']['items']} 个物品、{native_registry['registries']['blocks']} 个方块、{native_registry['registries']['fluids']} 个流体、{native_registry['registries']['entities']} 个实体类型。492条原生物品目标均存在，68个检索声明可绑定；KubeJS在该模式中跳过启动脚本，其验证另见下段。此处不是新增完整任务或功能保真率，实际导出仍为2/3814。\n"
-text+=f"\n新增生产服务端分发的注册阶段检查，执行真实KubeJS启动事件。修复燃料标签调用、Rhino循环const和材料ID命名空间问题；GTCEu两处客户端代码移入OnlyIn助手，原客户端指令保留。{startup['registered_custom_items']}个迁移物品已注册，已有720条映射（含228条脚本身份）目标均存在，{startup['bound_retrieval_declarations']}个检索声明可绑定。32种灯的服务端状态保留，客户端数据生成构造512个原始渲染器。锡锑9:1组成及16种燃料生成数据经过真实API核对；燃料仍需资源重载/世界燃烧验收。LDLib/Rhino客户端扫描修复已验证：23个配置访问器全部注册，15个客户端回调分侧正确，通用接口保留；注册日志无ERROR或反射扫描失败，六组负例均重现预期错误。后续完整初始化、资源重载与游戏仍未验收。\n"
+text+=f"\n新增生产服务端分发的注册阶段检查，执行真实KubeJS启动事件。修复燃料标签调用、Rhino循环const和材料ID命名空间问题；GTCEu两处客户端代码移入OnlyIn助手，原客户端指令保留。{startup['registered_custom_items']}个迁移物品已注册，已有720条映射（含228条脚本身份）目标均存在，{startup['bound_retrieval_declarations']}个检索声明可绑定。32种灯的服务端状态保留，客户端数据生成构造512个原始渲染器。锡锑9:1组成及16种燃料生成数据经过真实API核对；资源重载已核对16种燃料实际值；世界燃烧仍待验收。LDLib/Rhino客户端扫描修复已验证：23个配置访问器全部注册，15个客户端回调分侧正确，通用接口保留；注册日志无ERROR或反射扫描失败，六组负例均重现预期错误。独立资源重载现已通过下述检查；完整游戏仍未验收。\n"
 text+=f"\n多物品检索纯引擎通过 {engine['source_comparisons']} 次锁定原源码算法对照，支持消耗/自动消耗/组检测/OR的16种组合，覆盖同槽预算、跨轮锁定、离线成员和重复提交；源耗尽槽异常整份拒绝且不写入库存。物品匹配、库存、存储和参与者仍使用夹具；尚未接入游戏或任务导出，不能计入已迁移任务数。\n"
 text+=f"\n新增进度编解码模型通过 {codec['source_comparisons']} 次源码对照与 {codec['binary_nbt_roundtrips']} 次真实 1.21 NBT 往返；有序任务规划模型通过 {planner['source_comparisons']} 次源码对照。两者仍未接入游戏存档、库存事务或导出。\n"
 text+='\n已接入标记检索任务的库存变化排队：包含空槽变化及初始监听器同步，在 Pre tick 重新扫描。完整游戏事件执行仍未验证。\n'
@@ -375,5 +385,6 @@ scope=checks['LegacyRetrievalSaveScopeCheck']
 text+=f"\n保存许可状态机通过 {scope['assertions']} 项断言，保护嵌套保存的一次性入口、跨账本/回调/线程重入及未解决范围关闭。新增 {native_scope['injections_verified']} 处原生保存和生命周期Mixin在 {native_scope['targets_transformed']} 个固定目标上应用成功，{native_scope['asm_basic_dataflow_methods']} 个方法数据流检查及三组破坏性负例通过。协调器在决策前再次核对所有观察库存。原生钩子尚未在游戏执行；进程级隔离不等于持久登录恢复或任意模组库存写入隔离。\n"
 text+=f"\n四份锁定旧源码共有 {collisions['source_resource_occurrences']} 个资源出现记录；{collisions['same_path_groups']} 组同路径候选中 {collisions['same_path_different_content_groups']} 组字节不同，双方来源均保留，未猜测加载优先级或覆盖目标资源。\n"
 text+='\n独立源码补丁产物完成真实模组初始化与资源重载：167条迁移机器配方具有输出，16种燃料实际注册值一致，五类配方组件编码往返及18次概率加成复制/JSON/网络往返通过。原始API和旧输出方向两组负例被拒绝。补丁保持原JAR的资源字节，已按独立来源锁装入基础包并验证与新源码重建产物一致；机器实际执行、客户端渲染和完整迁移仍未验证。\n'
+text+='\n旧版有序合成定位已在真实资源加载中验证：noShrink保留外围空格，10395次固定Forge源码格子对照、22次JSON/网络往返、26次默认或重置裁剪、6组容器/配料动作、5项原点相等性/哈希和4项缓存入口检查通过。移除原点或缓存Mixin的两组新增负例被拒绝，CLIENT数据生成亦验证原点。缓存检查仅进入实际get头部并止于缺少Level的查询，未执行世界内缓存命中；GTNH的NBT/充电/附魔、阶段门槛、真实工作台及客户端展示仍未完成。\n'
 status.write_text(text,encoding='utf-8')
 print(json.dumps({k:v for k,v in report.items() if k!='checks'},ensure_ascii=False))

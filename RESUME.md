@@ -274,3 +274,23 @@ r30完成记录：完整入口退出0，`work/migration/installed-gtceu-rebuild.
 
 
 r30另行恢复输入预检通过，报告`evidence/local-restore-input-check.json`：五份固定源码归档及其解压树、18个上游身份、两个实例的派生GT、2036个需导入/核验的运行文件、9358个master输入和11977个旧包参考文件均通过。运行文件数比完整清单少1，是因为本地兼容JAR要求重建而未作为导入输入验证。master/旧包树仍按历史逐文件清单核验，不冒充重新审计原始ZIP；本次无整份工作区复制或恢复后启动。
+
+
+## 有序合成定位、原点与缓存（2026-10-18，r31）
+
+说明见[旧版合成定位](docs/legacy-shaped-geometry.zh-CN.md)。真实失败基线证明原noShrink在KubeJS377下会丢失外围空格；新增gtnh_migration:legacy_shaped序列化器和两个普通Mixin保留原网格坐标、相等性/哈希及配方缓存失效。GT schema仅在shrink=false选择新序列化器，并修正kjsCategory方法；默认与显式重置true仍走既有KubeJS路径。
+
+固定Forge10.13.4.1614未修改源码在隔离几何测试桩中产生3465个输入结果，实际加载配方及JSON/网络往返共10395次对照通过；22次配方往返、26次默认/重置裁剪、6组容器动作、5项输入身份和4项实际缓存入口检查通过。原点和缓存Mixin缺失的负例被拒绝。缓存检查止于真实get入口后的Level查询，未构造World，不能声称游戏缓存命中已验证。旧逻辑3x3在2x2和4x4的边界按源码保留，未擅自重写。
+
+新派生GT摘要57756c966739f22aee0d8eccfe061e39f36c1d9cac60b819ea74b10f7a55b239；旧86ce239b版本必须匹配previous_artifacts才能升级，先存入按摘要命名的派生缓存再替换，未知修改仍拒绝。原始下载锁、两个CoreMod和旧客户端类锁不放宽。安装/恢复检查扩为18项。Forge移植类的许可与归属随资源保留，不归入本地MIT声明。
+
+完整重建日志为work/migration/shaped-geometry-rebuild.log，正式完成结果以随后记录为准。后续继续GTNH合成的NBT/充放电/附魔、阶段门槛、机器执行、任务提交/奖励及客户端视觉。无服务器、世界、玩家或WorldStem；EULA=false；任务依赖闭合导出仍2/3814，完整目标保持active，继续单人完成。
+
+下一轮已核对的固定源码入口：GT5U `GTShapedRecipe.java` 的 `matches` 在 mKeepingNBT=true 时比较所有非空格是否带tag及完整tag内容，空compound与无tag不能擅自等同；结果先调用updateItemStack，再复制第一个带tag输入，处理电量、附魔后再次update。电量处理先清空结果电量，模拟读取各输入的可放电量，排除MetaGeneratedTool后以int累加，再给结果充电；不能把它简化为复制一个charge字段。`GTModHandler.java:2053/2077`包含IC2管理器、等级、模拟标志及int运算；`GTUtility.java:3119`附魔写回将等级先转byte再写short，属于必须明确对照的旧值域边界。这些只是待实现行为的源码定位，当前LegacyShapedRecipe没有实现它们。
+
+
+r31完成记录：完整重建入口退出0，work/migration/shaped-geometry-rebuild.log末尾为CURRENT_PHASE_REBUILD_COMPLETE_FULL_PARITY_STILL_FALSE，47份汇总检查全部通过并已同步公开证据。兼容JAR摘要221f26a1637aed0f7c7b9d3ce8ea856a6377e110f9c37098b028c183d49e1944，GT派生摘要仍为本节57756c96版本；运行清单2037个文件，顶层模组19个。CLIENT验证17个选定类与7个保存钩子，并验证原网格；服务端注册及六个启动负例、资源正例及四个资源负例均通过。新增合成行为检查数量见本节和NativeResourceBridgeCheck.json。
+
+首次完整执行曾因测试把七个钩子与目标列表前七项按下标绑定，在新增RecipeCache后发生错配；改为明确的钩子/类名映射，全部原断言保留，独立复查及完整入口重跑通过。失败日志保留work/migration/shaped-geometry-initial-failed.log。状态元数据同步纠正了过时的LDLib/资源重载待验收描述，但机器、真实工作台、玩家、任务提交/奖励和客户端视觉均仍未验收，full_parity=false。
+
+r31只读恢复预检通过：五份固定源码归档/树、两个实例的派生身份、2036个运行输入、9358个master文件及11977个旧包参考文件一致，当前兼容JAR与公开锁匹配。报告evidence/local-restore-input-check.json已更新；未复制整份工作区，未启动恢复后的游戏。
