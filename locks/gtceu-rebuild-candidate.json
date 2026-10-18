@@ -1,0 +1,9 @@
+{
+  "repository": "https://github.com/Valerm625/GregTech-Modern-Unofficial-Rebuild",
+  "commit": "0c63302896851b340022d568b8211cebc603f1f1",
+  "role": "source candidate and compatibility reference; not an installed replacement",
+  "current_gtceu_filename": "gtceu-1.21.1-7.0.2.jar",
+  "current_gtceu_sha256": "c09a550523e931342a575193cbaad2e4b643e5de2cefe280cd1de540022c6388",
+  "current_kubejs_filename": "kubejs-neoforge-2101.7.2-build.377.jar",
+  "current_kubejs_sha256": "df9a8458b1f83fed06ba54684977911795a5153a462b81a610895f5b1f2f0cbf"
+}

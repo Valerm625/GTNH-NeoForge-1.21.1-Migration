@@ -226,3 +226,15 @@ NBT 比较修复了独立 NaN 对象误判，日志来源写入保留现有 NaN 
 真实资源/配方重载探索调用`WorldLoader.load`，只加载资源与注册表，不构造世界、玩家或WorldStem。原始失败日志`resource-original-api-failure.log`：GTRecipes$KJSCallWrapper引用不存在的`dev.latvian.mods.kubejs.bindings.event.ServerEvents`；当前KubeJS实际类在`plugin.builtin.event`，RECIPES字段类型及hasListeners签名保留。仅在该忽略目录的实验兼容JAR中改正字段owner后，重载继续至GTRecipeComponents静态初始化，当前`launch.log`重现`SizedIngredientComponent.NESTED`字段不存在，随后GTRecipeSchema初始化失败。尚未完成资源重载、配方或燃料实际生效验证。
 
 实验补丁在`work/full-lifecycle-probe/resource_api_probe.js`；该目录的兼容JAR含额外实验CoreMod，不能覆盖基础包、作为r27产物发布或计为已验证迁移。正式兼容JAR仍只含已验证的两个CoreMod。下一步需按固定KubeJS/GTCEu真实API与源语义修复全部配方桥接差异，保留嵌套配料、数量、机会和条件语义，再把完整初始化与资源重载纳入可复现检查。不能把NESTED盲改为其他字段以求启动通过。
+
+## 新增源码候选审计（2026-10-18，r28）
+
+用户提供 `Valerm625/GregTech-Modern-Unofficial-Rebuild`。已克隆到忽略目录 `work/upstream/gt-modern-unofficial-rebuild`，固定 HEAD 为 `0c63302896851b340022d568b8211cebc603f1f1`，读取 Git 对象完成[接口、依赖和资源审计](docs/gtceu-rebuild-candidate.zh-CN.md)。候选是 8.0.1-unofficial，KubeJS 编译基线为 7.2-build.336。当前 377 对其 STAGE_KEY 引用的 javac 负例失败，MIRROR_KEY 正例成功；未执行候选整体构建或 GameTest，未安装候选、未向候选仓库推送。来源审计不改变 2/3814 导出、720/8388 身份或完整迁移未完成状态。
+
+当前 r27 基础包与兼容 JAR 均保持不变，原 45 份检查仍适用。本轮增加独立可复现的 `audit_gtceu_rebuild_candidate.py`、锁和证据，不把审计数字混入游戏验收。继续单人工作；EULA 保持 false。
+
+资源重载探索状态更新：忽略目录 `work/kjs-api-port/src` 保留从原 GTCEu 7.0.2 复制并修改的 KubeJS 7.2 适配源码。`work/kjs-api-port/compile.args` 与 `compile.log` 记录成功编译；它只替换 `work/full-lifecycle-probe/mods` 内的实验 GT JAR，基础包不变。该 probe 的兼容 JAR 已恢复为原 r27，两项正式 CoreMod 之外没有额外 CoreMod。此前尝试在脚本加载 ClassReader 的方式被 CoreMod 类型过滤器拒绝，不能绕过该限制。
+
+最新 `work/full-lifecycle-probe/launch.log` 记录配方事件完成：KubeJS 报告新增 167、移除 3、失败 0，RecipeManager 加载 31778 条；随后资源标签更新时 DataMapLoader.results 为 null，整体进程退出 1。因此仍不能声称资源重载、燃料生效或配方功能验证通过。下一步应先检查独立资源加载入口是否缺少 NeoForge AddReloadListenerEvent 等生产生命周期步骤，不得用伪造空结果掩盖问题。实验代码尚未做来源补丁归档和配方语义完整测试，不作为交付产物。
+
+新候选的通用 output 已改为输出键，可用于核对旧版输出写入输入键的缺陷；需要正反例覆盖普通/每 tick 输入输出、数量与概率。整体升级还涉及 ModularUI 与旧 LDLib 兼容层、五个移动/移除的源码路径、资源差异和现有任务映射，不能直接放宽版本锁或删除兼容代码求通过。

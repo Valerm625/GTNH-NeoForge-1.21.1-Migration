@@ -1,8 +1,8 @@
 {
-  "created_at": "2026-10-18T19:46:37.648499+08:00",
+  "created_at": "2026-10-18T20:08:07.958159+08:00",
   "scope": "source-only public checkpoint; third-party game inputs excluded",
   "hash_scope": "Git index canonical blobs, not Windows checkout line endings",
-  "base_commit": "5d439768e7e997ae31ff6610440333d2f0b1ba99",
+  "base_commit": "c593e0524b72b324f69965959a21ee68877c3386",
   "files": [
     {
       "path": ".gitattributes",
@@ -26,18 +26,23 @@
     },
     {
       "path": "README.md",
-      "bytes": 14034,
-      "sha256": "1124f6f97ef2152a643a30707ace68da488d1c24127cae59d9c76f5c64336c79"
+      "bytes": 14388,
+      "sha256": "0709c25503a4cffa682e4c477a336080b3e350c4c165ebb3b1e962dc104dd0e5"
     },
     {
       "path": "RESUME.md",
-      "bytes": 39482,
-      "sha256": "67f8667fa9a06c1ee2a0d8c8d411d8c024f09fc2156ae7fd31e3d08507db345d"
+      "bytes": 41836,
+      "sha256": "8623a62010a32c74573cc710f536a148f74a2c6b2e039da24e0dfed4da7a7a70"
     },
     {
       "path": "STATUS.zh-CN.md",
       "bytes": 18606,
       "sha256": "87b1b5c9f9954e6863d7ff3f3084ce1c4ff063e6ed0e4b64bf54cf9cba10cec7"
+    },
+    {
+      "path": "docs/gtceu-rebuild-candidate.zh-CN.md",
+      "bytes": 4477,
+      "sha256": "0adf1d8eafeec941cf101d7105c6820da7b18f8cc0c125be969dc76ad7e8fd68"
     },
     {
       "path": "docs/inventory-detection-timing.zh-CN.md",
@@ -263,6 +268,11 @@
       "path": "evidence/fuel-script-contract.json",
       "bytes": 281,
       "sha256": "05b9cd3aa39d70fa6c2a75c9973a65693d58128aea3b0c5e20622c685a13f629"
+    },
+    {
+      "path": "evidence/gtceu-rebuild-candidate-audit.json",
+      "bytes": 589732,
+      "sha256": "e5d8fbe0f770923064c6e9efee15902f1a39e837de7c2675b72dc9b330accae4"
     },
     {
       "path": "evidence/hunt-task-adapter.json",
@@ -598,6 +608,11 @@
       "path": "locks/gtceu-client-isolation.json",
       "bytes": 764,
       "sha256": "896327537e9c5903e856c2132c9e2dae3b17220de6f3c948c401f11276f5ffad"
+    },
+    {
+      "path": "locks/gtceu-rebuild-candidate.json",
+      "bytes": 544,
+      "sha256": "b08797cad1d9e1c9e8c1565675fb38f1df789f0ddf407d306b3fc8c4857284b3"
     },
     {
       "path": "locks/library-client-callbacks.json",
@@ -1200,6 +1215,11 @@
       "sha256": "524f328a3357ad00b4cea449393676a78cce588e916e991a5f8603ae72e889aa"
     },
     {
+      "path": "work/migration/audit_gtceu_rebuild_candidate.py",
+      "bytes": 9523,
+      "sha256": "c8f705d5fc6b743f4645e9621711803e31389575d59b79ee10d95ed9377cbd59"
+    },
+    {
       "path": "work/migration/audit_source_archives.py",
       "bytes": 16704,
       "sha256": "ed1f1602ee619aeafe217caf1399f4c2d30a15b6440513515b91086de9a9abcc"
@@ -1725,9 +1745,9 @@
       "sha256": "b66be7c92e19c78726f4eeeefac46a6c761b68a42e7309fc324b61efb6e0d1c7"
     }
   ],
-  "file_count": 344,
+  "file_count": 348,
   "source_archive_inputs_included": false,
   "runtime_binaries_included": false,
   "full_parity": false,
-  "continuation": "Continue solo: adapt GTCEu recipe integration to pinned KubeJS APIs (ServerEvents package and SizedIngredientComponent.NESTED), preserving all ingredient and recipe semantics; promote full mod initialization and real resource reload checks. Full parity remains false."
+  "continuation": "Pinned user-provided GTCEu 8.0.1-unofficial candidate assessed; runtime remains validated r27. Continue KubeJS recipe semantics and legitimate resource reload harness before replacement; full parity remains false."
 }
