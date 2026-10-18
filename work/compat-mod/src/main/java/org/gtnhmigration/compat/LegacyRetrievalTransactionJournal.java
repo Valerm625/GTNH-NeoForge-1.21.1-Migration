@@ -53,8 +53,8 @@ public final class LegacyRetrievalTransactionJournal {
         public Decision decisionFor(CompoundTag actualPlayerData) throws IOException {
             require(playerId(actualPlayerData).equals(actor),"Recovery player UUID mismatch");
             Optional<Marker> actual=readMarker(actualPlayerData);
-            if(actual.equals(Optional.of(marker())) && inventory(actualPlayerData).equals(inventory(afterPlayer))) return Decision.COMMIT;
-            if(actual.equals(readMarker(beforePlayer)) && inventory(actualPlayerData).equals(inventory(beforePlayer))) return Decision.ABORT;
+            if(actual.equals(Optional.of(marker())) && sameNbt(inventory(actualPlayerData),inventory(afterPlayer))) return Decision.COMMIT;
+            if(actual.equals(readMarker(beforePlayer)) && sameNbt(inventory(actualPlayerData),inventory(beforePlayer))) return Decision.ABORT;
             throw new IOException("Player inventory and transaction marker do not prove a recoverable state");
         }
     }
@@ -182,9 +182,16 @@ public final class LegacyRetrievalTransactionJournal {
     public CompoundTag proposePersistentMarker(CompoundTag playerData) throws IOException {
         synchronized(store) {
             verifyResolvedPlayer(playerData);
-            Optional<Marker> marker=readMarker(playerData);
-            return marker.isPresent()?stamp(playerData,marker.orElseThrow()):playerData.copy();
+            return persistentMarkerCandidate(playerData);
         }
+    }
+
+    /** Pure relocation for validating archived maintenance records. This does
+     * not authorize a file write or prove that the marker belongs to this world.
+     */
+    static CompoundTag persistentMarkerCandidate(CompoundTag playerData)throws IOException {
+        Optional<Marker> marker=readMarker(playerData);
+        return marker.isPresent()?stamp(playerData,marker.orElseThrow()):playerData.copy();
     }
 
     private Scan scan() throws IOException {
@@ -268,7 +275,7 @@ public final class LegacyRetrievalTransactionJournal {
         require(playerId(before).equals(actor) && playerId(after).equals(actor),"Player UUID mismatch");
         inventory(before);inventory(after);readMarker(before);readMarker(after);
         CompoundTag a=before.copy(),b=after.copy();a.remove("Inventory");b.remove("Inventory");
-        require(a.equals(b),"Proposed transaction modifies noninventory player data");
+        require(sameNbt(a,b),"Proposed transaction modifies noninventory player data");
     }
     public static Optional<Marker> readMarker(CompoundTag player) throws IOException {
         if(!player.contains("NeoForgeData")) return Optional.empty();
@@ -295,7 +302,36 @@ public final class LegacyRetrievalTransactionJournal {
         ListTag list=(ListTag)player.get("Inventory");require(list.isEmpty() || list.getElementType()==Tag.TAG_COMPOUND,"Invalid player inventory list type");return list;
     }
     private static byte[] encode(CompoundTag tag) throws IOException {
-        ByteArrayOutputStream bytes=new ByteArrayOutputStream();try(DataOutputStream out=new DataOutputStream(bytes)){NbtIo.write(tag,out);}return bytes.toByteArray();
+        ByteArrayOutputStream bytes=new ByteArrayOutputStream();try(DataOutputStream out=new DataOutputStream(bytes)){NbtIo.write(tag,new RawOutput(out));}return bytes.toByteArray();
+    }
+    /** Minecraft FloatTag/DoubleTag.equals treats distinct NaNs as unequal.
+     * Compare represented IEEE bits, tag types, keys and list order instead.
+     * This cannot restore bits already normalized by a native reader/constructor.
+     */
+    static boolean sameNbt(Tag a,Tag b) {
+        if(a==b)return true;if(a==null || b==null || a.getId()!=b.getId())return false;
+        if(a instanceof FloatTag x)return Float.floatToRawIntBits(x.getAsFloat())==Float.floatToRawIntBits(((FloatTag)b).getAsFloat());
+        if(a instanceof DoubleTag x)return Double.doubleToRawLongBits(x.getAsDouble())==Double.doubleToRawLongBits(((DoubleTag)b).getAsDouble());
+        if(a instanceof CompoundTag x){CompoundTag y=(CompoundTag)b;if(!x.getAllKeys().equals(y.getAllKeys()))return false;for(String key:x.getAllKeys())if(!sameNbt(x.get(key),y.get(key)))return false;return true;}
+        if(a instanceof ListTag x){ListTag y=(ListTag)b;if(x.size()!=y.size() || x.getElementType()!=y.getElementType())return false;for(int i=0;i<x.size();i++)if(!sameNbt(x.get(i),y.get(i)))return false;return true;}
+        return a.equals(b);
+    }
+    /** DataOutputStream canonicalizes NaN payloads; journal evidence must not. */
+    private record RawOutput(DataOutput out) implements DataOutput {
+        public void write(int v)throws IOException{out.write(v);}
+        public void write(byte[] v)throws IOException{out.write(v);}
+        public void write(byte[] v,int off,int len)throws IOException{out.write(v,off,len);}
+        public void writeBoolean(boolean v)throws IOException{out.writeBoolean(v);}
+        public void writeByte(int v)throws IOException{out.writeByte(v);}
+        public void writeShort(int v)throws IOException{out.writeShort(v);}
+        public void writeChar(int v)throws IOException{out.writeChar(v);}
+        public void writeInt(int v)throws IOException{out.writeInt(v);}
+        public void writeLong(long v)throws IOException{out.writeLong(v);}
+        public void writeFloat(float v)throws IOException{out.writeInt(Float.floatToRawIntBits(v));}
+        public void writeDouble(double v)throws IOException{out.writeLong(Double.doubleToRawLongBits(v));}
+        public void writeBytes(String v)throws IOException{out.writeBytes(v);}
+        public void writeChars(String v)throws IOException{out.writeChars(v);}
+        public void writeUTF(String v)throws IOException{out.writeUTF(v);}
     }
     private static CompoundTag decode(byte[] bytes) throws IOException {
         try(DataInputStream input=new DataInputStream(new ByteArrayInputStream(bytes))) {

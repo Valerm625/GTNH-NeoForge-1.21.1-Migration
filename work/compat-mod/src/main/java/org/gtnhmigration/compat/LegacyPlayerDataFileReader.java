@@ -70,6 +70,14 @@ public final class LegacyPlayerDataFileReader {
         require(sameIdentity(rootBefore,rootAfter) && rootAfter.isDirectory() && !rootAfter.isSymbolicLink(),"Player directory changed while reading");
         require(after.isRegularFile() && !after.isSymbolicLink() && sameIdentity(before,after)
             && before.size()==after.size() && raw.length==before.size() && before.lastModifiedTime().equals(after.lastModifiedTime()),"Player file changed while reading");
+        return decodeArchived(root,actor,authority,raw);
+    }
+    /** Decodes a retained maintenance blob; this is not fresh file evidence.
+     * verifyUnchanged still compares against the actual derived file path.
+     */
+    static Snapshot decodeArchived(Path directory,UUID actor,Authority authority,byte[] raw)throws IOException {
+        Path root=directory.toAbsolutePath().normalize();
+        require(raw.length>0 && raw.length<=MAX_COMPRESSED_BYTES,"Archived player file size is unsupported");
         byte[] decoded=inflateSingleMember(raw);CompoundTag data;
         try(DataInputStream input=new DataInputStream(new ByteArrayInputStream(decoded))) {
             data=NbtIo.read(input,NbtAccounter.create(256L*1024*1024));
@@ -95,7 +103,7 @@ public final class LegacyPlayerDataFileReader {
     // GZIPInputStream tolerates trailing junk/concatenated members. Recovery
     // evidence instead requires one validated member and one complete NBT root.
     // Optional standard gzip header fields are parsed without rewriting bytes.
-    private static byte[] inflateSingleMember(byte[] raw)throws IOException {
+    static byte[] inflateSingleMember(byte[] raw)throws IOException {
         require(raw.length>=18 && u(raw,0)==31 && u(raw,1)==139 && u(raw,2)==8,"Player file is not gzip/deflate");
         int flags=u(raw,3);require((flags&224)==0,"Unknown gzip flags");int position=10;
         if((flags&4)!=0){require(position+2<=raw.length,"Truncated gzip extra length");int size=u(raw,position)|(u(raw,position+1)<<8);position+=2;require(size<=raw.length-position,"Truncated gzip extra data");position+=size;}

@@ -25,6 +25,7 @@ N=R/'work/migration/integrated-owner-check'
 U=R/'work/migration/retrieval-save-scope-check'
 X=R/'work/migration/quest-world-store-check'
 A=R/'work/migration/quest-player-admission-check'
+M=R/'work/migration/player-marker-upgrade-check'
 
 
 def read(path):
@@ -72,7 +73,7 @@ for name,expected in observer['adapter_source_sha256'].items():
     assert sha(R/'work/compat-mod/src/main/java/org/gtnhmigration/compat'/(name+'.java'))==expected,name
 assert observer['test_source_sha256']==sha(R/'work/migration/LegacyInventoryObserverCheck.java')
 assert observer['runner_sha256']==sha(R/'work/migration/test_legacy_inventory_observer.py')
-for directory,name in [(J,'LegacyTypedNbtJsonReaderCheck'),(G,'LegacyQuestProgressEnvelopeCheck'),(S,'LegacyQuestProgressStoreCheck'),(T,'LegacyProgressImportPipelineCheck'),(B,'LegacyRetrievalInventoryBridgeCheck'),(D,'LegacyRetrievalTransactionJournalCheck'),(F,'LegacyRetrievalTransactionProposalCheck'),(H,'LegacyPlayerDataFileReaderCheck'),(K,'LegacyRetrievalCommitCoordinatorCheck'),(W,'LegacyWorldPlayerAuthorityCheck'),(N,'LegacyIntegratedOwnerCoordinatorCheck'),(U,'LegacyRetrievalSaveScopeCheck'),(X,'LegacyQuestWorldStoreCheck'),(A,'LegacyQuestPlayerAdmissionCheck')]:
+for directory,name in [(J,'LegacyTypedNbtJsonReaderCheck'),(G,'LegacyQuestProgressEnvelopeCheck'),(S,'LegacyQuestProgressStoreCheck'),(T,'LegacyProgressImportPipelineCheck'),(B,'LegacyRetrievalInventoryBridgeCheck'),(D,'LegacyRetrievalTransactionJournalCheck'),(F,'LegacyRetrievalTransactionProposalCheck'),(H,'LegacyPlayerDataFileReaderCheck'),(K,'LegacyRetrievalCommitCoordinatorCheck'),(W,'LegacyWorldPlayerAuthorityCheck'),(N,'LegacyIntegratedOwnerCoordinatorCheck'),(U,'LegacyRetrievalSaveScopeCheck'),(X,'LegacyQuestWorldStoreCheck'),(A,'LegacyQuestPlayerAdmissionCheck'),(M,'LegacyPlayerMarkerUpgradeCheck')]:
     value=read(directory/(name+'.json'))
     assert value['passed'] and not value['runtime_integrated'] and not value['export_enabled'],name
     for relative,expected in value['source_sha256'].items():
@@ -98,7 +99,7 @@ for relative, expected in hunt['source_sha256'].items():
     assert sha(R/relative)==expected,relative
 assert matcher['adapter_source_sha256']==sha(R/'work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalStackMatcher.java')
 with zipfile.ZipFile(jar) as compiled:
-    for directory,prefix in [(C,'LegacyRetrievalProgressCodec'),(L,'LegacyQuestRetrievalPlanner'),(J,'LegacyTypedNbtJsonReader'),(G/'classes','LegacyQuestProgressEnvelope'),(S,'LegacyQuestProgressStoreCodec'),(S,'LegacyQuestProgressFileStore'),(B,'LegacyRetrievalInventoryBridge'),(D,'LegacyRetrievalTransactionJournal'),(F,'LegacyRetrievalTransactionProposal'),(H,'LegacyPlayerDataFileReader'),(K,'LegacyRetrievalCommitCoordinator'),(W,'LegacyPlayerDataFileReader'),(W,'LegacyRetrievalTransactionJournal'),(W,'LegacyRetrievalCommitCoordinator'),(N,'LegacyRetrievalCommitCoordinator'),(N,'LegacyRetrievalTransactionProposal'),(U,'LegacyRetrievalSaveScope'),(K,'LegacyRetrievalNativeSaveScope'),(X,'LegacyQuestWorldStore'),(A,'LegacyQuestPlayerAdmission'),(A,'LegacyQuestNativeLifecycle')]:
+    for directory,prefix in [(C,'LegacyRetrievalProgressCodec'),(L,'LegacyQuestRetrievalPlanner'),(J,'LegacyTypedNbtJsonReader'),(G/'classes','LegacyQuestProgressEnvelope'),(S,'LegacyQuestProgressStoreCodec'),(S,'LegacyQuestProgressFileStore'),(B,'LegacyRetrievalInventoryBridge'),(D,'LegacyRetrievalTransactionJournal'),(F,'LegacyRetrievalTransactionProposal'),(H,'LegacyPlayerDataFileReader'),(K,'LegacyRetrievalCommitCoordinator'),(W,'LegacyPlayerDataFileReader'),(W,'LegacyRetrievalTransactionJournal'),(W,'LegacyRetrievalCommitCoordinator'),(N,'LegacyRetrievalCommitCoordinator'),(N,'LegacyRetrievalTransactionProposal'),(U,'LegacyRetrievalSaveScope'),(K,'LegacyRetrievalNativeSaveScope'),(X,'LegacyQuestWorldStore'),(A,'LegacyQuestPlayerAdmission'),(A,'LegacyQuestNativeLifecycle'),(M,'LegacyPlayerMarkerUpgrade')]:
         package_dir=directory/'org/gtnhmigration/compat'
         classes=[package_dir/(prefix+'.class')]+sorted(package_dir.glob(prefix+'$*.class'))
         assert all(path.is_file() for path in classes),prefix
@@ -121,7 +122,7 @@ with zipfile.ZipFile(jar) as compiled:
         entry='org/gtnhmigration/compat/'+name+'.class'
         assert compiled.read(entry)==(P/entry).read_bytes(), 'Packaged class differs from tested class: '+name
 checks={}
-for name in ['IsolatedMixinTransformationCheck','NativeSaveScopeMixinCheck','LegacyRetrievalSaveScopeCheck','LegacyQuestWorldStoreCheck','LegacyQuestPlayerAdmissionCheck','LegacyRetrievalEngineCheck','LegacyRetrievalStackMatcherCheck','LegacyCraftingShapeCheck','LegacyHuntAdapterCheck',
+for name in ['IsolatedMixinTransformationCheck','NativeSaveScopeMixinCheck','LegacyRetrievalSaveScopeCheck','LegacyQuestWorldStoreCheck','LegacyQuestPlayerAdmissionCheck','LegacyPlayerMarkerUpgradeCheck','LegacyRetrievalEngineCheck','LegacyRetrievalStackMatcherCheck','LegacyCraftingShapeCheck','LegacyHuntAdapterCheck',
              'LegacyRetrievalProgressCodecCheck','LegacyQuestRetrievalPlannerCheck','LegacyInventoryObserverCheck',
              'LegacyTypedNbtJsonReaderCheck','LegacyQuestProgressEnvelopeCheck','LegacyQuestProgressStoreCheck','LegacyProgressImportPipelineCheck','LegacyRetrievalInventoryBridgeCheck','LegacyRetrievalTransactionJournalCheck','LegacyRetrievalTransactionProposalCheck','LegacyPlayerDataFileReaderCheck','LegacyRetrievalCommitCoordinatorCheck','LegacyWorldPlayerAuthorityCheck','LegacyIntegratedOwnerCoordinatorCheck',
              'QuestAdapterShapeCheck','LegacyRetrievalCounterCheck','QuestSnbtCheck',
@@ -154,7 +155,7 @@ assert compat_row['sha256']==sha(jar)
 assert 'eula=false' in (O/'eula.txt').read_text(encoding='utf-8')
 report={
     'phase_date_shanghai':'2026-10-18',
-    'phase':'journal preparation and recovery with installed startup/player-load call sites and source receipts; native lifecycle execution and full game parity remain incomplete',
+    'phase':'journal preparation and recovery with installed startup/player-load call sites, source receipts and archived binary-preserving marker promotion; native lifecycle execution and full game parity remain incomplete',
     'checks':checks,
     'compat_jar_sha256':sha(jar),
     'source_quests':manifest['source_quests'],
@@ -189,6 +190,9 @@ report={
     'native_player_admission_call_sites_registered':True,
     'player_admission_receipt_fixture_verified':True,
     'fresh_process_admission_fixture_verified':True,
+    'archived_marker_upgrade_fixture_verified':True,
+    'marker_upgrade_process_halt_recovery_verified':True,
+    'marker_binary_ieee_fidelity_fixture_verified':True,
     'durable_admission_recovery_verified':False,
     'integrated_owner_native_submission_verified':False,
     'native_player_save_verified':False,
@@ -219,6 +223,7 @@ metadata['validation_state'].update({
     'world_player_authority':'level.dat/Data/Player readback and source-bound journal resolution tested; pinned native owner load/cache/save bytecode audited; explicit owner adapter compiled, synthetic coordination verified; no native lifecycle or game execution',
     'world_bound_ledger':'immutable world-relative manifest archived at genesis; historical catalog, non-creating reopen and offline primary/mirror recovery tested; startup/admission call sites installed but not game-executed',
     'player_admission':'source receipts, loaded owner cache checks, first-login absence, native payload return identity and post-event live marker checked in fixtures; native startup/load hooks registered and isolated-transformed; no game execution or unknown cache/mirror repair',
+    'player_marker_upgrade':'world-bound maintenance intents, exact before/after gzip archives, targeted binary NBT edit, atomic mirror-first publication, actual cache promotion and process-halt roll-forward tested with synthetic files; native game execution and conflict repair unverified',
     'source_asset_collisions':'four exact archives checked; all same-path candidates retained, precedence unresolved',
     'full_feature_parity':False,'client_rendering_verified':False,
 })
@@ -252,9 +257,11 @@ text+=f"\n单人房主的level.dat/Data/Player来源和UUID.dat镜像不能混�
 owner=checks['LegacyIntegratedOwnerCoordinatorCheck']
 text+=f"\n新增显式房主提交路径：以level.dat决定事务，缓存和UUID镜像也必须一致；取消时通过玩家列表保存恢复二者，并复核世界文件未变。{owner['assertions']} 项夹具断言及 {owner['native_owner_save_audit']['negative_controls']} 组字节码破坏性负例通过，后续保存不会重新写入已取消扣物。原生适配器仅编译和审计，需覆盖全服务器保存/生命周期的持续隔离，尚未注册或执行真实游戏，仍未完成单人迁移。\n"
 world_store=checks['LegacyQuestWorldStoreCheck']
-text+=f"\n世界账本绑定通过 {world_store['assertions']} 项断言和 {len(world_store['process_crash_checks'])} 个独立JVM中断/重开场景。固定世界相对目录、不可变历史任务目录及首帧原件绑定阻止串账；缺失或不完整初始化不重置为空。离线恢复按待决来源读回，房主额外核对UUID镜像；不改写玩家或世界文件，尚未接入原生启动/登录或缓存修复。\n"
+text+=f"\n世界账本绑定通过 {world_store['assertions']} 项断言和 {len(world_store['process_crash_checks'])} 个独立JVM中断/重开场景。固定世界相对目录、不可变历史任务目录及首帧原件绑定阻止串账；缺失或不完整初始化不重置为空。离线恢复按待决来源读回，房主额外核对UUID镜像；离线恢复本身不改写玩家或世界文件；启动/登录调用点已注册，真实运行和未知缓存冲突修复仍未验证。\n"
 admission=checks['LegacyQuestPlayerAdmissionCheck']
-text+=f"\n玩家加载来源凭据通过 {admission['assertions']} 项断言、{len(admission['process_admission_checks'])} 个独立JVM中断后的恢复/加载凭据场景。注册世界启动、正常停止及玩家原生加载调用点，保留DataFixer和加载事件，并在事件后核对实际玩家标记。原生调用位置经过字节码和隔离变换检查，尚未运行真实世界；旧标记持久升级、未知缓存/镜像修复和安全故障关闭仍待完成。\n"
+text+=f"\n玩家加载来源凭据通过 {admission['assertions']} 项断言、{len(admission['process_admission_checks'])} 个独立JVM中断后的恢复/加载凭据场景。注册世界启动、正常停止及玩家原生加载调用点，保留DataFixer和加载事件，并在事件后核对实际玩家标记。原生调用位置经过字节码和隔离变换检查，尚未运行真实世界；旧标记升级由独立维护日志实现并在下列夹具验证；未知缓存/镜像修复和安全故障关闭仍待完成。\n"
+marker=checks['LegacyPlayerMarkerUpgradeCheck']
+text+=f"\n旧事务标记升级通过 {marker['assertions']} 项断言和 {len(marker['process_crash_checks'])} 个独立JVM中断后恢复/加载场景。原/目标gzip完整归档，维护意图绑定世界与主账本版本，镜像先于世界文件原子发布，原生房主缓存只迁移自有标记。UUID和世界两份独立二进制对照保留其他字段、根名称、顺序、负零和NaN载荷；未知状态拒绝覆盖。仍是合成文件验证，未证明真实玩家加载/保存或原生NBT全流程保真。\n"
 scope=checks['LegacyRetrievalSaveScopeCheck']
 text+=f"\n保存许可状态机通过 {scope['assertions']} 项断言，保护嵌套保存的一次性入口、跨账本/回调/线程重入及未解决范围关闭。新增 {native_scope['injections_verified']} 处原生保存和生命周期Mixin在 {native_scope['targets_transformed']} 个固定目标上应用成功，{native_scope['asm_basic_dataflow_methods']} 个方法数据流检查及三组破坏性负例通过。协调器在决策前再次核对所有观察库存。原生钩子尚未在游戏执行；进程级隔离不等于持久登录恢复或任意模组库存写入隔离。\n"
 text+=f"\n四份锁定旧源码共有 {collisions['source_resource_occurrences']} 个资源出现记录；{collisions['same_path_groups']} 组同路径候选中 {collisions['same_path_different_content_groups']} 组字节不同，双方来源均保留，未猜测加载优先级或覆盖目标资源。\n"

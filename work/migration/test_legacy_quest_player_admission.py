@@ -16,7 +16,7 @@ assert sha(patched)=='f57ce3018e21459d24b50508e8c1b4fd5c16324ec1dc5f316c192aa013
 def relative(path):return Path(os.path.relpath(path,out)).as_posix()
 cp=';'.join(relative(path) for path in [minecraft,extra]+libraries)
 compile_cp=';'.join(relative(path) for path in [patched,universal])+';'+cp
-names=['LegacyRetrievalEngine','LegacyRetrievalProgressCodec','LegacyQuestProgressEnvelope','LegacyQuestProgressStoreCodec','LegacyQuestProgressFileStore','LegacyRetrievalTransactionJournal','LegacyPlayerDataFileReader','LegacyQuestWorldStore','LegacyQuestPlayerAdmission','LegacyRetrievalSaveScope','LegacyRetrievalNativeSaveScope','LegacyQuestNativeLifecycle']
+names=['LegacyRetrievalEngine','LegacyRetrievalProgressCodec','LegacyQuestProgressEnvelope','LegacyQuestProgressStoreCodec','LegacyQuestProgressFileStore','LegacyRetrievalTransactionJournal','LegacyPlayerDataFileReader','LegacyQuestWorldStore','LegacyQuestPlayerAdmission','LegacyRetrievalSaveScope','LegacyRetrievalNativeSaveScope','LegacyQuestNativeLifecycle','LegacyPlayerMarkerUpgrade']
 sources=[R/'work/compat-mod/src/main/java/org/gtnhmigration/compat'/(name+'.java') for name in names]
 checks=[R/'work/migration/LegacyPlayerDataFileReaderCheck.java',R/'work/migration/LegacyQuestWorldStoreCheck.java',R/'work/migration/LegacyQuestPlayerAdmissionCheck.java']
 def run(executable,arguments,name):
@@ -65,8 +65,8 @@ ordered(method(dedicated,'initServer'),['Method setPlayerList:','Method loadLeve
 assert 'Method setPlayerList:' in method(integrated,'net.minecraft.client.server.IntegratedServer')
 assert 'Method loadLevel:' in method(integrated,'initServer')
 lifecycle=inspect(out,'org.gtnhmigration.compat.LegacyQuestNativeLifecycle')
-ordered(method(lifecycle,'beforeWorldLoad'),['LegacyRetrievalNativeSaveScope.beginServer:','Method hasMetadata:','LegacyQuestWorldStore.open:','LegacyQuestWorldStore.recoverOffline:','LegacyQuestPlayerAdmission.verifyResolvedWorldCache:'])
-ordered(method(lifecycle,'load'),['LegacyRetrievalNativeSaveScope.begin:','LegacyQuestPlayerAdmission.begin:','LegacyRetrievalSaveScope.root:','LegacyQuestPlayerAdmission$Receipt.finish:','LegacyRetrievalSaveScope$Lease.release:'])
+ordered(method(lifecycle,'beforeWorldLoad'),['LegacyRetrievalNativeSaveScope.beginServer:','Method hasMetadata:','LegacyQuestWorldStore.open:','LegacyPlayerMarkerUpgrade.resume:','LegacyQuestWorldStore.recoverOffline:','LegacyQuestPlayerAdmission.verifyResolvedWorldCache:'])
+ordered(method(lifecycle,'load'),['LegacyRetrievalNativeSaveScope.begin:','LegacyPlayerMarkerUpgrade.promote:','LegacyQuestPlayerAdmission.begin:','LegacyRetrievalSaveScope.root:','LegacyQuestPlayerAdmission$Receipt.finish:','LegacyRetrievalSaveScope$Lease.release:'])
 assert 'net/minecraft/client/' not in lifecycle
 report['process_admission_checks']=process_checks
 report['native_startup_order_audited']=True
@@ -76,5 +76,5 @@ report.update({'source_sha256':{p.relative_to(R).as_posix():sha(p) for p in sour
  'limitations':['Synthetic NBT/files and production receipt/save-scope; no native Player, world, login or shutdown is executed.',
  'DataFixer and player loading events remain in pinned native bytecode; synthetic payload changes do not test actual DataFixer behavior.',
  'Native call-site registration is checked by the isolated Mixin report, not by this fixture execution.',
- 'Legacy marker promotion, mismatched owner mirror/cache repair, early failure cleanup and arbitrary other-mod inventory access remain incomplete.']})
+ 'Legacy marker promotion has a separate durable maintenance fixture; mismatched owner inventory/cache repair, early failure cleanup and arbitrary other-mod inventory access remain incomplete.']})
 (out/'LegacyQuestPlayerAdmissionCheck.json').write_text(json.dumps(report,indent=2)+'\n',encoding='utf-8',newline='\n');print(json.dumps(report))

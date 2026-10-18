@@ -216,7 +216,7 @@ public final class LegacyRetrievalCommitCoordinator {
     static boolean sameCritical(CompoundTag a,CompoundTag b)throws IOException {
         require(a.get("UUID") instanceof IntArrayTag && a.getIntArray("UUID").length==4 && b.get("UUID") instanceof IntArrayTag && b.getIntArray("UUID").length==4,"Missing player identity");
         require(a.get("Inventory") instanceof ListTag && b.get("Inventory") instanceof ListTag,"Missing player inventory");
-        return a.getUUID("UUID").equals(b.getUUID("UUID")) && a.get("Inventory").equals(b.get("Inventory")) && sameMarker(a,b);
+        return a.getUUID("UUID").equals(b.getUUID("UUID")) && LegacyRetrievalTransactionJournal.sameNbt(a.get("Inventory"),b.get("Inventory")) && sameMarker(a,b);
     }
     private static boolean sameMarker(CompoundTag a,CompoundTag b)throws IOException {
         LegacyRetrievalTransactionJournal.readMarker(a);LegacyRetrievalTransactionJournal.readMarker(b);

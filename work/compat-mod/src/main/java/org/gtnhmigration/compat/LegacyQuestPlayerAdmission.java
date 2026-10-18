@@ -49,9 +49,9 @@ public final class LegacyQuestPlayerAdmission {
             usable();require(actor.equals(player) && payloads==0 && source!=null,"Unexpected native player payload");
             require(data.hasUUID("UUID") && data.getUUID("UUID").equals(actor),"Native payload UUID mismatch");
             require(source.authority()==Authority.WORLD_PLAYER?fileReads==0:fileReads==1,"Payload did not use its verified file source");
-            if(loadedWorldPlayer!=null)require(loadedWorldPlayer.equals(data),"Native owner payload differs from verified loaded tag");
+            if(loadedWorldPlayer!=null)require(LegacyRetrievalTransactionJournal.sameNbt(loadedWorldPlayer,data),"Native owner payload differs from verified loaded tag");
             journal(world).verifyResolvedPlayer(data);
-            require(journal(world).proposePersistentMarker(data).equals(data),"Legacy transaction marker needs persistent promotion before admission");
+            require(LegacyRetrievalTransactionJournal.sameNbt(journal(world).proposePersistentMarker(data),data),"Legacy transaction marker needs persistent promotion before admission");
             verifyEvidence();acceptedPayload=data;payloads++;
             }catch(IOException|RuntimeException|Error failure){failed=true;throw failure;}
         }
@@ -68,7 +68,7 @@ public final class LegacyQuestPlayerAdmission {
             require(actor.equals(actualPlayer),"Live player UUID changed during admission");
             CompoundTag live=new CompoundTag();live.putUUID("UUID",actualPlayer);live.put("NeoForgeData",persistentData.copy());
             journal(world).verifyResolvedPlayer(live);
-            require(journal(world).proposePersistentMarker(live).equals(live),"Live transaction marker lost its persistent placement");
+            require(LegacyRetrievalTransactionJournal.sameNbt(journal(world).proposePersistentMarker(live),live),"Live transaction marker lost its persistent placement");
             verifyEvidence();finished=true;
             }catch(IOException|RuntimeException|Error failure){failed=true;throw failure;}
         }
@@ -97,7 +97,7 @@ public final class LegacyQuestPlayerAdmission {
                 source=LegacyPlayerDataFileReader.read(directory,actor);
             }
             journal.verifyResolvedPlayer(source.data());
-            require(journal.proposePersistentMarker(source.data()).equals(source.data()),"Legacy transaction marker needs persistent promotion before admission");
+            require(LegacyRetrievalTransactionJournal.sameNbt(journal.proposePersistentMarker(source.data()),source.data()),"Legacy transaction marker needs persistent promotion before admission");
             if(owner!=null)journal.verifyResolvedPlayer(owner);
             return new Receipt(world,actor,source,owner);
         }
@@ -124,7 +124,7 @@ public final class LegacyQuestPlayerAdmission {
     private static LegacyRetrievalTransactionJournal journal(LegacyQuestWorldStore world){return new LegacyRetrievalTransactionJournal(world.ledger(),world.binding(),world.catalog());}
     private static boolean sameCritical(CompoundTag a,CompoundTag b)throws IOException {
         return a.hasUUID("UUID") && b.hasUUID("UUID") && a.getUUID("UUID").equals(b.getUUID("UUID"))
-            && a.get("Inventory") instanceof ListTag && a.get("Inventory").equals(b.get("Inventory"))
+            && a.get("Inventory") instanceof ListTag && LegacyRetrievalTransactionJournal.sameNbt(a.get("Inventory"),b.get("Inventory"))
             && LegacyRetrievalTransactionJournal.readMarker(a).equals(LegacyRetrievalTransactionJournal.readMarker(b));
     }
     private static boolean absent(Path path)throws IOException {

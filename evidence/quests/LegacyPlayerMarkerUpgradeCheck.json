@@ -1,0 +1,104 @@
+{
+  "test": "persistent_player_marker_upgrade",
+  "passed": true,
+  "assertions": 126,
+  "runtime_integrated": false,
+  "export_enabled": false,
+  "native_call_sites_registered": true,
+  "game_runtime_verified": false,
+  "binary_golden_authorities": 2,
+  "ieee_bit_fidelity_fixture_verified": true,
+  "actual_player_save_fixtures": 0,
+  "source_sha256": {
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalEngine.java": "974899a867d5f9b2b18295e02c3fc56827064bdfa19c863158ea4b06b0a45758",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalProgressCodec.java": "596a64ed0ed06bad0f70731773078376ea9ab7ec3cba7dacdd8c10faac0fe856",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestProgressEnvelope.java": "43ed5abb2ed2595efa101b9e89d8d8409f84b62ca01cd9c62191ea5e92b9b9a0",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestProgressStoreCodec.java": "7e610faa9cd32b56cf1302c0d62189884defbc8746c393bcf423bd84cd5f2e94",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestProgressFileStore.java": "1334a278a4c6e846ec1fe378b59122fbde65a8ad2a0ab57ab141077061e303e8",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalTransactionJournal.java": "deb535b1fec75d71d4e3667bcb9721bff579a6072a48d5139d62a93711495d2e",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyPlayerDataFileReader.java": "eabe4f1e9bb7a55a4fd28693d0c4a88c7dc3d4014054a032f846d0c38fdca643",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestWorldStore.java": "1261392c84db12d09290b5fb1fce8d3a74e95c148cb68d5cac0e95f4950e6b05",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestPlayerAdmission.java": "cba4caa7e8bae97328321c106c18891c35ec8f241e59ccec19b40a00cc06ed82",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyPlayerMarkerUpgrade.java": "1e2a91df13360b16cf6f11d10520fb24fee5926018d2aac68667ee42d0fefbc2",
+    "work/migration/LegacyPlayerDataFileReaderCheck.java": "27f47442063c7a8fa659f91f8e8e44a80076704310a810d0e09f2c61991d0932",
+    "work/migration/LegacyQuestWorldStoreCheck.java": "011a0cb89da8d7d7a559717ac3657030d0e04d51906cedc30cc2a894ba2e31d6",
+    "work/migration/LegacyPlayerMarkerUpgradeCheck.java": "e9189adf569384b5144423fafe83436addf8744523b026766b75565c7907a46a",
+    "work/migration/test_legacy_player_marker_upgrade.py": "c1876bfafeb2d345db54020695b4a124fdecdc06741aa936511d483488cd237c"
+  },
+  "minecraft_jar_sha256": "26ca9c40d7e1681190b428583c38816852218e78df3f8bdb60a59a78503aec71",
+  "process_crash_checks": [
+    {
+      "authority": "PLAYER_FILE",
+      "boundary": "BLOBS_ARCHIVED",
+      "halt_exit": 73,
+      "fresh_process_recovery_and_admission": true
+    },
+    {
+      "authority": "PLAYER_FILE",
+      "boundary": "PREPARED",
+      "halt_exit": 73,
+      "fresh_process_recovery_and_admission": true
+    },
+    {
+      "authority": "PLAYER_FILE",
+      "boundary": "PLAYER_PUBLISHED",
+      "halt_exit": 73,
+      "fresh_process_recovery_and_admission": true
+    },
+    {
+      "authority": "PLAYER_FILE",
+      "boundary": "CACHE_UPDATED",
+      "halt_exit": 73,
+      "fresh_process_recovery_and_admission": true
+    },
+    {
+      "authority": "PLAYER_FILE",
+      "boundary": "RESOLVED",
+      "halt_exit": 73,
+      "fresh_process_recovery_and_admission": true
+    },
+    {
+      "authority": "WORLD_PLAYER",
+      "boundary": "BLOBS_ARCHIVED",
+      "halt_exit": 73,
+      "fresh_process_recovery_and_admission": true
+    },
+    {
+      "authority": "WORLD_PLAYER",
+      "boundary": "PREPARED",
+      "halt_exit": 73,
+      "fresh_process_recovery_and_admission": true
+    },
+    {
+      "authority": "WORLD_PLAYER",
+      "boundary": "PLAYER_PUBLISHED",
+      "halt_exit": 73,
+      "fresh_process_recovery_and_admission": true
+    },
+    {
+      "authority": "WORLD_PLAYER",
+      "boundary": "WORLD_PUBLISHED",
+      "halt_exit": 73,
+      "fresh_process_recovery_and_admission": true
+    },
+    {
+      "authority": "WORLD_PLAYER",
+      "boundary": "CACHE_UPDATED",
+      "halt_exit": 73,
+      "fresh_process_recovery_and_admission": true
+    },
+    {
+      "authority": "WORLD_PLAYER",
+      "boundary": "RESOLVED",
+      "halt_exit": 73,
+      "fresh_process_recovery_and_admission": true
+    }
+  ],
+  "limitations": [
+    "Synthetic world/player data; actual gzip/NBT, atomic file replacement, archive, journal, cache and admission model execute, not native Player or lifecycle.",
+    "Only the internal v1 marker placement moves to v2; targeted binary editing retains every unrelated NBT byte, including IEEE negative zero and NaN payloads. Whole before/after gzip streams are archived; compressed headers may differ. This does not repair unknown cache or mirror inventory conflicts.",
+    "Journal comparison and source serialization retain represented NaN payloads. Native Minecraft constructors/readers still normalize negative zero; this is not full native-player NBT fidelity.",
+    "Caller excludes native saves and external writers. Same-filesystem atomic move has no unsafe fallback; power-loss directory durability and malicious concurrent filesystem writes are not proven.",
+    "Raw originals and candidate files remain in immutable hash-addressed blobs. Orphan blobs and temporary files are retained; incomplete maintenance-directory creation is not automatically reset."
+  ]
+}

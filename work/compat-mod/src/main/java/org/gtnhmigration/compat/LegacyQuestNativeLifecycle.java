@@ -38,8 +38,11 @@ public final class LegacyQuestNativeLifecycle {
                     try{LegacyQuestPlayerAdmission.verifyPendingWorldCache(world,server.getWorldData().getLoadedPlayerTag());}
                     catch(IOException failure){throw new UncheckedIOException(failure);}
                 };
-                barrier.run();world.recoverOffline(barrier);
+                barrier.run();LegacyPlayerMarkerUpgrade.resume(world,()->server.getWorldData().getLoadedPlayerTag(),barrier);
+                world.recoverOffline(barrier);
                 LegacyQuestPlayerAdmission.verifyResolvedWorldCache(world,server.getWorldData().getLoadedPlayerTag());
+                CompoundTag cached=server.getWorldData().getLoadedPlayerTag();
+                if(cached!=null)LegacyPlayerMarkerUpgrade.promote(world,cached.getUUID("UUID"),LegacyPlayerDataFileReader.Authority.WORLD_PLAYER,()->server.getWorldData().getLoadedPlayerTag(),barrier);
                 world.verifyBinding();scope.release();mount.ready=true;
             }catch(IOException|RuntimeException|Error failure){scope.quarantine();throw failure;}
         }catch(IOException failure){throw new UncheckedIOException("Bound quest world recovery failed before world loading",failure);}
@@ -69,6 +72,9 @@ public final class LegacyQuestNativeLifecycle {
         var access=(LegacyRetrievalNativeSaveScope.ServerAccess)server;
         try(var scope=LegacyRetrievalNativeSaveScope.begin(player,access.gtnhMigration$playerStorage())){
             try{synchronized(world.ledger()){
+                boolean owner=server.isSingleplayerOwner(player.getGameProfile()) && server.getWorldData().getLoadedPlayerTag()!=null;
+                Runnable promotionBarrier=()->{scope.assertHeld();requireThread(server);if(list.getPlayer(player.getUUID())!=null)throw new IllegalStateException("Player became active during marker promotion");};
+                LegacyPlayerMarkerUpgrade.promote(world,player.getUUID(),owner?LegacyPlayerDataFileReader.Authority.WORLD_PLAYER:LegacyPlayerDataFileReader.Authority.PLAYER_FILE,()->server.getWorldData().getLoadedPlayerTag(),promotionBarrier);
                 var receipt=LegacyQuestPlayerAdmission.begin(world,player.getUUID(),server.isSingleplayerOwner(player.getGameProfile()),server.getWorldData().getLoadedPlayerTag());
                 LOAD.set(new Load(player,list,scope,receipt));
                 var result=LegacyRetrievalSaveScope.root(server,PLAYER_LOAD,player,()->list.load(player));

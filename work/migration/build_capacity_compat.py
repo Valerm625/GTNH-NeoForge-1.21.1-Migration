@@ -100,7 +100,9 @@ lock['unintegrated_helpers'] += [
  'LegacyRetrievalInventoryBridge; actual Inventory snapshots/count writes and rollback, no registered submit handler or durable inventory/progress transaction',
  'LegacyRetrievalTransactionJournal; expected-head intent/decision records, clone-persisted marker proposals and synthetic player-file recovery, no native player save',
  'LegacyRetrievalTransactionProposal; actual inventory/player-NBT/quest-progress composition, no world coordinator',
- 'LegacyPlayerDataFileReader; explicit UUID.dat or level.dat/Data/Player integrity/readback; journal binds source authority, synthetic files only; no native lifecycle isolation',
+ 'LegacyPlayerDataFileReader; explicit UUID.dat or level.dat/Data/Player integrity/readback; journal binds source authority, synthetic files only; native lifecycle hooks installed but game execution unverified',
+ 'LegacyQuestWorldStore and LegacyQuestPlayerAdmission and LegacyQuestNativeLifecycle; world binding and guarded startup/load call sites installed; production receipts exercised with synthetic files, native game execution unverified',
+ 'LegacyPlayerMarkerUpgrade; world-bound maintenance intents, immutable gzip archives, binary-preserving marker relocation and process-halt recovery; installed before native admission, synthetic file/cache execution only',
  'LegacyRetrievalSaveScope and LegacyRetrievalNativeSaveScope; one-use native save permits and process-local quarantine; 39 selected save/load/lifecycle guards; startup and source-receipt admission call sites installed, native lifecycle execution unverified',
  'LegacyRetrievalCommitCoordinator; explicit UUID-file and integrated-owner cache/mirror/world save/readback and conditional rollback protocols; native adapters compiled and acquire server/storage save permits; required save/lifecycle mixins are registered and isolated-transformed, fixture execution only; no persistent admission recovery or gameplay submit handler',
 ]

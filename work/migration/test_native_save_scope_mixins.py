@@ -79,7 +79,7 @@ report.update({
     'client_distribution_isolated_transform_verified':True,
     'dedicated_distribution_check':dedicated,
     'compat_jar_sha256': sha(compat),
-    'source_sha256': {source.relative_to(R).as_posix(): sha(source) for source in [*sources,Path(__file__),R/'work/migration/acquire_native_client_audit.py',R/'locks/native-client-audit-inputs.json']+sorted((R/'work/compat-mod/src/main/java/org/gtnhmigration/compat').glob('*SaveScope*.java'))+[R/'work/compat-mod/src/main/java/org/gtnhmigration/compat'/name for name in ['LegacyPlayerDataLoadScopeMixin.java','LegacyQuestNativeLifecycle.java','LegacyQuestPlayerAdmission.java']]},
+    'source_sha256': {source.relative_to(R).as_posix(): sha(source) for source in [*sources,Path(__file__),R/'work/migration/acquire_native_client_audit.py',R/'locks/native-client-audit-inputs.json']+sorted((R/'work/compat-mod/src/main/java/org/gtnhmigration/compat').glob('*SaveScope*.java'))+[R/'work/compat-mod/src/main/java/org/gtnhmigration/compat'/name for name in ['LegacyPlayerDataLoadScopeMixin.java','LegacyQuestNativeLifecycle.java','LegacyQuestPlayerAdmission.java','LegacyPlayerMarkerUpgrade.java']]},
     'dependency_sha256': {path.name: sha(path) for path in
                           [patched,client/'neoforge-21.1.262-client.jar',client/'client-srg.jar', mixin, O / 'mods/ftb-quests-neoforge-2101.1.36.jar', O / 'mods/EnderStorage-1.21.1-2.13.0.191.jar']},
     'limitations': [
