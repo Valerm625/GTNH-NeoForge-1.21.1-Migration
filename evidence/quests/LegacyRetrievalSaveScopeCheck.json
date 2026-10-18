@@ -7,7 +7,7 @@
   "game_runtime_verified": false,
   "durable_admission_recovery_verified": false,
   "source_sha256": {
-    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalSaveScope.java": "a6d89c4632d9911a7f2c1d3b2e5c6f575990e15955769f5d6479245ece82b6b6",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalSaveScope.java": "da84e3e1f813ebe5f76f8854a6781736333c45baf1da28d9bf3207245ec6535d",
     "work/migration/LegacyRetrievalSaveScopeCheck.java": "164ec48dc675fcf349ad23bcba276f4f3025679b408337bd292e8a1ec385fd6c",
     "work/migration/test_legacy_retrieval_save_scope.py": "908b59c9aa715f76011d5cab50fb3e245c1f1d963f1d95eb7eda439eac3e004a"
   },

@@ -29,13 +29,15 @@
     "world_player_save": "MinecraftServer.saveAllChunks supplies PlayerList.getSingleplayerData to LevelStorageAccess.saveDataTag; PrimaryLevelData stores Player inside the Data compound. Actual native saving is not executed.",
     "integrated_player_cache": "Pinned client IntegratedPlayerList.save captures owner saveWithoutId into playerData before calling PlayerList.save. getSingleplayerData returns that cache; parent saveAll dispatches virtually to save.",
     "integrated_save_order": "MinecraftServer.saveEverything calls playerList.saveAll then saveAllChunks. IntegratedServer delegates to the base method then warns on low disk space; a late exception is not proof that world publication failed.",
-    "server_pre_tick_order": "Pinned MinecraftServer.tickServer fires fireServerTickPre before tickChildren. Guards cover both entries so a quarantined submission created in Pre cannot continue through the normal child tick entry."
+    "server_pre_tick_order": "Pinned MinecraftServer.tickServer fires fireServerTickPre before tickChildren. Guards cover both entries so a quarantined submission created in Pre cannot continue through the normal child tick entry.",
+    "startup_player_list_order": "Pinned DedicatedServer.initServer calls setPlayerList before loadLevel. IntegratedServer sets PlayerList in its constructor before initServer calls loadLevel. No native startup executes in this audit.",
+    "admission_datafix_event_order": "Transformed PlayerDataStorage.lambda$load$1 retains updateToCurrentVersion before the guarded Entity.load call and firePlayerLoadingEvent afterward; source receipt finalization rechecks live player persistent marker in the compiled adapter."
   },
   "limitations": [
     "Static inspection does not validate actual Player, event hooks, transformed mod behavior, crash atomicity or power-loss persistence.",
     "Proposal test uses Inventory(null), actual ItemStack codecs and fixture slot encoding; Inventory.save itself is not called.",
     "Native PlayerDataStorage save differs from asynchronous SavedData.save; do not transfer that API assumption.",
-    "Selected save/lifecycle guard mixins are registered and separately transformed against pinned client and dedicated-server bytecode. No native game execution, persistent admission recovery, arbitrary-mod inventory isolation or complete safe fault shutdown is proven."
+    "Selected startup/save/load/lifecycle call sites are registered and separately transformed against pinned client and dedicated-server bytecode. Source receipts and fresh-process recovery/admission are fixtures. Native game lifecycle, arbitrary-mod compatibility, legacy-marker promotion, unknown cache/mirror repair and complete safe fault shutdown remain unproven or incomplete."
   ],
   "native_clone_executed": false,
   "authority_audit_report": "evidence/quests/LegacyWorldPlayerAuthorityCheck.json",
@@ -72,5 +74,6 @@
     "native_code_executed": false
   },
   "save_scope_transformation_report": "evidence/quests/NativeSaveScopeMixinCheck.json",
-  "save_scope_state_machine_report": "evidence/quests/LegacyRetrievalSaveScopeCheck.json"
+  "save_scope_state_machine_report": "evidence/quests/LegacyRetrievalSaveScopeCheck.json",
+  "player_admission_audit_report": "evidence/quests/LegacyQuestPlayerAdmissionCheck.json"
 }

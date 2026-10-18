@@ -19,11 +19,21 @@ public final class LegacyRetrievalNativeSaveScope {
     public interface WorldFileHooks {}
     public interface OwnerCacheHooks {}
     public interface PlayerLifecycleHooks {}
+    public interface PlayerDataLoadHooks {}
     private LegacyRetrievalNativeSaveScope(){}
     public static LegacyRetrievalSaveScope.Lease begin(ServerPlayer player,PlayerDataStorage storage)throws IOException {
         MinecraftServer server=player.getServer();
         if(server==null || !server.isSameThread() || player.isRemoved())throw new IllegalStateException("Inactive native server thread");
-        if(!(server instanceof ServerAccess access) || !(storage instanceof PlayerFileHooks) || !(player instanceof PlayerLifecycleHooks)
+        if(!(player instanceof PlayerLifecycleHooks) || !(player instanceof PlayerDataLoadHooks))throw new IllegalStateException("Player lifecycle/load guards are missing");
+        return beginServer(server,storage);
+    }
+    public static LegacyRetrievalSaveScope.Lease beginServer(MinecraftServer server)throws IOException {
+        if(!(server instanceof ServerAccess access))throw new IllegalStateException("Native server access hook is missing");
+        return beginServer(server,access.gtnhMigration$playerStorage());
+    }
+    private static LegacyRetrievalSaveScope.Lease beginServer(MinecraftServer server,PlayerDataStorage storage)throws IOException {
+        if(!server.isSameThread())throw new IllegalStateException("Wrong server thread");
+        if(!(server instanceof ServerAccess access) || !(storage instanceof PlayerFileHooks)
                 || !(server.getPlayerList() instanceof PlayerListHooks)
                 || !(access.gtnhMigration$worldStorage() instanceof WorldFileHooks)
                 || access.gtnhMigration$playerStorage()!=storage)

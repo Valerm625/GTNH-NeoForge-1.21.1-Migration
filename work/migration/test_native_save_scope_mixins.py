@@ -38,8 +38,8 @@ with zipfile.ZipFile(compat) as jar:
     config = json.loads(jar.read('gtnh_migration_compat.mixins.json'))
     expected = {'EnderTankCapacityMixin', 'LegacyRetrievalItemTaskMixin', 'LegacyDimensionLocationTaskMixin',
                 'LegacyHuntTaskMixin', 'LegacyCraftingItemTaskMixin', 'LegacyInventoryListenerMixin', 'LegacyTaskLoginTimingMixin', 'LegacyInitialInventorySyncMixin'}
-    expected |= {'LegacyServerSaveScopeMixin','LegacyPlayerListSaveScopeMixin','LegacyPlayerFileSaveScopeMixin','LegacyWorldFileSaveScopeMixin','LegacyPlayerLifecycleSaveScopeMixin'}
-    assert len(config['mixins']) == 13 and set(config['mixins']) == expected
+    expected |= {'LegacyServerSaveScopeMixin','LegacyPlayerListSaveScopeMixin','LegacyPlayerFileSaveScopeMixin','LegacyWorldFileSaveScopeMixin','LegacyPlayerLifecycleSaveScopeMixin','LegacyPlayerDataLoadScopeMixin'}
+    assert len(config['mixins']) == 14 and set(config['mixins']) == expected
     assert config['client'] == ['LegacyOwnerCacheSaveScopeMixin']
     assert config['required'] and config['package'] == 'org.gtnhmigration.compat'
     config['mixins'].remove('LegacyPlayerFileSaveScopeMixin')
@@ -65,21 +65,21 @@ def run(executable, args, name):
 run(java.with_name('javac.exe'), ['-proc:none', '--release', '21', '-encoding', 'UTF-8', '-cp', cp,
                                  '-d', '.', *[relative(source) for source in sources]], 'compile')
 results = {}
-for mode in ['baseline', 'dedicated', 'missing_player_file_target', 'missing_registration']:
+for mode in ['baseline', 'dedicated', 'missing_player_file_target', 'missing_player_load_target', 'missing_registration']:
     log = run(java, ['-cp', server_cp if mode=='dedicated' else cp, 'NativeSaveScopeMixinCheck', mode], mode)
     results[mode] = json.loads(next(line for line in log.splitlines() if line.startswith('{')))
     assert results[mode]['passed'], mode
 
 report = results.pop('baseline')
 dedicated = results.pop('dedicated')
-assert report['injections_verified']==30 and dedicated['injections_verified']==29
-assert report['targets_transformed']==6 and dedicated['targets_transformed']==5
+assert report['injections_verified']==39 and dedicated['injections_verified']==38
+assert report['targets_transformed']==7 and dedicated['targets_transformed']==6
 report.update({
     'negative_controls': results,
     'client_distribution_isolated_transform_verified':True,
     'dedicated_distribution_check':dedicated,
     'compat_jar_sha256': sha(compat),
-    'source_sha256': {source.relative_to(R).as_posix(): sha(source) for source in [*sources,Path(__file__),R/'work/migration/acquire_native_client_audit.py',R/'locks/native-client-audit-inputs.json']+sorted((R/'work/compat-mod/src/main/java/org/gtnhmigration/compat').glob('*SaveScope*.java'))},
+    'source_sha256': {source.relative_to(R).as_posix(): sha(source) for source in [*sources,Path(__file__),R/'work/migration/acquire_native_client_audit.py',R/'locks/native-client-audit-inputs.json']+sorted((R/'work/compat-mod/src/main/java/org/gtnhmigration/compat').glob('*SaveScope*.java'))+[R/'work/compat-mod/src/main/java/org/gtnhmigration/compat'/name for name in ['LegacyPlayerDataLoadScopeMixin.java','LegacyQuestNativeLifecycle.java','LegacyQuestPlayerAdmission.java']]},
     'dependency_sha256': {path.name: sha(path) for path in
                           [patched,client/'neoforge-21.1.262-client.jar',client/'client-srg.jar', mixin, O / 'mods/ftb-quests-neoforge-2101.1.36.jar', O / 'mods/EnderStorage-1.21.1-2.13.0.191.jar']},
     'limitations': [

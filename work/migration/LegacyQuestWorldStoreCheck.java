@@ -155,6 +155,6 @@ public final class LegacyQuestWorldStoreCheck {
     public static void main(String[] args)throws Exception{
         if(args.length>1){child(args[0],Path.of(args[1]),args[2]);System.out.println("WORLD_STORE_CHILD_OK");return;}
         Path root=Path.of(args[0]);lifecycle(root.resolve("lifecycle"));damaged(root.resolve("damaged"));recovery(root.resolve("recovery"));
-        System.out.println("{\"test\":\"world_bound_quest_store\",\"passed\":true,\"assertions\":"+checks+",\"runtime_integrated\":false,\"export_enabled\":false,\"game_runtime_verified\":false,\"actual_player_save_fixtures\":0,\"native_admission_installed\":false}");
+        System.out.println("{\"test\":\"world_bound_quest_store\",\"passed\":true,\"assertions\":"+checks+",\"runtime_integrated\":false,\"export_enabled\":false,\"game_runtime_verified\":false,\"actual_player_save_fixtures\":0,\"native_admission_verified\":false}");
     }
 }

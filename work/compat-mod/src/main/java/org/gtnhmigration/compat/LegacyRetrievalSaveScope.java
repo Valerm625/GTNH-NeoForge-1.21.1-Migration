@@ -9,7 +9,7 @@ import java.util.function.Supplier;
  * A poisoned/abandoned scope remains quarantined in this process.
  */
 public final class LegacyRetrievalSaveScope {
-    public enum Operation { EVERYTHING, PLAYERS, PLAYER, PLAYER_FILE, CHUNKS, LEVEL_TAG, LEVEL_FILE }
+    public enum Operation { EVERYTHING, PLAYERS, PLAYER, PLAYER_FILE, CHUNKS, LEVEL_TAG, LEVEL_FILE, PLAYER_LOAD, PLAYER_FILE_LOAD, PLAYER_NBT_LOAD }
     public enum Entry { ENTER, OWNER_CACHE, PLAYER_BASE }
     private static final Object LOCK=new Object();
     private static final IdentityHashMap<Object,Lease> NODES=new IdentityHashMap<>();
@@ -98,6 +98,8 @@ public final class LegacyRetrievalSaveScope {
                 if(frame==null || frame.lease!=lease || frame.operation!=parent || frame.consumed!=frame.entries.size())
                     fail(lease,"Native save child outside its authorized parent");
                 if(!allowed(parent,operation))fail(lease,"Unexpected native save edge");
+                if((parent==Operation.PLAYER || parent==Operation.PLAYER_LOAD || parent==Operation.PLAYER_FILE_LOAD) && frame.target!=target)
+                    fail(lease,"Native child changed the permitted player identity");
             }
         }
         return lease==null?call.get():invoke(lease,operation,target,call);
@@ -108,6 +110,8 @@ public final class LegacyRetrievalSaveScope {
         case PLAYER -> child==Operation.PLAYER_FILE;
         case CHUNKS -> child==Operation.LEVEL_TAG;
         case LEVEL_TAG -> child==Operation.LEVEL_FILE;
+        case PLAYER_LOAD -> child==Operation.PLAYER_FILE_LOAD || child==Operation.PLAYER_NBT_LOAD;
+        case PLAYER_FILE_LOAD -> child==Operation.PLAYER_NBT_LOAD;
         default -> false;
     };}
     private static <T>T invoke(Lease lease,Operation operation,Object target,Supplier<T> call){

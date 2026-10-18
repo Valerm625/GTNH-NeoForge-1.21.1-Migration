@@ -17,6 +17,10 @@ public abstract class LegacyServerSaveScopeMixin implements LegacyRetrievalNativ
     @Shadow @Final protected PlayerDataStorage playerDataStorage;
     public LevelStorageSource.LevelStorageAccess gtnhMigration$worldStorage(){return storageSource;}
     public PlayerDataStorage gtnhMigration$playerStorage(){return playerDataStorage;}
+    @Inject(method="loadLevel",at=@At("HEAD"),require=1,allow=1,remap=false)
+    private void gtnhMigration$beforeWorldLoad(CallbackInfo ci){LegacyQuestNativeLifecycle.beforeWorldLoad((MinecraftServer)(Object)this);}
+    @Inject(method="stopServer",at=@At("RETURN"),require=1,allow=1,remap=false)
+    private void gtnhMigration$afterWorldStop(CallbackInfo ci){LegacyQuestNativeLifecycle.afterWorldStop((MinecraftServer)(Object)this);}
     @Inject(method="saveEverything",at=@At("HEAD"),require=1,allow=1,remap=false)
     private void gtnhMigration$enterSaveEverything(boolean a,boolean b,boolean c,CallbackInfoReturnable<Boolean> ci){enter(this,null,EVERYTHING,this,Entry.ENTER);}
     @Inject(method="saveAllChunks",at=@At("HEAD"),require=1,allow=1,remap=false)

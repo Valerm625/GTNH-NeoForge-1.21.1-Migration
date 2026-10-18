@@ -17,6 +17,15 @@ public final class NativeSaveScopeMixinCheck {
     static int assertions, verifiedMethods, injections;
     record Contract(String target, String method, String handler) {}
     static final List<Contract> CONTRACTS=List.of(
+        new Contract("net.minecraft.server.MinecraftServer","loadLevel","gtnhMigration$beforeWorldLoad"),
+        new Contract("net.minecraft.server.MinecraftServer","stopServer","gtnhMigration$afterWorldStop"),
+        new Contract("net.minecraft.server.players.PlayerList","placeNewPlayer","gtnhMigration$guardAdmission"),
+        new Contract("net.minecraft.server.players.PlayerList","load","gtnhMigration$permitPlayerLoadFile"),
+        new Contract("net.minecraft.server.players.PlayerList","load","gtnhMigration$permitOwnerLoadData"),
+        new Contract("net.minecraft.world.level.storage.PlayerDataStorage","load","gtnhMigration$verifiedPlayerRead"),
+        new Contract("net.minecraft.world.level.storage.PlayerDataStorage","backup","gtnhMigration$beforePlayerBackup"),
+        new Contract("net.minecraft.world.level.storage.PlayerDataStorage","lambda$load$1","gtnhMigration$permitFileLoadData"),
+        new Contract("net.minecraft.world.entity.Entity","load","gtnhMigration$enterPlayerDataLoad"),
         new Contract("net.minecraft.server.MinecraftServer","saveEverything","gtnhMigration$enterSaveEverything"),
         new Contract("net.minecraft.server.MinecraftServer","saveAllChunks","gtnhMigration$enterSaveChunks"),
         new Contract("net.minecraft.server.MinecraftServer","tickServer","gtnhMigration$denyNestedTick"),
@@ -58,8 +67,8 @@ public final class NativeSaveScopeMixinCheck {
     static byte[] mutate(byte[] bytes,String mode) {
         ClassNode node=parse(bytes);
         int count=0;
-        for(MethodNode method:node.methods) if(method.name.equals("save")){method.name="removedNativeSave";count++;}
-        require(count==1,"Wrong native mutation target");
+        for(MethodNode method:node.methods) if(method.name.equals(mode.equals("missing_player_load_target")?"load":"save")){method.name="removedNativeEntry";count++;}
+        require(count==(mode.equals("missing_player_load_target")?2:1),"Wrong native mutation target");
         ClassWriter writer=new ClassWriter(0); node.accept(writer); return writer.toByteArray();
     }
     static boolean injectionFailure(Throwable error) {
@@ -72,7 +81,7 @@ public final class NativeSaveScopeMixinCheck {
     }
     public static void main(String[] args) throws Exception {
         String mode=args.length==0?"baseline":args[0];
-        require(Set.of("baseline","dedicated","missing_player_file_target","missing_registration").contains(mode),"Unknown test mode");
+        require(Set.of("baseline","dedicated","missing_player_file_target","missing_player_load_target","missing_registration").contains(mode),"Unknown test mode");
         MixinBootstrap.init();
         require(MixinService.getService() instanceof OfflineMixinService,"Unexpected Mixin service");
         MixinEnvironment environment=MixinEnvironment.getCurrentEnvironment();
@@ -87,7 +96,7 @@ public final class NativeSaveScopeMixinCheck {
             try(InputStream in=NativeSaveScopeMixinCheck.class.getClassLoader().getResourceAsStream(target.replace('.','/')+".class")) {
                 require(in!=null,"Missing actual target "+target); before=in.readAllBytes();
             }
-            boolean negative=mode.equals("missing_player_file_target") && target.endsWith(".PlayerDataStorage");
+            boolean negative=(mode.equals("missing_player_file_target") || mode.equals("missing_player_load_target")) && target.endsWith(".PlayerDataStorage");
             if(negative) before=mutate(before,mode);
             byte[] after;
             try { after=transformer.transformClass(environment,target,before); }
@@ -97,15 +106,13 @@ public final class NativeSaveScopeMixinCheck {
                 return;
             }
             require(!negative,"Mixin accepted changed target: "+mode);
+            if(mode.equals("missing_registration") && target.endsWith(".PlayerDataStorage")) {
+                require(Arrays.equals(before,after),"Unregistered player file target unexpectedly changed");
+                System.out.println("{\"passed\":true,\"control\":\"missing_registration\",\"missing_injection_detected\":true}");return;
+            }
             ClassNode node=parse(after);
             for(Contract contract:CONTRACTS) if(contract.target().equals(target)) {
                 List<MethodNode> handlers=node.methods.stream().filter(m->m.name.endsWith("$"+contract.handler())).toList();
-                if(mode.equals("missing_registration") && contract.handler().equals("gtnhMigration$enterPlayerFile")) {
-                    require(handlers.isEmpty(),"Negative registration fixture still contains native file handler");
-                    require(Arrays.equals(before,after),"Unregistered native file target unexpectedly changed");
-                    System.out.println("{\"passed\":true,\"control\":\"missing_registration\",\"missing_injection_detected\":true}");
-                    return;
-                }
                 require(handlers.size()==1,"Expected exactly one transformed handler: "+contract.handler());
                 MethodNode handler=handlers.getFirst();
                 long calls=0;
@@ -128,6 +135,18 @@ public final class NativeSaveScopeMixinCheck {
                     require(found,"No guarded method body");
                 }
 
+                if(contract.handler().equals("gtnhMigration$permitFileLoadData")) {
+                    MethodNode load=node.methods.stream().filter(m->m.name.equals("lambda$load$1")).findFirst().orElseThrow();
+                    int position=0,fix=-1,apply=-1,event=-1;
+                    for(AbstractInsnNode instruction:load.instructions) {
+                        if(instruction instanceof MethodInsnNode call){
+                            if(call.name.equals("updateToCurrentVersion"))fix=position;
+                            if(call.name.equals(handler.name))apply=position;
+                            if(call.name.equals("firePlayerLoadingEvent"))event=position;
+                        }position++;
+                    }
+                    require(fix>=0 && apply>fix && event>apply,"DataFixer/load/event order changed");
+                }
                 injections++;
             }
             require(!Arrays.equals(before,after),"Unchanged target "+target);
@@ -137,7 +156,7 @@ public final class NativeSaveScopeMixinCheck {
             Files.write(Path.of(target.substring(target.lastIndexOf('.')+1)+".class.transformed"),after);
         }
         require(mode.equals("baseline") || dedicated,"Negative control did not reach its target");
-        require(injections==(dedicated?29:30),"Expected all registered native guard injections for this distribution");
+        require(injections==(dedicated?38:39),"Expected all registered native guard injections for this distribution");
         System.out.println("{\"test\":\"native_save_scope_mixin_transformation\",\"passed\":true,\"assertions\":"+assertions
             +",\"targets_transformed\":"+targets.size()+",\"injections_verified\":"+injections+",\"asm_basic_dataflow_methods\":"+verifiedMethods
             +",\"actual_sponge_transformer_executed\":true,\"isolated_mixin_transformation_verified\":true,\"neoforge_transform_chain_verified\":false,\"game_runtime_verified\":false}");

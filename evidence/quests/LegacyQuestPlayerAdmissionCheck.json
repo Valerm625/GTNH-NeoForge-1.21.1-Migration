@@ -1,0 +1,66 @@
+{
+  "test": "player_admission_receipts",
+  "passed": true,
+  "assertions": 89,
+  "runtime_integrated": false,
+  "export_enabled": false,
+  "native_call_sites_registered": true,
+  "native_lifecycle_executed": false,
+  "game_runtime_verified": false,
+  "actual_player_save_fixtures": 0,
+  "process_admission_checks": [
+    {
+      "authority": "PLAYER_FILE",
+      "previous_process_halt": 73,
+      "decision": "COMMIT",
+      "fresh_process_receipt_after_recovery": true
+    },
+    {
+      "authority": "PLAYER_FILE",
+      "previous_process_halt": 73,
+      "decision": "ABORT",
+      "fresh_process_receipt_after_recovery": true
+    },
+    {
+      "authority": "WORLD_PLAYER",
+      "previous_process_halt": 73,
+      "decision": "COMMIT",
+      "fresh_process_receipt_after_recovery": true
+    },
+    {
+      "authority": "WORLD_PLAYER",
+      "previous_process_halt": 73,
+      "decision": "ABORT",
+      "fresh_process_receipt_after_recovery": true
+    }
+  ],
+  "native_startup_order_audited": true,
+  "compiled_admission_call_order_audited": true,
+  "native_client_sha256": "aff67d0c3bbd015ecd881bb37416b740ada2e1e854433501ec5bb9381dbdd1c2",
+  "source_sha256": {
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalEngine.java": "974899a867d5f9b2b18295e02c3fc56827064bdfa19c863158ea4b06b0a45758",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalProgressCodec.java": "596a64ed0ed06bad0f70731773078376ea9ab7ec3cba7dacdd8c10faac0fe856",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestProgressEnvelope.java": "43ed5abb2ed2595efa101b9e89d8d8409f84b62ca01cd9c62191ea5e92b9b9a0",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestProgressStoreCodec.java": "7e610faa9cd32b56cf1302c0d62189884defbc8746c393bcf423bd84cd5f2e94",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestProgressFileStore.java": "1334a278a4c6e846ec1fe378b59122fbde65a8ad2a0ab57ab141077061e303e8",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalTransactionJournal.java": "05381ae27d35363909c85693786524c4ac07789f98b51f44df8b63e00cb31ce9",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyPlayerDataFileReader.java": "42229092a2bbb9f21af22721f8734daaadbd34f55f396d9a64575c7d14d7166b",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestWorldStore.java": "529a7242a2a93275cb0ebb034fef53f4ee0ac7a818931b426dc5cdc9ecca3a3a",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestPlayerAdmission.java": "a43b924fed8e18b93f1a319033d4867ee81edb447b9b7b90d0537a96c560a28b",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalSaveScope.java": "da84e3e1f813ebe5f76f8854a6781736333c45baf1da28d9bf3207245ec6535d",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalNativeSaveScope.java": "b04f9a6828b069cfed5fc4507ac71a5f5847f8a655f6f966163cf08c9bdf1e28",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestNativeLifecycle.java": "18067eb09badb888a01f1f8f921e39f9bbc7352e343cd3993eb778f08eec837a",
+    "work/migration/LegacyPlayerDataFileReaderCheck.java": "27f47442063c7a8fa659f91f8e8e44a80076704310a810d0e09f2c61991d0932",
+    "work/migration/LegacyQuestWorldStoreCheck.java": "011a0cb89da8d7d7a559717ac3657030d0e04d51906cedc30cc2a894ba2e31d6",
+    "work/migration/LegacyQuestPlayerAdmissionCheck.java": "ab94d44582ebabe75ba76521114ee96a8683706e95b6bc0ea56ca2db83974d7f",
+    "work/migration/test_legacy_quest_player_admission.py": "4e06d665e887426ff8fa4b594588d0a0a50cbd51941e96a55edf64090ef84e50"
+  },
+  "minecraft_jar_sha256": "26ca9c40d7e1681190b428583c38816852218e78df3f8bdb60a59a78503aec71",
+  "neoforge_patched_server_sha256": "f57ce3018e21459d24b50508e8c1b4fd5c16324ec1dc5f316c192aa0130e7fe0",
+  "limitations": [
+    "Synthetic NBT/files and production receipt/save-scope; no native Player, world, login or shutdown is executed.",
+    "DataFixer and player loading events remain in pinned native bytecode; synthetic payload changes do not test actual DataFixer behavior.",
+    "Native call-site registration is checked by the isolated Mixin report, not by this fixture execution.",
+    "Legacy marker promotion, mismatched owner mirror/cache repair, early failure cleanup and arbitrary other-mod inventory access remain incomplete."
+  ]
+}

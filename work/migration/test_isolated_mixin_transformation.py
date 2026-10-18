@@ -33,8 +33,8 @@ with zipfile.ZipFile(compat) as jar:
     config = json.loads(jar.read('gtnh_migration_compat.mixins.json'))
     expected = {'EnderTankCapacityMixin', 'LegacyRetrievalItemTaskMixin', 'LegacyDimensionLocationTaskMixin',
                 'LegacyHuntTaskMixin', 'LegacyCraftingItemTaskMixin', 'LegacyInventoryListenerMixin', 'LegacyTaskLoginTimingMixin', 'LegacyInitialInventorySyncMixin'}
-    expected |= {'LegacyServerSaveScopeMixin','LegacyPlayerListSaveScopeMixin','LegacyPlayerFileSaveScopeMixin','LegacyWorldFileSaveScopeMixin','LegacyPlayerLifecycleSaveScopeMixin'}
-    assert len(config['mixins']) == 13 and set(config['mixins']) == expected
+    expected |= {'LegacyServerSaveScopeMixin','LegacyPlayerListSaveScopeMixin','LegacyPlayerFileSaveScopeMixin','LegacyWorldFileSaveScopeMixin','LegacyPlayerLifecycleSaveScopeMixin','LegacyPlayerDataLoadScopeMixin'}
+    assert len(config['mixins']) == 14 and set(config['mixins']) == expected
     assert config['client'] == ['LegacyOwnerCacheSaveScopeMixin']
     assert config['required'] and config['package'] == 'org.gtnhmigration.compat'
     config['mixins'].remove('LegacyHuntTaskMixin')

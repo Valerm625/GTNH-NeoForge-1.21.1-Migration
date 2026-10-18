@@ -65,6 +65,8 @@ public final class LegacyRetrievalTransactionJournal {
         this.store=Objects.requireNonNull(store);this.binding=Objects.requireNonNull(binding);this.catalog=Objects.requireNonNull(catalog);
     }
     public Optional<Pending> pending() throws IOException { synchronized(store) { return scan().pending(); } }
+    /** Includes aborted transactions whose expected marker is still absent. */
+    public boolean hasPlayerHistory(UUID actor) throws IOException { synchronized(store) { return scan().expectedMarkers().containsKey(actor); } }
 
     /** beforePlayer and afterPlayer must differ only in Inventory. Arbitrary
      * other player fields are retained opaquely; changing them is not this operation.
