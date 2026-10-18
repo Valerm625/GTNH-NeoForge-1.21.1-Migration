@@ -1,8 +1,8 @@
 {
-  "created_at": "2026-10-18T11:55:35.332487+08:00",
+  "created_at": "2026-10-18T12:11:12.875433+08:00",
   "scope": "source-only public checkpoint; third-party game inputs excluded",
   "hash_scope": "Git index canonical blobs, not Windows checkout line endings",
-  "base_commit": "16f798ab3407d9e90eafa4ac128af674c46dc86e",
+  "base_commit": "353e452cc791b2d4a75afcf412d51a3fe250b468",
   "files": [
     {
       "path": ".gitattributes",
@@ -26,18 +26,18 @@
     },
     {
       "path": "README.md",
-      "bytes": 6632,
-      "sha256": "d968b9874135ae49e0aaddf004b2153fbeb6ec57f3b0fe565e207a7abda69e96"
+      "bytes": 7059,
+      "sha256": "81808ebffe1b1ba90b216710a0401d9a8b2322e41e8fae3153e8a04934089c47"
     },
     {
       "path": "RESUME.md",
-      "bytes": 9621,
-      "sha256": "4dbcd3b200a6a470887e8c58c97127cfae9a9841d2be080878f70af2248d93fb"
+      "bytes": 10067,
+      "sha256": "356d3d409f175b76f112f96f40be5360c7d1cda9ffc895b386d722f33b088d42"
     },
     {
       "path": "STATUS.zh-CN.md",
-      "bytes": 17107,
-      "sha256": "33833fd51b957365525f9ee1c4248031d71056247f54283860d34d5abf9b08da"
+      "bytes": 18492,
+      "sha256": "9ab2f535f271d960cf8a09edbe8e2e0abbfb5882889812b0d32a3c7716e759bc"
     },
     {
       "path": "docs/inventory-detection-timing.zh-CN.md",
@@ -75,14 +75,19 @@
       "sha256": "843363c89c113f56cbdaa2a6044018db80277515516c2e626c8667b45fec32b2"
     },
     {
+      "path": "docs/retrieval-inventory-bridge.zh-CN.md",
+      "bytes": 6260,
+      "sha256": "ca82cd72169c0f895d73385bd789b8c1aef17dec1ffe08d0bc1a1ef540ab41ca"
+    },
+    {
       "path": "docs/retrieval-progress-persistence.zh-CN.md",
       "bytes": 9001,
       "sha256": "c81d8944e85016f3cbd81fdb3c78f125aaab0a025f85aac22e46b444a1555c53"
     },
     {
       "path": "docs/retrieval-runtime-bridge-design.zh-CN.md",
-      "bytes": 21440,
-      "sha256": "17158533aaa2a787ea1936a819296d082251e0d9afbb31d54c9b317a066b13a0"
+      "bytes": 21796,
+      "sha256": "ff623f050b6c80135b316646f7091776484d2528352103ec93da88c3b91170f3"
     },
     {
       "path": "docs/typed-nbt-json-reader.zh-CN.md",
@@ -121,8 +126,8 @@
     },
     {
       "path": "evidence/compat-mod.lock.json",
-      "bytes": 2314,
-      "sha256": "78841531e45156ac25409fa08918e496788a6c4339823d97c8cf2d236eed6e84"
+      "bytes": 2478,
+      "sha256": "e547877e82e37b4207baaf9900474c0dbb89369339d6306821ec8fa52c19ef48"
     },
     {
       "path": "evidence/crafting-task-adapter.json",
@@ -182,7 +187,7 @@
     {
       "path": "evidence/loader-with-quest-runtime.json",
       "bytes": 347,
-      "sha256": "04160fd22f86c1f1d3773544369bee8875a4018c25b803c38dacfc88136a5909"
+      "sha256": "c11876f13f2a6fb14cf293125afc03a80cb1fe463ab2e22e1bd578232c767852"
     },
     {
       "path": "evidence/location-task-boundary.json",
@@ -241,8 +246,8 @@
     },
     {
       "path": "evidence/phase-2026-10-18-task-semantics.json",
-      "bytes": 86326,
-      "sha256": "463e186643df63d534c10d4818c55113d7688098e76186192796e1aa0c82942c"
+      "bytes": 88630,
+      "sha256": "1f24c5bf858b4c4f97644a0ca6f21e590e0e2c389ed0bb80827473c18fa754d6"
     },
     {
       "path": "evidence/quest-export-summary.json",
@@ -252,7 +257,7 @@
     {
       "path": "evidence/quests/IsolatedMixinTransformationCheck.json",
       "bytes": 2100,
-      "sha256": "31962d6cd0c13f7f61a868a082f9c90fb3835447a673bc5053981c803a36dc90"
+      "sha256": "a9f5de1102049c4e20916370a409a5df550511ea2e8a098f262d8f57abfe5252"
     },
     {
       "path": "evidence/quests/LegacyCraftingShapeCheck.json",
@@ -267,12 +272,12 @@
     {
       "path": "evidence/quests/LegacyHuntAdapterCheck.json",
       "bytes": 1606,
-      "sha256": "51b1865f1179b71022247446295288e02555ba103804831828f4872183f55701"
+      "sha256": "e834c0790c65f46a6d09f8ee1896b13cb49624d8998dbdeea468a3bd7b14e02c"
     },
     {
       "path": "evidence/quests/LegacyInventoryObserverCheck.json",
       "bytes": 5269,
-      "sha256": "4259c4ea8bbeedf4d6c7f5a1faeee141c6d8f44cbff7bfcbaf77001c02b7242b"
+      "sha256": "c66b75b504f2e157a5ce04de86bd3124370f0f917d86fb9822df4c6a8594025e"
     },
     {
       "path": "evidence/quests/LegacyProgressImportPipelineCheck.json",
@@ -303,6 +308,11 @@
       "path": "evidence/quests/LegacyRetrievalEngineCheck.json",
       "bytes": 1869,
       "sha256": "db38802451dd1afb54430112af5d85cca0aef2220ddb3094e53cfc8bfb1c3347"
+    },
+    {
+      "path": "evidence/quests/LegacyRetrievalInventoryBridgeCheck.json",
+      "bytes": 2083,
+      "sha256": "7db150b2c333197c88d168ee3e6626b12c9610ce5c2ebbadeba98a8214d04f4d"
     },
     {
       "path": "evidence/quests/LegacyRetrievalProgressCodecCheck.json",
@@ -351,13 +361,13 @@
     },
     {
       "path": "evidence/validation-state.json",
-      "bytes": 2749,
-      "sha256": "67892a6ced0b69da6d22d3ea6b75b0c0ba77478bc279d831140c462465c15258"
+      "bytes": 2949,
+      "sha256": "b4a54f69f9f765246d638fa948a94555518f8cad49d33342be4de9d7e699aae9"
     },
     {
       "path": "evidence/validation-summary.json",
-      "bytes": 5062,
-      "sha256": "d50bed4ccdaf17882236651dcce9a5d37eba4569bb3294fa6f3759e729a03480"
+      "bytes": 5063,
+      "sha256": "c123661f336dbc297f9cffb70a0e22cf808d7bb1c9d371c23a61b2bf13058cfe"
     },
     {
       "path": "evidence/vanilla-identity-mapping.json",
@@ -381,8 +391,8 @@
     },
     {
       "path": "locks/compat-mod.lock.json",
-      "bytes": 2314,
-      "sha256": "78841531e45156ac25409fa08918e496788a6c4339823d97c8cf2d236eed6e84"
+      "bytes": 2478,
+      "sha256": "e547877e82e37b4207baaf9900474c0dbb89369339d6306821ec8fa52c19ef48"
     },
     {
       "path": "locks/ftb-candidates.json",
@@ -391,8 +401,8 @@
     },
     {
       "path": "locks/local-runtime-file-hashes.json",
-      "bytes": 418285,
-      "sha256": "a6b9d514fba38b3cb4efa04c25902812c995e98011bfc0d2b865b038e829faca"
+      "bytes": 418286,
+      "sha256": "5602939d2e5c19f0993578672bc33d9e7bdd3c33fb3f1fc924dbcb776cce1963"
     },
     {
       "path": "locks/modern-transport-candidates.json",
@@ -515,6 +525,11 @@
       "sha256": "974899a867d5f9b2b18295e02c3fc56827064bdfa19c863158ea4b06b0a45758"
     },
     {
+      "path": "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalInventoryBridge.java",
+      "bytes": 15017,
+      "sha256": "245d4b5322105e358be0d1f0e9d017ac321a121a161148c73f65ad57ce628681"
+    },
+    {
       "path": "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalItemTaskMixin.java",
       "bytes": 3144,
       "sha256": "3c2a455598409bcde4180603e3d48103d75dfb41c03767360c800cd2bf051dbc"
@@ -630,6 +645,11 @@
       "sha256": "27e67f2eca05e99c89e21265e6d0b87d90dccc3d05f6ed8b887c18c782aa1bb6"
     },
     {
+      "path": "work/migration/LegacyRetrievalInventoryBridgeCheck.java",
+      "bytes": 15955,
+      "sha256": "def027c0410302e095a7f7afbb872addb6b2e3a71097d2340ca9b8f8e96a77b5"
+    },
+    {
       "path": "work/migration/LegacyRetrievalProgressCodecCheck.java",
       "bytes": 11539,
       "sha256": "a306b8df6a4ff7b959eed0e289f808dc4ef073edf5fec53c39ba2f2d1ce2c8e7"
@@ -721,8 +741,8 @@
     },
     {
       "path": "work/migration/build_capacity_compat.py",
-      "bytes": 8834,
-      "sha256": "dbf00904f860cd6d9f035e6ab4d52a806c5324f9e4d81b931573b3ae6a13bf06"
+      "bytes": 8995,
+      "sha256": "2c6115f99ae795661f84b4403a4aed0413aa5394113dac3f68de4308fd86b127"
     },
     {
       "path": "work/migration/build_quest_ir.py",
@@ -856,8 +876,8 @@
     },
     {
       "path": "work/migration/rebuild_current_phase.py",
-      "bytes": 2570,
-      "sha256": "04d4e9f664cee6dd693108f7e6c74b55f658f5401b39757f3a5d00f291fb04fa"
+      "bytes": 2677,
+      "sha256": "fb206608348358a43a2df07a234798c8b3727a3d37bc1abb21bd1d724959581e"
     },
     {
       "path": "work/migration/recover_java.py",
@@ -963,6 +983,11 @@
       "path": "work/migration/test_legacy_retrieval_engine.py",
       "bytes": 10760,
       "sha256": "98ebede8e42c99ee285c76202f20a330b3c8d674cbedbb4b0b6c49be56fdbfd0"
+    },
+    {
+      "path": "work/migration/test_legacy_retrieval_inventory_bridge.py",
+      "bytes": 3333,
+      "sha256": "06b8cffb5c92e544f456f71636f917b409d147e78820aed37602ec27e871c5d1"
     },
     {
       "path": "work/migration/test_legacy_retrieval_matcher.py",
@@ -1121,13 +1146,13 @@
     },
     {
       "path": "work/migration/write_task_semantics_status.py",
-      "bytes": 15089,
-      "sha256": "fc8b0ef304ab2e524c1ba85143518652004393aa863f395c66e0d9dc780e7f6b"
+      "bytes": 16121,
+      "sha256": "0e33fcbc145b7e005e9909f13a00f12c4c2b223de3d2cf5a9d3e858fb7990fa7"
     }
   ],
-  "file_count": 224,
+  "file_count": 229,
   "source_archive_inputs_included": false,
   "runtime_binaries_included": false,
   "full_parity": false,
-  "continuation": "active full-fidelity goal; independent UUID ledger and process-halt recovery verified; next connect world lifecycle and whole-quest inventory transaction, exact item mapping, party, completion and UI without discarding source records"
+  "continuation": "active full-fidelity goal; real Inventory count bridge and independent UUID ledger verified separately; next implement authenticated world lifecycle and durable player inventory/progress recovery, exact ore identities, party/completion/UI without discarding unsupported content"
 }

@@ -45,5 +45,6 @@
   "ore_resource_subset": "34 exact primary-source PNGs and 34 transparent derived layers; rendering unverified",
   "legacy_progress_import": "typed JSON and identity envelope composed with planner and independent ledger reload; synthetic player progress, no world import",
   "source_asset_collisions": "four exact archives checked; all same-path candidates retained, precedence unresolved",
-  "uuid_progress_ledger": "versioned append-only NBT snapshots and source bytes preserved; process-halt recovery verified, no world lifecycle or inventory transaction"
+  "uuid_progress_ledger": "versioned append-only NBT snapshots and source bytes preserved; process-halt recovery verified, no world lifecycle or inventory transaction",
+  "retrieval_inventory_bridge": "real vanilla Inventory/ItemStack snapshots and count application/rollback tested; no world submit handler, synchronization or durable inventory/progress transaction"
 }

@@ -1,6 +1,6 @@
 {
   "phase_date_shanghai": "2026-10-18",
-  "phase": "versioned UUID progress ledger with original source archives and process-halt recovery; composed retrieval persistence",
+  "phase": "actual Minecraft inventory snapshots and guarded count application; independent UUID ledger and ordered quest planning",
   "checks": {
     "IsolatedMixinTransformationCheck": {
       "test": "isolated_real_sponge_mixin_transformation",
@@ -30,7 +30,7 @@
           "missing_injection_detected": true
         }
       },
-      "compat_jar_sha256": "b86227de2ed902291a9fea1d540fdf5328898a289c2f166170aa7a2897ffbfaf",
+      "compat_jar_sha256": "59c130c33fd6242c262e29699923fa98c84e328c7db3409bf73b5c9d6fded2c6",
       "source_sha256": {
         "work/migration/OfflineMixinService.java": "a7ea57ef2ea959f69885cca79076690724e82a17c768df2d4521e23fddc897df",
         "work/migration/OfflineProperties.java": "10ad2622af4698009243667fac346ad23621d38f86c583aebcb99593059f9f3d",
@@ -126,7 +126,7 @@
       "wrong_class_mapping_mutation_rejected": true,
       "actual_mixin_transformation_verified": false,
       "game_runtime_verified": false,
-      "compat_jar_sha256": "b86227de2ed902291a9fea1d540fdf5328898a289c2f166170aa7a2897ffbfaf",
+      "compat_jar_sha256": "59c130c33fd6242c262e29699923fa98c84e328c7db3409bf73b5c9d6fded2c6",
       "source_sha256": {
         "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyHuntTaskMixin.java": "62e74aa7175a44471a99fefb5ef09374c51fcec548238a4c49c84aafaafb9a93",
         "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyHuntEntityMatcher.java": "1435b87ae0bf98e2a44d31eae9262041cd9d610214d6412839496ada8b5c48d8",
@@ -279,7 +279,7 @@
       "test_source_sha256": "aed919c8f8caccf54a5c619b0f5b5294859ce8522c35398f941d146903f99d41",
       "runner_sha256": "fb6d375d4f805b0bc8393e3211d9b2eaf04d50ab9dea744a2dc20393b848fe65",
       "oracle_fixture_sha256": "24c3d959554108708f56ba755d089edfabd2f3a828af050169081b1c08953ab9",
-      "compat_jar_sha256": "b86227de2ed902291a9fea1d540fdf5328898a289c2f166170aa7a2897ffbfaf",
+      "compat_jar_sha256": "59c130c33fd6242c262e29699923fa98c84e328c7db3409bf73b5c9d6fded2c6",
       "ftb_artifact_sha256": "6a39982c4b3afc00b1e788041a4f0d394e1659e3b3a6e5d078cd790bc36d0018",
       "minecraft_artifact_sha256": "26ca9c40d7e1681190b428583c38816852218e78df3f8bdb60a59a78503aec71",
       "packaged_bridge_matches_sources": true,
@@ -514,6 +514,35 @@
         "Individual fixed-source differential checks remain separate; this is a composition check, not a new original runtime oracle."
       ]
     },
+    "LegacyRetrievalInventoryBridgeCheck": {
+      "test": "actual_minecraft_inventory_bridge",
+      "passed": true,
+      "assertions": 1465,
+      "vanilla_default_stacks_roundtripped": 1332,
+      "legacy_slots_checked": 40,
+      "actual_inventory_objects": true,
+      "actual_itemstack_objects": true,
+      "world_started": false,
+      "runtime_integrated": false,
+      "export_enabled": false,
+      "inventory_transaction_verified": false,
+      "source_sha256": {
+        "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalEngine.java": "974899a867d5f9b2b18295e02c3fc56827064bdfa19c863158ea4b06b0a45758",
+        "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestRetrievalPlanner.java": "bf680e9df76a8844bfed402feaf4b535624baf6644ec3de4093f0aab7b68c0e2",
+        "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalInventoryBridge.java": "245d4b5322105e358be0d1f0e9d017ac321a121a161148c73f65ad57ce628681",
+        "work/migration/LegacyRetrievalInventoryBridgeCheck.java": "def027c0410302e095a7f7afbb872addb6b2e3a71097d2340ca9b8f8e96a77b5",
+        "work/migration/test_legacy_retrieval_inventory_bridge.py": "06b8cffb5c92e544f456f71636f917b409d147e78820aed37602ec27e871c5d1"
+      },
+      "minecraft_jar_sha256": "26ca9c40d7e1681190b428583c38816852218e78df3f8bdb60a59a78503aec71",
+      "limitations": [
+        "Actual vanilla Inventory objects use null Player references; no world/server or NeoForge transform chain executes.",
+        "Exact vanilla item predicates, authorization and participant membership are fixtures. Oak logs do not stand in for a verified legacy logWood mapping.",
+        "Count writes and rollback execute in memory only. No dirty flag, menu broadcast, event, task completion, reward or file write occurs.",
+        "Caller must enforce server main thread and revalidate definition, ledger, party and authorization. Capturing-thread confinement alone does not authenticate a caller.",
+        "Opaque/transient components without a lossless NBT representation are rejected with the live inventory preserved.",
+        "Third-party Inventory/ItemStack Mixin side effects and cross-file crash recovery have not been verified."
+      ]
+    },
     "QuestAdapterShapeCheck": {
       "test": "compiled_quest_adapter_target_shape",
       "passed": true,
@@ -607,7 +636,7 @@
         "0:456": "e6556c4a267e1bde83949d2e3a93d5ad53fed963557db2188990de3ded14e28c",
         "0:42": "cadcc2de303f04719db7e2021ae6e61b5649780d8d69d96b3c90019c5f69aced"
       },
-      "export_manifest_sha256": "c5c4383d70dd5e24251a852f896c389e387c2d9677e490a35545acf5e7453eab",
+      "export_manifest_sha256": "d9e065ecb669c39ae360cf0380417a692be16c1e1661e2b8caef4e576d598ade",
       "verifier_sha256": "8dcf6ec98717afc21d831c641090803935abe0926fa864d4b0d85f6453e1d79c",
       "source_sha256": "96669f3e782ca8ce3a92d1225e0adddf5519595ad193e44ac52035c67235be41",
       "target_source_sha256": "ff4345ea224da2889fab822050619448e71da420eebff206218c2bfec9505b1f",
@@ -1510,7 +1539,7 @@
       "production_assets_modified": false
     }
   },
-  "compat_jar_sha256": "b86227de2ed902291a9fea1d540fdf5328898a289c2f166170aa7a2897ffbfaf",
+  "compat_jar_sha256": "59c130c33fd6242c262e29699923fa98c84e328c7db3409bf73b5c9d6fded2c6",
   "source_quests": 3814,
   "structural_candidates": 47,
   "dependency_closed_active_quests": 2,
@@ -1523,6 +1552,7 @@
   "typed_json_envelope_planner_composition_verified": true,
   "independent_uuid_ledger_file_roundtrip_verified": true,
   "ledger_process_halt_recovery_verified": true,
+  "actual_inventory_in_memory_count_application_verified": true,
   "inventory_and_progress_transaction_verified": false,
   "live_mixin_transformation_verified": false,
   "neoforge_transform_chain_verified": false,

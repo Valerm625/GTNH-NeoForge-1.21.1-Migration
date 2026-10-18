@@ -1,6 +1,6 @@
 {
   "filename": "gtnh-migration-compat-0.1.0.jar",
-  "sha256": "b86227de2ed902291a9fea1d540fdf5328898a289c2f166170aa7a2897ffbfaf",
+  "sha256": "59c130c33fd6242c262e29699923fa98c84e328c7db3409bf73b5c9d6fded2c6",
   "version": "0.1.0",
   "mod_id": "gtnh_migration_compat",
   "source": "tools/compat-mod/src",
@@ -29,7 +29,8 @@
     "LegacyQuestRetrievalPlanner; ordered calculation model, no inventory transaction or quest export",
     "LegacyTypedNbtJsonReader; strict typed legacy JSON decoder, retains raw bytes; no world/save import",
     "LegacyQuestProgressEnvelope; exact identity and local merge candidate, no file store or task activation",
-    "LegacyQuestProgressStoreCodec and LegacyQuestProgressFileStore; independent append-only UUID ledger, process restart verified, no world lifecycle or inventory transaction"
+    "LegacyQuestProgressStoreCodec and LegacyQuestProgressFileStore; independent append-only UUID ledger, process restart verified, no world lifecycle or inventory transaction",
+    "LegacyRetrievalInventoryBridge; actual Inventory snapshots/count writes and rollback, no registered submit handler or durable inventory/progress transaction"
   ],
   "quest_adapter_live_verified": false,
   "inventory_event_world_verified": false,

@@ -133,6 +133,8 @@ FTB Teams 确有 `Team.getExtraData()`、`TeamManager.getExtraData()` 和 `markD
 
 ## 一次提交的库存与状态边界
 
+Phase 5 已实现[真实库存快照及内存计数应用](retrieval-inventory-bridge.zh-CN.md)，可在实际Inventory对象上执行完整计划，验证40槽、actor范围、回滚与重入。不调用markDirty、同步或存档；以下世界入口及跨文件协议仍待完成，不能把该辅助类直接当作可上线的完整提交处理器。
+
 `LegacyQuestRetrievalPlanner.plan` 已经能按原 task index 生成前后库存、前后任务状态、每项检测结果和总消耗；它不触碰真实物品。服务端桥接建议采用下面的严格顺序：
 
 1. 解析请求、认证 actor、检查队伍锁和原 BQ 入口条件。`Gate` 只是已验证结果的输入，不会替调用方执行 `canSubmit`、解锁或 quest cache 逻辑。

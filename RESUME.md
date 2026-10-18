@@ -27,9 +27,11 @@ Phase 3 另有 `test_legacy_typed_nbt_json_reader.py`（**2,932 项断言 / 577 
 
 读取器/envelope 的 `accepted` 只表示候选可解释。Phase 4 文件层另验证独立账本保存与重新读取，仍不能称为世界玩家存档导入、联网或游戏运行完成。物品身份映射仍为 **720 / 8388**。读取器与运行时桥接边界见 [typed JSON 规范](docs/typed-nbt-json-reader.zh-CN.md)、[身份 envelope](docs/quest-progress-envelope-design.zh-CN.md)和[运行时桥接设计](docs/retrieval-runtime-bridge-design.zh-CN.md)。
 
-Phase 4 完整重建的23份汇总检查已通过，包括模型组合及纯模型编译类与兼容 JAR 对应类的逐字节一致性；当前 JAR SHA256 为 `b86227de2ed902291a9fea1d540fdf5328898a289c2f166170aa7a2897ffbfaf`。恢复后必须按本地当前源码重建，不把这个历史成功结果替代新运行结果。
+Phase 5 完整重建的24份汇总检查已通过，包括模型组合及纯模型编译类与兼容 JAR 对应类的逐字节一致性；当前 JAR SHA256 为 `59c130c33fd6242c262e29699923fa98c84e328c7db3409bf73b5c9d6fded2c6`。恢复后必须按本地当前源码重建，不把这个历史成功结果替代新运行结果。
 
 Phase 4 的 `test_legacy_quest_progress_store.py` 验证独立文件账本（436项断言、25个格式拒绝案例、64次NBT往返、3个JVM中断恢复场景）。原始输入字节及所有已发布帧保留，配置变化/损坏/缺帧/分叉阻止加载；不接受后退到空进度。独立账本与实际玩家库存尚无跨文件事务，不能从进程恢复推定机器掉电安全。详情见[文件账本设计](docs/quest-progress-file-store.zh-CN.md)。
+
+Phase 5 新增 `test_legacy_retrieval_inventory_bridge.py`：真实Inventory/ItemStack对象上的1,465项断言，其中1,332个非空原版默认物品栈无损快照往返。旧40槽复核、actor独占扣物、异常回滚和无法恢复库存隔离通过；没有世界提交入口或库存/账本持久化事务，不得把独立applyCounts直接接到联网领奖。详见[库存桥接边界](docs/retrieval-inventory-bridge.zh-CN.md)。
 
 `test_legacy_inventory_observer.py` 检查既有标记单物品任务的初始同步、主背包槽 9..44（含变空）及下一次 Pre tick 去重时机；真实事件总线与完整世界生命周期尚未验证。隔离 Mixin 报告当前验证 **9 个注入、7 个目标、230 个方法**，不得把它说成完整 NeoForge 转换链已通过。
 
