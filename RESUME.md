@@ -294,3 +294,19 @@ r31完成记录：完整重建入口退出0，work/migration/shaped-geometry-reb
 首次完整执行曾因测试把七个钩子与目标列表前七项按下标绑定，在新增RecipeCache后发生错配；改为明确的钩子/类名映射，全部原断言保留，独立复查及完整入口重跑通过。失败日志保留work/migration/shaped-geometry-initial-failed.log。状态元数据同步纠正了过时的LDLib/资源重载待验收描述，但机器、真实工作台、玩家、任务提交/奖励和客户端视觉均仍未验收，full_parity=false。
 
 r31只读恢复预检通过：五份固定源码归档/树、两个实例的派生身份、2036个运行输入、9358个master文件及11977个旧包参考文件一致，当前兼容JAR与公开锁匹配。报告evidence/local-restore-input-check.json已更新；未复制整份工作区，未启动恢复后的游戏。
+
+
+## 旧版合成电量阶段（2026-10-18，r32）
+
+`LegacyCraftingEnergy` 作为 `gtnh_migration:legacy_shaped` 的显式 `gtnh:legacy_energy` 选项接入实际配方组装；默认false。固定GT5 5.09.54.205的电量段和isElectricItem/chargeElectricItem/dischargeElectricItem表达式从锁定归档原样提取为独立对照类，只有物品/IC2调用由真实现代GT能力后端桥接。保留Int.MAX请求、逐槽模拟、IGTTool排除、int溢出以及输出容量；输入能力查询使用副本，结果独立，不修改模板。它没有迁移IC2本身、NBT/附魔/updateItemStack或全部源配方，不能据此宣布旧工具完整等价。
+
+专项实际资源加载通过9375次表达式对照、10次JSON/网络往返及6个边界检查；真实LV/MV/HV电池、钢钻、铁锭参与。空实现替换负例被拒绝，既有四组资源负例保留，资源检查现为1正5负。21条隔离测试配方不装入基础包；活动迁移仍170条（167机器）、身份映射720、任务依赖闭合导出2/3814。GT派生JAR仍57756c96版本和25个重编译类，本轮仅修改本地兼容模组及测试/证据。
+
+编译真实IGTTool需其LDLib父接口，build_capacity_compat.py从已锁定GT嵌套依赖提取到work/compat-mod/build/dependencies，并校验原LDLib摘要；不添加运行时模组副本。GT5移植类沿用LGPL-3.0，LGPL/GPL许可文本随资源保留。完整重建日志work/migration/legacy-energy-rebuild.log；完成结果以本节后续记录和phase报告为准。
+
+下一步源配方入口已定位：ProcessingToolHead.java的toolHeadDrill分支约278行，LV锂/镉/钠三种电池分别配置100000/75000/50000容量，图案SXd/GMG/PBP，钢螺丝、钢板、小钢齿轮、LV电机和材料钻头，d为工具符号。不能只替换新GT输出名字而跳过原GT工具材料/耐久/附魔/NBT/充放电及贴图。MetaGeneratedItem01约4960行的CoverCopyPaste旧配方也已读取，但当前注册表未找到可直接证明等价的对应功能，不创建占位替代。候选8.0.1与当前7.0.2的首电池复制路径及未使用开关均非GTNH源规则，未将其整体套用。
+
+
+r32完整重建完成记录：入口退出0，legacy-energy-rebuild.log末尾为CURRENT_PHASE_REBUILD_COMPLETE_FULL_PARITY_STILL_FALSE，47份汇总检查全部通过。客户端数据生成、服务端正常启动注册及六个启动负例、资源正例及五个资源负例均通过。兼容JAR摘要26baa6b39458b720e07c2bbc71abd7ca16697d736b10fba62ab32a5fe32fe9d9；GT派生摘要仍57756c966739f22aee0d8eccfe061e39f36c1d9cac60b819ea74b10f7a55b239。运行清单2037文件，顶层模组19个。新能力仅是显式选择的电量阶段，完整IC2/旧工具功能、源配方、NBT/附魔、玩家工作台和视觉仍未完成，EULA=false，无世界/玩家，目标继续active且由单人完成。
+
+r32只读恢复输入预检通过：五份固定源码归档/树、2036个运行输入、9358个master文件、11977个旧包参考文件，以及两个实例的GT派生身份均一致，当前兼容JAR与公开锁匹配。未复制整份工作区，未进行恢复后游戏启动。

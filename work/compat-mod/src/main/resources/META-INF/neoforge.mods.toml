@@ -1,6 +1,6 @@
 modLoader="javafml"
 loaderVersion="[4,)"
-license="MIT; Minecraft Forge Public Licence 1.0 (see NOTICE)"
+license="MIT; Minecraft Forge Public Licence 1.0; LGPL-3.0 (see NOTICE)"
 [[mods]]
 modId="gtnh_migration_compat"
 version="0.1.0"

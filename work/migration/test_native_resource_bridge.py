@@ -16,6 +16,7 @@ import zipfile
 from build_gtceu_kubejs_bridge import build, classpath, R, O, OUT, PATCH, read, save
 from gtceu_artifact import runtime_jar, original_jar
 from build_legacy_shaped_oracle import build as build_shaped_oracle
+from build_legacy_energy_reference import build as build_energy_reference
 
 
 def sha(path):
@@ -69,10 +70,12 @@ def check_dump(dump):
     assert shaped["type"] == "gtnh_migration:legacy_shaped" and shaped["kubejs:mirror"] is False and shaped["kubejs:shrink"] is False
     assert shaped["pattern"] == ["hI"] and shaped["key"]["h"] == {"tag": "gtceu:crafting_tools/hammer"}
     assert dump["shaped_behavior"] == {"source_geometry_comparisons":10395,"json_network_round_trips":22,"default_and_reset_shrink_checks":26,"remaining_item_and_action_checks":6,"cache_origin_entry_checks":4,"input_identity_checks":5,"no_world":True}
+    assert dump["legacy_crafting_energy"] == {"source_comparisons":9375,"json_network_round_trips":10,"boundary_checks":6,"real_gt_capabilities":True,"input_and_template_unchanged":True,"ic2_runtime_verified":False,"world_or_player_executed":False}
+    assert sum(k.startswith("gtnh_audit:") for k in rows) == 21
     expected_fuels = {v["target_id"]: v["burn_ticks"] for v in read(O / "docs/fuel-block-migration/fuel-blocks.json")["blocks"]}
     assert len(expected_fuels) == 16 and dump["fuels"] == expected_fuels
     return {"migration_machine_recipes_with_outputs": len(migrated), "migration_namespace_recipes": 170,
-            "fixture_recipes": 18, "shaped_behavior": dump["shaped_behavior"], "fuel_values_verified": 16, "component_round_trips": 5,
+            "fixture_recipes": 21, "shaped_behavior": dump["shaped_behavior"], "legacy_crafting_energy":dump["legacy_crafting_energy"], "fuel_values_verified": 16, "component_round_trips": 5,
             "boost_copy_codec_network_round_trips": 18,
             "ordinary_and_tick_directions": True, "chance_and_fraction_preserved": True,
             "replacement_counts_and_chance_preserved": True, "tool_symbol_and_no_mirror": True}
@@ -99,13 +102,24 @@ def main():
     run = OUT / ("resource-check-" + str(uuid.uuid4()))
     classes = run / "classes"
     classes.mkdir(parents=True)
-    sources = [R / "work/migration" / n for n in ("NativeResourceAuditLaunchHandler.java", "NativeResourceAuditMain.java", "NativeShapedRecipeCheck.java")]
-    cp = os.pathsep.join(p.resolve().as_posix() for p in classpath())
+    sources = [R / "work/migration" / n for n in ("NativeResourceAuditLaunchHandler.java", "NativeResourceAuditMain.java", "NativeShapedRecipeCheck.java", "NativeCraftingEnergyCheck.java")]
+    reference = build_energy_reference(run)
+    library_pin = read(R / "locks/library-client-callbacks.json")
+    ldlib = (R / positive["jar"]).parent / Path(library_pin["ldlib_entry"]).name
+    assert sha(ldlib) == library_pin["ldlib_sha256"]
+    cp = os.pathsep.join(p.resolve().as_posix() for p in classpath()+[ldlib])
     argfile = run / "compile.args"
     arguments(argfile, ["-proc:none", "--release", "21", "-encoding", "UTF-8", "-cp", cp,
-                        "-d", str(classes)] + [str(p) for p in sources], True)
+                        "-d", str(classes)] + [str(p) for p in sources+[reference]], True)
     result = subprocess.run([str(java.with_name("javac.exe")), "-J-Duser.language=en", "-J-Duser.country=US", "@" + str(argfile)], capture_output=True, timeout=60)
     assert result.returncode == 0, result.stderr.decode(errors="replace")
+    negative_energy = run / "negative-energy"
+    negative_energy.mkdir()
+    no_op = negative_energy / "LegacyCraftingEnergy.java"
+    no_op.write_text('package org.gtnhmigration.compat; public final class LegacyCraftingEnergy { public static net.minecraft.world.item.ItemStack transfer(net.minecraft.world.item.crafting.CraftingInput input, net.minecraft.world.item.ItemStack result) { return result.copy(); } }', encoding='utf-8')
+    arguments(negative_energy / 'compile.args', ['-proc:none','--release','21','-encoding','UTF-8','-cp',cp,'-d',str(negative_energy),str(no_op)], True)
+    result = subprocess.run([str(java.with_name('javac.exe')), '-J-Duser.language=en', '@'+str(negative_energy/'compile.args')], capture_output=True, timeout=60)
+    assert result.returncode == 0, result.stderr.decode(errors='replace')
     launcher = run / "resource-audit-launcher.jar"
     with zipfile.ZipFile(launcher, "w") as output:
         name = "org/gtnhmigration/audit/launcher/NativeResourceAuditLaunchHandler.class"
@@ -113,16 +127,14 @@ def main():
         output.writestr("META-INF/services/cpw.mods.modlauncher.api.ILaunchHandlerService", "org.gtnhmigration.audit.launcher.NativeResourceAuditLaunchHandler\n")
     testmod = run / "resource-audit.jar"
     with zipfile.ZipFile(testmod, "w") as output:
-        name = "org/gtnhmigration/startupaudit/NativeResourceAuditMain.class"
-        output.write(classes / name, name)
-        name = "org/gtnhmigration/startupaudit/NativeShapedRecipeCheck.class"
-        output.write(classes / name, name)
+        for compiled in sorted((classes / 'org/gtnhmigration/startupaudit').rglob('*.class')):
+            output.write(compiled, compiled.relative_to(classes).as_posix())
         output.writestr("META-INF/MANIFEST.MF", "Manifest-Version: 1.0\nAutomatic-Module-Name: gtnh_startup_audit\n\n")
         output.writestr("META-INF/neoforge.mods.toml", 'modLoader="javafml"\nloaderVersion="[4,)"\nlicense="MIT"\n[[mods]]\nmodId="gtnh_startup_audit"\nversion="0.1.0"\ndisplayName="Resource reload audit"\n')
     launch_text = (O / "libraries/net/neoforged/neoforge/21.1.262/win_args.txt").read_text(encoding="utf-8")
     cases = {}
     details = None
-    for case, bridge in (("ported", positive), ("old_output", negative), ("original_api", None), ("without_grid_origin", positive), ("without_cache_origin", positive)):
+    for case, bridge in (("ported", positive), ("old_output", negative), ("original_api", None), ("without_grid_origin", positive), ("without_cache_origin", positive), ("without_energy_transfer",positive)):
         directory = run / case
         directory.mkdir()
         for folder in ("mods", "config", "kubejs"):
@@ -135,13 +147,15 @@ def main():
             copied.unlink()
             control = R / bridge["jar"] if bridge else original_jar()
             shutil.copy2(control, directory / "mods" / control.name)
-        if case in ("without_grid_origin", "without_cache_origin"):
+        if case in ("without_grid_origin", "without_cache_origin", "without_energy_transfer"):
             copied_compat = directory / "mods/gtnh-migration-compat-0.1.0.jar"
             replacement_compat = directory / "compat-without-grid.tmp"
             with zipfile.ZipFile(copied_compat) as before_jar, zipfile.ZipFile(replacement_compat, "w") as after_jar:
                 for info in before_jar.infolist():
                     data = before_jar.read(info.filename)
-                    if info.filename == "gtnh_migration_compat.mixins.json":
+                    if case == 'without_energy_transfer' and info.filename == 'org/gtnhmigration/compat/LegacyCraftingEnergy.class':
+                        data = (negative_energy / info.filename).read_bytes()
+                    elif case != 'without_energy_transfer' and info.filename == "gtnh_migration_compat.mixins.json":
                         config = json.loads(data)
                         config["mixins"].remove("LegacyCraftingGridMixin" if case == "without_grid_origin" else "LegacyCraftingCacheMixin")
                         data = json.dumps(config).encode()
@@ -189,6 +203,9 @@ def main():
         elif case == "without_cache_origin":
             assert result.returncode != 0 and "Crafting cache retained a position-dependent entry" in log
             entry["rejected_missing_cache_origin_invalidation"] = True
+        elif case == 'without_energy_transfer':
+            assert result.returncode != 0 and 'Legacy energy transfer differs from fixed GT5 source' in log
+            entry['rejected_missing_legacy_energy_transfer'] = True
         else:
             assert result.returncode == 0 and "GTNH_RESOURCE_PROBE_COMPLETE_NO_WORLD" in log
             assert "/ERROR]" not in log and "Error in 'ServerEvents" not in log
@@ -211,8 +228,12 @@ def main():
     source_paths = sources + [Path(__file__), R / "work/migration/build_gtceu_kubejs_bridge.py",
                               R / "work/migration/KubeJSBridgeFixtures.js", PATCH, R / "locks/gtceu-kubejs72-build.json",
                               R / "locks/native-client-audit-inputs.json", R / "locks/gtceu-derived-artifact.json",
+                              R / "locks/library-client-callbacks.json",
                               R / "work/migration/gtceu_artifact.py", R / "work/migration/install_gtceu_bridge.py",
                               R / "work/migration/build_legacy_shaped_oracle.py", R / "work/migration/LegacyShapedOracleMain.java",
+                              R / "work/migration/build_legacy_energy_reference.py", R / "locks/legacy-crafting-energy-source.json",
+                              R / "locks/sources/GT5-Unofficial-5.09.54.205-lock.json",
+                              R / "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyCraftingEnergy.java",
                               R / "locks/legacy-shaped-source.json", R / "work/migration/build_capacity_compat.py",
                               R / "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyShapedRecipe.java",
                               R / "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyCraftingGrid.java",

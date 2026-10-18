@@ -1,0 +1,15 @@
+{
+  "source_lock": "locks/sources/GT5-Unofficial-5.09.54.205-lock.json",
+  "files": {
+    "src/main/java/gregtech/api/util/GTShapedRecipe.java": "3798fd91ee264f21f8014eb3a580163e8de6d3aba8175005f3515897b1138614",
+    "src/main/java/gregtech/api/util/GTModHandler.java": "bd899989e2facef8af9b54e560a6d66fe30a8294993afacff99eaecd44069063"
+  },
+  "energy_fragment_sha256": "5b3f4f26a80208f74bb8d35003c13b90d3d38ec742aa8ee22cd5434fecba799a",
+  "methods": [
+    "public static boolean isElectricItem(ItemStack aStack)",
+    "public static int chargeElectricItem(ItemStack aStack, int aCharge, int aTier, boolean aIgnoreLimit,",
+    "public static int dischargeElectricItem(ItemStack aStack, int aCharge, int aTier, boolean aIgnoreLimit,"
+  ],
+  "methods_sha256": "385a6a32b22c8d5e88e4faa7890ba461b46e8dd5f32ed093223d4d5f982bb056",
+  "scope": "Unchanged GT5 energy phase and helper expressions; modern GT capability backend, no IC2/NBT/enchantment/world equivalence claim"
+}

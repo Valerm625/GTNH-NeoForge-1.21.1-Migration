@@ -46,6 +46,7 @@ public final class NativeResourceAuditMain {
           dump.add("recipes", recipes);
           try { dump.add("shaped_behavior", NativeShapedRecipeCheck.run(data.getRecipeManager(), ops, registries.compositeAccess())); }
           catch (Exception error) { throw new RuntimeException(error); }
+            dump.add("legacy_crafting_energy", NativeCraftingEnergyCheck.run(data.getRecipeManager(), ops, registries.compositeAccess()));
           var storage = ((dev.latvian.mods.kubejs.core.ReloadableServerResourcesKJS) data).kjs$getServerScriptManager().recipeSchemaStorage;
           var componentCodec = storage.recipeComponentCodec;
           var components = new com.google.gson.JsonArray();

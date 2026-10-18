@@ -22,3 +22,13 @@ docs/legacy-shaped-geometry.zh-CN.md
 
 Other local adapter code retains the MIT notice in LICENSE. Third-party code
 and dependencies retain their own licences; no blanket relicensing is intended.
+
+LegacyCraftingEnergy.java and its compiled class port the energy phase of
+GT5-Unofficial 5.09.54.205 GTShapedRecipe and GTModHandler, by the GregTech and
+GT New Horizons contributors, under LGPL-3.0. See LGPL-3.0.txt and GPL-3.0.txt.
+Fixed source: https://github.com/GTNewHorizons/GT5-Unofficial/tree/a3e1e11241a814c9fa0dd0973d5699548428f689
+The local adaptation uses modern GT item capabilities and IGTTool classification,
+preserving the source request bounds, simulated input queries and int addition.
+It is an energy-phase adapter, not an IC2 or complete crafting implementation.
+Modified source and build tools are available in the migration repository above;
+locks/legacy-crafting-energy-source.json records the exact source expressions.

@@ -2,6 +2,8 @@
 
 本阶段修复带外围空格的 GT 有序配方被裁剪后任意移动的问题，保留旧 Forge 的平移、镜像和固定逻辑 3×3 匹配边界。它只补齐已覆盖的格子匹配与序列化行为；GTNH 的 NBT、充放电、附魔、研究/阶段门槛及完整合成界面仍需继续迁移。
 
+后续增加了显式的[旧版电量阶段选项](legacy-crafting-energy.zh-CN.md)，已通过真实现代GT能力和固定源码表达式对照；完整旧IC2、NBT/附魔及全部源电动配方仍未完成。
+
 ## 修复前的证据
 
 固定 KubeJS 377 的 `ShapedKubeJSRecipe` 序列化器没有读取 `kubejs:shrink`。原版 `ShapedRecipePattern` 裁去外围空格，`CraftingInput` 又裁去输入空格且不保留原点，GT schema 中存在 `noShrink()` 并不使该方法生效。

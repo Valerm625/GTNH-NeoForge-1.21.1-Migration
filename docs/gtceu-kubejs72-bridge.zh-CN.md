@@ -42,3 +42,5 @@ python work/migration/test_native_resource_bridge.py
 依赖现有基础包、JDK 21 和 `locks/native-client-audit-inputs.json` 对应的本地编译输入。构建目录、派生 JAR、原始输入和详细运行日志在忽略目录 `work/migration/gtceu-kubejs-bridge/`；公开检查结果为 `evidence/NativeResourceBridgeCheck.json`。完整重建入口已加入此检查，旧检查继续保留。
 
 安装、来源校验和恢复见[派生模组管理](gtceu-derived-artifact.zh-CN.md)。既有 CoreMod 的目标类、LDLib 及其回调摘要锁保持不变，独立派生锁只允许经过验证的 25 个重编译类和来源元数据。后续继续验证真实机器执行、客户端渲染、真实工作台与阶段门槛。本阶段由 Codex 单人实现；完整目标保持未完成，任务导出仍为 2/3814。
+
+后续新增[旧版合成电量阶段](legacy-crafting-energy.zh-CN.md)，以显式选项接入本地迁移序列化器；实际资源检查现含21条隔离测试配方、9375次电量源码表达式对照和空实现负例。GT派生补丁本身未改变，完整电动配方、IC2、NBT/附魔与视觉仍未迁移完成。

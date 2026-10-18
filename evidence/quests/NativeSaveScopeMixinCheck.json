@@ -44,7 +44,7 @@
     "neoforge_transform_chain_verified": false,
     "game_runtime_verified": false
   },
-  "compat_jar_sha256": "221f26a1637aed0f7c7b9d3ce8ea856a6377e110f9c37098b028c183d49e1944",
+  "compat_jar_sha256": "26baa6b39458b720e07c2bbc71abd7ca16697d736b10fba62ab32a5fe32fe9d9",
   "source_sha256": {
     "work/migration/OfflineMixinService.java": "a7ea57ef2ea959f69885cca79076690724e82a17c768df2d4521e23fddc897df",
     "work/migration/OfflineProperties.java": "10ad2622af4698009243667fac346ad23621d38f86c583aebcb99593059f9f3d",

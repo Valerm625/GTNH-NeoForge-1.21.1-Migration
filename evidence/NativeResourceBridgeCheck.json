@@ -4,7 +4,7 @@
   "checks": {
     "migration_machine_recipes_with_outputs": 167,
     "migration_namespace_recipes": 170,
-    "fixture_recipes": 18,
+    "fixture_recipes": 21,
     "shaped_behavior": {
       "source_geometry_comparisons": 10395,
       "json_network_round_trips": 22,
@@ -13,6 +13,15 @@
       "cache_origin_entry_checks": 4,
       "input_identity_checks": 5,
       "no_world": true
+    },
+    "legacy_crafting_energy": {
+      "source_comparisons": 9375,
+      "json_network_round_trips": 10,
+      "boundary_checks": 6,
+      "real_gt_capabilities": true,
+      "input_and_template_unchanged": true,
+      "ic2_runtime_verified": false,
+      "world_or_player_executed": false
     },
     "fuel_values_verified": 16,
     "component_round_trips": 5,
@@ -25,52 +34,63 @@
   "cases": {
     "ported": {
       "exit": 0,
-      "log_sha256": "c2fb19eb2e15c9ac96fd1af463aad737b068931da698be3ac3b4c0cd54974864",
-      "dump_sha256": "b01a2d0daec2a7471cfd8037237bccdd8ad69a55000119fd70aabc8543f21dbe",
+      "log_sha256": "2b1d3e320c43dc01a27a8e82fdc6d9bf8887946661ad3759d82634b35399f3c3",
+      "dump_sha256": "1e5368db8287570917d459a2cc735ba8106858945592f45c7d917d1aacd82f4b",
       "passed_semantic_checks": true
     },
     "old_output": {
       "exit": 0,
-      "log_sha256": "50dec09487baaa5a17b818adb3dbc47505eedb40963f03268c9f4479c004543c",
-      "dump_sha256": "02e1b214ecddb051e4700b73387ff1459667982683114ac7b87b705ecb9382b0",
+      "log_sha256": "5ab53abefbe7a010a9d42045fb7a1202e4a6768cb90d0fa79aef27a82283c302",
+      "dump_sha256": "3e5e79fa1cc672b9120b9190a12ce4374cf782e1baf670df723b91cecf1ada21",
       "rejected_missing_machine_outputs": true
     },
     "original_api": {
       "exit": 1,
-      "log_sha256": "98340e159b3afb90871ea732a2852f0d0165f8456e786c0deac4e2d101eb5488",
+      "log_sha256": "243914bff7af63546a3ea5a6676b4fee16db4426fd6ab5e8732dfd94df8ab746",
       "rejected_missing_old_server_events_api": true
     },
     "without_grid_origin": {
       "exit": 1,
-      "log_sha256": "3776921a60750d4456ba23df3a31d18ad04ad341cd6ed6270c9ed7a3f6423b61",
+      "log_sha256": "15e58c826958bab2957fb278887e63d8698e5204df4b528e6ca356e9f6306e71",
       "rejected_missing_original_grid_coordinates": true
     },
     "without_cache_origin": {
       "exit": 1,
-      "log_sha256": "1c7217502779f306551a756c273d80dacd6cf1240f2d3dc599eab5050a8f5ca3",
+      "log_sha256": "b78bdbb94131e9ed7e673796cdf3ffa47e5d7ded94e496447ac7dd3d4993c15f",
       "rejected_missing_cache_origin_invalidation": true
+    },
+    "without_energy_transfer": {
+      "exit": 1,
+      "log_sha256": "358f01bb70201e0046346fded6bc54c1a716b20c006b9d851be512625cb19d6e",
+      "rejected_missing_legacy_energy_transfer": true
     }
   },
   "derived_jar_sha256": "57756c966739f22aee0d8eccfe061e39f36c1d9cac60b819ea74b10f7a55b239",
   "preserved_original_entries": 14084,
   "source_sha256": {
     "work/migration/NativeResourceAuditLaunchHandler.java": "52bbd626cb612ebe66dbb80847bf29aefb661c4744baed49570e5a38a5b34c3e",
-    "work/migration/NativeResourceAuditMain.java": "9b7300a7be11dd88cbbc922ef7519b1e11fdd26aaed65857a44d29b7291a3dd6",
+    "work/migration/NativeResourceAuditMain.java": "56e413cca6460b668ebf4e9b99bc415868d17e134a883f53034aa605d9247218",
     "work/migration/NativeShapedRecipeCheck.java": "d08f5141b2177d3316e870d7dd61e087afc059e5fefd7390273e71d3ecad8880",
-    "work/migration/test_native_resource_bridge.py": "791789712dd2b5704fef48666590140073ea4ff1393005802845d270dfa56eba",
+    "work/migration/NativeCraftingEnergyCheck.java": "147503df00384eeadf945ab9a27c90705cb32456a59b4f1cf4d86884c8ddeb3e",
+    "work/migration/test_native_resource_bridge.py": "bd19c0d9e84bb0359623c12440ee365219eef07eb827fb3c27bde6357e557d23",
     "work/migration/build_gtceu_kubejs_bridge.py": "d4fda70d2595be62c5fc60b326bde822f3c3f2c5b9382732a1ec30c63cab0215",
-    "work/migration/KubeJSBridgeFixtures.js": "b5ef19742a8cf9ffe0c1515f3b44c154c0c9c63ff24b5a5bc66f5f53cd8871f3",
+    "work/migration/KubeJSBridgeFixtures.js": "d45bc783e52382726f6cb6dab44cfdac394f32ea3e0c6db3cc28b482219aca5e",
     "work/compat-mod/patches/gtceu-kubejs72.json": "15472a152f3433da4ecff5dffc23ef9270064ca5ce458c0da40d62529dde2dcb",
     "locks/gtceu-kubejs72-build.json": "c4a770075370a4be34137fecc27681716f9d9e3187b5960729dc1c0620f8acb6",
     "locks/native-client-audit-inputs.json": "1542616c4c55281eec4dc906d9a2d0375e45aa50939eb29f67230d80fefa1093",
     "locks/gtceu-derived-artifact.json": "47bf81042582f858d8feabfb11f996496c7f0716e12ff6b684a39b7d71f0c44c",
+    "locks/library-client-callbacks.json": "be4ce16e2fcdc9b0a913484dfa146d260ddd40b59e8c7846331aeb715c770a47",
     "work/migration/gtceu_artifact.py": "0b00b39e644e1abdcb2dc9c99d4b85c77ba6eb777377be2f3cd8138c0fd9926a",
     "work/migration/install_gtceu_bridge.py": "6b7d32ca462646ecad9001ffd48696a498ac3218a685564b845fddf90330419a",
     "work/migration/build_legacy_shaped_oracle.py": "492d0fe6e39cbe00881cef4142b6b3f1c2cdd64479d77949000bc419826a575e",
     "work/migration/LegacyShapedOracleMain.java": "22b81b1b7e8af30bd649218e37df7b6e9add1071db3ad7058eec3393a7215d02",
+    "work/migration/build_legacy_energy_reference.py": "293f00948d769f863744b8a3ca4e6d8811404b896673bac723e376df2ccb4b9b",
+    "locks/legacy-crafting-energy-source.json": "1b6fae1c2fbea4fa4f96a2b8c9bd66827dcb79954083cff5862f9c26c3505a69",
+    "locks/sources/GT5-Unofficial-5.09.54.205-lock.json": "1d82ec79eef3195aea71ff518af0970f21cb1b95962314c1babff65548b24f5f",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyCraftingEnergy.java": "fe0f19fafa4fa1c1db2264163aec5f41854ee2a5f8947a3addf021d1ad3089cd",
     "locks/legacy-shaped-source.json": "20be82c9c0781d7fccebb84c0a2e8bc02be0825fe6799c1b1750cba0aa39023d",
-    "work/migration/build_capacity_compat.py": "9fd1d08dd35011932b4703696fb73052ea98a1db172d2f978acf3fbca85ec58e",
-    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyShapedRecipe.java": "3ee8fa4e084f45ae3b1aabab765d689928c3079fddb00c163e4bfe7f6718b703",
+    "work/migration/build_capacity_compat.py": "b8f38829bd5139f1065035e0e16eeb8e36b7518b6b04baa4211ca012510576ea",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyShapedRecipe.java": "9478ac797fd99b191b621265e5274ee8d8877a2cd039786b0e953101127bc45e",
     "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyCraftingGrid.java": "40c79cb17087a1464156ff0963cb7d5a6a79e222535b9d49debdeaab0d89b3cc",
     "work/compat-mod/src/main/java/org/gtnhmigration/compat/mixin/LegacyCraftingGridMixin.java": "09446dfb97decbf1284945fa3339ef2f32775ab92469b86c0a6d6abc06e95db7",
     "work/compat-mod/src/main/java/org/gtnhmigration/compat/mixin/LegacyCraftingCacheMixin.java": "ead103c135be55149b94e7664120ba866dd126845b54d606fd9e3a91e3f05049"
@@ -91,7 +111,7 @@
     "mods/ftb-quests-neoforge-2101.1.36.jar": "6a39982c4b3afc00b1e788041a4f0d394e1659e3b3a6e5d078cd790bc36d0018",
     "mods/ftb-teams-neoforge-2101.1.11.jar": "e6bcd670493624e6906df872a9c6af4a33fe6405cac57a32c59cd4cd5838c655",
     "mods/gtceu-1.21.1-7.0.2-gtnh-kubejs72.jar": "57756c966739f22aee0d8eccfe061e39f36c1d9cac60b819ea74b10f7a55b239",
-    "mods/gtnh-migration-compat-0.1.0.jar": "221f26a1637aed0f7c7b9d3ce8ea856a6377e110f9c37098b028c183d49e1944",
+    "mods/gtnh-migration-compat-0.1.0.jar": "26baa6b39458b720e07c2bbc71abd7ca16697d736b10fba62ab32a5fe32fe9d9",
     "mods/guideme-21.1.19.jar": "2ce254edb931c3c3cf81d69abaf8f4ce5b871bf85e64984f366bf044173bd66a",
     "mods/Jade-1.21.1-NeoForge-15.10.6.jar": "276f1f65a20d04f536989c4f311949d770b52c440c23c2b904a08860f3c93810",
     "mods/jei-1.21.1-neoforge-19.51.0.418.jar": "8bc3936d869e4040a5649c58b7e8be1c78c82a245c0dc07bdd68ab49121a222c",

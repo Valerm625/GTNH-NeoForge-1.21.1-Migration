@@ -1,6 +1,8 @@
 Local adapter code is MIT except LegacyShapedRecipe.java and its compiled classes,
 which are under the Minecraft Forge Public Licence 1.0. See NOTICE and
 MinecraftForge-License.txt for the source attribution and applicable licence.
+LegacyCraftingEnergy.java and its compiled class are under LGPL-3.0;
+see LGPL-3.0.txt, GPL-3.0.txt and NOTICE.
 
 MIT License
 Copyright (c) 2026 Local GTNH migration project

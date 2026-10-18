@@ -170,6 +170,9 @@ assert resource_bridge['checks']['shaped_behavior']['source_geometry_comparisons
 assert resource_bridge['checks']['shaped_behavior']['input_identity_checks']==5
 assert resource_bridge['cases']['without_grid_origin']['rejected_missing_original_grid_coordinates']
 assert resource_bridge['cases']['without_cache_origin']['rejected_missing_cache_origin_invalidation']
+assert resource_bridge['checks']['legacy_crafting_energy']['source_comparisons']==9375
+assert resource_bridge['checks']['legacy_crafting_energy']['json_network_round_trips']==10
+assert resource_bridge['cases']['without_energy_transfer']['rejected_missing_legacy_energy_transfer']
 assert native_registry['crafting_grid_origin_verified']
 assert resource_bridge['cases']['original_api']['rejected_missing_old_server_events_api']
 assert resource_bridge['cases']['old_output']['rejected_missing_machine_outputs']
@@ -245,6 +248,9 @@ report={
     'legacy_shaped_geometry_native_verified':True,
     'legacy_shaped_cache_entry_head_verified':True,
     'legacy_shaped_world_cache_and_menu_verified':False,
+    'legacy_crafting_energy_phase_native_verified':True,
+    'legacy_ic2_energy_items_verified':False,
+    'legacy_crafting_energy_source_recipes_migrated':False,
     'isolated_mixin_transformation_verified':True,
     'tested_model_classes_match_packaged_jar':True,
     'typed_json_envelope_planner_composition_verified':True,
@@ -309,6 +315,7 @@ metadata['validation_state'].update({
     'native_datagen_registry':'official NeoForge data target registered installed native mods; 492 native mapping rows resolve, 68 retrieval declarations bind; KubeJS skips startup scripts in this mode; two client helpers and 512 original lamp renderers retained; no rendering or world/player',
     'native_startup_registration':f"production server distribution executes ordinary KubeJS startup; 574 custom items and all 720 mapped targets registered; {startup['bound_retrieval_declarations']} retrieval declarations bind; tin:9/antimony:1 actual material and 16 fuel values checked; LDLib reflection errors resolved with 23 configurators and 15 side-correct callbacks; no world/player, complete lifecycle or gameplay",
     'derived_gtceu_resource_reload':'installed source-built GTCEu passes real resource loading; 167 migration machine recipes have outputs, five component codecs and 18 Content boost round trips pass; original API and old output direction controls rejected; no machine execution or complete recipe parity',
+    'legacy_crafting_energy':'opt-in legacy energy phase uses actual modern GT capabilities; 9375 fixed GT5 expression comparisons, 10 JSON/network round trips and six boundaries pass; no-op control rejected; native IC2, NBT/enchantment/item-update pipeline and migration of source electric crafting recipes remain incomplete',
     'legacy_shaped_geometry':'10395 fixed Forge source comparisons and 22 JSON/network round trips through real loaded recipes; original grid identity and cache-entry invalidation checks pass, missing-origin and missing-cache controls rejected; no world-backed cache reuse, menu, GTNH NBT/charge/enchantment or stage-gate parity',
     'mixin_package_isolation':'17 Mixins live outside the runtime helper package; real ModLauncher rejects old-layout negative control and defines 17 selected classes with seven native hook interfaces; no player/world lifecycle execution',
     'quest_adapter':'actual MC/FTB matcher and isolated Sponge Mixin application verified; full NeoForge transformer chain and game unverified',
@@ -386,5 +393,6 @@ text+=f"\n保存许可状态机通过 {scope['assertions']} 项断言，保护�
 text+=f"\n四份锁定旧源码共有 {collisions['source_resource_occurrences']} 个资源出现记录；{collisions['same_path_groups']} 组同路径候选中 {collisions['same_path_different_content_groups']} 组字节不同，双方来源均保留，未猜测加载优先级或覆盖目标资源。\n"
 text+='\n独立源码补丁产物完成真实模组初始化与资源重载：167条迁移机器配方具有输出，16种燃料实际注册值一致，五类配方组件编码往返及18次概率加成复制/JSON/网络往返通过。原始API和旧输出方向两组负例被拒绝。补丁保持原JAR的资源字节，已按独立来源锁装入基础包并验证与新源码重建产物一致；机器实际执行、客户端渲染和完整迁移仍未验证。\n'
 text+='\n旧版有序合成定位已在真实资源加载中验证：noShrink保留外围空格，10395次固定Forge源码格子对照、22次JSON/网络往返、26次默认或重置裁剪、6组容器/配料动作、5项原点相等性/哈希和4项缓存入口检查通过。移除原点或缓存Mixin的两组新增负例被拒绝，CLIENT数据生成亦验证原点。缓存检查仅进入实际get头部并止于缺少Level的查询，未执行世界内缓存命中；GTNH的NBT/充电/附魔、阶段门槛、真实工作台及客户端展示仍未完成。\n'
+text+='\n迁移有序配方新增显式gtnh:legacy_energy选项：以真实现代GT电池和工具能力执行旧电量阶段，9375次固定GT5表达式对照、10次JSON/网络往返及6个边界检查通过。保留模拟输入、工具排除、32位累加溢出、最大单次放电边界、结果容量及其他组件；空实现负例被拒绝。原IC2物品实现、NBT/附魔/updateItemStack和全部源电动工具配方仍未迁入；没有新增活动迁移配方或完整任务。\n'
 status.write_text(text,encoding='utf-8')
 print(json.dumps({k:v for k,v in report.items() if k!='checks'},ensure_ascii=False))

@@ -15,6 +15,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import dev.latvian.mods.kubejs.recipe.ingredientaction.IngredientActionHolder;
 import dev.latvian.mods.kubejs.recipe.special.ShapedKubeJSRecipe;
 import net.minecraft.core.NonNullList;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
@@ -31,7 +32,8 @@ import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 /** Legacy Forge shaped-grid geometry plus the existing KubeJS crafting actions.
- * This does not implement GTNH's NBT/charge/enchantment or research gates.
+ * An explicit legacy-energy option runs the old energy phase. This does not
+ * implement GTNH's NBT/enchantment/item-update pipeline or research gates.
  */
 public final class LegacyShapedRecipe extends ShapedKubeJSRecipe {
     private static final DeferredRegister<RecipeSerializer<?>> SERIALIZERS = DeferredRegister.create(Registries.RECIPE_SERIALIZER, "gtnh_migration");
@@ -39,16 +41,18 @@ public final class LegacyShapedRecipe extends ShapedKubeJSRecipe {
     private final ShapedRecipePattern.Data source;
     private final ItemStack output;
     private final boolean shrink;
+    private final boolean legacyEnergy;
 
     public static void register(IEventBus bus) { SERIALIZERS.register(bus); }
 
     public LegacyShapedRecipe(String group, CraftingBookCategory category, ShapedRecipePattern.Data source,
-            ItemStack output, boolean showNotification, boolean mirror, boolean shrink,
+            ItemStack output, boolean showNotification, boolean mirror, boolean shrink, boolean legacyEnergy,
             List<IngredientActionHolder> actions, String modifyResult) {
         super(group, category, pattern(source, shrink), output, showNotification, mirror, actions, modifyResult);
         this.source = source;
         this.output = output;
         this.shrink = shrink;
+        this.legacyEnergy = legacyEnergy;
     }
 
     private static ShapedRecipePattern pattern(ShapedRecipePattern.Data data, boolean shrink) {
@@ -67,6 +71,11 @@ public final class LegacyShapedRecipe extends ShapedKubeJSRecipe {
     }
 
     @Override public RecipeSerializer<?> getSerializer() { return SERIALIZER.get(); }
+
+    @Override public ItemStack assemble(CraftingInput input, HolderLookup.Provider registries) {
+        ItemStack assembled = super.assemble(input, registries);
+        return legacyEnergy ? LegacyCraftingEnergy.transfer(input, assembled) : assembled;
+    }
 
     @Override public boolean matches(CraftingInput input, Level level) {
         if (shrink) return super.matches(input, level);
@@ -109,6 +118,7 @@ public final class LegacyShapedRecipe extends ShapedKubeJSRecipe {
                 Codec.BOOL.optionalFieldOf("show_notification", true).forGetter(LegacyShapedRecipe::showNotification),
                 Codec.BOOL.optionalFieldOf(MIRROR_KEY, true).forGetter(LegacyShapedRecipe::kjs$getMirror),
                 Codec.BOOL.optionalFieldOf("kubejs:shrink", true).forGetter(recipe -> recipe.shrink),
+                Codec.BOOL.optionalFieldOf("gtnh:legacy_energy", false).forGetter(recipe -> recipe.legacyEnergy),
                 IngredientActionHolder.LIST_CODEC.optionalFieldOf(INGREDIENT_ACTIONS_KEY, List.of()).forGetter(LegacyShapedRecipe::kjs$getIngredientActions),
                 Codec.STRING.optionalFieldOf(MODIFY_RESULT_KEY, "").forGetter(LegacyShapedRecipe::kjs$getModifyResult)
         ).apply(instance, LegacyShapedRecipe::new));

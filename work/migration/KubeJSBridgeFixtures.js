@@ -30,6 +30,21 @@ ServerEvents.recipes(event => {
     .noMirror().noShrink().id('gtnh_audit:tool_shaped');
 });
 
+// Actual GT items and the explicitly opted-in legacy energy phase.
+ServerEvents.recipes(event => {
+  var inputs = ['gtceu:lv_lithium_battery', 'gtceu:mv_lithium_battery', 'gtceu:hv_lithium_battery', 'gtceu:lv_steel_drill', 'minecraft:iron_ingot'].map(id => ({item:id}));
+  ['legacy', 'disabled', 'plain'].forEach(name => {
+    var result = name === 'plain' ? {id:'minecraft:diamond',count:1} : {
+      id:'gtceu:lv_lithium_battery', count:1, components:{
+        'gtceu:energy_content':{max_charge:200000,charge:83,infinite:false,discharge_mode:true}
+      }
+    };
+    event.custom({type:'gtnh_migration:legacy_shaped', category:'misc', pattern:['ABC'],
+      key:{A:inputs,B:inputs,C:inputs},result:result,'kubejs:shrink':false,
+      'kubejs:mirror':false,'gtnh:legacy_energy':name!=='disabled'}).id('gtnh_audit:energy_'+name);
+  });
+});
+
 // The expected positions come from unedited Forge 10.13.4.1614 source.
 ServerEvents.recipes(event => {
   var cases = [

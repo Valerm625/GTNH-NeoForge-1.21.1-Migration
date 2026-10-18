@@ -46,7 +46,7 @@ public abstract class EnderTankCapacityMixin {
 (src/'MigrationCompat.java').write_text(entry,encoding='utf-8',newline='\n');(src/'mixin/EnderTankCapacityMixin.java').write_text(mixin,encoding='utf-8',newline='\n')
 (resources/'META-INF/neoforge.mods.toml').write_text('''modLoader="javafml"
 loaderVersion="[4,)"
-license="MIT; Minecraft Forge Public Licence 1.0 (see NOTICE)"
+license="MIT; Minecraft Forge Public Licence 1.0; LGPL-3.0 (see NOTICE)"
 [[mods]]
 modId="gtnh_migration_compat"
 version="0.1.0"
@@ -102,6 +102,8 @@ side="BOTH"
 (resources/'LICENSE').write_text('''Local adapter code is MIT except LegacyShapedRecipe.java and its compiled classes,
 which are under the Minecraft Forge Public Licence 1.0. See NOTICE and
 MinecraftForge-License.txt for the source attribution and applicable licence.
+LegacyCraftingEnergy.java and its compiled class are under LGPL-3.0;
+see LGPL-3.0.txt, GPL-3.0.txt and NOTICE.
 
 MIT License
 Copyright (c) 2026 Local GTNH migration project
@@ -110,14 +112,23 @@ The above copyright notice and this permission notice shall be included in all c
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ''',encoding='utf-8',newline='\n')
 assert hashlib.sha256((resources/'MinecraftForge-License.txt').read_bytes()).hexdigest() == '5d5b5983827c197ac2f352b8580e38b182389985cf0a5b5650c35de81fde9026'
-args=(O/'libraries/net/neoforged/neoforge/21.1.262/win_args.txt').read_text(encoding='utf-8');libs=[O/x for x in re.search(r'^-DlegacyClassPath=(.*)$',args,re.M).group(1).strip().split(';')];libs += [O/'libraries/net/neoforged/neoforge/21.1.262/neoforge-21.1.262-server.jar', O/'libraries/net/minecraft/server/1.21.1-20240808.144430/server-1.21.1-20240808.144430-srg.jar', O/'libraries/net/neoforged/neoforge/21.1.262/neoforge-21.1.262-universal.jar'] + list((O/'mods').glob('*.jar'));cp=';'.join(p.relative_to(R).as_posix() for p in libs);classes=P/'build/classes';classes.mkdir(parents=True,exist_ok=True)
+for name,digest in {'LGPL-3.0.txt':'e3a994d82e644b03a792a930f574002658412f62407f5fee083f2555c5f23118','GPL-3.0.txt':'12ac5047f2af0522f06798b1589ffc4599bc29c91f954d7874e0320634e777c0'}.items():
+ assert hashlib.sha256((resources/name).read_bytes()).hexdigest()==digest,name
+# IGTTool extends an LDLib interface; compile against the already hash-pinned nested dependency.
+ldcompile=P/'build/dependencies'/Path(librarypin['ldlib_entry']).name
+ldcompile.parent.mkdir(parents=True,exist_ok=True)
+if ldcompile.exists():
+ assert hashlib.sha256(ldcompile.read_bytes()).hexdigest()==librarypin['ldlib_sha256'],'Changed compiler LDLib dependency'
+else:
+ ldcompile.write_bytes(ldbytes)
+args=(O/'libraries/net/neoforged/neoforge/21.1.262/win_args.txt').read_text(encoding='utf-8');libs=[O/x for x in re.search(r'^-DlegacyClassPath=(.*)$',args,re.M).group(1).strip().split(';')];libs += [O/'libraries/net/neoforged/neoforge/21.1.262/neoforge-21.1.262-server.jar', O/'libraries/net/minecraft/server/1.21.1-20240808.144430/server-1.21.1-20240808.144430-srg.jar', O/'libraries/net/neoforged/neoforge/21.1.262/neoforge-21.1.262-universal.jar'] + list((O/'mods').glob('*.jar')) + [ldcompile];cp=';'.join(p.relative_to(R).as_posix() for p in libs);classes=P/'build/classes';classes.mkdir(parents=True,exist_ok=True)
 # Remove only stale compiled classes inside this known build output.
 assert classes.resolve().is_relative_to((P/'build').resolve())
 for stale in classes.rglob('*.class'):
  assert stale.resolve().is_relative_to(classes.resolve())
  stale.unlink()
 argfile=P/'javac.args';files=sorted(src.rglob('*.java'));argfile.write_text('-proc:none\n--release\n21\n-encoding\nUTF-8\n-cp\n"'+cp+'"\n-d\n'+classes.relative_to(R).as_posix()+'\n'+'\n'.join(p.relative_to(R).as_posix() for p in files)+'\n',encoding='ascii')
-p=subprocess.run([str(java.with_name('javac.exe')),'@'+argfile.relative_to(R).as_posix()],cwd=R,capture_output=True,timeout=45);assert p.returncode==0,p.stderr.decode(errors='replace')
+p=subprocess.run([str(java.with_name('javac.exe')),'-J-Duser.language=en','-J-Duser.country=US','@'+argfile.relative_to(R).as_posix()],cwd=R,capture_output=True,timeout=45);assert p.returncode==0,p.stderr.decode(errors='replace')
 jar=O/'mods/gtnh-migration-compat-0.1.0.jar'
 with zipfile.ZipFile(jar,'w',zipfile.ZIP_DEFLATED) as z:
  for base in [classes,resources]:

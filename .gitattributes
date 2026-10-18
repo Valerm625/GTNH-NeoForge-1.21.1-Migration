@@ -10,3 +10,5 @@ work/compat-mod/src/main/resources/NOTICE text eol=lf
 work/compat-mod/src/main/resources/META-INF/neoforge.mods.toml text eol=lf
 # Preserve the pinned upstream licence bytes, including upstream trailing spaces.
 work/compat-mod/src/main/resources/MinecraftForge-License.txt -text whitespace=-blank-at-eol
+work/compat-mod/src/main/resources/LGPL-3.0.txt -text whitespace=-blank-at-eol
+work/compat-mod/src/main/resources/GPL-3.0.txt -text whitespace=-blank-at-eol,-blank-at-eof
