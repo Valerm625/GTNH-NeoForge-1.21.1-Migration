@@ -32,6 +32,8 @@ Phase 6 新增[事务日志与库存候选组合](docs/retrieval-transaction-jou
 
 Phase 6 另加入当前玩家文件读取层：40项断言覆盖UUID.dat完整性、文件变化及日志恢复，不回退旧备份，保留原始字节。完整重建的27份汇总检查通过，生产类与兼容 JAR 内对应类逐字节一致；玩家数据仍为合成夹具，世界、真实存档及联网尚未验证。
 
+最新加入[提交协调器](docs/retrieval-commit-coordinator.zh-CN.md)，串联基线保存、日志准备、库存应用、保存读回和条件回滚。164项组合断言通过，含准备/决策账本写入失败后关闭重开；当前完整重建汇总为28份。原生ServerPlayer/PlayerDataStorage适配器已编译，执行的保存端仍为夹具；尚未注册游戏入口或实现持续生命周期隔离。
+
 - evidence/source-archive-audit.json：输入 SHA256、版本证据、任务身份差异和资源数量。
 - evidence/phase-2026-10-18-task-semantics.json：当前阶段测试与边界。
 - evidence/quests/LegacyRetrievalTransactionJournalCheck.json 与 LegacyRetrievalTransactionProposalCheck.json：事务恢复夹具及实际库存候选组合检查。

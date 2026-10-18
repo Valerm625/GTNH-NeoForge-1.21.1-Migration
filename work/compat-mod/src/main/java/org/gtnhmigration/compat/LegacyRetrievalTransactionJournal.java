@@ -45,6 +45,14 @@ public final class LegacyRetrievalTransactionJournal {
         /** Proposed player data, not evidence that a live player file contains it. */
         public CompoundTag playerDataToPersist() { return stamp(afterPlayer, marker()); }
         public CompoundTag originalPlayerData() { return beforePlayer.copy(); }
+        /** Classifies file evidence without advancing the ledger. */
+        public Decision decisionFor(CompoundTag actualPlayerData) throws IOException {
+            require(playerId(actualPlayerData).equals(actor),"Recovery player UUID mismatch");
+            Optional<Marker> actual=readMarker(actualPlayerData);
+            if(actual.equals(Optional.of(marker())) && inventory(actualPlayerData).equals(inventory(afterPlayer))) return Decision.COMMIT;
+            if(actual.equals(readMarker(beforePlayer)) && inventory(actualPlayerData).equals(inventory(beforePlayer))) return Decision.ABORT;
+            throw new IOException("Player inventory and transaction marker do not prove a recoverable state");
+        }
     }
     public record Resolution(UUID transaction, Decision decision, String ledgerSha256) {}
     private record Scan(Optional<Pending> pending, Map<UUID, Optional<Marker>> expectedMarkers) {}
@@ -95,12 +103,7 @@ public final class LegacyRetrievalTransactionJournal {
     public Resolution resolve(CompoundTag actualPlayerData) throws IOException {
         synchronized(store) {
         Scan scan=scan();Pending pending=scan.pending().orElseThrow(()->new IOException("No pending transaction"));
-        require(playerId(actualPlayerData).equals(pending.actor),"Recovery player UUID mismatch");
-        Optional<Marker> actual=readMarker(actualPlayerData);
-        Decision decision;
-        if(actual.equals(Optional.of(pending.marker())) && inventory(actualPlayerData).equals(inventory(pending.afterPlayer))) decision=Decision.COMMIT;
-        else if(actual.equals(readMarker(pending.beforePlayer)) && inventory(actualPlayerData).equals(inventory(pending.beforePlayer))) decision=Decision.ABORT;
-        else throw new IOException("Player inventory and transaction marker do not prove a recoverable state");
+        Decision decision=pending.decisionFor(actualPlayerData);
         var head=store.current().orElseThrow();
         // Recheck immediately before CAS; other callers must not mutate this store outside the coordinator.
         requirePendingHead(head,pending);

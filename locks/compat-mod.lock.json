@@ -1,6 +1,6 @@
 {
   "filename": "gtnh-migration-compat-0.1.0.jar",
-  "sha256": "f3403f8934e9df699c638fc2e27cb2faf6d49f511c3b3938bf88f120e83f5c21",
+  "sha256": "f1643a6220b311cb8b1d58c39865e33b843b25e1924c78c48f980449a704ac0b",
   "version": "0.1.0",
   "mod_id": "gtnh_migration_compat",
   "source": "tools/compat-mod/src",
@@ -33,7 +33,8 @@
     "LegacyRetrievalInventoryBridge; actual Inventory snapshots/count writes and rollback, no registered submit handler or durable inventory/progress transaction",
     "LegacyRetrievalTransactionJournal; expected-head intent/decision records, clone-persisted marker proposals and synthetic player-file recovery, no native player save",
     "LegacyRetrievalTransactionProposal; actual inventory/player-NBT/quest-progress composition, no world coordinator",
-    "LegacyPlayerDataFileReader; authoritative UUID.dat integrity/readback and journal resolution, synthetic files only; caller must exclude native saves and player lifecycle changes"
+    "LegacyPlayerDataFileReader; authoritative UUID.dat integrity/readback and journal resolution, synthetic files only; caller must exclude native saves and player lifecycle changes",
+    "LegacyRetrievalCommitCoordinator; baseline, inventory apply, save/readback and conditional rollback protocol; native adapter compiled, save port tested with fixtures only, no lifecycle barrier or registered game handler"
   ],
   "quest_adapter_live_verified": false,
   "inventory_event_world_verified": false,

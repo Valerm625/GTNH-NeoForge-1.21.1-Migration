@@ -64,6 +64,8 @@ public final class LegacyRetrievalInventoryBridge {
         private final HolderLookup.Provider registries;
         private final Plan<FrozenStack> plan;
         private boolean attempted;
+        private List<Edit> successfulEdits;
+        private boolean restored;
         private Prepared(Quest<FrozenStack> quest, Map<Integer, State> previous, UUID actor,
                 List<UUID> allMembers, Map<UUID, Inventory> online, HolderLookup.Provider registries, Gate gate) {
             this.actor = Objects.requireNonNull(actor); this.registries = Objects.requireNonNull(registries);
@@ -83,6 +85,55 @@ public final class LegacyRetrievalInventoryBridge {
         }
         public Plan<FrozenStack> plan() { return plan; }
         public UUID actor() { return actor; }
+        boolean ownsActorInventory(Inventory inventory) { return live.get(actor) == inventory; }
+        void verifyReadyToSubmit() {
+            if (Thread.currentThread() != owner || attempted || restored)
+                throw new IllegalStateException("Prepared operation is not available on this thread");
+            synchronized (IN_FLIGHT) {
+                for (Inventory inventory : live.values()) if (RECOVERY_REQUIRED.contains(inventory) || IN_FLIGHT.containsKey(inventory))
+                    throw new IllegalStateException("Participant inventory is not available");
+            }
+            requireSnapshot(plan.beforeInventories());
+        }
+        void quarantine() { synchronized (IN_FLIGHT) { RECOVERY_REQUIRED.addAll(live.values()); } }
+
+        /** Coordinator-only rollback after the authoritative file proves ABORT.
+         * Reuses original objects and refuses any intervening inventory change.
+         * Never reloads a full player or overwrites a separately replaced stack.
+         */
+        void restoreAfterUnpersistedAttempt() {
+            if (Thread.currentThread() != owner || !attempted || restored)
+                throw new IllegalStateException("Invalid inventory restoration lifecycle");
+            restored = true;
+            synchronized (IN_FLIGHT) {
+                for (Inventory inventory : live.values()) {
+                    if (RECOVERY_REQUIRED.contains(inventory) || IN_FLIGHT.containsKey(inventory))
+                        throw new IllegalStateException("Inventory is not safe to restore");
+                }
+                live.values().forEach(inventory -> IN_FLIGHT.put(inventory, this));
+            }
+            try {
+                if (successfulEdits == null) { requireSnapshot(plan.beforeInventories()); return; }
+                requireSnapshot(plan.afterInventories());
+                // Validate every original reference before restoring any slot,
+                // including stacks removed completely from the live inventory.
+                for (Edit edit : successfulEdits) {
+                    ItemStack current = get(edit.inventory(), edit.slot());
+                    if (current != edit.original() && !(edit.after() == 0 && current == ItemStack.EMPTY))
+                        throw new IllegalStateException("Restore would overwrite another stack");
+                    var original = plan.beforeInventories().get(actor).get(edit.slot());
+                    if (edit.original().getCount() != (edit.after() == 0 ? edit.before() : edit.after())
+                            || !FrozenStack.of(edit.original(), registries).equals(original.item()))
+                        throw new IllegalStateException("Detached original stack changed");
+                }
+                for (Edit edit : successfulEdits.reversed()) {
+                    edit.original().setCount(edit.before());
+                    set(edit.inventory(), edit.slot(), edit.original());
+                }
+                requireSnapshot(plan.beforeInventories());
+            } catch (RuntimeException | Error failure) { quarantine(); throw failure; }
+            finally { synchronized (IN_FLIGHT) { live.values().forEach(inventory -> { if (IN_FLIGHT.get(inventory) == this) IN_FLIGHT.remove(inventory); }); } }
+        }
 
         /** Compose the count plan with a native-shaped player snapshot. This
          * only proposes bytes; it does not save a player or prove persistence.
@@ -169,6 +220,7 @@ public final class LegacyRetrievalInventoryBridge {
                 requireSnapshot(plan.afterInventories());
                 if (!precondition.getAsBoolean()) throw new IllegalStateException("Submission precondition changed after write");
                 requireSnapshot(plan.afterInventories());
+                successfulEdits = List.copyOf(applied);
                 return plan;
             } catch (RuntimeException | Error failure) {
                 Collections.reverse(applied);

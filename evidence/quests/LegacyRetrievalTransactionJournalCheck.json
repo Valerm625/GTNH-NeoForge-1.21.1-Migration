@@ -14,7 +14,7 @@
     "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestProgressEnvelope.java": "43ed5abb2ed2595efa101b9e89d8d8409f84b62ca01cd9c62191ea5e92b9b9a0",
     "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestProgressStoreCodec.java": "7e610faa9cd32b56cf1302c0d62189884defbc8746c393bcf423bd84cd5f2e94",
     "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestProgressFileStore.java": "9830ea6c0ccf297d796b2ba2ed127a9ce0ec4df7a5b74fd0e3e0840eac6c89a2",
-    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalTransactionJournal.java": "60719a62bc76745878e03a26206c9fd15ef6c4f4af33ad2bd95158ea2956467b",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalTransactionJournal.java": "a4d7df62862a48732b0e851eada2631a490804b30f8a16b6908b36354ef86b83",
     "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyPlayerDataFileReader.java": "9312f91c24c6d75236672cbb7667999b19d15306c93fb9c4ccc99a129db1f4f2",
     "work/migration/LegacyRetrievalTransactionJournalCheck.java": "d92eb887f7fcfa220a2f48a14d8e312f3e364e0f6d577181ffeffa8c0c938d99",
     "work/migration/test_legacy_retrieval_transaction_journal.py": "a89293dc85ed51836a482036275856ae5fb1a050e02522a6d647b6c5edd9e676"
