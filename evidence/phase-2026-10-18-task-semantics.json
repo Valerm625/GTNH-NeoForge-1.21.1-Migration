@@ -1,6 +1,6 @@
 {
   "phase_date_shanghai": "2026-10-18",
-  "phase": "actual Minecraft inventory snapshots and guarded count application; independent UUID ledger and ordered quest planning",
+  "phase": "journal preparation and recovery with actual inventory-to-player-NBT proposals; native player persistence remains unintegrated",
   "checks": {
     "IsolatedMixinTransformationCheck": {
       "test": "isolated_real_sponge_mixin_transformation",
@@ -30,7 +30,7 @@
           "missing_injection_detected": true
         }
       },
-      "compat_jar_sha256": "59c130c33fd6242c262e29699923fa98c84e328c7db3409bf73b5c9d6fded2c6",
+      "compat_jar_sha256": "eb40dd411f29bffbb8c7e8cae6f3709ad811a48c547149d2736ec7a85b9c70f1",
       "source_sha256": {
         "work/migration/OfflineMixinService.java": "a7ea57ef2ea959f69885cca79076690724e82a17c768df2d4521e23fddc897df",
         "work/migration/OfflineProperties.java": "10ad2622af4698009243667fac346ad23621d38f86c583aebcb99593059f9f3d",
@@ -126,7 +126,7 @@
       "wrong_class_mapping_mutation_rejected": true,
       "actual_mixin_transformation_verified": false,
       "game_runtime_verified": false,
-      "compat_jar_sha256": "59c130c33fd6242c262e29699923fa98c84e328c7db3409bf73b5c9d6fded2c6",
+      "compat_jar_sha256": "eb40dd411f29bffbb8c7e8cae6f3709ad811a48c547149d2736ec7a85b9c70f1",
       "source_sha256": {
         "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyHuntTaskMixin.java": "62e74aa7175a44471a99fefb5ef09374c51fcec548238a4c49c84aafaafb9a93",
         "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyHuntEntityMatcher.java": "1435b87ae0bf98e2a44d31eae9262041cd9d610214d6412839496ada8b5c48d8",
@@ -279,7 +279,7 @@
       "test_source_sha256": "aed919c8f8caccf54a5c619b0f5b5294859ce8522c35398f941d146903f99d41",
       "runner_sha256": "fb6d375d4f805b0bc8393e3211d9b2eaf04d50ab9dea744a2dc20393b848fe65",
       "oracle_fixture_sha256": "24c3d959554108708f56ba755d089edfabd2f3a828af050169081b1c08953ab9",
-      "compat_jar_sha256": "59c130c33fd6242c262e29699923fa98c84e328c7db3409bf73b5c9d6fded2c6",
+      "compat_jar_sha256": "eb40dd411f29bffbb8c7e8cae6f3709ad811a48c547149d2736ec7a85b9c70f1",
       "ftb_artifact_sha256": "6a39982c4b3afc00b1e788041a4f0d394e1659e3b3a6e5d078cd790bc36d0018",
       "minecraft_artifact_sha256": "26ca9c40d7e1681190b428583c38816852218e78df3f8bdb60a59a78503aec71",
       "packaged_bridge_matches_sources": true,
@@ -529,7 +529,7 @@
       "source_sha256": {
         "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalEngine.java": "974899a867d5f9b2b18295e02c3fc56827064bdfa19c863158ea4b06b0a45758",
         "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestRetrievalPlanner.java": "bf680e9df76a8844bfed402feaf4b535624baf6644ec3de4093f0aab7b68c0e2",
-        "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalInventoryBridge.java": "245d4b5322105e358be0d1f0e9d017ac321a121a161148c73f65ad57ce628681",
+        "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalInventoryBridge.java": "9c637a2cb9c64a0b6dcf1fb5afdfc474553dbe4e01e78994cdab6b822cdbbc1e",
         "work/migration/LegacyRetrievalInventoryBridgeCheck.java": "def027c0410302e095a7f7afbb872addb6b2e3a71097d2340ca9b8f8e96a77b5",
         "work/migration/test_legacy_retrieval_inventory_bridge.py": "06b8cffb5c92e544f456f71636f917b409d147e78820aed37602ec27e871c5d1"
       },
@@ -541,6 +541,125 @@
         "Caller must enforce server main thread and revalidate definition, ledger, party and authorization. Capturing-thread confinement alone does not authenticate a caller.",
         "Opaque/transient components without a lossless NBT representation are rejected with the live inventory preserved.",
         "Third-party Inventory/ItemStack Mixin side effects and cross-file crash recovery have not been verified."
+      ]
+    },
+    "LegacyRetrievalTransactionJournalCheck": {
+      "test": "durable_inventory_progress_journal",
+      "passed": true,
+      "assertions": 36,
+      "actual_player_save_fixtures": 0,
+      "runtime_integrated": false,
+      "export_enabled": false,
+      "game_runtime_verified": false,
+      "native_player_save_verified": false,
+      "synthetic_player_nbt_used": true,
+      "source_sha256": {
+        "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalEngine.java": "974899a867d5f9b2b18295e02c3fc56827064bdfa19c863158ea4b06b0a45758",
+        "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalProgressCodec.java": "596a64ed0ed06bad0f70731773078376ea9ab7ec3cba7dacdd8c10faac0fe856",
+        "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestProgressEnvelope.java": "43ed5abb2ed2595efa101b9e89d8d8409f84b62ca01cd9c62191ea5e92b9b9a0",
+        "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestProgressStoreCodec.java": "7e610faa9cd32b56cf1302c0d62189884defbc8746c393bcf423bd84cd5f2e94",
+        "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestProgressFileStore.java": "9830ea6c0ccf297d796b2ba2ed127a9ce0ec4df7a5b74fd0e3e0840eac6c89a2",
+        "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalTransactionJournal.java": "6b0a993e48341ea0d7a61fd0e36c56ed8909460c32e0758e9cb58cda2971055a",
+        "work/migration/LegacyRetrievalTransactionJournalCheck.java": "6a7bdaff92bdfd8532f8e8da73d7c7dfa7be22b652c17e85a671af726d0ba1a8",
+        "work/migration/test_legacy_retrieval_transaction_journal.py": "01d7b7a4866a006e80a2a9015515bc64e5ad5e5b2ad8072b422ed35a7e798511"
+      },
+      "minecraft_jar_sha256": "26ca9c40d7e1681190b428583c38816852218e78df3f8bdb60a59a78503aec71",
+      "process_crash_checks": [
+        {
+          "boundary": "PREPARE_TEMP",
+          "child_exit_code": 72,
+          "committed": false,
+          "player_file_unchanged_by_recovery": true,
+          "prior_ledger_frames_retained": true,
+          "second_recovery_idempotent": true
+        },
+        {
+          "boundary": "PREPARED",
+          "child_exit_code": 72,
+          "committed": false,
+          "player_file_unchanged_by_recovery": true,
+          "prior_ledger_frames_retained": true,
+          "second_recovery_idempotent": true
+        },
+        {
+          "boundary": "PLAYER_TEMP",
+          "child_exit_code": 72,
+          "committed": false,
+          "player_file_unchanged_by_recovery": true,
+          "prior_ledger_frames_retained": true,
+          "second_recovery_idempotent": true
+        },
+        {
+          "boundary": "PLAYER_PUBLISHED",
+          "child_exit_code": 72,
+          "committed": true,
+          "player_file_unchanged_by_recovery": true,
+          "prior_ledger_frames_retained": true,
+          "second_recovery_idempotent": true
+        },
+        {
+          "boundary": "RESOLVE_TEMP",
+          "child_exit_code": 72,
+          "committed": true,
+          "player_file_unchanged_by_recovery": true,
+          "prior_ledger_frames_retained": true,
+          "second_recovery_idempotent": true
+        },
+        {
+          "boundary": "RESOLVE_PUBLISHED",
+          "child_exit_code": 72,
+          "committed": true,
+          "player_file_unchanged_by_recovery": true,
+          "prior_ledger_frames_retained": true,
+          "second_recovery_idempotent": true
+        },
+        {
+          "boundary": "RESOLVED",
+          "child_exit_code": 72,
+          "committed": true,
+          "player_file_unchanged_by_recovery": true,
+          "prior_ledger_frames_retained": true,
+          "second_recovery_idempotent": true
+        }
+      ],
+      "limitations": [
+        "Synthetic full player NBT and a fixture atomic file writer, not native PlayerDataStorage or a world.",
+        "The journal never writes player inventory; an actual coordinator must persist marker+inventory together, read back the authoritative file without dat_old fallback, and gate normal play until resolved.",
+        "Accepted before/after player inventories and progress states must come from independently verified runtime snapshots and planning; this journal is not item matching, authorization or inventory validation.",
+        "Aborting a pending transaction does not undo a live in-memory inventory; a future coordinator must restore/reload it before play resumes.",
+        "Death/clone/logout, native-save failure/readback, power loss, reward events, party and networking remain unverified.",
+        "The existing append-only ledger retains source and transaction bytes; limits/compaction and manual removal of a complete history tail remain unresolved."
+      ]
+    },
+    "LegacyRetrievalTransactionProposalCheck": {
+      "test": "actual_inventory_to_journal_proposal",
+      "passed": true,
+      "assertions": 68,
+      "runtime_integrated": false,
+      "export_enabled": false,
+      "native_player_save_verified": false,
+      "game_runtime_verified": false,
+      "actual_player_save_fixtures": 0,
+      "source_sha256": {
+        "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalEngine.java": "974899a867d5f9b2b18295e02c3fc56827064bdfa19c863158ea4b06b0a45758",
+        "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestRetrievalPlanner.java": "bf680e9df76a8844bfed402feaf4b535624baf6644ec3de4093f0aab7b68c0e2",
+        "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalInventoryBridge.java": "9c637a2cb9c64a0b6dcf1fb5afdfc474553dbe4e01e78994cdab6b822cdbbc1e",
+        "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalProgressCodec.java": "596a64ed0ed06bad0f70731773078376ea9ab7ec3cba7dacdd8c10faac0fe856",
+        "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestProgressEnvelope.java": "43ed5abb2ed2595efa101b9e89d8d8409f84b62ca01cd9c62191ea5e92b9b9a0",
+        "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestProgressStoreCodec.java": "7e610faa9cd32b56cf1302c0d62189884defbc8746c393bcf423bd84cd5f2e94",
+        "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestProgressFileStore.java": "9830ea6c0ccf297d796b2ba2ed127a9ce0ec4df7a5b74fd0e3e0840eac6c89a2",
+        "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalTransactionJournal.java": "6b0a993e48341ea0d7a61fd0e36c56ed8909460c32e0758e9cb58cda2971055a",
+        "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalTransactionProposal.java": "178afdd9e16f7895c98d7153f3ce947cf05cf0c82c9cd10f4714e8bad6a75326",
+        "work/migration/LegacyRetrievalTransactionProposalCheck.java": "a3470acee545bae279816281a3383b0dee7d7a8c8c6105704f69d3872f749e44",
+        "work/migration/test_legacy_retrieval_transaction_proposal.py": "c80aa82c4a451138eeed2547b604eb95a0e8de0f1bc14735323a5fe7cf3df047"
+      },
+      "minecraft_jar_sha256": "26ca9c40d7e1681190b428583c38816852218e78df3f8bdb60a59a78503aec71",
+      "limitations": [
+        "Actual vanilla Inventory(null), ItemStack codecs and real ledger files; synthetic player NBT and file writer, no world or native PlayerDataStorage.",
+        "Inventory fixture encoding follows inspected Inventory.save slot order; the actual Inventory.save method needs a live Player and is not invoked.",
+        "Exact vanilla predicates and actor/party authorization remain fixtures; oak logs are not a verified legacy logWood mapping.",
+        "The proposal binds progress and inventory snapshots to an expected ledger SHA; a runtime coordinator must additionally enforce server thread, quiescence, baseline file persistence, save/readback and recovery admission.",
+        "No game completion, reward, synchronization, death/clone or full NeoForge transformation is executed."
       ]
     },
     "QuestAdapterShapeCheck": {
@@ -636,7 +755,7 @@
         "0:456": "e6556c4a267e1bde83949d2e3a93d5ad53fed963557db2188990de3ded14e28c",
         "0:42": "cadcc2de303f04719db7e2021ae6e61b5649780d8d69d96b3c90019c5f69aced"
       },
-      "export_manifest_sha256": "d9e065ecb669c39ae360cf0380417a692be16c1e1661e2b8caef4e576d598ade",
+      "export_manifest_sha256": "0896217b26cbeb6f6832c2f25c4ecc77a5e71105437d560544799c75b311a1fc",
       "verifier_sha256": "8dcf6ec98717afc21d831c641090803935abe0926fa864d4b0d85f6453e1d79c",
       "source_sha256": "96669f3e782ca8ce3a92d1225e0adddf5519595ad193e44ac52035c67235be41",
       "target_source_sha256": "ff4345ea224da2889fab822050619448e71da420eebff206218c2bfec9505b1f",
@@ -1539,7 +1658,7 @@
       "production_assets_modified": false
     }
   },
-  "compat_jar_sha256": "59c130c33fd6242c262e29699923fa98c84e328c7db3409bf73b5c9d6fded2c6",
+  "compat_jar_sha256": "eb40dd411f29bffbb8c7e8cae6f3709ad811a48c547149d2736ec7a85b9c70f1",
   "source_quests": 3814,
   "structural_candidates": 47,
   "dependency_closed_active_quests": 2,
@@ -1554,6 +1673,9 @@
   "ledger_process_halt_recovery_verified": true,
   "actual_inventory_in_memory_count_application_verified": true,
   "inventory_and_progress_transaction_verified": false,
+  "journal_fixture_two_file_recovery_verified": true,
+  "actual_inventory_to_journal_proposal_composition_verified": true,
+  "native_player_save_verified": false,
   "live_mixin_transformation_verified": false,
   "neoforge_transform_chain_verified": false,
   "client_visuals_verified": false,

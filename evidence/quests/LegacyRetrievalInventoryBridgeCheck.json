@@ -13,7 +13,7 @@
   "source_sha256": {
     "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalEngine.java": "974899a867d5f9b2b18295e02c3fc56827064bdfa19c863158ea4b06b0a45758",
     "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestRetrievalPlanner.java": "bf680e9df76a8844bfed402feaf4b535624baf6644ec3de4093f0aab7b68c0e2",
-    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalInventoryBridge.java": "245d4b5322105e358be0d1f0e9d017ac321a121a161148c73f65ad57ce628681",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalInventoryBridge.java": "9c637a2cb9c64a0b6dcf1fb5afdfc474553dbe4e01e78994cdab6b822cdbbc1e",
     "work/migration/LegacyRetrievalInventoryBridgeCheck.java": "def027c0410302e095a7f7afbb872addb6b2e3a71097d2340ca9b8f8e96a77b5",
     "work/migration/test_legacy_retrieval_inventory_bridge.py": "06b8cffb5c92e544f456f71636f917b409d147e78820aed37602ec27e871c5d1"
   },

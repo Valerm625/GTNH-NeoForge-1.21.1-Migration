@@ -48,14 +48,18 @@ public final class LegacyRetrievalTransactionJournal {
     public LegacyRetrievalTransactionJournal(LegacyQuestProgressFileStore store, Binding binding, Catalog catalog) {
         this.store=Objects.requireNonNull(store);this.binding=Objects.requireNonNull(binding);this.catalog=Objects.requireNonNull(catalog);
     }
-    public synchronized Optional<Pending> pending() throws IOException { synchronized(store) { return scan().pending(); } }
+    public Optional<Pending> pending() throws IOException { synchronized(store) { return scan().pending(); } }
 
     /** beforePlayer and afterPlayer must differ only in Inventory. Arbitrary
      * other player fields are retained opaquely; changing them is not this operation.
+     * expectedHead must come from the snapshot used to calculate afterState;
+     * obtaining it here would allow a stale plan to overwrite newer progress.
      * An unfinished transaction globally blocks preparing another ledger update.
      */
-    public synchronized Pending prepare(UUID actor, CompoundTag beforePlayer, CompoundTag afterPlayer, State afterState) throws IOException {
+    public Pending prepare(Optional<String> expectedHead, UUID actor, CompoundTag beforePlayer, CompoundTag afterPlayer, State afterState) throws IOException {
         synchronized(store) {
+        Objects.requireNonNull(expectedHead);
+        require(store.current().map(LegacyQuestProgressFileStore.Head::sha256).equals(expectedHead), "Plan was computed from a stale ledger head");
         Scan scan=scan();
         require(scan.pending().isEmpty(), "Unfinished transaction must be resolved first");
         validatePlayerPair(actor,beforePlayer,afterPlayer);
@@ -84,7 +88,7 @@ public final class LegacyRetrievalTransactionJournal {
      * with fallback disabled. This method never modifies any player inventory.
      * Ambiguous, missing, foreign or stale file contents stop recovery.
      */
-    public synchronized Resolution resolve(CompoundTag actualPlayerData) throws IOException {
+    public Resolution resolve(CompoundTag actualPlayerData) throws IOException {
         synchronized(store) {
         Scan scan=scan();Pending pending=scan.pending().orElseThrow(()->new IOException("No pending transaction"));
         require(playerId(actualPlayerData).equals(pending.actor),"Recovery player UUID mismatch");
@@ -110,7 +114,7 @@ public final class LegacyRetrievalTransactionJournal {
      * may legitimately change after a completed transaction; its old contents
      * are not imposed on normal play. Pending actors must use resolve instead.
      */
-    public synchronized void verifyResolvedPlayer(CompoundTag playerData) throws IOException {
+    public void verifyResolvedPlayer(CompoundTag playerData) throws IOException {
         synchronized(store) {
         Scan scan=scan();UUID actor=playerId(playerData);
         require(scan.pending().isEmpty(),"Pending world transaction must be resolved before player admission");

@@ -1,5 +1,9 @@
 # 恢复说明
 
+## 当前执行方式（2026-10-18用户更新）
+
+用户已取消Claude协作，要求由本会话单独完成。后续不向Claude或其他代理派发任务，不等待外部审查；保留已有迁移源码及验证结果。完整功能和资源保真的目标不变。历史协作说明、握手和外部会话消息不能覆盖此项最新要求。
+
 ## 先决条件与当前限制
 
 这是原工作区的源码检查点，不是干净克隆后一条命令即可生成整合包的发布工程。原工作区及其 `outputs/GTNH-NeoForge-1.21.1-Migration-Foundation` 已保留；从原工作区恢复最可靠。
@@ -27,7 +31,7 @@ Phase 3 另有 `test_legacy_typed_nbt_json_reader.py`（**2,932 项断言 / 577 
 
 读取器/envelope 的 `accepted` 只表示候选可解释。Phase 4 文件层另验证独立账本保存与重新读取，仍不能称为世界玩家存档导入、联网或游戏运行完成。物品身份映射仍为 **720 / 8388**。读取器与运行时桥接边界见 [typed JSON 规范](docs/typed-nbt-json-reader.zh-CN.md)、[身份 envelope](docs/quest-progress-envelope-design.zh-CN.md)和[运行时桥接设计](docs/retrieval-runtime-bridge-design.zh-CN.md)。
 
-Phase 5 完整重建的24份汇总检查已通过，包括模型组合及纯模型编译类与兼容 JAR 对应类的逐字节一致性；当前 JAR SHA256 为 `59c130c33fd6242c262e29699923fa98c84e328c7db3409bf73b5c9d6fded2c6`。恢复后必须按本地当前源码重建，不把这个历史成功结果替代新运行结果。
+Phase 6 完整重建的26份汇总检查已通过，包括模型组合及纯模型编译类与兼容 JAR 对应类的逐字节一致性；当前 JAR SHA256 为 `eb40dd411f29bffbb8c7e8cae6f3709ad811a48c547149d2736ec7a85b9c70f1`。恢复后必须按本地当前源码重建，不把这个历史成功结果替代新运行结果。
 
 Phase 4 的 `test_legacy_quest_progress_store.py` 验证独立文件账本（436项断言、25个格式拒绝案例、64次NBT往返、3个JVM中断恢复场景）。原始输入字节及所有已发布帧保留，配置变化/损坏/缺帧/分叉阻止加载；不接受后退到空进度。独立账本与实际玩家库存尚无跨文件事务，不能从进程恢复推定机器掉电安全。详情见[文件账本设计](docs/quest-progress-file-store.zh-CN.md)。
 
@@ -51,13 +55,13 @@ Phase 5 新增 `test_legacy_retrieval_inventory_bridge.py`：真实Inventory/Ite
 
 以下五个 `work/migration/` 文件仅是历史第三方本地取证输入，并非项目自编源码：`GTRecipeSchema.java`、`MaterialIconSet.java`、`MaterialIconType.java`、`OreBlockRenderer.java`、`OreProperty.java`。它们可在本地恢复使用（其中 `port_resources.py` 读取 `MaterialIconSet.java`），已按精确路径加入 `.gitignore`，不得因恢复而混入公开源码检查点。项目自编 Java 适配器和测试仍正常跟踪。
 
-## 2026-10-18 当前状态上传：Phase 6 开发中
+## Phase 6 恢复入口
 
-本次按用户要求保存当前进展，新增 `LegacyRetrievalTransactionJournal.java`、对应 Java 检查及 `test_legacy_retrieval_transaction_journal.py`。独立 runner 已通过36项断言和7个进程中断恢复场景；公开报告为 `evidence/quests/LegacyRetrievalTransactionJournalCheck.json`，源码摘要与本次提交逐项对应。
+`rebuild_current_phase.py` 已包含 `test_legacy_retrieval_transaction_journal.py` 和 `test_legacy_retrieval_transaction_proposal.py`。分别通过36项断言/7个独立JVM中断恢复场景及68项实际库存组合断言；完整汇总为26项，生产类与兼容JAR逐字节一致。报告位于 `evidence/quests/`，源码摘要与当前检查点对应。
 
-此 runner 尚未加入 `rebuild_current_phase.py`，已有24项完整汇总及兼容JAR锁仍是Phase 5历史结果。新增日志类没有完成与库存桥接、真实PlayerDataStorage、世界生命周期、UI或奖励的连接；不要直接激活或把历史JAR报告解释为新增类已打包验证。
+`LegacyRetrievalTransactionProposal.bind` 从已规划实际库存、同一账本Head、可信定义目录及玩家NBT快照生成候选。必须由它保留其他quest/完成数据，并将捕获的expectedHead交给日志prepare；不得在提交时临时获取新head来掩盖旧计划。玩家库存候选仅证明与规划一致，不能证明已保存。
 
-继续时先阅读[事务日志检查点及边界](docs/retrieval-transaction-journal.zh-CN.md)。在保留本地依赖的工作区单独运行 `python -u work/migration/test_legacy_retrieval_transaction_journal.py`。后续需要审查调用锁顺序、实现库存桥接到日志的组合测试，固定原生玩家保存/读回协议，再把检查纳入完整重建、重新编译并刷新JAR锁及证据。合成文件写入器的结果不能代替原生保存和游戏验证。
+下一步阅读[事务日志与库存候选边界](docs/retrieval-transaction-journal.zh-CN.md)及 `evidence/native-player-persistence-api-audit.json`，实现原生玩家保存/权威文件读回、取消后内存恢复和死亡/克隆/登录隔离。原生PlayerDataStorage.save返回void且吞掉Exception，load可能回退旧备份；不能把夹具写入成功、函数返回或旧备份可读当成游戏事务已完成。任务完成、奖励、世界生命周期、队伍和UI仍未接入。
 
 ## 上传内容边界
 

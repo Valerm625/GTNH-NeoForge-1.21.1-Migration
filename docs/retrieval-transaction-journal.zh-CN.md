@@ -1,6 +1,6 @@
-# 检索事务日志：开发中检查点
+# 检索事务日志与实际库存候选
 
-2026-10-18按用户要求上传当前状态。该源码已有独立夹具验证，尚未完成运行时集成，不增加任务导出数或已迁移功能覆盖。
+Phase 6 已纳入完整重建和兼容JAR对应检查，但尚未完成世界运行时集成，不增加任务导出数或已迁移功能覆盖。
 
 ## 当前实现
 
@@ -12,12 +12,23 @@
 
 同一账本同时仅允许一笔待决事务。重复恢复、未知格式、外部写入绕过日志、玩家身份或标记不匹配均有检查。已解决事务后允许正常库存变化，但仍校验该玩家最后一个事务标记。
 
+## 库存和状态候选
+
+`LegacyRetrievalTransactionProposal.bind` 绑定实际库存Prepared、规划所用账本Head、完整可信Catalog及玩家NBT。只在该quest的所有task index/factory与目录一致、规划前状态与账本一致时生成结果。其他quest的任务行及不透明完成记录保持原样，完成/奖励事件不触发。
+
+`Prepared.proposedPlayerData` 按原生保存形状核对主背包0–35、盔甲100–103，保留副手150；检测语义仍只读旧40槽。每个ItemStack必须通过实际NBT codec精确往返，未知字段、重复/未知槽、顺序异常、UUID或库存不符均保留输入并拒绝。更新数量使用真实ItemStack编码，整栈消耗删除对应条目。外层玩家字段和其他NeoForgeData不变。
+
+日志prepare强制接收候选捕获的expectedHead。并发的新账本帧即使不改进度，也会使旧候选失效；不能以提交时新读到的head替换旧摘要。所有日志操作仅持有共享store监视器，不再同时持有日志对象锁。
+
+以上没有证明玩家当前磁盘文件等于候选before。正式协调器必须先确保该基线已持久化，复核现场库存、权限和参与者，保持提交期间无其他写入，实际保存后再读回。日志取消也不等于内存库存已恢复。
+
 ## 本次验证
 
 在具有本地依赖的原工作区执行：
 
 ```powershell
 python -u work/migration/test_legacy_retrieval_transaction_journal.py
+python -u work/migration/test_legacy_retrieval_transaction_proposal.py
 ```
 
 报告位于 `evidence/quests/LegacyRetrievalTransactionJournalCheck.json`，包含本次源码SHA-256。测试使用真实NBT库及独立文件账本，但玩家NBT是合成数据，写入器是测试夹具；没有真实Player、世界或原生PlayerDataStorage调用。
@@ -26,15 +37,21 @@ python -u work/migration/test_legacy_retrieval_transaction_journal.py
 - 7个独立JVM进程中断边界：准备临时文件、准备发布、玩家临时文件、玩家发布、决策临时文件、决策发布、事务结束。
 - 每个中断场景由新进程恢复，再用另一进程重复恢复；既有账本帧保持不变，恢复不改写玩家文件。
 
+另有68项实际Inventory/ItemStack到玩家NBT候选、日志准备/关闭/重开/恢复组合断言，覆盖40槽、组件/副手、其他quest/完成记录、离线成员、旧版本计划及重复扣物。
+
 这些是进程中断与夹具协议的验证，不是原生玩家保存、机器掉电或完整游戏行为的证明。真实玩家存档fixture数量为0。
 
 ## 尚未完成
 
-1. 连接 `LegacyRetrievalInventoryBridge` 与日志，使用经过验证的实际库存、任务计划、权限和参与者生成前后状态。日志自身不负责物品匹配或完整库存条目合法性。
+1. 将已验证的库存候选与日志接入实际游戏协调器。原物品/矿辞匹配、认证和参与者仍需真实验证；当前候选验证现代NBT，不能替代原身份映射。
 2. 实现原生玩家保存协调器，确保标记和库存一同保存，并重新读取权威玩家文件确认结果；不能仅根据保存方法返回认定成功，也不能将旧备份回退当成新提交。
 3. 在登录、死亡/克隆、退出、重载及异常恢复期间阻止未解决事务进入正常游戏，妥善恢复或重新加载内存库存。
 4. 完成世界生命周期、队伍、网络/UI、任务完成与奖励集成；审查与外层调用者的锁顺序。
 5. 处理账本增长、容量扩展、历史整理及外部删除完整尾部历史的检测限制。
-6. 将独立runner和生产类对应检查接入完整重建，重新生成兼容JAR、锁文件和汇总证据。
+6. 验证完整NeoForge转换链及实际Player/世界保存，不能从基础类和夹具通过推断已完成。
 
-当前公开的24项完整检查与兼容JAR摘要仍来自Phase 5；本次新增源码未纳入该结果。完整任务迁移仍为未完成，依赖闭合实际导出仍为2/3814，旧物品身份映射仍为720/8388。
+当前26项完整重建检查通过；日志及候选类已经与兼容JAR对应类逐字节核验。完整任务迁移仍为未完成，依赖闭合实际导出仍为2/3814，旧物品身份映射仍为720/8388。
+
+## 原生保存API的静态证据
+
+`evidence/native-player-persistence-api-audit.json` 固定实际NeoForge server及相关类摘要。Inventory.save的字节码在忽略常量池编号/显示空白后与原版相同。PlayerDataStorage.save同步创建临时文件、writeCompressed、safeReplaceFile并触发保存事件，捕获Exception后返回void；它不是SavedData的异步worker接口，返回也不代表成功。load可能读取dat_old备份。Entity将持久数据保存在NeoForgeData；死亡/克隆是否保留自定义标记必须另行处理和测试。本审计未执行任何实际Player方法。

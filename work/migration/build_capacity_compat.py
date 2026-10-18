@@ -98,5 +98,7 @@ lock['unintegrated_helpers'] += [
  'LegacyQuestProgressEnvelope; exact identity and local merge candidate, no file store or task activation',
  'LegacyQuestProgressStoreCodec and LegacyQuestProgressFileStore; independent append-only UUID ledger, process restart verified, no world lifecycle or inventory transaction',
  'LegacyRetrievalInventoryBridge; actual Inventory snapshots/count writes and rollback, no registered submit handler or durable inventory/progress transaction',
+ 'LegacyRetrievalTransactionJournal; expected-head intent/decision records and synthetic player-file recovery, no native player save',
+ 'LegacyRetrievalTransactionProposal; actual inventory/player-NBT/quest-progress composition, no world coordinator',
 ]
 (O/'docs/compat-mod.lock.json').write_text(json.dumps(lock,indent=2),encoding='utf-8',newline='\n');print(json.dumps(lock))

@@ -164,3 +164,7 @@ Phase 5 已实现[真实库存快照及内存计数应用](retrieval-inventory-b
 当前可继续实现的最小单元是“注册独立任务定义 + 自有只读快照/预览消息 + 明确禁止激活的完整校验结果”，随后补齐实际库存事务、完成与持久化协议。未支持的 repeat、ignored、非 AND、未知任务类型等仍整体拒绝，原需求留存；不能为了让 UI 可点击而跳过任务、删除要求或把队伍历史压缩为一个数字。
 
 主要源码依据：[FTB TaskTypes](https://github.com/FTBTeam/FTB-Quests/blob/8c53f35a97d8897c861b097f1e39f4fc3beb3a15/common/src/main/java/dev/ftb/mods/ftbquests/quest/task/TaskTypes.java)、[FTB SubmitTaskMessage](https://github.com/FTBTeam/FTB-Quests/blob/8c53f35a97d8897c861b097f1e39f4fc3beb3a15/common/src/main/java/dev/ftb/mods/ftbquests/net/SubmitTaskMessage.java)、[FTB TeamData](https://github.com/FTBTeam/FTB-Quests/blob/8c53f35a97d8897c861b097f1e39f4fc3beb3a15/common/src/main/java/dev/ftb/mods/ftbquests/quest/TeamData.java)、[FTB ServerQuestFile](https://github.com/FTBTeam/FTB-Quests/blob/8c53f35a97d8897c861b097f1e39f4fc3beb3a15/common/src/main/java/dev/ftb/mods/ftbquests/quest/ServerQuestFile.java)、[BQ QuestInstance](https://github.com/GTNewHorizons/BetterQuesting/blob/815d738923d46e9083f988421e5329193e2e5940/src/main/java/betterquesting/questing/QuestInstance.java)。
+
+## Phase 6 更新
+
+事务日志、actual Inventory到原生形状玩家NBT候选及expectedHead绑定已实现，见[事务日志与候选](retrieval-transaction-journal.zh-CN.md)。36项日志断言/7个进程中断场景、68项库存组合断言与26份完整重建汇总通过。保存器仍是合成夹具；上文的原生保存协调、登录/死亡/克隆隔离、完成/奖励和网络UI要求全部保留。

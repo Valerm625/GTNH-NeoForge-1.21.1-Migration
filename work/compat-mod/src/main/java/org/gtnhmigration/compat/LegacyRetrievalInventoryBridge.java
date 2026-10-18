@@ -3,7 +3,7 @@ package org.gtnhmigration.compat;
 import java.util.*;
 import java.util.function.BooleanSupplier;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.nbt.Tag;
+import net.minecraft.nbt.*;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.ItemStack;
 import org.gtnhmigration.compat.LegacyRetrievalEngine.*;
@@ -82,6 +82,48 @@ public final class LegacyRetrievalInventoryBridge {
             validateCountPlan(plan, actor);
         }
         public Plan<FrozenStack> plan() { return plan; }
+        public UUID actor() { return actor; }
+
+        /** Compose the count plan with a native-shaped player snapshot. This
+         * only proposes bytes; it does not save a player or prove persistence.
+         * Exact ItemStack codec round trips prevent silently dropping unknown
+         * item data. Main/armor slots must equal the planning snapshot; the
+         * modern offhand is retained without entering legacy task detection.
+         */
+        public CompoundTag proposedPlayerData(CompoundTag beforePlayer) {
+            if (!plan.evaluated()) throw new IllegalStateException("Unevaluated plan cannot propose a player mutation");
+            if (!(beforePlayer.get("UUID") instanceof IntArrayTag) || beforePlayer.getIntArray("UUID").length != 4
+                    || !beforePlayer.getUUID("UUID").equals(actor)) throw new IllegalArgumentException("Player snapshot owner mismatch");
+            if (!(beforePlayer.get("Inventory") instanceof ListTag entries)
+                    || !entries.isEmpty() && entries.getElementType() != Tag.TAG_COMPOUND)
+                throw new IllegalArgumentException("Player inventory is not a compound list");
+            List<Slot<FrozenStack>> expected = plan.beforeInventories().get(actor);
+            Set<Integer> present = new HashSet<>(); ListTag proposed = new ListTag(); int previous = -1;
+            for (Tag entry : entries) {
+                CompoundTag encoded = (CompoundTag) entry;
+                if (!(encoded.get("Slot") instanceof ByteTag)) throw new IllegalArgumentException("Noncanonical player inventory slot");
+                int nativeSlot = Byte.toUnsignedInt(encoded.getByte("Slot"));
+                int slot = nativeSlot < 36 ? nativeSlot : nativeSlot >= 100 && nativeSlot < 104 ? nativeSlot - 64 : nativeSlot == 150 ? 40 : -1;
+                if (slot < 0 || slot <= previous || !present.add(slot)) throw new IllegalArgumentException("Unknown, duplicate or unordered native inventory slot");
+                previous = slot;
+                CompoundTag identity = encoded.copy(); identity.remove("Slot");
+                ItemStack decoded = ItemStack.parse(registries, identity).orElseThrow(() -> new IllegalArgumentException("Player item does not decode"));
+                if (decoded.isEmpty() || !decoded.save(registries).equals(identity)) throw new IllegalArgumentException("Player item data cannot round trip exactly");
+                if (slot == 40) { proposed.add(encoded.copy()); continue; }
+                Slot<FrozenStack> want = expected.get(slot);
+                if (decoded.getCount() != want.count() || !FrozenStack.of(decoded, registries).equals(want.item()))
+                    throw new IllegalArgumentException("Player data differs from planned inventory");
+                int count = plan.afterInventories().get(actor).get(slot).count();
+                if (count == decoded.getCount()) proposed.add(encoded.copy());
+                else if (count > 0) {
+                    CompoundTag target = new CompoundTag(); target.putByte("Slot", (byte) nativeSlot);
+                    proposed.add(decoded.copyWithCount(count).save(registries, target));
+                }
+            }
+            for (int slot = 0; slot < 40; slot++) if (expected.get(slot).count() > 0 && !present.contains(slot))
+                throw new IllegalArgumentException("Player data omits a planned inventory slot");
+            CompoundTag afterPlayer = beforePlayer.copy(); afterPlayer.put("Inventory", proposed); return afterPlayer;
+        }
 
         /** One-use in-memory application only. The precondition must recheck
          * configuration, ledger revision, party and source entry authorization.

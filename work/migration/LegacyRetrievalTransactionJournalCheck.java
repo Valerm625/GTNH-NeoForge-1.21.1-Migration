@@ -53,10 +53,10 @@ public final class LegacyRetrievalTransactionJournalCheck {
         seed(base);CompoundTag before=readPlayer(base),after=after(before,3);
         Pending pending;
         try(var store=LegacyQuestProgressFileStore.open(base.resolve("ledger"),BINDING,CATALOG)){
-            var journal=journal(store);pending=journal.prepare(ACTOR,before,after,state(true));
+            var journal=journal(store);pending=journal.prepare(store.current().map(LegacyQuestProgressFileStore.Head::sha256),ACTOR,before,after,state(true));
             check(store.current().orElseThrow().frame().snapshot().state().equals(state(false)),"Preparation changed progress before player save");
             check(readPlayer(base).equals(before),"Journal modified player file");
-            rejects(()->journal.prepare(ACTOR,before,after,state(true)),"second pending transaction");
+            rejects(()->journal.prepare(store.current().map(LegacyQuestProgressFileStore.Head::sha256),ACTOR,before,after,state(true)),"second pending transaction");
             rejects(()->journal.verifyResolvedPlayer(before),"player admitted with pending transaction");
             CompoundTag stamped=pending.playerDataToPersist();check(stamped.getCompound("NeoForgeData").getCompound("othermod:data").equals(before.getCompound("NeoForgeData").getCompound("othermod:data")),"Other persistent data lost");
             check(count(stamped)==3 && stamped.getString("UnrelatedField").equals("must survive"),"Player proposal changed unrelated fields");
@@ -76,7 +76,7 @@ public final class LegacyRetrievalTransactionJournalCheck {
             rejects(()->journal.verifyResolvedPlayer(before),"dat_old marker rollback");
             CompoundTag legitimate=readPlayer(base);legitimate.getList("Inventory",10).getCompound(0).putInt("count",1);journal.verifyResolvedPlayer(legitimate);
             check(true,"Post-commit normal inventory changes must be allowed");
-            Pending next=journal.prepare(ACTOR,legitimate,after(legitimate,0),state(true));
+            Pending next=journal.prepare(store.current().map(LegacyQuestProgressFileStore.Head::sha256),ACTOR,legitimate,after(legitimate,0),state(true));
             check(journal.resolve(legitimate).decision()==Decision.ABORT,"Unsaved next mutation not aborted");journal.verifyResolvedPlayer(legitimate);
             check(!next.marker().transaction().equals(pending.marker().transaction()),"Transaction identity reused");
         }
@@ -85,9 +85,9 @@ public final class LegacyRetrievalTransactionJournalCheck {
         seed(base);CompoundTag before=readPlayer(base),after=after(before,3);
         try(var store=LegacyQuestProgressFileStore.open(base.resolve("ledger"),BINDING,CATALOG)){
             var journal=journal(store);CompoundTag wrong=before.copy();wrong.putInt("UnrelatedField",9);
-            rejects(()->journal.prepare(ACTOR,before,wrong,state(true)),"noninventory edit");
-            CompoundTag bad=before.copy();bad.putString("Inventory","malformed");rejects(()->journal.prepare(ACTOR,bad,after,state(true)),"invalid inventory type");
-            Pending pending=journal.prepare(ACTOR,before,after,state(true));String prepared=store.current().orElseThrow().sha256();
+            rejects(()->journal.prepare(store.current().map(LegacyQuestProgressFileStore.Head::sha256),ACTOR,before,wrong,state(true)),"noninventory edit");
+            CompoundTag bad=before.copy();bad.putString("Inventory","malformed");rejects(()->journal.prepare(store.current().map(LegacyQuestProgressFileStore.Head::sha256),ACTOR,bad,after,state(true)),"invalid inventory type");
+            Pending pending=journal.prepare(store.current().map(LegacyQuestProgressFileStore.Head::sha256),ACTOR,before,after,state(true));String prepared=store.current().orElseThrow().sha256();
             CompoundTag noMarker=after.copy();rejects(()->journal.resolve(noMarker),"after inventory without marker");
             CompoundTag wrongCount=pending.playerDataToPersist();wrongCount.getList("Inventory",10).getCompound(0).putInt("count",4);rejects(()->journal.resolve(wrongCount),"marker with unproved inventory");
             CompoundTag wrongActor=pending.playerDataToPersist();wrongActor.putUUID("UUID",OFFLINE);rejects(()->journal.resolve(wrongActor),"foreign actor");
@@ -99,7 +99,7 @@ public final class LegacyRetrievalTransactionJournalCheck {
         }
         Path bypass=base.resolve("bypass");seed(bypass);
         try(var store=LegacyQuestProgressFileStore.open(bypass.resolve("ledger"),BINDING,CATALOG)){
-            var journal=journal(store);journal.prepare(ACTOR,player(5),player(3),state(true));
+            var journal=journal(store);journal.prepare(store.current().map(LegacyQuestProgressFileStore.Head::sha256),ACTOR,player(5),player(3),state(true));
             var head=store.current().orElseThrow();store.commit(Optional.of(head.sha256()),state(true),head.frame().snapshot().sources());
             rejects(journal::pending,"outside writer advanced progress before player persistence");
         }
@@ -116,7 +116,7 @@ public final class LegacyRetrievalTransactionJournalCheck {
             var one=journal(store);var two=journal(store);CyclicBarrier start=new CyclicBarrier(2);AtomicInteger success=new AtomicInteger(),blocked=new AtomicInteger();
             try(ExecutorService threads=Executors.newFixedThreadPool(2)){
                 List<Future<?>> results=new ArrayList<>();
-                for(var facade:List.of(one,two))results.add(threads.submit(()->{try{start.await();facade.prepare(ACTOR,player(5),player(3),state(true));success.incrementAndGet();}catch(IOException expected){blocked.incrementAndGet();}catch(Exception failure){throw new RuntimeException(failure);}}));
+                for(var facade:List.of(one,two))results.add(threads.submit(()->{try{start.await();facade.prepare(store.current().map(LegacyQuestProgressFileStore.Head::sha256),ACTOR,player(5),player(3),state(true));success.incrementAndGet();}catch(IOException expected){blocked.incrementAndGet();}catch(Exception failure){throw new RuntimeException(failure);}}));
                 for(var result:results)result.get(20,TimeUnit.SECONDS);
             }
             check(success.get()==1 && blocked.get()==1,"Concurrent facades interleaved two preparations");
@@ -134,7 +134,7 @@ public final class LegacyRetrievalTransactionJournalCheck {
                 if(resolving.get()&&point==LegacyQuestProgressFileStore.Boundary.TEMP_OPENED)halt(boundary,"RESOLVE_TEMP");
                 if(resolving.get()&&point==LegacyQuestProgressFileStore.Boundary.PUBLISHED)halt(boundary,"RESOLVE_PUBLISHED");
             })){
-                var journal=journal(store);CompoundTag before=readPlayer(base);Pending pending=journal.prepare(ACTOR,before,after(before,3),state(true));halt(boundary,"PREPARED");
+                var journal=journal(store);CompoundTag before=readPlayer(base);Pending pending=journal.prepare(store.current().map(LegacyQuestProgressFileStore.Head::sha256),ACTOR,before,after(before,3),state(true));halt(boundary,"PREPARED");
                 writePlayer(base,pending.playerDataToPersist(),boundary);resolving.set(true);journal.resolve(readPlayer(base));halt(boundary,"RESOLVED");
             }
             throw new AssertionError("Crash boundary not reached");

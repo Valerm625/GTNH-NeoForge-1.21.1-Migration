@@ -16,6 +16,8 @@ G=R/'work/migration/quest-progress-envelope-check'
 T=R/'work/migration/progress-import-pipeline-check'
 S=R/'work/migration/quest-progress-store-check'
 B=R/'work/migration/retrieval-inventory-check'
+D=R/'work/migration/retrieval-transaction-check'
+F=R/'work/migration/retrieval-proposal-check'
 
 
 def read(path):
@@ -63,7 +65,7 @@ for name,expected in observer['adapter_source_sha256'].items():
     assert sha(R/'work/compat-mod/src/main/java/org/gtnhmigration/compat'/(name+'.java'))==expected,name
 assert observer['test_source_sha256']==sha(R/'work/migration/LegacyInventoryObserverCheck.java')
 assert observer['runner_sha256']==sha(R/'work/migration/test_legacy_inventory_observer.py')
-for directory,name in [(J,'LegacyTypedNbtJsonReaderCheck'),(G,'LegacyQuestProgressEnvelopeCheck'),(S,'LegacyQuestProgressStoreCheck'),(T,'LegacyProgressImportPipelineCheck'),(B,'LegacyRetrievalInventoryBridgeCheck')]:
+for directory,name in [(J,'LegacyTypedNbtJsonReaderCheck'),(G,'LegacyQuestProgressEnvelopeCheck'),(S,'LegacyQuestProgressStoreCheck'),(T,'LegacyProgressImportPipelineCheck'),(B,'LegacyRetrievalInventoryBridgeCheck'),(D,'LegacyRetrievalTransactionJournalCheck'),(F,'LegacyRetrievalTransactionProposalCheck')]:
     value=read(directory/(name+'.json'))
     assert value['passed'] and not value['runtime_integrated'] and not value['export_enabled'],name
     for relative,expected in value['source_sha256'].items():
@@ -82,7 +84,7 @@ for relative, expected in hunt['source_sha256'].items():
     assert sha(R/relative)==expected,relative
 assert matcher['adapter_source_sha256']==sha(R/'work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalStackMatcher.java')
 with zipfile.ZipFile(jar) as compiled:
-    for directory,prefix in [(C,'LegacyRetrievalProgressCodec'),(L,'LegacyQuestRetrievalPlanner'),(J,'LegacyTypedNbtJsonReader'),(G/'classes','LegacyQuestProgressEnvelope'),(S,'LegacyQuestProgressStoreCodec'),(S,'LegacyQuestProgressFileStore'),(B,'LegacyRetrievalInventoryBridge')]:
+    for directory,prefix in [(C,'LegacyRetrievalProgressCodec'),(L,'LegacyQuestRetrievalPlanner'),(J,'LegacyTypedNbtJsonReader'),(G/'classes','LegacyQuestProgressEnvelope'),(S,'LegacyQuestProgressStoreCodec'),(S,'LegacyQuestProgressFileStore'),(B,'LegacyRetrievalInventoryBridge'),(D,'LegacyRetrievalTransactionJournal'),(F,'LegacyRetrievalTransactionProposal')]:
         package_dir=directory/'org/gtnhmigration/compat'
         classes=[package_dir/(prefix+'.class')]+sorted(package_dir.glob(prefix+'$*.class'))
         assert all(path.is_file() for path in classes),prefix
@@ -107,7 +109,7 @@ with zipfile.ZipFile(jar) as compiled:
 checks={}
 for name in ['IsolatedMixinTransformationCheck','LegacyRetrievalEngineCheck','LegacyRetrievalStackMatcherCheck','LegacyCraftingShapeCheck','LegacyHuntAdapterCheck',
              'LegacyRetrievalProgressCodecCheck','LegacyQuestRetrievalPlannerCheck','LegacyInventoryObserverCheck',
-             'LegacyTypedNbtJsonReaderCheck','LegacyQuestProgressEnvelopeCheck','LegacyQuestProgressStoreCheck','LegacyProgressImportPipelineCheck','LegacyRetrievalInventoryBridgeCheck',
+             'LegacyTypedNbtJsonReaderCheck','LegacyQuestProgressEnvelopeCheck','LegacyQuestProgressStoreCheck','LegacyProgressImportPipelineCheck','LegacyRetrievalInventoryBridgeCheck','LegacyRetrievalTransactionJournalCheck','LegacyRetrievalTransactionProposalCheck',
              'QuestAdapterShapeCheck','LegacyRetrievalCounterCheck','QuestSnbtCheck',
              'checkpoint-verification','crafting-task-adapter','hunt-task-adapter','location-task-boundary']:
     checks[name]=read(Q/(name+'.json'))
@@ -138,7 +140,7 @@ assert compat_row['sha256']==sha(jar)
 assert 'eula=false' in (O/'eula.txt').read_text(encoding='utf-8')
 report={
     'phase_date_shanghai':'2026-10-18',
-    'phase':'actual Minecraft inventory snapshots and guarded count application; independent UUID ledger and ordered quest planning',
+    'phase':'journal preparation and recovery with actual inventory-to-player-NBT proposals; native player persistence remains unintegrated',
     'checks':checks,
     'compat_jar_sha256':sha(jar),
     'source_quests':manifest['source_quests'],
@@ -155,6 +157,9 @@ report={
     'ledger_process_halt_recovery_verified':True,
     'actual_inventory_in_memory_count_application_verified':True,
     'inventory_and_progress_transaction_verified':False,
+    'journal_fixture_two_file_recovery_verified':True,
+    'actual_inventory_to_journal_proposal_composition_verified':True,
+    'native_player_save_verified':False,
     'live_mixin_transformation_verified':False,
     'neoforge_transform_chain_verified':False,
     'client_visuals_verified':False,
@@ -172,7 +177,8 @@ metadata['validation_state'].update({
     'ore_resource_subset':'34 exact primary-source PNGs and 34 transparent derived layers; rendering unverified',
     'legacy_progress_import':'typed JSON and identity envelope composed with planner and independent ledger reload; synthetic player progress, no world import',
     'uuid_progress_ledger':'versioned append-only NBT snapshots and source bytes preserved; process-halt recovery verified, no world lifecycle or inventory transaction',
-    'retrieval_inventory_bridge':'real vanilla Inventory/ItemStack snapshots and count application/rollback tested; no world submit handler, synchronization or durable inventory/progress transaction',
+    'retrieval_inventory_bridge':'real vanilla Inventory/ItemStack snapshots, count application/rollback and native-shaped player-NBT proposals tested; no world submit handler or native player save',
+    'retrieval_transaction_journal':'expected-head preparation, immutable records and synthetic player-file recovery tested; actual inventory proposal composition verified; no native persistence or world lifecycle',
     'source_asset_collisions':'four exact archives checked; all same-path candidates retained, precedence unresolved',
     'full_feature_parity':False,'client_rendering_verified':False,
 })
@@ -194,6 +200,9 @@ ledger=checks['LegacyQuestProgressStoreCheck']
 text+=f"\n独立 UUID 账本通过 {ledger['assertions']} 项断言、{ledger['rejected_codec_mutations']} 个格式拒绝案例及 {len(ledger['process_crash_checks'])} 个独立 JVM 中断恢复场景。保留完整原输入字节、历史帧和离线 UUID；损坏、未知版本、配置变化或链缺口明确阻止加载。尚未证明机器掉电恢复或与玩家库存跨文件原子性。\n"
 bridge=checks['LegacyRetrievalInventoryBridgeCheck']
 text+=f"\n真实 Minecraft 库存桥接通过 {bridge['assertions']} 项断言，含 {bridge['vanilla_default_stacks_roundtripped']} 个原版非空默认物品栈的快照往返。旧40槽全量复核、仅扣发起者、单次应用、异常回滚与不确定库存隔离已在实际Inventory对象上检查；Player/世界/物品身份映射仍未接入，不是完整游戏或跨文件事务验证。\n"
+journal=checks['LegacyRetrievalTransactionJournalCheck']
+proposal=checks['LegacyRetrievalTransactionProposalCheck']
+text+=f"\n事务日志通过 {journal['assertions']} 项断言及 {len(journal['process_crash_checks'])} 个进程中断恢复场景；实际库存到玩家NBT候选、账本准备及恢复组合通过 {proposal['assertions']} 项断言。玩家文件写入器仍是夹具，未调用原生PlayerDataStorage；未证明世界库存/进度事务完成。\n"
 text+=f"\n四份锁定旧源码共有 {collisions['source_resource_occurrences']} 个资源出现记录；{collisions['same_path_groups']} 组同路径候选中 {collisions['same_path_different_content_groups']} 组字节不同，双方来源均保留，未猜测加载优先级或覆盖目标资源。\n"
 status.write_text(text,encoding='utf-8')
 print(json.dumps({k:v for k,v in report.items() if k!='checks'},ensure_ascii=False))

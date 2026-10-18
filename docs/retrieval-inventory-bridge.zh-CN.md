@@ -23,7 +23,7 @@ Phase 5 的 `LegacyRetrievalInventoryBridge` 将现有顺序规划器连接到�
 5. 在完整复核通过后应用整个 quest 的最终计数。未清空的槽保留原 ItemStack 实例，仅改 count，保留 popTime 等附属运行状态；清空的槽设为 EMPTY。不会逐任务发送 FTB 回调、事件、奖励或广播。
 6. 再次复核最终槽位和前置条件。正常返回后仍不 markDirty、不改变 Inventory 的 timesChanged、不广播菜单、不写文件。后续必须由真实持久化协调器完成库存/进度协议，再发布变更。
 
-RuntimeException 或 Error 触发反向计数回滚，恢复原对象及计数。若槽位已被另一个操作替换，拒绝用旧栈覆盖新栈；回滚后也重新检查全部观察槽位。任何未恢复状态使涉及的库存对象进入 `recoveryRequired`，无清除快捷接口。该标记只存在于当前进程的库存对象上，不能跨重启保证恢复；持久化的未决事务日志与玩家水位仍未实现。
+RuntimeException 或 Error 触发反向计数回滚，恢复原对象及计数。若槽位已被另一个操作替换，拒绝用旧栈覆盖新栈；回滚后也重新检查全部观察槽位。任何未恢复状态使涉及的库存对象进入 `recoveryRequired`，无清除快捷接口。该标记只存在于当前进程的库存对象上，不能跨重启保证恢复；Phase 6已有独立事务日志与玩家NBT标记候选，但实际玩家保存和生命周期协调仍未实现。
 
 这不是对任意模组回调副作用的完全回滚保证。当前独立测试使用基础 Minecraft 类，没有 NeoForge 转换链、第三方 Inventory/ItemStack Mixin 或世界事件。未验证的副作用不能以通过纯模型或当前真实对象测试代替。检测成功也不会自动把任务状态写入 UUID 账本；若先扣物后单独保存账本，崩溃仍可能丢物或重复扣物，正式提交入口在恢复协议完成前不得这样连接。
 
@@ -39,3 +39,7 @@ RuntimeException 或 Error 触发反向计数回滚，恢复原对象及计数�
 该示例使用明确的原版 OAK_LOG 谓词，不是旧 `logWood` 成员映射。世界、Player 实例、认证/队伍、配方/科技门槛、同步、完成/奖励和玩家存档均未测试。1,332项物品栈往返不能计作1,332项旧物品迁移。真实源差分仍由已有 engine/planner 检查提供；本检查没有新宣称运行原1.7.10游戏。
 
 报告为 `evidence/quests/LegacyRetrievalInventoryBridgeCheck.json`。完整重建验证本检查使用的桥接生产类与兼容 JAR 对应类逐字节一致。下一步需要实际世界生命周期、准确物品/ore 匹配、玩家持久化水位与账本恢复协议，然后连接手动请求、队伍/完成/奖励和 UI；完整目标不变。
+
+## Phase 6：玩家NBT候选
+
+新增Prepared.proposedPlayerData及LegacyRetrievalTransactionProposal，将规划前真实库存与玩家NBT逐槽比对，生成保留组件、副手和其他玩家数据的候选；同时绑定账本摘要、保留其他quest与历史UUID状态。68项组合断言及完整重建对应检查通过。该辅助API仍不保存Player、不证明现场和磁盘一致，详见[事务日志设计](retrieval-transaction-journal.zh-CN.md)。
