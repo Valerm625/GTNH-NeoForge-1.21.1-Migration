@@ -102,6 +102,11 @@ public final class LegacyQuestNativeLifecycle {
         if(mount==null || !mount.ready)throw new IllegalStateException("Definitions unavailable before successful world admission");
         return mount.definitions;
     }
+    /** Resolve actual registered items only after the mounted source pin passed.
+     * This is a declaration lookup, not a submission or authorization API. */
+    public static LegacyRetrievalDefinitionBinding.Result retrievalDefinition(MinecraftServer server,UUID quest){
+        return LegacyRetrievalDefinitionBinding.inspect(definitions(server),quest,server.registryAccess());
+    }
     public static Optional<CompoundTag> load(PlayerList list,ServerPlayer player){
         MinecraftServer server=player.server;
         LegacyRetrievalSaveScope.denyLifecycle(server,null,"nested player admission");
