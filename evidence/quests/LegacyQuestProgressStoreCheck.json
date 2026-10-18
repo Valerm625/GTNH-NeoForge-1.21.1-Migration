@@ -14,7 +14,7 @@
     "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalProgressCodec.java": "596a64ed0ed06bad0f70731773078376ea9ab7ec3cba7dacdd8c10faac0fe856",
     "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestProgressEnvelope.java": "43ed5abb2ed2595efa101b9e89d8d8409f84b62ca01cd9c62191ea5e92b9b9a0",
     "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestProgressStoreCodec.java": "7e610faa9cd32b56cf1302c0d62189884defbc8746c393bcf423bd84cd5f2e94",
-    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestProgressFileStore.java": "1334a278a4c6e846ec1fe378b59122fbde65a8ad2a0ab57ab141077061e303e8",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestProgressFileStore.java": "075f4b0e66e39aa015cb957116f1196074d5b4fe9e92b6e0838e8e47fe2052a6",
     "work/migration/LegacyQuestProgressStoreCheck.java": "66ab19ea7d86301a7d67d01c91cb7b21efafb0fa429193e250d85ce59e3f73c2",
     "work/migration/test_legacy_quest_progress_store.py": "29825e710de12925ffa5a32766dfcedd60a9331848a5321d3725cdd9923dd3f9"
   },

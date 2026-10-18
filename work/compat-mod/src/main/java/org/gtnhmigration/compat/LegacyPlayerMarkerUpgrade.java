@@ -30,6 +30,9 @@ public final class LegacyPlayerMarkerUpgrade {
     private record Pending(UUID id,UUID actor,long revision,String head,List<Change> files,boolean mirrorAbsent,SourceDocument source) {}
     private LegacyPlayerMarkerUpgrade(){}
 
+    static void requireResolved(LegacyQuestWorldStore world)throws IOException {
+        synchronized(world.ledger()){if(exists(root(world)))try(var journal=new Maintenance(world,false)){require(journal.pending().isEmpty(),"Owner recovery cannot overlap pending marker maintenance");}}
+    }
     /** Resume a prior intent before permitting native world/player loading.
      * Null cache supplier means no loaded world exists (offline operation).
      */
@@ -41,7 +44,7 @@ public final class LegacyPlayerMarkerUpgrade {
             barrier.run();world.verifyBinding();if(!exists(root(world)))return false;
             try(var journal=new Maintenance(world,false)){
                 Optional<Pending> pending=journal.pending();if(pending.isEmpty())return false;
-                execute(journal,pending.orElseThrow(),cache,barrier,observer);return true;
+                LegacyOwnerTransactionRecovery.requireResolved(world);execute(journal,pending.orElseThrow(),cache,barrier,observer);return true;
             }
         }
     }
@@ -54,7 +57,7 @@ public final class LegacyPlayerMarkerUpgrade {
     }
     static boolean promote(LegacyQuestWorldStore world,UUID actor,Authority authority,Supplier<CompoundTag> cache,Runnable barrier,Observer observer)throws IOException {
         synchronized(world.ledger()){
-            barrier.run();world.verifyBinding();
+            barrier.run();world.verifyBinding();LegacyOwnerTransactionRecovery.requireResolved(world);
             if(exists(root(world))){try(var previous=new Maintenance(world,false)){
                 var pending=previous.pending();if(pending.isPresent()){
                     require(pending.orElseThrow().actor().equals(actor) && pending.orElseThrow().files().getFirst().authority()==authority,"Another marker upgrade requires startup recovery");
@@ -138,7 +141,7 @@ public final class LegacyPlayerMarkerUpgrade {
         CompoundTag document=before.documentData();
         if(before.authority()==Authority.PLAYER_FILE)document=player;else document.getCompound("Data").put("Player",player);
         ByteArrayOutputStream bytes=new ByteArrayOutputStream();
-        try(var gzip=new java.util.zip.GZIPOutputStream(bytes)){gzip.write(RawMarkerNbt.promote(before));}
+        try(var gzip=new java.util.zip.GZIPOutputStream(bytes)){gzip.write(LegacyPlayerNbtPatch.promoteMarker(before));}
         Snapshot after=LegacyPlayerDataFileReader.decodeArchived(before.path().getParent(),before.actor(),before.authority(),bytes.toByteArray());
         require(sameNbt(document,after.documentData()),"Marker candidate did not survive NBT/gzip round trip");return new Change(before.authority(),before,after);
     }
@@ -152,7 +155,7 @@ public final class LegacyPlayerMarkerUpgrade {
             require(sameNbt(document,c.after().documentData()),"Marker upgrade modifies unrelated player/world NBT");
             require(LegacyRetrievalTransactionJournal.readMarker(c.before().data()).isPresent(),"Marker upgrade lacks a known marker");
             if(!sameNbt(c.before().data(),expected)){
-                require(Arrays.equals(RawMarkerNbt.promote(c.before()),LegacyPlayerDataFileReader.inflateSingleMember(c.after().originalBytes())),"Marker upgrade changes unrelated binary NBT");changed=true;
+                require(Arrays.equals(LegacyPlayerNbtPatch.promoteMarker(c.before()),LegacyPlayerDataFileReader.inflateSingleMember(c.after().originalBytes())),"Marker upgrade changes unrelated binary NBT");changed=true;
             }
             else require(c.before().sha256().equals(c.after().sha256()),"Unchanged marker witness was reencoded");
             require(sameCritical(files.getFirst().before().data(),c.before().data()),"Owner mirror has different inventory or transaction identity");
@@ -189,66 +192,6 @@ public final class LegacyPlayerMarkerUpgrade {
     private static void writeForced(Path path,byte[] bytes)throws IOException {
         try(FileChannel output=FileChannel.open(path,StandardOpenOption.CREATE_NEW,StandardOpenOption.WRITE,LinkOption.NOFOLLOW_LINKS)){
             ByteBuffer buffer=ByteBuffer.wrap(bytes);while(buffer.hasRemaining())output.write(buffer);output.force(true);
-        }
-    }
-
-    /** Edits named-field spans instead of serializing decoded foreign data.
-     * Native NBT normalizes negative zero on read and NaN payloads on write.
-     * All bytes outside the marker placement, including the root name and
-     * unknown fields, retain their original representation and ordering.
-     */
-    private static final class RawMarkerNbt {
-        private record Field(int type,String name,int start,int payload,int end) {}
-        final byte[] raw;
-        RawMarkerNbt(byte[] raw){this.raw=raw;}
-        static byte[] promote(Snapshot snapshot)throws IOException {
-            RawMarkerNbt nbt=new RawMarkerNbt(LegacyPlayerDataFileReader.inflateSingleMember(snapshot.originalBytes()));
-            Field root=nbt.new Cursor(0).field(0);require(root.type()==10 && root.end()==nbt.raw.length,"Invalid raw marker document");
-            Field player=root;
-            if(snapshot.authority()==Authority.WORLD_PLAYER)player=nbt.required(nbt.required(root,"Data"),"Player");
-            Field forge=nbt.required(player,"NeoForgeData");List<Field> fields=nbt.fields(forge);
-            Field marker=nbt.find(fields,LegacyRetrievalTransactionJournal.MARKER_KEY);
-            require(marker!=null && marker.type()==10,"Missing raw legacy marker");
-            require(nbt.fields(marker).size()==3,"Duplicate raw marker fields");
-            nbt.required(marker,"transaction");nbt.required(marker,"preparation_sha256");
-            Field version=nbt.required(marker,"schema_version");require(version.type()==3 && version.end()-version.payload()==4,"Invalid raw marker version");
-            require(ByteBuffer.wrap(nbt.raw,version.payload(),4).getInt()==1,"Raw marker is not v1");
-            byte[] modern=Arrays.copyOfRange(nbt.raw,marker.start(),marker.end());ByteBuffer.wrap(modern,version.payload()-marker.start(),4).putInt(2);
-            Field persisted=nbt.find(fields,LegacyRetrievalTransactionJournal.PERSISTED_KEY);
-            byte[] replacement;
-            if(persisted==null){ByteArrayOutputStream bytes=new ByteArrayOutputStream();DataOutputStream out=new DataOutputStream(bytes);out.writeByte(10);out.writeUTF(LegacyRetrievalTransactionJournal.PERSISTED_KEY);out.write(modern);out.writeByte(0);replacement=bytes.toByteArray();}
-            else{
-                require(persisted.type()==10 && nbt.find(nbt.fields(persisted),LegacyRetrievalTransactionJournal.MARKER_KEY)==null,"Ambiguous raw persisted marker");
-                ByteArrayOutputStream bytes=new ByteArrayOutputStream();bytes.write(nbt.raw,persisted.start(),persisted.end()-persisted.start()-1);bytes.write(modern);bytes.write(0);replacement=bytes.toByteArray();
-            }
-            ByteArrayOutputStream value=new ByteArrayOutputStream();value.write(nbt.raw,forge.start(),forge.payload()-forge.start());
-            for(Field field:fields){if(field==marker)continue;if(field==persisted)value.write(replacement);else value.write(nbt.raw,field.start(),field.end()-field.start());}
-            if(persisted==null)value.write(replacement);value.write(0);
-            ByteArrayOutputStream document=new ByteArrayOutputStream();document.write(nbt.raw,0,forge.start());value.writeTo(document);document.write(nbt.raw,forge.end(),nbt.raw.length-forge.end());return document.toByteArray();
-        }
-        Field required(Field parent,String name)throws IOException{Field result=find(fields(parent),name);require(result!=null,"Missing raw NBT field: "+name);return result;}
-        Field find(List<Field> fields,String name)throws IOException{Field result=null;for(Field field:fields)if(field.name().equals(name)){require(result==null,"Duplicate raw marker-path field: "+name);result=field;}return result;}
-        List<Field> fields(Field compound)throws IOException{
-            require(compound.type()==10,"Raw marker path is not a compound");Cursor cursor=new Cursor(compound.payload());List<Field> result=new ArrayList<>();
-            while(cursor.pos()<compound.end()-1)result.add(cursor.field(0));require(cursor.pos()==compound.end()-1 && cursor.input.readUnsignedByte()==0,"Malformed raw compound");return result;
-        }
-        private final class Cursor {
-            final ByteArrayInputStream bytes;final DataInputStream input;
-            Cursor(int offset){bytes=new ByteArrayInputStream(raw,offset,raw.length-offset);input=new DataInputStream(bytes);}
-            int pos(){return raw.length-bytes.available();}
-            Field field(int depth)throws IOException{int start=pos(),type=input.readUnsignedByte();require(type>=1 && type<=12,"Invalid raw named tag type");String name=input.readUTF();int payload=pos();skip(type,depth);return new Field(type,name,start,payload,pos());}
-            void take(long count)throws IOException{require(count>=0 && count<=bytes.available(),"Truncated raw NBT");input.skipNBytes(count);}
-            void array(int width)throws IOException{int count=input.readInt();require(count>=0,"Negative raw array length");take((long)count*width);}
-            void skip(int type,int depth)throws IOException{
-                require(depth<=512,"Raw NBT nesting limit exceeded");
-                switch(type){
-                    case 1->take(1);case 2->take(2);case 3,5->take(4);case 4,6->take(8);
-                    case 7->array(1);case 8->take(input.readUnsignedShort());
-                    case 9->{int child=input.readUnsignedByte(),count=input.readInt();require(count>=0 && child<=12 && (child!=0 || count==0) && count<=bytes.available(),"Invalid raw list");for(int i=0;i<count;i++)skip(child,depth+1);}
-                    case 10->{while(true){int child=input.readUnsignedByte();if(child==0)break;require(child<=12,"Unknown raw tag type");take(input.readUnsignedShort());skip(child,depth+1);}}
-                    case 11->array(4);case 12->array(8);default->throw new IOException("Unknown raw NBT payload");
-                }
-            }
         }
     }
 

@@ -70,10 +70,12 @@ public final class LegacyQuestProgressFileStore implements AutoCloseable {
      * A bad/gapped/forked chain blocks access instead of silently rolling back.
      * Pending temporary files are preserved but never treated as committed.
      */
-    public synchronized Optional<Head> current() throws IOException { return readHead(false); }
+    public synchronized Optional<Head> current() throws IOException { return readHead(0); }
     /** First published frame, after validating the entire chain. */
-    public synchronized Optional<Head> origin() throws IOException { return readHead(true); }
-    private Optional<Head> readHead(boolean origin) throws IOException {
+    public synchronized Optional<Head> origin() throws IOException { return readHead(1); }
+    /** Select a historical frame only after validating the entire current chain. */
+    synchronized Optional<Head> atRevision(long revision)throws IOException {if(revision<=0)throw new IllegalArgumentException("Invalid historical revision");return readHead(revision);}
+    private Optional<Head> readHead(long selectedRevision) throws IOException {
         usable();
         List<Path> paths = new ArrayList<>();
         try (DirectoryStream<Path> entries = Files.newDirectoryStream(directory)) {
@@ -85,7 +87,7 @@ public final class LegacyQuestProgressFileStore implements AutoCloseable {
             }
         }
         paths.sort(Comparator.comparing(p -> p.getFileName().toString()));
-        Head previous = null, first = null;
+        Head previous = null, selected = null;
         for (Path path : paths) {
             Matcher name = FRAME.matcher(path.getFileName().toString());
             if (!name.matches()) throw new AssertionError();
@@ -110,9 +112,9 @@ public final class LegacyQuestProgressFileStore implements AutoCloseable {
                 throw new IOException("Ledger chain is gapped, forked, or incorrectly linked");
             if (previous != null) requireArchivePrefix(previous.frame().snapshot().sources(), frame.snapshot().sources());
             previous = new Head(name.group(2), frame);
-            if (first == null) first = previous;
+            if (revision == selectedRevision) selected = previous;
         }
-        return Optional.ofNullable(origin ? first : previous);
+        return Optional.ofNullable(selectedRevision == 0 ? previous : selected);
     }
 
     /** expectedSha256 is absent only for a genuinely empty store. A successful

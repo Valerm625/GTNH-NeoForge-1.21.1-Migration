@@ -4,7 +4,7 @@
 
 ## 文件、缓存与恢复顺序
 
-启动入口在普通库存事务恢复前恢复未完成的标记维护；普通恢复及房主缓存验证之后，再处理旧房主标记。玩家加载入口在创建来源凭据之前按实际原生来源处理升级。所有操作持有原生保存范围及世界账本锁；生产调用点已编译和审计，尚未执行真实原生生命周期。
+启动入口在房主辅助恢复与普通库存事务恢复前恢复未完成的标记维护；普通恢复及房主缓存验证之后，再处理旧房主标记。玩家加载入口在创建来源凭据之前按实际原生来源处理升级。所有操作持有原生保存范围及世界账本锁；生产调用点已编译和审计，尚未执行真实原生生命周期。
 
 持久化位于 `<world>/gtnh-migration/player-marker-upgrades/`：
 
@@ -30,7 +30,7 @@ Minecraft 的 FloatTag/DoubleTag 普通相等比较会把不同对象中的 NaN 
 
 ## 验证和边界
 
-入口：`python work/migration/test_legacy_player_marker_upgrade.py`。报告：`evidence/quests/LegacyPlayerMarkerUpgradeCheck.json`。当前通过 126 项断言和 11 个独立 JVM 中断恢复场景。完整重建另外验证世界/加载接入顺序、既有协调器、隔离 Mixin 及测试生产类与兼容 JAR 的字节一致性。
+入口：`python work/migration/test_legacy_player_marker_upgrade.py`。报告：`evidence/quests/LegacyPlayerMarkerUpgradeCheck.json`。旧标记维护和[房主事务恢复](owner-transaction-recovery.zh-CN.md)之间新增互斥检查；二进制解析抽到共享包内助手，既有覆盖保留。当前通过 126 项断言和 11 个独立 JVM 中断恢复场景。完整重建另外验证世界/加载接入顺序、既有协调器、隔离 Mixin 及测试生产类与兼容 JAR 的字节一致性。
 
 测试使用合成玩家/世界文件以及真实 NBT、gzip、文件替换和账本实现。真实玩家存档 fixture 为 0，没有运行 Player、客户端、世界或加载事件。原生保护不等于任意其他模组/外部文件写入者的沙箱；没有证明机器掉电时目录持久性。孤立归档与临时文件保留，维护目录初次创建中断不自动重置；明确恢复工具、未知缓存/镜像冲突修复和安全故障关闭仍须完成。
 

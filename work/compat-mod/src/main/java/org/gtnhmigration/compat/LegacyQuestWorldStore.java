@@ -184,8 +184,8 @@ public final class LegacyQuestWorldStore implements AutoCloseable {
     private static Manifest readManifest(Path world)throws IOException {
         Path root=realDirectory(world.resolve(DIRECTORY));
         try(DirectoryStream<Path> entries=Files.newDirectoryStream(root)){
-            for(Path entry:entries){String name=entry.getFileName().toString();require(name.equals(MANIFEST) || name.equals(LEDGER) || name.equals("player-marker-upgrades") || name.matches("binding-[0-9a-f-]{36}\\.tmp"),"Unknown world binding entry: "+name);
-                require((name.equals(LEDGER) || name.equals("player-marker-upgrades"))?Files.isDirectory(entry,LinkOption.NOFOLLOW_LINKS):Files.isRegularFile(entry,LinkOption.NOFOLLOW_LINKS),"Nonregular world binding entry");}
+            for(Path entry:entries){String name=entry.getFileName().toString();require(name.equals(MANIFEST) || name.equals(LEDGER) || (name.equals("player-marker-upgrades") || name.equals("owner-transaction-recovery")) || name.matches("binding-[0-9a-f-]{36}\\.tmp"),"Unknown world binding entry: "+name);
+                require((name.equals(LEDGER) || (name.equals("player-marker-upgrades") || name.equals("owner-transaction-recovery")))?Files.isDirectory(entry,LinkOption.NOFOLLOW_LINKS):Files.isRegularFile(entry,LinkOption.NOFOLLOW_LINKS),"Nonregular world binding entry");}
         }
         Path path=root.resolve(MANIFEST);BasicFileAttributes before=Files.readAttributes(path,BasicFileAttributes.class,LinkOption.NOFOLLOW_LINKS);
         require(before.isRegularFile() && before.size()>0 && before.size()<=MAX_MANIFEST,"Invalid world binding file");byte[] bytes;

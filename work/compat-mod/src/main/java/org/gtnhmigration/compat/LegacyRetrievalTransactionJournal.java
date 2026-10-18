@@ -45,6 +45,7 @@ public final class LegacyRetrievalTransactionJournal {
         public UUID transaction() { return transaction; }
         public UUID actor() { return actor; }
         public Authority authority() { return authority; }
+        long preparedRevision() { return Math.addExact(baseRevision,1); }
         public Marker marker() { return new Marker(transaction, source.sha256()); }
         /** Proposed player data, not evidence that a live player file contains it. */
         public CompoundTag playerDataToPersist() { return stamp(afterPlayer, marker()); }
@@ -65,6 +66,25 @@ public final class LegacyRetrievalTransactionJournal {
         this.store=Objects.requireNonNull(store);this.binding=Objects.requireNonNull(binding);this.catalog=Objects.requireNonNull(catalog);
     }
     public Optional<Pending> pending() throws IOException { synchronized(store) { return scan().pending(); } }
+    /** Verified historical preparation for a durable recovery intent. */
+    Pending preparation(UUID transaction,String expectedSha)throws IOException {
+        synchronized(store){scan();var head=store.current().orElseThrow();
+            for(SourceDocument source:head.frame().snapshot().sources())if(source.identity().equals(PREFIX+transaction+"/prepare")){
+                require(source.sha256().equals(expectedSha),"Recovery preparation digest differs from main history");return parsePrepared(source);
+            }
+            throw new IOException("Recovery preparation is missing from main history");
+        }
+    }
+    Optional<Resolution> historicalResolution(Pending pending,String preparedHead)throws IOException {
+        synchronized(store){scan();var maybe=store.atRevision(Math.addExact(pending.preparedRevision(),1));if(maybe.isEmpty())return Optional.empty();
+            var head=maybe.orElseThrow();require(head.frame().parentSha256().equals(preparedHead),"Recovery resolution parent differs");
+            SourceDocument source=head.frame().snapshot().sources().getLast();CompoundTag record=decode(source.bytes());
+            fields(record,"schema_version","kind","transaction","preparation_sha256","prepared_head","decision");
+            require(source.identity().equals(PREFIX+pending.transaction+"/resolve") && record.getInt("schema_version")==1 && string(record,"kind").equals("resolve") && string(record,"transaction").equals(pending.transaction.toString())
+                && string(record,"preparation_sha256").equals(pending.source.sha256()) && string(record,"prepared_head").equals(preparedHead),"Recovery resolution does not match preparation");
+            return Optional.of(new Resolution(pending.transaction,decision(string(record,"decision")),head.sha256()));
+        }
+    }
     /** Includes aborted transactions whose expected marker is still absent. */
     public boolean hasPlayerHistory(UUID actor) throws IOException { synchronized(store) { return scan().expectedMarkers().containsKey(actor); } }
 

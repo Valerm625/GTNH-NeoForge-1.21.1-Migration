@@ -31,7 +31,7 @@ Phase 3 另有 `test_legacy_typed_nbt_json_reader.py`（**2,932 项断言 / 577 
 
 读取器/envelope 的 `accepted` 只表示候选可解释。Phase 4 文件层另验证独立账本保存与重新读取，仍不能称为世界玩家存档导入、联网或游戏运行完成。物品身份映射仍为 **720 / 8388**。读取器与运行时桥接边界见 [typed JSON 规范](docs/typed-nbt-json-reader.zh-CN.md)、[身份 envelope](docs/quest-progress-envelope-design.zh-CN.md)和[运行时桥接设计](docs/retrieval-runtime-bridge-design.zh-CN.md)。
 
-Phase 6 当前35份汇总检查已通过，包括模型组合及生产类与兼容 JAR 对应类的逐字节一致性；当前 JAR SHA256 为 `798e297f3421c45e812638bfbbe304436ad4c0dd8f57f4cd412ccefef9f44049`。恢复后必须按本地当前源码重建，不把这个历史成功结果替代新运行结果。
+Phase 6 当前36份汇总检查已通过，包括模型组合及生产类与兼容 JAR 对应类的逐字节一致性；当前 JAR SHA256 为 `fdc363dcb4e8ece56efa5a73c359aac927cae7730c56e820f653f540ef3ab2d9`。恢复后必须按本地当前源码重建，不把这个历史成功结果替代新运行结果。
 
 Phase 4 的 `test_legacy_quest_progress_store.py` 验证独立文件账本（436项断言、25个格式拒绝案例、64次NBT往返、3个JVM中断恢复场景）。原始输入字节及所有已发布帧保留，配置变化/损坏/缺帧/分叉阻止加载；不接受后退到空进度。独立账本与实际玩家库存尚无跨文件事务，不能从进程恢复推定机器掉电安全。详情见[文件账本设计](docs/quest-progress-file-store.zh-CN.md)。
 
@@ -57,7 +57,7 @@ Phase 5 新增 `test_legacy_retrieval_inventory_bridge.py`：真实Inventory/Ite
 
 ## Phase 6 恢复入口
 
-`rebuild_current_phase.py` 已包含 `test_legacy_retrieval_transaction_journal.py`、`test_legacy_retrieval_transaction_proposal.py`、`test_legacy_player_data_file_reader.py`、`test_legacy_retrieval_commit_coordinator.py`、`test_legacy_world_player_authority.py` 及 `test_legacy_integrated_owner_coordinator.py`。分别通过53项断言/7个独立JVM中断恢复场景、68项实际库存组合断言、40项文件读回断言、168项普通协调流程断言、47项世界玩家来源断言及257项房主协调断言；完整汇总为35项，生产类与兼容JAR逐字节一致。报告位于 `evidence/quests/`，源码摘要与当前检查点对应。
+`rebuild_current_phase.py` 已包含 `test_legacy_retrieval_transaction_journal.py`、`test_legacy_retrieval_transaction_proposal.py`、`test_legacy_player_data_file_reader.py`、`test_legacy_retrieval_commit_coordinator.py`、`test_legacy_world_player_authority.py` 及 `test_legacy_integrated_owner_coordinator.py`。分别通过53项断言/7个独立JVM中断恢复场景、68项实际库存组合断言、40项文件读回断言、168项普通协调流程断言、47项世界玩家来源断言及257项房主协调断言；完整汇总为36项，生产类与兼容JAR逐字节一致。报告位于 `evidence/quests/`，源码摘要与当前检查点对应。
 
 `LegacyRetrievalTransactionProposal.bind` 从已规划实际库存、同一账本Head、可信定义目录及玩家NBT快照生成候选。必须由它保留其他quest/完成数据，并将捕获的expectedHead交给日志prepare；不得在提交时临时获取新head来掩盖旧计划。玩家库存候选仅证明与规划一致，不能证明已保存。
 
@@ -104,4 +104,14 @@ Phase 5 新增 `test_legacy_retrieval_inventory_bridge.py`：真实Inventory/Ite
 
 NBT 比较修复了独立 NaN 对象误判，日志来源写入保留现有 NaN 载荷。二进制定点升级可保留文件中的负零；Minecraft 原生对象读取/写入全流程仍未证明保真，typed JSON 负零拒绝策略保持。实际玩家存档 fixture 为 0，任务/资源覆盖没有因此增加。
 
-本检查点首次汇总捕获了最后补充的镜像保护源码与先前编译JAR不一致；重新编译后刷新受产物影响的加载、Mixin、观察器、狩猎、容量及运行输入检查，35项最终汇总和全部对应生产类字节一致性通过。原有模型测试均已按最终源码执行。
+此前标记升级检查点首次汇总捕获了最后补充的镜像保护源码与先前编译JAR不一致；重新编译后刷新受产物影响的加载、Mixin、观察器、狩猎、容量及运行输入检查，35项最终汇总和全部对应生产类字节一致性通过。原有模型测试均已按最终源码执行。
+
+## 房主待决事务恢复补充
+
+新增 [房主镜像/缓存恢复](docs/owner-transaction-recovery.zh-CN.md) 与 `test_legacy_owner_transaction_recovery.py`：347项断言、16种组合、12个独立JVM中断后恢复/入场凭据场景。`LegacyOwnerTransactionRecovery` 只接受同一待决WORLD_PLAYER事务的已知旧/新状态，保持世界和备份不变，归档完整原件，再将镜像与实际缓存的Inventory/自有标记修复到世界选择。最后发布主决策和辅助完成记录，两者之间中断可恢复。
+
+二进制字段编辑抽到 `LegacyPlayerNbtPatch`，旧标记升级继续用原126项断言与11个进程场景回归。主文件账本新增验证全链后的历史帧读取；日志历史准备/决策接口用于核验已完成或待完成的辅助意图。标记维护与房主恢复互斥，不能绕过尚未完成的另一协议。
+
+原生启动调用点的次序现在包括：标记意图恢复 → 房主事务恢复 → 原缓存验证/普通离线恢复 → 已解决缓存验证 → 标记升级。独立UUID事务仍走原恢复。尚未执行真实游戏，未知/缺失镜像修复、初始化恢复、安全故障关闭和模式/房主变化仍须完成；不得把阶段性拒绝作为最终全功能迁移。
+
+当前房主恢复检查点的完整重建一次执行通过全部36份汇总检查，所有测试生产类与最终兼容JAR逐字节一致；详见 `evidence/phase-2026-10-18-task-semantics.json`。

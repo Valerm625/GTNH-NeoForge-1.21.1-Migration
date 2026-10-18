@@ -35,10 +35,10 @@ public final class LegacyQuestNativeLifecycle {
                 var mount=new Mount(world);synchronized(WORLDS){WORLDS.put(server,mount);}
                 Runnable barrier=()->{
                     scope.assertHeld();requireThread(server);requireEmpty(server);
-                    try{LegacyQuestPlayerAdmission.verifyPendingWorldCache(world,server.getWorldData().getLoadedPlayerTag());}
-                    catch(IOException failure){throw new UncheckedIOException(failure);}
                 };
                 barrier.run();LegacyPlayerMarkerUpgrade.resume(world,()->server.getWorldData().getLoadedPlayerTag(),barrier);
+                LegacyOwnerTransactionRecovery.recover(world,()->server.getWorldData().getLoadedPlayerTag(),barrier);
+                LegacyQuestPlayerAdmission.verifyPendingWorldCache(world,server.getWorldData().getLoadedPlayerTag());
                 world.recoverOffline(barrier);
                 LegacyQuestPlayerAdmission.verifyResolvedWorldCache(world,server.getWorldData().getLoadedPlayerTag());
                 CompoundTag cached=server.getWorldData().getLoadedPlayerTag();

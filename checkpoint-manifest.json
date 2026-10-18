@@ -1,8 +1,8 @@
 {
-  "created_at": "2026-10-18T15:43:20.930367+08:00",
+  "created_at": "2026-10-18T16:03:14.916094+08:00",
   "scope": "source-only public checkpoint; third-party game inputs excluded",
   "hash_scope": "Git index canonical blobs, not Windows checkout line endings",
-  "base_commit": "020b432960c955227fe3be5ccac90227aa992c8c",
+  "base_commit": "652748d093987dd104034d0f5ecfdcded46dfbaf",
   "files": [
     {
       "path": ".gitattributes",
@@ -26,18 +26,18 @@
     },
     {
       "path": "README.md",
-      "bytes": 10129,
-      "sha256": "76d631971c78b39c759414cf5bde88f937974e34789ad89618c443e8e171d560"
+      "bytes": 10157,
+      "sha256": "5e2d3cc0946aec4a4b88981da0e06e8aeda5a0851c0bf816dc21a9c509723995"
     },
     {
       "path": "RESUME.md",
-      "bytes": 19640,
-      "sha256": "fad377ad672cc62001c2cfdca11dcb1c952b5f19065eaa33187e5455a12d28b9"
+      "bytes": 21129,
+      "sha256": "5fb376251e6c6a6851a5ab7503a95bb613c64661a1ddc4794307875c91c36169"
     },
     {
       "path": "STATUS.zh-CN.md",
-      "bytes": 31051,
-      "sha256": "b3f98f983ca791063a623615e2ae1f0722df14bc08d3337b8f95727affee5aa5"
+      "bytes": 32769,
+      "sha256": "68d04ed38e94e502f2733189c4d6c17d3fb5ca3f96d0598cd40da37a028a3565"
     },
     {
       "path": "docs/inventory-detection-timing.zh-CN.md",
@@ -65,14 +65,19 @@
       "sha256": "f64d430f5fa836bb9a25a948f6f2a0c948590eabf6e460b68b10749b5b7a677c"
     },
     {
+      "path": "docs/owner-transaction-recovery.zh-CN.md",
+      "bytes": 5410,
+      "sha256": "55cddcbb4596ed71ccc4e6a8323cb2d783924d3a1099897695f62afa0168f135"
+    },
+    {
       "path": "docs/player-admission.zh-CN.md",
-      "bytes": 5910,
-      "sha256": "00b6d606004f2f59e1286904afb85e2b4a896cdaa69c09748d2435cda7651530"
+      "bytes": 6061,
+      "sha256": "5d45adfbdb2a1bd67f4d7784d30e4d742e0ea45e8eb7589467fc77f8b4476824"
     },
     {
       "path": "docs/player-marker-upgrade.zh-CN.md",
-      "bytes": 4480,
-      "sha256": "750022ddd3d21d42ebb0e2fbdde386af46cbb68661a4ec446ad9cfc4bad0f388"
+      "bytes": 4666,
+      "sha256": "83a130b4b091665f43d79e6b9aac9ac103c68932b96c941e702bb09c2ceca553"
     },
     {
       "path": "docs/player-storage-authority.zh-CN.md",
@@ -161,8 +166,8 @@
     },
     {
       "path": "evidence/compat-mod.lock.json",
-      "bytes": 4084,
-      "sha256": "2dd7d13a3ecb16b2e63b8f661b538f3ac586f22c268727a42bd732be01863508"
+      "bytes": 4326,
+      "sha256": "71650361f64c24b6d14380db28bb440440dc961e87398c392627e147e803758c"
     },
     {
       "path": "evidence/crafting-task-adapter.json",
@@ -222,7 +227,7 @@
     {
       "path": "evidence/loader-with-quest-runtime.json",
       "bytes": 347,
-      "sha256": "53d4b17ee0b0c9bff999a40ee15eb623b182cb640b64c27906510d4128313349"
+      "sha256": "c48d80fcc8aa670b19505eafed9510f1983e65f42695dbd1f3e081ab856bff13"
     },
     {
       "path": "evidence/location-task-boundary.json",
@@ -286,8 +291,8 @@
     },
     {
       "path": "evidence/phase-2026-10-18-task-semantics.json",
-      "bytes": 140607,
-      "sha256": "09970a0706a4087da0eb6cdd35adbc5232bb4c138f3d25d94b996f0cf3c232b6"
+      "bytes": 148085,
+      "sha256": "e3df1f471a88299503bd26e122ea0eb2c6066f1be63bdde9ababf7930fc9d2c1"
     },
     {
       "path": "evidence/quest-export-summary.json",
@@ -297,7 +302,7 @@
     {
       "path": "evidence/quests/IsolatedMixinTransformationCheck.json",
       "bytes": 2204,
-      "sha256": "c454d6ec5b56b1532f7f7e83c777a069c9bda3e33a8e655d605d5e509488ed56"
+      "sha256": "a4c100ff4f2318d4f1edf1c41122c16cb3df4b9bf07a1939fed70f9382ee2cee"
     },
     {
       "path": "evidence/quests/LegacyCraftingShapeCheck.json",
@@ -312,37 +317,42 @@
     {
       "path": "evidence/quests/LegacyHuntAdapterCheck.json",
       "bytes": 1606,
-      "sha256": "e721eb987b6e65ff565d6eb7d20b413f3da4a5b39c875b5a9a938b709bc21d8e"
+      "sha256": "2f5f55996e0c873383a7150899794e619ebd61ccc690a4e3709703155a076947"
     },
     {
       "path": "evidence/quests/LegacyIntegratedOwnerCoordinatorCheck.json",
       "bytes": 6234,
-      "sha256": "3ae7555a69a95934db101bb57a23f63d1dfda1416e119711302d0635683e13e5"
+      "sha256": "93227e12c49b43691029776abe878e8f35cc61755cf99645a9625c03e5da2333"
     },
     {
       "path": "evidence/quests/LegacyInventoryObserverCheck.json",
       "bytes": 5269,
-      "sha256": "80a86c85483ac68147fe0663b93dd177ce781dbc82cde7ac7a03a33158fec0cf"
+      "sha256": "c0d72055ceefda094964bda15753e51629eb3de11a1888c6b958bab2586fb666"
+    },
+    {
+      "path": "evidence/quests/LegacyOwnerTransactionRecoveryCheck.json",
+      "bytes": 5838,
+      "sha256": "3b6ac25dc76b73b0e374664a5d84affaa8d63f105e0bef6a91f0df2bb5bc7a78"
     },
     {
       "path": "evidence/quests/LegacyPlayerDataFileReaderCheck.json",
       "bytes": 2827,
-      "sha256": "7ff6839ff04a62309763a14211abc125daf3c58b6bd98b7198a13b6334bd74e1"
+      "sha256": "1f1222ba343d60dae78d34a0fcaa6927fe2e606acd4fe1e285887165cdf7fba3"
     },
     {
       "path": "evidence/quests/LegacyPlayerMarkerUpgradeCheck.json",
-      "bytes": 5416,
-      "sha256": "9dcd9cb3624d5e64c7c3e4c1f3bf199ad98b0b4c2a72e29014db7fb1f87fd61f"
+      "bytes": 5738,
+      "sha256": "17a5bd352aeaf955b44b2cab3f3f7ac8620d73abfb093cf4c4ebf481b10c780c"
     },
     {
       "path": "evidence/quests/LegacyProgressImportPipelineCheck.json",
       "bytes": 2512,
-      "sha256": "41fe6d1918c80cffaf37f054092c34f30abd8c4b48d77358ce5a7c1f475f8da8"
+      "sha256": "d69be9559da1ecd6c11eb9f110e57686c63da7d05d208c274b974876b7ac5615"
     },
     {
       "path": "evidence/quests/LegacyQuestPlayerAdmissionCheck.json",
-      "bytes": 4578,
-      "sha256": "d9d051597e4b0ddf863af0e2361586b5059fa5c7a5d1d6f37376cca88b63fada"
+      "bytes": 4900,
+      "sha256": "5231ec7bcfdc1db16127c8c6d1b93084360c0c64279f3fe25bd2b817484e6061"
     },
     {
       "path": "evidence/quests/LegacyQuestProgressEnvelopeCheck.json",
@@ -352,7 +362,7 @@
     {
       "path": "evidence/quests/LegacyQuestProgressStoreCheck.json",
       "bytes": 2700,
-      "sha256": "4069dbd8aeb1f554ca811b3f26842e8ea8c82919e9f30cc00420d49af468ceb9"
+      "sha256": "c6e111730dfe2d1c79f7af0846dab9c4f5a0908a65cd71eb865e6b1021de8a06"
     },
     {
       "path": "evidence/quests/LegacyQuestRetrievalPlannerCheck.json",
@@ -362,12 +372,12 @@
     {
       "path": "evidence/quests/LegacyQuestWorldStoreCheck.json",
       "bytes": 3804,
-      "sha256": "5cd60d2343023422ada16b0e0834a86b77107a60570bc4383ce2594c2432cea1"
+      "sha256": "91df8d36144fbae1cb82d998113f368586f361430cece443b4ada82d75771604"
     },
     {
       "path": "evidence/quests/LegacyRetrievalCommitCoordinatorCheck.json",
       "bytes": 4608,
-      "sha256": "5458c01e28e3ce766683959179a28bdd17e6aabffb6f58d741ac04adc1c0b2d1"
+      "sha256": "139a40e1b2a281f9c5696b709b76320448a06c1d79123f2d0a911e8e942e4dd0"
     },
     {
       "path": "evidence/quests/LegacyRetrievalCounterCheck.json",
@@ -402,12 +412,12 @@
     {
       "path": "evidence/quests/LegacyRetrievalTransactionJournalCheck.json",
       "bytes": 5175,
-      "sha256": "5ef483e03e540b0f7091def971210aa849df59793a7f3936139e107103e70633"
+      "sha256": "e61c7966fa758fece454d391aff1eeb081e29fe493842d63be09aef2a3da6398"
     },
     {
       "path": "evidence/quests/LegacyRetrievalTransactionProposalCheck.json",
       "bytes": 3088,
-      "sha256": "b6421e3b82929522b8ca2decce58c3fb896be04217db3fdb302bbc70c2c9db74"
+      "sha256": "85f36a5c6873fb5712131a32bfc717a64abaddb346f9b76f30ab93227812002e"
     },
     {
       "path": "evidence/quests/LegacyTypedNbtJsonReaderCheck.json",
@@ -417,12 +427,12 @@
     {
       "path": "evidence/quests/LegacyWorldPlayerAuthorityCheck.json",
       "bytes": 5335,
-      "sha256": "bf95b366ea0182128e1318353484265ffc49acf21386cb3e9a3f239a7f1e3e47"
+      "sha256": "0608bc362727e0c9f9e22c991d97ece907d715771e4ed1fa15f59d32a41c5023"
     },
     {
       "path": "evidence/quests/NativeSaveScopeMixinCheck.json",
-      "bytes": 5090,
-      "sha256": "3e87a282b3d0ec636cdf5433ff27a46e60c321678e7c0f022c2794a649693178"
+      "bytes": 5412,
+      "sha256": "de1affdf209a0d36c7603a1c7fddd83dab1bd634d9ad4b36acce8a09b579b24b"
     },
     {
       "path": "evidence/quests/QuestAdapterShapeCheck.json",
@@ -456,13 +466,13 @@
     },
     {
       "path": "evidence/validation-state.json",
-      "bytes": 5013,
-      "sha256": "53372b482927533b41f2425c12b0f587118839807cc341468e3b7a7eb5cc3161"
+      "bytes": 5317,
+      "sha256": "10646511a3c15f1d4dc651b7b7cb8327892250acd271354214c83ef40e2d78e4"
     },
     {
       "path": "evidence/validation-summary.json",
       "bytes": 5063,
-      "sha256": "d6d26c938a7b6adcc5c9c2106ecd6db9ee433223294e9c02a2b99193f3c13890"
+      "sha256": "e009edb0df83faeed8c02fdccbcb9c66d90e315efe0856208521974fecdd22ca"
     },
     {
       "path": "evidence/vanilla-identity-mapping.json",
@@ -486,8 +496,8 @@
     },
     {
       "path": "locks/compat-mod.lock.json",
-      "bytes": 4084,
-      "sha256": "2dd7d13a3ecb16b2e63b8f661b538f3ac586f22c268727a42bd732be01863508"
+      "bytes": 4326,
+      "sha256": "71650361f64c24b6d14380db28bb440440dc961e87398c392627e147e803758c"
     },
     {
       "path": "locks/ftb-candidates.json",
@@ -497,7 +507,7 @@
     {
       "path": "locks/local-runtime-file-hashes.json",
       "bytes": 418286,
-      "sha256": "3c9442c4cae85510460d00aacdec6ee752df45e65d7639363ab00dafc25016de"
+      "sha256": "cf44ccace955fd2af45cb8b074f3b01fd271e2f78d995745dbae774906f710d8"
     },
     {
       "path": "locks/modern-transport-candidates.json",
@@ -600,6 +610,11 @@
       "sha256": "ecdfdae475531805608691386bc92db00a521cd03e72bea51a2169d66b050e99"
     },
     {
+      "path": "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyOwnerTransactionRecovery.java",
+      "bytes": 20890,
+      "sha256": "84bc6aeac8a3b1f228a5cf25701743054ae238c5ccec0adcad4b30d978833af3"
+    },
+    {
       "path": "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyPlayerDataFileReader.java",
       "bytes": 9797,
       "sha256": "eabe4f1e9bb7a55a4fd28693d0c4a88c7dc3d4014054a032f846d0c38fdca643"
@@ -626,13 +641,18 @@
     },
     {
       "path": "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyPlayerMarkerUpgrade.java",
-      "bytes": 32315,
-      "sha256": "1e2a91df13360b16cf6f11d10520fb24fee5926018d2aac68667ee42d0fefbc2"
+      "bytes": 26838,
+      "sha256": "ac6ac65ad1eb4cfc748546793267a18567bb6eb41b6b3a943a14c8a6939433ae"
+    },
+    {
+      "path": "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyPlayerNbtPatch.java",
+      "bytes": 11713,
+      "sha256": "1c10d4fd907205b4e075a11d99f358c2014fe0d1a9f7c374d1c147c8241b32dc"
     },
     {
       "path": "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestNativeLifecycle.java",
-      "bytes": 9928,
-      "sha256": "ea1da4fc65e836e69f9057a2149e7553f81cd4cb85998b48399e659bc217f2ac"
+      "bytes": 9948,
+      "sha256": "f64ca7b39b63cc537d3034d7d2cf1c518f173f3f70f893f7d41453761b4300de"
     },
     {
       "path": "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestPlayerAdmission.java",
@@ -646,8 +666,8 @@
     },
     {
       "path": "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestProgressFileStore.java",
-      "bytes": 10758,
-      "sha256": "1334a278a4c6e846ec1fe378b59122fbde65a8ad2a0ab57ab141077061e303e8"
+      "bytes": 11068,
+      "sha256": "075f4b0e66e39aa015cb957116f1196074d5b4fe9e92b6e0838e8e47fe2052a6"
     },
     {
       "path": "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestProgressStoreCodec.java",
@@ -661,8 +681,8 @@
     },
     {
       "path": "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestWorldStore.java",
-      "bytes": 16743,
-      "sha256": "1261392c84db12d09290b5fb1fce8d3a74e95c148cb68d5cac0e95f4950e6b05"
+      "bytes": 16837,
+      "sha256": "9ae57d86f68d308b1bf99f25fc83b4844bca5b06dae020713a5d64f747029bc2"
     },
     {
       "path": "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalCommitCoordinator.java",
@@ -711,8 +731,8 @@
     },
     {
       "path": "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalTransactionJournal.java",
-      "bytes": 26552,
-      "sha256": "deb535b1fec75d71d4e3667bcb9721bff579a6072a48d5139d62a93711495d2e"
+      "bytes": 28444,
+      "sha256": "26eea3d9bc8aa2a5306054dae7ec561215b03aa5412bbbbcd55c95092a63dc1a"
     },
     {
       "path": "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalTransactionProposal.java",
@@ -803,6 +823,11 @@
       "path": "work/migration/LegacyInventoryObserverCheck.java",
       "bytes": 17336,
       "sha256": "aed919c8f8caccf54a5c619b0f5b5294859ce8522c35398f941d146903f99d41"
+    },
+    {
+      "path": "work/migration/LegacyOwnerTransactionRecoveryCheck.java",
+      "bytes": 20934,
+      "sha256": "b2ba8b5dae39a4ee2d8c3adf6a684d8dbaa9eb624825bbb1ae7d296fc6f38a44"
     },
     {
       "path": "work/migration/LegacyPlayerDataFileReaderCheck.java",
@@ -986,8 +1011,8 @@
     },
     {
       "path": "work/migration/build_capacity_compat.py",
-      "bytes": 10822,
-      "sha256": "8ff14a4fbaf82034fd1c8b78174c1807be5b337330aa92220a12bd6c2fc6b20a"
+      "bytes": 11061,
+      "sha256": "2001a3c4e68fcba74b1442436826e86e66723d2f48eebc4d723a46dd3a900504"
     },
     {
       "path": "work/migration/build_quest_ir.py",
@@ -1121,8 +1146,8 @@
     },
     {
       "path": "work/migration/rebuild_current_phase.py",
-      "bytes": 3351,
-      "sha256": "e49f46f9feab7e875edf337d64bc1f90ddbad833ce81288764baa712eea61914"
+      "bytes": 3396,
+      "sha256": "a032dec1af24d01c7d87a4139bd1ad431f3b1f8a384816ebb717e766c5f9540a"
     },
     {
       "path": "work/migration/recover_java.py",
@@ -1210,14 +1235,19 @@
       "sha256": "fb6d375d4f805b0bc8393e3211d9b2eaf04d50ab9dea744a2dc20393b848fe65"
     },
     {
+      "path": "work/migration/test_legacy_owner_transaction_recovery.py",
+      "bytes": 5418,
+      "sha256": "86525d215f0403aa45def28da717ac79af9e6b51d021a3f4ac09a7849a6d3f99"
+    },
+    {
       "path": "work/migration/test_legacy_player_data_file_reader.py",
       "bytes": 3682,
       "sha256": "b015f13a8a57d54542e107749dd975fdc7e518d38ae9ebd8a630a845ccdec9aa"
     },
     {
       "path": "work/migration/test_legacy_player_marker_upgrade.py",
-      "bytes": 5247,
-      "sha256": "c1876bfafeb2d345db54020695b4a124fdecdc06741aa936511d483488cd237c"
+      "bytes": 5548,
+      "sha256": "148505c55188a513e06cb1d654d8e2996eefd7d922385a6dd36e744a35afc95a"
     },
     {
       "path": "work/migration/test_legacy_progress_import_pipeline.py",
@@ -1226,8 +1256,8 @@
     },
     {
       "path": "work/migration/test_legacy_quest_player_admission.py",
-      "bytes": 6904,
-      "sha256": "b48efa7d7c5da542a7cca80555c0df289205e3da1979f8aa6055d3c875773c03"
+      "bytes": 7301,
+      "sha256": "5956d672eef60df4ee8912ffe174605f785719efb23c84ec1bfdb47e5937aec4"
     },
     {
       "path": "work/migration/test_legacy_quest_progress_envelope.py",
@@ -1311,8 +1341,8 @@
     },
     {
       "path": "work/migration/test_native_save_scope_mixins.py",
-      "bytes": 6532,
-      "sha256": "329616e8d5efee32674f9320e67d66fe29102f53c1aeef27a3d2e31a056bc8ca"
+      "bytes": 6598,
+      "sha256": "8b02e25e31021efc08511958cac98eda417ad9ab1bf7742e8bcd142aa37ca51d"
     },
     {
       "path": "work/migration/test_quest_export_java.py",
@@ -1446,13 +1476,13 @@
     },
     {
       "path": "work/migration/write_task_semantics_status.py",
-      "bytes": 26783,
-      "sha256": "ded64617f7b75bc9b7e847ad6ee5f1bbc6b719178f66b5826bf3d353090e6eea"
+      "bytes": 28062,
+      "sha256": "edf60b1295151173e8df75de3d5b43d63261280e373639c94459df69a6f61bb2"
     }
   ],
-  "file_count": 289,
+  "file_count": 295,
   "source_archive_inputs_included": false,
   "runtime_binaries_included": false,
   "full_parity": false,
-  "continuation": "Solo continuation: archived binary-preserving v1-to-v2 player marker maintenance, NaN-aware journal/admission comparison, 126 assertions and 11 process-halt recovery cases; full migration and native gameplay remain incomplete."
+  "continuation": "Solo continuation: world-authoritative pending owner transaction mirror/cache repair, immutable raw archives and independent auxiliary journal; 347 assertions, 16 combinations, 12 process-halt recovery/admission cases; full migration/native gameplay remain incomplete."
 }
