@@ -1,13 +1,13 @@
 {
-  "created_at": "2026-10-18T17:05:26.826257+08:00",
+  "created_at": "2026-10-18T17:06:06.857359+08:00",
   "scope": "source-only public checkpoint; third-party game inputs excluded",
   "hash_scope": "Git index canonical blobs, not Windows checkout line endings",
-  "base_commit": "3cd7ee9890cac09947b0b5e28ecc3ffcc27bb0c0",
+  "base_commit": "06e1a2fe8d07346f69248d4fe6aaecae60ba06ff",
   "files": [
     {
       "path": ".gitattributes",
-      "bytes": 102,
-      "sha256": "0be04cfeaf81b316575e60b9dfcdcaeb2e40708b521cfcb15e2e69a657f75de7"
+      "bytes": 120,
+      "sha256": "f451ecc30c1db14ca1db645211ad835f8877ea52fde6f131db448217ddf9a447"
     },
     {
       "path": ".gitignore",
@@ -1564,5 +1564,5 @@
   "source_archive_inputs_included": false,
   "runtime_binaries_included": false,
   "full_parity": false,
-  "continuation": "Continue solo: bind full actual quest declarations to registry-backed item predicates and complete native submission, party authorization, quest completion/rewards/UI, first world binding and all remaining mod/resource parity. Preserve all original definitions and unsupported semantics; current native lifecycle has not been game-executed."
+  "continuation": "Continue solo: bind actual quest definitions to registry-backed item predicates; complete native submission, party authorization, completion/rewards/UI, first world binding and all remaining mod/resource parity. Original definitions remain complete; no native world execution is claimed."
 }
