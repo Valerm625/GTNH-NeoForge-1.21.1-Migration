@@ -32,6 +32,7 @@ AA=R/'work/migration/maintenance-initialization-check'
 AB=R/'work/migration/quest-definition-archive-check'
 AC=R/'work/migration/retrieval-definition-binding-check'
 AD=R/'work/migration/quest-entry-policy-check'
+AE=R/'work/migration/quest-completion-planner-check'
 
 
 def read(path):
@@ -79,7 +80,7 @@ for name,expected in observer['adapter_source_sha256'].items():
     assert sha(R/'work/compat-mod/src/main/java/org/gtnhmigration/compat'/(name+'.java'))==expected,name
 assert observer['test_source_sha256']==sha(R/'work/migration/LegacyInventoryObserverCheck.java')
 assert observer['runner_sha256']==sha(R/'work/migration/test_legacy_inventory_observer.py')
-for directory,name in [(J,'LegacyTypedNbtJsonReaderCheck'),(G,'LegacyQuestProgressEnvelopeCheck'),(S,'LegacyQuestProgressStoreCheck'),(T,'LegacyProgressImportPipelineCheck'),(B,'LegacyRetrievalInventoryBridgeCheck'),(D,'LegacyRetrievalTransactionJournalCheck'),(F,'LegacyRetrievalTransactionProposalCheck'),(H,'LegacyPlayerDataFileReaderCheck'),(K,'LegacyRetrievalCommitCoordinatorCheck'),(W,'LegacyWorldPlayerAuthorityCheck'),(N,'LegacyIntegratedOwnerCoordinatorCheck'),(U,'LegacyRetrievalSaveScopeCheck'),(X,'LegacyQuestWorldStoreCheck'),(A,'LegacyQuestPlayerAdmissionCheck'),(M,'LegacyPlayerMarkerUpgradeCheck'),(Y,'LegacyOwnerTransactionRecoveryCheck'),(Z,'LegacyStartupShutdownCheck'),(AA,'LegacyMaintenanceInitializationCheck'),(AB,'LegacyQuestDefinitionArchiveCheck'),(AC,'LegacyRetrievalDefinitionBindingCheck'),(AD,'LegacyQuestEntryPolicyCheck')]:
+for directory,name in [(J,'LegacyTypedNbtJsonReaderCheck'),(G,'LegacyQuestProgressEnvelopeCheck'),(S,'LegacyQuestProgressStoreCheck'),(T,'LegacyProgressImportPipelineCheck'),(B,'LegacyRetrievalInventoryBridgeCheck'),(D,'LegacyRetrievalTransactionJournalCheck'),(F,'LegacyRetrievalTransactionProposalCheck'),(H,'LegacyPlayerDataFileReaderCheck'),(K,'LegacyRetrievalCommitCoordinatorCheck'),(W,'LegacyWorldPlayerAuthorityCheck'),(N,'LegacyIntegratedOwnerCoordinatorCheck'),(U,'LegacyRetrievalSaveScopeCheck'),(X,'LegacyQuestWorldStoreCheck'),(A,'LegacyQuestPlayerAdmissionCheck'),(M,'LegacyPlayerMarkerUpgradeCheck'),(Y,'LegacyOwnerTransactionRecoveryCheck'),(Z,'LegacyStartupShutdownCheck'),(AA,'LegacyMaintenanceInitializationCheck'),(AB,'LegacyQuestDefinitionArchiveCheck'),(AC,'LegacyRetrievalDefinitionBindingCheck'),(AD,'LegacyQuestEntryPolicyCheck'),(AE,'LegacyQuestCompletionPlannerCheck')]:
     value=read(directory/(name+'.json'))
     assert value['passed'] and not value['runtime_integrated'] and not value['export_enabled'],name
     for relative,expected in value['source_sha256'].items():
@@ -105,7 +106,7 @@ for relative, expected in hunt['source_sha256'].items():
     assert sha(R/relative)==expected,relative
 assert matcher['adapter_source_sha256']==sha(R/'work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalStackMatcher.java')
 with zipfile.ZipFile(jar) as compiled:
-    for directory,prefix in [(C,'LegacyRetrievalProgressCodec'),(L,'LegacyQuestRetrievalPlanner'),(J,'LegacyTypedNbtJsonReader'),(G/'classes','LegacyQuestProgressEnvelope'),(S,'LegacyQuestProgressStoreCodec'),(S,'LegacyQuestProgressFileStore'),(B,'LegacyRetrievalInventoryBridge'),(D,'LegacyRetrievalTransactionJournal'),(F,'LegacyRetrievalTransactionProposal'),(H,'LegacyPlayerDataFileReader'),(K,'LegacyRetrievalCommitCoordinator'),(W,'LegacyPlayerDataFileReader'),(W,'LegacyRetrievalTransactionJournal'),(W,'LegacyRetrievalCommitCoordinator'),(N,'LegacyRetrievalCommitCoordinator'),(N,'LegacyRetrievalTransactionProposal'),(U,'LegacyRetrievalSaveScope'),(K,'LegacyRetrievalNativeSaveScope'),(X,'LegacyQuestWorldStore'),(A,'LegacyQuestPlayerAdmission'),(A,'LegacyQuestNativeLifecycle'),(M,'LegacyPlayerMarkerUpgrade'),(M,'LegacyPlayerNbtPatch'),(Y,'LegacyOwnerTransactionRecovery'),(Z,'LegacyRetrievalSaveScope'),(AA,'LegacyMaintenanceInitialization'),(AB,'LegacyQuestDefinitionArchive'),(AC,'LegacyRetrievalDefinitionBinding'),(AD,'LegacyQuestEntryPolicy')]:
+    for directory,prefix in [(C,'LegacyRetrievalProgressCodec'),(L,'LegacyQuestRetrievalPlanner'),(J,'LegacyTypedNbtJsonReader'),(G/'classes','LegacyQuestProgressEnvelope'),(S,'LegacyQuestProgressStoreCodec'),(S,'LegacyQuestProgressFileStore'),(B,'LegacyRetrievalInventoryBridge'),(D,'LegacyRetrievalTransactionJournal'),(F,'LegacyRetrievalTransactionProposal'),(H,'LegacyPlayerDataFileReader'),(K,'LegacyRetrievalCommitCoordinator'),(W,'LegacyPlayerDataFileReader'),(W,'LegacyRetrievalTransactionJournal'),(W,'LegacyRetrievalCommitCoordinator'),(N,'LegacyRetrievalCommitCoordinator'),(N,'LegacyRetrievalTransactionProposal'),(U,'LegacyRetrievalSaveScope'),(K,'LegacyRetrievalNativeSaveScope'),(X,'LegacyQuestWorldStore'),(A,'LegacyQuestPlayerAdmission'),(A,'LegacyQuestNativeLifecycle'),(M,'LegacyPlayerMarkerUpgrade'),(M,'LegacyPlayerNbtPatch'),(Y,'LegacyOwnerTransactionRecovery'),(Z,'LegacyRetrievalSaveScope'),(AA,'LegacyMaintenanceInitialization'),(AB,'LegacyQuestDefinitionArchive'),(AC,'LegacyRetrievalDefinitionBinding'),(AD,'LegacyQuestEntryPolicy'),(AE,'LegacyQuestCompletionPlanner')]:
         package_dir=directory/'org/gtnhmigration/compat'
         classes=[package_dir/(prefix+'.class')]+sorted(package_dir.glob(prefix+'$*.class'))
         assert all(path.is_file() for path in classes),prefix
@@ -128,7 +129,7 @@ with zipfile.ZipFile(jar) as compiled:
         entry='org/gtnhmigration/compat/'+name+'.class'
         assert compiled.read(entry)==(P/entry).read_bytes(), 'Packaged class differs from tested class: '+name
 checks={}
-for name in ['IsolatedMixinTransformationCheck','NativeSaveScopeMixinCheck','LegacyRetrievalSaveScopeCheck','LegacyQuestWorldStoreCheck','LegacyQuestPlayerAdmissionCheck','LegacyPlayerMarkerUpgradeCheck','LegacyOwnerTransactionRecoveryCheck','LegacyStartupShutdownCheck','LegacyMaintenanceInitializationCheck','LegacyQuestDefinitionArchiveCheck','LegacyRetrievalDefinitionBindingCheck','LegacyQuestEntryPolicyCheck','LegacyRetrievalEngineCheck','LegacyRetrievalStackMatcherCheck','LegacyCraftingShapeCheck','LegacyHuntAdapterCheck',
+for name in ['IsolatedMixinTransformationCheck','NativeSaveScopeMixinCheck','LegacyRetrievalSaveScopeCheck','LegacyQuestWorldStoreCheck','LegacyQuestPlayerAdmissionCheck','LegacyPlayerMarkerUpgradeCheck','LegacyOwnerTransactionRecoveryCheck','LegacyStartupShutdownCheck','LegacyMaintenanceInitializationCheck','LegacyQuestDefinitionArchiveCheck','LegacyRetrievalDefinitionBindingCheck','LegacyQuestEntryPolicyCheck','LegacyQuestCompletionPlannerCheck','LegacyRetrievalEngineCheck','LegacyRetrievalStackMatcherCheck','LegacyCraftingShapeCheck','LegacyHuntAdapterCheck',
              'LegacyRetrievalProgressCodecCheck','LegacyQuestRetrievalPlannerCheck','LegacyInventoryObserverCheck',
              'LegacyTypedNbtJsonReaderCheck','LegacyQuestProgressEnvelopeCheck','LegacyQuestProgressStoreCheck','LegacyProgressImportPipelineCheck','LegacyRetrievalInventoryBridgeCheck','LegacyRetrievalTransactionJournalCheck','LegacyRetrievalTransactionProposalCheck','LegacyPlayerDataFileReaderCheck','LegacyRetrievalCommitCoordinatorCheck','LegacyWorldPlayerAuthorityCheck','LegacyIntegratedOwnerCoordinatorCheck',
              'QuestAdapterShapeCheck','LegacyRetrievalCounterCheck','QuestSnbtCheck',
@@ -157,7 +158,7 @@ checks['exact_resource_collision_tests']=collision_tests
 archive=read(O/'docs/quest-migration/definition-archive.json')
 assert archive['passed'] and archive['source_document_count']==7806 and archive['source_quest_count']==3814
 for relative,expected in archive['source_sha256'].items():assert sha(R/relative)==expected,relative
-assert archive['archive_sha256']==checks['LegacyQuestDefinitionArchiveCheck']['archive_sha256']==checks['LegacyRetrievalDefinitionBindingCheck']['archive_sha256']==checks['LegacyQuestEntryPolicyCheck']['archive_sha256']
+assert archive['archive_sha256']==checks['LegacyQuestDefinitionArchiveCheck']['archive_sha256']==checks['LegacyRetrievalDefinitionBindingCheck']['archive_sha256']==checks['LegacyQuestEntryPolicyCheck']['archive_sha256']==checks['LegacyQuestCompletionPlannerCheck']['archive_sha256']
 assert sha(O/'config/gtnh_migration/quest-definitions'/(archive['archive_sha256']+'.bin'))==archive['archive_sha256']
 with zipfile.ZipFile(jar) as compiled:
     assert compiled.read('gtnh_migration/quest-definitions.pin')==(R/'work/compat-mod/src/main/resources/gtnh_migration/quest-definitions.pin').read_bytes()
@@ -174,7 +175,7 @@ assert compat_row['sha256']==sha(jar)
 assert 'eula=false' in (O/'eula.txt').read_text(encoding='utf-8')
 report={
     'phase_date_shanghai':'2026-10-18',
-    'phase':'journal preparation and recovery with installed startup/player-load call sites, source receipts, archived binary-preserving marker promotion, proven owner mirror/cache reconciliation, non-saving cleanup for pre-world recovery failures and world-bound auxiliary construction recovery; complete pinned source definition archive and native pre-recovery binding check installed; source-backed registry item predicates and manual retrieval declarations connected; source prerequisite gates evaluated from UUID quest completion records; native lifecycle execution and full game parity remain incomplete',
+    'phase':'journal preparation and recovery with installed startup/player-load call sites, source receipts, archived binary-preserving marker promotion, proven owner mirror/cache reconciliation, non-saving cleanup for pre-world recovery failures and world-bound auxiliary construction recovery; complete pinned source definition archive and native pre-recovery binding check installed; source-backed registry item predicates and manual retrieval declarations connected; source prerequisite gates evaluated from UUID quest completion records; source passive completion pass and supported active-membership projection composed with UUID ledger; native lifecycle execution and full game parity remain incomplete',
     'checks':checks,
     'compat_jar_sha256':sha(jar),
     'source_quests':manifest['source_quests'],
@@ -219,6 +220,8 @@ report={
     'actual_source_retrieval_declaration_binding_verified':True,
     'source_prerequisite_and_nonrepeat_entry_policy_verified':True,
     'native_player_entry_query_compiled':True,
+    'source_passive_quest_completion_plan_verified':True,
+    'quest_completion_native_tick_registered':False,
     'native_party_authorization_verified':False,
     'native_retrieval_submission_registered':False,
     'native_definition_binding_call_order_audited':True,
@@ -257,6 +260,7 @@ metadata['validation_state'].update({
     'world_bound_ledger':'immutable world-relative manifest archived at genesis; historical catalog, non-creating reopen and offline primary/mirror recovery tested; startup/admission call sites installed but not game-executed',
     'player_admission':'source receipts, loaded owner cache checks, first-login absence, native payload return identity and post-event live marker checked in fixtures; native startup/load hooks registered and isolated-transformed; no game execution or unknown cache/mirror repair',
     'player_marker_upgrade':'world-bound maintenance intents, exact before/after gzip archives, targeted binary NBT edit, atomic mirror-first publication, actual cache promotion and process-halt roll-forward tested with synthetic files; native game execution and conflict repair unverified',
+    'quest_completion_planner':'source 60-tick passive completion and active-membership expression compared for 38 bound nonrepeat retrieval declarations; per-UUID records and event/dirty/notice intents preserved; synthetic ledger reopen verified, native tick/cache/party/rewards unimplemented',
     'quest_entry_policy':'3814 source nodes and 5460 prerequisite edges; six source logic modes and UUID/global completion presence; three missing references retained, nonrepeat gates source-compared; active-player ledger-head query compiled, no party authorization or game execution',
     'retrieval_definition_binding':'source task flags, true task indexes and complete requirements bound to actual registry items; 38 vanilla detection declarations verified without native player/world, party authorization, quest completion or rewards',
     'definition_archive':'7806 exact source files, 3814 quests, source settings and identity references retained; pinned content digest checked before bound-world recovery; retrieval progress shapes cataloged but gameplay handlers remain incomplete',

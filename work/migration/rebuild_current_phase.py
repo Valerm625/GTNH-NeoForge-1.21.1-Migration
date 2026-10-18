@@ -23,6 +23,7 @@ steps.insert(steps.index('build_capacity_compat.py'), 'build_quest_definition_ar
 steps.insert(steps.index('test_legacy_retrieval_matcher.py'), 'test_legacy_quest_definition_archive.py')
 steps.insert(steps.index('test_legacy_retrieval_matcher.py'), 'test_legacy_retrieval_definition_binding.py')
 steps.insert(steps.index('test_legacy_retrieval_matcher.py'), 'test_legacy_quest_entry_policy.py')
+steps.insert(steps.index('test_legacy_retrieval_matcher.py'), 'test_legacy_quest_completion_planner.py')
 for step in steps:
     print('RUN',step,flush=True)
     subprocess.run([sys.executable,'-u',str(HERE/step)],cwd=ROOT,check=True)
