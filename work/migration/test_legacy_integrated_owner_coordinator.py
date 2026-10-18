@@ -15,7 +15,7 @@ assert hashlib.sha256(patched.read_bytes()).hexdigest()=='f57ce3018e21459d24b505
 def relative(path):return Path(os.path.relpath(path,out)).as_posix()
 cp=';'.join(relative(path) for path in [minecraft,extra]+libraries)
 compile_cp=';'.join(relative(path) for path in [patched,universal])+ ';'+cp
-names=['LegacyRetrievalEngine','LegacyQuestRetrievalPlanner','LegacyRetrievalInventoryBridge','LegacyRetrievalProgressCodec','LegacyQuestProgressEnvelope','LegacyQuestProgressStoreCodec','LegacyQuestProgressFileStore','LegacyRetrievalTransactionJournal','LegacyRetrievalTransactionProposal','LegacyPlayerDataFileReader','LegacyRetrievalCommitCoordinator','LegacyRetrievalSaveScope','LegacyRetrievalNativeSaveScope']
+names=['LegacyRetrievalEngine','LegacyQuestRetrievalPlanner','LegacyRetrievalInventoryBridge','LegacyRetrievalProgressCodec','LegacyQuestProgressEnvelope','LegacyQuestProgressStoreCodec','LegacyQuestProgressFileStore','LegacyRetrievalTransactionJournal','LegacyRetrievalTransactionProposal','LegacyPlayerDataFileReader','LegacyRetrievalCommitCoordinator','LegacyQuestWorldStore','LegacyRetrievalSaveScope','LegacyRetrievalNativeSaveScope']
 sources=[R/'work/compat-mod/src/main/java/org/gtnhmigration/compat'/(name+'.java') for name in names]
 check=R/'work/migration/LegacyIntegratedOwnerCoordinatorCheck.java'
 helper=R/'work/migration/LegacyRetrievalCommitCoordinatorCheck.java'

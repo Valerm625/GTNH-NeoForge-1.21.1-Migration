@@ -28,6 +28,7 @@ public final class LegacyRetrievalCommitCoordinator {
     private static final Set<LegacyQuestProgressFileStore> RECOVERY=Collections.newSetFromMap(new IdentityHashMap<>());
     private final LegacyQuestProgressFileStore store;
     private final Catalog catalog;
+    private final Binding binding;
     private final LegacyRetrievalTransactionJournal journal;
 
     public record Outcome(Resolution resolution, Optional<String> attemptFailure) {}
@@ -46,7 +47,7 @@ public final class LegacyRetrievalCommitCoordinator {
         default Exception restoreSecondary(CompoundTag before,CompoundTag after)throws IOException {return null;}
     }
     public LegacyRetrievalCommitCoordinator(LegacyQuestProgressFileStore store,Binding binding,Catalog catalog) {
-        this.store=Objects.requireNonNull(store);this.catalog=Objects.requireNonNull(catalog);
+        this.store=Objects.requireNonNull(store);this.catalog=Objects.requireNonNull(catalog);this.binding=Objects.requireNonNull(binding);
         journal=new LegacyRetrievalTransactionJournal(store,binding,catalog);
     }
     public boolean recoveryRequired() { synchronized(BUSY) { return RECOVERY.contains(store); } }
@@ -72,7 +73,13 @@ public final class LegacyRetrievalCommitCoordinator {
             ServerPlayer player,PlayerDataStorage storage,Runnable assertExclusive,BooleanSupplier authorization,boolean owner)throws IOException {
         try(var scope=LegacyRetrievalNativeSaveScope.begin(player,storage)) {
             try {
-                Outcome result=submit(inventory,plannedHead,owner?new NativeIntegratedOwnerPort(player,storage,assertExclusive):new NativePlayerPort(player,storage,assertExclusive),authorization);
+                LegacyQuestWorldStore.requireBoundStore(player.server.getWorldPath(LevelResource.ROOT),store,binding,catalog);
+                Runnable boundBarrier=()->{
+                    assertExclusive.run();
+                    try {LegacyQuestWorldStore.requireBoundStore(player.server.getWorldPath(LevelResource.ROOT),store,binding,catalog);}
+                    catch(IOException failure){throw new IllegalStateException("World/ledger binding changed during submission",failure);}
+                };
+                Outcome result=submit(inventory,plannedHead,owner?new NativeIntegratedOwnerPort(player,storage,boundBarrier):new NativePlayerPort(player,storage,boundBarrier),authorization);
                 scope.release();return result;
             } catch(IOException|RuntimeException|Error failure) {
                 if(recoveryRequired() || scope.recoveryRequired()) {quarantine(inventory);scope.quarantine();}

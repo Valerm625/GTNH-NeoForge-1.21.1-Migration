@@ -56,6 +56,12 @@ public final class LegacyQuestProgressFileStore implements AutoCloseable {
         catch (IOException | RuntimeException e) { close(); throw e; }
     }
 
+    /** Exact normalized location used when binding this handle to its world. */
+    public Path directory() { return directory; }
+    boolean matches(Binding binding, Catalog catalog) {
+        return this.binding.equals(binding) && LegacyQuestProgressStoreCodec.catalogSha256(this.catalog).equals(LegacyQuestProgressStoreCodec.catalogSha256(catalog));
+    }
+
     private void usable() throws IOException {
         if (closed || !lock.isValid()) throw new IOException("Ledger is closed");
         if (uncertain) throw new IOException("Commit outcome uncertain; close and reopen before any further operation");
@@ -64,7 +70,10 @@ public final class LegacyQuestProgressFileStore implements AutoCloseable {
      * A bad/gapped/forked chain blocks access instead of silently rolling back.
      * Pending temporary files are preserved but never treated as committed.
      */
-    public synchronized Optional<Head> current() throws IOException {
+    public synchronized Optional<Head> current() throws IOException { return readHead(false); }
+    /** First published frame, after validating the entire chain. */
+    public synchronized Optional<Head> origin() throws IOException { return readHead(true); }
+    private Optional<Head> readHead(boolean origin) throws IOException {
         usable();
         List<Path> paths = new ArrayList<>();
         try (DirectoryStream<Path> entries = Files.newDirectoryStream(directory)) {
@@ -76,7 +85,7 @@ public final class LegacyQuestProgressFileStore implements AutoCloseable {
             }
         }
         paths.sort(Comparator.comparing(p -> p.getFileName().toString()));
-        Head previous = null;
+        Head previous = null, first = null;
         for (Path path : paths) {
             Matcher name = FRAME.matcher(path.getFileName().toString());
             if (!name.matches()) throw new AssertionError();
@@ -101,8 +110,9 @@ public final class LegacyQuestProgressFileStore implements AutoCloseable {
                 throw new IOException("Ledger chain is gapped, forked, or incorrectly linked");
             if (previous != null) requireArchivePrefix(previous.frame().snapshot().sources(), frame.snapshot().sources());
             previous = new Head(name.group(2), frame);
+            if (first == null) first = previous;
         }
-        return Optional.ofNullable(previous);
+        return Optional.ofNullable(origin ? first : previous);
     }
 
     /** expectedSha256 is absent only for a genuinely empty store. A successful

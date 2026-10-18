@@ -51,5 +51,6 @@
   "authoritative_player_file_readback": "strict UUID.dat integrity, immutable raw-byte snapshots and file-backed commit/abort recovery tested with synthetic data; no fallback to dat_old, native save or lifecycle barrier",
   "retrieval_commit_coordinator": "baseline/marker promotion, intent, actual inventory counts, save readback, all-participant final recheck and conditional rollback tested; native adapters acquire guarded save scopes, no native execution or durable admission recovery",
   "world_player_authority": "level.dat/Data/Player readback and source-bound journal resolution tested; pinned native owner load/cache/save bytecode audited; explicit owner adapter compiled, synthetic coordination verified; no native lifecycle or game execution",
-  "native_save_scope": "single-use permits, callback/thread rejection and process-local quarantine tested; 30 required native save/lifecycle injections isolated-transformed; no game execution, external filesystem lock or arbitrary-mod inventory isolation"
+  "native_save_scope": "single-use permits, callback/thread rejection and process-local quarantine tested; 30 required native save/lifecycle injections isolated-transformed; no game execution, external filesystem lock or arbitrary-mod inventory isolation",
+  "world_bound_ledger": "immutable world-relative manifest archived at genesis; historical catalog, non-creating reopen and offline primary/mirror recovery tested; no native admission or cache repair"
 }

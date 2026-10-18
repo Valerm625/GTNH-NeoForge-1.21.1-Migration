@@ -23,6 +23,7 @@ K=R/'work/migration/retrieval-coordinator-check'
 W=R/'work/migration/world-player-authority-check'
 N=R/'work/migration/integrated-owner-check'
 U=R/'work/migration/retrieval-save-scope-check'
+X=R/'work/migration/quest-world-store-check'
 
 
 def read(path):
@@ -70,7 +71,7 @@ for name,expected in observer['adapter_source_sha256'].items():
     assert sha(R/'work/compat-mod/src/main/java/org/gtnhmigration/compat'/(name+'.java'))==expected,name
 assert observer['test_source_sha256']==sha(R/'work/migration/LegacyInventoryObserverCheck.java')
 assert observer['runner_sha256']==sha(R/'work/migration/test_legacy_inventory_observer.py')
-for directory,name in [(J,'LegacyTypedNbtJsonReaderCheck'),(G,'LegacyQuestProgressEnvelopeCheck'),(S,'LegacyQuestProgressStoreCheck'),(T,'LegacyProgressImportPipelineCheck'),(B,'LegacyRetrievalInventoryBridgeCheck'),(D,'LegacyRetrievalTransactionJournalCheck'),(F,'LegacyRetrievalTransactionProposalCheck'),(H,'LegacyPlayerDataFileReaderCheck'),(K,'LegacyRetrievalCommitCoordinatorCheck'),(W,'LegacyWorldPlayerAuthorityCheck'),(N,'LegacyIntegratedOwnerCoordinatorCheck'),(U,'LegacyRetrievalSaveScopeCheck')]:
+for directory,name in [(J,'LegacyTypedNbtJsonReaderCheck'),(G,'LegacyQuestProgressEnvelopeCheck'),(S,'LegacyQuestProgressStoreCheck'),(T,'LegacyProgressImportPipelineCheck'),(B,'LegacyRetrievalInventoryBridgeCheck'),(D,'LegacyRetrievalTransactionJournalCheck'),(F,'LegacyRetrievalTransactionProposalCheck'),(H,'LegacyPlayerDataFileReaderCheck'),(K,'LegacyRetrievalCommitCoordinatorCheck'),(W,'LegacyWorldPlayerAuthorityCheck'),(N,'LegacyIntegratedOwnerCoordinatorCheck'),(U,'LegacyRetrievalSaveScopeCheck'),(X,'LegacyQuestWorldStoreCheck')]:
     value=read(directory/(name+'.json'))
     assert value['passed'] and not value['runtime_integrated'] and not value['export_enabled'],name
     for relative,expected in value['source_sha256'].items():
@@ -96,7 +97,7 @@ for relative, expected in hunt['source_sha256'].items():
     assert sha(R/relative)==expected,relative
 assert matcher['adapter_source_sha256']==sha(R/'work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalStackMatcher.java')
 with zipfile.ZipFile(jar) as compiled:
-    for directory,prefix in [(C,'LegacyRetrievalProgressCodec'),(L,'LegacyQuestRetrievalPlanner'),(J,'LegacyTypedNbtJsonReader'),(G/'classes','LegacyQuestProgressEnvelope'),(S,'LegacyQuestProgressStoreCodec'),(S,'LegacyQuestProgressFileStore'),(B,'LegacyRetrievalInventoryBridge'),(D,'LegacyRetrievalTransactionJournal'),(F,'LegacyRetrievalTransactionProposal'),(H,'LegacyPlayerDataFileReader'),(K,'LegacyRetrievalCommitCoordinator'),(W,'LegacyPlayerDataFileReader'),(W,'LegacyRetrievalTransactionJournal'),(W,'LegacyRetrievalCommitCoordinator'),(N,'LegacyRetrievalCommitCoordinator'),(N,'LegacyRetrievalTransactionProposal'),(U,'LegacyRetrievalSaveScope'),(K,'LegacyRetrievalNativeSaveScope')]:
+    for directory,prefix in [(C,'LegacyRetrievalProgressCodec'),(L,'LegacyQuestRetrievalPlanner'),(J,'LegacyTypedNbtJsonReader'),(G/'classes','LegacyQuestProgressEnvelope'),(S,'LegacyQuestProgressStoreCodec'),(S,'LegacyQuestProgressFileStore'),(B,'LegacyRetrievalInventoryBridge'),(D,'LegacyRetrievalTransactionJournal'),(F,'LegacyRetrievalTransactionProposal'),(H,'LegacyPlayerDataFileReader'),(K,'LegacyRetrievalCommitCoordinator'),(W,'LegacyPlayerDataFileReader'),(W,'LegacyRetrievalTransactionJournal'),(W,'LegacyRetrievalCommitCoordinator'),(N,'LegacyRetrievalCommitCoordinator'),(N,'LegacyRetrievalTransactionProposal'),(U,'LegacyRetrievalSaveScope'),(K,'LegacyRetrievalNativeSaveScope'),(X,'LegacyQuestWorldStore')]:
         package_dir=directory/'org/gtnhmigration/compat'
         classes=[package_dir/(prefix+'.class')]+sorted(package_dir.glob(prefix+'$*.class'))
         assert all(path.is_file() for path in classes),prefix
@@ -119,7 +120,7 @@ with zipfile.ZipFile(jar) as compiled:
         entry='org/gtnhmigration/compat/'+name+'.class'
         assert compiled.read(entry)==(P/entry).read_bytes(), 'Packaged class differs from tested class: '+name
 checks={}
-for name in ['IsolatedMixinTransformationCheck','NativeSaveScopeMixinCheck','LegacyRetrievalSaveScopeCheck','LegacyRetrievalEngineCheck','LegacyRetrievalStackMatcherCheck','LegacyCraftingShapeCheck','LegacyHuntAdapterCheck',
+for name in ['IsolatedMixinTransformationCheck','NativeSaveScopeMixinCheck','LegacyRetrievalSaveScopeCheck','LegacyQuestWorldStoreCheck','LegacyRetrievalEngineCheck','LegacyRetrievalStackMatcherCheck','LegacyCraftingShapeCheck','LegacyHuntAdapterCheck',
              'LegacyRetrievalProgressCodecCheck','LegacyQuestRetrievalPlannerCheck','LegacyInventoryObserverCheck',
              'LegacyTypedNbtJsonReaderCheck','LegacyQuestProgressEnvelopeCheck','LegacyQuestProgressStoreCheck','LegacyProgressImportPipelineCheck','LegacyRetrievalInventoryBridgeCheck','LegacyRetrievalTransactionJournalCheck','LegacyRetrievalTransactionProposalCheck','LegacyPlayerDataFileReaderCheck','LegacyRetrievalCommitCoordinatorCheck','LegacyWorldPlayerAuthorityCheck','LegacyIntegratedOwnerCoordinatorCheck',
              'QuestAdapterShapeCheck','LegacyRetrievalCounterCheck','QuestSnbtCheck',
@@ -152,7 +153,7 @@ assert compat_row['sha256']==sha(jar)
 assert 'eula=false' in (O/'eula.txt').read_text(encoding='utf-8')
 report={
     'phase_date_shanghai':'2026-10-18',
-    'phase':'journal preparation and recovery with native save permits and selected lifecycle entry guards; persistent admission recovery and full game parity remain incomplete',
+    'phase':'journal preparation and recovery with world-bound catalogs, non-creating reopen and offline authority/mirror recovery; native admission and full game parity remain incomplete',
     'checks':checks,
     'compat_jar_sha256':sha(jar),
     'source_quests':manifest['source_quests'],
@@ -182,6 +183,8 @@ report={
     'native_save_permit_state_machine_verified':True,
     'native_save_guard_mixins_isolated_verified':True,
     'native_save_guard_game_runtime_verified':False,
+    'world_bound_ledger_fixture_verified':True,
+    'world_bound_offline_process_recovery_verified':True,
     'durable_admission_recovery_verified':False,
     'integrated_owner_native_submission_verified':False,
     'native_player_save_verified':False,
@@ -210,6 +213,7 @@ metadata['validation_state'].update({
     'retrieval_commit_coordinator':'baseline/marker promotion, intent, actual inventory counts, save readback, all-participant final recheck and conditional rollback tested; native adapters acquire guarded save scopes, no native execution or durable admission recovery',
     'native_save_scope':'single-use permits, callback/thread rejection and process-local quarantine tested; 30 required native save/lifecycle injections isolated-transformed; no game execution, external filesystem lock or arbitrary-mod inventory isolation',
     'world_player_authority':'level.dat/Data/Player readback and source-bound journal resolution tested; pinned native owner load/cache/save bytecode audited; explicit owner adapter compiled, synthetic coordination verified; no native lifecycle or game execution',
+    'world_bound_ledger':'immutable world-relative manifest archived at genesis; historical catalog, non-creating reopen and offline primary/mirror recovery tested; no native admission or cache repair',
     'source_asset_collisions':'four exact archives checked; all same-path candidates retained, precedence unresolved',
     'full_feature_parity':False,'client_rendering_verified':False,
 })
@@ -242,6 +246,8 @@ world_authority=checks['LegacyWorldPlayerAuthorityCheck']
 text+=f"\n单人房主的level.dat/Data/Player来源和UUID.dat镜像不能混用。{world_authority['assertions']} 项断言验证完整世界文件快照、显式来源日志和关闭重开恢复，旧UUID日志保持兼容。原生登录分支、退出保存顺序与DataVersion写入经过锁定字节码核对。\n"
 owner=checks['LegacyIntegratedOwnerCoordinatorCheck']
 text+=f"\n新增显式房主提交路径：以level.dat决定事务，缓存和UUID镜像也必须一致；取消时通过玩家列表保存恢复二者，并复核世界文件未变。{owner['assertions']} 项夹具断言及 {owner['native_owner_save_audit']['negative_controls']} 组字节码破坏性负例通过，后续保存不会重新写入已取消扣物。原生适配器仅编译和审计，需覆盖全服务器保存/生命周期的持续隔离，尚未注册或执行真实游戏，仍未完成单人迁移。\n"
+world_store=checks['LegacyQuestWorldStoreCheck']
+text+=f"\n世界账本绑定通过 {world_store['assertions']} 项断言和 {len(world_store['process_crash_checks'])} 个独立JVM中断/重开场景。固定世界相对目录、不可变历史任务目录及首帧原件绑定阻止串账；缺失或不完整初始化不重置为空。离线恢复按待决来源读回，房主额外核对UUID镜像；不改写玩家或世界文件，尚未接入原生启动/登录或缓存修复。\n"
 scope=checks['LegacyRetrievalSaveScopeCheck']
 text+=f"\n保存许可状态机通过 {scope['assertions']} 项断言，保护嵌套保存的一次性入口、跨账本/回调/线程重入及未解决范围关闭。新增 {native_scope['injections_verified']} 处原生保存和生命周期Mixin在 {native_scope['targets_transformed']} 个固定目标上应用成功，{native_scope['asm_basic_dataflow_methods']} 个方法数据流检查及两组破坏性负例通过。协调器在决策前再次核对所有观察库存。原生钩子尚未在游戏执行；进程级隔离不等于持久登录恢复或任意模组库存写入隔离。\n"
 text+=f"\n四份锁定旧源码共有 {collisions['source_resource_occurrences']} 个资源出现记录；{collisions['same_path_groups']} 组同路径候选中 {collisions['same_path_different_content_groups']} 组字节不同，双方来源均保留，未猜测加载优先级或覆盖目标资源。\n"

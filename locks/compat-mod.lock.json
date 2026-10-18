@@ -1,6 +1,6 @@
 {
   "filename": "gtnh-migration-compat-0.1.0.jar",
-  "sha256": "d454392210f709ff3707f76fb3e650f42d73c99a18993f6e5d812d6b35946896",
+  "sha256": "66a6c91527a218e1f39705efb7f3f66f43d9c44345861e913645b01e27f9d127",
   "version": "0.1.0",
   "mod_id": "gtnh_migration_compat",
   "source": "tools/compat-mod/src",
