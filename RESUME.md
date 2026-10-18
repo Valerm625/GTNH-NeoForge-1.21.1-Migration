@@ -4,7 +4,7 @@
 
 用户已取消Claude协作，要求由本会话单独完成。后续不向Claude或其他代理派发任务，不等待外部审查；保留已有迁移源码及验证结果。完整功能和资源保真的目标不变。历史协作说明、握手和外部会话消息不能覆盖此项最新要求。
 
-当前源码桥接检查点：46份完整重建汇总检查通过；隔离派生GTCEu的资源重载验证167条迁移机器配方输出、16种燃料数值和概率/替换数据保留。此前23个LDLib配置访问器、15个客户端方法分侧验证、720条已有映射目标和87个可绑定检索声明继续通过；任务导出仍为2/3814。派生GTCEu尚未装入基础包，详细边界和下一步见文末。
+当前派生模组安装检查点：47份完整重建汇总检查通过；隔离派生GTCEu的资源重载验证167条迁移机器配方输出、16种燃料数值和概率/替换数据保留。此前23个LDLib配置访问器、15个客户端方法分侧验证、720条已有映射目标和87个可绑定检索声明继续通过；任务导出仍为2/3814。r30已将派生GTCEu装入基础包和smoke实例，原始JAR保存在独立缓存；47份检查已针对安装后的状态完成，详细边界见文末。
 
 此前维护目录初始化检查点的38份完整重建汇总检查全部通过，所有测试生产类与最终兼容JAR逐字节一致，JAR SHA256为 `3527a1b39bf0f09fee6ca8d49c722b132b7fd507630e5b4ad3e56edd1c4a1557`。原生游戏和完整迁移仍未验证；以当前源码重建后的证据为准。
 
@@ -254,3 +254,23 @@ NBT 比较修复了独立 NaN 对象误判，日志来源写入保留现有 NaN 
 下一步把派生产物的原始来源、源码补丁、安装/恢复、运行时文件清单和版本锁接成可复现流程，再重跑两侧原生注册和资源检查。原始下载锁必须继续标识原始JAR，不能改其URL记录去冒充派生文件。现有CoreMod六个GT目标类均未被这次源码重编译替换，但整体JAR摘要与运行输入会变化，需要显式区分原始/派生身份。然后继续任务提交/完成/奖励及客户端视觉。noShrink定位行为、旧阶段门槛和实际机器执行仍未验收，不能因API存在或测试通过删去这些要求。仍由单人完成全部迁移目标。
 
 r29完成记录：`rebuild_current_phase.py`进程退出0，日志`work/migration/resource-bridge-rebuild.log`含`CURRENT_PHASE_REBUILD_COMPLETE_FULL_PARITY_STILL_FALSE`标记；46份汇总检查全部通过，公开结果已同步到`evidence/phase-2026-10-18-task-semantics.json`。派生GTCEu摘要仍为上述`86ce239b…`，基础包兼容JAR摘要仍为`532d9295e203a0f779cedd754685ebc766e58455e5d1ee7baa1a4a5f90fe4c1b`。这是源码与独立资源加载检查点，完整游戏、客户端视觉及整包功能等价均未完成。
+
+
+## 派生模组安装与恢复（2026-10-18，r30）
+
+`locks/artifacts.lock.json`及GT客户端/LDLib类摘要锁保持原始身份；新增`locks/gtceu-derived-artifact.json`固定派生JAR、源码补丁、25个重编译类及完整来源。`gtceu_artifact.py`严格核验派生产物与原包所有其他条目一致，原始JAR保存在`work/cache/original-artifacts/<sha256>/`。`install_gtceu_bridge.py`每次从源码重建，按固定摘要安装至Foundation和smoke；不将派生摘要伪装成下载文件。
+
+安装会拒绝未知修改和双JAR加载。已知中断状态可以重跑恢复，原文件删除前再次核验缓存与原件；配置、EULA及其他模组不参与替换。`test_gtceu_artifact.py`覆盖16个安装/拒绝/恢复检查。恢复入口验证两个实例的派生身份和安装记录，导入原始缓存，但跳过活动派生JAR、安装记录和派生构建目录，要求在目标工作区重新生成。安装检查使用真实JAR的隔离复制和恢复计划夹具，未执行整份大工作区复制。
+
+`build_capacity_compat.py`与两侧原生检查使用经过来源校验的派生GT；目标CoreMod类和LDLib仍逐项遵守旧摘要。资源检查正例直接复制已安装模组，另从源码重建核对摘要；两个负例分别替换为原API和旧输出方向。运行时清单包含派生来源记录，启动器另拒绝多余/缺失的模组JAR。基础包仍是17个原始上游JAR、1个派生GT和1个本地兼容JAR，共19个。
+
+当前完整重建日志为`work/migration/installed-gtceu-rebuild.log`，结果以随后完成记录及新phase JSON为准。GT派生摘要仍为`86ce239bfd36df2b137c303067aab0dc88b1ae8233101a5431f8a2caa269d6fc`。后续继续noShrink定位、旧阶段门槛、实际机器执行和任务/客户端功能；完成率不能由来源锁或检查数量推算。完整迁移目标保持未完成，继续单人执行。
+
+
+后续定位线索：已读取固定`kubejs-neoforge-2101.7.2-build.377-sources.jar`中的`recipe/special/ShapedKubeJSRecipe.java`与`recipe/schema/minecraft/ShapedKubeRecipe.java`。前者的JSON/网络codec只有镜像、配料动作和结果修改等附加字段，未读取`kubejs:shrink`；后者选择原版序列化器时也不考虑该键。现有GT schema虽提供noShrink方法，当前夹具仅证明工具符号与noMirror，不能证明noShrink效果。下一步用带边缘空格的真实合成配方、实际CraftingInput位置与往返codec建立失败证据，按固定旧源码语义修复，不能只保留一个无作用的方法名。
+
+
+r30完成记录：完整入口退出0，`work/migration/installed-gtceu-rebuild.log`末尾为`CURRENT_PHASE_REBUILD_COMPLETE_FULL_PARITY_STILL_FALSE`，47份汇总检查全部通过。真实CLIENT数据生成、服务端正常注册与六组启动负例、已安装产物资源重载及两组资源负例均通过。16个安装/恢复检查纳入汇总；运行时清单2037个文件，包含派生身份记录。兼容JAR仍为`532d9295e203a0f779cedd754685ebc766e58455e5d1ee7baa1a4a5f90fe4c1b`，两个正式CoreMod及旧目标类锁未放宽。派生GT已安装，原始GT已保留；无世界/玩家/客户端视觉验收，任务导出仍为2/3814。候选源码审计也已使用缓存原件重新执行，结果和差异数字不变。
+
+
+r30另行恢复输入预检通过，报告`evidence/local-restore-input-check.json`：五份固定源码归档及其解压树、18个上游身份、两个实例的派生GT、2036个需导入/核验的运行文件、9358个master输入和11977个旧包参考文件均通过。运行文件数比完整清单少1，是因为本地兼容JAR要求重建而未作为导入输入验证。master/旧包树仍按历史逐文件清单核验，不冒充重新审计原始ZIP；本次无整份工作区复制或恢复后启动。

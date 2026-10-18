@@ -1,0 +1,61 @@
+{
+  "passed": true,
+  "scope": "Read-only verification of current local restore inputs; no full workspace copy or restored runtime launch",
+  "verification": {
+    "platform": {
+      "minecraft": "1.21.1",
+      "neoforge": "21.1.262"
+    },
+    "source_archives": [
+      {
+        "repository": "GTNewHorizons/BetterQuesting",
+        "tag": "3.8.89-GTNH",
+        "files_verified": 583
+      },
+      {
+        "repository": "FTBTeam/FTB-Quests",
+        "tag": "v2101.1.36",
+        "files_verified": 568
+      },
+      {
+        "repository": "GTNewHorizons/GT5-Unofficial",
+        "tag": "5.09.54.205",
+        "files_verified": 18461
+      },
+      {
+        "repository": "GTNewHorizons/NewHorizonsCoreMod",
+        "tag": "2.9.84",
+        "files_verified": 1183
+      },
+      {
+        "repository": "GTNewHorizons/Railcraft",
+        "tag": "9.17.31",
+        "files_verified": 1575
+      }
+    ],
+    "upstream_mods_verified": 18,
+    "local_compat_jar_imported": false,
+    "local_compat_requires_rebuild": {
+      "filename": "gtnh-migration-compat-0.1.0.jar",
+      "checkpoint_sha256": "532d9295e203a0f779cedd754685ebc766e58455e5d1ee7baa1a4a5f90fe4c1b",
+      "source_workspace_sha256": "532d9295e203a0f779cedd754685ebc766e58455e5d1ee7baa1a4a5f90fe4c1b",
+      "matches_checkpoint": true,
+      "reason": "Rebuild locally generated code from the preserved tracked source before any loader run."
+    },
+    "derived_gtceu_imported": false,
+    "derived_gtceu_requires_source_rebuild": true,
+    "derived_gtceu_verified_sha256": "86ce239bfd36df2b137c303067aab0dc88b1ae8233101a5431f8a2caa269d6fc",
+    "runtime_files_verified": 2036,
+    "master_inventory_files_verified": 9358,
+    "legacy_inventory_files_verified": 11977,
+    "inventory_scope": "Master/legacy trees checked against historical inventories; this does not independently re-read their original ZIP archives."
+  },
+  "source_sha256": {
+    "work/migration/restore_local_checkpoint.py": "f7d13e47c4c4c13f33bd7bfa2cf0a556adc23cd3b6aa8a17f4887e0a02a4f794",
+    "work/migration/gtceu_artifact.py": "b7fd70b937fd10833f64dbd26e9daba67b01fbd56fd9e248f294b068b41bc9cc",
+    "locks/gtceu-derived-artifact.json": "b02b680f6a127fe43da6aa811cb212be8c7cb705793b965fcc4b3f1be034dfde",
+    "locks/local-runtime-file-hashes.json": "ea87823d0f74a94f0d59cc224db947ed76217d09b629e8a8ea5e4509dd391bae"
+  },
+  "eula_changed": false,
+  "full_parity": false
+}

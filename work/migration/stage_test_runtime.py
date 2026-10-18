@@ -1,6 +1,8 @@
 from pathlib import Path
 import json,hashlib,shutil,re,datetime,zipfile
+from gtceu_artifact import runtime_jar, RECEIPT
 R=Path(__file__).resolve().parents[2];W=R/'work';O=R/'outputs/GTNH-NeoForge-1.21.1-Migration-Foundation'
+runtime_jar(O)
 # Package the already installed test runtime; do not change launcher accounts or user's system Java.
 runtime=json.loads((W/'migration/runtime.json').read_text(encoding='utf-8'));jhome=Path(runtime['java_home']);dest=O/'runtime'/jhome.name
 dest.parent.mkdir(exist_ok=True);shutil.copytree(jhome,dest,dirs_exist_ok=True)
@@ -35,6 +37,9 @@ foreach ($Entry in $Manifest.files) {
   $Hash = (Get-FileHash -LiteralPath $Path -Algorithm SHA256).Hash.ToLowerInvariant()
   if ($Hash -ne $Entry.sha256) { throw "Changed runtime file: $($Entry.path)" }
 }
+$ExpectedMods = @($Manifest.files | Where-Object { $_.path -like 'mods/*.jar' } | ForEach-Object { [IO.Path]::GetFileName($_.path) } | Sort-Object)
+$ActualMods = @(Get-ChildItem -LiteralPath (Join-Path $Root 'mods') -Filter '*.jar' -File | ForEach-Object { $_.Name } | Sort-Object)
+if (Compare-Object $ExpectedMods $ActualMods) { throw 'Active mod JARs differ from the verified runtime manifest.' }
 $Java = Join-Path $Root 'RUNTIME_JAVA'
 Push-Location -LiteralPath $Root
 try {
@@ -44,7 +49,8 @@ try {
 '''.replace('RUNTIME_JAVA',(Path('runtime')/jhome.name/'bin/java.exe').as_posix().replace('/','\\')).replace('NEO_VERSION',v)
 (O/'start-server-test.ps1').write_text(script,encoding='utf-8-sig')
 if not (O/'start-server-test.cmd').exists(): (O/'start-server-test.cmd').write_text('@echo off\r\ncd /d "%~dp0"\r\npowershell.exe -NoProfile -File "%~dp0start-server-test.ps1" %*\r\npause\r\n',encoding='ascii')
-files=[]
+receipt_path=O/RECEIPT
+files=[{'path':RECEIPT.as_posix(),'bytes':receipt_path.stat().st_size,'sha256':hashlib.sha256(receipt_path.read_bytes()).hexdigest()}]
 for folder in ['runtime','libraries','mods','kubejs','resourcepacks']:
  for p in sorted((O/folder).rglob('*')):
   if p.is_file():

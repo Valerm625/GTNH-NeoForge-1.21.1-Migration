@@ -6,6 +6,7 @@ startup scripts during datagen; its custom registrations are outside this audit.
 """
 from pathlib import Path
 import hashlib, json, os, re, shutil, subprocess, uuid, zipfile
+from gtceu_artifact import runtime_jar, original_jar
 
 R = Path(__file__).resolve().parents[2]
 O = R / 'outputs/GTNH-NeoForge-1.21.1-Migration-Foundation'
@@ -101,8 +102,8 @@ with (OUT/'compile.log').open('wb') as log:
     result = subprocess.run([str(JAVA.with_name('javac.exe')),'@'+str(compile_args)],
                             stdout=log,stderr=subprocess.STDOUT,timeout=60)
 assert result.returncode==0, 'Audit compilation failed; inspect native-registry-check/compile.log'
-pin=json.loads(LIBRARY_PIN.read_text(encoding='utf-8'));gtjar=O/'mods'/pin['gtceu_filename']
-assert sha(gtjar)==pin['gtceu_sha256']
+pin=json.loads(LIBRARY_PIN.read_text(encoding='utf-8'));gtjar=runtime_jar(O)
+assert sha(original_jar())==pin['gtceu_sha256']
 ldjar=classes/'ldlib.jar'
 with zipfile.ZipFile(gtjar) as z:ldjar.write_bytes(z.read(pin['ldlib_entry']))
 assert sha(ldjar)==pin['ldlib_sha256']

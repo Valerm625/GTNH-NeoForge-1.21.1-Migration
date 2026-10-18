@@ -1,6 +1,6 @@
 # GTCEu 7.0.2 的 KubeJS 7.2 源码适配与资源加载
 
-当前实现生成独立的派生 GTCEu JAR，在复制的整包输入中执行真实模组初始化、资源加载和配方事件。基础包中的原始 GTCEu JAR仍保留；派生产物尚未安装到基础包。此阶段验证资源和配方对象，不等于机器运转、客户端渲染或完整 GTNH 迁移完成。
+当前实现生成独立的派生 GTCEu JAR，按来源锁装入基础包与本地测试实例，再在复制的已安装输入中执行真实模组初始化、资源加载和配方事件。原始 GTCEu JAR 移入按摘要命名的缓存，下载来源锁保持不变。此阶段验证资源和配方对象，不等于机器运转、客户端渲染或完整 GTNH 迁移完成。
 
 ## 修复内容
 
@@ -34,10 +34,11 @@
 14 个选定源文件编译为 25 个原有类条目。派生 JAR 的其他 14084 个原始条目逐字节保留，包括全部贴图与其他资源；额外加入一份派生来源元数据。这里证明的是对 7.0.2 原产物的保留，不能代替与 GTNH 旧版贴图的视觉对照。
 
 ```powershell
-python work/migration/build_gtceu_kubejs_bridge.py
+python work/migration/install_gtceu_bridge.py
+python work/migration/test_gtceu_artifact.py
 python work/migration/test_native_resource_bridge.py
 ```
 
 依赖现有基础包、JDK 21 和 `locks/native-client-audit-inputs.json` 对应的本地编译输入。构建目录、派生 JAR、原始输入和详细运行日志在忽略目录 `work/migration/gtceu-kubejs-bridge/`；公开检查结果为 `evidence/NativeResourceBridgeCheck.json`。完整重建入口已加入此检查，旧检查继续保留。
 
-后续要把派生产物的来源、安装与恢复接入版本锁，并重新验证两侧加载和现有兼容补丁。不能简单覆盖原始下载产物、放宽版本锁或移除测试。本阶段由 Codex 单人实现；完整目标保持未完成，任务导出仍为 2/3814。
+安装、来源校验和恢复见[派生模组管理](gtceu-derived-artifact.zh-CN.md)。既有 CoreMod 的目标类、LDLib 及其回调摘要锁保持不变，独立派生锁只允许经过验证的 25 个重编译类和来源元数据。后续继续验证真实机器执行、客户端渲染、noShrink定位与阶段门槛。本阶段由 Codex 单人实现；完整目标保持未完成，任务导出仍为 2/3814。

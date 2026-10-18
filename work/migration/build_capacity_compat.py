@@ -1,13 +1,14 @@
 from pathlib import Path
 import json,subprocess,zipfile,hashlib,re,shutil,io
+from gtceu_artifact import runtime_jar, original_jar
 R=Path(__file__).resolve().parents[2];W=R/'work';O=R/'outputs/GTNH-NeoForge-1.21.1-Migration-Foundation';P=W/'compat-mod';src=P/'src/main/java/org/gtnhmigration/compat';resources=P/'src/main/resources';(src/'mixin').mkdir(parents=True,exist_ok=True);src.mkdir(parents=True,exist_ok=True);(resources/'META-INF').mkdir(parents=True,exist_ok=True)
 legacy=W/'source/GT-New-Horizons-Modpack-master/config/EnderStorage.cfg';text=legacy.read_text(encoding='utf-8');buckets=int(re.search(r'^enderTankSize=(\d+)$',text,re.M).group(1));assert buckets==256
-gtpin=json.loads((R/'locks/gtceu-client-isolation.json').read_text(encoding='utf-8'));gtjar=O/'mods'/gtpin['filename']
-assert hashlib.sha256(gtjar.read_bytes()).hexdigest()==gtpin['sha256'],'Re-audit GTCEu client isolation for changed upstream artifact'
+gtpin=json.loads((R/'locks/gtceu-client-isolation.json').read_text(encoding='utf-8'));gtjar=runtime_jar(O)
+assert hashlib.sha256(original_jar().read_bytes()).hexdigest()==gtpin['sha256'],'Re-audit GTCEu client isolation for changed upstream artifact'
 with zipfile.ZipFile(gtjar) as z:
  for name,digest in gtpin['classes'].items():assert hashlib.sha256(z.read(name)).hexdigest()==digest,name
  librarypin=json.loads((R/'locks/library-client-callbacks.json').read_text(encoding='utf-8'))
- assert gtjar.name==librarypin['gtceu_filename'] and gtpin['sha256']==librarypin['gtceu_sha256']
+ assert original_jar().name==librarypin['gtceu_filename'] and gtpin['sha256']==librarypin['gtceu_sha256']
  ldbytes=z.read(librarypin['ldlib_entry'])
  assert hashlib.sha256(ldbytes).hexdigest()==librarypin['ldlib_sha256'],'Changed nested LDLib; re-audit client callbacks'
  with zipfile.ZipFile(io.BytesIO(ldbytes)) as ld:

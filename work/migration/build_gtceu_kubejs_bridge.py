@@ -14,6 +14,7 @@ import subprocess
 import urllib.request
 import uuid
 import zipfile
+from gtceu_artifact import cache_original, pins
 
 R = Path(__file__).resolve().parents[2]
 O = R / "outputs/GTNH-NeoForge-1.21.1-Migration-Foundation"
@@ -60,7 +61,7 @@ def build(old_output_control=False):
             path.write_bytes(content)
         if digest(path.read_bytes()) != pin["sha256"]:
             raise ValueError("Dependency hash mismatch: " + name)
-    original = O / "mods" / lock["original_jar"]
+    original = cache_original()
     assert digest(original.read_bytes()) == lock["original_sha256"]
     assert digest((O / "mods" / lock["kubejs_jar"]).read_bytes()) == lock["kubejs_sha256"]
     run = OUT / str(uuid.uuid4())
@@ -91,7 +92,8 @@ def build(old_output_control=False):
             sources.append(target)
             applied[name] = digest(content)
         (run / "lombok.config").write_bytes(archive.read(lock["source_root"] + "lombok.config"))
-    libraries = classpath() + [cache / "lombok-1.18.38.jar", cache / "annotations-26.0.1.jar"]
+    libraries = [p for p in classpath() if p.name not in (lock["original_jar"], pins()["filename"])]
+    libraries += [original, cache / "lombok-1.18.38.jar", cache / "annotations-26.0.1.jar"]
     # Compile retained client methods too; these inputs are not added to the
     # dedicated-server runtime or used to strip any rendering implementation.
     client_pin = read(R / "locks/native-client-audit-inputs.json")["cache_files_sha256"]

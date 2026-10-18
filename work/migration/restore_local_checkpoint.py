@@ -18,14 +18,20 @@ import subprocess
 import sys
 import time
 import zipfile
+from gtceu_artifact import pins as gtceu_pins, verify_original, verify_derived, receipt as gtceu_receipt, RECEIPT as GTCEU_RECEIPT
 
 ROOT = Path(__file__).resolve().parents[2]
 FOUNDATION = Path('outputs/GTNH-NeoForge-1.21.1-Migration-Foundation')
 REPORT = Path('work/migration/local-checkpoint-restore.json')
 GENERATED_COMPAT = 'gtnh-migration-compat-0.1.0.jar'
+GENERATED_GTCEU = 'gtceu-1.21.1-7.0.2-gtnh-kubejs72.jar'
 REBUILD_FILES = {
     (FOUNDATION / 'mods' / GENERATED_COMPAT).as_posix(),
     'work/neoforge-smoke/mods/' + GENERATED_COMPAT,
+    (FOUNDATION / 'mods' / GENERATED_GTCEU).as_posix(),
+    'work/neoforge-smoke/mods/' + GENERATED_GTCEU,
+    (FOUNDATION / GTCEU_RECEIPT).as_posix(),
+    ('work/neoforge-smoke/' + GTCEU_RECEIPT.as_posix()),
 }
 TREES = (
     'work/cache', 'work/exact-sources', 'work/runtime', 'work/neoforge-smoke',
@@ -105,6 +111,58 @@ def verify_source_archive(archive, extracted):
     return len(expected)
 
 
+def verify_mod_inputs(source, target):
+    result = {}
+    artifacts = read_json(target / 'locks/artifacts.lock.json')['artifacts']
+    ftb = read_json(target / 'locks/ftb-candidates.json')
+    output_artifacts = read_json(source / FOUNDATION / 'docs/artifacts.lock.json')['artifacts']
+    if output_artifacts != artifacts:
+        raise RestoreError('The original output artifact definitions differ from the checkpoint lock')
+    original_ftb = read_json(source / FOUNDATION / 'docs/ftb-candidates.json')
+    without_source_path = lambda rows: [{k: v for k, v in row.items() if k != 'sources_jar'} for row in rows]
+    if without_source_path(original_ftb) != without_source_path(ftb):
+        raise RestoreError('The original output FTB definitions differ from the checkpoint lock')
+    pin = gtceu_pins(target)
+    base = source / 'work/cache/original-artifacts' / pin['original_sha256'] / pin['original_filename']
+    verify_original(base, target)
+    expected_names = ({row['filename'] for row in artifacts + ftb} - {pin['original_filename']}) | {GENERATED_COMPAT, pin['filename']}
+    for folder in (source / FOUNDATION / 'mods', source / 'work/neoforge-smoke/mods'):
+        if {p.name for p in folder.glob('*.jar')} != expected_names:
+            raise RestoreError(f'Unexpected or missing active mod JARs: {folder}')
+        verify_derived(folder / pin['filename'], target, base)
+        if read_json(folder.parent / GTCEU_RECEIPT) != gtceu_receipt(target):
+            raise RestoreError(f'Derived GTCEu installation receipt differs: {folder}')
+    for row in artifacts:
+        if row['filename'] == pin['original_filename']:
+            continue  # Download identity checked against the immutable original cache above.
+        hashes = row['hashes']
+        algorithm = 'sha512' if 'sha512' in hashes else 'sha1'
+        require_digest(source / FOUNDATION / 'mods' / row['filename'], hashes[algorithm], algorithm)
+        require_digest(source / 'work/neoforge-smoke/mods' / row['filename'], hashes[algorithm], algorithm)
+    for row in ftb:
+        require_digest(source / FOUNDATION / 'mods' / row['filename'], row['sha256'])
+        require_digest(source / 'work/neoforge-smoke/mods' / row['filename'], row['sha256'])
+    compat = read_json(target / 'locks/compat-mod.lock.json')
+    if compat['filename'] != GENERATED_COMPAT:
+        raise RestoreError('Unexpected local adapter artifact; recovery policy needs review')
+    original_compat = read_json(source / FOUNDATION / 'docs/compat-mod.lock.json')
+    actual_compat = digest(source / FOUNDATION / 'mods' / GENERATED_COMPAT)
+    if original_compat['sha256'] != actual_compat:
+        raise RestoreError('The original workspace local adapter differs from its own lock')
+    result['upstream_mods_verified'] = len(artifacts) + len(ftb)
+    result['local_compat_jar_imported'] = False
+    result['local_compat_requires_rebuild'] = {
+        'filename': GENERATED_COMPAT, 'checkpoint_sha256': compat['sha256'],
+        'source_workspace_sha256': actual_compat,
+        'matches_checkpoint': actual_compat == compat['sha256'],
+        'reason': 'Rebuild locally generated code from the preserved tracked source before any loader run.',
+    }
+    result['derived_gtceu_imported'] = False
+    result['derived_gtceu_requires_source_rebuild'] = True
+    result['derived_gtceu_verified_sha256'] = pin['sha256']
+    return result
+
+
 def verify_inputs(source, target):
     result = {}
     platform = read_json(target / 'locks/platform-lock.json')
@@ -128,42 +186,7 @@ def verify_inputs(source, target):
         count = verify_source_archive(archive, source / 'work/exact-sources' / repo / lock['tag'])
         result['source_archives'].append({'repository': lock['repository'], 'tag': lock['tag'], 'files_verified': count})
         print('SOURCE_LOCK_VERIFIED', repo, count, flush=True)
-    artifacts = read_json(target / 'locks/artifacts.lock.json')['artifacts']
-    ftb = read_json(target / 'locks/ftb-candidates.json')
-    output_artifacts = read_json(source / FOUNDATION / 'docs/artifacts.lock.json')['artifacts']
-    if output_artifacts != artifacts:
-        raise RestoreError('The original output artifact definitions differ from the checkpoint lock')
-    original_ftb = read_json(source / FOUNDATION / 'docs/ftb-candidates.json')
-    without_source_path = lambda rows: [{k: v for k, v in row.items() if k != 'sources_jar'} for row in rows]
-    if without_source_path(original_ftb) != without_source_path(ftb):
-        raise RestoreError('The original output FTB definitions differ from the checkpoint lock')
-    expected_names = {row['filename'] for row in artifacts + ftb} | {GENERATED_COMPAT}
-    for folder in (source / FOUNDATION / 'mods', source / 'work/neoforge-smoke/mods'):
-        if {p.name for p in folder.glob('*.jar')} != expected_names:
-            raise RestoreError(f'Unexpected or missing active mod JARs: {folder}')
-    for row in artifacts:
-        hashes = row['hashes']
-        algorithm = 'sha512' if 'sha512' in hashes else 'sha1'
-        require_digest(source / FOUNDATION / 'mods' / row['filename'], hashes[algorithm], algorithm)
-        require_digest(source / 'work/neoforge-smoke/mods' / row['filename'], hashes[algorithm], algorithm)
-    for row in ftb:
-        require_digest(source / FOUNDATION / 'mods' / row['filename'], row['sha256'])
-        require_digest(source / 'work/neoforge-smoke/mods' / row['filename'], row['sha256'])
-    compat = read_json(target / 'locks/compat-mod.lock.json')
-    if compat['filename'] != GENERATED_COMPAT:
-        raise RestoreError('Unexpected local adapter artifact; recovery policy needs review')
-    original_compat = read_json(source / FOUNDATION / 'docs/compat-mod.lock.json')
-    actual_compat = digest(source / FOUNDATION / 'mods' / GENERATED_COMPAT)
-    if original_compat['sha256'] != actual_compat:
-        raise RestoreError('The original workspace local adapter differs from its own lock')
-    result['upstream_mods_verified'] = len(artifacts) + len(ftb)
-    result['local_compat_jar_imported'] = False
-    result['local_compat_requires_rebuild'] = {
-        'filename': GENERATED_COMPAT, 'checkpoint_sha256': compat['sha256'],
-        'source_workspace_sha256': actual_compat,
-        'matches_checkpoint': actual_compat == compat['sha256'],
-        'reason': 'Rebuild locally generated code from the preserved tracked source before any loader run.',
-    }
+    result.update(verify_mod_inputs(source, target))
     runtime_rows = read_json(target / 'locks/local-runtime-file-hashes.json')['files']
     runtime_rows = [row for row in runtime_rows if row['path'] != 'mods/' + GENERATED_COMPAT]
     result['runtime_files_verified'] = verify_inventory(source / FOUNDATION, runtime_rows)
@@ -226,7 +249,7 @@ def build_plan(source, target, tracked):
                 if rel in tracked:
                     preserved.append(rel)
                     continue
-                if rel in REBUILD_FILES or rel == 'work/migration/runtime.json' or name.endswith(('.part', '.pyc', '.class', '.args')):
+                if rel in REBUILD_FILES or rel.startswith('work/migration/gtceu-kubejs-bridge/') or rel == 'work/migration/runtime.json' or name.endswith(('.part', '.pyc', '.class', '.args')):
                     skipped.append(rel)
                     continue
                 src, dst = safe_path(source, relative), safe_path(target, relative)

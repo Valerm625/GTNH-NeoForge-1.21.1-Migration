@@ -1,7 +1,7 @@
 {
   "portable_java_21": "packaged binary -version passes",
   "neoforge_server_installation": "21.1.262 installed; actual loader stops at unaccepted EULA",
-  "modern_artifacts": "18 downloaded JARs + 1 local version-pinned adapter; 60 dependency ranges passed",
+  "modern_artifacts": "17 original upstream JARs + 1 source-built GTCEu derivative + 1 local version-pinned adapter; 60 dependency ranges passed",
   "original_release": "2.8.4 isolated and CRC-verified",
   "currency_items": 81,
   "currency_assembler_recipes": 112,
@@ -16,7 +16,7 @@
   "early_game_recipe_definitions": 3,
   "animated_texture_files": 31,
   "creative_tabs": 8,
-  "runtime_input_files": 2036,
+  "runtime_input_files": 2037,
   "quest_stack_identities_mapped": 720,
   "active_modern_quests": 2,
   "active_top_level_jars": 19,

@@ -1,10 +1,15 @@
 from pathlib import Path
 import json,zipfile,io,tomllib,hashlib,subprocess,re,collections,datetime
 from PIL import Image
+from gtceu_artifact import runtime_jar, pins as gtceu_pins
 R=Path(__file__).resolve().parents[2];W=R/'work';O=R/'outputs/GTNH-NeoForge-1.21.1-Migration-Foundation';D=O/'docs/verification';D.mkdir(exist_ok=True)
 def h(p,alg='sha256'):return hashlib.new(alg,p.read_bytes()).hexdigest()
 lock=json.loads((O/'docs/artifacts.lock.json').read_text(encoding='utf-8'));ftb=json.loads((O/'docs/ftb-candidates.json').read_text(encoding='utf-8'))
 expected={x['filename']:x for x in lock['artifacts']};expected.update({x['filename']:x for x in ftb});actual={p.name:p for p in (O/'mods').glob('*.jar')}
+gtpin=gtceu_pins(); runtime_jar(O)
+assert gtpin['original_filename'] in expected
+del expected[gtpin['original_filename']]
+expected[gtpin['filename']]={'sha256':gtpin['sha256']}
 compatpath=O/'docs/compat-mod.lock.json'
 if compatpath.exists():
     compat=json.loads(compatpath.read_text(encoding='utf-8'));expected[compat['filename']]=compat

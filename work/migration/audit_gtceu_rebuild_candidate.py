@@ -17,6 +17,7 @@ import subprocess
 import tarfile
 import tomllib
 import zipfile
+from gtceu_artifact import original_jar
 
 ROOT = Path(__file__).resolve().parents[2]
 FOUNDATION = ROOT / "outputs/GTNH-NeoForge-1.21.1-Migration-Foundation"
@@ -51,7 +52,7 @@ def main():
     def source(path):
         return files[path].decode("utf-8")
 
-    old_jar = FOUNDATION / "mods" / lock["current_gtceu_filename"]
+    old_jar = original_jar()
     kjs_jar = FOUNDATION / "mods" / lock["current_kubejs_filename"]
     for path, key in [(old_jar, "current_gtceu_sha256"), (kjs_jar, "current_kubejs_sha256")]:
         if sha(path.read_bytes()) != lock[key]:

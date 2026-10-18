@@ -1,7 +1,7 @@
 """Real resource reload of the derived GTCEu bridge, including failing controls.
 
 No server/world/player instances. All runs use private copied mods/config/scripts;
-the installed Foundation pack remains unchanged. This does not prove machine
+the installed Foundation pack remains unchanged during testing. This does not prove machine
 execution, rendering, complete GTNH recipes, or complete pack migration.
 """
 from pathlib import Path
@@ -14,6 +14,7 @@ import subprocess
 import uuid
 import zipfile
 from build_gtceu_kubejs_bridge import build, classpath, R, O, OUT, PATCH, read, save
+from gtceu_artifact import runtime_jar, original_jar
 
 
 def sha(path):
@@ -88,6 +89,8 @@ def main():
     eula = (O / "eula.txt").read_bytes()
     assert re.search(rb"(?m)^eula=false\s*$", eula)
     positive = build()
+    installed = runtime_jar(O)
+    assert sha(installed) == positive["jar_sha256"], "Installed artifact differs from fresh source rebuild"
     negative = build(old_output_control=True)
     java = Path(read(R / "work/migration/runtime.json")["java"])
     run = OUT / ("resource-check-" + str(uuid.uuid4()))
@@ -119,12 +122,14 @@ def main():
         directory.mkdir()
         for folder in ("mods", "config", "kubejs"):
             shutil.copytree(O / folder, directory / folder)
-        if bridge:
-            # Only the copied fixture pack is changed; original pinned input stays intact.
-            copied = directory / "mods/gtceu-1.21.1-7.0.2.jar"
-            assert copied.resolve().is_relative_to(run.resolve())
+        if case != "ported":
+            # The positive case uses the installed pack unchanged. Only negative
+            # fixtures replace its verified copy with the corresponding control.
+            copied = directory / "mods" / installed.name
+            assert copied.resolve().is_relative_to(run.resolve()) and sha(copied) == sha(installed)
             copied.unlink()
-            shutil.copy2(R / bridge["jar"], directory / "mods" / Path(bridge["jar"]).name)
+            control = R / bridge["jar"] if bridge else original_jar()
+            shutil.copy2(control, directory / "mods" / control.name)
         shutil.copy2(testmod, directory / "mods" / testmod.name)
         shutil.copy2(R / "work/migration/KubeJSBridgeFixtures.js", directory / "kubejs/server_scripts/99_gtnh_bridge_audit.js")
         replacement = directory / "kubejs/data/gtnh_audit/recipe/assembler/replacement.json"
@@ -181,13 +186,15 @@ def main():
     assert snapshot() == before and (O / "eula.txt").read_bytes() == eula
     source_paths = sources + [Path(__file__), R / "work/migration/build_gtceu_kubejs_bridge.py",
                               R / "work/migration/KubeJSBridgeFixtures.js", PATCH, R / "locks/gtceu-kubejs72-build.json",
-                              R / "locks/native-client-audit-inputs.json"]
-    report = {"passed": True, "scope": "isolated derived artifact; actual mod initialization and resource reload without a game world",
+                              R / "locks/native-client-audit-inputs.json", R / "locks/gtceu-derived-artifact.json",
+                              R / "work/migration/gtceu_artifact.py", R / "work/migration/install_gtceu_bridge.py"]
+    report = {"passed": True, "scope": "installed source-built artifact copied into isolated resource checks; no game world",
               "checks": details, "cases": cases, "derived_jar_sha256": positive["jar_sha256"],
               "preserved_original_entries": positive["unchanged_original_entries"],
               "source_sha256": {p.relative_to(R).as_posix(): sha(p) for p in source_paths},
               "foundation_unchanged": True, "eula_accepted": False, "server_world_player_constructed": False,
-              "installed_into_foundation": False, "machine_execution_verified": False,
+              "installed_into_foundation": True, "installed_artifact_matches_fresh_build": True,
+              "input_sha256": before, "machine_execution_verified": False,
               "client_visuals_verified": False, "full_parity": False}
     save(run / "report.json", report)
     save(R / "evidence/NativeResourceBridgeCheck.json", report)

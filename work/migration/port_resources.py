@@ -1,10 +1,11 @@
 """Build conservative, source-traced resource ports. Explicitly track unmigrated assets."""
 from pathlib import Path
+from gtceu_artifact import original_jar
 import zipfile,json,hashlib,io,re,struct,datetime
 from PIL import Image,ImageDraw
 ROOT=Path(__file__).resolve().parents[2];WORK=ROOT/'work';OUT=ROOT/'outputs/GTNH-NeoForge-1.21.1-Migration-Foundation'
 SOURCE=WORK/'source-release-2.8.4/GT New Horizons 2.8.4/.minecraft/mods/gregtech-5.09.51.482.jar'
-TARGET=OUT/'mods/gtceu-1.21.1-7.0.2.jar';REPORT=OUT/'docs/resource-migration';REPORT.mkdir(exist_ok=True)
+TARGET=original_jar();REPORT=OUT/'docs/resource-migration';REPORT.mkdir(exist_ok=True)
 def digest(b):return hashlib.sha256(b).hexdigest()
 def save_json(path,obj):path.parent.mkdir(parents=True,exist_ok=True);path.write_text(json.dumps(obj,ensure_ascii=False,indent=2),encoding='utf-8')
 def png(b):

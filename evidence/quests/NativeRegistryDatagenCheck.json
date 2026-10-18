@@ -179,7 +179,7 @@
     "work/migration/LibraryClientCallbacksCheck.java": "322c1ba908781e1d0d6b20e5e110ce58c09af30256e2c89fe929970c16a68d2d",
     "work/compat-mod/src/main/resources/coremods/library_client_callbacks.js": "334478bc8d57e236d25d93ed181d8ab034f10b4211fdd640c3f8f524737e68e8",
     "locks/library-client-callbacks.json": "be4ce16e2fcdc9b0a913484dfa146d260ddd40b59e8c7846331aeb715c770a47",
-    "work/migration/test_native_registry_datagen.py": "45a6ea2e435b14cabbb6dc40b179b4f6c84a5640c50f3c63495a3b5e8ef7cc73",
+    "work/migration/test_native_registry_datagen.py": "8230cbfcd895f6aab3d27c54cd8b43a4cc5e05913e5e6dda08450b9250befe98",
     "work/migration/acquire_native_client_audit.py": "38aa830027cf861928db5f18f2990ed33b38052ea5f671493f05e8c825a1e366"
   },
   "overlay_inputs_sha256": {
@@ -289,7 +289,7 @@
     "mods/ftb-library-neoforge-2101.1.37.jar": "624c2d2d1cbadb946d967e17757bd5b2d129d4d3ed71f2da0c70607d04476ac2",
     "mods/ftb-quests-neoforge-2101.1.36.jar": "6a39982c4b3afc00b1e788041a4f0d394e1659e3b3a6e5d078cd790bc36d0018",
     "mods/ftb-teams-neoforge-2101.1.11.jar": "e6bcd670493624e6906df872a9c6af4a33fe6405cac57a32c59cd4cd5838c655",
-    "mods/gtceu-1.21.1-7.0.2.jar": "c09a550523e931342a575193cbaad2e4b643e5de2cefe280cd1de540022c6388",
+    "mods/gtceu-1.21.1-7.0.2-gtnh-kubejs72.jar": "86ce239bfd36df2b137c303067aab0dc88b1ae8233101a5431f8a2caa269d6fc",
     "mods/gtnh-migration-compat-0.1.0.jar": "532d9295e203a0f779cedd754685ebc766e58455e5d1ee7baa1a4a5f90fe4c1b",
     "mods/guideme-21.1.19.jar": "2ce254edb931c3c3cf81d69abaf8f4ce5b871bf85e64984f366bf044173bd66a",
     "mods/Jade-1.21.1-NeoForge-15.10.6.jar": "276f1f65a20d04f536989c4f311949d770b52c440c23c2b904a08860f3c93810",

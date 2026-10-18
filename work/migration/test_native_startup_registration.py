@@ -6,6 +6,7 @@ and configurator scanning are checked without hiding reflection diagnostics.
 """
 from pathlib import Path
 import hashlib, json, os, re, shutil, subprocess, uuid, zipfile
+from gtceu_artifact import runtime_jar, original_jar
 
 R = Path(__file__).resolve().parents[2]
 O = R/'outputs/GTNH-NeoForge-1.21.1-Migration-Foundation'
@@ -33,8 +34,8 @@ initial = snapshot()
 eula = (O/'eula.txt').read_bytes()
 assert re.search(rb'(?m)^eula=false\s*$',eula)
 pin = json.loads((R/'locks/gtceu-client-isolation.json').read_text(encoding='utf-8'))
-gtjar = O/'mods'/pin['filename']
-assert sha(gtjar)==pin['sha256']
+gtjar = runtime_jar(O)
+assert sha(original_jar())==pin['sha256']
 with zipfile.ZipFile(COMPAT) as z:
     assert z.read('coremods/gtceu_client_isolation.js')==COREMOD.read_bytes()
     assert z.read('coremods/library_client_callbacks.js')==LIBRARY_COREMOD.read_bytes()

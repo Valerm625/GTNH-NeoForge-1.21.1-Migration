@@ -1,6 +1,8 @@
 from pathlib import Path
 import json,subprocess,datetime,hashlib,shutil
+from gtceu_artifact import runtime_jar
 ROOT=Path(__file__).resolve().parents[2];WORK=ROOT/'work';OUT=ROOT/'outputs/GTNH-NeoForge-1.21.1-Migration-Foundation';SERVER=WORK/'neoforge-smoke'
+runtime_jar(SERVER)
 java=json.loads((WORK/'migration/runtime.json').read_text(encoding='utf-8'))['java']
 v=json.loads((WORK/'migration/platform-lock.json').read_text(encoding='utf-8'))['neoforge']
 assert 'eula=false' in (SERVER/'eula.txt').read_text(encoding='utf-8'), 'Loader probe only allowed with unaccepted EULA'

@@ -83,7 +83,7 @@
     "src/main/java/com/gregtechceu/gtceu/integration/kjs/recipe/GTRecipeSchema.java": "6b26acdd1a0a81a0aab5f1d2f13aedc506e24a9e93e4d0b9b4a177c41b46d884",
     "src/main/java/com/gregtechceu/gtceu/integration/kjs/recipe/components/ContentJS.java": "169d488a7dc1b448dacb615c30f2ff60b299c0a012a489ab4b8aa3456c2a557f"
   },
-  "audit_script_sha256": "c8f705d5fc6b743f4645e9621711803e31389575d59b79ee10d95ed9377cbd59",
+  "audit_script_sha256": "6726979626fab20fd46a7005c639a673c10fbbe0764903201ae2c87409709460",
   "current_artifacts": {
     "current_gtceu_filename": "gtceu-1.21.1-7.0.2.jar",
     "current_gtceu_sha256": "c09a550523e931342a575193cbaad2e4b643e5de2cefe280cd1de540022c6388",

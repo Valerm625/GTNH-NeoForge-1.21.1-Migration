@@ -1,9 +1,14 @@
 {
   "source_sha256": {
-    "work/migration/stage_test_runtime.py": "c684fc20987a1fedd5f463fdb5eb9f56812ec2fde26b511c3f9ac5c955f531b6"
+    "work/migration/stage_test_runtime.py": "cbf52e87ae4e9e73608e389ab7f45742cca03ace8ddcedfadb07c6093c0a0d41"
   },
-  "created_at": "2026-10-18T12:35:09.448875+00:00",
+  "created_at": "2026-10-18T12:52:53.033683+00:00",
   "files": [
+    {
+      "path": "docs/gtceu-derived-artifact.json",
+      "bytes": 582,
+      "sha256": "f06754c9452b2bcbadf707cc567f1f35c5cd79472c68e61617ff5681affee9d6"
+    },
     {
       "path": "runtime/zulu21.52.203-ca-crac-jdk21.0.12.1-win_x64/bin/api-ms-win-core-console-l1-1-0.dll",
       "bytes": 22056,
@@ -3495,9 +3500,9 @@
       "sha256": "e6bcd670493624e6906df872a9c6af4a33fe6405cac57a32c59cd4cd5838c655"
     },
     {
-      "path": "mods/gtceu-1.21.1-7.0.2.jar",
-      "bytes": 16555448,
-      "sha256": "c09a550523e931342a575193cbaad2e4b643e5de2cefe280cd1de540022c6388"
+      "path": "mods/gtceu-1.21.1-7.0.2-gtnh-kubejs72.jar",
+      "bytes": 16579883,
+      "sha256": "86ce239bfd36df2b137c303067aab0dc88b1ae8233101a5431f8a2caa269d6fc"
     },
     {
       "path": "mods/gtnh-migration-compat-0.1.0.jar",
