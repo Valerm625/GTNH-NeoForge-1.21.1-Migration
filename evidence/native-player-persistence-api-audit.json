@@ -8,7 +8,12 @@
     "net/minecraft/world/entity/player/Inventory.class": "8aeacbdfd1f94bf308bebd52c56c09b11bcc9b08cf54676eafc6314b6ff445b1",
     "net/minecraft/world/level/storage/PlayerDataStorage.class": "96c286bd429ca4c7249c15d033a3a27a481c08de78cbaa8b743944668c6bce21",
     "net/minecraft/world/entity/Entity.class": "4f65b7d5d4628e9f10a6a23e5a0f68814520d8019f4bc001924cd752c00eed84",
-    "net/minecraft/server/level/ServerPlayer.class": "ec7c90a8b6a771cfd53b5038f377a72314b9efbf2301ed1ce540723b7d19c6d2"
+    "net/minecraft/server/level/ServerPlayer.class": "ec7c90a8b6a771cfd53b5038f377a72314b9efbf2301ed1ce540723b7d19c6d2",
+    "net/minecraft/server/players/PlayerList.class": "c7ed33824878b591e2c8440d392b1a2fbecb152e51c0873ae02bf148e43de430",
+    "net/minecraft/world/entity/player/Player.class": "277a886c7267e82baa4378282e3c892f16338c0a6a779f1cf361a0af7d7b09fd",
+    "net/minecraft/server/MinecraftServer.class": "3f1b7a260a249ae836d9d71bf0a0fe7575b62aff48f2b8fac10dd06aaa9efd2f",
+    "net/minecraft/world/level/storage/LevelStorageSource$LevelStorageAccess.class": "d6cc03db1b690e97f316388e0dc740c6300db856ecfeab5bacd161d7aacccd52",
+    "net/minecraft/world/level/storage/PrimaryLevelData.class": "b5eac29d33c7536e1dfd5a66bfbf59f95bf92f8a2ce9f9d86eeddcd1f0feb36e"
   },
   "inventory_save_method_same_after_constant_pool_index_and_spacing_normalization": true,
   "observations": {
@@ -16,12 +21,19 @@
     "player_save": "Direct saveWithoutId -> writeCompressed temporary -> Util.safeReplaceFile -> firePlayerSavingEvent. Method catches Exception, logs warning, returns void; return is not persistence acknowledgement.",
     "player_load": "load .dat, with .dat_old fallback after failed primary; future coordinator must verify authoritative file and transaction marker before admission.",
     "entity_persistent_data": "getPersistentData stored under root NeoForgeData; transaction marker belongs inside that compound.",
-    "clone_persistent_scope": "ServerPlayer.restoreFrom preserves only getPersistentData()[PlayerPersisted] before EventHooks.onPlayerClone; journal runner checks 15 pinned bytecode instructions. V2 transaction markers belong inside this subtree."
+    "clone_persistent_scope": "ServerPlayer.restoreFrom preserves only getPersistentData()[PlayerPersisted] before EventHooks.onPlayerClone; journal runner checks 15 pinned bytecode instructions. V2 transaction markers belong inside this subtree.",
+    "player_list_authority": "PlayerList.load uses WorldData.getLoadedPlayerTag for isSingleplayerOwner when nonnull; otherwise delegates to PlayerDataStorage.load. UUID.dat alone cannot confirm integrated-owner persistence.",
+    "admission_order": "placeNewPlayer calls load before adding the player to its players list and before firePlayerLoggedIn; a logged-in event is too late to prevent native load fallback.",
+    "removal_order": "remove invokes firePlayerLoggedOut, save, then removePlayerImmediately; ordinary disconnect is not a no-save quarantine.",
+    "player_data_version": "Player.addAdditionalSaveData invokes NbtUtils.addCurrentDataVersion before Inventory.save. Checking Entity/PlayerDataStorage alone misses this call.",
+    "world_player_save": "MinecraftServer.saveAllChunks supplies PlayerList.getSingleplayerData to LevelStorageAccess.saveDataTag; PrimaryLevelData stores Player inside the Data compound. This does not verify integrated client cache implementation or actual saving."
   },
   "limitations": [
     "Static inspection does not validate actual Player, event hooks, transformed mod behavior, crash atomicity or power-loss persistence.",
     "Proposal test uses Inventory(null), actual ItemStack codecs and fixture slot encoding; Inventory.save itself is not called.",
-    "Native PlayerDataStorage save differs from asynchronous SavedData.save; do not transfer that API assumption."
+    "Native PlayerDataStorage save differs from asynchronous SavedData.save; do not transfer that API assumption.",
+    "IntegratedPlayerList client implementation and native owner save/cache coordination remain unverified. The compiled UUID-only submit adapter now rejects the integrated owner before writing; this is an explicit incomplete feature."
   ],
-  "native_clone_executed": false
+  "native_clone_executed": false,
+  "authority_audit_report": "evidence/quests/LegacyWorldPlayerAuthorityCheck.json"
 }

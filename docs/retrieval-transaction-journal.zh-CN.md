@@ -51,7 +51,7 @@ python -u work/migration/test_legacy_player_data_file_reader.py
 5. 处理账本增长、容量扩展、历史整理及外部删除完整尾部历史的检测限制。
 6. 验证完整NeoForge转换链及实际Player/世界保存，不能从基础类和夹具通过推断已完成。
 
-当前28项完整重建检查通过；日志、候选、文件读取及提交协调类已经与兼容JAR对应类逐字节核验。完整任务迁移仍为未完成，依赖闭合实际导出仍为2/3814，旧物品身份映射仍为720/8388。
+当前29项完整重建检查通过；日志、候选、文件读取及提交协调类已经与兼容JAR对应类逐字节核验。完整任务迁移仍为未完成，依赖闭合实际导出仍为2/3814，旧物品身份映射仍为720/8388。
 
 ## 原生保存API的静态证据
 
@@ -82,3 +82,7 @@ gzip必须恰有一个完整成员，支持标准可选头字段，校验头校�
 ## 协调流程更新
 
 [提交协调器](retrieval-commit-coordinator.zh-CN.md)现已串联基线确认、准备、实际库存应用、标记替换、保存/读回和条件回滚。164项组合断言验证合成保存端与真实库存/文件的交互。原生ServerPlayer/PlayerDataStorage适配代码已编译，未实际执行或注册；正常取消的原物品对象恢复已实现，失败后的生命周期隔离及登录恢复仍需完成。上文的世界、队伍、完整身份、奖励/UI、容量与掉电验收要求继续保留。
+
+## 世界玩家来源更新
+
+单人房主可从level.dat/Data.Player加载，不能用UUID.dat镜像确认其事务。[存档来源协议](player-storage-authority.zh-CN.md)新增显式WORLD_PLAYER准备记录（schema_version=2）及文件Snapshot来源检查；既有PLAYER_FILE准备仍保持schema_version=1和原字节。resolveFromWorldPlayer仅接收世界来源，旧裸NBT及resolveFromPlayerDirectory仅接收UUID文件来源。来源不符即使玩家内容相同也拒绝。47项夹具断言及原生字节码审计通过，世界/房主保存与生命周期集成仍未完成。

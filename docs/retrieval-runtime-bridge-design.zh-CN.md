@@ -170,3 +170,5 @@ Phase 5 已实现[真实库存快照及内存计数应用](retrieval-inventory-b
 事务日志、actual Inventory到原生形状玩家NBT候选及expectedHead绑定已实现，见[事务日志与候选](retrieval-transaction-journal.zh-CN.md)。53项日志断言/7个进程中断场景、68项库存组合断言、40项当前UUID.dat读回断言与27份完整重建汇总通过。文件读回拒绝旧备份回退，可驱动日志提交或取消；保存器及玩家内容仍是合成夹具。上文的原生保存协调、持续写入隔离、取消后内存恢复、登录/死亡/克隆隔离、完成/奖励和网络UI要求全部保留。
 
 后续提交协调流程已实现，见[协调器及原生保存边界](retrieval-commit-coordinator.zh-CN.md)：164项断言覆盖基线、原物品对象条件恢复和账本失败恢复；最新完整汇总为28项。真实ServerPlayer/PlayerDataStorage适配器已编译，尚未执行，仍未实现持续生命周期隔离。其恢复异常不能用普通断线处理，因为断线本身可能写入不确定库存。全游戏入口、网络、完成和奖励仍未注册。
+
+最新[存档来源核对](player-storage-authority.zh-CN.md)补上房主level.dat/Data.Player分支及日志来源绑定，47项新增检查通过，完整汇总为29项。房主缓存和世界保存协调未实现，当前原生提交入口在写入前拒绝该场景。登录恢复必须在PlayerList.load前处理原生来源选择，不能仅依赖LoggedIn事件或UUID.dat读取。

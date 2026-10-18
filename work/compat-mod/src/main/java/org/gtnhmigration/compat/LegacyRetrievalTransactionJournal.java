@@ -6,6 +6,7 @@ import java.util.*;
 import net.minecraft.nbt.*;
 import org.gtnhmigration.compat.LegacyQuestProgressEnvelope.*;
 import org.gtnhmigration.compat.LegacyQuestProgressStoreCodec.*;
+import org.gtnhmigration.compat.LegacyPlayerDataFileReader.Authority;
 
 /** Durable preparation/decision journal carried in the ledger's immutable byte
  * archive. No world/player save hooks are registered. Player writes are an
@@ -34,13 +35,16 @@ public final class LegacyRetrievalTransactionJournal {
         private final CompoundTag beforePlayer, afterPlayer;
         private final State beforeState, afterState;
         private final SourceDocument source;
+        private final Authority authority;
         private Pending(UUID transaction, UUID actor, long revision, String head, int sourceCount,
-                CompoundTag beforePlayer, CompoundTag afterPlayer, State beforeState, State afterState, SourceDocument source) {
+                CompoundTag beforePlayer, CompoundTag afterPlayer, State beforeState, State afterState, SourceDocument source, Authority authority) {
             this.transaction=transaction;this.actor=actor;this.baseRevision=revision;this.baseHead=head;this.baseSourceCount=sourceCount;
             this.beforePlayer=beforePlayer.copy();this.afterPlayer=afterPlayer.copy();this.beforeState=beforeState;this.afterState=afterState;this.source=source;
+            this.authority=authority;
         }
         public UUID transaction() { return transaction; }
         public UUID actor() { return actor; }
+        public Authority authority() { return authority; }
         public Marker marker() { return new Marker(transaction, source.sha256()); }
         /** Proposed player data, not evidence that a live player file contains it. */
         public CompoundTag playerDataToPersist() { return stamp(afterPlayer, marker()); }
@@ -69,7 +73,14 @@ public final class LegacyRetrievalTransactionJournal {
      * An unfinished transaction globally blocks preparing another ledger update.
      */
     public Pending prepare(Optional<String> expectedHead, UUID actor, CompoundTag beforePlayer, CompoundTag afterPlayer, State afterState) throws IOException {
+        return prepare(expectedHead,actor,beforePlayer,afterPlayer,afterState,Authority.PLAYER_FILE);
+    }
+    /** World-player preparation explicitly binds the level.dat authority. The
+     * native integrated-server save/cache coordination is still required.
+     */
+    public Pending prepare(Optional<String> expectedHead, UUID actor, CompoundTag beforePlayer, CompoundTag afterPlayer, State afterState, Authority authority) throws IOException {
         synchronized(store) {
+        Objects.requireNonNull(authority);
         Objects.requireNonNull(expectedHead);
         require(store.current().map(LegacyQuestProgressFileStore.Head::sha256).equals(expectedHead), "Plan was computed from a stale ledger head");
         Scan scan=scan();
@@ -81,7 +92,8 @@ public final class LegacyRetrievalTransactionJournal {
         State before=current.map(h->h.frame().snapshot().state()).orElse(State.empty());
         List<SourceDocument> sources=current.map(h->h.frame().snapshot().sources()).orElse(List.of());
         UUID transaction=UUID.randomUUID();
-        CompoundTag record=new CompoundTag();record.putInt("schema_version",1);record.putString("kind","prepare");
+        CompoundTag record=new CompoundTag();record.putInt("schema_version",authority==Authority.PLAYER_FILE?1:2);record.putString("kind","prepare");
+        if(authority==Authority.WORLD_PLAYER) record.putString("player_authority",authority.name());
         record.putString("transaction",transaction.toString());record.putString("actor",actor.toString());
         record.putLong("base_revision",current.map(h->h.frame().revision()).orElse(0L));
         record.putString("base_head",current.map(LegacyQuestProgressFileStore.Head::sha256).orElse(GENESIS));
@@ -101,8 +113,18 @@ public final class LegacyRetrievalTransactionJournal {
      * Ambiguous, missing, foreign or stale file contents stop recovery.
      */
     public Resolution resolve(CompoundTag actualPlayerData) throws IOException {
+        return resolve(actualPlayerData,Authority.PLAYER_FILE);
+    }
+    /** Source-bound evidence; level.dat transactions cannot be resolved by the
+     * legacy bare-NBT/UUID.dat entry, even if the player contents are identical.
+     */
+    public Resolution resolve(LegacyPlayerDataFileReader.Snapshot file) throws IOException {
+        synchronized(store) { file.verifyUnchanged();return resolve(file.data(),file.authority()); }
+    }
+    private Resolution resolve(CompoundTag actualPlayerData,Authority authority) throws IOException {
         synchronized(store) {
         Scan scan=scan();Pending pending=scan.pending().orElseThrow(()->new IOException("No pending transaction"));
+        require(pending.authority()==authority,"Player evidence comes from the wrong persistence authority");
         Decision decision=pending.decisionFor(actualPlayerData);
         var head=store.current().orElseThrow();
         // Recheck immediately before CAS; other callers must not mutate this store outside the coordinator.
@@ -124,9 +146,16 @@ public final class LegacyRetrievalTransactionJournal {
     public Resolution resolveFromPlayerDirectory(Path playerDirectory) throws IOException {
         synchronized(store) {
             Pending pending=scan().pending().orElseThrow(()->new IOException("No pending transaction"));
+            require(pending.authority()==Authority.PLAYER_FILE,"Transaction requires level.dat player evidence");
             var file=LegacyPlayerDataFileReader.read(playerDirectory,pending.actor());
-            file.verifyUnchanged();
-            return resolve(file.data());
+            return resolve(file);
+        }
+    }
+    public Resolution resolveFromWorldPlayer(Path worldDirectory) throws IOException {
+        synchronized(store) {
+            Pending pending=scan().pending().orElseThrow(()->new IOException("No pending transaction"));
+            require(pending.authority()==Authority.WORLD_PLAYER,"Transaction requires UUID.dat player evidence");
+            return resolve(LegacyPlayerDataFileReader.readWorldPlayer(worldDirectory,pending.actor()));
         }
     }
 
@@ -170,8 +199,9 @@ public final class LegacyRetrievalTransactionJournal {
                 continue;
             }
             CompoundTag record=decode(source.bytes());
-            require(record.get("schema_version") instanceof IntTag && record.getInt("schema_version")==1,"Unknown journal schema");
             String kind=string(record,"kind");
+            require(record.get("schema_version") instanceof IntTag && (record.getInt("schema_version")==1
+                || record.getInt("schema_version")==2 && kind.equals("prepare")),"Unknown journal schema");
             if(kind.equals("prepare")) {
                 require(pending==null,"Overlapping journal preparations");
                 pending=parsePrepared(source);lastPrepared=pending;lastResolution=null;
@@ -209,8 +239,13 @@ public final class LegacyRetrievalTransactionJournal {
     }
     private Pending parsePrepared(SourceDocument source) throws IOException {
         CompoundTag record=decode(source.bytes());
-        fields(record,"schema_version","kind","transaction","actor","base_revision","base_head","base_source_count","before_player","after_player","before_state","after_state");
-        require(record.get("schema_version") instanceof IntTag && record.getInt("schema_version")==1 && string(record,"kind").equals("prepare"),"Invalid preparation schema/kind");
+        require(record.get("schema_version") instanceof IntTag && string(record,"kind").equals("prepare"),"Invalid preparation schema/kind");
+        int version=record.getInt("schema_version");require(version==1 || version==2,"Unknown preparation schema");
+        Set<String> expected=new HashSet<>(Set.of("schema_version","kind","transaction","actor","base_revision","base_head","base_source_count","before_player","after_player","before_state","after_state"));
+        if(version==2) expected.add("player_authority");
+        require(record.getAllKeys().equals(expected),"Missing or unknown preparation fields");
+        Authority authority=Authority.PLAYER_FILE;
+        if(version==2) {require(string(record,"player_authority").equals(Authority.WORLD_PLAYER.name()),"Unknown world-player authority");authority=Authority.WORLD_PLAYER;}
         UUID transaction=uuid(string(record,"transaction")),actor=uuid(string(record,"actor"));
         require(source.identity().equals(PREFIX+transaction+"/prepare"),"Preparation archive identity mismatch");
         require(record.get("base_revision") instanceof LongTag && record.getLong("base_revision")>=0,"Invalid base revision");
@@ -219,7 +254,7 @@ public final class LegacyRetrievalTransactionJournal {
         CompoundTag before=compound(record,"before_player"),after=compound(record,"after_player");
         validatePlayerPair(actor,before,after);
         return new Pending(transaction,actor,record.getLong("base_revision"),parent,record.getInt("base_source_count"),before,after,
-            readState(compound(record,"before_state")),readState(compound(record,"after_state")),source);
+            readState(compound(record,"before_state")),readState(compound(record,"after_state")),source,authority);
     }
     private CompoundTag stateTag(State state) { return LegacyQuestProgressStoreCodec.write(new Frame(1,GENESIS,new Snapshot(binding,state,List.of())),catalog); }
     private State readState(CompoundTag tag) throws IOException {

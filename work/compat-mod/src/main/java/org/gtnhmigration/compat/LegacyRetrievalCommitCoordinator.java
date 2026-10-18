@@ -167,6 +167,10 @@ public final class LegacyRetrievalCommitCoordinator {
         public Path directory(){return storage.getPlayerDir().toPath();}
         public void assertExclusive(){
             if(player.getServer()==null || !player.getServer().isSameThread() || player.isRemoved()) throw new IllegalStateException("Player is not on its active server thread");
+            // Native PlayerList.load may prefer WorldData.getLoadedPlayerTag
+            // for the integrated owner. UUID.dat alone cannot prove its save.
+            if(player.getServer().isSingleplayerOwner(player.getGameProfile()))
+                throw new IllegalStateException("Integrated owner requires level.dat and player-cache coordination before submission");
             barrier.run();
         }
         public CompoundTag capture(){assertExclusive();return player.saveWithoutId(new CompoundTag()).copy();}

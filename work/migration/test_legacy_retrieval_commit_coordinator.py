@@ -33,6 +33,7 @@ report=json.loads(next(line[line.index('{'): ] for line in log.splitlines() if '
 report.update({'source_sha256':{p.relative_to(R).as_posix():hashlib.sha256(p.read_bytes()).hexdigest() for p in sources+[check,Path(__file__)]},'minecraft_jar_sha256':hashlib.sha256(minecraft.read_bytes()).hexdigest(),'neoforge_patched_server_sha256':hashlib.sha256(patched.read_bytes()).hexdigest(),
  'limitations':['Native ServerPlayer/PlayerDataStorage adapter compiles against the pinned NeoForge server but is not executed. Test runtime uses vanilla Inventory(null), NBT codecs, real files and a synthetic save port.',
  'Caller must implement continuous save/inventory/lifecycle exclusion and original authorization/party gates. Assertions and server-thread checks do not install a lifecycle barrier.',
+ 'The native UUID.dat adapter refuses the integrated-server owner before persistence. Its level.dat authority, native cache and world-save coordination remain an explicit implementation gap.',
  'Failure quarantine blocks this store/inventory from another coordinator submission; it does not stop ordinary game ticks, saves, disconnects or admission. No hooks are registered.',
  'Only marker locations and actor count edits are changed; no full player reload, task/reward publication, UI synchronization or world import is implemented.',
  'Save failure scenarios are deterministic boundary injections, not a new JVM/power-loss test or live NeoForge callback test. Oak log predicates are fixtures, not a legacy logWood mapping.']})

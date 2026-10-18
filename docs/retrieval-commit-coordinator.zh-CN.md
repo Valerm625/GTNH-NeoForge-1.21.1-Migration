@@ -2,6 +2,8 @@
 
 `LegacyRetrievalCommitCoordinator` 把已有独立账本、库存桥接、标记和玩家文件读回串成一条提交流程。公开入口接受真实ServerPlayer及PlayerDataStorage，并调用原生saveWithoutId、getPersistentData和save；代码已针对锁定NeoForge server编译。测试通过包内保存接口注入故障，未实际运行ServerPlayer或原生保存方法。当前没有注册游戏事件或提交消息入口。
 
+后续[存档来源审计](player-storage-authority.zh-CN.md)确认单人房主可能使用level.dat/Data.Player。当前原生入口在写入前拒绝isSingleplayerOwner，不能把本类的UUID.dat确认用于房主。显式世界来源读取和日志恢复已实现；房主缓存与世界保存协调仍是必须完成的功能。
+
 ## 提交顺序
 
 1. 校验库存对象属于actor、计划仍可使用、线程与所有参与者槽位未变、账本完整Head等于规划时快照，以及外层授权条件。不能只拿相同摘要包装不同的状态，也不能复用已经尝试过的计划。
@@ -31,7 +33,7 @@ python -u work/migration/test_legacy_retrieval_commit_coordinator.py
 
 报告：`evidence/quests/LegacyRetrievalCommitCoordinatorCheck.json`。runner固定NeoForge server摘要，编译生产原生适配器；执行测试时使用真实原版Inventory(null)、ItemStack/NBT codec和本地文件，保存端及玩家数据为合成夹具。
 
-本轮164项断言通过，已纳入28份完整重建汇总，并核对新增生产类及其嵌套原生适配器与兼容JAR的逐字节一致性。
+本类164项断言通过；加入世界玩家来源47项检查后，最新完整重建汇总为29份。生产类及其嵌套原生适配器与兼容JAR逐字节一致。
 
 覆盖正常提交、整栈/部分扣减、静默失败、发布前后异常、旧标记在准备前升级保存、重复提交、失去授权、跨协调器重入、旧Head/伪造Frame、错误库存对象和缺失隔离。拒绝损坏文件、仅新标记却旧库存、保存后的内存变动、外部替换栈及脱离库存的原对象被改动。账本准备/决策的临时文件强制写入及发布边界另有故障注入，关闭重开后按磁盘恢复，确认不会退款、重扣或改写玩家文件。
 

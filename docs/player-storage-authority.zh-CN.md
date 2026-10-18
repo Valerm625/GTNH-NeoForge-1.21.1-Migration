@@ -1,0 +1,29 @@
+# 玩家持久化来源：UUID.dat 与单人世界 level.dat
+
+原生玩家数据并非总由UUID.dat决定。锁定NeoForge 21.1.262中的PlayerList.load先取得WorldData.getLoadedPlayerTag；当服务器判断当前玩家是单人房主且该标签非null时，直接加载这份玩家NBT。其余分支才调用PlayerDataStorage.load，后者可能回退dat_old。因此只核对UUID.dat不足以证明房主下次登录将读取同一份库存。
+
+这些结论来自固定server JAR的字节码，报告见 `evidence/quests/LegacyWorldPlayerAuthorityCheck.json`。PlayerList加载发生在加入players列表和登录事件之前；退出顺序是LoggedOut事件、保存玩家、移除玩家。Player.addAdditionalSaveData会写入当前DataVersion，随后保存Inventory；此前只查看Entity和PlayerDataStorage不足以确认版本标签来源。
+
+## 显式文件来源
+
+`LegacyPlayerDataFileReader.read(playerDirectory, actor)`保持读取UUID.dat。新增 `readWorldPlayer(worldDirectory, actor)`仅读取level.dat中的Data.Player，验证期望UUID、库存和标记。两者都保留完整压缩字节及整个NBT文档，`data()`返回玩家子树，`documentData()`返回整份文档的深复制。
+
+level.dat缺失、损坏或没有Data.Player时明确拒绝，不自动改用level.dat_old或playerdata/UUID.dat。文件摘要涵盖整个level.dat；即使Player子树未变而其他世界元数据变化，旧快照也不能继续解决事务。读取及日志恢复都不修改世界元数据、玩家镜像或备份。
+
+调用者必须先核实原生加载会使用哪个来源，并保持读回到决策完成期间没有其他写入。本读取器不决定服务器模式、不运行DataFixer，也不替代原生世界缓存。压缩/解压各64MiB和NBT记账256MiB限制继续适用；超限拒绝且保留原件，容量扩展仍待完成。
+
+## 日志来源绑定
+
+原UUID.dat准备记录仍写schema_version=1，按PLAYER_FILE解释，原来源字节保持不变。显式WORLD_PLAYER准备写schema_version=2并携带player_authority字段。来源归档路径格式和决策记录仍为v1；准备记录版本与PlayerPersisted里的标记版本是不同概念。
+
+Pending.authority()在关闭重开后仍可读。resolveFromWorldPlayer只接受WORLD_PLAYER，resolveFromPlayerDirectory只接受PLAYER_FILE。接收文件Snapshot的resolve先重新检查全文摘要，再检查来源及玩家数据。旧的裸NBT resolve仅允许PLAYER_FILE，不能绕过WORLD_PLAYER的来源验证。错误文件来源即使具有相同UUID、库存和事务标记也被拒绝，账本不前进。
+
+47项断言包括完整世界文档和原始压缩字节保留、深复制、外层元数据变化、损坏/缺失主文件及有效备份、玩家镜像与世界文件状态相反、重开恢复、旧schema兼容和4种日志来源字段损坏。使用真实Minecraft NBT库和独立账本，但世界文件、玩家数据及写入器为合成夹具。
+
+## 原生提交的待完成部分
+
+当前原生提交适配器只协调UUID.dat。它现在在任何持久化修改之前检查isSingleplayerOwner并拒绝未适配的房主提交，防止错误确认事务。此拒绝明确是临时实现缺口；单人世界支持属于完整迁移目标，不能作为最终删减。
+
+接下来必须查清并接入集成服务器的玩家缓存、世界saveDataTag/level.dat发布以及它们与玩家文件的顺序；不能仅增加一次PlayerDataStorage.save后宣称支持单人。还要处理缓存与磁盘的取消恢复、世界类型切换、缺失Player标签的首次保存、原生备份回退、加载前恢复、退出/死亡/克隆期间隔离，并执行真实游戏测试。现有服务端工件提供公共加载/世界保存字节码证据，尚未检查客户端IntegratedPlayerList的完整实现。
+
+当前29份完整重建汇总通过，新增来源检查中的生产类与兼容JAR逐字节一致。没有实际调用Player、登录/退出事件或原生世界保存，真实玩家存档fixture仍为0。任务导出仍为2/3814，完整迁移未完成。

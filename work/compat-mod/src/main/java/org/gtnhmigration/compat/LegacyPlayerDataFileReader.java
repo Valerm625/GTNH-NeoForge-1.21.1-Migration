@@ -7,12 +7,14 @@ import java.util.*;
 import java.util.zip.*;
 import net.minecraft.nbt.*;
 
-/** Reads only the authoritative UUID.dat, never dat_old or a temporary file.
+/** Reads an explicit UUID.dat or level.dat/Data/Player authority, never a
+ * backup, temporary file or alternative player mirror as fallback.
  * Caller must exclude concurrent native saves/other writers for the entire
  * recovery operation. Attribute/digest checks detect changes, not an OS-wide
  * transaction lock. No Player, data fixer, load event, or file write is invoked.
  */
 public final class LegacyPlayerDataFileReader {
+    public enum Authority { PLAYER_FILE, WORLD_PLAYER }
     public static final int MAX_COMPRESSED_BYTES=64*1024*1024;
     public static final int MAX_DECOMPRESSED_BYTES=64*1024*1024;
     private LegacyPlayerDataFileReader() {}
@@ -21,29 +23,42 @@ public final class LegacyPlayerDataFileReader {
         private final UUID actor;
         private final byte[] bytes;
         private final CompoundTag data;
+        private final CompoundTag document;
+        private final Authority authority;
         private final String sha256;
-        private Snapshot(Path directory,UUID actor,byte[] bytes,CompoundTag data) {
+        private Snapshot(Path directory,UUID actor,byte[] bytes,CompoundTag data,CompoundTag document,Authority authority) {
             this.directory=directory;this.actor=actor;this.bytes=bytes.clone();this.data=data.copy();
+            this.document=document.copy();this.authority=authority;
             this.sha256=LegacyQuestProgressStoreCodec.digest(bytes);
         }
-        public Path path(){return directory.resolve(actor+".dat");}
+        public Path path(){return directory.resolve(authority==Authority.PLAYER_FILE?actor+".dat":"level.dat");}
         public UUID actor(){return actor;}
+        public Authority authority(){return authority;}
         public String sha256(){return sha256;}
         public byte[] originalBytes(){return bytes.clone();}
         public CompoundTag data(){return data.copy();}
+        public CompoundTag documentData(){return document.copy();}
         public void verifyUnchanged()throws IOException {
-            Snapshot current=read(directory,actor);
+            Snapshot current=read(directory,actor,authority,path->{});
             require(current.sha256.equals(sha256),"Player file changed after snapshot");
         }
     }
     @FunctionalInterface interface ReadObserver {void bytesRead(Path path)throws IOException;}
     public static Snapshot read(Path directory,UUID actor)throws IOException {return read(directory,actor,path->{});}
+    /** Explicit level.dat/Data/Player source for an integrated-server owner.
+     * Does not fall back to playerdata/UUID.dat or level.dat_old. The caller
+     * must establish that this is the native load authority for this player.
+     */
+    public static Snapshot readWorldPlayer(Path worldDirectory,UUID actor)throws IOException {return read(worldDirectory,actor,Authority.WORLD_PLAYER,path->{});}
     static Snapshot read(Path directory,UUID actor,ReadObserver observer)throws IOException {
+        return read(directory,actor,Authority.PLAYER_FILE,observer);
+    }
+    private static Snapshot read(Path directory,UUID actor,Authority authority,ReadObserver observer)throws IOException {
         Objects.requireNonNull(directory);Objects.requireNonNull(actor);Objects.requireNonNull(observer);
         Path root=directory.toAbsolutePath().normalize();
         BasicFileAttributes rootBefore=attributes(root);
         require(rootBefore.isDirectory() && !rootBefore.isSymbolicLink(),"Player directory is not a real directory");
-        Path path=root.resolve(actor+".dat");BasicFileAttributes before=attributes(path);
+        Path path=root.resolve(authority==Authority.PLAYER_FILE?actor+".dat":"level.dat");BasicFileAttributes before=attributes(path);
         require(before.isRegularFile() && !before.isSymbolicLink(),"Player file is not a regular file");
         require(before.size()>0 && before.size()<=MAX_COMPRESSED_BYTES,"Player file size is unsupported");
         byte[] raw;
@@ -60,12 +75,19 @@ public final class LegacyPlayerDataFileReader {
             data=NbtIo.read(input,NbtAccounter.create(256L*1024*1024));
             require(data!=null && input.read()==-1,"Player file has no single complete NBT root");
         } catch(RuntimeException failure) {throw new IOException("Player NBT cannot be read losslessly",failure);}
-        require(data.get("UUID") instanceof IntArrayTag && data.getIntArray("UUID").length==4 && data.getUUID("UUID").equals(actor),"Player file UUID does not match filename");
+        CompoundTag document=data;
+        if(authority==Authority.WORLD_PLAYER) {
+            require(document.get("Data") instanceof CompoundTag,"World file has no Data compound");
+            CompoundTag world=document.getCompound("Data");
+            require(world.get("Player") instanceof CompoundTag,"World file has no authoritative Player compound");
+            data=world.getCompound("Player");
+        }
+        require(data.get("UUID") instanceof IntArrayTag && data.getIntArray("UUID").length==4 && data.getUUID("UUID").equals(actor),"Player file UUID does not match expected actor");
         require(data.get("Inventory") instanceof ListTag,"Player inventory list is missing");
         ListTag inventory=(ListTag)data.get("Inventory");
         require(inventory.isEmpty() || inventory.getElementType()==Tag.TAG_COMPOUND,"Player inventory has invalid entry type");
         LegacyRetrievalTransactionJournal.readMarker(data);
-        return new Snapshot(root,actor,raw,data);
+        return new Snapshot(root,actor,raw,data,document,authority);
     }
     private static BasicFileAttributes attributes(Path path)throws IOException {return Files.readAttributes(path,BasicFileAttributes.class,LinkOption.NOFOLLOW_LINKS);}
     private static boolean sameIdentity(BasicFileAttributes a,BasicFileAttributes b){return Objects.equals(a.fileKey(),b.fileKey()) && a.creationTime().equals(b.creationTime());}
