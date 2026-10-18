@@ -17,16 +17,17 @@
     "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestProgressFileStore.java": "075f4b0e66e39aa015cb957116f1196074d5b4fe9e92b6e0838e8e47fe2052a6",
     "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalTransactionJournal.java": "26eea3d9bc8aa2a5306054dae7ec561215b03aa5412bbbbcd55c95092a63dc1a",
     "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyPlayerDataFileReader.java": "eabe4f1e9bb7a55a4fd28693d0c4a88c7dc3d4014054a032f846d0c38fdca643",
-    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestWorldStore.java": "9ae57d86f68d308b1bf99f25fc83b4844bca5b06dae020713a5d64f747029bc2",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestWorldStore.java": "375b2bcdcd7134f4a0b763faf39ff1e5b54eb6b1e82df75e9820f81339a460e8",
     "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestPlayerAdmission.java": "cba4caa7e8bae97328321c106c18891c35ec8f241e59ccec19b40a00cc06ed82",
-    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyPlayerMarkerUpgrade.java": "ac6ac65ad1eb4cfc748546793267a18567bb6eb41b6b3a943a14c8a6939433ae",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyPlayerMarkerUpgrade.java": "e91623c4466571165ca44944850bea09304339242c6c313c97fbc652c5d3bd81",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyMaintenanceInitialization.java": "df687956aabbe1cce6d2d39db794c202d088f9c5004521a382a22445e9872c17",
     "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyPlayerNbtPatch.java": "1c10d4fd907205b4e075a11d99f358c2014fe0d1a9f7c374d1c147c8241b32dc",
-    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyOwnerTransactionRecovery.java": "84bc6aeac8a3b1f228a5cf25701743054ae238c5ccec0adcad4b30d978833af3",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyOwnerTransactionRecovery.java": "251d946b0de210045de15d0bc62eb7a7acf13cca78968c3865bce3c7f8a0609c",
     "work/migration/LegacyPlayerDataFileReaderCheck.java": "27f47442063c7a8fa659f91f8e8e44a80076704310a810d0e09f2c61991d0932",
     "work/migration/LegacyQuestWorldStoreCheck.java": "011a0cb89da8d7d7a559717ac3657030d0e04d51906cedc30cc2a894ba2e31d6",
     "work/migration/LegacyPlayerMarkerUpgradeCheck.java": "e9189adf569384b5144423fafe83436addf8744523b026766b75565c7907a46a",
     "work/migration/LegacyOwnerTransactionRecoveryCheck.java": "b2ba8b5dae39a4ee2d8c3adf6a684d8dbaa9eb624825bbb1ae7d296fc6f38a44",
-    "work/migration/test_legacy_owner_transaction_recovery.py": "86525d215f0403aa45def28da717ac79af9e6b51d021a3f4ac09a7849a6d3f99"
+    "work/migration/test_legacy_owner_transaction_recovery.py": "c4013083343c6c3f4008d5a0b7147c0fce7e337e27c1368ffe8b65ed55d53983"
   },
   "minecraft_jar_sha256": "26ca9c40d7e1681190b428583c38816852218e78df3f8bdb60a59a78503aec71",
   "process_crash_checks": [
@@ -108,6 +109,6 @@
     "The authoritative world file must match a pending WORLD_PLAYER transaction. Only mirrors and loaded caches proven as that same transaction before/after state are repaired; unknown/missing sources remain intact and blocked.",
     "No world-file or backup rewrite. Other mirror/cache fields are preserved. Complete before/after compressed evidence is archived; inventory and marker alone follow the world outcome.",
     "Native loaded NBT may already normalize negative zero. Targeted binary patching preserves unaffected file bytes, not arbitrary native-game round trips.",
-    "Caller excludes live players, native saves and external writers. Machine power-loss durability, arbitrary-mod isolation and incomplete maintenance-directory initialization recovery remain unproven."
+    "Caller excludes live players, native saves and external writers. Machine power-loss durability, arbitrary-mod isolation and ambiguous legacy maintenance-directory initialization recovery remain unproven; new world-bound construction recovery has a separate fixture."
   ]
 }

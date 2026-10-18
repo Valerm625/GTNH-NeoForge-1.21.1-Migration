@@ -31,7 +31,7 @@ public final class LegacyPlayerMarkerUpgrade {
     private LegacyPlayerMarkerUpgrade(){}
 
     static void requireResolved(LegacyQuestWorldStore world)throws IOException {
-        synchronized(world.ledger()){if(exists(root(world)))try(var journal=new Maintenance(world,false)){require(journal.pending().isEmpty(),"Owner recovery cannot overlap pending marker maintenance");}}
+        synchronized(world.ledger()){if(LegacyMaintenanceInitialization.present(world,LegacyMaintenanceInitialization.Kind.MARKER))try(var journal=new Maintenance(world,false)){require(journal.pending().isEmpty(),"Owner recovery cannot overlap pending marker maintenance");}}
     }
     /** Resume a prior intent before permitting native world/player loading.
      * Null cache supplier means no loaded world exists (offline operation).
@@ -41,7 +41,7 @@ public final class LegacyPlayerMarkerUpgrade {
     }
     static boolean resume(LegacyQuestWorldStore world,Supplier<CompoundTag> cache,Runnable barrier,Observer observer)throws IOException {
         synchronized(world.ledger()){
-            barrier.run();world.verifyBinding();if(!exists(root(world)))return false;
+            barrier.run();world.verifyBinding();if(!LegacyMaintenanceInitialization.present(world,LegacyMaintenanceInitialization.Kind.MARKER))return false;
             try(var journal=new Maintenance(world,false)){
                 Optional<Pending> pending=journal.pending();if(pending.isEmpty())return false;
                 LegacyOwnerTransactionRecovery.requireResolved(world);execute(journal,pending.orElseThrow(),cache,barrier,observer);return true;
@@ -58,7 +58,7 @@ public final class LegacyPlayerMarkerUpgrade {
     static boolean promote(LegacyQuestWorldStore world,UUID actor,Authority authority,Supplier<CompoundTag> cache,Runnable barrier,Observer observer)throws IOException {
         synchronized(world.ledger()){
             barrier.run();world.verifyBinding();LegacyOwnerTransactionRecovery.requireResolved(world);
-            if(exists(root(world))){try(var previous=new Maintenance(world,false)){
+            if(LegacyMaintenanceInitialization.present(world,LegacyMaintenanceInitialization.Kind.MARKER)){try(var previous=new Maintenance(world,false)){
                 var pending=previous.pending();if(pending.isPresent()){
                     require(pending.orElseThrow().actor().equals(actor) && pending.orElseThrow().files().getFirst().authority()==authority,"Another marker upgrade requires startup recovery");
                     execute(previous,pending.orElseThrow(),cache,barrier,observer);return true;
@@ -200,15 +200,8 @@ public final class LegacyPlayerMarkerUpgrade {
         Maintenance(LegacyQuestWorldStore world,boolean create)throws IOException {
             this.world=world;root=root(world);blobs=root.resolve("blobs");
             origin=new SourceDocument(PREFIX+"world/"+world.storageId(),world.ledger().origin().orElseThrow().frame().snapshot().sources().getFirst().bytes());
-            boolean fresh=!exists(root);require(!fresh || create,"Marker maintenance directory is missing");
-            if(fresh){Files.createDirectory(root);Files.createDirectory(blobs);}else{directory(root);directory(blobs);directory(root.resolve("ledger"));}
-            try(DirectoryStream<Path> entries=Files.newDirectoryStream(root)){for(Path entry:entries)require(Set.of("blobs","ledger").contains(entry.getFileName().toString()),"Unknown marker-maintenance entry");}
-            ledger=LegacyQuestProgressFileStore.open(root.resolve("ledger"),world.binding(),world.catalog());
-            try{
-                if(fresh)ledger.commit(Optional.empty(),State.empty(),List.of(origin));
-                var first=ledger.origin().orElseThrow(()->new IOException("Marker maintenance origin is missing; refusing reset"));
-                require(first.frame().snapshot().sources().equals(List.of(origin)),"Marker archive belongs to another world");pending();
-            }catch(IOException|RuntimeException|Error failure){try{ledger.close();}catch(IOException close){failure.addSuppressed(close);}throw failure;}
+            ledger=LegacyMaintenanceInitialization.open(world,LegacyMaintenanceInitialization.Kind.MARKER,create);
+            try{pending();}catch(IOException|RuntimeException|Error failure){try{ledger.close();}catch(IOException close){failure.addSuppressed(close);}throw failure;}
         }
         byte[] blob(String hash)throws IOException {
             digestField(hash);Path path=blobs.resolve(hash+".gz");

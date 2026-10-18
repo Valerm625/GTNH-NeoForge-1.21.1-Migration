@@ -31,13 +31,13 @@ public final class LegacyOwnerTransactionRecovery {
     private record Plan(UUID id,long revision,String head,Pending transaction,Decision decision,Snapshot world,Snapshot before,Snapshot after,SourceDocument source) {}
     private LegacyOwnerTransactionRecovery(){}
     static void requireResolved(LegacyQuestWorldStore world)throws IOException {
-        synchronized(world.ledger()){if(exists(root(world)))try(var maintenance=new Maintenance(world,false)){require(maintenance.pending().isEmpty(),"Marker migration cannot overlap pending owner recovery");}}
+        synchronized(world.ledger()){if(LegacyMaintenanceInitialization.present(world,LegacyMaintenanceInitialization.Kind.OWNER))try(var maintenance=new Maintenance(world,false)){require(maintenance.pending().isEmpty(),"Marker migration cannot overlap pending owner recovery");}}
     }
     public static boolean recover(LegacyQuestWorldStore world,Supplier<CompoundTag> cache,Runnable barrier)throws IOException{return recover(world,cache,barrier,point->{});}
     static boolean recover(LegacyQuestWorldStore world,Supplier<CompoundTag> cache,Runnable barrier,Observer observer)throws IOException{
         synchronized(world.ledger()){
             barrier.run();world.verifyBinding();LegacyPlayerMarkerUpgrade.requireResolved(world);
-            if(exists(root(world)))try(var maintenance=new Maintenance(world,false)){
+            if(LegacyMaintenanceInitialization.present(world,LegacyMaintenanceInitialization.Kind.OWNER))try(var maintenance=new Maintenance(world,false)){
                 var pending=maintenance.pending();if(pending.isPresent()){execute(maintenance,pending.orElseThrow(),cache,barrier,observer);return true;}
             }
             var progress=progress(world);var pending=progress.pending();
@@ -104,12 +104,8 @@ public final class LegacyOwnerTransactionRecovery {
         final LegacyQuestWorldStore world;final Path root,blobs;final LegacyQuestProgressFileStore ledger;final SourceDocument origin;
         Maintenance(LegacyQuestWorldStore world,boolean create)throws IOException{
             this.world=world;root=root(world);blobs=root.resolve("blobs");origin=new SourceDocument(PREFIX+"world/"+world.storageId(),world.ledger().origin().orElseThrow().frame().snapshot().sources().getFirst().bytes());
-            boolean fresh=!exists(root);require(!fresh || create,"Owner recovery directory is missing");
-            if(fresh){Files.createDirectory(root);Files.createDirectory(blobs);}else{directory(root);directory(blobs);directory(root.resolve("ledger"));}
-            try(DirectoryStream<Path> entries=Files.newDirectoryStream(root)){for(Path entry:entries)require(Set.of("blobs","ledger").contains(entry.getFileName().toString()),"Unknown owner recovery entry");}
-            ledger=LegacyQuestProgressFileStore.open(root.resolve("ledger"),world.binding(),world.catalog());
-            try{if(fresh)ledger.commit(Optional.empty(),State.empty(),List.of(origin));require(ledger.origin().orElseThrow(()->new IOException("Recovery origin missing; refusing reset")).frame().snapshot().sources().equals(List.of(origin)),"Recovery archive belongs to another world");pending();}
-            catch(IOException|RuntimeException|Error failure){try{ledger.close();}catch(IOException close){failure.addSuppressed(close);}throw failure;}
+            ledger=LegacyMaintenanceInitialization.open(world,LegacyMaintenanceInitialization.Kind.OWNER,create);
+            try{pending();}catch(IOException|RuntimeException|Error failure){try{ledger.close();}catch(IOException close){failure.addSuppressed(close);}throw failure;}
         }
         byte[] blob(String hash)throws IOException {
             digestField(hash);Path path=blobs.resolve(hash+".gz");

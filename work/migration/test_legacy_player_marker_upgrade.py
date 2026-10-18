@@ -16,7 +16,7 @@ assert sha(patched)=='f57ce3018e21459d24b50508e8c1b4fd5c16324ec1dc5f316c192aa013
 def relative(path):return Path(os.path.relpath(path,out)).as_posix()
 cp=';'.join(relative(path) for path in [minecraft,extra]+libraries)
 compile_cp=';'.join(relative(path) for path in [patched,universal])+';'+cp
-names=['LegacyRetrievalEngine','LegacyRetrievalProgressCodec','LegacyQuestProgressEnvelope','LegacyQuestProgressStoreCodec','LegacyQuestProgressFileStore','LegacyRetrievalTransactionJournal','LegacyPlayerDataFileReader','LegacyQuestWorldStore','LegacyQuestPlayerAdmission','LegacyPlayerMarkerUpgrade','LegacyPlayerNbtPatch','LegacyOwnerTransactionRecovery']
+names=['LegacyRetrievalEngine','LegacyRetrievalProgressCodec','LegacyQuestProgressEnvelope','LegacyQuestProgressStoreCodec','LegacyQuestProgressFileStore','LegacyRetrievalTransactionJournal','LegacyPlayerDataFileReader','LegacyQuestWorldStore','LegacyQuestPlayerAdmission','LegacyPlayerMarkerUpgrade','LegacyMaintenanceInitialization','LegacyPlayerNbtPatch','LegacyOwnerTransactionRecovery']
 sources=[R/'work/compat-mod/src/main/java/org/gtnhmigration/compat'/(name+'.java') for name in names]
 checks=[R/'work/migration/LegacyPlayerDataFileReaderCheck.java',R/'work/migration/LegacyQuestWorldStoreCheck.java',R/'work/migration/LegacyPlayerMarkerUpgradeCheck.java']
 def run(executable,arguments,name):
@@ -51,5 +51,5 @@ report.update({'source_sha256':{p.relative_to(R).as_posix():sha(p) for p in sour
  'Only the internal v1 marker placement moves to v2; targeted binary editing retains every unrelated NBT byte, including IEEE negative zero and NaN payloads. Whole before/after gzip streams are archived; compressed headers may differ. This does not repair unknown cache or mirror inventory conflicts.',
  'Journal comparison and source serialization retain represented NaN payloads. Native Minecraft constructors/readers still normalize negative zero; this is not full native-player NBT fidelity.',
  'Caller excludes native saves and external writers. Same-filesystem atomic move has no unsafe fallback; power-loss directory durability and malicious concurrent filesystem writes are not proven.',
- 'Raw originals and candidate files remain in immutable hash-addressed blobs. Orphan blobs and temporary files are retained; incomplete maintenance-directory creation is not automatically reset.']})
+ 'Raw originals and candidate files remain in immutable hash-addressed blobs. Orphan blobs and temporary files are retained; proven new initialization may finish genesis, while legacy partial directories without construction evidence are not reset.']})
 (out/'LegacyPlayerMarkerUpgradeCheck.json').write_text(json.dumps(report,indent=2)+'\n',encoding='utf-8',newline='\n');print(json.dumps(report))

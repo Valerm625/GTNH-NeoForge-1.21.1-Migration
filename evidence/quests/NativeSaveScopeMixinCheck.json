@@ -44,12 +44,12 @@
     "neoforge_transform_chain_verified": false,
     "game_runtime_verified": false
   },
-  "compat_jar_sha256": "66f885b3a9df29f68373eb3cedd43713d29efbcf9a4829b664f43b1ab0b814e4",
+  "compat_jar_sha256": "3527a1b39bf0f09fee6ca8d49c722b132b7fd507630e5b4ad3e56edd1c4a1557",
   "source_sha256": {
     "work/migration/OfflineMixinService.java": "a7ea57ef2ea959f69885cca79076690724e82a17c768df2d4521e23fddc897df",
     "work/migration/OfflineProperties.java": "10ad2622af4698009243667fac346ad23621d38f86c583aebcb99593059f9f3d",
     "work/migration/NativeSaveScopeMixinCheck.java": "6f8bdfd9dbdd4fe9da4835236e8bf559ef0f31fec05b7fa828758607a506237d",
-    "work/migration/test_native_save_scope_mixins.py": "5ea1edb0ccfec84ac177b493ac0e991b6089da1aaf638fec48701ac1ee0c7391",
+    "work/migration/test_native_save_scope_mixins.py": "986103c86012159d8bcc967324f5797092e0d94c4eb16137f2e54aea47cc1c57",
     "work/migration/acquire_native_client_audit.py": "38aa830027cf861928db5f18f2990ed33b38052ea5f671493f05e8c825a1e366",
     "locks/native-client-audit-inputs.json": "1542616c4c55281eec4dc906d9a2d0375e45aa50939eb29f67230d80fefa1093",
     "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyOwnerCacheSaveScopeMixin.java": "ecdfdae475531805608691386bc92db00a521cd03e72bea51a2169d66b050e99",
@@ -63,9 +63,10 @@
     "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyPlayerDataLoadScopeMixin.java": "985b42d00e9d4931e1695d75dd7a8330eb21a580712c5247d9910c4886b7d6db",
     "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestNativeLifecycle.java": "9ad75b6d642c82d0b5fe961b46bd3f3ec2de6fb63a0984e1f6498d0a842c08b8",
     "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestPlayerAdmission.java": "cba4caa7e8bae97328321c106c18891c35ec8f241e59ccec19b40a00cc06ed82",
-    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyPlayerMarkerUpgrade.java": "ac6ac65ad1eb4cfc748546793267a18567bb6eb41b6b3a943a14c8a6939433ae",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyPlayerMarkerUpgrade.java": "e91623c4466571165ca44944850bea09304339242c6c313c97fbc652c5d3bd81",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyMaintenanceInitialization.java": "df687956aabbe1cce6d2d39db794c202d088f9c5004521a382a22445e9872c17",
     "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyPlayerNbtPatch.java": "1c10d4fd907205b4e075a11d99f358c2014fe0d1a9f7c374d1c147c8241b32dc",
-    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyOwnerTransactionRecovery.java": "84bc6aeac8a3b1f228a5cf25701743054ae238c5ccec0adcad4b30d978833af3"
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyOwnerTransactionRecovery.java": "251d946b0de210045de15d0bc62eb7a7acf13cca78968c3865bce3c7f8a0609c"
   },
   "dependency_sha256": {
     "neoforge-21.1.262-server.jar": "f57ce3018e21459d24b50508e8c1b4fd5c16324ec1dc5f316c192aa0130e7fe0",

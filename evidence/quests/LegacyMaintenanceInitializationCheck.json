@@ -1,0 +1,184 @@
+{
+  "test": "maintenance_initialization",
+  "passed": true,
+  "assertions": 484,
+  "protocols": 2,
+  "exception_boundaries": 24,
+  "runtime_integrated": false,
+  "export_enabled": false,
+  "game_runtime_verified": false,
+  "source_sha256": {
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalEngine.java": "974899a867d5f9b2b18295e02c3fc56827064bdfa19c863158ea4b06b0a45758",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalProgressCodec.java": "596a64ed0ed06bad0f70731773078376ea9ab7ec3cba7dacdd8c10faac0fe856",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestProgressEnvelope.java": "43ed5abb2ed2595efa101b9e89d8d8409f84b62ca01cd9c62191ea5e92b9b9a0",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestProgressStoreCodec.java": "7e610faa9cd32b56cf1302c0d62189884defbc8746c393bcf423bd84cd5f2e94",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestProgressFileStore.java": "075f4b0e66e39aa015cb957116f1196074d5b4fe9e92b6e0838e8e47fe2052a6",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalTransactionJournal.java": "26eea3d9bc8aa2a5306054dae7ec561215b03aa5412bbbbcd55c95092a63dc1a",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyPlayerDataFileReader.java": "eabe4f1e9bb7a55a4fd28693d0c4a88c7dc3d4014054a032f846d0c38fdca643",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestWorldStore.java": "375b2bcdcd7134f4a0b763faf39ff1e5b54eb6b1e82df75e9820f81339a460e8",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestPlayerAdmission.java": "cba4caa7e8bae97328321c106c18891c35ec8f241e59ccec19b40a00cc06ed82",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyPlayerMarkerUpgrade.java": "e91623c4466571165ca44944850bea09304339242c6c313c97fbc652c5d3bd81",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyMaintenanceInitialization.java": "df687956aabbe1cce6d2d39db794c202d088f9c5004521a382a22445e9872c17",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyPlayerNbtPatch.java": "1c10d4fd907205b4e075a11d99f358c2014fe0d1a9f7c374d1c147c8241b32dc",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyOwnerTransactionRecovery.java": "251d946b0de210045de15d0bc62eb7a7acf13cca78968c3865bce3c7f8a0609c",
+    "work/migration/LegacyPlayerDataFileReaderCheck.java": "27f47442063c7a8fa659f91f8e8e44a80076704310a810d0e09f2c61991d0932",
+    "work/migration/LegacyQuestWorldStoreCheck.java": "011a0cb89da8d7d7a559717ac3657030d0e04d51906cedc30cc2a894ba2e31d6",
+    "work/migration/LegacyPlayerMarkerUpgradeCheck.java": "e9189adf569384b5144423fafe83436addf8744523b026766b75565c7907a46a",
+    "work/migration/LegacyOwnerTransactionRecoveryCheck.java": "b2ba8b5dae39a4ee2d8c3adf6a684d8dbaa9eb624825bbb1ae7d296fc6f38a44",
+    "work/migration/LegacyMaintenanceInitializationCheck.java": "01facbce4f5ea8582d7f419eaf45210387945ffefed9f092fd0eb4ab1d97fd0b",
+    "work/migration/test_legacy_maintenance_initialization.py": "8566932a592e328f1c0e92cc6d4a35b20439651796186a370cb5fd556c80bd1b"
+  },
+  "minecraft_jar_sha256": "26ca9c40d7e1681190b428583c38816852218e78df3f8bdb60a59a78503aec71",
+  "process_crash_checks": [
+    {
+      "protocol": "MARKER",
+      "boundary": "INTENT_TEMP_OPENED",
+      "halt_exit": 73,
+      "fresh_process_initialization_maintenance_and_admission": true
+    },
+    {
+      "protocol": "MARKER",
+      "boundary": "INTENT_TEMP_FORCED",
+      "halt_exit": 73,
+      "fresh_process_initialization_maintenance_and_admission": true
+    },
+    {
+      "protocol": "MARKER",
+      "boundary": "INTENT_PUBLISHED",
+      "halt_exit": 73,
+      "fresh_process_initialization_maintenance_and_admission": true
+    },
+    {
+      "protocol": "MARKER",
+      "boundary": "ROOT_CREATED",
+      "halt_exit": 73,
+      "fresh_process_initialization_maintenance_and_admission": true
+    },
+    {
+      "protocol": "MARKER",
+      "boundary": "BLOBS_CREATED",
+      "halt_exit": 73,
+      "fresh_process_initialization_maintenance_and_admission": true
+    },
+    {
+      "protocol": "MARKER",
+      "boundary": "LEDGER_OPENED",
+      "halt_exit": 73,
+      "fresh_process_initialization_maintenance_and_admission": true
+    },
+    {
+      "protocol": "MARKER",
+      "boundary": "GENESIS_TEMP_OPENED",
+      "halt_exit": 73,
+      "fresh_process_initialization_maintenance_and_admission": true
+    },
+    {
+      "protocol": "MARKER",
+      "boundary": "GENESIS_TEMP_FORCED",
+      "halt_exit": 73,
+      "fresh_process_initialization_maintenance_and_admission": true
+    },
+    {
+      "protocol": "MARKER",
+      "boundary": "GENESIS_PUBLISHED",
+      "halt_exit": 73,
+      "fresh_process_initialization_maintenance_and_admission": true
+    },
+    {
+      "protocol": "MARKER",
+      "boundary": "COMPLETE_TEMP_OPENED",
+      "halt_exit": 73,
+      "fresh_process_initialization_maintenance_and_admission": true
+    },
+    {
+      "protocol": "MARKER",
+      "boundary": "COMPLETE_TEMP_FORCED",
+      "halt_exit": 73,
+      "fresh_process_initialization_maintenance_and_admission": true
+    },
+    {
+      "protocol": "MARKER",
+      "boundary": "COMPLETE_PUBLISHED",
+      "halt_exit": 73,
+      "fresh_process_initialization_maintenance_and_admission": true
+    },
+    {
+      "protocol": "OWNER",
+      "boundary": "INTENT_TEMP_OPENED",
+      "halt_exit": 73,
+      "fresh_process_initialization_maintenance_and_admission": true
+    },
+    {
+      "protocol": "OWNER",
+      "boundary": "INTENT_TEMP_FORCED",
+      "halt_exit": 73,
+      "fresh_process_initialization_maintenance_and_admission": true
+    },
+    {
+      "protocol": "OWNER",
+      "boundary": "INTENT_PUBLISHED",
+      "halt_exit": 73,
+      "fresh_process_initialization_maintenance_and_admission": true
+    },
+    {
+      "protocol": "OWNER",
+      "boundary": "ROOT_CREATED",
+      "halt_exit": 73,
+      "fresh_process_initialization_maintenance_and_admission": true
+    },
+    {
+      "protocol": "OWNER",
+      "boundary": "BLOBS_CREATED",
+      "halt_exit": 73,
+      "fresh_process_initialization_maintenance_and_admission": true
+    },
+    {
+      "protocol": "OWNER",
+      "boundary": "LEDGER_OPENED",
+      "halt_exit": 73,
+      "fresh_process_initialization_maintenance_and_admission": true
+    },
+    {
+      "protocol": "OWNER",
+      "boundary": "GENESIS_TEMP_OPENED",
+      "halt_exit": 73,
+      "fresh_process_initialization_maintenance_and_admission": true
+    },
+    {
+      "protocol": "OWNER",
+      "boundary": "GENESIS_TEMP_FORCED",
+      "halt_exit": 73,
+      "fresh_process_initialization_maintenance_and_admission": true
+    },
+    {
+      "protocol": "OWNER",
+      "boundary": "GENESIS_PUBLISHED",
+      "halt_exit": 73,
+      "fresh_process_initialization_maintenance_and_admission": true
+    },
+    {
+      "protocol": "OWNER",
+      "boundary": "COMPLETE_TEMP_OPENED",
+      "halt_exit": 73,
+      "fresh_process_initialization_maintenance_and_admission": true
+    },
+    {
+      "protocol": "OWNER",
+      "boundary": "COMPLETE_TEMP_FORCED",
+      "halt_exit": 73,
+      "fresh_process_initialization_maintenance_and_admission": true
+    },
+    {
+      "protocol": "OWNER",
+      "boundary": "COMPLETE_PUBLISHED",
+      "halt_exit": 73,
+      "fresh_process_initialization_maintenance_and_admission": true
+    }
+  ],
+  "limitations": [
+    "Synthetic player/world inputs, actual file stores and exclusive locks; initialization preserves original files and every leftover temporary file, then runs maintenance/admission models. No Player, world or native game lifecycle runs.",
+    "Only directories with a valid world/protocol construction intent and no completion or established operation can finish genesis. Completion evidence is outside the auxiliary root to detect a missing established directory.",
+    "Legacy journals without new construction evidence remain reopen-only; ambiguous old partial initialization cannot be reset. Deletion/rollback of all independent evidence and power-loss directory persistence remain unproven.",
+    "Main-world binding initialization, unknown source repair, arbitrary external writes and loaded-world failure shutdown remain separate incomplete requirements."
+  ]
+}

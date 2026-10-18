@@ -16,7 +16,7 @@ assert sha(patched)=='f57ce3018e21459d24b50508e8c1b4fd5c16324ec1dc5f316c192aa013
 def relative(path):return Path(os.path.relpath(path,out)).as_posix()
 cp=';'.join(relative(path) for path in [minecraft,extra]+libraries)
 compile_cp=';'.join(relative(path) for path in [patched,universal])+';'+cp
-names=['LegacyRetrievalEngine','LegacyRetrievalProgressCodec','LegacyQuestProgressEnvelope','LegacyQuestProgressStoreCodec','LegacyQuestProgressFileStore','LegacyRetrievalTransactionJournal','LegacyPlayerDataFileReader','LegacyQuestWorldStore','LegacyQuestPlayerAdmission','LegacyPlayerMarkerUpgrade','LegacyPlayerNbtPatch','LegacyOwnerTransactionRecovery']
+names=['LegacyRetrievalEngine','LegacyRetrievalProgressCodec','LegacyQuestProgressEnvelope','LegacyQuestProgressStoreCodec','LegacyQuestProgressFileStore','LegacyRetrievalTransactionJournal','LegacyPlayerDataFileReader','LegacyQuestWorldStore','LegacyQuestPlayerAdmission','LegacyPlayerMarkerUpgrade','LegacyMaintenanceInitialization','LegacyPlayerNbtPatch','LegacyOwnerTransactionRecovery']
 sources=[R/'work/compat-mod/src/main/java/org/gtnhmigration/compat'/(name+'.java') for name in names]
 checks=[R/'work/migration/LegacyPlayerDataFileReaderCheck.java',R/'work/migration/LegacyQuestWorldStoreCheck.java',R/'work/migration/LegacyPlayerMarkerUpgradeCheck.java',R/'work/migration/LegacyOwnerTransactionRecoveryCheck.java']
 def run(executable,arguments,name):
@@ -49,5 +49,5 @@ report.update({'source_sha256':{p.relative_to(R).as_posix():sha(p) for p in sour
  'The authoritative world file must match a pending WORLD_PLAYER transaction. Only mirrors and loaded caches proven as that same transaction before/after state are repaired; unknown/missing sources remain intact and blocked.',
  'No world-file or backup rewrite. Other mirror/cache fields are preserved. Complete before/after compressed evidence is archived; inventory and marker alone follow the world outcome.',
  'Native loaded NBT may already normalize negative zero. Targeted binary patching preserves unaffected file bytes, not arbitrary native-game round trips.',
- 'Caller excludes live players, native saves and external writers. Machine power-loss durability, arbitrary-mod isolation and incomplete maintenance-directory initialization recovery remain unproven.']})
+ 'Caller excludes live players, native saves and external writers. Machine power-loss durability, arbitrary-mod isolation and ambiguous legacy maintenance-directory initialization recovery remain unproven; new world-bound construction recovery has a separate fixture.']})
 (out/'LegacyOwnerTransactionRecoveryCheck.json').write_text(json.dumps(report,indent=2)+'\n',encoding='utf-8',newline='\n');print(json.dumps(report))
