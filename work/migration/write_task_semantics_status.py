@@ -157,6 +157,19 @@ for relative,expected in startup['input_sha256'].items():assert sha(O/relative)=
 for relative,expected in startup['platform_inputs_sha256'].items():assert sha(O/relative)==expected,relative
 assert startup['registry_details_sha256']==sha(R/'work/migration/native-startup-check/registry-details.json')
 checks['NativeStartupRegistrationCheck']=startup
+resource_bridge=read(R/'evidence/NativeResourceBridgeCheck.json')
+assert resource_bridge['passed'] and resource_bridge['foundation_unchanged']
+assert not resource_bridge['installed_into_foundation'] and not resource_bridge['full_parity']
+assert not resource_bridge['server_world_player_constructed'] and not resource_bridge['eula_accepted']
+assert resource_bridge['checks']['migration_machine_recipes_with_outputs']==167
+assert resource_bridge['checks']['fuel_values_verified']==16
+assert resource_bridge['checks']['boost_copy_codec_network_round_trips']==18
+assert resource_bridge['cases']['original_api']['rejected_missing_old_server_events_api']
+assert resource_bridge['cases']['old_output']['rejected_missing_machine_outputs']
+for relative,expected in resource_bridge['source_sha256'].items():assert sha(R/relative)==expected,relative
+bridge_build=read(R/'work/migration/gtceu-kubejs-bridge/build.json')
+assert resource_bridge['derived_jar_sha256']==bridge_build['jar_sha256']==sha(R/bridge_build['jar'])
+checks['NativeResourceBridgeCheck']=resource_bridge
 ore=read(V/'exact-ore-resource-check.json')
 ore_tests=read(V/'exact-ore-resource-tests.json')
 assert ore['passed'] and ore_tests['passed']
@@ -214,6 +227,8 @@ report={
     'native_startup_bound_retrieval_declarations':startup['bound_retrieval_declarations'],
     'native_startup_registered_mapped_identities':startup['registered_mapped_identities'],
     'all_native_startup_errors_resolved':startup['all_startup_errors_resolved'],
+    'isolated_derived_gtceu_resource_reload_verified':True,
+    'derived_gtceu_installed_into_foundation':False,
     'isolated_mixin_transformation_verified':True,
     'tested_model_classes_match_packaged_jar':True,
     'typed_json_envelope_planner_composition_verified':True,
@@ -351,5 +366,6 @@ text+=f"\n启动恢复失败关闭通过 {shutdown['assertions']} 项断言，�
 scope=checks['LegacyRetrievalSaveScopeCheck']
 text+=f"\n保存许可状态机通过 {scope['assertions']} 项断言，保护嵌套保存的一次性入口、跨账本/回调/线程重入及未解决范围关闭。新增 {native_scope['injections_verified']} 处原生保存和生命周期Mixin在 {native_scope['targets_transformed']} 个固定目标上应用成功，{native_scope['asm_basic_dataflow_methods']} 个方法数据流检查及三组破坏性负例通过。协调器在决策前再次核对所有观察库存。原生钩子尚未在游戏执行；进程级隔离不等于持久登录恢复或任意模组库存写入隔离。\n"
 text+=f"\n四份锁定旧源码共有 {collisions['source_resource_occurrences']} 个资源出现记录；{collisions['same_path_groups']} 组同路径候选中 {collisions['same_path_different_content_groups']} 组字节不同，双方来源均保留，未猜测加载优先级或覆盖目标资源。\n"
+text+='\n独立源码补丁产物完成真实模组初始化与资源重载：167条迁移机器配方具有输出，16种燃料实际注册值一致，五类配方组件编码往返及18次概率加成复制/JSON/网络往返通过。原始API和旧输出方向两组负例被拒绝。补丁保持原JAR的资源字节，尚未装入基础包；机器实际执行、客户端渲染和完整迁移仍未验证。\n'
 status.write_text(text,encoding='utf-8')
 print(json.dumps({k:v for k,v in report.items() if k!='checks'},ensure_ascii=False))

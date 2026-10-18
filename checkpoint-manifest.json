@@ -1,8 +1,8 @@
 {
-  "created_at": "2026-10-18T20:08:07.958159+08:00",
+  "created_at": "2026-10-18T20:38:10.361865+08:00",
   "scope": "source-only public checkpoint; third-party game inputs excluded",
   "hash_scope": "Git index canonical blobs, not Windows checkout line endings",
-  "base_commit": "c593e0524b72b324f69965959a21ee68877c3386",
+  "base_commit": "98be9b1b4ccc07015b3ab0f955ca0481528e919d",
   "files": [
     {
       "path": ".gitattributes",
@@ -11,13 +11,13 @@
     },
     {
       "path": ".gitignore",
-      "bytes": 815,
-      "sha256": "a36ac341f12f6f7c55e1f085dca88e6515f44f09af8dde3ce0a60d6b336fc76c"
+      "bytes": 883,
+      "sha256": "ecedc314d0d9996069a99e40005bf16cb1fc971b68ca06720507810f715d583d"
     },
     {
       "path": "NOTICE.md",
-      "bytes": 1447,
-      "sha256": "6da16788f1b59769905eff7661bb2021f7121c89d9f2f44b4d26bf1a5c368853"
+      "bytes": 1794,
+      "sha256": "6f636d2ce323eb2ecd9809488fc93d912c9220f888d808fd75b329381e076ca4"
     },
     {
       "path": "PAUSED-HANDOFF.zh-CN.md",
@@ -26,18 +26,23 @@
     },
     {
       "path": "README.md",
-      "bytes": 14388,
-      "sha256": "0709c25503a4cffa682e4c477a336080b3e350c4c165ebb3b1e962dc104dd0e5"
+      "bytes": 14755,
+      "sha256": "3949b604695eacbe177723eaf214273a870307a0d2d770eaa9a873b8d71dbbb3"
     },
     {
       "path": "RESUME.md",
-      "bytes": 41836,
-      "sha256": "8623a62010a32c74573cc710f536a148f74a2c6b2e039da24e0dfed4da7a7a70"
+      "bytes": 45424,
+      "sha256": "02ad35c5f7dbae6331fcee612887017f25717c762c1b778aa400299da9a5f54f"
     },
     {
       "path": "STATUS.zh-CN.md",
-      "bytes": 18606,
-      "sha256": "87b1b5c9f9954e6863d7ff3f3084ce1c4ff063e6ed0e4b64bf54cf9cba10cec7"
+      "bytes": 19011,
+      "sha256": "6338e93b25a153206c71a270e31a9bb820165dc91105fd3c124698123c6c5bdb"
+    },
+    {
+      "path": "docs/gtceu-kubejs72-bridge.zh-CN.md",
+      "bytes": 5060,
+      "sha256": "08dc3c4a18070c3eb815b3d82757e70ae67691ed5e2c453d201668f20841c1e2"
     },
     {
       "path": "docs/gtceu-rebuild-candidate.zh-CN.md",
@@ -205,9 +210,14 @@
       "sha256": "e1c0ad728983d8a57335e52cf1064f1affd1d454173d8cebd3ed8b4a72b48704"
     },
     {
+      "path": "evidence/NativeResourceBridgeCheck.json",
+      "bytes": 2614,
+      "sha256": "8e34b45decb556c4224198c0403bbba058c446a8a4fec9989d5fd1f707d3d024"
+    },
+    {
       "path": "evidence/NativeStartupRegistrationCheck.json",
       "bytes": 196479,
-      "sha256": "8130c56318a504ebaae937ae90041356e82a5c55c4a8707438b7e10544c9a248"
+      "sha256": "808abe08b44b20f052d46efbb064dbe41728988ce4a61c2ed4a7659ff86c9513"
     },
     {
       "path": "evidence/capacity-adapter-test.json",
@@ -292,7 +302,7 @@
     {
       "path": "evidence/loader-with-quest-runtime.json",
       "bytes": 347,
-      "sha256": "a602c9a47751e54344fb4a4a0cd0484bca090e773dfe16c835e374b62a169b38"
+      "sha256": "f81f99d67d493d43965386d987b01ce5adcbb02a05102d2232fc854920b8c0a4"
     },
     {
       "path": "evidence/location-task-boundary.json",
@@ -356,8 +366,8 @@
     },
     {
       "path": "evidence/phase-2026-10-18-task-semantics.json",
-      "bytes": 587038,
-      "sha256": "8d1ff091412ba135dd633a54d410694364f000d91cf4b8687b3d4aa82e7eca22"
+      "bytes": 590009,
+      "sha256": "bbbd42c9808a126a5823be18cf2e8e389b8b9ec74cc38f9748a452bbbd328b46"
     },
     {
       "path": "evidence/quest-export-summary.json",
@@ -472,7 +482,7 @@
     {
       "path": "evidence/quests/LegacyRetrievalDefinitionBindingCheck.json",
       "bytes": 6924,
-      "sha256": "c26fc98583d1bdd48eb1a523d4ce4e0ee9e0a08f125ebc6ac86e84f74dd268f5"
+      "sha256": "552b653b92ee8574ce6fc2e93b73b599c38493d58c88008db8bc8b4b4400894f"
     },
     {
       "path": "evidence/quests/LegacyRetrievalEngineCheck.json",
@@ -572,7 +582,7 @@
     {
       "path": "evidence/validation-summary.json",
       "bytes": 5063,
-      "sha256": "1c55d9a721690c113aaf00bd68e1f99c1663e165d5dad64ebac9af6cafff0a95"
+      "sha256": "ca3a90d308df8aa987c5e41617ed4da5d7ab38040b0b1cfb839c439d42bdfa1e"
     },
     {
       "path": "evidence/vanilla-identity-mapping.json",
@@ -610,6 +620,11 @@
       "sha256": "896327537e9c5903e856c2132c9e2dae3b17220de6f3c948c401f11276f5ffad"
     },
     {
+      "path": "locks/gtceu-kubejs72-build.json",
+      "bytes": 1243,
+      "sha256": "c4a770075370a4be34137fecc27681716f9d9e3187b5960729dc1c0620f8acb6"
+    },
+    {
       "path": "locks/gtceu-rebuild-candidate.json",
       "bytes": 544,
       "sha256": "b08797cad1d9e1c9e8c1565675fb38f1df789f0ddf407d306b3fc8c4857284b3"
@@ -622,7 +637,7 @@
     {
       "path": "locks/local-runtime-file-hashes.json",
       "bytes": 418671,
-      "sha256": "1bfb62e86dd64496c9b5d1bbcd981634b4f0212b6a83cf01972653f630ff962e"
+      "sha256": "690808c27a8c5c1bfb1bc597965c8117e5921b522973ba7978b3fe792a59dc69"
     },
     {
       "path": "locks/modern-transport-candidates.json",
@@ -668,6 +683,11 @@
       "path": "requirements.txt",
       "bytes": 15,
       "sha256": "41b54a6fb2918667ca47a61d73b522629d84490f3d78f0f20b21135faba10d35"
+    },
+    {
+      "path": "work/compat-mod/patches/gtceu-kubejs72.json",
+      "bytes": 22677,
+      "sha256": "09d2f697111a776c345a440f4ca1f61ccb3b2d393cde7c5487b4a17c4756ce65"
     },
     {
       "path": "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyCraftingStackMatcher.java",
@@ -965,6 +985,11 @@
       "sha256": "6b87ec3e4f1c26fc0e6b805b94de409a0114422c1514c11fe0afdd99e39259d7"
     },
     {
+      "path": "work/migration/KubeJSBridgeFixtures.js",
+      "bytes": 1816,
+      "sha256": "2ed21c18ccca2e9eae6a8dd4b14c1972d393f4e9a5eaec1727a6e6c297f85b01"
+    },
+    {
       "path": "work/migration/LegacyCraftingShapeCheck.java",
       "bytes": 4528,
       "sha256": "26f187b5b89cf272dab15d6f275901421fad31476e2d375bff73e9cd67f1a107"
@@ -1135,6 +1160,16 @@
       "sha256": "2e6704046ec686eef6f143f7c7555b4162f74b10403e674fee439a98a751c68e"
     },
     {
+      "path": "work/migration/NativeResourceAuditLaunchHandler.java",
+      "bytes": 691,
+      "sha256": "52bbd626cb612ebe66dbb80847bf29aefb661c4744baed49570e5a38a5b34c3e"
+    },
+    {
+      "path": "work/migration/NativeResourceAuditMain.java",
+      "bytes": 8465,
+      "sha256": "6fa39a53da2c20c97643c44a5de195d33a2cf565d04409275f1bd020414d6d9e"
+    },
+    {
       "path": "work/migration/NativeSaveScopeMixinCheck.java",
       "bytes": 14353,
       "sha256": "6f8bdfd9dbdd4fe9da4835236e8bf559ef0f31fec05b7fa828758607a506237d"
@@ -1233,6 +1268,11 @@
       "path": "work/migration/build_capacity_compat.py",
       "bytes": 12967,
       "sha256": "be48dbfb00cabe7c7af087ed1b5e62130369d892ee3f706125ade018732b9b2c"
+    },
+    {
+      "path": "work/migration/build_gtceu_kubejs_bridge.py",
+      "bytes": 8168,
+      "sha256": "b0e137475f39d67eb050c1c2c10cda613c84806048b1ae6f889855bd45ba22bd"
     },
     {
       "path": "work/migration/build_quest_definition_archive.py",
@@ -1371,8 +1411,8 @@
     },
     {
       "path": "work/migration/rebuild_current_phase.py",
-      "bytes": 4161,
-      "sha256": "f91064c26a6e77030b6ced4afe9bf693c4f87e927446ca0fbf7ac64f2ab74939"
+      "bytes": 4246,
+      "sha256": "9e8dcbb54a821bf46e32b3896825dc98c6bbeb9329f6737b1e55e94897ec3a8c"
     },
     {
       "path": "work/migration/recover_java.py",
@@ -1600,6 +1640,11 @@
       "sha256": "45a6ea2e435b14cabbb6dc40b179b4f6c84a5640c50f3c63495a3b5e8ef7cc73"
     },
     {
+      "path": "work/migration/test_native_resource_bridge.py",
+      "bytes": 11979,
+      "sha256": "e884d5143691f8bcb50b5ef6f8b600091aeb8339bc70880bb82f0eb4a20ba422"
+    },
+    {
       "path": "work/migration/test_native_save_scope_mixins.py",
       "bytes": 6714,
       "sha256": "5c5a0b20513c54f5a45a8c25825e3a03c860887397fc22077ceafa781ee17f75"
@@ -1741,13 +1786,13 @@
     },
     {
       "path": "work/migration/write_task_semantics_status.py",
-      "bytes": 40234,
-      "sha256": "b66be7c92e19c78726f4eeeefac46a6c761b68a42e7309fc324b61efb6e0d1c7"
+      "bytes": 41824,
+      "sha256": "c1c97cec6e5263dfd68ee1d50990071e3653400247e4baf69abff8fb3f5decf1"
     }
   ],
-  "file_count": 348,
+  "file_count": 357,
   "source_archive_inputs_included": false,
   "runtime_binaries_included": false,
   "full_parity": false,
-  "continuation": "Pinned user-provided GTCEu 8.0.1-unofficial candidate assessed; runtime remains validated r27. Continue KubeJS recipe semantics and legitimate resource reload harness before replacement; full parity remains false."
+  "continuation": "Integrate the verified source-built GTCEu KubeJS bridge into artifact provenance, installation and restore; preserve original download identity and rerun client/server and resource checks. Complete quest runtime, machine and visual parity remain pending."
 }

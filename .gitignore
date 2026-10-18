@@ -20,6 +20,7 @@
 !/work/migration/*.py
 !/work/migration/*.cjs
 !/work/migration/*.java
+!/work/migration/KubeJSBridgeFixtures.js
 # Local third-party inspection inputs restored from the private checkpoint.
 /work/migration/GTRecipeSchema.java
 /work/migration/MaterialIconSet.java
@@ -28,6 +29,7 @@
 /work/migration/OreProperty.java
 /work/compat-mod/*
 !/work/compat-mod/src/
+!/work/compat-mod/patches/
 **/__pycache__/
 **/*.pyc
 **/*.class

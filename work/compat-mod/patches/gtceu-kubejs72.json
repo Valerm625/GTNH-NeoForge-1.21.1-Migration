@@ -1,0 +1,372 @@
+{
+  "format": 1,
+  "source_commit": "f6200e018582c3e26e8db06c289d9e01c8250ac8",
+  "license": "Upstream GTCEu LGPL-3.0 and retained file notices; this patch does not relicense upstream material.",
+  "files": [
+    {
+      "path": "src/main/java/com/gregtechceu/gtceu/integration/kjs/recipe/GTRecipeSchema.java",
+      "original_sha256": "fbec2f122cf58e537c6955fab5e60bd52780d794c8b611104064d9be17a5dd27",
+      "patched_sha256": "833b700ed395c04fb6777f981bb72536b5d9689400b8f0d54f367a5ebfccc4fb",
+      "edits": [
+        {
+          "start": 117,
+          "end": 118,
+          "before": "            var key = perTick ? ALL_TICK_INPUTS : ALL_INPUTS;\n",
+          "after": "            var key = perTick ? ALL_TICK_OUTPUTS : ALL_OUTPUTS;\n"
+        }
+      ]
+    },
+    {
+      "path": "src/main/java/com/gregtechceu/gtceu/integration/kjs/recipe/GTShapedRecipeSchema.java",
+      "original_sha256": "f1fc6184d8deeb0a079953a6463a1f6bfe819afbc16840ec1c69bb64a58e268d",
+      "patched_sha256": "efa9d56ca5c65c2085aac35deb153e101be6eb3fbd299b08ba38bf122f44964b",
+      "edits": [
+        {
+          "start": 18,
+          "end": 19,
+          "before": "import dev.latvian.mods.kubejs.recipe.schema.RecipeSchemaFunction;\n",
+          "after": "\n"
+        },
+        {
+          "start": 54,
+          "end": 56,
+          "before": "        public void afterLoaded() {\n            super.afterLoaded();\n",
+          "after": "        public void validate(dev.latvian.mods.kubejs.recipe.component.RecipeValidationContext cx) {\n            super.validate(cx);\n"
+        },
+        {
+          "start": 110,
+          "end": 111,
+          "before": "                    !json.has(KubeJSCraftingRecipe.MODIFY_RESULT_KEY) && !json.has(KubeJSCraftingRecipe.STAGE_KEY) &&\n",
+          "after": "                    !json.has(KubeJSCraftingRecipe.MODIFY_RESULT_KEY) && !json.has(\"kubejs:stage\") &&\n"
+        },
+        {
+          "start": 122,
+          "end": 125,
+          "before": "    RecipeKey<ItemStack> RESULT = ItemStackComponent.STRICT_ITEM_STACK.outputKey(\"result\");\n    RecipeKey<List<String>> PATTERN = StringGridComponent.STRING_GRID.otherKey(\"pattern\");\n    RecipeKey<TinyMap<Character, Ingredient>> KEY = IngredientComponent.INGREDIENT.asPatternKey().inputKey(\"key\");\n",
+          "after": "    RecipeKey<ItemStack> RESULT = ItemStackComponent.ITEM_STACK.outputKey(\"result\");\n    RecipeKey<List<String>> PATTERN = StringComponent.STRING.instance().asList().otherKey(\"pattern\");\n    RecipeKey<TinyMap<Character, Ingredient>> KEY = IngredientComponent.INGREDIENT.instance().asPatternKey().inputKey(\"key\");\n"
+        },
+        {
+          "start": 139,
+          "end": 141,
+          "before": "            .function(\"noMirror\", new RecipeSchemaFunction.SetFunction<>(MIRROR, false))\n            .function(\"noShrink\", new RecipeSchemaFunction.SetFunction<>(SHRINK, false));\n",
+          "after": "            .setOpFunction(\"noMirror\", MIRROR, false)\n            .setOpFunction(\"noShrink\", SHRINK, false);\n"
+        }
+      ]
+    },
+    {
+      "path": "src/main/java/com/gregtechceu/gtceu/integration/kjs/recipe/IDRecipeConstructor.java",
+      "original_sha256": "834d4eca0618ad224960c891fe63e670aee7d432d860dffd7941bb35d9ce99d8",
+      "patched_sha256": "fb268677985802b90eca147463de54671baf7a250c9008fa1306eef615a5038e",
+      "edits": [
+        {
+          "start": 28,
+          "end": 29,
+          "before": "        r.id(KubeResourceLocation.wrap(from.getValue(cx, r, GTRecipeSchema.ID)));\n",
+          "after": "        r.id(KubeResourceLocation.wrap(from.getValue(new dev.latvian.mods.kubejs.recipe.RecipeScriptContext.Impl(cx, r), GTRecipeSchema.ID)));\n"
+        },
+        {
+          "start": 33,
+          "end": 34,
+          "before": "    public void setValues(Context cx, KubeRecipe recipe, RecipeSchemaType schemaType, ComponentValueMap from) {\n",
+          "after": "    public void setValues(dev.latvian.mods.kubejs.recipe.RecipeScriptContext cx, RecipeSchemaType schemaType, ComponentValueMap from) {\n        var recipe = cx.recipe();\n"
+        }
+      ]
+    },
+    {
+      "path": "src/main/java/com/gregtechceu/gtceu/integration/kjs/recipe/KJSHelpers.java",
+      "original_sha256": "2cc36b13befed111bfbfe17afba810a40f9f67a9ad6dc8f386afad4931b19c79",
+      "patched_sha256": "2cc36b13befed111bfbfe17afba810a40f9f67a9ad6dc8f386afad4931b19c79",
+      "edits": []
+    },
+    {
+      "path": "src/main/java/com/gregtechceu/gtceu/integration/kjs/recipe/WrappingRecipeSchemaType.java",
+      "original_sha256": "3680f6bf81cdbbda03cbdad202bc5d120c8643f0cc4693d6a027d5c3b0a92375",
+      "patched_sha256": "3680f6bf81cdbbda03cbdad202bc5d120c8643f0cc4693d6a027d5c3b0a92375",
+      "edits": []
+    },
+    {
+      "path": "src/main/java/com/gregtechceu/gtceu/integration/kjs/recipe/components/CapabilityMap.java",
+      "original_sha256": "abec08f8797a47a4ef4074ed36dbd358bd677a1aca2a579feec7a15a2192ed41",
+      "patched_sha256": "abec08f8797a47a4ef4074ed36dbd358bd677a1aca2a579feec7a15a2192ed41",
+      "edits": []
+    },
+    {
+      "path": "src/main/java/com/gregtechceu/gtceu/integration/kjs/recipe/components/CapabilityMapComponent.java",
+      "original_sha256": "3677228c501ae8f1fc612ad5b74ade25f5805d4183b8d79e3173d68134dc64bd",
+      "patched_sha256": "1bf007f1fac4d4ffdc35e1e0306b2675a853c2573c1dca082664061cdfdfa371",
+      "edits": [
+        {
+          "start": 6,
+          "end": 7,
+          "before": "import dev.latvian.mods.kubejs.recipe.KubeRecipe;\n",
+          "after": "import dev.latvian.mods.kubejs.recipe.RecipeScriptContext;\nimport dev.latvian.mods.kubejs.recipe.component.RecipeComponentType;\nimport com.gregtechceu.gtceu.GTCEu;\nimport com.mojang.serialization.codecs.RecordCodecBuilder;\n"
+        },
+        {
+          "start": 9,
+          "end": 10,
+          "before": "import dev.latvian.mods.rhino.Context;\n",
+          "after": ""
+        },
+        {
+          "start": 12,
+          "end": 13,
+          "before": "import java.util.concurrent.atomic.AtomicBoolean;\n",
+          "after": "import java.util.ArrayList;\nimport java.util.List;\nimport dev.latvian.mods.kubejs.recipe.filter.RecipeMatchContext;\n"
+        },
+        {
+          "start": 20,
+          "end": 20,
+          "before": "",
+          "after": "\n    public static final RecipeComponentType<CapabilityMap> TYPE = RecipeComponentType.unit(GTCEu.id(\"capability_map\"), INSTANCE);\n    @Override public RecipeComponentType<?> type() { return TYPE; }\n"
+        },
+        {
+          "start": 37,
+          "end": 38,
+          "before": "    public CapabilityMap replace(Context cx, KubeRecipe recipe, CapabilityMap original,\n",
+          "after": "    public boolean matches(RecipeMatchContext cx, CapabilityMap value, ReplacementMatchInfo match) {\n        for (var entry : value.entrySet()) {\n            var component = GTRecipeComponents.VALID_CAPS.get(entry.getKey());\n            if (component != null && entry.getValue().stream().anyMatch(v -> component.matches(cx, v, match))) return true;\n        }\n        return false;\n    }\n\n    @Override\n    public CapabilityMap replace(RecipeScriptContext cx, CapabilityMap original,\n"
+        },
+        {
+          "start": 39,
+          "end": 43,
+          "before": "        AtomicBoolean changed = new AtomicBoolean(false);\n        original.forEach((key, values) -> {\n            var content = GTRecipeComponents.VALID_CAPS.get(key);\n            for (int i = 0; i < values.size(); ++i) {\n",
+          "after": "        CapabilityMap replacement = original;\n        for (var entry : original.entrySet()) {\n            var component = GTRecipeComponents.VALID_CAPS.get(entry.getKey());\n            if (component == null) continue;\n            List<Content> values = entry.getValue();\n            List<Content> replacedValues = values;\n            for (int i = 0; i < values.size(); i++) {\n"
+        },
+        {
+          "start": 44,
+          "end": 48,
+          "before": "                Content result = content.replace(cx, recipe, value, match, with);\n                if (!result.equals(value)) {\n                    changed.set(true);\n                    values.set(i, result);\n",
+          "after": "                Content result = component.replace(cx, value, match, with);\n                if (result != value) {\n                    if (replacedValues == values) replacedValues = new ArrayList<>(values);\n                    replacedValues.set(i, result);\n"
+        },
+        {
+          "start": 50,
+          "end": 52,
+          "before": "        });\n        return changed.get() ? new CapabilityMap(original) : original;\n",
+          "after": "            if (replacedValues != values) {\n                if (replacement == original) replacement = new CapabilityMap(original);\n                replacement.put(entry.getKey(), replacedValues);\n            }\n        }\n        return replacement;\n"
+        }
+      ]
+    },
+    {
+      "path": "src/main/java/com/gregtechceu/gtceu/integration/kjs/recipe/components/ContentJS.java",
+      "original_sha256": "c4f64dd3a39852225ceefd210ea7ba2bcf7b2caa5b8b003779662903c2d4828d",
+      "patched_sha256": "e6c6a6b2027f287a6a69220065d87e4667b106384f97260ebd4ab9696bbb940d",
+      "edits": [
+        {
+          "start": 6,
+          "end": 7,
+          "before": "import dev.latvian.mods.kubejs.recipe.KubeRecipe;\n",
+          "after": "import dev.latvian.mods.kubejs.recipe.RecipeScriptContext;\nimport dev.latvian.mods.kubejs.recipe.filter.RecipeMatchContext;\nimport dev.latvian.mods.kubejs.recipe.component.RecipeComponentType;\nimport com.gregtechceu.gtceu.GTCEu;\nimport com.mojang.serialization.codecs.RecordCodecBuilder;\n"
+        },
+        {
+          "start": 9,
+          "end": 10,
+          "before": "import dev.latvian.mods.rhino.Context;\n",
+          "after": ""
+        },
+        {
+          "start": 14,
+          "end": 14,
+          "before": "",
+          "after": "\n    public static final RecipeComponentType<?> TYPE = RecipeComponentType.<ContentJS<?>>dynamic(GTCEu.id(\"content\"), (type, ctx) -> RecordCodecBuilder.mapCodec(instance -> instance.group(\n            ctx.recipeComponentCodec().fieldOf(\"component\").forGetter(ContentJS::baseComponent),\n            RecipeCapability.DIRECT_CODEC.fieldOf(\"capability\").forGetter(ContentJS::capability)\n    ).apply(instance, ContentJS::create)));\n\n    @Override public RecipeComponentType<?> type() { return TYPE; }\n"
+        },
+        {
+          "start": 29,
+          "end": 29,
+          "before": "",
+          "after": "    @SuppressWarnings(\"unchecked\")\n"
+        },
+        {
+          "start": 30,
+          "end": 34,
+          "before": "    public Content replace(Context cx, KubeRecipe recipe, Content original, ReplacementMatchInfo match, Object with) {\n        return new Content(\n                baseComponent.replace(cx, recipe, baseComponent.wrap(cx, recipe, original.content), match, with),\n                original.chance, original.maxChance, original.tierChanceBoost);\n",
+          "after": "    public boolean matches(RecipeMatchContext cx, Content value, ReplacementMatchInfo match) {\n        return baseComponent.matches(cx, (T) value.content, match);\n    }\n\n    @Override\n    public Content replace(RecipeScriptContext cx, Content original, ReplacementMatchInfo match, Object with) {\n        if (!matches(cx, original, match)) return original;\n        Object replacement = baseComponent.replace(cx, baseComponent.wrap(cx, original.content), match, with);\n        return replacement == original.content ? original : Content.fromSerialized(\n                replacement, original.chance, original.maxChance, original.tierChanceBoost);\n"
+        }
+      ]
+    },
+    {
+      "path": "src/main/java/com/gregtechceu/gtceu/integration/kjs/recipe/components/GTRecipeComponents.java",
+      "original_sha256": "9a64b8fd370d3fec7e5f0a97f146bfef3a273a2b73ea85e5effbd5431ea62d8e",
+      "patched_sha256": "43b0070f3800e0c1ce1058260d9b7918a0ea18da53e909b3ebc315669531fd1d",
+      "edits": [
+        {
+          "start": 26,
+          "end": 26,
+          "before": "",
+          "after": "        private final RecipeComponentType<CompoundTag> componentType = RecipeComponentType.unit(com.gregtechceu.gtceu.GTCEu.id(\"tag\"), this);\n        @Override public RecipeComponentType<?> type() { return componentType; }\n\n"
+        },
+        {
+          "start": 43,
+          "end": 43,
+          "before": "",
+          "after": "        private final RecipeComponentType<ResourceLocation> componentType = RecipeComponentType.unit(com.gregtechceu.gtceu.GTCEu.id(\"resource_location\"), this);\n        @Override public RecipeComponentType<?> type() { return componentType; }\n\n"
+        },
+        {
+          "start": 60,
+          "end": 60,
+          "before": "",
+          "after": "        private final RecipeComponentType<RecipeCapability<?>> componentType = RecipeComponentType.unit(com.gregtechceu.gtceu.GTCEu.id(\"recipe_capability\"), this);\n        @Override public RecipeComponentType<?> type() { return componentType; }\n\n"
+        },
+        {
+          "start": 77,
+          "end": 77,
+          "before": "",
+          "after": "        private final RecipeComponentType<ChanceLogic> componentType = RecipeComponentType.unit(com.gregtechceu.gtceu.GTCEu.id(\"chance_logic\"), this);\n        @Override public RecipeComponentType<?> type() { return componentType; }\n\n"
+        },
+        {
+          "start": 95,
+          "end": 95,
+          "before": "",
+          "after": "        private final RecipeComponentType<RecipeCondition<?>> componentType = RecipeComponentType.unit(com.gregtechceu.gtceu.GTCEu.id(\"recipe_condition\"), this);\n        @Override public RecipeComponentType<?> type() { return componentType; }\n\n"
+        },
+        {
+          "start": 113,
+          "end": 113,
+          "before": "",
+          "after": "        private final RecipeComponentType<EnergyStack.WithIO> componentType = RecipeComponentType.unit(com.gregtechceu.gtceu.GTCEu.id(\"energy_stack\"), this);\n        @Override public RecipeComponentType<?> type() { return componentType; }\n\n"
+        },
+        {
+          "start": 133,
+          "end": 134,
+          "before": "    public static final ContentJS<SizedIngredient> ITEM = ContentJS.create(SizedIngredientComponent.NESTED,\n",
+          "after": "    public static final ContentJS<SizedIngredient> ITEM = ContentJS.create(SizedIngredientComponent.SIZED_INGREDIENT.instance(),\n"
+        },
+        {
+          "start": 135,
+          "end": 136,
+          "before": "    public static final ContentJS<SizedFluidIngredient> FLUID = ContentJS.create(SizedFluidIngredientComponent.NESTED,\n",
+          "after": "    public static final ContentJS<SizedFluidIngredient> FLUID = ContentJS.create(SizedFluidIngredientComponent.NESTED.instance(),\n"
+        }
+      ]
+    },
+    {
+      "path": "src/main/java/com/gregtechceu/gtceu/integration/kjs/recipe/components/JavaMapRecipeComponent.java",
+      "original_sha256": "74de61d21903983a41ab23ea0b3be23aff2262681edee9e1e6a63b59ebb8098f",
+      "patched_sha256": "2554ceb962cc003a27daa9da571d982c454c8d6bb0c62be8165e3d0d7f443321",
+      "edits": [
+        {
+          "start": 3,
+          "end": 4,
+          "before": "import dev.latvian.mods.kubejs.recipe.KubeRecipe;\n",
+          "after": "import dev.latvian.mods.kubejs.recipe.RecipeScriptContext;\nimport dev.latvian.mods.kubejs.recipe.component.RecipeComponentType;\nimport com.gregtechceu.gtceu.GTCEu;\nimport com.mojang.serialization.codecs.RecordCodecBuilder;\n"
+        },
+        {
+          "start": 6,
+          "end": 7,
+          "before": "import dev.latvian.mods.rhino.Context;\n",
+          "after": ""
+        },
+        {
+          "start": 15,
+          "end": 15,
+          "before": "",
+          "after": "    public static final RecipeComponentType<?> TYPE = RecipeComponentType.<JavaMapRecipeComponent<?, ?>>dynamic(GTCEu.id(\"java_map\"), (type, ctx) -> RecordCodecBuilder.mapCodec(instance -> instance.group(\n            ctx.recipeComponentCodec().fieldOf(\"key\").forGetter(JavaMapRecipeComponent::key),\n            ctx.recipeComponentCodec().fieldOf(\"value\").forGetter(JavaMapRecipeComponent::value)\n    ).apply(instance, JavaMapRecipeComponent::new)));\n\n    @Override public RecipeComponentType<?> type() { return TYPE; }\n\n"
+        },
+        {
+          "start": 16,
+          "end": 17,
+          "before": "    public Map<K, V> replace(Context cx, KubeRecipe recipe, Map<K, V> original, ReplacementMatchInfo match,\n",
+          "after": "    public Map<K, V> replace(RecipeScriptContext cx, Map<K, V> original, ReplacementMatchInfo match,\n"
+        },
+        {
+          "start": 21,
+          "end": 22,
+          "before": "            var r = value.replace(cx, recipe, entry.getValue(), match, with);\n",
+          "after": "            var r = value.replace(cx, entry.getValue(), match, with);\n"
+        }
+      ]
+    },
+    {
+      "path": "src/main/java/com/gregtechceu/gtceu/integration/kjs/GTKubeJSPlugin.java",
+      "original_sha256": "67228540001f8087034249e3dcec5ed40095e76071e7b16cc2b972c806ce6f46",
+      "patched_sha256": "d59d520c2238bbd1bc916225001b4521ba1424385dc8f8d3bc8bf546423b8eec",
+      "edits": [
+        {
+          "start": 117,
+          "end": 118,
+          "before": "import dev.latvian.mods.kubejs.recipe.schema.RecipeComponentFactoryRegistry;\n",
+          "after": "import dev.latvian.mods.kubejs.recipe.component.RecipeComponentTypeRegistry;\n"
+        },
+        {
+          "start": 264,
+          "end": 271,
+          "before": "    public void registerRecipeComponents(RecipeComponentFactoryRegistry registry) {\n        registry.register(GTRecipeComponents.TAG);\n        registry.register(GTRecipeComponents.RECIPE_CONDITION);\n        registry.register(GTRecipeComponents.RESOURCE_LOCATION);\n        registry.register(GTRecipeComponents.RECIPE_CAPABILITY);\n        registry.register(GTRecipeComponents.CHANCE_LOGIC);\n        registry.register(CapabilityMapComponent.INSTANCE);\n",
+          "after": "    public void registerRecipeComponents(RecipeComponentTypeRegistry registry) {\n        registry.register(GTRecipeComponents.TAG.type());\n        registry.register(GTRecipeComponents.RECIPE_CONDITION.type());\n        registry.register(GTRecipeComponents.RESOURCE_LOCATION.type());\n        registry.register(GTRecipeComponents.RECIPE_CAPABILITY.type());\n        registry.register(GTRecipeComponents.CHANCE_LOGIC.type());\n        registry.register(GTRecipeComponents.ENERGY_STACK.type());\n        registry.register(CapabilityMapComponent.INSTANCE.type());\n"
+        },
+        {
+          "start": 272,
+          "end": 275,
+          "before": "        registry.register(GTRecipeComponents.ITEM);\n        registry.register(GTRecipeComponents.FLUID);\n        registry.register(GTRecipeComponents.EU);\n",
+          "after": "        registry.register(com.gregtechceu.gtceu.integration.kjs.recipe.components.ContentJS.TYPE);\n        registry.register(com.gregtechceu.gtceu.integration.kjs.recipe.components.JavaMapRecipeComponent.TYPE);\n"
+        },
+        {
+          "start": 461,
+          "end": 462,
+          "before": "            return () -> BlockStatePredicate.ruleTestOf(cx, o);\n",
+          "after": "            return () -> BlockStatePredicate.wrapRuleTest(cx, o);\n"
+        }
+      ]
+    },
+    {
+      "path": "src/main/java/com/gregtechceu/gtceu/data/recipe/GTRecipes.java",
+      "original_sha256": "72e972a6d10d956fd4785c0c7fa5a1c2e89ca39e2a45cd8379d055f8dc6b0279",
+      "patched_sha256": "16765089f0a33b88521fded9251376fcb913e49581992d654dcdec1cc850389b",
+      "edits": [
+        {
+          "start": 21,
+          "end": 22,
+          "before": "import dev.latvian.mods.kubejs.bindings.event.ServerEvents;\n",
+          "after": "import dev.latvian.mods.kubejs.plugin.builtin.event.ServerEvents;\n"
+        }
+      ]
+    },
+    {
+      "path": "src/main/java/com/gregtechceu/gtceu/api/recipe/content/Content.java",
+      "original_sha256": "314715e388bd1d0b4997e54fd703305ea83f31a19e2683ae481dba4290f5178e",
+      "patched_sha256": "6ce3be291f5fd3ef10706d1ba2d85d6f3547e470d86520a5cfca2a203882cc8f",
+      "edits": [
+        {
+          "start": 39,
+          "end": 39,
+          "before": "",
+          "after": "        this(content, chance, maxChance, tierChanceBoost, true);\n    }\n\n    /** Restore an already normalized boost from a codec, copy or network payload. */\n    public static Content fromSerialized(Object content, int chance, int maxChance, int tierChanceBoost) {\n        return new Content(content, chance, maxChance, tierChanceBoost, false);\n    }\n\n    private Content(Object content, int chance, int maxChance, int tierChanceBoost, boolean normalize) {\n"
+        },
+        {
+          "start": 42,
+          "end": 43,
+          "before": "        this.tierChanceBoost = fixBoost(tierChanceBoost);\n",
+          "after": "        this.tierChanceBoost = normalize ? fixBoost(tierChanceBoost) : tierChanceBoost;\n"
+        },
+        {
+          "start": 52,
+          "end": 53,
+          "before": "                .apply(instance, Content::new));\n",
+          "after": "                .apply(instance, Content::fromSerialized));\n"
+        },
+        {
+          "start": 57,
+          "end": 58,
+          "before": "        return new Content(capability.copyContent(content), chance, maxChance, tierChanceBoost);\n",
+          "after": "        return fromSerialized(capability.copyContent(content), chance, maxChance, tierChanceBoost);\n"
+        },
+        {
+          "start": 64,
+          "end": 65,
+          "before": "            return new Content(capability.copyContent(content, modifier), chance, maxChance, tierChanceBoost);\n",
+          "after": "            return fromSerialized(capability.copyContent(content, modifier), chance, maxChance, tierChanceBoost);\n"
+        }
+      ]
+    },
+    {
+      "path": "src/main/java/com/gregtechceu/gtceu/api/recipe/content/IContentSerializer.java",
+      "original_sha256": "6c6babf6b7123119359d47cb28fb378b29df9ce2418975d431fa0431dc52957a",
+      "patched_sha256": "147b23584db910c504a8478aae3ff6d8566f0c90d43a181978ea305d2fe52fd9",
+      "edits": [
+        {
+          "start": 47,
+          "end": 48,
+          "before": "        return new Content(inner, chance, maxChance, tierChanceBoost);\n",
+          "after": "        return Content.fromSerialized(inner, chance, maxChance, tierChanceBoost);\n"
+        }
+      ]
+    }
+  ]
+}

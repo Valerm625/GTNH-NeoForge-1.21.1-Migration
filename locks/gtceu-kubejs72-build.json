@@ -1,0 +1,23 @@
+{
+  "source_commit": "f6200e018582c3e26e8db06c289d9e01c8250ac8",
+  "source_root": "GregTech-Modern-f6200e018582c3e26e8db06c289d9e01c8250ac8/",
+  "dependencies": {
+    "gtceu-7.0.2-source.zip": {
+      "url": "https://codeload.github.com/GregTechCEu/GregTech-Modern/zip/f6200e018582c3e26e8db06c289d9e01c8250ac8",
+      "sha256": "7c35eb1fe7cfdfff1a1f145421a6722291e497b160d38a31521fd15909719ea6"
+    },
+    "lombok-1.18.38.jar": {
+      "url": "https://repo.maven.apache.org/maven2/org/projectlombok/lombok/1.18.38/lombok-1.18.38.jar",
+      "sha256": "1e1e427c36ff63c44fd30ef292d9e773ea3154460ab6265d3fed7e6f5bc50fb9"
+    },
+    "annotations-26.0.1.jar": {
+      "url": "https://repo.maven.apache.org/maven2/org/jetbrains/annotations/26.0.1/annotations-26.0.1.jar",
+      "sha256": "2037be378980d3ba9333e97955f3b2cde392aa124d04ca73ce2eee6657199297"
+    }
+  },
+  "original_jar": "gtceu-1.21.1-7.0.2.jar",
+  "original_sha256": "c09a550523e931342a575193cbaad2e4b643e5de2cefe280cd1de540022c6388",
+  "kubejs_jar": "kubejs-neoforge-2101.7.2-build.377.jar",
+  "kubejs_sha256": "df9a8458b1f83fed06ba54684977911795a5153a462b81a610895f5b1f2f0cbf",
+  "role": "isolated source-built compatibility candidate; installation requires regression validation"
+}

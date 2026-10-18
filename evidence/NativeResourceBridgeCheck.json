@@ -1,0 +1,54 @@
+{
+  "passed": true,
+  "scope": "isolated derived artifact; actual mod initialization and resource reload without a game world",
+  "checks": {
+    "migration_machine_recipes_with_outputs": 167,
+    "migration_namespace_recipes": 170,
+    "fixture_recipes": 5,
+    "fuel_values_verified": 16,
+    "component_round_trips": 5,
+    "boost_copy_codec_network_round_trips": 18,
+    "ordinary_and_tick_directions": true,
+    "chance_and_fraction_preserved": true,
+    "replacement_counts_and_chance_preserved": true,
+    "tool_symbol_and_no_mirror": true
+  },
+  "cases": {
+    "ported": {
+      "exit": 0,
+      "log_sha256": "153f5ab0e5cee3e2f3abeb7e7253a8652d8c115f83845aeb9bedd67986737320",
+      "dump_sha256": "9ba0dd873daae49878b276f5e853542c33741a571d291ead0c50be149c2802bd",
+      "passed_semantic_checks": true
+    },
+    "old_output": {
+      "exit": 0,
+      "log_sha256": "9ba2db2877afac34b5ea88be6788304810e7fec18074821e45b1b5a6b47bc4aa",
+      "dump_sha256": "36971c3e8fedfc76b17a3915ac5d9101266aed96add0ebd136b0721651472e50",
+      "rejected_missing_machine_outputs": true
+    },
+    "original_api": {
+      "exit": 1,
+      "log_sha256": "7706f522c908e64291022f89a1877bfc37e2c65afde9a738290215c241b22443",
+      "rejected_missing_old_server_events_api": true
+    }
+  },
+  "derived_jar_sha256": "86ce239bfd36df2b137c303067aab0dc88b1ae8233101a5431f8a2caa269d6fc",
+  "preserved_original_entries": 14084,
+  "source_sha256": {
+    "work/migration/NativeResourceAuditLaunchHandler.java": "52bbd626cb612ebe66dbb80847bf29aefb661c4744baed49570e5a38a5b34c3e",
+    "work/migration/NativeResourceAuditMain.java": "6fa39a53da2c20c97643c44a5de195d33a2cf565d04409275f1bd020414d6d9e",
+    "work/migration/test_native_resource_bridge.py": "e884d5143691f8bcb50b5ef6f8b600091aeb8339bc70880bb82f0eb4a20ba422",
+    "work/migration/build_gtceu_kubejs_bridge.py": "b0e137475f39d67eb050c1c2c10cda613c84806048b1ae6f889855bd45ba22bd",
+    "work/migration/KubeJSBridgeFixtures.js": "2ed21c18ccca2e9eae6a8dd4b14c1972d393f4e9a5eaec1727a6e6c297f85b01",
+    "work/compat-mod/patches/gtceu-kubejs72.json": "09d2f697111a776c345a440f4ca1f61ccb3b2d393cde7c5487b4a17c4756ce65",
+    "locks/gtceu-kubejs72-build.json": "c4a770075370a4be34137fecc27681716f9d9e3187b5960729dc1c0620f8acb6",
+    "locks/native-client-audit-inputs.json": "1542616c4c55281eec4dc906d9a2d0375e45aa50939eb29f67230d80fefa1093"
+  },
+  "foundation_unchanged": true,
+  "eula_accepted": false,
+  "server_world_player_constructed": false,
+  "installed_into_foundation": false,
+  "machine_execution_verified": false,
+  "client_visuals_verified": false,
+  "full_parity": false
+}

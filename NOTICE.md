@@ -7,5 +7,6 @@
 - CoreMod 2.9.84 来源为 GTNewHorizons/NewHorizonsCoreMod（GPLv3）；GT5U 5.09.54.205 为 GTNewHorizons/GT5-Unofficial（LGPLv3）；BetterQuesting 3.8.89-GTNH 为 GTNewHorizons/BetterQuesting（MIT）。来源提交和归档哈希见 `locks/sources/`。
 - Railcraft、FTB 以及各现代模组遵循各自上游声明。没有把它们视作自动可再分发的内容。本仓库只保存公开版本/下载来源/哈希元数据，不包含它们的二进制、完整源码或资源。
 - 输出运行输入哈希仅描述本地测试状态，不代表那些文件已随仓库提供，也不授予第三方文件使用权。
+- `work/compat-mod/patches/gtceu-kubejs72.json` 是针对固定 GTCEu 7.0.2 源码的局部补丁，沿用上游 LGPL-3.0 及文件声明；来源归档和构建依赖见 `locks/gtceu-kubejs72-build.json`。它不受本地兼容模组的 MIT 声明重新许可。派生 JAR 与第三方完整源码仍只在本地生成，未随此仓库发布。
 
 公开前排除了账户凭据、机器绝对路径、原包 ZIP、游戏/JDK/模组 JAR、原任务正文、纹理、音频与存档。此仓库公开不等于宣布整合包完成或许可审计完成；扩大分发范围前应逐项检查权利与归属。
