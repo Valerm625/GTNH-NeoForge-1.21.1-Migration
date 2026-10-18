@@ -65,14 +65,14 @@ def run(executable, args, name):
 run(java.with_name('javac.exe'), ['-proc:none', '--release', '21', '-encoding', 'UTF-8', '-cp', cp,
                                  '-d', '.', *[relative(source) for source in sources]], 'compile')
 results = {}
-for mode in ['baseline', 'dedicated', 'missing_player_file_target', 'missing_player_load_target', 'missing_registration']:
+for mode in ['baseline', 'dedicated', 'missing_player_file_target', 'missing_player_load_target', 'missing_registration', 'missing_stop_call']:
     log = run(java, ['-cp', server_cp if mode=='dedicated' else cp, 'NativeSaveScopeMixinCheck', mode], mode)
     results[mode] = json.loads(next(line for line in log.splitlines() if line.startswith('{')))
     assert results[mode]['passed'], mode
 
 report = results.pop('baseline')
 dedicated = results.pop('dedicated')
-assert report['injections_verified']==39 and dedicated['injections_verified']==38
+assert report['injections_verified']==46 and dedicated['injections_verified']==45
 assert report['targets_transformed']==7 and dedicated['targets_transformed']==6
 report.update({
     'negative_controls': results,

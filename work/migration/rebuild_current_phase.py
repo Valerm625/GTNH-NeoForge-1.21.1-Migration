@@ -15,7 +15,7 @@ for step in ['test_legacy_retrieval_progress_codec.py', 'test_legacy_quest_retri
 for step in ['test_legacy_typed_nbt_json_reader.py', 'test_legacy_quest_progress_envelope.py', 'test_legacy_quest_progress_store.py', 'test_legacy_progress_import_pipeline.py']:
     steps.insert(steps.index('test_legacy_retrieval_matcher.py'), step)
 steps.insert(steps.index('test_legacy_retrieval_matcher.py'), 'test_legacy_retrieval_inventory_bridge.py')
-for step in ['test_legacy_retrieval_transaction_journal.py', 'test_legacy_retrieval_transaction_proposal.py', 'test_legacy_player_data_file_reader.py', 'test_legacy_retrieval_commit_coordinator.py', 'test_legacy_world_player_authority.py', 'test_legacy_integrated_owner_coordinator.py', 'test_legacy_quest_world_store.py', 'test_legacy_quest_player_admission.py', 'test_legacy_player_marker_upgrade.py', 'test_legacy_owner_transaction_recovery.py']:
+for step in ['test_legacy_retrieval_transaction_journal.py', 'test_legacy_retrieval_transaction_proposal.py', 'test_legacy_player_data_file_reader.py', 'test_legacy_retrieval_commit_coordinator.py', 'test_legacy_world_player_authority.py', 'test_legacy_integrated_owner_coordinator.py', 'test_legacy_quest_world_store.py', 'test_legacy_quest_player_admission.py', 'test_legacy_player_marker_upgrade.py', 'test_legacy_owner_transaction_recovery.py', 'test_legacy_startup_shutdown.py']:
     steps.insert(steps.index('test_legacy_retrieval_matcher.py'), step)
 for step in ['verify_exact_ore_resources.py', 'test_exact_ore_resources.py']:
     steps.insert(steps.index('verify_migration.py'), step)

@@ -15,8 +15,15 @@ import org.spongepowered.asm.service.*;
  */
 public final class NativeSaveScopeMixinCheck {
     static int assertions, verifiedMethods, injections;
-    record Contract(String target, String method, String handler) {}
+    record Contract(String target, String method, String handler, int expectedCalls) {
+        Contract(String target,String method,String handler){this(target,method,handler,1);}
+    }
     static final List<Contract> CONTRACTS=List.of(
+        new Contract("net.minecraft.server.MinecraftServer","runServer","gtnhMigration$stopFromRunLoop",3),
+        new Contract("net.minecraft.server.MinecraftServer","stopServer","gtnhMigration$stopSavePlayers"),
+        new Contract("net.minecraft.server.MinecraftServer","stopServer","gtnhMigration$stopRemovePlayers"),
+        new Contract("net.minecraft.server.MinecraftServer","stopServer","gtnhMigration$stopSaveChunks"),
+        new Contract("net.minecraft.server.MinecraftServer","stopServer","gtnhMigration$stopCloseStorage"),
         new Contract("net.minecraft.server.MinecraftServer","loadLevel","gtnhMigration$beforeWorldLoad"),
         new Contract("net.minecraft.server.MinecraftServer","stopServer","gtnhMigration$afterWorldStop"),
         new Contract("net.minecraft.server.players.PlayerList","placeNewPlayer","gtnhMigration$guardAdmission"),
@@ -67,6 +74,15 @@ public final class NativeSaveScopeMixinCheck {
     static byte[] mutate(byte[] bytes,String mode) {
         ClassNode node=parse(bytes);
         int count=0;
+        if(mode.equals("missing_stop_call")){
+            MethodNode run=node.methods.stream().filter(m->m.name.equals("runServer")).findFirst().orElseThrow();
+            for(AbstractInsnNode instruction:run.instructions.toArray())if(instruction instanceof MethodInsnNode call && call.name.equals("stopServer") && call.owner.equals(node.name)){
+                AbstractInsnNode receiver=instruction.getPrevious();
+                require(receiver instanceof VarInsnNode v && v.getOpcode()==Opcodes.ALOAD && v.var==0,"Stop receiver changed");
+                run.instructions.remove(receiver);run.instructions.remove(instruction);count++;break;
+            }
+            require(count==1,"Missing runServer mutation");ClassWriter writer=new ClassWriter(0);node.accept(writer);return writer.toByteArray();
+        }
         for(MethodNode method:node.methods) if(method.name.equals(mode.equals("missing_player_load_target")?"load":"save")){method.name="removedNativeEntry";count++;}
         require(count==(mode.equals("missing_player_load_target")?2:1),"Wrong native mutation target");
         ClassWriter writer=new ClassWriter(0); node.accept(writer); return writer.toByteArray();
@@ -81,7 +97,7 @@ public final class NativeSaveScopeMixinCheck {
     }
     public static void main(String[] args) throws Exception {
         String mode=args.length==0?"baseline":args[0];
-        require(Set.of("baseline","dedicated","missing_player_file_target","missing_player_load_target","missing_registration").contains(mode),"Unknown test mode");
+        require(Set.of("baseline","dedicated","missing_player_file_target","missing_player_load_target","missing_registration","missing_stop_call").contains(mode),"Unknown test mode");
         MixinBootstrap.init();
         require(MixinService.getService() instanceof OfflineMixinService,"Unexpected Mixin service");
         MixinEnvironment environment=MixinEnvironment.getCurrentEnvironment();
@@ -96,7 +112,7 @@ public final class NativeSaveScopeMixinCheck {
             try(InputStream in=NativeSaveScopeMixinCheck.class.getClassLoader().getResourceAsStream(target.replace('.','/')+".class")) {
                 require(in!=null,"Missing actual target "+target); before=in.readAllBytes();
             }
-            boolean negative=(mode.equals("missing_player_file_target") || mode.equals("missing_player_load_target")) && target.endsWith(".PlayerDataStorage");
+            boolean negative=((mode.equals("missing_player_file_target") || mode.equals("missing_player_load_target")) && target.endsWith(".PlayerDataStorage")) || mode.equals("missing_stop_call") && target.equals("net.minecraft.server.MinecraftServer");
             if(negative) before=mutate(before,mode);
             byte[] after;
             try { after=transformer.transformClass(environment,target,before); }
@@ -122,7 +138,7 @@ public final class NativeSaveScopeMixinCheck {
                             && call.name.equals(handler.name) && call.desc.equals(handler.desc)) calls++;
                     }
                 }
-                require(calls==1,"Expected exactly one injection call from "+contract.method());
+                require(calls==contract.expectedCalls(),"Wrong injection call count from "+contract.method()+": "+calls);
                 if(contract.handler().contains("$enter") || contract.handler().contains("$deny")) {
                     boolean found=false;
                     for(MethodNode method:node.methods) if(method.name.equals(contract.method())) {
@@ -147,7 +163,7 @@ public final class NativeSaveScopeMixinCheck {
                     }
                     require(fix>=0 && apply>fix && event>apply,"DataFixer/load/event order changed");
                 }
-                injections++;
+                injections+=contract.expectedCalls();
             }
             require(!Arrays.equals(before,after),"Unchanged target "+target);
             for(MethodNode method:node.methods) if((method.access&(Opcodes.ACC_ABSTRACT|Opcodes.ACC_NATIVE))==0) {
@@ -156,7 +172,7 @@ public final class NativeSaveScopeMixinCheck {
             Files.write(Path.of(target.substring(target.lastIndexOf('.')+1)+".class.transformed"),after);
         }
         require(mode.equals("baseline") || dedicated,"Negative control did not reach its target");
-        require(injections==(dedicated?38:39),"Expected all registered native guard injections for this distribution");
+        require(injections==(dedicated?45:46),"Expected all registered native guard injections for this distribution");
         System.out.println("{\"test\":\"native_save_scope_mixin_transformation\",\"passed\":true,\"assertions\":"+assertions
             +",\"targets_transformed\":"+targets.size()+",\"injections_verified\":"+injections+",\"asm_basic_dataflow_methods\":"+verifiedMethods
             +",\"actual_sponge_transformer_executed\":true,\"isolated_mixin_transformation_verified\":true,\"neoforge_transform_chain_verified\":false,\"game_runtime_verified\":false}");

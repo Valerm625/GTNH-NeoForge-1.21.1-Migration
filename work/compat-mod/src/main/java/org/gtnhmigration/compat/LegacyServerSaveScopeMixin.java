@@ -30,7 +30,17 @@ public abstract class LegacyServerSaveScopeMixin implements LegacyRetrievalNativ
     @Inject(method="tickChildren",at=@At("HEAD"),require=1,allow=1,remap=false)
     private void gtnhMigration$denyChildTicks(CallbackInfo ci){denyLifecycle(this,null,"world/player ticks after server Pre callbacks");}
     @Inject(method="stopServer",at=@At("HEAD"),require=1,allow=1,remap=false)
-    private void gtnhMigration$denyNestedStop(CallbackInfo ci){denyLifecycle(this,null,"server stop");}
+    private void gtnhMigration$denyNestedStop(CallbackInfo ci){LegacyQuestNativeLifecycle.beforeWorldStop((MinecraftServer)(Object)this);}
+    @Redirect(method="runServer",at=@At(value="INVOKE",target="Lnet/minecraft/server/MinecraftServer;stopServer()V"),require=3,allow=3,remap=false)
+    private void gtnhMigration$stopFromRunLoop(MinecraftServer server){LegacyQuestNativeLifecycle.stopFromRunLoop(server);}
+    @Redirect(method="stopServer",at=@At(value="INVOKE",target="Lnet/minecraft/server/players/PlayerList;saveAll()V"),require=1,allow=1,remap=false)
+    private void gtnhMigration$stopSavePlayers(PlayerList players){LegacyQuestNativeLifecycle.stopSavePlayers((MinecraftServer)(Object)this,players);}
+    @Redirect(method="stopServer",at=@At(value="INVOKE",target="Lnet/minecraft/server/players/PlayerList;removeAll()V"),require=1,allow=1,remap=false)
+    private void gtnhMigration$stopRemovePlayers(PlayerList players){LegacyQuestNativeLifecycle.stopRemovePlayers((MinecraftServer)(Object)this,players);}
+    @Redirect(method="stopServer",at=@At(value="INVOKE",target="Lnet/minecraft/server/MinecraftServer;saveAllChunks(ZZZ)Z"),require=1,allow=1,remap=false)
+    private boolean gtnhMigration$stopSaveChunks(MinecraftServer server,boolean a,boolean b,boolean c){return LegacyQuestNativeLifecycle.stopSaveChunks(server,a,b,c);}
+    @Redirect(method="stopServer",at=@At(value="INVOKE",target="Lnet/minecraft/world/level/storage/LevelStorageSource$LevelStorageAccess;close()V"),require=1,allow=1,remap=false)
+    private void gtnhMigration$stopCloseStorage(LevelStorageSource.LevelStorageAccess storage)throws java.io.IOException{LegacyQuestNativeLifecycle.stopCloseStorage((MinecraftServer)(Object)this,storage);}
     @Redirect(method="saveEverything",at=@At(value="INVOKE",target="Lnet/minecraft/server/players/PlayerList;saveAll()V"),require=1,allow=1,remap=false)
     private void gtnhMigration$permitPlayerListSave(PlayerList list){child(this,EVERYTHING,PLAYERS,list,()->{list.saveAll();return null;});}
     @Redirect(method="saveEverything",at=@At(value="INVOKE",target="Lnet/minecraft/server/MinecraftServer;saveAllChunks(ZZZ)Z"),require=1,allow=1,remap=false)

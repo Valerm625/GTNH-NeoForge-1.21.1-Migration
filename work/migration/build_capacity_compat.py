@@ -104,7 +104,7 @@ lock['unintegrated_helpers'] += [
  'LegacyQuestWorldStore and LegacyQuestPlayerAdmission and LegacyQuestNativeLifecycle; world binding and guarded startup/load call sites installed; production receipts exercised with synthetic files, native game execution unverified',
  'LegacyPlayerMarkerUpgrade; world-bound maintenance intents, immutable gzip archives, binary-preserving marker relocation and process-halt recovery; installed before native admission, synthetic file/cache execution only',
  'LegacyOwnerTransactionRecovery and LegacyPlayerNbtPatch; known pending owner transaction mirror/cache reconciliation with archived raw files and unchanged world authority; native startup call site installed, process-halt fixtures only',
- 'LegacyRetrievalSaveScope and LegacyRetrievalNativeSaveScope; one-use native save permits and process-local quarantine; 39 selected save/load/lifecycle guards; startup and source-receipt admission call sites installed, native lifecycle execution unverified',
+ 'LegacyRetrievalSaveScope and LegacyRetrievalNativeSaveScope; one-use native save permits and process-local quarantine; 46 selected save/load/lifecycle guards; startup and source-receipt admission call sites installed, native lifecycle execution unverified',
  'LegacyRetrievalCommitCoordinator; explicit UUID-file and integrated-owner cache/mirror/world save/readback and conditional rollback protocols; native adapters compiled and acquire server/storage save permits; required save/lifecycle mixins are registered and isolated-transformed, fixture execution only; no persistent admission recovery or gameplay submit handler',
 ]
 (O/'docs/compat-mod.lock.json').write_text(json.dumps(lock,indent=2),encoding='utf-8',newline='\n');print(json.dumps(lock))

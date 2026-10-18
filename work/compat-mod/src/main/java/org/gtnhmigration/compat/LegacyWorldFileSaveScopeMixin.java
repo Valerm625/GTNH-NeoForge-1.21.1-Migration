@@ -20,7 +20,7 @@ public abstract class LegacyWorldFileSaveScopeMixin implements LegacyRetrievalNa
     @Redirect(method="saveDataTag(Lnet/minecraft/core/RegistryAccess;Lnet/minecraft/world/level/storage/WorldData;Lnet/minecraft/nbt/CompoundTag;)V",at=@At(value="INVOKE",target="Lnet/minecraft/world/level/storage/LevelStorageSource$LevelStorageAccess;saveLevelData(Lnet/minecraft/nbt/CompoundTag;)V"),require=1,allow=1,remap=false)
     private void gtnhMigration$permitWorldFile(LevelStorageSource.LevelStorageAccess receiver,CompoundTag data){child(this,LEVEL_TAG,LEVEL_FILE,this,()->{saveLevelData(data);return null;});}
     @Inject(method="close",at=@At("HEAD"),require=1,allow=1,remap=false)
-    private void gtnhMigration$denyWorldClose(CallbackInfo ci){denyLifecycle(this,getWorldDir(),"world storage close");}
+    private void gtnhMigration$denyWorldClose(CallbackInfo ci){enterStorageClose(this,getWorldDir());}
     @Inject(method="deleteLevel",at=@At("HEAD"),require=1,allow=1,remap=false)
     private void gtnhMigration$denyWorldDelete(CallbackInfo ci){denyLifecycle(this,getWorldDir(),"world deletion");}
     @Inject(method="renameLevel",at=@At("HEAD"),require=1,allow=1,remap=false)

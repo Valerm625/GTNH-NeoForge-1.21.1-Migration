@@ -19,6 +19,8 @@ import static org.gtnhmigration.compat.LegacyRetrievalSaveScope.Operation.*;
 public final class LegacyQuestNativeLifecycle {
     private static final Map<MinecraftServer,Mount> WORLDS=new IdentityHashMap<>();
     private static final ThreadLocal<Load> LOAD=new ThreadLocal<>();
+    private static final ThreadLocal<MinecraftServer> STOP_ATTEMPT=new ThreadLocal<>();
+    private static final Set<MinecraftServer> FAILED_BEFORE_LEVELS=Collections.newSetFromMap(new IdentityHashMap<>());
     private static final class Mount {
         final LegacyQuestWorldStore world;boolean ready;
         Mount(LegacyQuestWorldStore world){this.world=world;}
@@ -44,15 +46,44 @@ public final class LegacyQuestNativeLifecycle {
                 CompoundTag cached=server.getWorldData().getLoadedPlayerTag();
                 if(cached!=null)LegacyPlayerMarkerUpgrade.promote(world,cached.getUUID("UUID"),LegacyPlayerDataFileReader.Authority.WORLD_PLAYER,()->server.getWorldData().getLoadedPlayerTag(),barrier);
                 world.verifyBinding();scope.release();mount.ready=true;
-            }catch(IOException|RuntimeException|Error failure){scope.quarantine();throw failure;}
+            }catch(IOException|RuntimeException|Error failure){scope.quarantine();synchronized(WORLDS){FAILED_BEFORE_LEVELS.add(server);}throw failure;}
         }catch(IOException failure){throw new UncheckedIOException("Bound quest world recovery failed before world loading",failure);}
     }
+    /** Covers all three pinned runServer stop paths, including exceptional exit. */
+    public static void stopFromRunLoop(MinecraftServer server){
+        requireThread(server);if(STOP_ATTEMPT.get()!=null){LegacyRetrievalSaveScope.denyLifecycle(server,null,"reentrant stop attempt");throw new IllegalStateException("Reentrant server stop");}
+        STOP_ATTEMPT.set(server);try{server.stopServer();}finally{LegacyRetrievalSaveScope.abandonShutdown(server);STOP_ATTEMPT.remove();}
+    }
+    public static void beforeWorldStop(MinecraftServer server){
+        boolean failed;synchronized(WORLDS){failed=FAILED_BEFORE_LEVELS.contains(server);}
+        if(!failed || STOP_ATTEMPT.get()!=server){LegacyRetrievalSaveScope.denyLifecycle(server,null,"server stop");return;}
+        var access=(LegacyRetrievalNativeSaveScope.ServerAccess)server;
+        if(!LegacyRetrievalSaveScope.beginEmptyShutdown(server,server.getPlayerList(),access.gtnhMigration$worldStorage(),()->verifyEmptyShutdown(server)))throw new IllegalStateException("Failed startup lost its quarantine");
+    }
+    private static void verifyEmptyShutdown(MinecraftServer server){
+        requireThread(server);boolean failed;synchronized(WORLDS){failed=FAILED_BEFORE_LEVELS.contains(server);}
+        if(!failed || STOP_ATTEMPT.get()!=server || !server.isStopped() || server.getAllLevels().iterator().hasNext() || server.getPlayerList()==null || !server.getPlayerList().getPlayers().isEmpty())throw new IllegalStateException("Non-saving cleanup requires failed recovery before native world loading");
+    }
+    public static void stopSavePlayers(MinecraftServer server,PlayerList players){
+        if(!LegacyRetrievalSaveScope.shutdownStep(server,players,LegacyRetrievalSaveScope.ShutdownStep.PLAYERS,()->verifyEmptyShutdown(server)))players.saveAll();
+    }
+    public static void stopRemovePlayers(MinecraftServer server,PlayerList players){
+        if(!LegacyRetrievalSaveScope.shutdownStep(server,players,LegacyRetrievalSaveScope.ShutdownStep.REMOVE,()->verifyEmptyShutdown(server)))players.removeAll();
+    }
+    public static boolean stopSaveChunks(MinecraftServer server,boolean a,boolean b,boolean c){
+        if(LegacyRetrievalSaveScope.shutdownStep(server,server,LegacyRetrievalSaveScope.ShutdownStep.CHUNKS,()->verifyEmptyShutdown(server)))return false;return server.saveAllChunks(a,b,c);
+    }
+    public static void stopCloseStorage(MinecraftServer server,LevelStorageSource.LevelStorageAccess storage)throws IOException{
+        if(!LegacyRetrievalSaveScope.shutdownStep(server,storage,LegacyRetrievalSaveScope.ShutdownStep.STORAGE,()->verifyEmptyShutdown(server))){storage.close();return;}
+        storage.close();LegacyRetrievalSaveScope.storageClosed(server);
+    }
     public static void afterWorldStop(MinecraftServer server){
+        boolean cleanup=LegacyRetrievalSaveScope.shutdownActive(server);if(cleanup)LegacyRetrievalSaveScope.verifyShutdownComplete(server,()->verifyEmptyShutdown(server));
         Mount mount;synchronized(WORLDS){mount=WORLDS.get(server);}
-        if(mount==null)return;
-        try{if(mount.world!=null)mount.world.close();}
+        try{if(mount!=null && mount.world!=null)mount.world.close();}
         catch(IOException failure){throw new UncheckedIOException("Could not close world quest ledger",failure);}
-        synchronized(WORLDS){WORLDS.remove(server);}
+        if(cleanup)LegacyRetrievalSaveScope.finishShutdown(server,()->verifyEmptyShutdown(server));
+        synchronized(WORLDS){WORLDS.remove(server);FAILED_BEFORE_LEVELS.remove(server);}
     }
     /** Future task handlers use this already-mounted handle, never open a second
      * ledger or create one implicitly when startup recovery did not succeed.

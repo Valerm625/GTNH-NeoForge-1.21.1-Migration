@@ -21,7 +21,7 @@
     "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyPlayerDataFileReader.java": "eabe4f1e9bb7a55a4fd28693d0c4a88c7dc3d4014054a032f846d0c38fdca643",
     "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalCommitCoordinator.java": "7f4fe24f9c44a6342e83d17de7370fe7ae9978acaf01faa71431891d363d3ae3",
     "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestWorldStore.java": "9ae57d86f68d308b1bf99f25fc83b4844bca5b06dae020713a5d64f747029bc2",
-    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalSaveScope.java": "da84e3e1f813ebe5f76f8854a6781736333c45baf1da28d9bf3207245ec6535d",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalSaveScope.java": "fcd62aa8a929ba0ab066e16e1767909a31baf5dbc17d153b4d74d1e2efb1be4a",
     "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalNativeSaveScope.java": "b04f9a6828b069cfed5fc4507ac71a5f5847f8a655f6f966163cf08c9bdf1e28",
     "work/migration/LegacyRetrievalCommitCoordinatorCheck.java": "4c3558e056085c570f9475721916c7725624041b831ffed7b46f9941bb1272f8",
     "work/migration/LegacyIntegratedOwnerCoordinatorCheck.java": "c13e307e7778d2abe86ab77a000e497d4d5c8cccf580bd1a272f6b5a9e2bb24d",
