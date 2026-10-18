@@ -1,0 +1,34 @@
+{
+  "test": "LegacyQuestDefinitionArchiveCheck",
+  "passed": true,
+  "assertions": 23282,
+  "rejections": 26,
+  "source_documents": 7806,
+  "source_quests": 3814,
+  "progress_retrieval_definitions": 3743,
+  "runtime_integrated": false,
+  "export_enabled": false,
+  "game_runtime_verified": false,
+  "source_sha256": {
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalEngine.java": "974899a867d5f9b2b18295e02c3fc56827064bdfa19c863158ea4b06b0a45758",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalProgressCodec.java": "596a64ed0ed06bad0f70731773078376ea9ab7ec3cba7dacdd8c10faac0fe856",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestProgressEnvelope.java": "43ed5abb2ed2595efa101b9e89d8d8409f84b62ca01cd9c62191ea5e92b9b9a0",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestProgressStoreCodec.java": "7e610faa9cd32b56cf1302c0d62189884defbc8746c393bcf423bd84cd5f2e94",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestProgressFileStore.java": "075f4b0e66e39aa015cb957116f1196074d5b4fe9e92b6e0838e8e47fe2052a6",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalTransactionJournal.java": "26eea3d9bc8aa2a5306054dae7ec561215b03aa5412bbbbcd55c95092a63dc1a",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyPlayerDataFileReader.java": "eabe4f1e9bb7a55a4fd28693d0c4a88c7dc3d4014054a032f846d0c38fdca643",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestWorldStore.java": "375b2bcdcd7134f4a0b763faf39ff1e5b54eb6b1e82df75e9820f81339a460e8",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestDefinitionArchive.java": "807c4cceff467e7d89e18caa1f86febe3e12a9e09e3417a5ee03896cfbe2c5df",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyTypedNbtJsonReader.java": "39bb4cc485f6948ae43cd22445bc5b83dcbfce007c224f2536a4fe1469eba274",
+    "work/migration/LegacyQuestDefinitionArchiveCheck.java": "9c23201be9c7a5f21e6e1f2d60b57fbbb7d034204e8ac97f6c449e9ead789f9c",
+    "work/migration/test_legacy_quest_definition_archive.py": "78d70830810af37827da0106640c97c2fb1fb360022a75f435fdb93096857fe4",
+    "work/compat-mod/src/main/resources/gtnh_migration/quest-definitions.pin": "f7f22f552f925f93686f1741a75a985d338908c3ce754bacb1877e78aa1d61f1"
+  },
+  "minecraft_jar_sha256": "26ca9c40d7e1681190b428583c38816852218e78df3f8bdb60a59a78503aec71",
+  "archive_sha256": "cf0367344bfa10587719e9a919d04dfd2877fe1e5c2a96b24a4323e0fb7973dc",
+  "limitations": [
+    "Reads actual pinned definitions and synthetic world ledgers; no native server/world/player execution.",
+    "Catalog counts retrieval progress payloads only; no unsupported task, reward, ore equivalence, party or UI is activated.",
+    "Digest and bounded file read checks do not establish malicious-writer or power-loss protection."
+  ]
+}

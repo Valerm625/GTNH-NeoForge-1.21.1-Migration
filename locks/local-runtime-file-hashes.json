@@ -1,5 +1,8 @@
 {
-  "created_at": "2026-10-18T08:43:59.262542+00:00",
+  "source_sha256": {
+    "work/migration/stage_test_runtime.py": "c684fc20987a1fedd5f463fdb5eb9f56812ec2fde26b511c3f9ac5c955f531b6"
+  },
+  "created_at": "2026-10-18T09:04:57.911689+00:00",
   "files": [
     {
       "path": "runtime/zulu21.52.203-ca-crac-jdk21.0.12.1-win_x64/bin/api-ms-win-core-console-l1-1-0.dll",
@@ -3498,8 +3501,8 @@
     },
     {
       "path": "mods/gtnh-migration-compat-0.1.0.jar",
-      "bytes": 262549,
-      "sha256": "3527a1b39bf0f09fee6ca8d49c722b132b7fd507630e5b4ad3e56edd1c4a1557"
+      "bytes": 273336,
+      "sha256": "4fb21fe7e4c73a8c661998329fa182b6d2c1c21950e738dc811888364de8c271"
     },
     {
       "path": "mods/guideme-21.1.19.jar",
@@ -10170,6 +10173,11 @@
       "path": "config/ftbquests/quests/lang/en_us.snbt",
       "bytes": 5777,
       "sha256": "a973698244fbeca7515f8ecf7f70549c6163a883c0e5f2ca8841e4a5558e9571"
+    },
+    {
+      "path": "config/gtnh_migration/quest-definitions/cf0367344bfa10587719e9a919d04dfd2877fe1e5c2a96b24a4323e0fb7973dc.bin",
+      "bytes": 21338767,
+      "sha256": "cf0367344bfa10587719e9a919d04dfd2877fe1e5c2a96b24a4323e0fb7973dc"
     },
     {
       "path": "config/EnderStorage.cfg",

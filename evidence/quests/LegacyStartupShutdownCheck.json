@@ -27,13 +27,13 @@
     "work/migration/LegacyPlayerMarkerUpgradeCheck.java": "e9189adf569384b5144423fafe83436addf8744523b026766b75565c7907a46a",
     "work/migration/LegacyStartupShutdownCheck.java": "61de790064c8581284070ec5bf980a524c1264dbff9319aed326be2b3984d6e1",
     "work/migration/test_legacy_startup_shutdown.py": "69c9bd07ca6d1fca52b44fac11625a7c9836444bab72c30e53eeaa59a5264925",
-    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestNativeLifecycle.java": "9ad75b6d642c82d0b5fe961b46bd3f3ec2de6fb63a0984e1f6498d0a842c08b8",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestNativeLifecycle.java": "3cc8ceee2b85e0a581cff44ebb2e4d76e8f6c41a57c214e76bacb03d26fdc56e",
     "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyServerSaveScopeMixin.java": "348b65d89d0510d372779f684cee3a23baf1c04327a3685434029284eb607d7d",
     "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyWorldFileSaveScopeMixin.java": "cbc49f1233b22fc13fa3ee8f3258a121ed6e3e0779044a7ea1aaaf95ca269875"
   },
   "minecraft_jar_sha256": "26ca9c40d7e1681190b428583c38816852218e78df3f8bdb60a59a78503aec71",
   "patched_native_jar_sha256": "f57ce3018e21459d24b50508e8c1b4fd5c16324ec1dc5f316c192aa0130e7fe0",
-  "compat_jar_sha256": "3527a1b39bf0f09fee6ca8d49c722b132b7fd507630e5b4ad3e56edd1c4a1557",
+  "compat_jar_sha256": "4fb21fe7e4c73a8c661998329fa182b6d2c1c21950e738dc811888364de8c271",
   "limitations": [
     "Executes production permit state machine, synthetic world/player/pending ledger, actual DirectoryLock and ledger lock. Server objects and shutdown calls are fixtures. Byte digests exclude the two locked lock files; their exclusion and reopen behavior are tested directly.",
     "Pinned native shutdown ordering and terminal runServer call sites are bytecode audited, with required isolated Mixin checks in a separate report. No Player, server loop, world or full NeoForge transformation chain executes.",

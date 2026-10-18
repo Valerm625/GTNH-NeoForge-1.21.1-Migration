@@ -29,6 +29,7 @@ M=R/'work/migration/player-marker-upgrade-check'
 Y=R/'work/migration/owner-transaction-recovery-check'
 Z=R/'work/migration/startup-shutdown-check'
 AA=R/'work/migration/maintenance-initialization-check'
+AB=R/'work/migration/quest-definition-archive-check'
 
 
 def read(path):
@@ -76,7 +77,7 @@ for name,expected in observer['adapter_source_sha256'].items():
     assert sha(R/'work/compat-mod/src/main/java/org/gtnhmigration/compat'/(name+'.java'))==expected,name
 assert observer['test_source_sha256']==sha(R/'work/migration/LegacyInventoryObserverCheck.java')
 assert observer['runner_sha256']==sha(R/'work/migration/test_legacy_inventory_observer.py')
-for directory,name in [(J,'LegacyTypedNbtJsonReaderCheck'),(G,'LegacyQuestProgressEnvelopeCheck'),(S,'LegacyQuestProgressStoreCheck'),(T,'LegacyProgressImportPipelineCheck'),(B,'LegacyRetrievalInventoryBridgeCheck'),(D,'LegacyRetrievalTransactionJournalCheck'),(F,'LegacyRetrievalTransactionProposalCheck'),(H,'LegacyPlayerDataFileReaderCheck'),(K,'LegacyRetrievalCommitCoordinatorCheck'),(W,'LegacyWorldPlayerAuthorityCheck'),(N,'LegacyIntegratedOwnerCoordinatorCheck'),(U,'LegacyRetrievalSaveScopeCheck'),(X,'LegacyQuestWorldStoreCheck'),(A,'LegacyQuestPlayerAdmissionCheck'),(M,'LegacyPlayerMarkerUpgradeCheck'),(Y,'LegacyOwnerTransactionRecoveryCheck'),(Z,'LegacyStartupShutdownCheck'),(AA,'LegacyMaintenanceInitializationCheck')]:
+for directory,name in [(J,'LegacyTypedNbtJsonReaderCheck'),(G,'LegacyQuestProgressEnvelopeCheck'),(S,'LegacyQuestProgressStoreCheck'),(T,'LegacyProgressImportPipelineCheck'),(B,'LegacyRetrievalInventoryBridgeCheck'),(D,'LegacyRetrievalTransactionJournalCheck'),(F,'LegacyRetrievalTransactionProposalCheck'),(H,'LegacyPlayerDataFileReaderCheck'),(K,'LegacyRetrievalCommitCoordinatorCheck'),(W,'LegacyWorldPlayerAuthorityCheck'),(N,'LegacyIntegratedOwnerCoordinatorCheck'),(U,'LegacyRetrievalSaveScopeCheck'),(X,'LegacyQuestWorldStoreCheck'),(A,'LegacyQuestPlayerAdmissionCheck'),(M,'LegacyPlayerMarkerUpgradeCheck'),(Y,'LegacyOwnerTransactionRecoveryCheck'),(Z,'LegacyStartupShutdownCheck'),(AA,'LegacyMaintenanceInitializationCheck'),(AB,'LegacyQuestDefinitionArchiveCheck')]:
     value=read(directory/(name+'.json'))
     assert value['passed'] and not value['runtime_integrated'] and not value['export_enabled'],name
     for relative,expected in value['source_sha256'].items():
@@ -102,7 +103,7 @@ for relative, expected in hunt['source_sha256'].items():
     assert sha(R/relative)==expected,relative
 assert matcher['adapter_source_sha256']==sha(R/'work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalStackMatcher.java')
 with zipfile.ZipFile(jar) as compiled:
-    for directory,prefix in [(C,'LegacyRetrievalProgressCodec'),(L,'LegacyQuestRetrievalPlanner'),(J,'LegacyTypedNbtJsonReader'),(G/'classes','LegacyQuestProgressEnvelope'),(S,'LegacyQuestProgressStoreCodec'),(S,'LegacyQuestProgressFileStore'),(B,'LegacyRetrievalInventoryBridge'),(D,'LegacyRetrievalTransactionJournal'),(F,'LegacyRetrievalTransactionProposal'),(H,'LegacyPlayerDataFileReader'),(K,'LegacyRetrievalCommitCoordinator'),(W,'LegacyPlayerDataFileReader'),(W,'LegacyRetrievalTransactionJournal'),(W,'LegacyRetrievalCommitCoordinator'),(N,'LegacyRetrievalCommitCoordinator'),(N,'LegacyRetrievalTransactionProposal'),(U,'LegacyRetrievalSaveScope'),(K,'LegacyRetrievalNativeSaveScope'),(X,'LegacyQuestWorldStore'),(A,'LegacyQuestPlayerAdmission'),(A,'LegacyQuestNativeLifecycle'),(M,'LegacyPlayerMarkerUpgrade'),(M,'LegacyPlayerNbtPatch'),(Y,'LegacyOwnerTransactionRecovery'),(Z,'LegacyRetrievalSaveScope'),(AA,'LegacyMaintenanceInitialization')]:
+    for directory,prefix in [(C,'LegacyRetrievalProgressCodec'),(L,'LegacyQuestRetrievalPlanner'),(J,'LegacyTypedNbtJsonReader'),(G/'classes','LegacyQuestProgressEnvelope'),(S,'LegacyQuestProgressStoreCodec'),(S,'LegacyQuestProgressFileStore'),(B,'LegacyRetrievalInventoryBridge'),(D,'LegacyRetrievalTransactionJournal'),(F,'LegacyRetrievalTransactionProposal'),(H,'LegacyPlayerDataFileReader'),(K,'LegacyRetrievalCommitCoordinator'),(W,'LegacyPlayerDataFileReader'),(W,'LegacyRetrievalTransactionJournal'),(W,'LegacyRetrievalCommitCoordinator'),(N,'LegacyRetrievalCommitCoordinator'),(N,'LegacyRetrievalTransactionProposal'),(U,'LegacyRetrievalSaveScope'),(K,'LegacyRetrievalNativeSaveScope'),(X,'LegacyQuestWorldStore'),(A,'LegacyQuestPlayerAdmission'),(A,'LegacyQuestNativeLifecycle'),(M,'LegacyPlayerMarkerUpgrade'),(M,'LegacyPlayerNbtPatch'),(Y,'LegacyOwnerTransactionRecovery'),(Z,'LegacyRetrievalSaveScope'),(AA,'LegacyMaintenanceInitialization'),(AB,'LegacyQuestDefinitionArchive')]:
         package_dir=directory/'org/gtnhmigration/compat'
         classes=[package_dir/(prefix+'.class')]+sorted(package_dir.glob(prefix+'$*.class'))
         assert all(path.is_file() for path in classes),prefix
@@ -125,7 +126,7 @@ with zipfile.ZipFile(jar) as compiled:
         entry='org/gtnhmigration/compat/'+name+'.class'
         assert compiled.read(entry)==(P/entry).read_bytes(), 'Packaged class differs from tested class: '+name
 checks={}
-for name in ['IsolatedMixinTransformationCheck','NativeSaveScopeMixinCheck','LegacyRetrievalSaveScopeCheck','LegacyQuestWorldStoreCheck','LegacyQuestPlayerAdmissionCheck','LegacyPlayerMarkerUpgradeCheck','LegacyOwnerTransactionRecoveryCheck','LegacyStartupShutdownCheck','LegacyMaintenanceInitializationCheck','LegacyRetrievalEngineCheck','LegacyRetrievalStackMatcherCheck','LegacyCraftingShapeCheck','LegacyHuntAdapterCheck',
+for name in ['IsolatedMixinTransformationCheck','NativeSaveScopeMixinCheck','LegacyRetrievalSaveScopeCheck','LegacyQuestWorldStoreCheck','LegacyQuestPlayerAdmissionCheck','LegacyPlayerMarkerUpgradeCheck','LegacyOwnerTransactionRecoveryCheck','LegacyStartupShutdownCheck','LegacyMaintenanceInitializationCheck','LegacyQuestDefinitionArchiveCheck','LegacyRetrievalEngineCheck','LegacyRetrievalStackMatcherCheck','LegacyCraftingShapeCheck','LegacyHuntAdapterCheck',
              'LegacyRetrievalProgressCodecCheck','LegacyQuestRetrievalPlannerCheck','LegacyInventoryObserverCheck',
              'LegacyTypedNbtJsonReaderCheck','LegacyQuestProgressEnvelopeCheck','LegacyQuestProgressStoreCheck','LegacyProgressImportPipelineCheck','LegacyRetrievalInventoryBridgeCheck','LegacyRetrievalTransactionJournalCheck','LegacyRetrievalTransactionProposalCheck','LegacyPlayerDataFileReaderCheck','LegacyRetrievalCommitCoordinatorCheck','LegacyWorldPlayerAuthorityCheck','LegacyIntegratedOwnerCoordinatorCheck',
              'QuestAdapterShapeCheck','LegacyRetrievalCounterCheck','QuestSnbtCheck',
@@ -151,15 +152,27 @@ assert collisions['full_manifest_sha256']==sha(R/'work/migration/resource-collis
 checks['exact_resource_collisions']=collisions
 checks['exact_resource_collision_tests']=collision_tests
 
+archive=read(O/'docs/quest-migration/definition-archive.json')
+assert archive['passed'] and archive['source_document_count']==7806 and archive['source_quest_count']==3814
+for relative,expected in archive['source_sha256'].items():assert sha(R/relative)==expected,relative
+assert archive['archive_sha256']==checks['LegacyQuestDefinitionArchiveCheck']['archive_sha256']
+assert sha(O/'config/gtnh_migration/quest-definitions'/(archive['archive_sha256']+'.bin'))==archive['archive_sha256']
+with zipfile.ZipFile(jar) as compiled:
+    assert compiled.read('gtnh_migration/quest-definitions.pin')==(R/'work/compat-mod/src/main/resources/gtnh_migration/quest-definitions.pin').read_bytes()
+checks['source_definition_archive']={k:v for k,v in archive.items() if k!='documents'}
 assert checks['LegacyStartupShutdownCheck']['compat_jar_sha256']==sha(jar)
 manifest=read(Q/'export-manifest.json')
 runtime=read(V/'test-runtime-files.json')
+for relative,expected in runtime['source_sha256'].items():assert sha(R/relative)==expected,relative
+checks['source_definition_archive']['source_sha256'].update(runtime['source_sha256'])
+archive_rows=[row for row in runtime['files'] if row['path']=='config/gtnh_migration/quest-definitions/'+archive['archive_sha256']+'.bin']
+assert len(archive_rows)==1 and archive_rows[0]['sha256']==archive['archive_sha256'] and archive_rows[0]['bytes']==archive['archive_bytes']
 compat_row=next(row for row in runtime['files'] if row['path']=='mods/'+jar.name)
 assert compat_row['sha256']==sha(jar)
 assert 'eula=false' in (O/'eula.txt').read_text(encoding='utf-8')
 report={
     'phase_date_shanghai':'2026-10-18',
-    'phase':'journal preparation and recovery with installed startup/player-load call sites, source receipts, archived binary-preserving marker promotion, proven owner mirror/cache reconciliation, non-saving cleanup for pre-world recovery failures and world-bound auxiliary construction recovery; native lifecycle execution and full game parity remain incomplete',
+    'phase':'journal preparation and recovery with installed startup/player-load call sites, source receipts, archived binary-preserving marker promotion, proven owner mirror/cache reconciliation, non-saving cleanup for pre-world recovery failures and world-bound auxiliary construction recovery; complete pinned source definition archive and native pre-recovery binding check installed; native lifecycle execution and full game parity remain incomplete',
     'checks':checks,
     'compat_jar_sha256':sha(jar),
     'source_quests':manifest['source_quests'],
@@ -200,6 +213,9 @@ report={
     'known_owner_transaction_recovery_fixture_verified':True,
     'pre_world_startup_shutdown_fixture_verified':True,
     'maintenance_initialization_restart_fixture_verified':True,
+    'source_definition_archive_byte_fidelity_verified':True,
+    'native_definition_binding_call_order_audited':True,
+    'definition_archive_game_runtime_verified':False,
     'legacy_ambiguous_initialization_recovery_verified':False,
     'loaded_world_failure_shutdown_verified':False,
     'owner_repair_process_halt_recovery_verified':True,
@@ -234,6 +250,7 @@ metadata['validation_state'].update({
     'world_bound_ledger':'immutable world-relative manifest archived at genesis; historical catalog, non-creating reopen and offline primary/mirror recovery tested; startup/admission call sites installed but not game-executed',
     'player_admission':'source receipts, loaded owner cache checks, first-login absence, native payload return identity and post-event live marker checked in fixtures; native startup/load hooks registered and isolated-transformed; no game execution or unknown cache/mirror repair',
     'player_marker_upgrade':'world-bound maintenance intents, exact before/after gzip archives, targeted binary NBT edit, atomic mirror-first publication, actual cache promotion and process-halt roll-forward tested with synthetic files; native game execution and conflict repair unverified',
+    'definition_archive':'7806 exact source files, 3814 quests, source settings and identity references retained; pinned content digest checked before bound-world recovery; retrieval progress shapes cataloged but gameplay handlers remain incomplete',
     'maintenance_initialization':'durable world/protocol intent before directory creation and separate completion witness; interrupted genesis completes without advancing main progress or changing player/world bytes; legacy ambiguous partial directories remain blocked',
     'startup_failure_shutdown':'failed loadLevel HEAD with no levels or players, terminal runServer and unwound poisoned scope only; saves skipped, actual lock reopen and unchanged synthetic files checked; native game and loaded-world failure shutdown unverified',
     'owner_transaction_recovery':'startup reconciliation of proven old/new WORLD_PLAYER mirror/cache states; immutable originals, binary-preserving mirror edit, world bytes unchanged, main decision and repair completion recoverable across process halt; unknown conflicts and native execution unverified',

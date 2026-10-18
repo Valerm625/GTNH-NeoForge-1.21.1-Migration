@@ -1,5 +1,5 @@
 from pathlib import Path
-import json,hashlib,shutil,re,datetime
+import json,hashlib,shutil,re,datetime,zipfile
 R=Path(__file__).resolve().parents[2];W=R/'work';O=R/'outputs/GTNH-NeoForge-1.21.1-Migration-Foundation'
 # Package the already installed test runtime; do not change launcher accounts or user's system Java.
 runtime=json.loads((W/'migration/runtime.json').read_text(encoding='utf-8'));jhome=Path(runtime['java_home']);dest=O/'runtime'/jhome.name
@@ -58,12 +58,22 @@ if quest_manifest.exists():
   assert p.is_file(),f'Missing authored quest file: {name}'
   with p.open('rb') as f:digest=hashlib.file_digest(f,'sha256').hexdigest()
   files.append({'path':p.relative_to(O).as_posix(),'bytes':p.stat().st_size,'sha256':digest})
+# Include the exact archive required by the packaged compatibility JAR. Older
+# content-addressed archives remain on disk without becoming current inputs.
+with zipfile.ZipFile(O/'mods/gtnh-migration-compat-0.1.0.jar') as z:
+ pin=z.read('gtnh_migration/quest-definitions.pin').decode('ascii').splitlines()
+assert len(pin)==4 and pin[0]=='GTNHQDP1' and all(re.fullmatch('[0-9a-f]{64}',v) for v in pin[1:])
+p=O/'config/gtnh_migration/quest-definitions'/(pin[1]+'.bin')
+assert p.is_file(),'Missing pinned definition archive'
+with p.open('rb') as f:digest=hashlib.file_digest(f,'sha256').hexdigest()
+assert digest==pin[1],'Changed pinned definition archive'
+files.append({'path':p.relative_to(O).as_posix(),'bytes':p.stat().st_size,'sha256':digest})
 # Pin the authored EnderStorage configuration; user EULA and generated runtime logs are deliberately excluded.
 p=O/'config/EnderStorage.cfg'
 if p.exists():
  with p.open('rb') as f:digest=hashlib.file_digest(f,'sha256').hexdigest()
  files.append({'path':p.relative_to(O).as_posix(),'bytes':p.stat().st_size,'sha256':digest})
-report={'created_at':datetime.datetime.now(datetime.timezone.utc).isoformat(),'files':files,'scope':'Installed test runtime and migration inputs; no world, EULA consent, or gameplay validation implied.'}
+report={'source_sha256':{Path(__file__).relative_to(R).as_posix():hashlib.sha256(Path(__file__).read_bytes()).hexdigest()},'created_at':datetime.datetime.now(datetime.timezone.utc).isoformat(),'files':files,'scope':'Installed test runtime and migration inputs; no world, EULA consent, or gameplay validation implied.'}
 (O/'docs/verification/test-runtime-files.json').write_text(json.dumps(report,ensure_ascii=False,indent=2),encoding='utf-8')
 (O/'docs/verification/test-runtime.sha256.tsv').write_text(''.join(x['sha256']+'\t'+x['path']+'\n' for x in files),encoding='utf-8')
 # A relocatable test output must not depend on the work folder or source absolute paths.

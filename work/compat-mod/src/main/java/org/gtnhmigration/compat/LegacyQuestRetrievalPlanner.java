@@ -91,7 +91,8 @@ public final class LegacyQuestRetrievalPlanner {
         if (quest.repeatTime() >= 0) problems.add(new Problem("repeatTime", "unsupported_repeat"));
         if (quest.simultaneous()) problems.add(new Problem("simultaneous", "unsupported_simultaneous"));
         if (quest.global()) problems.add(new Problem("global", "unsupported_global"));
-        if (quest.globalShare()) problems.add(new Problem("globalShare", "unsupported_global_share"));
+        // GLOBAL_SHARE only affects global-quest reward claims in pinned BQ.
+        // Keep the source flag; nonglobal task detection must not reject it.
         if (quest.editMode()) problems.add(new Problem("editMode", "unsupported_edit_mode"));
         if (quest.tasks().isEmpty()) problems.add(new Problem("tasks", "unsupported_empty_quest"));
         Set<Integer> indices = new HashSet<>();

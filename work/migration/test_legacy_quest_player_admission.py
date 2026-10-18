@@ -16,7 +16,7 @@ assert sha(patched)=='f57ce3018e21459d24b50508e8c1b4fd5c16324ec1dc5f316c192aa013
 def relative(path):return Path(os.path.relpath(path,out)).as_posix()
 cp=';'.join(relative(path) for path in [minecraft,extra]+libraries)
 compile_cp=';'.join(relative(path) for path in [patched,universal])+';'+cp
-names=['LegacyRetrievalEngine','LegacyRetrievalProgressCodec','LegacyQuestProgressEnvelope','LegacyQuestProgressStoreCodec','LegacyQuestProgressFileStore','LegacyRetrievalTransactionJournal','LegacyPlayerDataFileReader','LegacyQuestWorldStore','LegacyQuestPlayerAdmission','LegacyRetrievalSaveScope','LegacyRetrievalNativeSaveScope','LegacyQuestNativeLifecycle','LegacyPlayerMarkerUpgrade','LegacyMaintenanceInitialization','LegacyPlayerNbtPatch','LegacyOwnerTransactionRecovery']
+names=['LegacyRetrievalEngine','LegacyRetrievalProgressCodec','LegacyQuestProgressEnvelope','LegacyQuestProgressStoreCodec','LegacyQuestProgressFileStore','LegacyRetrievalTransactionJournal','LegacyPlayerDataFileReader','LegacyQuestWorldStore','LegacyQuestPlayerAdmission','LegacyRetrievalSaveScope','LegacyRetrievalNativeSaveScope','LegacyQuestNativeLifecycle','LegacyQuestDefinitionArchive','LegacyTypedNbtJsonReader','LegacyPlayerMarkerUpgrade','LegacyMaintenanceInitialization','LegacyPlayerNbtPatch','LegacyOwnerTransactionRecovery']
 sources=[R/'work/compat-mod/src/main/java/org/gtnhmigration/compat'/(name+'.java') for name in names]
 checks=[R/'work/migration/LegacyPlayerDataFileReaderCheck.java',R/'work/migration/LegacyQuestWorldStoreCheck.java',R/'work/migration/LegacyQuestPlayerAdmissionCheck.java']
 def run(executable,arguments,name):
@@ -68,11 +68,12 @@ ordered(method(dedicated,'initServer'),['Method setPlayerList:','Method loadLeve
 assert 'Method setPlayerList:' in method(integrated,'net.minecraft.client.server.IntegratedServer')
 assert 'Method loadLevel:' in method(integrated,'initServer')
 lifecycle=inspect(out,'org.gtnhmigration.compat.LegacyQuestNativeLifecycle')
-ordered(method(lifecycle,'beforeWorldLoad'),['LegacyRetrievalNativeSaveScope.beginServer:','Method hasMetadata:','LegacyQuestWorldStore.open:','LegacyPlayerMarkerUpgrade.resume:','LegacyOwnerTransactionRecovery.recover:','LegacyQuestPlayerAdmission.verifyPendingWorldCache:','LegacyQuestWorldStore.recoverOffline:','LegacyQuestPlayerAdmission.verifyResolvedWorldCache:'])
+ordered(method(lifecycle,'beforeWorldLoad'),['LegacyRetrievalNativeSaveScope.beginServer:','MinecraftServer.getServerDirectory:','LegacyQuestDefinitionArchive.loadPinned:','Method hasMetadata:','LegacyQuestWorldStore.open:','LegacyQuestWorldStore.verifyCurrent:','LegacyPlayerMarkerUpgrade.resume:','LegacyOwnerTransactionRecovery.recover:','LegacyQuestPlayerAdmission.verifyPendingWorldCache:','LegacyQuestWorldStore.recoverOffline:','LegacyQuestPlayerAdmission.verifyResolvedWorldCache:'])
 ordered(method(lifecycle,'load'),['LegacyRetrievalNativeSaveScope.begin:','LegacyPlayerMarkerUpgrade.promote:','LegacyQuestPlayerAdmission.begin:','LegacyRetrievalSaveScope.root:','LegacyQuestPlayerAdmission$Receipt.finish:','LegacyRetrievalSaveScope$Lease.release:'])
 assert 'net/minecraft/client/' not in lifecycle
 report['process_admission_checks']=process_checks
 report['native_startup_order_audited']=True
+report['definition_archive_verified_before_recovery_audited']=True
 report['compiled_admission_call_order_audited']=True
 report['native_client_sha256']=sha(client)
 report.update({'source_sha256':{p.relative_to(R).as_posix():sha(p) for p in sources+checks+[Path(__file__)]},'minecraft_jar_sha256':sha(minecraft),'neoforge_patched_server_sha256':sha(patched),

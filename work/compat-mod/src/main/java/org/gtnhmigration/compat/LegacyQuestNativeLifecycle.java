@@ -22,8 +22,8 @@ public final class LegacyQuestNativeLifecycle {
     private static final ThreadLocal<MinecraftServer> STOP_ATTEMPT=new ThreadLocal<>();
     private static final Set<MinecraftServer> FAILED_BEFORE_LEVELS=Collections.newSetFromMap(new IdentityHashMap<>());
     private static final class Mount {
-        final LegacyQuestWorldStore world;boolean ready;
-        Mount(LegacyQuestWorldStore world){this.world=world;}
+        final LegacyQuestWorldStore world;final LegacyQuestDefinitionArchive definitions;boolean ready;
+        Mount(LegacyQuestWorldStore world,LegacyQuestDefinitionArchive definitions){this.world=world;this.definitions=definitions;}
     }
     private record Load(ServerPlayer player,PlayerList list,LegacyRetrievalSaveScope.Lease scope,LegacyQuestPlayerAdmission.Receipt receipt) {}
     private LegacyQuestNativeLifecycle(){}
@@ -32,9 +32,11 @@ public final class LegacyQuestNativeLifecycle {
         synchronized(WORLDS){if(WORLDS.containsKey(server))throw new IllegalStateException("World load already initialized");}
         try(var scope=LegacyRetrievalNativeSaveScope.beginServer(server)){
             try{
-                if(!hasMetadata(server)){synchronized(WORLDS){var empty=new Mount(null);empty.ready=true;WORLDS.put(server,empty);}scope.release();return;}
+                var definitions=LegacyQuestDefinitionArchive.loadPinned(server.getServerDirectory());
+                if(!hasMetadata(server)){var empty=new Mount(null,definitions);synchronized(WORLDS){WORLDS.put(server,empty);}scope.release();empty.ready=true;return;}
                 requireEmpty(server);var world=LegacyQuestWorldStore.open(server.getWorldPath(LevelResource.ROOT));
-                var mount=new Mount(world);synchronized(WORLDS){WORLDS.put(server,mount);}
+                var mount=new Mount(world,definitions);synchronized(WORLDS){WORLDS.put(server,mount);}
+                world.verifyCurrent(definitions.binding(),definitions.progressCatalog());
                 Runnable barrier=()->{
                     scope.assertHeld();requireThread(server);requireEmpty(server);
                 };
@@ -93,6 +95,12 @@ public final class LegacyQuestNativeLifecycle {
         if(mount==null || mount.world==null){if(hasMetadata(server))throw new IllegalStateException("Bound world has not completed startup recovery");return Optional.empty();}
         requireThread(server);if(!mount.ready)throw new IllegalStateException("Bound world remains quarantined during startup recovery");
         return Optional.of(mount.world);
+    }
+    /** Read-only source catalog; never creates a world ledger or enables a task. */
+    public static LegacyQuestDefinitionArchive definitions(MinecraftServer server){
+        requireThread(server);Mount mount;synchronized(WORLDS){mount=WORLDS.get(server);}
+        if(mount==null || !mount.ready)throw new IllegalStateException("Definitions unavailable before successful world admission");
+        return mount.definitions;
     }
     public static Optional<CompoundTag> load(PlayerList list,ServerPlayer player){
         MinecraftServer server=player.server;

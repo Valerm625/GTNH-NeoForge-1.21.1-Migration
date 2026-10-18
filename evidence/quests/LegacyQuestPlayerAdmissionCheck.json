@@ -35,6 +35,7 @@
     }
   ],
   "native_startup_order_audited": true,
+  "definition_archive_verified_before_recovery_audited": true,
   "compiled_admission_call_order_audited": true,
   "native_client_sha256": "aff67d0c3bbd015ecd881bb37416b740ada2e1e854433501ec5bb9381dbdd1c2",
   "source_sha256": {
@@ -49,7 +50,9 @@
     "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestPlayerAdmission.java": "cba4caa7e8bae97328321c106c18891c35ec8f241e59ccec19b40a00cc06ed82",
     "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalSaveScope.java": "fcd62aa8a929ba0ab066e16e1767909a31baf5dbc17d153b4d74d1e2efb1be4a",
     "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalNativeSaveScope.java": "b04f9a6828b069cfed5fc4507ac71a5f5847f8a655f6f966163cf08c9bdf1e28",
-    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestNativeLifecycle.java": "9ad75b6d642c82d0b5fe961b46bd3f3ec2de6fb63a0984e1f6498d0a842c08b8",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestNativeLifecycle.java": "3cc8ceee2b85e0a581cff44ebb2e4d76e8f6c41a57c214e76bacb03d26fdc56e",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestDefinitionArchive.java": "807c4cceff467e7d89e18caa1f86febe3e12a9e09e3417a5ee03896cfbe2c5df",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyTypedNbtJsonReader.java": "39bb4cc485f6948ae43cd22445bc5b83dcbfce007c224f2536a4fe1469eba274",
     "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyPlayerMarkerUpgrade.java": "e91623c4466571165ca44944850bea09304339242c6c313c97fbc652c5d3bd81",
     "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyMaintenanceInitialization.java": "df687956aabbe1cce6d2d39db794c202d088f9c5004521a382a22445e9872c17",
     "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyPlayerNbtPatch.java": "1c10d4fd907205b4e075a11d99f358c2014fe0d1a9f7c374d1c147c8241b32dc",
@@ -57,7 +60,7 @@
     "work/migration/LegacyPlayerDataFileReaderCheck.java": "27f47442063c7a8fa659f91f8e8e44a80076704310a810d0e09f2c61991d0932",
     "work/migration/LegacyQuestWorldStoreCheck.java": "011a0cb89da8d7d7a559717ac3657030d0e04d51906cedc30cc2a894ba2e31d6",
     "work/migration/LegacyQuestPlayerAdmissionCheck.java": "ab94d44582ebabe75ba76521114ee96a8683706e95b6bc0ea56ca2db83974d7f",
-    "work/migration/test_legacy_quest_player_admission.py": "1804a7695d4306144dbfc40fc13a9a7d0207d8d694b0e4c38d1238361e27618d"
+    "work/migration/test_legacy_quest_player_admission.py": "b1ca5b534908bb0e13048aaaf05437add700c9690421e7288bf562c87496435e"
   },
   "minecraft_jar_sha256": "26ca9c40d7e1681190b428583c38816852218e78df3f8bdb60a59a78503aec71",
   "neoforge_patched_server_sha256": "f57ce3018e21459d24b50508e8c1b4fd5c16324ec1dc5f316c192aa0130e7fe0",

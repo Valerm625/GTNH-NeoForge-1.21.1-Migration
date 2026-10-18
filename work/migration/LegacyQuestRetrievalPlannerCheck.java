@@ -150,7 +150,9 @@ public final class LegacyQuestRetrievalPlannerCheck {
         rejects(new Quest<>(QUEST,normal.tasks(),"AND",0,false,false,false,false),"unsupported_repeat",Map.of());
         rejects(new Quest<>(QUEST,normal.tasks(),"AND",-1,true,false,false,false),"unsupported_simultaneous",Map.of());
         rejects(new Quest<>(QUEST,normal.tasks(),"AND",-1,false,true,false,false),"unsupported_global",Map.of());
-        rejects(new Quest<>(QUEST,normal.tasks(),"AND",-1,false,false,true,false),"unsupported_global_share",Map.of());
+        var sharedFlag=new Quest<>(QUEST,normal.tasks(),"AND",-1,false,false,true,false);
+        require(check(sharedFlag,Map.of(),five,OPEN).equals(check(normal,Map.of(),five,OPEN)),"Inactive globalShare changed nonglobal detection");
+        rejects(new Quest<>(QUEST,normal.tasks(),"AND",-1,false,true,true,false),"unsupported_global",Map.of());
         rejects(new Quest<>(QUEST,normal.tasks(),"AND",-1,false,false,false,true),"unsupported_edit_mode",Map.of());
 
         Config<String> throwing=new Config<>(List.of(new Requirement<>(1,item->{throw new IllegalStateException("fixture failure");})),false,false,false,false);

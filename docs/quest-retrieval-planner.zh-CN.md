@@ -15,7 +15,7 @@
 
 ## 输入及拒绝边界
 
-`Quest` 必须明确给出 AND、负数 repeatTime、simultaneous/global/globalShare/editMode 均为 false。所有任务必须是已审查的 `bq_standard:retrieval`、ignored=false，且提供引擎接受的配置。引擎仍仅支持非消耗 AND 多要求及单要求手动消耗。
+`Quest` 必须明确给出 AND、负数 repeatTime、simultaneous/global/editMode 均为 false；globalShare 保留原始值，非全局检测中不影响算法。所有任务必须是已审查的 `bq_standard:retrieval`、ignored=false，且提供引擎接受的配置。引擎仍仅支持非消耗 AND 多要求及单要求手动消耗。
 
 空 quest、重复 index、未知/非检索任务、缺少检索配置，以及上述未支持模式，都会在任何任务运行前整体拒绝。未知任务即使发起者已完成，也不能悄悄略过。`UnsupportedQuestException` 返回原声明及逐项问题；原完整 NBT/配置仍由调用方保存，不能用本模块的有限字段替换或删去原需求。
 
@@ -35,6 +35,6 @@
 
 runner 对五个原 BQ 源文件做 SHA-256 检查，原样提取并执行 `QuestInstance.detect`、`SimpleDatabase.getEntries`、`LookupLogic.getRefCache/computeRefCache`。每个任务再执行原 `TaskRetrieval.detect/checkAndComplete/onInventoryChange/Detector`。检索夹具由现有 runner 的字符串常量取得，不执行或改写原 runner。库存/玩家/cache/property 及存储包装仍是测试夹具；真实旧任务循环和排序方法直接参与对照。
 
-当前通过 9,707 项断言、2,412 次源码对照。覆盖正常及反向任务顺序、重复提交、稀疏 index、非首位 actor、offline、未达标前任务后仍交付、部分进度累积、入口拒绝、未知类型与未支持模式整体拒绝、后任务失败不修改输入，以及固定种子的多次随机检测。规划器和 oracle 分别取得独立输入副本，并逐次验证调用前后输入不变，避免一个实现的修改污染另一侧。
+当前通过 9,716 项断言、2,414 次源码对照（包括非全局 globalShare=true 的原循环对照）。覆盖正常及反向任务顺序、重复提交、稀疏 index、非首位 actor、offline、未达标前任务后仍交付、部分进度累积、入口拒绝、未知类型与未支持模式整体拒绝、后任务失败不修改输入，以及固定种子的多次随机检测。规划器和 oracle 分别取得独立输入副本，并逐次验证调用前后输入不变，避免一个实现的修改污染另一侧。
 
 报告 `LegacyQuestRetrievalPlannerCheck.json` 绑定生产源码、测试、runner、原源码及生成 oracle 的哈希；明确 `atomic_calculation_only=true`、`runtime_integrated=false`、`export_enabled=false`、`game_runtime_verified=false`。测试成功不增加已迁移任务数，也不解除 `logWood` 完整身份集合、队伍生命周期、UI/网络、持久化事务和实际游戏验证的阻塞。

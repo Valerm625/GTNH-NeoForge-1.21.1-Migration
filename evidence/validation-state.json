@@ -16,7 +16,7 @@
   "early_game_recipe_definitions": 3,
   "animated_texture_files": 31,
   "creative_tabs": 8,
-  "runtime_input_files": 2035,
+  "runtime_input_files": 2036,
   "quest_stack_identities_mapped": 720,
   "active_modern_quests": 2,
   "active_top_level_jars": 19,
@@ -57,5 +57,6 @@
   "player_marker_upgrade": "world-bound maintenance intents, exact before/after gzip archives, targeted binary NBT edit, atomic mirror-first publication, actual cache promotion and process-halt roll-forward tested with synthetic files; native game execution and conflict repair unverified",
   "owner_transaction_recovery": "startup reconciliation of proven old/new WORLD_PLAYER mirror/cache states; immutable originals, binary-preserving mirror edit, world bytes unchanged, main decision and repair completion recoverable across process halt; unknown conflicts and native execution unverified",
   "startup_failure_shutdown": "failed loadLevel HEAD with no levels or players, terminal runServer and unwound poisoned scope only; saves skipped, actual lock reopen and unchanged synthetic files checked; native game and loaded-world failure shutdown unverified",
-  "maintenance_initialization": "durable world/protocol intent before directory creation and separate completion witness; interrupted genesis completes without advancing main progress or changing player/world bytes; legacy ambiguous partial directories remain blocked"
+  "maintenance_initialization": "durable world/protocol intent before directory creation and separate completion witness; interrupted genesis completes without advancing main progress or changing player/world bytes; legacy ambiguous partial directories remain blocked",
+  "definition_archive": "7806 exact source files, 3814 quests, source settings and identity references retained; pinned content digest checked before bound-world recovery; retrieval progress shapes cataloged but gameplay handlers remain incomplete"
 }

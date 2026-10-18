@@ -19,6 +19,8 @@ for step in ['test_legacy_retrieval_transaction_journal.py', 'test_legacy_retrie
     steps.insert(steps.index('test_legacy_retrieval_matcher.py'), step)
 for step in ['verify_exact_ore_resources.py', 'test_exact_ore_resources.py']:
     steps.insert(steps.index('verify_migration.py'), step)
+steps.insert(steps.index('build_capacity_compat.py'), 'build_quest_definition_archive.py')
+steps.insert(steps.index('test_legacy_retrieval_matcher.py'), 'test_legacy_quest_definition_archive.py')
 for step in steps:
     print('RUN',step,flush=True)
     subprocess.run([sys.executable,'-u',str(HERE/step)],cwd=ROOT,check=True)
