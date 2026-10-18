@@ -29,6 +29,7 @@ steps.insert(steps.index('stage_test_runtime.py'), 'test_native_startup_registra
 steps.insert(steps.index('stage_test_runtime.py'), 'test_native_resource_bridge.py')
 steps.insert(steps.index('build_capacity_compat.py'), 'install_gtceu_bridge.py')
 steps.insert(steps.index('build_capacity_compat.py'), 'test_gtceu_artifact.py')
+steps.insert(steps.index('build_capacity_compat.py'), 'audit_legacy_credit_sources.py')
 for step in steps:
     print('RUN',step,flush=True)
     subprocess.run([sys.executable,'-u',str(HERE/step)],cwd=ROOT,check=True)

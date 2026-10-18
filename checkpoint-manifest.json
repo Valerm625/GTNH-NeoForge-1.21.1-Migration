@@ -1,8 +1,8 @@
 {
-  "created_at": "2026-10-18T22:51:35.218100+08:00",
+  "created_at": "2026-10-18T23:20:45.760711+08:00",
   "scope": "source-only public checkpoint; third-party game inputs excluded",
   "hash_scope": "Git index canonical blobs, not Windows checkout line endings",
-  "base_commit": "b89d88d49039e5b6607599cf0f1c78745f6b91cb",
+  "base_commit": "5156b113d7171108cda66e64dd23c3e2b4555f76",
   "files": [
     {
       "path": ".gitattributes",
@@ -16,8 +16,8 @@
     },
     {
       "path": "NOTICE.md",
-      "bytes": 3238,
-      "sha256": "16a2c2ee1288c08478c19fcea2755ac829cc1c2fa9095de2481c2999d0ea8f51"
+      "bytes": 3562,
+      "sha256": "de1f2e4b8f50eb8d6bec65621d24fa0345f4ed44dfde847489d93dcc014cc7d4"
     },
     {
       "path": "PAUSED-HANDOFF.zh-CN.md",
@@ -26,18 +26,18 @@
     },
     {
       "path": "README.md",
-      "bytes": 16091,
-      "sha256": "e09bb2d1a795fed9923246a88f58929f8aee18e1bdf868ec85b1cb4b99a67281"
+      "bytes": 16556,
+      "sha256": "486e61ecb1776d105d0f9f4adbe40a8a4f03b73c73300ee45ae0d51520dfcde1"
     },
     {
       "path": "RESUME.md",
-      "bytes": 60394,
-      "sha256": "33c0b41178699eaa0a3739603d955263da3d4e54ab889460243255d839a12862"
+      "bytes": 65383,
+      "sha256": "3bc1d7bf629624c2f23db5b148d6ec48e3920dfbcfa284d1a155775ea414cc6c"
     },
     {
       "path": "STATUS.zh-CN.md",
-      "bytes": 20640,
-      "sha256": "bfaba8da9d4708accde47d9b1b6618368180ce19d652250f23fd70721e7f1921"
+      "bytes": 21282,
+      "sha256": "58cc4fb7e9a9543c36e7fe241ac2f0ac60c7f08fe8f10992a24823e6e12f55ad"
     },
     {
       "path": "docs/gtceu-derived-artifact.zh-CN.md",
@@ -73,6 +73,11 @@
       "path": "docs/legacy-shaped-geometry.zh-CN.md",
       "bytes": 5192,
       "sha256": "1c4f0e1ee810bff363cb973c3a739c4e3c2c5a6ab0bcd0515c36e58f3eda66ff"
+    },
+    {
+      "path": "docs/legacy-shapeless-crafting.zh-CN.md",
+      "bytes": 4297,
+      "sha256": "670a195397545b16790c461d5203348e40e292df5b727adc7f2595c011f83a8a"
     },
     {
       "path": "docs/library-client-callbacks.zh-CN.md",
@@ -235,14 +240,19 @@
       "sha256": "94a7b48b36857146c6ce18ec7fae0eb93a4bb3e18e840002c49e69df7486c155"
     },
     {
+      "path": "evidence/LegacyCreditSourceAudit.json",
+      "bytes": 27801,
+      "sha256": "76b23b7b315b9cb787785e24aa062797f1eceeed754828ed78146a29e98be81a"
+    },
+    {
       "path": "evidence/NativeResourceBridgeCheck.json",
-      "bytes": 183139,
-      "sha256": "e710941080514e1ef84cc2d7285d9866dc19147745082f8f1b0d907d29ec51d9"
+      "bytes": 184398,
+      "sha256": "ec6b0629bb2a543fefb026edb3071374d39572a955219afdb9eb3f932546601e"
     },
     {
       "path": "evidence/NativeStartupRegistrationCheck.json",
       "bytes": 196493,
-      "sha256": "b00f5cae6356842b0711946404635f2077786abb543f8c839121157d58c07052"
+      "sha256": "e8d454835a10338e025b66ba0e6eff74b2920d763eeff2146a490e20f927019d"
     },
     {
       "path": "evidence/capacity-adapter-test.json",
@@ -262,7 +272,7 @@
     {
       "path": "evidence/compat-mod.lock.json",
       "bytes": 4559,
-      "sha256": "51d4d4d1037a7c1efe1993c86ab0884b8a470838fdea407792c84952da247ab5"
+      "sha256": "14107096657caa1cf25099f948efaa9864167d03f06096d65e5e1d6f6e7cb4d8"
     },
     {
       "path": "evidence/crafting-task-adapter.json",
@@ -327,12 +337,12 @@
     {
       "path": "evidence/loader-with-quest-runtime.json",
       "bytes": 347,
-      "sha256": "f8bc328009a931f847be34ea9385895ad80c968c2920c6092353aed86ec32cf1"
+      "sha256": "10bb26b36a58d4852e6a7ea8add1640243988a5ff3326b02260aea4186f30e9e"
     },
     {
       "path": "evidence/local-restore-input-check.json",
       "bytes": 2418,
-      "sha256": "9b19103c55cc9fdb713e926ff164ed272d5e7216424b66ae8222f8b49e6e744e"
+      "sha256": "232a6568d4ea533e6902ae0ab7bec42325ba1788613109f3a9e8537feb9b24b6"
     },
     {
       "path": "evidence/location-task-boundary.json",
@@ -396,8 +406,8 @@
     },
     {
       "path": "evidence/phase-2026-10-18-task-semantics.json",
-      "bytes": 778280,
-      "sha256": "6bd84a49fb689577e9514c34b6ff05bdebf0b8818b5e6dd8f456afe8be3f9e81"
+      "bytes": 810928,
+      "sha256": "aca4ea02e3d59af0108aa14adefe1d307f3ac8d09efe6665ff9ef965eaf94719"
     },
     {
       "path": "evidence/quest-export-summary.json",
@@ -407,7 +417,7 @@
     {
       "path": "evidence/quests/IsolatedMixinTransformationCheck.json",
       "bytes": 2204,
-      "sha256": "2c4472feda1afda9fdbc0e9693243dc4e7fff16ea944f70ca88e3bb4db13324f"
+      "sha256": "fd46a7c0bea8375c050cbf10b7a452998a7eb65ca3e4fc7ea7e84e104460bb6c"
     },
     {
       "path": "evidence/quests/LegacyCraftingShapeCheck.json",
@@ -422,7 +432,7 @@
     {
       "path": "evidence/quests/LegacyHuntAdapterCheck.json",
       "bytes": 1612,
-      "sha256": "88759022547024b68f859b219786be8b7fd6c8fd2c8303a7a02b70ae786b78d5"
+      "sha256": "10eaa8721310c668a497c0d30e30acba9c80776318f6e8fdc7038fdac6f1e329"
     },
     {
       "path": "evidence/quests/LegacyIntegratedOwnerCoordinatorCheck.json",
@@ -432,7 +442,7 @@
     {
       "path": "evidence/quests/LegacyInventoryObserverCheck.json",
       "bytes": 5287,
-      "sha256": "8253a7450d635794cc6c75e001c7daa19e0d1a84315bb3686d9fa46f2c60e956"
+      "sha256": "fba78f273073dc15edd380cca419d57ed6d0b0bb90a2ba37a5360db3137f139d"
     },
     {
       "path": "evidence/quests/LegacyMaintenanceInitializationCheck.json",
@@ -552,7 +562,7 @@
     {
       "path": "evidence/quests/LegacyStartupShutdownCheck.json",
       "bytes": 4925,
-      "sha256": "311ea2c9276b32dbf8ae17db0006be214be6cb06125fd22cff62ecb0b284ba24"
+      "sha256": "e2e35933ab2e102b971cb505283559823db53b1917bc3bd12fbc7930cec8eacf"
     },
     {
       "path": "evidence/quests/LegacyTypedNbtJsonReaderCheck.json",
@@ -567,12 +577,12 @@
     {
       "path": "evidence/quests/NativeRegistryDatagenCheck.json",
       "bytes": 188197,
-      "sha256": "01af62dc2a33a4272136953597c1a835b8812cad9909d9b1e3867fc079091c2a"
+      "sha256": "3f6b0eeeb558f0378ddff086a0c35e0ab7c1a942dc3bf35ed8aea9a50fb2e60e"
     },
     {
       "path": "evidence/quests/NativeSaveScopeMixinCheck.json",
       "bytes": 5759,
-      "sha256": "677e8836549b7ff978cfc2ae480b63e6c23b2c8701ab85998228127f452250da"
+      "sha256": "21cf5411b084a16282835d2c17a416f4e994c9f3ebb88c60c660249a0d3b67ba"
     },
     {
       "path": "evidence/quests/QuestAdapterShapeCheck.json",
@@ -611,13 +621,13 @@
     },
     {
       "path": "evidence/validation-state.json",
-      "bytes": 9447,
-      "sha256": "95739f181d314a4a912912c45e08a4c6371406eb0b3582e36d096e5813320153"
+      "bytes": 10106,
+      "sha256": "58e5a82002c3e3c1e01d31f70aa900fdb21c7632ab6ff1e23a212e9457b9b979"
     },
     {
       "path": "evidence/validation-summary.json",
       "bytes": 5077,
-      "sha256": "6e0000fbf8de340598ae38d05c023d28aca4d933523d5bcb90ec2e3cca70d343"
+      "sha256": "f38ee55a5b2f5226db1a6efbe1a39f9afcce0a687396f460ad223dfb405e5eea"
     },
     {
       "path": "evidence/vanilla-identity-mapping.json",
@@ -642,7 +652,7 @@
     {
       "path": "locks/compat-mod.lock.json",
       "bytes": 4559,
-      "sha256": "51d4d4d1037a7c1efe1993c86ab0884b8a470838fdea407792c84952da247ab5"
+      "sha256": "14107096657caa1cf25099f948efaa9864167d03f06096d65e5e1d6f6e7cb4d8"
     },
     {
       "path": "locks/ftb-candidates.json",
@@ -685,6 +695,11 @@
       "sha256": "20be82c9c0781d7fccebb84c0a2e8bc02be0825fe6799c1b1750cba0aa39023d"
     },
     {
+      "path": "locks/legacy-shapeless-source.json",
+      "bytes": 1809,
+      "sha256": "c474701e10e8ef0c93953ca52f8f2e072e55c80df9646584e7e0ace379266215"
+    },
+    {
       "path": "locks/library-client-callbacks.json",
       "bytes": 2069,
       "sha256": "be4ce16e2fcdc9b0a913484dfa146d260ddd40b59e8c7846331aeb715c770a47"
@@ -692,7 +707,7 @@
     {
       "path": "locks/local-runtime-file-hashes.json",
       "bytes": 418851,
-      "sha256": "7e7f667a338a89d3f04baa7d9cc64916e94cb9637419c6fa1a2d271cf2e7231f"
+      "sha256": "765d50a4eca0860eb5ba3282b0515f220e6cdd25e49500a17f28a34edf018ce9"
     },
     {
       "path": "locks/modern-transport-candidates.json",
@@ -920,14 +935,24 @@
       "sha256": "9c391e8e73c9e81a451ecf1f609158de7af4583f45f144abc05fc93b53c77997"
     },
     {
+      "path": "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyShapelessMatch.java",
+      "bytes": 1218,
+      "sha256": "7bf839873eb87949d2fb12c699a30dfb19e90ddaff7e5a5298b118a2e96ff14d"
+    },
+    {
+      "path": "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyShapelessRecipe.java",
+      "bytes": 4540,
+      "sha256": "f3cfb7c2e33ca136d4893a1320aadd679adcfce13a52f7d9f6d4998ae709dff8"
+    },
+    {
       "path": "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyTypedNbtJsonReader.java",
       "bytes": 12753,
       "sha256": "39bb4cc485f6948ae43cd22445bc5b83dcbfce007c224f2536a4fe1469eba274"
     },
     {
       "path": "work/compat-mod/src/main/java/org/gtnhmigration/compat/MigrationCompat.java",
-      "bytes": 341,
-      "sha256": "56ac700db6a1d07690db75e3d2c8f9447bb300d1551f0dbe8ab3aa2d80ba3960"
+      "bytes": 378,
+      "sha256": "714254d4eaf09bf163af5838c404c31d83456eb45f692aba2b892af857289ad6"
     },
     {
       "path": "work/compat-mod/src/main/java/org/gtnhmigration/compat/mixin/EnderTankCapacityMixin.java",
@@ -1026,8 +1051,8 @@
     },
     {
       "path": "work/compat-mod/src/main/resources/LICENSE",
-      "bytes": 1456,
-      "sha256": "a4520b2c0a2f0d78f50fb3860b88b4bd71e520df1bea46b12c30d49d4392e195"
+      "bytes": 1485,
+      "sha256": "74f8ae560d6146bcd125808155f85df9be2b44c947ab509288366e25d8e22945"
     },
     {
       "path": "work/compat-mod/src/main/resources/META-INF/coremods.json",
@@ -1046,8 +1071,8 @@
     },
     {
       "path": "work/compat-mod/src/main/resources/NOTICE",
-      "bytes": 2527,
-      "sha256": "7439a18164cfbb273dd963f7b04bb0a1626e350074e79b44620af841f506c015"
+      "bytes": 2717,
+      "sha256": "5fc6c562e3c81d07825ac92b6b6648a00c4fd61dc7b06e02ff5579cdc459bc19"
     },
     {
       "path": "work/compat-mod/src/main/resources/coremods/gtceu_client_isolation.js",
@@ -1096,8 +1121,8 @@
     },
     {
       "path": "work/migration/KubeJSBridgeFixtures.js",
-      "bytes": 4661,
-      "sha256": "3933e0214d06e480f4489486c428cac21a619f7ba191cec072a2101b5abcf152"
+      "bytes": 6091,
+      "sha256": "b98242bc442d07eba6e4818b2e2bad52910fc3023e59e72d333683e5cf4f72ca"
     },
     {
       "path": "work/migration/LegacyCraftingShapeCheck.java",
@@ -1276,8 +1301,8 @@
     },
     {
       "path": "work/migration/NativeCraftingNbtCheck.java",
-      "bytes": 10228,
-      "sha256": "48532f8bb393168ff05f56edea1b795c5dae223f85495641f92d313cf42b62f4"
+      "bytes": 10204,
+      "sha256": "42cbe55ee45fa359bd2d08207ed9adeb0c71b742db733a953e8fb7f8cd53687f"
     },
     {
       "path": "work/migration/NativeRegistryAudit.java",
@@ -1291,8 +1316,8 @@
     },
     {
       "path": "work/migration/NativeResourceAuditMain.java",
-      "bytes": 9025,
-      "sha256": "3341d0ff6a44e5481d8af7219911057ed357847a96410e0992dd680919dd2387"
+      "bytes": 9238,
+      "sha256": "808efbc90ae59567b084aeea8f4c073c545e59423eedafd5817d42906d62a9e1"
     },
     {
       "path": "work/migration/NativeSaveScopeMixinCheck.java",
@@ -1303,6 +1328,11 @@
       "path": "work/migration/NativeShapedRecipeCheck.java",
       "bytes": 9434,
       "sha256": "d08f5141b2177d3316e870d7dd61e087afc059e5fefd7390273e71d3ecad8880"
+    },
+    {
+      "path": "work/migration/NativeShapelessRecipeCheck.java",
+      "bytes": 9861,
+      "sha256": "e85befc8724f24fc5c969f6fb7a17f8d72184bb1d28989bd0b8bc54e5fbd3041"
     },
     {
       "path": "work/migration/OfflineMixinService.java",
@@ -1385,6 +1415,11 @@
       "sha256": "6726979626fab20fd46a7005c639a673c10fbbe0764903201ae2c87409709460"
     },
     {
+      "path": "work/migration/audit_legacy_credit_sources.py",
+      "bytes": 7286,
+      "sha256": "c0b34f485037d2164a3ed88e2233802cd70bff4b9e9e907b9acd54e821ae2675"
+    },
+    {
       "path": "work/migration/audit_source_archives.py",
       "bytes": 16704,
       "sha256": "ed1f1602ee619aeafe217caf1399f4c2d30a15b6440513515b91086de9a9abcc"
@@ -1396,8 +1431,8 @@
     },
     {
       "path": "work/migration/build_capacity_compat.py",
-      "bytes": 14639,
-      "sha256": "48a74e7a88f6cf5b27d44ffcc86fe8a56b4aa816393eb7ad7eeb67bbdbd0f952"
+      "bytes": 14705,
+      "sha256": "cc6b12a4367979216dc039e31145dec0c5f944c1f257aca3b36eaacf25c2f240"
     },
     {
       "path": "work/migration/build_gtceu_kubejs_bridge.py",
@@ -1411,13 +1446,18 @@
     },
     {
       "path": "work/migration/build_legacy_nbt_reference.py",
-      "bytes": 3852,
-      "sha256": "efa55ec8fdad466fb6476a1ade8ec470e6130b094bf96714a8291bdadb656e94"
+      "bytes": 4329,
+      "sha256": "f0dd276d91bd6f4a77426a27bfb2afd0af44e4bd7ceeb07bac39661add6cb68f"
     },
     {
       "path": "work/migration/build_legacy_shaped_oracle.py",
       "bytes": 5009,
       "sha256": "492d0fe6e39cbe00881cef4142b6b3f1c2cdd64479d77949000bc419826a575e"
+    },
+    {
+      "path": "work/migration/build_legacy_shapeless_reference.py",
+      "bytes": 2015,
+      "sha256": "d8a5c0e9fc67038541b4624c6da4756848be25cb40eae0c840fd24e22f580496"
     },
     {
       "path": "work/migration/build_quest_definition_archive.py",
@@ -1566,8 +1606,8 @@
     },
     {
       "path": "work/migration/rebuild_current_phase.py",
-      "bytes": 4407,
-      "sha256": "93dd6a43a22379c88de343b6cce337b584980058f02880f978ca2ab1a6a030ab"
+      "bytes": 4495,
+      "sha256": "9fa4385b9f3252a919949e0c86b917c98b98c7ff8949e879e598a029901009a5"
     },
     {
       "path": "work/migration/recover_java.py",
@@ -1801,8 +1841,8 @@
     },
     {
       "path": "work/migration/test_native_resource_bridge.py",
-      "bytes": 20178,
-      "sha256": "c8c269fb7b4d437af9551ac849bbac5b8fdcb93be8038d182d35ee959a71ecb7"
+      "bytes": 23088,
+      "sha256": "8b065f6a87978c52b03dd1973be17285d96c1b1ae8275224d24828f03d83a0b3"
     },
     {
       "path": "work/migration/test_native_save_scope_mixins.py",
@@ -1946,13 +1986,13 @@
     },
     {
       "path": "work/migration/write_task_semantics_status.py",
-      "bytes": 46789,
-      "sha256": "1a7dcf42c4704a7eb1c4667d577623a9c0422aa1c81398080c0511890be07fb6"
+      "bytes": 49099,
+      "sha256": "2aa26f36a6dba71d9d5d41f02f300e874833c7348e48539c683c85f953b13fae"
     }
   ],
-  "file_count": 389,
+  "file_count": 397,
   "source_archive_inputs_included": false,
   "runtime_binaries_included": false,
   "full_parity": false,
-  "continuation": "Continue solo toward complete GTNH parity: implement actual item mappings and update hooks, bidirectional legacy NBT/modern component mapping, shapeless keep/overwrite and enchantments; then connect source crafting recipes with all material, capacity, tool, progression and texture rules. Credit_Iron is IC2 coin, not a GT MetaItem. Continue native quests, machine execution and client parity. Raw legacy tag and explicit keep phase are verified only; full pack is incomplete. Preserve all user requirements and EULA=false."
+  "continuation": "Continue solo with complete credit item behavior and texture mapping, pinned IC2 coin identity, overwrite NBT, validators, item update hooks and remaining full-pack parity; full parity remains false."
 }

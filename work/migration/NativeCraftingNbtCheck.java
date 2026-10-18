@@ -26,15 +26,15 @@ public final class NativeCraftingNbtCheck {
     private static void field(DataOutputStream out, int type, String key, Write payload) throws IOException {
         out.writeByte(type); out.writeUTF(key); payload.write(out);
     }
-    private static ItemStack stack(byte[] raw) {
+    static ItemStack stack(byte[] raw) {
         ItemStack stack = new ItemStack(Items.IRON_INGOT);
         if (raw != null) stack.set(LegacyItemTag.TYPE, new LegacyItemTag(raw));
         return stack;
     }
-    private static byte[] raw(ItemStack stack) {
+    static byte[] raw(ItemStack stack) {
         LegacyItemTag value = stack.get(LegacyItemTag.TYPE); return value == null ? null : value.bytes();
     }
-    private static List<byte[]> values() throws IOException {
+    static List<byte[]> values() throws IOException {
         List<byte[]> values = new ArrayList<>(); values.add(null); values.add(tag("", out -> {}));
         values.add(tag("tag", out -> {}));
         for (int type = 1; type <= 11; type++) {

@@ -1,0 +1,27 @@
+{
+  "forge": {
+    "filename": "forge-1.7.10-10.13.4.1614-userdev.jar",
+    "url": "https://maven.minecraftforge.net/net/minecraftforge/forge/1.7.10-10.13.4.1614-1.7.10/forge-1.7.10-10.13.4.1614-1.7.10-userdev.jar",
+    "sha256": "6ed364c0defdb481a41ef2d99c02d382f16fc42a6ea0ea1c2b849848d8466e91",
+    "license": {
+      "name": "Minecraft Forge Public Licence 1.0",
+      "source_url": "https://maven.minecraftforge.net/net/minecraftforge/forge/1.7.10-10.13.4.1614-1.7.10/forge-1.7.10-10.13.4.1614-1.7.10-universal.jar",
+      "archive_sha256": "00d1ca02192c7efb87da95552ebf247021f1e1d642f86d0a03076314def11529",
+      "entry": "MinecraftForge-License.txt",
+      "sha256": "5d5b5983827c197ac2f352b8580e38b182389985cf0a5b5650c35de81fde9026",
+      "local_path": "work/compat-mod/src/main/resources/MinecraftForge-License.txt"
+    },
+    "entry": "src/main/java/net/minecraftforge/oredict/ShapelessOreRecipe.java",
+    "source_sha256": "fc0ebb605fad5af9b20c94f3c27ce5800f6759bc5c9fe9b1308888ade1951852",
+    "matcher_sha256": "038a0f362c26192b04f8b090fc075395cd0d79eda66bfae57715375b974ca07f"
+  },
+  "gt5": {
+    "source_lock": "locks/sources/GT5-Unofficial-5.09.54.205-lock.json",
+    "file": "src/main/java/gregtech/api/util/GTShapelessRecipe.java",
+    "source_sha256": "469f65d7b7d5c80890070976351dcfc5c5efda93cb5f172d3c77134e9d8a6557",
+    "match_fragment_sha256": "06748d5897b2445ed1424d6837d42e52afb95cce96109983c7ca3556835305cd",
+    "keep_fragment_sha256": "608e40a0efd547126f3c4070af3701d3de04fd741f37fceea3b9f9c3303aa1c3",
+    "energy_fragment_sha256": "5b3f4f26a80208f74bb8d35003c13b90d3d38ec742aa8ee22cd5434fecba799a"
+  },
+  "scope": "ordered greedy matching, keep-NBT and identical energy phase; native item mapping, overwrite, arbitrary validator and complete item updates remain incomplete"
+}

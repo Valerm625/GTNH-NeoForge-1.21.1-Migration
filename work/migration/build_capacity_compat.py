@@ -21,7 +21,7 @@ entry='''package org.gtnhmigration.compat;
 import net.neoforged.fml.common.Mod;
 /** Explicit GTNH migration adaptations, not a claim of complete port. */
 @Mod("gtnh_migration_compat")
-public final class MigrationCompat { public MigrationCompat(net.neoforged.bus.api.IEventBus bus) { LegacyShapedRecipe.register(bus); LegacyItemTag.register(bus); } }
+public final class MigrationCompat { public MigrationCompat(net.neoforged.bus.api.IEventBus bus) { LegacyShapedRecipe.register(bus); LegacyShapelessRecipe.register(bus); LegacyItemTag.register(bus); } }
 '''
 mixin='''package org.gtnhmigration.compat.mixin;
 
@@ -99,7 +99,7 @@ ordering="AFTER"
 side="BOTH"
 ''',encoding='utf-8',newline='\n')
 (resources/'gtnh_migration_compat.mixins.json').write_text(json.dumps({'required':True,'minVersion':'0.8','package':'org.gtnhmigration.compat.mixin','compatibilityLevel':'JAVA_21','mixins':['EnderTankCapacityMixin','LegacyRetrievalItemTaskMixin','LegacyDimensionLocationTaskMixin','LegacyHuntTaskMixin','LegacyCraftingItemTaskMixin','LegacyInventoryListenerMixin','LegacyTaskLoginTimingMixin','LegacyInitialInventorySyncMixin','LegacyServerSaveScopeMixin','LegacyPlayerListSaveScopeMixin','LegacyPlayerFileSaveScopeMixin','LegacyWorldFileSaveScopeMixin','LegacyPlayerLifecycleSaveScopeMixin','LegacyPlayerDataLoadScopeMixin','LegacyCraftingGridMixin','LegacyCraftingCacheMixin'],'client':['LegacyOwnerCacheSaveScopeMixin'],'injectors':{'defaultRequire':1}},indent=2),encoding='utf-8',newline='\n')
-(resources/'LICENSE').write_text('''Local adapter code is MIT except LegacyShapedRecipe.java and its compiled classes,
+(resources/'LICENSE').write_text('''Local adapter code is MIT except LegacyShapedRecipe.java, LegacyShapelessMatch.java and their compiled classes,
 which are under the Minecraft Forge Public Licence 1.0. See NOTICE and
 MinecraftForge-License.txt for the source attribution and applicable licence.
 LegacyCraftingEnergy.java and LegacyCraftingNbt.java and their compiled classes are under LGPL-3.0;

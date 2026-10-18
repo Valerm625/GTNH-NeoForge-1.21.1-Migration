@@ -7,8 +7,11 @@ import zipfile
 R = Path(__file__).resolve().parents[2]
 
 
-def build(directory):
+def build(directory, shapeless=False):
     pin = json.loads((R / 'locks/legacy-crafting-nbt-source.json').read_text(encoding='utf-8'))
+    if shapeless:
+        other = json.loads((R / 'locks/legacy-shapeless-source.json').read_text(encoding='utf-8'))['gt5']
+        pin = {**pin, **other}
     source_pin = json.loads((R / pin['source_lock']).read_text(encoding='utf-8'))
     archive = R / 'work/cache/exact-sources/GT5-Unofficial-5.09.54.205.zip'
     assert hashlib.sha256(archive.read_bytes()).hexdigest() == source_pin['archive_sha256']
@@ -16,8 +19,8 @@ def build(directory):
         raw = z.read('GT5-Unofficial-' + source_pin['commit'] + '/' + pin['file'])
     assert hashlib.sha256(raw).hexdigest() == pin['source_sha256']
     source = raw.decode('utf-8')
-    match = source[source.index('        if (mKeepingNBT) {'):source.index('        return super.matches')]
-    keep = source[source.index('            // Keeping NBT'):source.index('            // Charge Values')]
+    match = source[source.index('        if (!mInputValidator.test' if shapeless else '        if (mKeepingNBT) {'):source.index('        return super.matches')]
+    keep = source[source.index('            // Keeping NBT'):source.index('            // Overwrite NBT' if shapeless else '            // Charge Values')]
     assert hashlib.sha256(match.encode()).hexdigest() == pin['match_fragment_sha256']
     assert hashlib.sha256(keep.encode()).hexdigest() == pin['keep_fragment_sha256']
     legacy = R / 'work/cache/legacy-platform/minecraft-server-1.7.10.jar'
@@ -25,8 +28,9 @@ def build(directory):
     with zipfile.ZipFile(legacy) as z:
         for name, digest in pin['legacy_server']['classes'].items():
             assert hashlib.sha256(z.read(name)).hexdigest() == digest
-    target = directory / 'GT5CraftingNbtReference.java'
-    target.write_text('''package org.gtnhmigration.startupaudit;
+    name = 'GT5ShapelessNbtReference' if shapeless else 'GT5CraftingNbtReference'
+    target = directory / (name + '.java')
+    text = '''package org.gtnhmigration.startupaudit;
 import java.io.*;
 import java.net.*;
 import java.nio.file.*;
@@ -41,6 +45,7 @@ public final class GT5CraftingNbtReference {
  }
  public static boolean matches(CraftingInput input) {
   boolean mKeepingNBT=true; InventoryCrafting aGrid=new InventoryCrafting(input);
+  java.util.function.Predicate<InventoryCrafting> mInputValidator=grid->true;
 ''' + match + '''
   return true;
  }
@@ -73,5 +78,6 @@ public final class GT5CraftingNbtReference {
   public int hashCode(){return nativeTag.hashCode();}
  }
 }
-''', encoding='utf-8', newline='\n')
+'''
+    target.write_text(text.replace('GT5CraftingNbtReference',name), encoding='utf-8', newline='\n')
     return target, legacy

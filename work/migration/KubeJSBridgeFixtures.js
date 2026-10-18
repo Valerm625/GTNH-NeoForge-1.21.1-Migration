@@ -45,6 +45,23 @@ ServerEvents.recipes(event => {
   });
 });
 
+// Ordered legacy shapeless matching and explicitly selected GT5 phases.
+ServerEvents.recipes(event => {
+  event.custom({type:'gtnh_migration:legacy_shapeless',category:'misc',
+    ingredients:[[{item:'minecraft:iron_ingot'},{item:'minecraft:gold_ingot'}],{item:'minecraft:iron_ingot'}],
+    result:{id:'minecraft:diamond',count:1}}).id('gtnh_audit:shapeless_overlap');
+  event.custom({type:'gtnh_migration:legacy_shapeless',category:'misc',
+    ingredients:[{item:'minecraft:iron_ingot'},{item:'minecraft:iron_ingot'}],
+    result:{id:'minecraft:diamond',count:2,components:{'gtnh_migration:legacy_item_tag':'CgAAAQAIdGVtcGxhdGUHAA==','minecraft:custom_name':'"template"'}},
+    'gtnh:keep_legacy_nbt':true}).id('gtnh_audit:shapeless_nbt');
+  var batteries=[{item:'gtceu:lv_lithium_battery'},{item:'gtceu:mv_lithium_battery'},{item:'gtceu:lv_steel_drill'}];
+  event.custom({type:'gtnh_migration:legacy_shapeless',category:'misc',ingredients:[batteries,batteries,batteries],
+    result:{id:'gtceu:lv_lithium_battery',count:1,components:{'gtceu:energy_content':{max_charge:200000,charge:83,infinite:false,discharge_mode:true}}},
+    'gtnh:legacy_energy':true}).id('gtnh_audit:shapeless_energy');
+  event.custom({type:'gtnh_migration:legacy_shapeless',category:'misc',ingredients:[{item:'minecraft:milk_bucket'},{item:'minecraft:iron_ingot'}],
+    result:{id:'minecraft:clay_ball',count:1}}).id('gtnh_audit:shapeless_bucket');
+});
+
 // The expected positions come from unedited Forge 10.13.4.1614 source.
 ServerEvents.recipes(event => {
   ['keep','disabled'].forEach(name => {

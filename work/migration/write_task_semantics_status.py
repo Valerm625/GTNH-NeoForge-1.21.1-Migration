@@ -176,6 +176,10 @@ assert resource_bridge['cases']['without_energy_transfer']['rejected_missing_leg
 assert resource_bridge['checks']['legacy_crafting_nbt']['source_comparisons']==11094
 assert resource_bridge['checks']['legacy_crafting_nbt']['item_round_trips']==129
 assert resource_bridge['cases']['without_legacy_nbt']['rejected_missing_legacy_nbt']
+assert resource_bridge['checks']['legacy_shapeless']['source_match_comparisons']==76800
+assert resource_bridge['checks']['legacy_shapeless']['source_nbt_comparisons']==5547
+assert resource_bridge['checks']['legacy_shapeless']['source_energy_comparisons']==81
+assert resource_bridge['cases']['bipartite_shapeless']['rejected_changed_matching_algorithm']
 assert native_registry['crafting_grid_origin_verified']
 assert resource_bridge['cases']['original_api']['rejected_missing_old_server_events_api']
 assert resource_bridge['cases']['old_output']['rejected_missing_machine_outputs']
@@ -183,6 +187,11 @@ for relative,expected in resource_bridge['source_sha256'].items():assert sha(R/r
 bridge_build=read(R/'work/migration/gtceu-kubejs-bridge/build.json')
 assert resource_bridge['derived_jar_sha256']==bridge_build['jar_sha256']==sha(R/bridge_build['jar'])
 checks['NativeResourceBridgeCheck']=resource_bridge
+credit_sources=read(R/'evidence/LegacyCreditSourceAudit.json')
+assert credit_sources['passed'] and credit_sources['gt_item_definitions']==13 and credit_sources['source_conversion_recipes']==24
+assert credit_sources['activated_credit_items']==credit_sources['activated_credit_recipes']==0
+for relative,expected in credit_sources['source_sha256'].items():assert sha(R/relative)==expected,relative
+checks['LegacyCreditSourceAudit']=credit_sources
 artifact=read(R/'evidence/GTCEuArtifactCheck.json')
 assert artifact['passed'] and artifact['case_count']==18
 assert artifact['original_download_lock_unchanged'] and artifact['original_jar_retained']
@@ -257,6 +266,9 @@ report={
     'legacy_raw_item_tag_and_keep_phase_native_verified':True,
     'legacy_item_nbt_to_modern_components_complete':False,
     'legacy_item_update_hooks_complete':False,
+    'legacy_shapeless_matching_and_selected_phases_native_verified':True,
+    'legacy_shapeless_overwrite_and_custom_validator_complete':False,
+    'legacy_credit_items_and_recipes_activated':False,
     'isolated_mixin_transformation_verified':True,
     'tested_model_classes_match_packaged_jar':True,
     'typed_json_envelope_planner_composition_verified':True,
@@ -323,6 +335,8 @@ metadata['validation_state'].update({
     'derived_gtceu_resource_reload':'installed source-built GTCEu passes real resource loading; 167 migration machine recipes have outputs, five component codecs and 18 Content boost round trips pass; original API and old output direction controls rejected; no machine execution or complete recipe parity',
     'legacy_crafting_energy':'opt-in legacy energy phase uses actual modern GT capabilities; 9375 fixed GT5 expression comparisons, 10 JSON/network round trips and six boundaries pass; no-op control rejected; native IC2, complete item semantics and migration of source electric crafting recipes remain incomplete',
     'legacy_crafting_nbt':'explicit raw legacy tag component and shaped keep-NBT phase; 11094 comparisons using original Minecraft 1.7.10 NBT classes, four recipe and 129 item round trips; no-op control rejected; full native component mapping, shapeless overwrite, item updates and enchantments remain incomplete',
+    'legacy_shapeless':'ordered greedy matching through installed serializer; 76800 fixed Forge comparisons, 5547 GT5 NBT and 81 energy comparisons, 812 JSON/network round trips and six remaining-item checks; bipartite-solver control rejected; overwrite, custom validators, full source item-set mapping and world menus remain incomplete',
+    'legacy_credit_source_inventory':'13 GT credit definitions, 13 original textures, three language files, 24 conversion recipes, material data and aspects verified against pinned source archive; Credit_Iron binds external IC2 coin; zero credit items/recipes activated, full behavior and integrations remain incomplete',
     'legacy_shaped_geometry':'10395 fixed Forge source comparisons and 22 JSON/network round trips through real loaded recipes; original grid identity and cache-entry invalidation checks pass, missing-origin and missing-cache controls rejected; no world-backed cache reuse, menu, GTNH NBT/charge/enchantment or stage-gate parity',
     'mixin_package_isolation':'17 Mixins live outside the runtime helper package; real ModLauncher rejects old-layout negative control and defines 17 selected classes with seven native hook interfaces; no player/world lifecycle execution',
     'quest_adapter':'actual MC/FTB matcher and isolated Sponge Mixin application verified; full NeoForge transformer chain and game unverified',
@@ -402,5 +416,6 @@ text+='\n独立源码补丁产物完成真实模组初始化与资源重载：16
 text+='\n旧版有序合成定位已在真实资源加载中验证：noShrink保留外围空格，10395次固定Forge源码格子对照、22次JSON/网络往返、26次默认或重置裁剪、6组容器/配料动作、5项原点相等性/哈希和4项缓存入口检查通过。移除原点或缓存Mixin的两组新增负例被拒绝，CLIENT数据生成亦验证原点。缓存检查仅进入实际get头部并止于缺少Level的查询，未执行世界内缓存命中；GTNH的NBT/充电/附魔、阶段门槛、真实工作台及客户端展示仍未完成。\n'
 text+='\n迁移有序配方新增显式gtnh:legacy_energy选项：以真实现代GT电池和工具能力执行旧电量阶段，9375次固定GT5表达式对照、10次JSON/网络往返及6个边界检查通过。保留模拟输入、工具排除、32位累加溢出、最大单次放电边界、结果容量及其他组件；空实现负例被拒绝。原IC2物品实现、NBT/附魔/updateItemStack和全部源电动工具配方仍未迁入；没有新增活动迁移配方或完整任务。\n'
 text+='\n旧物品完整tag原始字节组件与显式保留阶段已接入迁移有序合成：43种数据状态、11094次固定GT5表达式和原Minecraft 1.7.10 NBT类比较、4次配方及129次物品JSON/NBT/网络往返通过。无tag与空tag、NaN位模式及空列表类型均保留；移除处理的负例被拒绝。现代名称/耐久/附魔/能源映射、具体物品更新、无序合成覆盖与真实工作台仍未完成，活动配方和完整任务数量不增加。\n'
+text+='\n迁移无序配方新增独立序列化器，恢复旧Forge按槽位逐个选择第一个可用材料的匹配规则；76800次源码匹配对照、5547次GT5 NBT和81次电量对照、812次JSON/网络往返与6次容器/动作检查通过。全局重新分配材料的负例被拒绝。信用币来源核验覆盖13个GT定义、13张原贴图、三种语言和24条兑换配方，工业铁币为外部IC2 coin；回收和神秘要素数据明确保留在清单。未将未完成的信用币注册为占位物，活动配方与完整任务数不增加；无序覆盖NBT、任意输入验证器、具体物品行为和实机仍需继续。\n'
 status.write_text(text,encoding='utf-8')
 print(json.dumps({k:v for k,v in report.items() if k!='checks'},ensure_ascii=False))

@@ -38,3 +38,7 @@ GTShapedRecipe under LGPL-3.0. The source comparison expressions retain this
 licence. LegacyItemTag.java is an original local binary adapter under MIT.
 The comparison loads NBT classes from the official Minecraft 1.7.10 server
 in an isolated class loader; that third-party binary is not redistributed.
+
+LegacyShapelessMatch.java ports matching from Forge 10.13.4.1614
+ShapelessOreRecipe under the Minecraft Forge Public Licence 1.0.
+GT5ShapelessNbtReference test expressions remain LGPL-3.0.

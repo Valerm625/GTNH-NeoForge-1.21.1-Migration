@@ -1,4 +1,4 @@
-Local adapter code is MIT except LegacyShapedRecipe.java and its compiled classes,
+Local adapter code is MIT except LegacyShapedRecipe.java, LegacyShapelessMatch.java and their compiled classes,
 which are under the Minecraft Forge Public Licence 1.0. See NOTICE and
 MinecraftForge-License.txt for the source attribution and applicable licence.
 LegacyCraftingEnergy.java and LegacyCraftingNbt.java and their compiled classes are under LGPL-3.0;

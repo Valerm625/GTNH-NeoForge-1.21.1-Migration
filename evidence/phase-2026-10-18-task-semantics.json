@@ -176,7 +176,7 @@
         "illegal_mixin_package_rejected": true,
         "exit_code": 1
       },
-      "compat_jar_sha256": "05308fb6c05819ef1977859f2574a9d42f3745bfd6fca730c16452a3455f61db",
+      "compat_jar_sha256": "7272a8b1cbdb0bd5da20acdaeb6c8b93611cbfd3d8e6fd9c52ba4c9fe55b7ce9",
       "crafting_grid_origin_verified": true,
       "archive_sha256": "cf0367344bfa10587719e9a919d04dfd2877fe1e5c2a96b24a4323e0fb7973dc",
       "registry_details_sha256": "e20df4165e1b80a8b905bacf5f9351aeb991e8ab1b2ed9105a03814feebc6bea",
@@ -296,7 +296,7 @@
         "mods/ftb-quests-neoforge-2101.1.36.jar": "6a39982c4b3afc00b1e788041a4f0d394e1659e3b3a6e5d078cd790bc36d0018",
         "mods/ftb-teams-neoforge-2101.1.11.jar": "e6bcd670493624e6906df872a9c6af4a33fe6405cac57a32c59cd4cd5838c655",
         "mods/gtceu-1.21.1-7.0.2-gtnh-kubejs72.jar": "57756c966739f22aee0d8eccfe061e39f36c1d9cac60b819ea74b10f7a55b239",
-        "mods/gtnh-migration-compat-0.1.0.jar": "05308fb6c05819ef1977859f2574a9d42f3745bfd6fca730c16452a3455f61db",
+        "mods/gtnh-migration-compat-0.1.0.jar": "7272a8b1cbdb0bd5da20acdaeb6c8b93611cbfd3d8e6fd9c52ba4c9fe55b7ce9",
         "mods/guideme-21.1.19.jar": "2ce254edb931c3c3cf81d69abaf8f4ce5b871bf85e64984f366bf044173bd66a",
         "mods/Jade-1.21.1-NeoForge-15.10.6.jar": "276f1f65a20d04f536989c4f311949d770b52c440c23c2b904a08860f3c93810",
         "mods/jei-1.21.1-neoforge-19.51.0.418.jar": "8bc3936d869e4040a5649c58b7e8be1c78c82a245c0dc07bdd68ab49121a222c",
@@ -1587,7 +1587,7 @@
           "missing_injection_detected": true
         }
       },
-      "compat_jar_sha256": "05308fb6c05819ef1977859f2574a9d42f3745bfd6fca730c16452a3455f61db",
+      "compat_jar_sha256": "7272a8b1cbdb0bd5da20acdaeb6c8b93611cbfd3d8e6fd9c52ba4c9fe55b7ce9",
       "source_sha256": {
         "work/migration/OfflineMixinService.java": "a7ea57ef2ea959f69885cca79076690724e82a17c768df2d4521e23fddc897df",
         "work/migration/OfflineProperties.java": "10ad2622af4698009243667fac346ad23621d38f86c583aebcb99593059f9f3d",
@@ -1652,7 +1652,7 @@
         "neoforge_transform_chain_verified": false,
         "game_runtime_verified": false
       },
-      "compat_jar_sha256": "05308fb6c05819ef1977859f2574a9d42f3745bfd6fca730c16452a3455f61db",
+      "compat_jar_sha256": "7272a8b1cbdb0bd5da20acdaeb6c8b93611cbfd3d8e6fd9c52ba4c9fe55b7ce9",
       "source_sha256": {
         "work/migration/OfflineMixinService.java": "a7ea57ef2ea959f69885cca79076690724e82a17c768df2d4521e23fddc897df",
         "work/migration/OfflineProperties.java": "10ad2622af4698009243667fac346ad23621d38f86c583aebcb99593059f9f3d",
@@ -2118,7 +2118,7 @@
       },
       "minecraft_jar_sha256": "26ca9c40d7e1681190b428583c38816852218e78df3f8bdb60a59a78503aec71",
       "patched_native_jar_sha256": "f57ce3018e21459d24b50508e8c1b4fd5c16324ec1dc5f316c192aa0130e7fe0",
-      "compat_jar_sha256": "05308fb6c05819ef1977859f2574a9d42f3745bfd6fca730c16452a3455f61db",
+      "compat_jar_sha256": "7272a8b1cbdb0bd5da20acdaeb6c8b93611cbfd3d8e6fd9c52ba4c9fe55b7ce9",
       "limitations": [
         "Executes production permit state machine, synthetic world/player/pending ledger, actual DirectoryLock and ledger lock. Server objects and shutdown calls are fixtures. Byte digests exclude the two locked lock files; their exclusion and reopen behavior are tested directly.",
         "Pinned native shutdown ordering and terminal runServer call sites are bytecode audited, with required isolated Mixin checks in a separate report. No Player, server loop, world or full NeoForge transformation chain executes.",
@@ -2650,7 +2650,7 @@
       "wrong_class_mapping_mutation_rejected": true,
       "actual_mixin_transformation_verified": false,
       "game_runtime_verified": false,
-      "compat_jar_sha256": "05308fb6c05819ef1977859f2574a9d42f3745bfd6fca730c16452a3455f61db",
+      "compat_jar_sha256": "7272a8b1cbdb0bd5da20acdaeb6c8b93611cbfd3d8e6fd9c52ba4c9fe55b7ce9",
       "source_sha256": {
         "work/compat-mod/src/main/java/org/gtnhmigration/compat/mixin/LegacyHuntTaskMixin.java": "7f15573f44b15e31888922ab826399d488098d4217eed1fd823a9a0abbebf046",
         "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyHuntEntityMatcher.java": "1435b87ae0bf98e2a44d31eae9262041cd9d610214d6412839496ada8b5c48d8",
@@ -2803,7 +2803,7 @@
       "test_source_sha256": "ec438f96bc51ee8a1c6941a37e28f50a55c92fb227c81be450dd9539de4b6d26",
       "runner_sha256": "de5603c96e4430df3673ffd41e6baabc855c9a9a1a5569ee15b018807d1e331f",
       "oracle_fixture_sha256": "24c3d959554108708f56ba755d089edfabd2f3a828af050169081b1c08953ab9",
-      "compat_jar_sha256": "05308fb6c05819ef1977859f2574a9d42f3745bfd6fca730c16452a3455f61db",
+      "compat_jar_sha256": "7272a8b1cbdb0bd5da20acdaeb6c8b93611cbfd3d8e6fd9c52ba4c9fe55b7ce9",
       "ftb_artifact_sha256": "6a39982c4b3afc00b1e788041a4f0d394e1659e3b3a6e5d078cd790bc36d0018",
       "minecraft_artifact_sha256": "26ca9c40d7e1681190b428583c38816852218e78df3f8bdb60a59a78503aec71",
       "packaged_bridge_matches_sources": true,
@@ -3490,7 +3490,7 @@
         "0:456": "e6556c4a267e1bde83949d2e3a93d5ad53fed963557db2188990de3ded14e28c",
         "0:42": "cadcc2de303f04719db7e2021ae6e61b5649780d8d69d96b3c90019c5f69aced"
       },
-      "export_manifest_sha256": "47115617400942bbdfdbfaae2d743404bbf7ee184fc9c80e5cba2dcdada187b5",
+      "export_manifest_sha256": "de4277b1dedc2283d01d4007a2c41eb29689b9050a7961428f1d8be64cea43bc",
       "verifier_sha256": "8dcf6ec98717afc21d831c641090803935abe0926fa864d4b0d85f6453e1d79c",
       "source_sha256": "96669f3e782ca8ce3a92d1225e0adddf5519595ad193e44ac52035c67235be41",
       "target_source_sha256": "ff4345ea224da2889fab822050619448e71da420eebff206218c2bfec9505b1f",
@@ -3539,7 +3539,7 @@
         "work/compat-mod/src/main/resources/coremods/library_client_callbacks.js": "334478bc8d57e236d25d93ed181d8ab034f10b4211fdd640c3f8f524737e68e8",
         "locks/library-client-callbacks.json": "be4ce16e2fcdc9b0a913484dfa146d260ddd40b59e8c7846331aeb715c770a47"
       },
-      "compat_jar_sha256": "05308fb6c05819ef1977859f2574a9d42f3745bfd6fca730c16452a3455f61db",
+      "compat_jar_sha256": "7272a8b1cbdb0bd5da20acdaeb6c8b93611cbfd3d8e6fd9c52ba4c9fe55b7ce9",
       "gtceu_jar_sha256": "57756c966739f22aee0d8eccfe061e39f36c1d9cac60b819ea74b10f7a55b239",
       "input_sha256": {
         "mods/appliedenergistics2-19.2.18.jar": "df15a07f86ca1ca93aa66373f9d5d84dd3d4586631fceb38f4fbc85dad591e39",
@@ -3552,7 +3552,7 @@
         "mods/ftb-quests-neoforge-2101.1.36.jar": "6a39982c4b3afc00b1e788041a4f0d394e1659e3b3a6e5d078cd790bc36d0018",
         "mods/ftb-teams-neoforge-2101.1.11.jar": "e6bcd670493624e6906df872a9c6af4a33fe6405cac57a32c59cd4cd5838c655",
         "mods/gtceu-1.21.1-7.0.2-gtnh-kubejs72.jar": "57756c966739f22aee0d8eccfe061e39f36c1d9cac60b819ea74b10f7a55b239",
-        "mods/gtnh-migration-compat-0.1.0.jar": "05308fb6c05819ef1977859f2574a9d42f3745bfd6fca730c16452a3455f61db",
+        "mods/gtnh-migration-compat-0.1.0.jar": "7272a8b1cbdb0bd5da20acdaeb6c8b93611cbfd3d8e6fd9c52ba4c9fe55b7ce9",
         "mods/guideme-21.1.19.jar": "2ce254edb931c3c3cf81d69abaf8f4ce5b871bf85e64984f366bf044173bd66a",
         "mods/Jade-1.21.1-NeoForge-15.10.6.jar": "276f1f65a20d04f536989c4f311949d770b52c440c23c2b904a08860f3c93810",
         "mods/jei-1.21.1-neoforge-19.51.0.418.jar": "8bc3936d869e4040a5649c58b7e8be1c78c82a245c0dc07bdd68ab49121a222c",
@@ -4809,79 +4809,79 @@
         "kubejs/startup_scripts/08_gtnh_soldering_composition.js": "3a6824a8f7cb076e6e34d2da72500c22087e9da7acda951588e9fe4bc586109c"
       },
       "platform_inputs_sha256": {
-        "libraries/net/neoforged/mergetool/2.0.0/mergetool-2.0.0-api.jar": "0260881294d8b218afe3d673f084d3745a55c28b35205d07d5e62d7f22202a00",
-        "libraries/net/jodah/typetools/0.6.3/typetools-0.6.3.jar": "408300867804be05d1083cc0287dd3a21295a9e76090e288013ba5a4182dc96d",
-        "libraries/io/netty/netty-transport-native-epoll/4.1.97.Final/netty-transport-native-epoll-4.1.97.Final-linux-x86_64.jar": "1e83fc9f82e5415cdbb688c6a5c6bbbd7d198e9fdd6fdf64b3dc5d54dd1acfd0",
+        "libraries/org/apache/logging/log4j/log4j-core/2.22.1/log4j-core-2.22.1.jar": "46dccecac556623d8e2ce8648496824a82951d139062a4e61148aff1a25ed18d",
+        "libraries/net/neoforged/accesstransformers/10.0.1/accesstransformers-10.0.1.jar": "89fb0dc3d68f8a5961f309ee110dad7d2c1094ba204595602b71e02e104838a1",
+        "libraries/net/neoforged/JarJarSelector/0.4.1/JarJarSelector-0.4.1.jar": "f34bab02a5e967650dc52b7cb37a200051a7078f7d1868597699d78697da2400",
+        "libraries/it/unimi/dsi/fastutil/8.5.12/fastutil-8.5.12.jar": "b5543ee08d062d551cf0a5c9bc0fb70588b0382079029ba48941fa9c9be8a5d4",
         "libraries/org/codehaus/plexus/plexus-utils/3.3.0/plexus-utils-3.3.0.jar": "76d174792540e2775af94d03d10fb2d3c776e2cd0ac0ebf427d3e570072bb9ce",
-        "libraries/com/google/guava/listenablefuture/9999.0-empty-to-avoid-conflict-with-guava/listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar": "b372a037d4230aa57fbeffdef30fd6123f9c0c2db85d0aced00c91b974f33f99",
+        "libraries/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar": "3dfb0d5b6a106cd40b5b250e39935fbf2f927f4477546a5369a3ac609cf0506b",
+        "libraries/org/lz4/lz4-java/1.8.0/lz4-java-1.8.0.jar": "d74a3334fb35195009b338a951f918203d6bbca3d1d359033dc33edd1cadc9ef",
+        "libraries/org/ow2/asm/asm-analysis/9.10.1/asm-analysis-9.10.1.jar": "dede75a21306b65974ecd8f87114ff6970f09fb794157a4ca09ab25c888c2bfc",
+        "libraries/net/java/dev/jna/jna-platform/5.14.0/jna-platform-5.14.0.jar": "ae4caceb3840730c2537f9b7fb55a01baba580286b4122951488bcee558c2449",
+        "libraries/com/github/oshi/oshi-core/6.4.10/oshi-core-6.4.10.jar": "fef001a7a13515c273f30915915580782afbc45273cc07aa15994e51563ef310",
         "libraries/org/apache/logging/log4j/log4j-slf4j2-impl/2.22.1/log4j-slf4j2-impl-2.22.1.jar": "1920cd69d8682c7ef249bb407a3d0685723aa1785867cf4c53258da6bf14da97",
-        "libraries/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar": "ed825d10ab1399c8c0cb669e688cf0c8c82629b4c8399b58352b68e92ca10fcb",
-        "libraries/net/neoforged/neoforge/21.1.262/neoforge-21.1.262-universal.jar": "4070305f97a08409d9b4e714f619f0ec2d97d29c9939ef43a89d927259942f98",
+        "libraries/net/minecraftforge/srgutils/0.4.15/srgutils-0.4.15.jar": "f6bdebb7fae108329acddfc812f237c7f6328a98e3f282a105edfc161d0215e3",
         "libraries/com/machinezoo/noexception/noexception/1.7.1/noexception-1.7.1.jar": "3d70aaea3904918587a21bdf99ab6ade9ab1dd0eaf6119344ba513f60f575816",
         "libraries/io/netty/netty-codec/4.1.97.Final/netty-codec-4.1.97.Final.jar": "bcc96737a0f912fcf031cf8c45ebda352a90a40437db0832caad3d5a63618b38",
-        "libraries/org/apache/logging/log4j/log4j-core/2.22.1/log4j-core-2.22.1.jar": "46dccecac556623d8e2ce8648496824a82951d139062a4e61148aff1a25ed18d",
-        "libraries/net/minecrell/terminalconsoleappender/1.3.0/terminalconsoleappender-1.3.0.jar": "1afea1bca095068f7f4483f061feed94753be34233ddb0df9ec380fc14d5a985",
-        "libraries/org/ow2/asm/asm-analysis/9.10.1/asm-analysis-9.10.1.jar": "dede75a21306b65974ecd8f87114ff6970f09fb794157a4ca09ab25c888c2bfc",
-        "libraries/org/slf4j/slf4j-api/2.0.9/slf4j-api-2.0.9.jar": "0818930dc8d7debb403204611691da58e49d42c50b6ffcfdce02dadb7c3c2b6c",
-        "libraries/org/apache/commons/commons-lang3/3.14.0/commons-lang3-3.14.0.jar": "7b96bf3ee68949abb5bc465559ac270e0551596fa34523fddf890ec418dde13c",
-        "libraries/com/google/guava/failureaccess/1.0.1/failureaccess-1.0.1.jar": "a171ee4c734dd2da837e4b16be9df4661afab72a41adaf31eb84dfdaf936ca26",
-        "libraries/com/mojang/datafixerupper/8.0.16/datafixerupper-8.0.16.jar": "ffc138bc2596c291781b0d5e211ccac51f0f2345f27fc2742f335cedf7e2870d",
-        "libraries/org/antlr/antlr4-runtime/4.13.1/antlr4-runtime-4.13.1.jar": "54665d2838cc66458343468efc539e454fc95b46a8a04b13c6ac43fc9be63505",
-        "libraries/net/neoforged/neoforge/21.1.262/neoforge-21.1.262-server.jar": "f57ce3018e21459d24b50508e8c1b4fd5c16324ec1dc5f316c192aa0130e7fe0",
-        "libraries/io/netty/netty-resolver/4.1.97.Final/netty-resolver-4.1.97.Final.jar": "38a018c6d9fb2cb11b72881354782b45080bbd20b9a0ad6cde28b80d431ed0b1",
-        "libraries/org/joml/joml/1.10.5/joml-1.10.5.jar": "cac9f22f83a7aa33eebda73c16ff5261e3cb4911b6bafcf4c79ea486099d0c9a",
-        "libraries/net/neoforged/fancymodloader/loader/4.0.45/loader-4.0.45.jar": "8390398e67df23e72d85ed809685be2752c8ec545b7cbb6ad4b70fdc81e4dcd4",
-        "libraries/cpw/mods/securejarhandler/3.0.8/securejarhandler-3.0.8.jar": "945c63d6deafc821616b0380c23867d9b8c2852438f8a6df72732ab933fc587d",
-        "libraries/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar": "766ad2a0783f2687962c8ad74ceecc38a28b9f72a2d085ee438b7813e928d0c7",
-        "libraries/com/google/errorprone/error_prone_annotations/2.18.0/error_prone_annotations-2.18.0.jar": "9e6814cb71816988a4fd1b07a993a8f21bb7058d522c162b1de849e19bea54ae",
-        "libraries/org/openjdk/nashorn/nashorn-core/15.4/nashorn-core-15.4.jar": "6f816e84dfd63a81d4eaa7829c08337bbaff3ec683ff3bf6bbd90d017a00dc6f",
-        "libraries/io/netty/netty-transport-native-unix-common/4.1.97.Final/netty-transport-native-unix-common-4.1.97.Final.jar": "412fe140257c2dda5a5e15bee911298bd61928d03ee6be4db588e82c196c5dc6",
-        "libraries/net/neoforged/bus/8.0.5/bus-8.0.5.jar": "705e24f37752809499a5cd0c7dd31eaabf3d933c5d3b2060168e94e9ef62593a",
-        "libraries/net/fabricmc/sponge-mixin/0.16.4+mixin.0.8.7/sponge-mixin-0.16.4+mixin.0.8.7.jar": "921a2ca066d82d15d2939efd5eb22754e308db74b1e4277130a76625c3638dfd",
-        "libraries/net/neoforged/accesstransformers/10.0.1/accesstransformers-10.0.1.jar": "89fb0dc3d68f8a5961f309ee110dad7d2c1094ba204595602b71e02e104838a1",
-        "libraries/com/github/oshi/oshi-core/6.4.10/oshi-core-6.4.10.jar": "fef001a7a13515c273f30915915580782afbc45273cc07aa15994e51563ef310",
-        "libraries/com/google/guava/guava/32.1.2-jre/guava-32.1.2-jre.jar": "bc65dea7cfd9e4dacf8419d8af0e741655857d27885bb35d943d7187fc3a8fce",
-        "libraries/org/lz4/lz4-java/1.8.0/lz4-java-1.8.0.jar": "d74a3334fb35195009b338a951f918203d6bbca3d1d359033dc33edd1cadc9ef",
-        "libraries/org/apache/maven/maven-artifact/3.8.5/maven-artifact-3.8.5.jar": "91172bc294d6eab02fc9f45f4ea01fd0e418962d128cf489abea7b6957d988ee",
-        "libraries/org/ow2/asm/asm-util/9.10.1/asm-util-9.10.1.jar": "1bb99d091fba2597dc6d51193e9bbcf0d8447e7ed96bd8f0198b18152f09655c",
-        "libraries/io/netty/netty-buffer/4.1.97.Final/netty-buffer-4.1.97.Final.jar": "a4393f5b395486cc74d0325c9b41311abb9513ba0fd7ef8cf46e9345c3bffbea",
-        "libraries/com/electronwill/night-config/core/3.8.3/core-3.8.3.jar": "971dc88c1c22085611ee1c300f5bbf8595938178e819befbb5e98c3cbd272b79",
-        "libraries/net/neoforged/accesstransformers/at-modlauncher/10.0.1/at-modlauncher-10.0.1.jar": "2a4b447c6944a2b89e383c1eed9a26bb5cc60330a5bb26ef0a912a38d52df935",
-        "libraries/io/netty/netty-common/4.1.97.Final/netty-common-4.1.97.Final.jar": "a8aca0c8e9347acc75c885ecc749195d9775369aa520b9276f2d1128210a6c17",
-        "libraries/io/netty/netty-transport/4.1.97.Final/netty-transport-4.1.97.Final.jar": "197fd2d6c6b4afe677d9e95bf2e36b49a0bcabdfce0583683fb73f29a3f5a407",
-        "libraries/net/sf/jopt-simple/jopt-simple/5.0.4/jopt-simple-5.0.4.jar": "df26cc58f235f477db07f753ba5a3ab243ebe5789d9f89ecf68dd62ea9a66c28",
-        "libraries/com/google/j2objc/j2objc-annotations/2.8/j2objc-annotations-2.8.jar": "f02a95fa1a5e95edb3ed859fd0fb7df709d121a35290eff8b74dce2ab7f4d6ed",
-        "libraries/org/apache/logging/log4j/log4j-api/2.22.1/log4j-api-2.22.1.jar": "5d7beae7ff15d8516d6517121d7f12a79a6ac180df64b5fcec55d5be21056e53",
-        "libraries/net/neoforged/coremods/7.0.3/coremods-7.0.3.jar": "d24c0d3e31af23cac36a0f9f98654b875f678b27ddccd8b28d331c1878a6de4a",
-        "libraries/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar": "6d0abefb7cbf972ea16edb37ec14835372505063a45f976ab7ea889ed9497895",
-        "libraries/com/mojang/authlib/6.0.54/authlib-6.0.54.jar": "319ea7b53b5e52f62ad3e2b81e9db7f0751240edac548bd74f5f19e35dc21a3b",
-        "libraries/io/netty/netty-handler/4.1.97.Final/netty-handler-4.1.97.Final.jar": "bd4771d19149cbc9c7464ed2d58035d79cdfed7adb59d38718b0d8e7a3dcc2de",
-        "libraries/io/netty/netty-transport-native-epoll/4.1.97.Final/netty-transport-native-epoll-4.1.97.Final-linux-aarch_64.jar": "93b5fe8f3829dcb5e033d8d40d59159366ff4cf8266c903bbd6a4aeed9e59bac",
-        "libraries/net/neoforged/fancymodloader/earlydisplay/4.0.45/earlydisplay-4.0.45.jar": "27a791a19a7967b89cbaa820e7748ad6a1e9d8460217d232c4006f852884044f",
-        "libraries/net/neoforged/JarJarSelector/0.4.1/JarJarSelector-0.4.1.jar": "f34bab02a5e967650dc52b7cb37a200051a7078f7d1868597699d78697da2400",
-        "libraries/commons-io/commons-io/2.15.1/commons-io-2.15.1.jar": "a58af12ee1b68cfd2ebb0c27caef164f084381a00ec81a48cc275fd7ea54e154",
-        "libraries/com/mojang/brigadier/1.3.10/brigadier-1.3.10.jar": "c8ee4136e474ac7723ca2b432ec8d1a2bc88ef7d1ec57c314ba9e33cdc83dd75",
-        "libraries/net/minecraft/server/1.21.1-20240808.144430/server-1.21.1-20240808.144430-srg.jar": "26ca9c40d7e1681190b428583c38816852218e78df3f8bdb60a59a78503aec71",
-        "libraries/net/neoforged/neoforge/21.1.262/win_args.txt": "50688960e135f97c4dbb43a15fc069586b68fc073d267cd6513ed0c702bf738b",
-        "libraries/com/google/code/gson/gson/2.10.1/gson-2.10.1.jar": "4241c14a7727c34feea6507ec801318a3d4a90f070e4525681079fb94ee4c593",
-        "libraries/com/electronwill/night-config/toml/3.8.3/toml-3.8.3.jar": "ccb92882264bf071e3916ab122fe5ea3e211b8ebf199201698a1324f151f928f",
-        "libraries/net/neoforged/JarJarFileSystems/0.4.1/JarJarFileSystems-0.4.1.jar": "d9f88af1223ff23395c64ff0b0fe367563288a37bd38709bf667b6b39944bfab",
-        "libraries/io/netty/netty-transport-classes-epoll/4.1.97.Final/netty-transport-classes-epoll-4.1.97.Final.jar": "ee65fa17fe65f18fd22269f92bddad85bfb3a263cf65eba01e116a2f30b86ff5",
-        "libraries/cpw/mods/modlauncher/11.0.5/modlauncher-11.0.5.jar": "fd9b9fc7cf043d2264ea0113eac6b258f0a71fece5b00e831bfbdf9726c78a24",
-        "libraries/net/minecraftforge/srgutils/0.4.15/srgutils-0.4.15.jar": "f6bdebb7fae108329acddfc812f237c7f6328a98e3f282a105edfc161d0215e3",
-        "libraries/com/mojang/logging/1.2.7/logging-1.2.7.jar": "3dc3190204bac5f4184d8405bfe1f724f73a6a15a0d3f36ec7f69e6872c1a76c",
-        "libraries/org/jline/jline-reader/3.20.0/jline-reader-3.20.0.jar": "acd1c94d1e228aa7b7962f69b21ed3a9fd828eb3a63e4baf9086954e626af1f0",
         "libraries/net/java/dev/jna/jna/5.14.0/jna-5.14.0.jar": "34ed1e1f27fa896bca50dbc4e99cf3732967cec387a7a0d5e3486c09673fe8c6",
-        "libraries/net/neoforged/JarJarMetadata/0.4.1/JarJarMetadata-0.4.1.jar": "05d7b89f09c6de1a9b61d0e786c8fd808aed044babf321653e14abd6740d5546",
+        "libraries/com/google/errorprone/error_prone_annotations/2.18.0/error_prone_annotations-2.18.0.jar": "9e6814cb71816988a4fd1b07a993a8f21bb7058d522c162b1de849e19bea54ae",
+        "libraries/net/neoforged/bus/8.0.5/bus-8.0.5.jar": "705e24f37752809499a5cd0c7dd31eaabf3d933c5d3b2060168e94e9ef62593a",
         "libraries/org/jline/jline-terminal/3.20.0/jline-terminal-3.20.0.jar": "12125170e795519ba6dc8010c070b53c76aae92b485c1e37530e54ab5dd08d43",
-        "libraries/net/java/dev/jna/jna-platform/5.14.0/jna-platform-5.14.0.jar": "ae4caceb3840730c2537f9b7fb55a01baba580286b4122951488bcee558c2449",
+        "libraries/io/netty/netty-common/4.1.97.Final/netty-common-4.1.97.Final.jar": "a8aca0c8e9347acc75c885ecc749195d9775369aa520b9276f2d1128210a6c17",
+        "libraries/org/slf4j/slf4j-api/2.0.9/slf4j-api-2.0.9.jar": "0818930dc8d7debb403204611691da58e49d42c50b6ffcfdce02dadb7c3c2b6c",
+        "libraries/com/electronwill/night-config/core/3.8.3/core-3.8.3.jar": "971dc88c1c22085611ee1c300f5bbf8595938178e819befbb5e98c3cbd272b79",
+        "libraries/com/electronwill/night-config/toml/3.8.3/toml-3.8.3.jar": "ccb92882264bf071e3916ab122fe5ea3e211b8ebf199201698a1324f151f928f",
+        "libraries/org/jline/jline-reader/3.20.0/jline-reader-3.20.0.jar": "acd1c94d1e228aa7b7962f69b21ed3a9fd828eb3a63e4baf9086954e626af1f0",
+        "libraries/net/neoforged/neoforge/21.1.262/neoforge-21.1.262-server.jar": "f57ce3018e21459d24b50508e8c1b4fd5c16324ec1dc5f316c192aa0130e7fe0",
+        "libraries/commons-io/commons-io/2.15.1/commons-io-2.15.1.jar": "a58af12ee1b68cfd2ebb0c27caef164f084381a00ec81a48cc275fd7ea54e154",
+        "libraries/net/neoforged/fancymodloader/earlydisplay/4.0.45/earlydisplay-4.0.45.jar": "27a791a19a7967b89cbaa820e7748ad6a1e9d8460217d232c4006f852884044f",
+        "libraries/io/netty/netty-transport-native-epoll/4.1.97.Final/netty-transport-native-epoll-4.1.97.Final-linux-aarch_64.jar": "93b5fe8f3829dcb5e033d8d40d59159366ff4cf8266c903bbd6a4aeed9e59bac",
+        "libraries/net/neoforged/mergetool/2.0.0/mergetool-2.0.0-api.jar": "0260881294d8b218afe3d673f084d3745a55c28b35205d07d5e62d7f22202a00",
+        "libraries/org/antlr/antlr4-runtime/4.13.1/antlr4-runtime-4.13.1.jar": "54665d2838cc66458343468efc539e454fc95b46a8a04b13c6ac43fc9be63505",
+        "libraries/cpw/mods/modlauncher/11.0.5/modlauncher-11.0.5.jar": "fd9b9fc7cf043d2264ea0113eac6b258f0a71fece5b00e831bfbdf9726c78a24",
+        "libraries/net/neoforged/JarJarFileSystems/0.4.1/JarJarFileSystems-0.4.1.jar": "d9f88af1223ff23395c64ff0b0fe367563288a37bd38709bf667b6b39944bfab",
+        "libraries/org/apache/maven/maven-artifact/3.8.5/maven-artifact-3.8.5.jar": "91172bc294d6eab02fc9f45f4ea01fd0e418962d128cf489abea7b6957d988ee",
+        "libraries/com/mojang/brigadier/1.3.10/brigadier-1.3.10.jar": "c8ee4136e474ac7723ca2b432ec8d1a2bc88ef7d1ec57c314ba9e33cdc83dd75",
+        "libraries/io/netty/netty-handler/4.1.97.Final/netty-handler-4.1.97.Final.jar": "bd4771d19149cbc9c7464ed2d58035d79cdfed7adb59d38718b0d8e7a3dcc2de",
+        "libraries/net/neoforged/neoforge/21.1.262/win_args.txt": "50688960e135f97c4dbb43a15fc069586b68fc073d267cd6513ed0c702bf738b",
+        "libraries/net/jodah/typetools/0.6.3/typetools-0.6.3.jar": "408300867804be05d1083cc0287dd3a21295a9e76090e288013ba5a4182dc96d",
+        "libraries/cpw/mods/securejarhandler/3.0.8/securejarhandler-3.0.8.jar": "945c63d6deafc821616b0380c23867d9b8c2852438f8a6df72732ab933fc587d",
+        "libraries/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar": "6d0abefb7cbf972ea16edb37ec14835372505063a45f976ab7ea889ed9497895",
+        "libraries/org/apache/logging/log4j/log4j-api/2.22.1/log4j-api-2.22.1.jar": "5d7beae7ff15d8516d6517121d7f12a79a6ac180df64b5fcec55d5be21056e53",
+        "libraries/org/openjdk/nashorn/nashorn-core/15.4/nashorn-core-15.4.jar": "6f816e84dfd63a81d4eaa7829c08337bbaff3ec683ff3bf6bbd90d017a00dc6f",
+        "libraries/org/joml/joml/1.10.5/joml-1.10.5.jar": "cac9f22f83a7aa33eebda73c16ff5261e3cb4911b6bafcf4c79ea486099d0c9a",
+        "libraries/net/neoforged/neoforge/21.1.262/neoforge-21.1.262-universal.jar": "4070305f97a08409d9b4e714f619f0ec2d97d29c9939ef43a89d927259942f98",
+        "libraries/io/netty/netty-transport/4.1.97.Final/netty-transport-4.1.97.Final.jar": "197fd2d6c6b4afe677d9e95bf2e36b49a0bcabdfce0583683fb73f29a3f5a407",
+        "libraries/cpw/mods/bootstraplauncher/2.0.2/bootstraplauncher-2.0.2.jar": "d3f29309140540570fd6c709509706aa8fb133c1c8aef24491688f1a3f4e1d49",
+        "libraries/net/neoforged/accesstransformers/at-modlauncher/10.0.1/at-modlauncher-10.0.1.jar": "2a4b447c6944a2b89e383c1eed9a26bb5cc60330a5bb26ef0a912a38d52df935",
+        "libraries/io/netty/netty-transport-classes-epoll/4.1.97.Final/netty-transport-classes-epoll-4.1.97.Final.jar": "ee65fa17fe65f18fd22269f92bddad85bfb3a263cf65eba01e116a2f30b86ff5",
         "libraries/org/checkerframework/checker-qual/3.33.0/checker-qual-3.33.0.jar": "e316255bbfcd9fe50d165314b85abb2b33cb2a66a93c491db648e498a82c2de1",
-        "libraries/it/unimi/dsi/fastutil/8.5.12/fastutil-8.5.12.jar": "b5543ee08d062d551cf0a5c9bc0fb70588b0382079029ba48941fa9c9be8a5d4",
-        "libraries/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar": "3dfb0d5b6a106cd40b5b250e39935fbf2f927f4477546a5369a3ac609cf0506b",
-        "libraries/cpw/mods/bootstraplauncher/2.0.2/bootstraplauncher-2.0.2.jar": "d3f29309140540570fd6c709509706aa8fb133c1c8aef24491688f1a3f4e1d49"
+        "libraries/net/minecraft/server/1.21.1-20240808.144430/server-1.21.1-20240808.144430-srg.jar": "26ca9c40d7e1681190b428583c38816852218e78df3f8bdb60a59a78503aec71",
+        "libraries/com/google/code/gson/gson/2.10.1/gson-2.10.1.jar": "4241c14a7727c34feea6507ec801318a3d4a90f070e4525681079fb94ee4c593",
+        "libraries/net/neoforged/coremods/7.0.3/coremods-7.0.3.jar": "d24c0d3e31af23cac36a0f9f98654b875f678b27ddccd8b28d331c1878a6de4a",
+        "libraries/org/ow2/asm/asm-util/9.10.1/asm-util-9.10.1.jar": "1bb99d091fba2597dc6d51193e9bbcf0d8447e7ed96bd8f0198b18152f09655c",
+        "libraries/net/neoforged/fancymodloader/loader/4.0.45/loader-4.0.45.jar": "8390398e67df23e72d85ed809685be2752c8ec545b7cbb6ad4b70fdc81e4dcd4",
+        "libraries/net/minecrell/terminalconsoleappender/1.3.0/terminalconsoleappender-1.3.0.jar": "1afea1bca095068f7f4483f061feed94753be34233ddb0df9ec380fc14d5a985",
+        "libraries/com/google/guava/guava/32.1.2-jre/guava-32.1.2-jre.jar": "bc65dea7cfd9e4dacf8419d8af0e741655857d27885bb35d943d7187fc3a8fce",
+        "libraries/com/google/guava/failureaccess/1.0.1/failureaccess-1.0.1.jar": "a171ee4c734dd2da837e4b16be9df4661afab72a41adaf31eb84dfdaf936ca26",
+        "libraries/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar": "766ad2a0783f2687962c8ad74ceecc38a28b9f72a2d085ee438b7813e928d0c7",
+        "libraries/com/mojang/authlib/6.0.54/authlib-6.0.54.jar": "319ea7b53b5e52f62ad3e2b81e9db7f0751240edac548bd74f5f19e35dc21a3b",
+        "libraries/com/google/j2objc/j2objc-annotations/2.8/j2objc-annotations-2.8.jar": "f02a95fa1a5e95edb3ed859fd0fb7df709d121a35290eff8b74dce2ab7f4d6ed",
+        "libraries/io/netty/netty-resolver/4.1.97.Final/netty-resolver-4.1.97.Final.jar": "38a018c6d9fb2cb11b72881354782b45080bbd20b9a0ad6cde28b80d431ed0b1",
+        "libraries/io/netty/netty-transport-native-unix-common/4.1.97.Final/netty-transport-native-unix-common-4.1.97.Final.jar": "412fe140257c2dda5a5e15bee911298bd61928d03ee6be4db588e82c196c5dc6",
+        "libraries/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar": "ed825d10ab1399c8c0cb669e688cf0c8c82629b4c8399b58352b68e92ca10fcb",
+        "libraries/com/mojang/datafixerupper/8.0.16/datafixerupper-8.0.16.jar": "ffc138bc2596c291781b0d5e211ccac51f0f2345f27fc2742f335cedf7e2870d",
+        "libraries/io/netty/netty-buffer/4.1.97.Final/netty-buffer-4.1.97.Final.jar": "a4393f5b395486cc74d0325c9b41311abb9513ba0fd7ef8cf46e9345c3bffbea",
+        "libraries/net/fabricmc/sponge-mixin/0.16.4+mixin.0.8.7/sponge-mixin-0.16.4+mixin.0.8.7.jar": "921a2ca066d82d15d2939efd5eb22754e308db74b1e4277130a76625c3638dfd",
+        "libraries/net/sf/jopt-simple/jopt-simple/5.0.4/jopt-simple-5.0.4.jar": "df26cc58f235f477db07f753ba5a3ab243ebe5789d9f89ecf68dd62ea9a66c28",
+        "libraries/com/mojang/logging/1.2.7/logging-1.2.7.jar": "3dc3190204bac5f4184d8405bfe1f724f73a6a15a0d3f36ec7f69e6872c1a76c",
+        "libraries/net/neoforged/JarJarMetadata/0.4.1/JarJarMetadata-0.4.1.jar": "05d7b89f09c6de1a9b61d0e786c8fd808aed044babf321653e14abd6740d5546",
+        "libraries/com/google/guava/listenablefuture/9999.0-empty-to-avoid-conflict-with-guava/listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar": "b372a037d4230aa57fbeffdef30fd6123f9c0c2db85d0aced00c91b974f33f99",
+        "libraries/org/apache/commons/commons-lang3/3.14.0/commons-lang3-3.14.0.jar": "7b96bf3ee68949abb5bc465559ac270e0551596fa34523fddf890ec418dde13c",
+        "libraries/io/netty/netty-transport-native-epoll/4.1.97.Final/netty-transport-native-epoll-4.1.97.Final-linux-x86_64.jar": "1e83fc9f82e5415cdbb688c6a5c6bbbd7d198e9fdd6fdf64b3dc5d54dd1acfd0"
       },
-      "registry_details_sha256": "4d54332941d24a3edf5d31d6630f6602c11907ba4452955fb77b2292a98a2f11",
-      "startup_log_sha256": "c9f666c13187a6d421cb47ac89eb8cce350ad1a897576779739769dab6c90f80",
+      "registry_details_sha256": "07fc9abc9d2b339af4da9d9eaa083b32d64b40bb0df62e7d9cb86298325168a5",
+      "startup_log_sha256": "28bd41b3f89f81c1ee1dc6548361cb5598bf711394ae82c7c882263d7f66017c",
       "registries": {
         "items": 11687,
         "blocks": 5628,
@@ -4993,37 +4993,37 @@
           "case": "without_client_isolation",
           "exit_code": 1,
           "expected_failure_observed": true,
-          "log_sha256": "621dc87fbfd63413e2b880b510e08b8278f168e5fdd9c2ea95fbaea3d3c00c8a"
+          "log_sha256": "53c853d8467227217bd1f7794970cf16b29fb6a222fd29ee8385a8e96010cee8"
         },
         {
           "case": "without_library_callbacks",
           "exit_code": 1,
           "expected_failure_observed": true,
-          "log_sha256": "cdefbd96799659987a405e43a5e37187761f714cb059242644e88d27fd817249"
+          "log_sha256": "04383b108987ba9049dbc11636405c8deb0301e9bbc62ae59a1c6862f10758e2"
         },
         {
           "case": "without_fluid_callback_guard",
           "exit_code": 1,
           "expected_failure_observed": true,
-          "log_sha256": "492ebb2a2a4818ffd0a9e72f751ba84ae5c2e6aadb3362c9381d7ab0e9ef4c2f"
+          "log_sha256": "62de06b051ef6615f206b9a55ae43d0f220841120348b26bcac45193745bedfb"
         },
         {
           "case": "old_fuel_tag_signature",
           "exit_code": 1,
           "expected_failure_observed": true,
-          "log_sha256": "29a236fc98a2f8c71e07dbf9713686d7fa42bf6e4a5e0488db7151ffd00811ea"
+          "log_sha256": "67f590590065d0c552bc11371680609e4ac7cc4203f6dbedc6b9ea15f0d9ce72"
         },
         {
           "case": "old_loop_const",
           "exit_code": 1,
           "expected_failure_observed": true,
-          "log_sha256": "5d3aa2e90173b33ad203f97f6197dfe0e9153af0c91d6a8b302c5f771ab24bcd"
+          "log_sha256": "4dc6958fba83cbe2ed28b10dd5ddcfb7fb0de25eaaf7cdcff6cf7b30856ccb8e"
         },
         {
           "case": "unqualified_material_ids",
           "exit_code": 1,
           "expected_failure_observed": true,
-          "log_sha256": "27bf02030e89c5342d89ea77dbfa1491f69b6837b233d58f1d8ebce8e9353295"
+          "log_sha256": "99f826faa1c5872aeadc4346a7c945e4a1c9368f173c4c306e42748ded58d467"
         }
       ],
       "library_callback_instruction_preservation": {
@@ -5111,7 +5111,7 @@
       "checks": {
         "migration_machine_recipes_with_outputs": 167,
         "migration_namespace_recipes": 170,
-        "fixture_recipes": 23,
+        "fixture_recipes": 27,
         "shaped_behavior": {
           "source_geometry_comparisons": 10395,
           "json_network_round_trips": 22,
@@ -5141,6 +5141,17 @@
           "item_update_hooks_complete": false,
           "world_or_player_executed": false
         },
+        "legacy_shapeless": {
+          "source_match_comparisons": 76800,
+          "source_nbt_comparisons": 5547,
+          "source_energy_comparisons": 81,
+          "json_network_round_trips": 812,
+          "boundary_checks": 9,
+          "remaining_item_checks": 6,
+          "source_item_set_mapping_complete": false,
+          "overwrite_and_custom_validator_complete": false,
+          "world_or_player_executed": false
+        },
         "fuel_values_verified": 16,
         "component_round_trips": 5,
         "boost_copy_codec_network_round_trips": 18,
@@ -5152,53 +5163,59 @@
       "cases": {
         "ported": {
           "exit": 0,
-          "log_sha256": "0d14f5216328f4ceb92fac625f28807e99921b31d32d7b1c198b75489d543f36",
-          "dump_sha256": "21c97621a7f490d8c906aa05f7b95d6d79c814e2bd03f44b8b3692af82b3f7a3",
+          "log_sha256": "8231cc32d15745df9b62ce2d0fc991366acfaca86cd261417dbc46f8554fd371",
+          "dump_sha256": "f6766e2737f203cfa0ea2c3751fa9be1d38eef74dc1335472789e9ecc15de054",
           "passed_semantic_checks": true
         },
         "old_output": {
           "exit": 0,
-          "log_sha256": "feb8111aa6590b863f03758ffed99999fa8d40fb94ea2adc3a7d9bff90ecda9e",
-          "dump_sha256": "64de239d415154bbf95dbd240dee0e9336f0f3ba64745bbc277e153b2e04a122",
+          "log_sha256": "fe0213d5000edc6819acd82edd02447064c1e3eca8d3ae385df1d5c9807b3bed",
+          "dump_sha256": "777351993d35039f519bde560c3d811dc913ddb48efb5dbe469e93fc47ade149",
           "rejected_missing_machine_outputs": true
         },
         "original_api": {
           "exit": 1,
-          "log_sha256": "3c29263a5a1a2ea9d523e48a05acd370a25c0e3c43991210e106caa250d51bb1",
+          "log_sha256": "21a4632dac1d13960a07d49a2df233733ec87481528e065059b034e6e9751d69",
           "rejected_missing_old_server_events_api": true
         },
         "without_grid_origin": {
           "exit": 1,
-          "log_sha256": "9df86e4d3ffe8920db3fc8bdd148d6e5de861320ff54639187088020f0a2cc65",
+          "log_sha256": "2eb24ffbb3b8c55972eb2d512fc8ee0941d1218b54f0b86bab0e3d3b5701e7bc",
           "rejected_missing_original_grid_coordinates": true
         },
         "without_cache_origin": {
           "exit": 1,
-          "log_sha256": "c9d658ee29e96d69bc790447ce6a7abddadacf2904855180f1f490efb8f53889",
+          "log_sha256": "1dcb4bf51cb3de8fb36bc8fbba2a098fda9db58aad85138361cf4a2ffcebdb45",
           "rejected_missing_cache_origin_invalidation": true
         },
         "without_energy_transfer": {
           "exit": 1,
-          "log_sha256": "d6cf4513f3316d2373f480c21f197c2a5104c8658feac2ce5f278da9e1244182",
+          "log_sha256": "311128f400b47aba7b3702f0628429aaeada87d5d72a4c5b20b73b07a5386a44",
           "rejected_missing_legacy_energy_transfer": true
         },
         "without_legacy_nbt": {
           "exit": 1,
-          "log_sha256": "c694cd3e844f3ea775c4d449c23e019d0d832975b28c88c72ca43a9f9592f219",
+          "log_sha256": "415a31c75a09fcd00ac4089d82eed64b4b8aea8af1e211c5bfeaa8236c89af4b",
           "rejected_missing_legacy_nbt": true
+        },
+        "bipartite_shapeless": {
+          "exit": 1,
+          "log_sha256": "b677870a7bfb72344ca12a25a6da1315ff1e107b339fc2b7af23d188a1d1017e",
+          "rejected_changed_matching_algorithm": true
         }
       },
       "derived_jar_sha256": "57756c966739f22aee0d8eccfe061e39f36c1d9cac60b819ea74b10f7a55b239",
       "preserved_original_entries": 14084,
       "source_sha256": {
         "work/migration/NativeResourceAuditLaunchHandler.java": "52bbd626cb612ebe66dbb80847bf29aefb661c4744baed49570e5a38a5b34c3e",
-        "work/migration/NativeResourceAuditMain.java": "3341d0ff6a44e5481d8af7219911057ed357847a96410e0992dd680919dd2387",
+        "work/migration/NativeResourceAuditMain.java": "808efbc90ae59567b084aeea8f4c073c545e59423eedafd5817d42906d62a9e1",
         "work/migration/NativeShapedRecipeCheck.java": "d08f5141b2177d3316e870d7dd61e087afc059e5fefd7390273e71d3ecad8880",
         "work/migration/NativeCraftingEnergyCheck.java": "147503df00384eeadf945ab9a27c90705cb32456a59b4f1cf4d86884c8ddeb3e",
-        "work/migration/NativeCraftingNbtCheck.java": "48532f8bb393168ff05f56edea1b795c5dae223f85495641f92d313cf42b62f4",
-        "work/migration/test_native_resource_bridge.py": "c8c269fb7b4d437af9551ac849bbac5b8fdcb93be8038d182d35ee959a71ecb7",
+        "work/migration/NativeCraftingNbtCheck.java": "42cbe55ee45fa359bd2d08207ed9adeb0c71b742db733a953e8fb7f8cd53687f",
+        "work/migration/NativeShapelessRecipeCheck.java": "e85befc8724f24fc5c969f6fb7a17f8d72184bb1d28989bd0b8bc54e5fbd3041",
+        "work/migration/test_native_resource_bridge.py": "8b065f6a87978c52b03dd1973be17285d96c1b1ae8275224d24828f03d83a0b3",
         "work/migration/build_gtceu_kubejs_bridge.py": "d4fda70d2595be62c5fc60b326bde822f3c3f2c5b9382732a1ec30c63cab0215",
-        "work/migration/KubeJSBridgeFixtures.js": "3933e0214d06e480f4489486c428cac21a619f7ba191cec072a2101b5abcf152",
+        "work/migration/KubeJSBridgeFixtures.js": "b98242bc442d07eba6e4818b2e2bad52910fc3023e59e72d333683e5cf4f72ca",
         "work/compat-mod/patches/gtceu-kubejs72.json": "15472a152f3433da4ecff5dffc23ef9270064ca5ce458c0da40d62529dde2dcb",
         "locks/gtceu-kubejs72-build.json": "c4a770075370a4be34137fecc27681716f9d9e3187b5960729dc1c0620f8acb6",
         "locks/native-client-audit-inputs.json": "1542616c4c55281eec4dc906d9a2d0375e45aa50939eb29f67230d80fefa1093",
@@ -5213,15 +5230,19 @@
         "locks/sources/GT5-Unofficial-5.09.54.205-lock.json": "1d82ec79eef3195aea71ff518af0970f21cb1b95962314c1babff65548b24f5f",
         "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyCraftingEnergy.java": "fe0f19fafa4fa1c1db2264163aec5f41854ee2a5f8947a3addf021d1ad3089cd",
         "locks/legacy-shaped-source.json": "20be82c9c0781d7fccebb84c0a2e8bc02be0825fe6799c1b1750cba0aa39023d",
-        "work/migration/build_capacity_compat.py": "48a74e7a88f6cf5b27d44ffcc86fe8a56b4aa816393eb7ad7eeb67bbdbd0f952",
+        "work/migration/build_capacity_compat.py": "cc6b12a4367979216dc039e31145dec0c5f944c1f257aca3b36eaacf25c2f240",
         "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyShapedRecipe.java": "9c391e8e73c9e81a451ecf1f609158de7af4583f45f144abc05fc93b53c77997",
         "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyCraftingGrid.java": "40c79cb17087a1464156ff0963cb7d5a6a79e222535b9d49debdeaab0d89b3cc",
         "work/compat-mod/src/main/java/org/gtnhmigration/compat/mixin/LegacyCraftingGridMixin.java": "09446dfb97decbf1284945fa3339ef2f32775ab92469b86c0a6d6abc06e95db7",
         "work/compat-mod/src/main/java/org/gtnhmigration/compat/mixin/LegacyCraftingCacheMixin.java": "ead103c135be55149b94e7664120ba866dd126845b54d606fd9e3a91e3f05049",
-        "work/migration/build_legacy_nbt_reference.py": "efa55ec8fdad466fb6476a1ade8ec470e6130b094bf96714a8291bdadb656e94",
+        "work/migration/build_legacy_nbt_reference.py": "f0dd276d91bd6f4a77426a27bfb2afd0af44e4bd7ceeb07bac39661add6cb68f",
         "locks/legacy-crafting-nbt-source.json": "1288d53fb3c71d9d58d88766112e0685675f2c6b1b562ecd83a9d5bee8b81203",
         "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyItemTag.java": "b77f70105eb9bee5b4dabaf314ea224ee1e4459732fa22f4c0a34904f1d0d433",
-        "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyCraftingNbt.java": "82d3011163acc91810e25be1bacf11811831a43ad5a3c962252a361cfe5ade0d"
+        "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyCraftingNbt.java": "82d3011163acc91810e25be1bacf11811831a43ad5a3c962252a361cfe5ade0d",
+        "work/migration/build_legacy_shapeless_reference.py": "d8a5c0e9fc67038541b4624c6da4756848be25cb40eae0c840fd24e22f580496",
+        "locks/legacy-shapeless-source.json": "c474701e10e8ef0c93953ca52f8f2e072e55c80df9646584e7e0ace379266215",
+        "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyShapelessRecipe.java": "f3cfb7c2e33ca136d4893a1320aadd679adcfce13a52f7d9f6d4998ae709dff8",
+        "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyShapelessMatch.java": "7bf839873eb87949d2fb12c699a30dfb19e90ddaff7e5a5298b118a2e96ff14d"
       },
       "foundation_unchanged": true,
       "eula_accepted": false,
@@ -5239,7 +5260,7 @@
         "mods/ftb-quests-neoforge-2101.1.36.jar": "6a39982c4b3afc00b1e788041a4f0d394e1659e3b3a6e5d078cd790bc36d0018",
         "mods/ftb-teams-neoforge-2101.1.11.jar": "e6bcd670493624e6906df872a9c6af4a33fe6405cac57a32c59cd4cd5838c655",
         "mods/gtceu-1.21.1-7.0.2-gtnh-kubejs72.jar": "57756c966739f22aee0d8eccfe061e39f36c1d9cac60b819ea74b10f7a55b239",
-        "mods/gtnh-migration-compat-0.1.0.jar": "05308fb6c05819ef1977859f2574a9d42f3745bfd6fca730c16452a3455f61db",
+        "mods/gtnh-migration-compat-0.1.0.jar": "7272a8b1cbdb0bd5da20acdaeb6c8b93611cbfd3d8e6fd9c52ba4c9fe55b7ce9",
         "mods/guideme-21.1.19.jar": "2ce254edb931c3c3cf81d69abaf8f4ce5b871bf85e64984f366bf044173bd66a",
         "mods/Jade-1.21.1-NeoForge-15.10.6.jar": "276f1f65a20d04f536989c4f311949d770b52c440c23c2b904a08860f3c93810",
         "mods/jei-1.21.1-neoforge-19.51.0.418.jar": "8bc3936d869e4040a5649c58b7e8be1c78c82a245c0dc07bdd68ab49121a222c",
@@ -6499,6 +6520,826 @@
       "client_visuals_verified": false,
       "full_parity": false
     },
+    "LegacyCreditSourceAudit": {
+      "passed": true,
+      "scope": "Source inventory only; no credit item or recipe activated",
+      "source_commit": "a3e1e11241a814c9fa0dd0973d5699548428f689",
+      "gt_item_definitions": 13,
+      "referenced_external_items": 1,
+      "source_conversion_recipes": 24,
+      "external_items": [
+        {
+          "source_enum": "Credit_Iron",
+          "source_binding": "GTModHandler.getIC2Item(\"coin\", 1L)",
+          "source_file": "src/main/java/gregtech/common/GTProxy.java",
+          "primary_ic2_identity_verified": false
+        }
+      ],
+      "definitions": [
+        {
+          "source_enum": "Credit_Greg_Copper",
+          "legacy_id": "gregtech:gt.metaitem.01",
+          "damage": 32000,
+          "definition_line": 627,
+          "name_key": "gt.item.credit.copper.name",
+          "tooltip_key": "gt.item.credit.copper.tooltip",
+          "translations": {
+            "en_US": {
+              "name": "Copper GT Credit",
+              "tooltip": "0.125 Credits"
+            },
+            "zh_CN": {
+              "name": null,
+              "tooltip": null
+            },
+            "ru_RU": {
+              "name": "Медная GT монета",
+              "tooltip": "0.125 монет"
+            }
+          },
+          "texture": "src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/0.png",
+          "png_sha256": "49abfa3fa4fe0ace0891a521d843e9a40c4e7a14be53ba73ecb3c182eab1b021",
+          "dimensions": [
+            32,
+            32
+          ],
+          "animation": null,
+          "material_data": [],
+          "thaumcraft_aspects": []
+        },
+        {
+          "source_enum": "Credit_Greg_Cupronickel",
+          "legacy_id": "gregtech:gt.metaitem.01",
+          "damage": 32001,
+          "definition_line": 632,
+          "name_key": "gt.item.credit.cupronickel.name",
+          "tooltip_key": "gt.item.credit.cupronickel.tooltip",
+          "translations": {
+            "en_US": {
+              "name": "Cupronickel GT Credit",
+              "tooltip": "1 Credit"
+            },
+            "zh_CN": {
+              "name": null,
+              "tooltip": null
+            },
+            "ru_RU": {
+              "name": "Мельхиоровая GT монета",
+              "tooltip": "1 монета"
+            }
+          },
+          "texture": "src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/1.png",
+          "png_sha256": "d747d971445976655a8f082841b6ae08cf9ab1da287b39656db45017ecf4b41e",
+          "dimensions": [
+            32,
+            32
+          ],
+          "animation": null,
+          "material_data": [
+            {
+              "material": "Cupronickel",
+              "units": 907200
+            }
+          ],
+          "thaumcraft_aspects": []
+        },
+        {
+          "source_enum": "Credit_Greg_Silver",
+          "legacy_id": "gregtech:gt.metaitem.01",
+          "damage": 32002,
+          "definition_line": 638,
+          "name_key": "gt.item.credit.silver.name",
+          "tooltip_key": "gt.item.credit.silver.tooltip",
+          "translations": {
+            "en_US": {
+              "name": "Silver GT Credit",
+              "tooltip": "8 Credits"
+            },
+            "zh_CN": {
+              "name": null,
+              "tooltip": null
+            },
+            "ru_RU": {
+              "name": "Серебряная GT монета",
+              "tooltip": "8 монет"
+            }
+          },
+          "texture": "src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/2.png",
+          "png_sha256": "6ce27fdfa578d1bd884d8538ba29713e12d683f4c1250fcb7010bbdb4d9658f4",
+          "dimensions": [
+            32,
+            32
+          ],
+          "animation": null,
+          "material_data": [],
+          "thaumcraft_aspects": [
+            {
+              "aspect": "LUCRUM",
+              "amount": 1
+            }
+          ]
+        },
+        {
+          "source_enum": "Credit_Greg_Gold",
+          "legacy_id": "gregtech:gt.metaitem.01",
+          "damage": 32003,
+          "definition_line": 644,
+          "name_key": "gt.item.credit.gold.name",
+          "tooltip_key": "gt.item.credit.gold.tooltip",
+          "translations": {
+            "en_US": {
+              "name": "Gold GT Credit",
+              "tooltip": "64 Credits"
+            },
+            "zh_CN": {
+              "name": null,
+              "tooltip": null
+            },
+            "ru_RU": {
+              "name": "Золотая GT монета",
+              "tooltip": "64 монеты"
+            }
+          },
+          "texture": "src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/3.png",
+          "png_sha256": "3c91a993357f6a6fab81bb972a47675fba3d2dfdad9c7974a20443f6d07bf1e5",
+          "dimensions": [
+            32,
+            32
+          ],
+          "animation": null,
+          "material_data": [],
+          "thaumcraft_aspects": []
+        },
+        {
+          "source_enum": "Credit_Greg_Platinum",
+          "legacy_id": "gregtech:gt.metaitem.01",
+          "damage": 32004,
+          "definition_line": 649,
+          "name_key": "gt.item.credit.platinum.name",
+          "tooltip_key": "gt.item.credit.platinum.tooltip",
+          "translations": {
+            "en_US": {
+              "name": "Platinum GT Credit",
+              "tooltip": "512 Credits"
+            },
+            "zh_CN": {
+              "name": null,
+              "tooltip": null
+            },
+            "ru_RU": {
+              "name": "Платиновая GT монета",
+              "tooltip": "512 монет"
+            }
+          },
+          "texture": "src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/4.png",
+          "png_sha256": "4984d239fd57bad3aa828cc4ba36d17ace5031fc329f8de7123f158374296c39",
+          "dimensions": [
+            32,
+            32
+          ],
+          "animation": null,
+          "material_data": [],
+          "thaumcraft_aspects": []
+        },
+        {
+          "source_enum": "Credit_Greg_Osmium",
+          "legacy_id": "gregtech:gt.metaitem.01",
+          "damage": 32005,
+          "definition_line": 654,
+          "name_key": "gt.item.credit.osmium.name",
+          "tooltip_key": "gt.item.credit.osmium.tooltip",
+          "translations": {
+            "en_US": {
+              "name": "Osmium GT Credit",
+              "tooltip": "4,096 Credits"
+            },
+            "zh_CN": {
+              "name": null,
+              "tooltip": null
+            },
+            "ru_RU": {
+              "name": "Осмиевая GT монета",
+              "tooltip": "4,096 монет"
+            }
+          },
+          "texture": "src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/5.png",
+          "png_sha256": "a88324462eaa7033357433f3f26549a7903c4f2fa6dbbca535b156850d86f685",
+          "dimensions": [
+            32,
+            32
+          ],
+          "animation": null,
+          "material_data": [],
+          "thaumcraft_aspects": []
+        },
+        {
+          "source_enum": "Credit_Greg_Naquadah",
+          "legacy_id": "gregtech:gt.metaitem.01",
+          "damage": 32006,
+          "definition_line": 659,
+          "name_key": "gt.item.credit.naquadah.name",
+          "tooltip_key": "gt.item.credit.naquadah.tooltip",
+          "translations": {
+            "en_US": {
+              "name": "Naquadah GT Credit",
+              "tooltip": "32,768 Credits"
+            },
+            "zh_CN": {
+              "name": null,
+              "tooltip": null
+            },
+            "ru_RU": {
+              "name": "Наквадаховая GT монета",
+              "tooltip": "32,768 монет"
+            }
+          },
+          "texture": "src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/6.png",
+          "png_sha256": "b8145ab0ef738934120993f872e0d7b802335040bb888038ad6eabdd6da034d8",
+          "dimensions": [
+            32,
+            32
+          ],
+          "animation": null,
+          "material_data": [],
+          "thaumcraft_aspects": []
+        },
+        {
+          "source_enum": "Credit_Greg_Neutronium",
+          "legacy_id": "gregtech:gt.metaitem.01",
+          "damage": 32007,
+          "definition_line": 664,
+          "name_key": "gt.item.credit.neutronium.name",
+          "tooltip_key": "gt.item.credit.neutronium.tooltip",
+          "translations": {
+            "en_US": {
+              "name": "Neutronium GT Credit",
+              "tooltip": "262,144 Credits"
+            },
+            "zh_CN": {
+              "name": null,
+              "tooltip": null
+            },
+            "ru_RU": {
+              "name": "Нейтрониевая GT монета",
+              "tooltip": "262,144 монет"
+            }
+          },
+          "texture": "src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/7.png",
+          "png_sha256": "55b021254e8aa8163e64436066e266972643ec5486244d6526744a3e215c3b94",
+          "dimensions": [
+            32,
+            32
+          ],
+          "animation": null,
+          "material_data": [],
+          "thaumcraft_aspects": []
+        },
+        {
+          "source_enum": "Credit_Copper",
+          "legacy_id": "gregtech:gt.metaitem.01",
+          "damage": 32011,
+          "definition_line": 701,
+          "name_key": "gt.item.credit.industrial.copper.name",
+          "tooltip_key": "gt.item.credit.industrial.copper.tooltip",
+          "translations": {
+            "en_US": {
+              "name": "Industrial Copper Credit",
+              "tooltip": "0.125 Credits"
+            },
+            "zh_CN": {
+              "name": null,
+              "tooltip": null
+            },
+            "ru_RU": {
+              "name": "Промышленная медная монета",
+              "tooltip": "0.125 монет"
+            }
+          },
+          "texture": "src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/11.png",
+          "png_sha256": "95e278220d51e9be43c9be4469f48188a573fadd0f41f1245f3598904d02af83",
+          "dimensions": [
+            16,
+            16
+          ],
+          "animation": null,
+          "material_data": [],
+          "thaumcraft_aspects": []
+        },
+        {
+          "source_enum": "Credit_Silver",
+          "legacy_id": "gregtech:gt.metaitem.01",
+          "damage": 32013,
+          "definition_line": 707,
+          "name_key": "gt.item.credit.industrial.silver.name",
+          "tooltip_key": "gt.item.credit.industrial.silver.tooltip",
+          "translations": {
+            "en_US": {
+              "name": "Industrial Silver Credit",
+              "tooltip": "8 Credits"
+            },
+            "zh_CN": {
+              "name": null,
+              "tooltip": null
+            },
+            "ru_RU": {
+              "name": "Промышленная серебряная монета",
+              "tooltip": "8 монет"
+            }
+          },
+          "texture": "src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/13.png",
+          "png_sha256": "4ba2f2b7bf3e063f6b9ad2c3c9e33d3722d99df10dbb60160a011da5ef7c3e89",
+          "dimensions": [
+            16,
+            16
+          ],
+          "animation": null,
+          "material_data": [],
+          "thaumcraft_aspects": [
+            {
+              "aspect": "LUCRUM",
+              "amount": 1
+            }
+          ]
+        },
+        {
+          "source_enum": "Credit_Gold",
+          "legacy_id": "gregtech:gt.metaitem.01",
+          "damage": 32014,
+          "definition_line": 713,
+          "name_key": "gt.item.credit.industrial.gold.name",
+          "tooltip_key": "gt.item.credit.industrial.gold.tooltip",
+          "translations": {
+            "en_US": {
+              "name": "Industrial Gold Credit",
+              "tooltip": "64 Credits"
+            },
+            "zh_CN": {
+              "name": null,
+              "tooltip": null
+            },
+            "ru_RU": {
+              "name": "Промышленная золотая монета",
+              "tooltip": "64 монеты"
+            }
+          },
+          "texture": "src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/14.png",
+          "png_sha256": "320e4e2aad41f59cd2e45bcf428a6026c68bea7ade67b7c9d07a21aa125fde08",
+          "dimensions": [
+            16,
+            16
+          ],
+          "animation": null,
+          "material_data": [],
+          "thaumcraft_aspects": []
+        },
+        {
+          "source_enum": "Credit_Platinum",
+          "legacy_id": "gregtech:gt.metaitem.01",
+          "damage": 32015,
+          "definition_line": 718,
+          "name_key": "gt.item.credit.industrial.platinum.name",
+          "tooltip_key": "gt.item.credit.industrial.platinum.tooltip",
+          "translations": {
+            "en_US": {
+              "name": "Industrial Platinum Credit",
+              "tooltip": "512 Credits"
+            },
+            "zh_CN": {
+              "name": null,
+              "tooltip": null
+            },
+            "ru_RU": {
+              "name": "Промышленная платиновая монета",
+              "tooltip": "512 монет"
+            }
+          },
+          "texture": "src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/15.png",
+          "png_sha256": "b7ecbdd6fed05c9bb2d04f1beac0737183dc10592024f7317e380cfed67c4099",
+          "dimensions": [
+            16,
+            16
+          ],
+          "animation": null,
+          "material_data": [],
+          "thaumcraft_aspects": []
+        },
+        {
+          "source_enum": "Credit_Osmium",
+          "legacy_id": "gregtech:gt.metaitem.01",
+          "damage": 32016,
+          "definition_line": 723,
+          "name_key": "gt.item.credit.industrial.osmium.name",
+          "tooltip_key": "gt.item.credit.industrial.osmium.tooltip",
+          "translations": {
+            "en_US": {
+              "name": "Industrial Osmium Credit",
+              "tooltip": "4096 Credits"
+            },
+            "zh_CN": {
+              "name": null,
+              "tooltip": null
+            },
+            "ru_RU": {
+              "name": "Промышленный осмиевая монета",
+              "tooltip": "4096 монет"
+            }
+          },
+          "texture": "src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/16.png",
+          "png_sha256": "387f309a22c641a377225e399620d6905b6de2f229068546e9ceb77edbed27e9",
+          "dimensions": [
+            16,
+            16
+          ],
+          "animation": null,
+          "material_data": [],
+          "thaumcraft_aspects": []
+        }
+      ],
+      "recipes": [
+        {
+          "output_enum": "Credit_Copper",
+          "output_count": 8,
+          "input_enums": [
+            "Credit_Iron"
+          ],
+          "keep_nbt": true,
+          "removable_by_gt": false,
+          "source_line": 4979,
+          "source_fragment_sha256": "4fbdfa976f08e26cba9e69f202a50617f9eac316b9dffb6529cfe0c15f6c2794"
+        },
+        {
+          "output_enum": "Credit_Iron",
+          "output_count": 8,
+          "input_enums": [
+            "Credit_Silver"
+          ],
+          "keep_nbt": true,
+          "removable_by_gt": false,
+          "source_line": 4983,
+          "source_fragment_sha256": "8d459548f34b107a97620f0dfeb08d06efa472822d59a972bb3b225ac4cfd8b2"
+        },
+        {
+          "output_enum": "Credit_Silver",
+          "output_count": 8,
+          "input_enums": [
+            "Credit_Gold"
+          ],
+          "keep_nbt": true,
+          "removable_by_gt": false,
+          "source_line": 4987,
+          "source_fragment_sha256": "56c9c35bc70fe6293003124f0c06b020d791754e4e563566cc82f6bb8aab8ef4"
+        },
+        {
+          "output_enum": "Credit_Gold",
+          "output_count": 8,
+          "input_enums": [
+            "Credit_Platinum"
+          ],
+          "keep_nbt": true,
+          "removable_by_gt": false,
+          "source_line": 4991,
+          "source_fragment_sha256": "627c3a1d1b9ebc6ac08c9f16fa7610194b21f0867161090bc28cad13b5623330"
+        },
+        {
+          "output_enum": "Credit_Platinum",
+          "output_count": 8,
+          "input_enums": [
+            "Credit_Osmium"
+          ],
+          "keep_nbt": true,
+          "removable_by_gt": false,
+          "source_line": 4995,
+          "source_fragment_sha256": "7707cd94eca41ddbfef2d5db5abade3c626d2d811f291a63dc5014990dcfc7fb"
+        },
+        {
+          "output_enum": "Credit_Iron",
+          "output_count": 1,
+          "input_enums": [
+            "Credit_Copper",
+            "Credit_Copper",
+            "Credit_Copper",
+            "Credit_Copper",
+            "Credit_Copper",
+            "Credit_Copper",
+            "Credit_Copper",
+            "Credit_Copper"
+          ],
+          "keep_nbt": true,
+          "removable_by_gt": false,
+          "source_line": 5000,
+          "source_fragment_sha256": "8251e89fd7a13915d6ae211f5c5549871ea3b9123112d98ba0ef4fb877a1bc89"
+        },
+        {
+          "output_enum": "Credit_Silver",
+          "output_count": 1,
+          "input_enums": [
+            "Credit_Iron",
+            "Credit_Iron",
+            "Credit_Iron",
+            "Credit_Iron",
+            "Credit_Iron",
+            "Credit_Iron",
+            "Credit_Iron",
+            "Credit_Iron"
+          ],
+          "keep_nbt": true,
+          "removable_by_gt": false,
+          "source_line": 5006,
+          "source_fragment_sha256": "9ca95c06908d878389660e62393de3383881ed08ee436badc03241e1c7361560"
+        },
+        {
+          "output_enum": "Credit_Gold",
+          "output_count": 1,
+          "input_enums": [
+            "Credit_Silver",
+            "Credit_Silver",
+            "Credit_Silver",
+            "Credit_Silver",
+            "Credit_Silver",
+            "Credit_Silver",
+            "Credit_Silver",
+            "Credit_Silver"
+          ],
+          "keep_nbt": true,
+          "removable_by_gt": false,
+          "source_line": 5011,
+          "source_fragment_sha256": "92f16cc5e9dfca7b884945874f98961f606af26cbab76516987c6c8df0192ceb"
+        },
+        {
+          "output_enum": "Credit_Platinum",
+          "output_count": 1,
+          "input_enums": [
+            "Credit_Gold",
+            "Credit_Gold",
+            "Credit_Gold",
+            "Credit_Gold",
+            "Credit_Gold",
+            "Credit_Gold",
+            "Credit_Gold",
+            "Credit_Gold"
+          ],
+          "keep_nbt": true,
+          "removable_by_gt": false,
+          "source_line": 5017,
+          "source_fragment_sha256": "faa5d9c16d74daedeeef8d6ac7e8d3e1fca3a88df9f5e0d9269c89fcc8558f4d"
+        },
+        {
+          "output_enum": "Credit_Osmium",
+          "output_count": 1,
+          "input_enums": [
+            "Credit_Platinum",
+            "Credit_Platinum",
+            "Credit_Platinum",
+            "Credit_Platinum",
+            "Credit_Platinum",
+            "Credit_Platinum",
+            "Credit_Platinum",
+            "Credit_Platinum"
+          ],
+          "keep_nbt": true,
+          "removable_by_gt": false,
+          "source_line": 5022,
+          "source_fragment_sha256": "2028901cfc3594e8b62b2aa2fce82a06331c01d0d927059c1cec8c51073812d2"
+        },
+        {
+          "output_enum": "Credit_Greg_Copper",
+          "output_count": 8,
+          "input_enums": [
+            "Credit_Greg_Cupronickel"
+          ],
+          "keep_nbt": true,
+          "removable_by_gt": false,
+          "source_line": 5029,
+          "source_fragment_sha256": "fa9016264dff702a985b339c34d0d7f51cd05939d8d020be97bce3c7bc47cb03"
+        },
+        {
+          "output_enum": "Credit_Greg_Cupronickel",
+          "output_count": 8,
+          "input_enums": [
+            "Credit_Greg_Silver"
+          ],
+          "keep_nbt": true,
+          "removable_by_gt": false,
+          "source_line": 5033,
+          "source_fragment_sha256": "e6ed7ec791ffa185cc6f541cdf1c95cdde4cab705feb209ae582dee128371cfd"
+        },
+        {
+          "output_enum": "Credit_Greg_Silver",
+          "output_count": 8,
+          "input_enums": [
+            "Credit_Greg_Gold"
+          ],
+          "keep_nbt": true,
+          "removable_by_gt": false,
+          "source_line": 5037,
+          "source_fragment_sha256": "65228531e5bfe69b6974025990412904d7daba4ceb8bdc437594fd688c8d9544"
+        },
+        {
+          "output_enum": "Credit_Greg_Gold",
+          "output_count": 8,
+          "input_enums": [
+            "Credit_Greg_Platinum"
+          ],
+          "keep_nbt": true,
+          "removable_by_gt": false,
+          "source_line": 5041,
+          "source_fragment_sha256": "6f173079b273423f0a631b2bb1aeb80d91fd3617fb2c7a6a23b9b2e93110e802"
+        },
+        {
+          "output_enum": "Credit_Greg_Platinum",
+          "output_count": 8,
+          "input_enums": [
+            "Credit_Greg_Osmium"
+          ],
+          "keep_nbt": true,
+          "removable_by_gt": false,
+          "source_line": 5045,
+          "source_fragment_sha256": "6ff4a06c1cf3d898ed4d1be87df04d86655fdfa48a9e5913524f6127351eb92d"
+        },
+        {
+          "output_enum": "Credit_Greg_Osmium",
+          "output_count": 8,
+          "input_enums": [
+            "Credit_Greg_Naquadah"
+          ],
+          "keep_nbt": true,
+          "removable_by_gt": false,
+          "source_line": 5049,
+          "source_fragment_sha256": "0e873ac447eca2b309ef8346d4220651b4376e4baa06d40f336723eeca6d8171"
+        },
+        {
+          "output_enum": "Credit_Greg_Naquadah",
+          "output_count": 8,
+          "input_enums": [
+            "Credit_Greg_Neutronium"
+          ],
+          "keep_nbt": true,
+          "removable_by_gt": false,
+          "source_line": 5053,
+          "source_fragment_sha256": "a6bb305b7e249c9dfe9ad22a19b390099d3ca3c6c100cb3b8560d85d2af747a1"
+        },
+        {
+          "output_enum": "Credit_Greg_Cupronickel",
+          "output_count": 1,
+          "input_enums": [
+            "Credit_Greg_Copper",
+            "Credit_Greg_Copper",
+            "Credit_Greg_Copper",
+            "Credit_Greg_Copper",
+            "Credit_Greg_Copper",
+            "Credit_Greg_Copper",
+            "Credit_Greg_Copper",
+            "Credit_Greg_Copper"
+          ],
+          "keep_nbt": true,
+          "removable_by_gt": false,
+          "source_line": 5058,
+          "source_fragment_sha256": "788dbb84ecc547b03d41802fc56c07d166e6615b8c6a36b353ca8d814f928573"
+        },
+        {
+          "output_enum": "Credit_Greg_Silver",
+          "output_count": 1,
+          "input_enums": [
+            "Credit_Greg_Cupronickel",
+            "Credit_Greg_Cupronickel",
+            "Credit_Greg_Cupronickel",
+            "Credit_Greg_Cupronickel",
+            "Credit_Greg_Cupronickel",
+            "Credit_Greg_Cupronickel",
+            "Credit_Greg_Cupronickel",
+            "Credit_Greg_Cupronickel"
+          ],
+          "keep_nbt": true,
+          "removable_by_gt": false,
+          "source_line": 5064,
+          "source_fragment_sha256": "2161a3e3c2876b65bda5c3c9ecac06d90841935bcc84e6ab72596cedf49b914d"
+        },
+        {
+          "output_enum": "Credit_Greg_Gold",
+          "output_count": 1,
+          "input_enums": [
+            "Credit_Greg_Silver",
+            "Credit_Greg_Silver",
+            "Credit_Greg_Silver",
+            "Credit_Greg_Silver",
+            "Credit_Greg_Silver",
+            "Credit_Greg_Silver",
+            "Credit_Greg_Silver",
+            "Credit_Greg_Silver"
+          ],
+          "keep_nbt": true,
+          "removable_by_gt": false,
+          "source_line": 5070,
+          "source_fragment_sha256": "3740afbfafc708cbfa8849681132696b16e88ab2685da0d263f217d03e37fb23"
+        },
+        {
+          "output_enum": "Credit_Greg_Platinum",
+          "output_count": 1,
+          "input_enums": [
+            "Credit_Greg_Gold",
+            "Credit_Greg_Gold",
+            "Credit_Greg_Gold",
+            "Credit_Greg_Gold",
+            "Credit_Greg_Gold",
+            "Credit_Greg_Gold",
+            "Credit_Greg_Gold",
+            "Credit_Greg_Gold"
+          ],
+          "keep_nbt": true,
+          "removable_by_gt": false,
+          "source_line": 5076,
+          "source_fragment_sha256": "9bc58961fd4c44cddd9579f11e6ae278bad0aa69771407218826ea834079735a"
+        },
+        {
+          "output_enum": "Credit_Greg_Osmium",
+          "output_count": 1,
+          "input_enums": [
+            "Credit_Greg_Platinum",
+            "Credit_Greg_Platinum",
+            "Credit_Greg_Platinum",
+            "Credit_Greg_Platinum",
+            "Credit_Greg_Platinum",
+            "Credit_Greg_Platinum",
+            "Credit_Greg_Platinum",
+            "Credit_Greg_Platinum"
+          ],
+          "keep_nbt": true,
+          "removable_by_gt": false,
+          "source_line": 5082,
+          "source_fragment_sha256": "9c80b5d035a7d77476f0f7e24921fa2d5cc09ef17dbb9e22fa15b3144763fcd2"
+        },
+        {
+          "output_enum": "Credit_Greg_Naquadah",
+          "output_count": 1,
+          "input_enums": [
+            "Credit_Greg_Osmium",
+            "Credit_Greg_Osmium",
+            "Credit_Greg_Osmium",
+            "Credit_Greg_Osmium",
+            "Credit_Greg_Osmium",
+            "Credit_Greg_Osmium",
+            "Credit_Greg_Osmium",
+            "Credit_Greg_Osmium"
+          ],
+          "keep_nbt": true,
+          "removable_by_gt": false,
+          "source_line": 5088,
+          "source_fragment_sha256": "15405d329a983e967e4ff9416bd7c2acb3705daffc840334d21fe00ceae84889"
+        },
+        {
+          "output_enum": "Credit_Greg_Neutronium",
+          "output_count": 1,
+          "input_enums": [
+            "Credit_Greg_Naquadah",
+            "Credit_Greg_Naquadah",
+            "Credit_Greg_Naquadah",
+            "Credit_Greg_Naquadah",
+            "Credit_Greg_Naquadah",
+            "Credit_Greg_Naquadah",
+            "Credit_Greg_Naquadah",
+            "Credit_Greg_Naquadah"
+          ],
+          "keep_nbt": true,
+          "removable_by_gt": false,
+          "source_line": 5094,
+          "source_fragment_sha256": "dea32bb26aa50542bdc737ea6a419634af3bf69f4c729efb63dddecc217a1f79"
+        }
+      ],
+      "source_sha256": {
+        "work/exact-sources/GT5-Unofficial/5.09.54.205/src/main/java/gregtech/common/items/MetaGeneratedItem01.java": "c358774f48fce59a7f7ac5bae346a45baed0f9e97d1bf109d19ade9e0b6d0b87",
+        "work/exact-sources/GT5-Unofficial/5.09.54.205/src/main/java/gregtech/common/items/IDMetaItem01.java": "82b461cd0537a6fe4d8a8e5d631266d6db7d0751aeff195dc0f2d69d591fd120",
+        "work/exact-sources/GT5-Unofficial/5.09.54.205/src/main/java/gregtech/common/GTProxy.java": "b514b8d6c322a617010ca13ae68335938a318d6bb049079ef3eda8ebd521e03d",
+        "work/exact-sources/GT5-Unofficial/5.09.54.205/src/main/java/gregtech/api/items/MetaGeneratedItemX32.java": "18874691689a614e712e8e3334249b4570f0b27ee476a897fcd3c38bf264608a",
+        "work/exact-sources/GT5-Unofficial/5.09.54.205/src/main/java/gregtech/api/items/MetaGeneratedItem.java": "c744cc24c27919c3c531f0771f3e5fc0af87ccc4a1b116d6e154c808ffcefb6a",
+        "work/exact-sources/GT5-Unofficial/5.09.54.205/src/main/java/gregtech/api/items/GTGenericItem.java": "4d56d2ba08e05fee426442f89e34f655fcc6863248ab8994e78e52581deb208d",
+        "work/exact-sources/GT5-Unofficial/5.09.54.205/src/main/java/gregtech/api/items/MetaBaseItem.java": "7641f58995d7b038e077d5139c758309aa4048dea8d370e6b08bd56fc2f5d1c6",
+        "work/exact-sources/GT5-Unofficial/5.09.54.205/src/main/resources/assets/gregtech/lang/en_US.lang": "f8a66470ccca2be9198401cf1fb029f2391e53b5fe99bc870d038e4b02b12f33",
+        "work/exact-sources/GT5-Unofficial/5.09.54.205/src/main/resources/assets/gregtech/lang/zh_CN.lang": "1c3596de331933f14c067b45b919d23b3cf0ccb1a2d63db75cfeca4901905477",
+        "work/exact-sources/GT5-Unofficial/5.09.54.205/src/main/resources/assets/gregtech/lang/ru_RU.lang": "4db421fc372b576dd4b96981246ddec5651f0052f21f238805e16fbd1bbf71ed",
+        "work/exact-sources/GT5-Unofficial/5.09.54.205/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/0.png": "49abfa3fa4fe0ace0891a521d843e9a40c4e7a14be53ba73ecb3c182eab1b021",
+        "work/exact-sources/GT5-Unofficial/5.09.54.205/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/1.png": "d747d971445976655a8f082841b6ae08cf9ab1da287b39656db45017ecf4b41e",
+        "work/exact-sources/GT5-Unofficial/5.09.54.205/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/2.png": "6ce27fdfa578d1bd884d8538ba29713e12d683f4c1250fcb7010bbdb4d9658f4",
+        "work/exact-sources/GT5-Unofficial/5.09.54.205/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/3.png": "3c91a993357f6a6fab81bb972a47675fba3d2dfdad9c7974a20443f6d07bf1e5",
+        "work/exact-sources/GT5-Unofficial/5.09.54.205/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/4.png": "4984d239fd57bad3aa828cc4ba36d17ace5031fc329f8de7123f158374296c39",
+        "work/exact-sources/GT5-Unofficial/5.09.54.205/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/5.png": "a88324462eaa7033357433f3f26549a7903c4f2fa6dbbca535b156850d86f685",
+        "work/exact-sources/GT5-Unofficial/5.09.54.205/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/6.png": "b8145ab0ef738934120993f872e0d7b802335040bb888038ad6eabdd6da034d8",
+        "work/exact-sources/GT5-Unofficial/5.09.54.205/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/7.png": "55b021254e8aa8163e64436066e266972643ec5486244d6526744a3e215c3b94",
+        "work/exact-sources/GT5-Unofficial/5.09.54.205/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/11.png": "95e278220d51e9be43c9be4469f48188a573fadd0f41f1245f3598904d02af83",
+        "work/exact-sources/GT5-Unofficial/5.09.54.205/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/13.png": "4ba2f2b7bf3e063f6b9ad2c3c9e33d3722d99df10dbb60160a011da5ef7c3e89",
+        "work/exact-sources/GT5-Unofficial/5.09.54.205/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/14.png": "320e4e2aad41f59cd2e45bcf428a6026c68bea7ade67b7c9d07a21aa125fde08",
+        "work/exact-sources/GT5-Unofficial/5.09.54.205/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/15.png": "b7ecbdd6fed05c9bb2d04f1beac0737183dc10592024f7317e380cfed67c4099",
+        "work/exact-sources/GT5-Unofficial/5.09.54.205/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/16.png": "387f309a22c641a377225e399620d6905b6de2f229068546e9ceb77edbed27e9",
+        "locks/sources/GT5-Unofficial-5.09.54.205-lock.json": "1d82ec79eef3195aea71ff518af0970f21cb1b95962314c1babff65548b24f5f",
+        "work/migration/audit_legacy_credit_sources.py": "c0b34f485037d2164a3ed88e2233802cd70bff4b9e9e907b9acd54e821ae2675"
+      },
+      "activated_credit_items": 0,
+      "activated_credit_recipes": 0,
+      "native_item_behavior_complete": false,
+      "material_recycling_complete": false,
+      "thaumcraft_integration_complete": false,
+      "client_visuals_verified": false,
+      "full_parity": false
+    },
     "GTCEuArtifactCheck": {
       "passed": true,
       "cases": [
@@ -7423,7 +8264,7 @@
       "full_parity": false
     }
   },
-  "compat_jar_sha256": "05308fb6c05819ef1977859f2574a9d42f3745bfd6fca730c16452a3455f61db",
+  "compat_jar_sha256": "7272a8b1cbdb0bd5da20acdaeb6c8b93611cbfd3d8e6fd9c52ba4c9fe55b7ce9",
   "source_quests": 3814,
   "structural_candidates": 47,
   "dependency_closed_active_quests": 2,
@@ -7450,6 +8291,9 @@
   "legacy_raw_item_tag_and_keep_phase_native_verified": true,
   "legacy_item_nbt_to_modern_components_complete": false,
   "legacy_item_update_hooks_complete": false,
+  "legacy_shapeless_matching_and_selected_phases_native_verified": true,
+  "legacy_shapeless_overwrite_and_custom_validator_complete": false,
+  "legacy_credit_items_and_recipes_activated": false,
   "isolated_mixin_transformation_verified": true,
   "tested_model_classes_match_packaged_jar": true,
   "typed_json_envelope_planner_composition_verified": true,

@@ -4,7 +4,7 @@
   "checks": {
     "migration_machine_recipes_with_outputs": 167,
     "migration_namespace_recipes": 170,
-    "fixture_recipes": 23,
+    "fixture_recipes": 27,
     "shaped_behavior": {
       "source_geometry_comparisons": 10395,
       "json_network_round_trips": 22,
@@ -34,6 +34,17 @@
       "item_update_hooks_complete": false,
       "world_or_player_executed": false
     },
+    "legacy_shapeless": {
+      "source_match_comparisons": 76800,
+      "source_nbt_comparisons": 5547,
+      "source_energy_comparisons": 81,
+      "json_network_round_trips": 812,
+      "boundary_checks": 9,
+      "remaining_item_checks": 6,
+      "source_item_set_mapping_complete": false,
+      "overwrite_and_custom_validator_complete": false,
+      "world_or_player_executed": false
+    },
     "fuel_values_verified": 16,
     "component_round_trips": 5,
     "boost_copy_codec_network_round_trips": 18,
@@ -45,53 +56,59 @@
   "cases": {
     "ported": {
       "exit": 0,
-      "log_sha256": "0d14f5216328f4ceb92fac625f28807e99921b31d32d7b1c198b75489d543f36",
-      "dump_sha256": "21c97621a7f490d8c906aa05f7b95d6d79c814e2bd03f44b8b3692af82b3f7a3",
+      "log_sha256": "8231cc32d15745df9b62ce2d0fc991366acfaca86cd261417dbc46f8554fd371",
+      "dump_sha256": "f6766e2737f203cfa0ea2c3751fa9be1d38eef74dc1335472789e9ecc15de054",
       "passed_semantic_checks": true
     },
     "old_output": {
       "exit": 0,
-      "log_sha256": "feb8111aa6590b863f03758ffed99999fa8d40fb94ea2adc3a7d9bff90ecda9e",
-      "dump_sha256": "64de239d415154bbf95dbd240dee0e9336f0f3ba64745bbc277e153b2e04a122",
+      "log_sha256": "fe0213d5000edc6819acd82edd02447064c1e3eca8d3ae385df1d5c9807b3bed",
+      "dump_sha256": "777351993d35039f519bde560c3d811dc913ddb48efb5dbe469e93fc47ade149",
       "rejected_missing_machine_outputs": true
     },
     "original_api": {
       "exit": 1,
-      "log_sha256": "3c29263a5a1a2ea9d523e48a05acd370a25c0e3c43991210e106caa250d51bb1",
+      "log_sha256": "21a4632dac1d13960a07d49a2df233733ec87481528e065059b034e6e9751d69",
       "rejected_missing_old_server_events_api": true
     },
     "without_grid_origin": {
       "exit": 1,
-      "log_sha256": "9df86e4d3ffe8920db3fc8bdd148d6e5de861320ff54639187088020f0a2cc65",
+      "log_sha256": "2eb24ffbb3b8c55972eb2d512fc8ee0941d1218b54f0b86bab0e3d3b5701e7bc",
       "rejected_missing_original_grid_coordinates": true
     },
     "without_cache_origin": {
       "exit": 1,
-      "log_sha256": "c9d658ee29e96d69bc790447ce6a7abddadacf2904855180f1f490efb8f53889",
+      "log_sha256": "1dcb4bf51cb3de8fb36bc8fbba2a098fda9db58aad85138361cf4a2ffcebdb45",
       "rejected_missing_cache_origin_invalidation": true
     },
     "without_energy_transfer": {
       "exit": 1,
-      "log_sha256": "d6cf4513f3316d2373f480c21f197c2a5104c8658feac2ce5f278da9e1244182",
+      "log_sha256": "311128f400b47aba7b3702f0628429aaeada87d5d72a4c5b20b73b07a5386a44",
       "rejected_missing_legacy_energy_transfer": true
     },
     "without_legacy_nbt": {
       "exit": 1,
-      "log_sha256": "c694cd3e844f3ea775c4d449c23e019d0d832975b28c88c72ca43a9f9592f219",
+      "log_sha256": "415a31c75a09fcd00ac4089d82eed64b4b8aea8af1e211c5bfeaa8236c89af4b",
       "rejected_missing_legacy_nbt": true
+    },
+    "bipartite_shapeless": {
+      "exit": 1,
+      "log_sha256": "b677870a7bfb72344ca12a25a6da1315ff1e107b339fc2b7af23d188a1d1017e",
+      "rejected_changed_matching_algorithm": true
     }
   },
   "derived_jar_sha256": "57756c966739f22aee0d8eccfe061e39f36c1d9cac60b819ea74b10f7a55b239",
   "preserved_original_entries": 14084,
   "source_sha256": {
     "work/migration/NativeResourceAuditLaunchHandler.java": "52bbd626cb612ebe66dbb80847bf29aefb661c4744baed49570e5a38a5b34c3e",
-    "work/migration/NativeResourceAuditMain.java": "3341d0ff6a44e5481d8af7219911057ed357847a96410e0992dd680919dd2387",
+    "work/migration/NativeResourceAuditMain.java": "808efbc90ae59567b084aeea8f4c073c545e59423eedafd5817d42906d62a9e1",
     "work/migration/NativeShapedRecipeCheck.java": "d08f5141b2177d3316e870d7dd61e087afc059e5fefd7390273e71d3ecad8880",
     "work/migration/NativeCraftingEnergyCheck.java": "147503df00384eeadf945ab9a27c90705cb32456a59b4f1cf4d86884c8ddeb3e",
-    "work/migration/NativeCraftingNbtCheck.java": "48532f8bb393168ff05f56edea1b795c5dae223f85495641f92d313cf42b62f4",
-    "work/migration/test_native_resource_bridge.py": "c8c269fb7b4d437af9551ac849bbac5b8fdcb93be8038d182d35ee959a71ecb7",
+    "work/migration/NativeCraftingNbtCheck.java": "42cbe55ee45fa359bd2d08207ed9adeb0c71b742db733a953e8fb7f8cd53687f",
+    "work/migration/NativeShapelessRecipeCheck.java": "e85befc8724f24fc5c969f6fb7a17f8d72184bb1d28989bd0b8bc54e5fbd3041",
+    "work/migration/test_native_resource_bridge.py": "8b065f6a87978c52b03dd1973be17285d96c1b1ae8275224d24828f03d83a0b3",
     "work/migration/build_gtceu_kubejs_bridge.py": "d4fda70d2595be62c5fc60b326bde822f3c3f2c5b9382732a1ec30c63cab0215",
-    "work/migration/KubeJSBridgeFixtures.js": "3933e0214d06e480f4489486c428cac21a619f7ba191cec072a2101b5abcf152",
+    "work/migration/KubeJSBridgeFixtures.js": "b98242bc442d07eba6e4818b2e2bad52910fc3023e59e72d333683e5cf4f72ca",
     "work/compat-mod/patches/gtceu-kubejs72.json": "15472a152f3433da4ecff5dffc23ef9270064ca5ce458c0da40d62529dde2dcb",
     "locks/gtceu-kubejs72-build.json": "c4a770075370a4be34137fecc27681716f9d9e3187b5960729dc1c0620f8acb6",
     "locks/native-client-audit-inputs.json": "1542616c4c55281eec4dc906d9a2d0375e45aa50939eb29f67230d80fefa1093",
@@ -106,15 +123,19 @@
     "locks/sources/GT5-Unofficial-5.09.54.205-lock.json": "1d82ec79eef3195aea71ff518af0970f21cb1b95962314c1babff65548b24f5f",
     "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyCraftingEnergy.java": "fe0f19fafa4fa1c1db2264163aec5f41854ee2a5f8947a3addf021d1ad3089cd",
     "locks/legacy-shaped-source.json": "20be82c9c0781d7fccebb84c0a2e8bc02be0825fe6799c1b1750cba0aa39023d",
-    "work/migration/build_capacity_compat.py": "48a74e7a88f6cf5b27d44ffcc86fe8a56b4aa816393eb7ad7eeb67bbdbd0f952",
+    "work/migration/build_capacity_compat.py": "cc6b12a4367979216dc039e31145dec0c5f944c1f257aca3b36eaacf25c2f240",
     "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyShapedRecipe.java": "9c391e8e73c9e81a451ecf1f609158de7af4583f45f144abc05fc93b53c77997",
     "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyCraftingGrid.java": "40c79cb17087a1464156ff0963cb7d5a6a79e222535b9d49debdeaab0d89b3cc",
     "work/compat-mod/src/main/java/org/gtnhmigration/compat/mixin/LegacyCraftingGridMixin.java": "09446dfb97decbf1284945fa3339ef2f32775ab92469b86c0a6d6abc06e95db7",
     "work/compat-mod/src/main/java/org/gtnhmigration/compat/mixin/LegacyCraftingCacheMixin.java": "ead103c135be55149b94e7664120ba866dd126845b54d606fd9e3a91e3f05049",
-    "work/migration/build_legacy_nbt_reference.py": "efa55ec8fdad466fb6476a1ade8ec470e6130b094bf96714a8291bdadb656e94",
+    "work/migration/build_legacy_nbt_reference.py": "f0dd276d91bd6f4a77426a27bfb2afd0af44e4bd7ceeb07bac39661add6cb68f",
     "locks/legacy-crafting-nbt-source.json": "1288d53fb3c71d9d58d88766112e0685675f2c6b1b562ecd83a9d5bee8b81203",
     "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyItemTag.java": "b77f70105eb9bee5b4dabaf314ea224ee1e4459732fa22f4c0a34904f1d0d433",
-    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyCraftingNbt.java": "82d3011163acc91810e25be1bacf11811831a43ad5a3c962252a361cfe5ade0d"
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyCraftingNbt.java": "82d3011163acc91810e25be1bacf11811831a43ad5a3c962252a361cfe5ade0d",
+    "work/migration/build_legacy_shapeless_reference.py": "d8a5c0e9fc67038541b4624c6da4756848be25cb40eae0c840fd24e22f580496",
+    "locks/legacy-shapeless-source.json": "c474701e10e8ef0c93953ca52f8f2e072e55c80df9646584e7e0ace379266215",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyShapelessRecipe.java": "f3cfb7c2e33ca136d4893a1320aadd679adcfce13a52f7d9f6d4998ae709dff8",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyShapelessMatch.java": "7bf839873eb87949d2fb12c699a30dfb19e90ddaff7e5a5298b118a2e96ff14d"
   },
   "foundation_unchanged": true,
   "eula_accepted": false,
@@ -132,7 +153,7 @@
     "mods/ftb-quests-neoforge-2101.1.36.jar": "6a39982c4b3afc00b1e788041a4f0d394e1659e3b3a6e5d078cd790bc36d0018",
     "mods/ftb-teams-neoforge-2101.1.11.jar": "e6bcd670493624e6906df872a9c6af4a33fe6405cac57a32c59cd4cd5838c655",
     "mods/gtceu-1.21.1-7.0.2-gtnh-kubejs72.jar": "57756c966739f22aee0d8eccfe061e39f36c1d9cac60b819ea74b10f7a55b239",
-    "mods/gtnh-migration-compat-0.1.0.jar": "05308fb6c05819ef1977859f2574a9d42f3745bfd6fca730c16452a3455f61db",
+    "mods/gtnh-migration-compat-0.1.0.jar": "7272a8b1cbdb0bd5da20acdaeb6c8b93611cbfd3d8e6fd9c52ba4c9fe55b7ce9",
     "mods/guideme-21.1.19.jar": "2ce254edb931c3c3cf81d69abaf8f4ce5b871bf85e64984f366bf044173bd66a",
     "mods/Jade-1.21.1-NeoForge-15.10.6.jar": "276f1f65a20d04f536989c4f311949d770b52c440c23c2b904a08860f3c93810",
     "mods/jei-1.21.1-neoforge-19.51.0.418.jar": "8bc3936d869e4040a5649c58b7e8be1c78c82a245c0dc07bdd68ab49121a222c",

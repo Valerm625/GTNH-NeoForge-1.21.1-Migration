@@ -1,0 +1,820 @@
+{
+  "passed": true,
+  "scope": "Source inventory only; no credit item or recipe activated",
+  "source_commit": "a3e1e11241a814c9fa0dd0973d5699548428f689",
+  "gt_item_definitions": 13,
+  "referenced_external_items": 1,
+  "source_conversion_recipes": 24,
+  "external_items": [
+    {
+      "source_enum": "Credit_Iron",
+      "source_binding": "GTModHandler.getIC2Item(\"coin\", 1L)",
+      "source_file": "src/main/java/gregtech/common/GTProxy.java",
+      "primary_ic2_identity_verified": false
+    }
+  ],
+  "definitions": [
+    {
+      "source_enum": "Credit_Greg_Copper",
+      "legacy_id": "gregtech:gt.metaitem.01",
+      "damage": 32000,
+      "definition_line": 627,
+      "name_key": "gt.item.credit.copper.name",
+      "tooltip_key": "gt.item.credit.copper.tooltip",
+      "translations": {
+        "en_US": {
+          "name": "Copper GT Credit",
+          "tooltip": "0.125 Credits"
+        },
+        "zh_CN": {
+          "name": null,
+          "tooltip": null
+        },
+        "ru_RU": {
+          "name": "Медная GT монета",
+          "tooltip": "0.125 монет"
+        }
+      },
+      "texture": "src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/0.png",
+      "png_sha256": "49abfa3fa4fe0ace0891a521d843e9a40c4e7a14be53ba73ecb3c182eab1b021",
+      "dimensions": [
+        32,
+        32
+      ],
+      "animation": null,
+      "material_data": [],
+      "thaumcraft_aspects": []
+    },
+    {
+      "source_enum": "Credit_Greg_Cupronickel",
+      "legacy_id": "gregtech:gt.metaitem.01",
+      "damage": 32001,
+      "definition_line": 632,
+      "name_key": "gt.item.credit.cupronickel.name",
+      "tooltip_key": "gt.item.credit.cupronickel.tooltip",
+      "translations": {
+        "en_US": {
+          "name": "Cupronickel GT Credit",
+          "tooltip": "1 Credit"
+        },
+        "zh_CN": {
+          "name": null,
+          "tooltip": null
+        },
+        "ru_RU": {
+          "name": "Мельхиоровая GT монета",
+          "tooltip": "1 монета"
+        }
+      },
+      "texture": "src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/1.png",
+      "png_sha256": "d747d971445976655a8f082841b6ae08cf9ab1da287b39656db45017ecf4b41e",
+      "dimensions": [
+        32,
+        32
+      ],
+      "animation": null,
+      "material_data": [
+        {
+          "material": "Cupronickel",
+          "units": 907200
+        }
+      ],
+      "thaumcraft_aspects": []
+    },
+    {
+      "source_enum": "Credit_Greg_Silver",
+      "legacy_id": "gregtech:gt.metaitem.01",
+      "damage": 32002,
+      "definition_line": 638,
+      "name_key": "gt.item.credit.silver.name",
+      "tooltip_key": "gt.item.credit.silver.tooltip",
+      "translations": {
+        "en_US": {
+          "name": "Silver GT Credit",
+          "tooltip": "8 Credits"
+        },
+        "zh_CN": {
+          "name": null,
+          "tooltip": null
+        },
+        "ru_RU": {
+          "name": "Серебряная GT монета",
+          "tooltip": "8 монет"
+        }
+      },
+      "texture": "src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/2.png",
+      "png_sha256": "6ce27fdfa578d1bd884d8538ba29713e12d683f4c1250fcb7010bbdb4d9658f4",
+      "dimensions": [
+        32,
+        32
+      ],
+      "animation": null,
+      "material_data": [],
+      "thaumcraft_aspects": [
+        {
+          "aspect": "LUCRUM",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "source_enum": "Credit_Greg_Gold",
+      "legacy_id": "gregtech:gt.metaitem.01",
+      "damage": 32003,
+      "definition_line": 644,
+      "name_key": "gt.item.credit.gold.name",
+      "tooltip_key": "gt.item.credit.gold.tooltip",
+      "translations": {
+        "en_US": {
+          "name": "Gold GT Credit",
+          "tooltip": "64 Credits"
+        },
+        "zh_CN": {
+          "name": null,
+          "tooltip": null
+        },
+        "ru_RU": {
+          "name": "Золотая GT монета",
+          "tooltip": "64 монеты"
+        }
+      },
+      "texture": "src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/3.png",
+      "png_sha256": "3c91a993357f6a6fab81bb972a47675fba3d2dfdad9c7974a20443f6d07bf1e5",
+      "dimensions": [
+        32,
+        32
+      ],
+      "animation": null,
+      "material_data": [],
+      "thaumcraft_aspects": []
+    },
+    {
+      "source_enum": "Credit_Greg_Platinum",
+      "legacy_id": "gregtech:gt.metaitem.01",
+      "damage": 32004,
+      "definition_line": 649,
+      "name_key": "gt.item.credit.platinum.name",
+      "tooltip_key": "gt.item.credit.platinum.tooltip",
+      "translations": {
+        "en_US": {
+          "name": "Platinum GT Credit",
+          "tooltip": "512 Credits"
+        },
+        "zh_CN": {
+          "name": null,
+          "tooltip": null
+        },
+        "ru_RU": {
+          "name": "Платиновая GT монета",
+          "tooltip": "512 монет"
+        }
+      },
+      "texture": "src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/4.png",
+      "png_sha256": "4984d239fd57bad3aa828cc4ba36d17ace5031fc329f8de7123f158374296c39",
+      "dimensions": [
+        32,
+        32
+      ],
+      "animation": null,
+      "material_data": [],
+      "thaumcraft_aspects": []
+    },
+    {
+      "source_enum": "Credit_Greg_Osmium",
+      "legacy_id": "gregtech:gt.metaitem.01",
+      "damage": 32005,
+      "definition_line": 654,
+      "name_key": "gt.item.credit.osmium.name",
+      "tooltip_key": "gt.item.credit.osmium.tooltip",
+      "translations": {
+        "en_US": {
+          "name": "Osmium GT Credit",
+          "tooltip": "4,096 Credits"
+        },
+        "zh_CN": {
+          "name": null,
+          "tooltip": null
+        },
+        "ru_RU": {
+          "name": "Осмиевая GT монета",
+          "tooltip": "4,096 монет"
+        }
+      },
+      "texture": "src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/5.png",
+      "png_sha256": "a88324462eaa7033357433f3f26549a7903c4f2fa6dbbca535b156850d86f685",
+      "dimensions": [
+        32,
+        32
+      ],
+      "animation": null,
+      "material_data": [],
+      "thaumcraft_aspects": []
+    },
+    {
+      "source_enum": "Credit_Greg_Naquadah",
+      "legacy_id": "gregtech:gt.metaitem.01",
+      "damage": 32006,
+      "definition_line": 659,
+      "name_key": "gt.item.credit.naquadah.name",
+      "tooltip_key": "gt.item.credit.naquadah.tooltip",
+      "translations": {
+        "en_US": {
+          "name": "Naquadah GT Credit",
+          "tooltip": "32,768 Credits"
+        },
+        "zh_CN": {
+          "name": null,
+          "tooltip": null
+        },
+        "ru_RU": {
+          "name": "Наквадаховая GT монета",
+          "tooltip": "32,768 монет"
+        }
+      },
+      "texture": "src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/6.png",
+      "png_sha256": "b8145ab0ef738934120993f872e0d7b802335040bb888038ad6eabdd6da034d8",
+      "dimensions": [
+        32,
+        32
+      ],
+      "animation": null,
+      "material_data": [],
+      "thaumcraft_aspects": []
+    },
+    {
+      "source_enum": "Credit_Greg_Neutronium",
+      "legacy_id": "gregtech:gt.metaitem.01",
+      "damage": 32007,
+      "definition_line": 664,
+      "name_key": "gt.item.credit.neutronium.name",
+      "tooltip_key": "gt.item.credit.neutronium.tooltip",
+      "translations": {
+        "en_US": {
+          "name": "Neutronium GT Credit",
+          "tooltip": "262,144 Credits"
+        },
+        "zh_CN": {
+          "name": null,
+          "tooltip": null
+        },
+        "ru_RU": {
+          "name": "Нейтрониевая GT монета",
+          "tooltip": "262,144 монет"
+        }
+      },
+      "texture": "src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/7.png",
+      "png_sha256": "55b021254e8aa8163e64436066e266972643ec5486244d6526744a3e215c3b94",
+      "dimensions": [
+        32,
+        32
+      ],
+      "animation": null,
+      "material_data": [],
+      "thaumcraft_aspects": []
+    },
+    {
+      "source_enum": "Credit_Copper",
+      "legacy_id": "gregtech:gt.metaitem.01",
+      "damage": 32011,
+      "definition_line": 701,
+      "name_key": "gt.item.credit.industrial.copper.name",
+      "tooltip_key": "gt.item.credit.industrial.copper.tooltip",
+      "translations": {
+        "en_US": {
+          "name": "Industrial Copper Credit",
+          "tooltip": "0.125 Credits"
+        },
+        "zh_CN": {
+          "name": null,
+          "tooltip": null
+        },
+        "ru_RU": {
+          "name": "Промышленная медная монета",
+          "tooltip": "0.125 монет"
+        }
+      },
+      "texture": "src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/11.png",
+      "png_sha256": "95e278220d51e9be43c9be4469f48188a573fadd0f41f1245f3598904d02af83",
+      "dimensions": [
+        16,
+        16
+      ],
+      "animation": null,
+      "material_data": [],
+      "thaumcraft_aspects": []
+    },
+    {
+      "source_enum": "Credit_Silver",
+      "legacy_id": "gregtech:gt.metaitem.01",
+      "damage": 32013,
+      "definition_line": 707,
+      "name_key": "gt.item.credit.industrial.silver.name",
+      "tooltip_key": "gt.item.credit.industrial.silver.tooltip",
+      "translations": {
+        "en_US": {
+          "name": "Industrial Silver Credit",
+          "tooltip": "8 Credits"
+        },
+        "zh_CN": {
+          "name": null,
+          "tooltip": null
+        },
+        "ru_RU": {
+          "name": "Промышленная серебряная монета",
+          "tooltip": "8 монет"
+        }
+      },
+      "texture": "src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/13.png",
+      "png_sha256": "4ba2f2b7bf3e063f6b9ad2c3c9e33d3722d99df10dbb60160a011da5ef7c3e89",
+      "dimensions": [
+        16,
+        16
+      ],
+      "animation": null,
+      "material_data": [],
+      "thaumcraft_aspects": [
+        {
+          "aspect": "LUCRUM",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "source_enum": "Credit_Gold",
+      "legacy_id": "gregtech:gt.metaitem.01",
+      "damage": 32014,
+      "definition_line": 713,
+      "name_key": "gt.item.credit.industrial.gold.name",
+      "tooltip_key": "gt.item.credit.industrial.gold.tooltip",
+      "translations": {
+        "en_US": {
+          "name": "Industrial Gold Credit",
+          "tooltip": "64 Credits"
+        },
+        "zh_CN": {
+          "name": null,
+          "tooltip": null
+        },
+        "ru_RU": {
+          "name": "Промышленная золотая монета",
+          "tooltip": "64 монеты"
+        }
+      },
+      "texture": "src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/14.png",
+      "png_sha256": "320e4e2aad41f59cd2e45bcf428a6026c68bea7ade67b7c9d07a21aa125fde08",
+      "dimensions": [
+        16,
+        16
+      ],
+      "animation": null,
+      "material_data": [],
+      "thaumcraft_aspects": []
+    },
+    {
+      "source_enum": "Credit_Platinum",
+      "legacy_id": "gregtech:gt.metaitem.01",
+      "damage": 32015,
+      "definition_line": 718,
+      "name_key": "gt.item.credit.industrial.platinum.name",
+      "tooltip_key": "gt.item.credit.industrial.platinum.tooltip",
+      "translations": {
+        "en_US": {
+          "name": "Industrial Platinum Credit",
+          "tooltip": "512 Credits"
+        },
+        "zh_CN": {
+          "name": null,
+          "tooltip": null
+        },
+        "ru_RU": {
+          "name": "Промышленная платиновая монета",
+          "tooltip": "512 монет"
+        }
+      },
+      "texture": "src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/15.png",
+      "png_sha256": "b7ecbdd6fed05c9bb2d04f1beac0737183dc10592024f7317e380cfed67c4099",
+      "dimensions": [
+        16,
+        16
+      ],
+      "animation": null,
+      "material_data": [],
+      "thaumcraft_aspects": []
+    },
+    {
+      "source_enum": "Credit_Osmium",
+      "legacy_id": "gregtech:gt.metaitem.01",
+      "damage": 32016,
+      "definition_line": 723,
+      "name_key": "gt.item.credit.industrial.osmium.name",
+      "tooltip_key": "gt.item.credit.industrial.osmium.tooltip",
+      "translations": {
+        "en_US": {
+          "name": "Industrial Osmium Credit",
+          "tooltip": "4096 Credits"
+        },
+        "zh_CN": {
+          "name": null,
+          "tooltip": null
+        },
+        "ru_RU": {
+          "name": "Промышленный осмиевая монета",
+          "tooltip": "4096 монет"
+        }
+      },
+      "texture": "src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/16.png",
+      "png_sha256": "387f309a22c641a377225e399620d6905b6de2f229068546e9ceb77edbed27e9",
+      "dimensions": [
+        16,
+        16
+      ],
+      "animation": null,
+      "material_data": [],
+      "thaumcraft_aspects": []
+    }
+  ],
+  "recipes": [
+    {
+      "output_enum": "Credit_Copper",
+      "output_count": 8,
+      "input_enums": [
+        "Credit_Iron"
+      ],
+      "keep_nbt": true,
+      "removable_by_gt": false,
+      "source_line": 4979,
+      "source_fragment_sha256": "4fbdfa976f08e26cba9e69f202a50617f9eac316b9dffb6529cfe0c15f6c2794"
+    },
+    {
+      "output_enum": "Credit_Iron",
+      "output_count": 8,
+      "input_enums": [
+        "Credit_Silver"
+      ],
+      "keep_nbt": true,
+      "removable_by_gt": false,
+      "source_line": 4983,
+      "source_fragment_sha256": "8d459548f34b107a97620f0dfeb08d06efa472822d59a972bb3b225ac4cfd8b2"
+    },
+    {
+      "output_enum": "Credit_Silver",
+      "output_count": 8,
+      "input_enums": [
+        "Credit_Gold"
+      ],
+      "keep_nbt": true,
+      "removable_by_gt": false,
+      "source_line": 4987,
+      "source_fragment_sha256": "56c9c35bc70fe6293003124f0c06b020d791754e4e563566cc82f6bb8aab8ef4"
+    },
+    {
+      "output_enum": "Credit_Gold",
+      "output_count": 8,
+      "input_enums": [
+        "Credit_Platinum"
+      ],
+      "keep_nbt": true,
+      "removable_by_gt": false,
+      "source_line": 4991,
+      "source_fragment_sha256": "627c3a1d1b9ebc6ac08c9f16fa7610194b21f0867161090bc28cad13b5623330"
+    },
+    {
+      "output_enum": "Credit_Platinum",
+      "output_count": 8,
+      "input_enums": [
+        "Credit_Osmium"
+      ],
+      "keep_nbt": true,
+      "removable_by_gt": false,
+      "source_line": 4995,
+      "source_fragment_sha256": "7707cd94eca41ddbfef2d5db5abade3c626d2d811f291a63dc5014990dcfc7fb"
+    },
+    {
+      "output_enum": "Credit_Iron",
+      "output_count": 1,
+      "input_enums": [
+        "Credit_Copper",
+        "Credit_Copper",
+        "Credit_Copper",
+        "Credit_Copper",
+        "Credit_Copper",
+        "Credit_Copper",
+        "Credit_Copper",
+        "Credit_Copper"
+      ],
+      "keep_nbt": true,
+      "removable_by_gt": false,
+      "source_line": 5000,
+      "source_fragment_sha256": "8251e89fd7a13915d6ae211f5c5549871ea3b9123112d98ba0ef4fb877a1bc89"
+    },
+    {
+      "output_enum": "Credit_Silver",
+      "output_count": 1,
+      "input_enums": [
+        "Credit_Iron",
+        "Credit_Iron",
+        "Credit_Iron",
+        "Credit_Iron",
+        "Credit_Iron",
+        "Credit_Iron",
+        "Credit_Iron",
+        "Credit_Iron"
+      ],
+      "keep_nbt": true,
+      "removable_by_gt": false,
+      "source_line": 5006,
+      "source_fragment_sha256": "9ca95c06908d878389660e62393de3383881ed08ee436badc03241e1c7361560"
+    },
+    {
+      "output_enum": "Credit_Gold",
+      "output_count": 1,
+      "input_enums": [
+        "Credit_Silver",
+        "Credit_Silver",
+        "Credit_Silver",
+        "Credit_Silver",
+        "Credit_Silver",
+        "Credit_Silver",
+        "Credit_Silver",
+        "Credit_Silver"
+      ],
+      "keep_nbt": true,
+      "removable_by_gt": false,
+      "source_line": 5011,
+      "source_fragment_sha256": "92f16cc5e9dfca7b884945874f98961f606af26cbab76516987c6c8df0192ceb"
+    },
+    {
+      "output_enum": "Credit_Platinum",
+      "output_count": 1,
+      "input_enums": [
+        "Credit_Gold",
+        "Credit_Gold",
+        "Credit_Gold",
+        "Credit_Gold",
+        "Credit_Gold",
+        "Credit_Gold",
+        "Credit_Gold",
+        "Credit_Gold"
+      ],
+      "keep_nbt": true,
+      "removable_by_gt": false,
+      "source_line": 5017,
+      "source_fragment_sha256": "faa5d9c16d74daedeeef8d6ac7e8d3e1fca3a88df9f5e0d9269c89fcc8558f4d"
+    },
+    {
+      "output_enum": "Credit_Osmium",
+      "output_count": 1,
+      "input_enums": [
+        "Credit_Platinum",
+        "Credit_Platinum",
+        "Credit_Platinum",
+        "Credit_Platinum",
+        "Credit_Platinum",
+        "Credit_Platinum",
+        "Credit_Platinum",
+        "Credit_Platinum"
+      ],
+      "keep_nbt": true,
+      "removable_by_gt": false,
+      "source_line": 5022,
+      "source_fragment_sha256": "2028901cfc3594e8b62b2aa2fce82a06331c01d0d927059c1cec8c51073812d2"
+    },
+    {
+      "output_enum": "Credit_Greg_Copper",
+      "output_count": 8,
+      "input_enums": [
+        "Credit_Greg_Cupronickel"
+      ],
+      "keep_nbt": true,
+      "removable_by_gt": false,
+      "source_line": 5029,
+      "source_fragment_sha256": "fa9016264dff702a985b339c34d0d7f51cd05939d8d020be97bce3c7bc47cb03"
+    },
+    {
+      "output_enum": "Credit_Greg_Cupronickel",
+      "output_count": 8,
+      "input_enums": [
+        "Credit_Greg_Silver"
+      ],
+      "keep_nbt": true,
+      "removable_by_gt": false,
+      "source_line": 5033,
+      "source_fragment_sha256": "e6ed7ec791ffa185cc6f541cdf1c95cdde4cab705feb209ae582dee128371cfd"
+    },
+    {
+      "output_enum": "Credit_Greg_Silver",
+      "output_count": 8,
+      "input_enums": [
+        "Credit_Greg_Gold"
+      ],
+      "keep_nbt": true,
+      "removable_by_gt": false,
+      "source_line": 5037,
+      "source_fragment_sha256": "65228531e5bfe69b6974025990412904d7daba4ceb8bdc437594fd688c8d9544"
+    },
+    {
+      "output_enum": "Credit_Greg_Gold",
+      "output_count": 8,
+      "input_enums": [
+        "Credit_Greg_Platinum"
+      ],
+      "keep_nbt": true,
+      "removable_by_gt": false,
+      "source_line": 5041,
+      "source_fragment_sha256": "6f173079b273423f0a631b2bb1aeb80d91fd3617fb2c7a6a23b9b2e93110e802"
+    },
+    {
+      "output_enum": "Credit_Greg_Platinum",
+      "output_count": 8,
+      "input_enums": [
+        "Credit_Greg_Osmium"
+      ],
+      "keep_nbt": true,
+      "removable_by_gt": false,
+      "source_line": 5045,
+      "source_fragment_sha256": "6ff4a06c1cf3d898ed4d1be87df04d86655fdfa48a9e5913524f6127351eb92d"
+    },
+    {
+      "output_enum": "Credit_Greg_Osmium",
+      "output_count": 8,
+      "input_enums": [
+        "Credit_Greg_Naquadah"
+      ],
+      "keep_nbt": true,
+      "removable_by_gt": false,
+      "source_line": 5049,
+      "source_fragment_sha256": "0e873ac447eca2b309ef8346d4220651b4376e4baa06d40f336723eeca6d8171"
+    },
+    {
+      "output_enum": "Credit_Greg_Naquadah",
+      "output_count": 8,
+      "input_enums": [
+        "Credit_Greg_Neutronium"
+      ],
+      "keep_nbt": true,
+      "removable_by_gt": false,
+      "source_line": 5053,
+      "source_fragment_sha256": "a6bb305b7e249c9dfe9ad22a19b390099d3ca3c6c100cb3b8560d85d2af747a1"
+    },
+    {
+      "output_enum": "Credit_Greg_Cupronickel",
+      "output_count": 1,
+      "input_enums": [
+        "Credit_Greg_Copper",
+        "Credit_Greg_Copper",
+        "Credit_Greg_Copper",
+        "Credit_Greg_Copper",
+        "Credit_Greg_Copper",
+        "Credit_Greg_Copper",
+        "Credit_Greg_Copper",
+        "Credit_Greg_Copper"
+      ],
+      "keep_nbt": true,
+      "removable_by_gt": false,
+      "source_line": 5058,
+      "source_fragment_sha256": "788dbb84ecc547b03d41802fc56c07d166e6615b8c6a36b353ca8d814f928573"
+    },
+    {
+      "output_enum": "Credit_Greg_Silver",
+      "output_count": 1,
+      "input_enums": [
+        "Credit_Greg_Cupronickel",
+        "Credit_Greg_Cupronickel",
+        "Credit_Greg_Cupronickel",
+        "Credit_Greg_Cupronickel",
+        "Credit_Greg_Cupronickel",
+        "Credit_Greg_Cupronickel",
+        "Credit_Greg_Cupronickel",
+        "Credit_Greg_Cupronickel"
+      ],
+      "keep_nbt": true,
+      "removable_by_gt": false,
+      "source_line": 5064,
+      "source_fragment_sha256": "2161a3e3c2876b65bda5c3c9ecac06d90841935bcc84e6ab72596cedf49b914d"
+    },
+    {
+      "output_enum": "Credit_Greg_Gold",
+      "output_count": 1,
+      "input_enums": [
+        "Credit_Greg_Silver",
+        "Credit_Greg_Silver",
+        "Credit_Greg_Silver",
+        "Credit_Greg_Silver",
+        "Credit_Greg_Silver",
+        "Credit_Greg_Silver",
+        "Credit_Greg_Silver",
+        "Credit_Greg_Silver"
+      ],
+      "keep_nbt": true,
+      "removable_by_gt": false,
+      "source_line": 5070,
+      "source_fragment_sha256": "3740afbfafc708cbfa8849681132696b16e88ab2685da0d263f217d03e37fb23"
+    },
+    {
+      "output_enum": "Credit_Greg_Platinum",
+      "output_count": 1,
+      "input_enums": [
+        "Credit_Greg_Gold",
+        "Credit_Greg_Gold",
+        "Credit_Greg_Gold",
+        "Credit_Greg_Gold",
+        "Credit_Greg_Gold",
+        "Credit_Greg_Gold",
+        "Credit_Greg_Gold",
+        "Credit_Greg_Gold"
+      ],
+      "keep_nbt": true,
+      "removable_by_gt": false,
+      "source_line": 5076,
+      "source_fragment_sha256": "9bc58961fd4c44cddd9579f11e6ae278bad0aa69771407218826ea834079735a"
+    },
+    {
+      "output_enum": "Credit_Greg_Osmium",
+      "output_count": 1,
+      "input_enums": [
+        "Credit_Greg_Platinum",
+        "Credit_Greg_Platinum",
+        "Credit_Greg_Platinum",
+        "Credit_Greg_Platinum",
+        "Credit_Greg_Platinum",
+        "Credit_Greg_Platinum",
+        "Credit_Greg_Platinum",
+        "Credit_Greg_Platinum"
+      ],
+      "keep_nbt": true,
+      "removable_by_gt": false,
+      "source_line": 5082,
+      "source_fragment_sha256": "9c80b5d035a7d77476f0f7e24921fa2d5cc09ef17dbb9e22fa15b3144763fcd2"
+    },
+    {
+      "output_enum": "Credit_Greg_Naquadah",
+      "output_count": 1,
+      "input_enums": [
+        "Credit_Greg_Osmium",
+        "Credit_Greg_Osmium",
+        "Credit_Greg_Osmium",
+        "Credit_Greg_Osmium",
+        "Credit_Greg_Osmium",
+        "Credit_Greg_Osmium",
+        "Credit_Greg_Osmium",
+        "Credit_Greg_Osmium"
+      ],
+      "keep_nbt": true,
+      "removable_by_gt": false,
+      "source_line": 5088,
+      "source_fragment_sha256": "15405d329a983e967e4ff9416bd7c2acb3705daffc840334d21fe00ceae84889"
+    },
+    {
+      "output_enum": "Credit_Greg_Neutronium",
+      "output_count": 1,
+      "input_enums": [
+        "Credit_Greg_Naquadah",
+        "Credit_Greg_Naquadah",
+        "Credit_Greg_Naquadah",
+        "Credit_Greg_Naquadah",
+        "Credit_Greg_Naquadah",
+        "Credit_Greg_Naquadah",
+        "Credit_Greg_Naquadah",
+        "Credit_Greg_Naquadah"
+      ],
+      "keep_nbt": true,
+      "removable_by_gt": false,
+      "source_line": 5094,
+      "source_fragment_sha256": "dea32bb26aa50542bdc737ea6a419634af3bf69f4c729efb63dddecc217a1f79"
+    }
+  ],
+  "source_sha256": {
+    "work/exact-sources/GT5-Unofficial/5.09.54.205/src/main/java/gregtech/common/items/MetaGeneratedItem01.java": "c358774f48fce59a7f7ac5bae346a45baed0f9e97d1bf109d19ade9e0b6d0b87",
+    "work/exact-sources/GT5-Unofficial/5.09.54.205/src/main/java/gregtech/common/items/IDMetaItem01.java": "82b461cd0537a6fe4d8a8e5d631266d6db7d0751aeff195dc0f2d69d591fd120",
+    "work/exact-sources/GT5-Unofficial/5.09.54.205/src/main/java/gregtech/common/GTProxy.java": "b514b8d6c322a617010ca13ae68335938a318d6bb049079ef3eda8ebd521e03d",
+    "work/exact-sources/GT5-Unofficial/5.09.54.205/src/main/java/gregtech/api/items/MetaGeneratedItemX32.java": "18874691689a614e712e8e3334249b4570f0b27ee476a897fcd3c38bf264608a",
+    "work/exact-sources/GT5-Unofficial/5.09.54.205/src/main/java/gregtech/api/items/MetaGeneratedItem.java": "c744cc24c27919c3c531f0771f3e5fc0af87ccc4a1b116d6e154c808ffcefb6a",
+    "work/exact-sources/GT5-Unofficial/5.09.54.205/src/main/java/gregtech/api/items/GTGenericItem.java": "4d56d2ba08e05fee426442f89e34f655fcc6863248ab8994e78e52581deb208d",
+    "work/exact-sources/GT5-Unofficial/5.09.54.205/src/main/java/gregtech/api/items/MetaBaseItem.java": "7641f58995d7b038e077d5139c758309aa4048dea8d370e6b08bd56fc2f5d1c6",
+    "work/exact-sources/GT5-Unofficial/5.09.54.205/src/main/resources/assets/gregtech/lang/en_US.lang": "f8a66470ccca2be9198401cf1fb029f2391e53b5fe99bc870d038e4b02b12f33",
+    "work/exact-sources/GT5-Unofficial/5.09.54.205/src/main/resources/assets/gregtech/lang/zh_CN.lang": "1c3596de331933f14c067b45b919d23b3cf0ccb1a2d63db75cfeca4901905477",
+    "work/exact-sources/GT5-Unofficial/5.09.54.205/src/main/resources/assets/gregtech/lang/ru_RU.lang": "4db421fc372b576dd4b96981246ddec5651f0052f21f238805e16fbd1bbf71ed",
+    "work/exact-sources/GT5-Unofficial/5.09.54.205/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/0.png": "49abfa3fa4fe0ace0891a521d843e9a40c4e7a14be53ba73ecb3c182eab1b021",
+    "work/exact-sources/GT5-Unofficial/5.09.54.205/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/1.png": "d747d971445976655a8f082841b6ae08cf9ab1da287b39656db45017ecf4b41e",
+    "work/exact-sources/GT5-Unofficial/5.09.54.205/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/2.png": "6ce27fdfa578d1bd884d8538ba29713e12d683f4c1250fcb7010bbdb4d9658f4",
+    "work/exact-sources/GT5-Unofficial/5.09.54.205/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/3.png": "3c91a993357f6a6fab81bb972a47675fba3d2dfdad9c7974a20443f6d07bf1e5",
+    "work/exact-sources/GT5-Unofficial/5.09.54.205/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/4.png": "4984d239fd57bad3aa828cc4ba36d17ace5031fc329f8de7123f158374296c39",
+    "work/exact-sources/GT5-Unofficial/5.09.54.205/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/5.png": "a88324462eaa7033357433f3f26549a7903c4f2fa6dbbca535b156850d86f685",
+    "work/exact-sources/GT5-Unofficial/5.09.54.205/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/6.png": "b8145ab0ef738934120993f872e0d7b802335040bb888038ad6eabdd6da034d8",
+    "work/exact-sources/GT5-Unofficial/5.09.54.205/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/7.png": "55b021254e8aa8163e64436066e266972643ec5486244d6526744a3e215c3b94",
+    "work/exact-sources/GT5-Unofficial/5.09.54.205/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/11.png": "95e278220d51e9be43c9be4469f48188a573fadd0f41f1245f3598904d02af83",
+    "work/exact-sources/GT5-Unofficial/5.09.54.205/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/13.png": "4ba2f2b7bf3e063f6b9ad2c3c9e33d3722d99df10dbb60160a011da5ef7c3e89",
+    "work/exact-sources/GT5-Unofficial/5.09.54.205/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/14.png": "320e4e2aad41f59cd2e45bcf428a6026c68bea7ade67b7c9d07a21aa125fde08",
+    "work/exact-sources/GT5-Unofficial/5.09.54.205/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/15.png": "b7ecbdd6fed05c9bb2d04f1beac0737183dc10592024f7317e380cfed67c4099",
+    "work/exact-sources/GT5-Unofficial/5.09.54.205/src/main/resources/assets/gregtech/textures/items/gt.metaitem.01/16.png": "387f309a22c641a377225e399620d6905b6de2f229068546e9ceb77edbed27e9",
+    "locks/sources/GT5-Unofficial-5.09.54.205-lock.json": "1d82ec79eef3195aea71ff518af0970f21cb1b95962314c1babff65548b24f5f",
+    "work/migration/audit_legacy_credit_sources.py": "c0b34f485037d2164a3ed88e2233802cd70bff4b9e9e907b9acd54e821ae2675"
+  },
+  "activated_credit_items": 0,
+  "activated_credit_recipes": 0,
+  "native_item_behavior_complete": false,
+  "material_recycling_complete": false,
+  "thaumcraft_integration_complete": false,
+  "client_visuals_verified": false,
+  "full_parity": false
+}

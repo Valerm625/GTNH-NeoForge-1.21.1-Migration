@@ -14,3 +14,5 @@
 公开前排除了账户凭据、机器绝对路径、原包 ZIP、游戏/JDK/模组 JAR、原任务正文、纹理、音频与存档。此仓库公开不等于宣布整合包完成或许可审计完成；扩大分发范围前应逐项检查权利与归属。
 
 - `LegacyCraftingNbt.java` 中的保留阶段沿用固定 GT5 `GTShapedRecipe` 的 LGPL-3.0；原样提取的测试表达式同样保留该许可。`LegacyItemTag.java` 为本地原创 MIT 二进制适配器。对照使用的官方 Minecraft 1.7.10 服务端 JAR 仅作本地测试输入，不包含在公开检查点中。
+
+- `LegacyShapelessMatch.java` 的匹配阶段移植自固定 Forge `ShapelessOreRecipe`，沿用 Minecraft Forge Public Licence 1.0；相应固定来源见 `locks/legacy-shapeless-source.json`。无序 GT5 对照表达式保持 LGPL-3.0。信用币来源清单抽取自同一固定 GT5 归档，原许可与归属不变。
