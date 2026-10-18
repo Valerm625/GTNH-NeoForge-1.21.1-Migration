@@ -11,7 +11,7 @@ minecraft=O/'libraries/net/minecraft/server/1.21.1-20240808.144430/server-1.21.1
 extra=minecraft.with_name('server-1.21.1-20240808.144430-extra.jar')
 def relative(path):return Path(os.path.relpath(path,out)).as_posix()
 cp=';'.join(relative(path) for path in [minecraft,extra]+libraries)
-names=['LegacyRetrievalEngine','LegacyQuestRetrievalPlanner','LegacyRetrievalInventoryBridge','LegacyRetrievalProgressCodec','LegacyQuestProgressEnvelope','LegacyQuestProgressStoreCodec','LegacyQuestProgressFileStore','LegacyRetrievalTransactionJournal','LegacyRetrievalTransactionProposal']
+names=['LegacyRetrievalEngine','LegacyQuestRetrievalPlanner','LegacyRetrievalInventoryBridge','LegacyRetrievalProgressCodec','LegacyQuestProgressEnvelope','LegacyQuestProgressStoreCodec','LegacyQuestProgressFileStore','LegacyRetrievalTransactionJournal','LegacyRetrievalTransactionProposal','LegacyPlayerDataFileReader']
 sources=[R/'work/compat-mod/src/main/java/org/gtnhmigration/compat'/(name+'.java') for name in names]
 check=R/'work/migration/LegacyRetrievalTransactionProposalCheck.java'
 def run(executable,arguments,name):

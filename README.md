@@ -30,7 +30,7 @@ Phase 6 新增[事务日志与库存候选组合](docs/retrieval-transaction-jou
 
 先读 [RESUME.md](RESUME.md)。本地恢复与原始 ZIP 审计都有独立入口；完整重建入口是 work/migration/rebuild_current_phase.py，按当前源码重编译后执行新的受限加载探测和验证。
 
-Phase 6 完整重建的26份汇总检查通过，纯模型编译类与兼容 JAR 内对应类逐字节一致；这仍不代表世界、真实存档或联网已验证。
+Phase 6 另加入当前玩家文件读取层：40项断言覆盖UUID.dat完整性、文件变化及日志恢复，不回退旧备份，保留原始字节。完整重建的27份汇总检查通过，生产类与兼容 JAR 内对应类逐字节一致；玩家数据仍为合成夹具，世界、真实存档及联网尚未验证。
 
 - evidence/source-archive-audit.json：输入 SHA256、版本证据、任务身份差异和资源数量。
 - evidence/phase-2026-10-18-task-semantics.json：当前阶段测试与边界。

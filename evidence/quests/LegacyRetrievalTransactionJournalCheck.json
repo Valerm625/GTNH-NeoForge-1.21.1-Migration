@@ -14,9 +14,10 @@
     "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestProgressEnvelope.java": "43ed5abb2ed2595efa101b9e89d8d8409f84b62ca01cd9c62191ea5e92b9b9a0",
     "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestProgressStoreCodec.java": "7e610faa9cd32b56cf1302c0d62189884defbc8746c393bcf423bd84cd5f2e94",
     "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestProgressFileStore.java": "9830ea6c0ccf297d796b2ba2ed127a9ce0ec4df7a5b74fd0e3e0840eac6c89a2",
-    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalTransactionJournal.java": "54f8af710a25a2fdc9fea65df5e36f14812a0fac77ffb133264fe7c3369cd1b5",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalTransactionJournal.java": "60719a62bc76745878e03a26206c9fd15ef6c4f4af33ad2bd95158ea2956467b",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyPlayerDataFileReader.java": "9312f91c24c6d75236672cbb7667999b19d15306c93fb9c4ccc99a129db1f4f2",
     "work/migration/LegacyRetrievalTransactionJournalCheck.java": "d92eb887f7fcfa220a2f48a14d8e312f3e364e0f6d577181ffeffa8c0c938d99",
-    "work/migration/test_legacy_retrieval_transaction_journal.py": "1d51ea1dea3fcdf61052d93bdb892cbf7d4cf05116fddc4d62045ce94f3c38ad"
+    "work/migration/test_legacy_retrieval_transaction_journal.py": "a89293dc85ed51836a482036275856ae5fb1a050e02522a6d647b6c5edd9e676"
   },
   "minecraft_jar_sha256": "26ca9c40d7e1681190b428583c38816852218e78df3f8bdb60a59a78503aec71",
   "process_crash_checks": [

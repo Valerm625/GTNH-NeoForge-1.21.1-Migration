@@ -31,7 +31,7 @@ Phase 3 另有 `test_legacy_typed_nbt_json_reader.py`（**2,932 项断言 / 577 
 
 读取器/envelope 的 `accepted` 只表示候选可解释。Phase 4 文件层另验证独立账本保存与重新读取，仍不能称为世界玩家存档导入、联网或游戏运行完成。物品身份映射仍为 **720 / 8388**。读取器与运行时桥接边界见 [typed JSON 规范](docs/typed-nbt-json-reader.zh-CN.md)、[身份 envelope](docs/quest-progress-envelope-design.zh-CN.md)和[运行时桥接设计](docs/retrieval-runtime-bridge-design.zh-CN.md)。
 
-Phase 6 完整重建的26份汇总检查已通过，包括模型组合及纯模型编译类与兼容 JAR 对应类的逐字节一致性；当前 JAR SHA256 为 `c1adb7d4e2680071b0a0709434124d4298b37b27704bf328f0b71c3090bb0b20`。恢复后必须按本地当前源码重建，不把这个历史成功结果替代新运行结果。
+Phase 6 完整重建的27份汇总检查已通过，包括模型组合及生产类与兼容 JAR 对应类的逐字节一致性；当前 JAR SHA256 为 `f3403f8934e9df699c638fc2e27cb2faf6d49f511c3b3938bf88f120e83f5c21`。恢复后必须按本地当前源码重建，不把这个历史成功结果替代新运行结果。
 
 Phase 4 的 `test_legacy_quest_progress_store.py` 验证独立文件账本（436项断言、25个格式拒绝案例、64次NBT往返、3个JVM中断恢复场景）。原始输入字节及所有已发布帧保留，配置变化/损坏/缺帧/分叉阻止加载；不接受后退到空进度。独立账本与实际玩家库存尚无跨文件事务，不能从进程恢复推定机器掉电安全。详情见[文件账本设计](docs/quest-progress-file-store.zh-CN.md)。
 
@@ -57,13 +57,15 @@ Phase 5 新增 `test_legacy_retrieval_inventory_bridge.py`：真实Inventory/Ite
 
 ## Phase 6 恢复入口
 
-`rebuild_current_phase.py` 已包含 `test_legacy_retrieval_transaction_journal.py` 和 `test_legacy_retrieval_transaction_proposal.py`。分别通过53项断言/7个独立JVM中断恢复场景及68项实际库存组合断言；完整汇总为26项，生产类与兼容JAR逐字节一致。报告位于 `evidence/quests/`，源码摘要与当前检查点对应。
+`rebuild_current_phase.py` 已包含 `test_legacy_retrieval_transaction_journal.py`、`test_legacy_retrieval_transaction_proposal.py` 及 `test_legacy_player_data_file_reader.py`。分别通过53项断言/7个独立JVM中断恢复场景、68项实际库存组合断言及40项文件读回断言；完整汇总为27项，生产类与兼容JAR逐字节一致。报告位于 `evidence/quests/`，源码摘要与当前检查点对应。
 
 `LegacyRetrievalTransactionProposal.bind` 从已规划实际库存、同一账本Head、可信定义目录及玩家NBT快照生成候选。必须由它保留其他quest/完成数据，并将捕获的expectedHead交给日志prepare；不得在提交时临时获取新head来掩盖旧计划。玩家库存候选仅证明与规划一致，不能证明已保存。
 
 事务标记现为PlayerPersisted内的v2；旧v1保持可读，但正式进入游戏前须调用proposePersistentMarker生成升级候选，并实际保存/读回。升级函数自身不写盘，不能跳过此生命周期步骤。
 
-下一步阅读[事务日志与库存候选边界](docs/retrieval-transaction-journal.zh-CN.md)及 `evidence/native-player-persistence-api-audit.json`，实现原生玩家保存/权威文件读回、取消后内存恢复和死亡/克隆/登录隔离。原生PlayerDataStorage.save返回void且吞掉Exception，load可能回退旧备份；不能把夹具写入成功、函数返回或旧备份可读当成游戏事务已完成。任务完成、奖励、世界生命周期、队伍和UI仍未接入。
+`LegacyPlayerDataFileReader` 已实现当前UUID.dat的严格读回，保留原始gzip字节并拒绝缺失、损坏、读取中替换及超限数据，不读取dat_old。`resolveFromPlayerDirectory` 以读回内容驱动日志提交/取消，必须由调用者持续排除原生保存和生命周期变化。当前文件写入器和玩家数据仍为合成夹具，符号链接拒绝分支未在本机执行，真实玩家存档fixture仍为0。
+
+下一步阅读[事务日志与库存候选边界](docs/retrieval-transaction-journal.zh-CN.md)及 `evidence/native-player-persistence-api-audit.json`，实现原生玩家保存协调、读回期间写入隔离、取消后内存恢复和死亡/克隆/登录隔离。原生PlayerDataStorage.save返回void且吞掉Exception，load可能回退旧备份；不能把夹具写入成功、函数返回或旧备份可读当成游戏事务已完成。任务完成、奖励、世界生命周期、队伍和UI仍未接入。
 
 ## 上传内容边界
 

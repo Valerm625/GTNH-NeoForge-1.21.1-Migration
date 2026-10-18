@@ -9,7 +9,7 @@ libs=[O/p for p in re.search(r'^-DlegacyClassPath=(.*)$',launch,re.M).group(1).s
 mc=O/'libraries/net/minecraft/server/1.21.1-20240808.144430/server-1.21.1-20240808.144430-srg.jar'
 def rel(p):return Path(os.path.relpath(p,out)).as_posix()
 cp=';'.join(rel(p) for p in [mc]+libs)
-names=['LegacyRetrievalEngine','LegacyRetrievalProgressCodec','LegacyQuestProgressEnvelope','LegacyQuestProgressStoreCodec','LegacyQuestProgressFileStore','LegacyRetrievalTransactionJournal']
+names=['LegacyRetrievalEngine','LegacyRetrievalProgressCodec','LegacyQuestProgressEnvelope','LegacyQuestProgressStoreCodec','LegacyQuestProgressFileStore','LegacyRetrievalTransactionJournal','LegacyPlayerDataFileReader']
 sources=[R/'work/compat-mod/src/main/java/org/gtnhmigration/compat'/(n+'.java') for n in names]
 check=R/'work/migration/LegacyRetrievalTransactionJournalCheck.java'
 def run(executable,args,name,expected=0):

@@ -1,6 +1,7 @@
 package org.gtnhmigration.compat;
 
 import java.io.*;
+import java.nio.file.Path;
 import java.util.*;
 import net.minecraft.nbt.*;
 import org.gtnhmigration.compat.LegacyQuestProgressEnvelope.*;
@@ -110,6 +111,19 @@ public final class LegacyRetrievalTransactionJournal {
         sources.add(new SourceDocument(PREFIX+pending.transaction+"/resolve",encode(record)));
         var committed=store.commit(Optional.of(head.sha256()),decision==Decision.COMMIT?pending.afterState:pending.beforeState,sources);
         return new Resolution(pending.transaction,decision,committed.sha256());
+        }
+    }
+
+    /** File-backed recovery entry. The caller must hold the native save/player
+     * lifecycle barrier; the ledger monitor cannot exclude other file writers.
+     * Corrupt/missing UUID.dat blocks recovery even if dat_old is readable.
+     */
+    public Resolution resolveFromPlayerDirectory(Path playerDirectory) throws IOException {
+        synchronized(store) {
+            Pending pending=scan().pending().orElseThrow(()->new IOException("No pending transaction"));
+            var file=LegacyPlayerDataFileReader.read(playerDirectory,pending.actor());
+            file.verifyUnchanged();
+            return resolve(file.data());
         }
     }
 

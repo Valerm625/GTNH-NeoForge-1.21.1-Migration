@@ -1,0 +1,31 @@
+{
+  "test": "authoritative_player_file_readback",
+  "passed": true,
+  "assertions": 40,
+  "symbolic_link_checked": false,
+  "runtime_integrated": false,
+  "export_enabled": false,
+  "native_player_save_verified": false,
+  "game_runtime_verified": false,
+  "actual_player_save_fixtures": 0,
+  "source_sha256": {
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalEngine.java": "974899a867d5f9b2b18295e02c3fc56827064bdfa19c863158ea4b06b0a45758",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalProgressCodec.java": "596a64ed0ed06bad0f70731773078376ea9ab7ec3cba7dacdd8c10faac0fe856",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestProgressEnvelope.java": "43ed5abb2ed2595efa101b9e89d8d8409f84b62ca01cd9c62191ea5e92b9b9a0",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestProgressStoreCodec.java": "7e610faa9cd32b56cf1302c0d62189884defbc8746c393bcf423bd84cd5f2e94",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestProgressFileStore.java": "9830ea6c0ccf297d796b2ba2ed127a9ce0ec4df7a5b74fd0e3e0840eac6c89a2",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalTransactionJournal.java": "60719a62bc76745878e03a26206c9fd15ef6c4f4af33ad2bd95158ea2956467b",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyPlayerDataFileReader.java": "9312f91c24c6d75236672cbb7667999b19d15306c93fb9c4ccc99a129db1f4f2",
+    "work/migration/LegacyPlayerDataFileReaderCheck.java": "27f47442063c7a8fa659f91f8e8e44a80076704310a810d0e09f2c61991d0932",
+    "work/migration/test_legacy_player_data_file_reader.py": "b015f13a8a57d54542e107749dd975fdc7e518d38ae9ebd8a630a845ccdec9aa"
+  },
+  "minecraft_jar_sha256": "26ca9c40d7e1681190b428583c38816852218e78df3f8bdb60a59a78503aec71",
+  "limitations": [
+    "Synthetic player data written with actual Minecraft NBT codecs; no PlayerDataStorage.save, live Player, world or data fixer executes.",
+    "Only UUID.dat is read. Corrupt or absent primary blocks journal recovery even when dat_old is valid; no file is repaired, overwritten or created by the reader.",
+    "Raw gzip bytes and decoded NBT snapshots are retained; bounds are 64 MiB compressed/decompressed and 256 MiB NBT accounting. Oversized files are preserved and rejected, not truncated.",
+    "File attributes and a second digest detect changes but do not lock native saves or external writers. The caller must keep the player lifecycle and file writers quiescent through resolution.",
+    "The passed directory must be the trusted world player directory. This is not hostile filesystem containment, player authentication or full item/schema validation.",
+    "Symlink rejection is exercised only if the current filesystem permits creating the test link; see symbolic_link_checked."
+  ]
+}

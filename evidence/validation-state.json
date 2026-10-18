@@ -47,5 +47,6 @@
   "source_asset_collisions": "four exact archives checked; all same-path candidates retained, precedence unresolved",
   "uuid_progress_ledger": "versioned append-only NBT snapshots and source bytes preserved; process-halt recovery verified, no world lifecycle or inventory transaction",
   "retrieval_inventory_bridge": "real vanilla Inventory/ItemStack snapshots, count application/rollback and native-shaped player-NBT proposals tested; no world submit handler or native player save",
-  "retrieval_transaction_journal": "expected-head preparation, immutable records and synthetic player-file recovery tested; actual inventory proposal composition and clone-persisted marker scope verified; no native persistence or world lifecycle"
+  "retrieval_transaction_journal": "expected-head preparation, immutable records and synthetic player-file recovery tested; actual inventory proposal composition and clone-persisted marker scope verified; no native persistence or world lifecycle",
+  "authoritative_player_file_readback": "strict UUID.dat integrity, immutable raw-byte snapshots and file-backed commit/abort recovery tested with synthetic data; no fallback to dat_old, native save or lifecycle barrier"
 }
