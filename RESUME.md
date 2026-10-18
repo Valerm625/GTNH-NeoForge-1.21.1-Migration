@@ -310,3 +310,22 @@ r31只读恢复预检通过：五份固定源码归档/树、两个实例的派�
 r32完整重建完成记录：入口退出0，legacy-energy-rebuild.log末尾为CURRENT_PHASE_REBUILD_COMPLETE_FULL_PARITY_STILL_FALSE，47份汇总检查全部通过。客户端数据生成、服务端正常启动注册及六个启动负例、资源正例及五个资源负例均通过。兼容JAR摘要26baa6b39458b720e07c2bbc71abd7ca16697d736b10fba62ab32a5fe32fe9d9；GT派生摘要仍57756c966739f22aee0d8eccfe061e39f36c1d9cac60b819ea74b10f7a55b239。运行清单2037文件，顶层模组19个。新能力仅是显式选择的电量阶段，完整IC2/旧工具功能、源配方、NBT/附魔、玩家工作台和视觉仍未完成，EULA=false，无世界/玩家，目标继续active且由单人完成。
 
 r32只读恢复输入预检通过：五份固定源码归档/树、2036个运行输入、9358个master文件、11977个旧包参考文件，以及两个实例的GT派生身份均一致，当前兼容JAR与公开锁匹配。未复制整份工作区，未进行恢复后游戏启动。
+
+
+## 旧物品 NBT 表示与有序合成保留（2026-10-18，r33）
+
+上一轮r32属于progress，提交b89d88d已推送并导出383文件源码检查点。本轮继续单人。LegacyItemTag注册独立数据组件gtnh_migration:legacy_item_tag，保留1.7.10完整命名compound原始字节（JSON Base64，网络byte array），存在性区分无tag/空tag。比较独立实现旧标签1–11、浮点==、列表元素类型与最后重复键规则，不经现代NBT规范化；组件equals本身仍为稳定字节相等。16 MiB/512层读取边界，错误数据不接受。
+
+LegacyCraftingNbt移植GT5的KEEPNBT匹配与结果复制，LegacyShapedRecipe通过显式gtnh:keep_legacy_nbt选项接入，默认false，NBT保留在电量阶段之前。只针对显式旧tag；现代CUSTOM_DATA/名称/耐久/附魔/能源等并不自动映射，updateItemStack委托的GTGenericItem.isItemStackUsable仍待逐项实现，不添加空回调冒充等价。共享不可变组件按独立旧compound比较，不模拟手动共享可变NBT对象的特殊别名。
+
+固定GT5匹配与复制片段原样生成对照，比较后端为官方1.7.10服务端JAR真实NBT类，来源/类摘要写入locks/legacy-crafting-nbt-source.json。NativeCraftingNbtCheck使用43种数据状态、两种shrink和三种配方编码形态，共11094对照；4次配方、129次物品JSON/NBT/网络字节往返；原始输入、模板、外围格、关闭选项及6类拒绝检查。测试仅隔离加载旧NBT类，没有服务器/世界/玩家；旧游戏JAR不公开发布。native资源夹具23条，活动迁移仍170条（167机器）、映射720、完整导出2/3814。
+
+专项日志work/migration/legacy-nbt-native.log；完整重建日志work/migration/legacy-nbt-rebuild.log。成功完成以本节后续记录和公开phase报告为准。初次专项仅因lambda中检查方法的受检异常未捕获而编译失败，已按既有入口处理方式修复。GT派生产物仍57756c96版本，未改用户候选仓库。
+
+后续优先接实际旧物品、NBT到现代组件的双向映射和更新回调，再接无序KEEPNBT/overwriteNBT/附魔。源码MetaGeneratedItem01.craftingShapelessRecipes约4980–5100有两组Credit与Credit_Greg的8进制合并/拆分，明确使用KEEPNBT；现代GTItems未找到直接同名信用币实现，须按原身份、纹理与全部行为迁入，不借用名称相近的物品或绕过NBT门槛。
+
+补充固定源码定位：Credit_Greg八种位于common/items/IDMetaItem01.java的0–7，工业Copper/Silver/Gold/Platinum/Osmium位于11/13/14/15/16；工业Iron不是本MetaItem条目，GTProxy.java:575将其绑定到IC2 coin。Greg Cupronickel另含907200L材料回收数据，银币含LUCRUM神秘要素，不可只迁八进制配方与外观。GTGenericItem.isItemStackUsable基础实现返回true，但MetaBaseItem先遍历实际行为，MetaGeneratedTool则重建材料/工具附魔；需按具体物品验证调用链。
+
+r33完整重建完成记录：legacy-nbt-rebuild.log入口退出0并输出CURRENT_PHASE_REBUILD_COMPLETE_FULL_PARITY_STILL_FALSE，47份汇总检查全部通过并同步公开证据。原生客户端注册、服务端常规初始化及既有启动负例、资源正例及六组资源负例通过。兼容JAR摘要05308fb6c05819ef1977859f2574a9d42f3745bfd6fca730c16452a3455f61db；GT派生仍57756c966739f22aee0d8eccfe061e39f36c1d9cac60b819ea74b10f7a55b239。运行清单2037个文件，顶层模组19个。只证明旧tag表示与明确选择的保留阶段；全物品映射、更新回调、无序覆盖、附魔、原生工作台和视觉未完成，EULA=false，目标保持active。
+
+r33只读恢复预检通过：五份固定源码归档/树、2036个运行输入、9358个master文件和11977个旧包参考文件一致；当前兼容JAR与公开锁匹配，两个实例GT派生身份一致。只读核验，无整份工作区复制或恢复后游戏启动。

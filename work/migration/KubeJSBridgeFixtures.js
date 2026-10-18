@@ -47,6 +47,15 @@ ServerEvents.recipes(event => {
 
 // The expected positions come from unedited Forge 10.13.4.1614 source.
 ServerEvents.recipes(event => {
+  ['keep','disabled'].forEach(name => {
+    event.custom({type:'gtnh_migration:legacy_shaped',category:'misc',pattern:['AB'],
+      key:{A:{item:'minecraft:iron_ingot'},B:{item:'minecraft:iron_ingot'}},
+      result:{id:'minecraft:diamond',count:1,components:{'gtnh_migration:legacy_item_tag':'CgAAAQAIdGVtcGxhdGUHAA==','minecraft:custom_name':'"template"'}},
+      'kubejs:shrink':false,'kubejs:mirror':false,'gtnh:keep_legacy_nbt':name==='keep'}).id('gtnh_audit:nbt_'+name);
+  });
+});
+
+ServerEvents.recipes(event => {
   var cases = [
     ['center', ['   ', ' A ', '   '], false], ['right', ['  A'], false],
     ['right_mirror', ['  A'], true], ['leading', [' A'], false],

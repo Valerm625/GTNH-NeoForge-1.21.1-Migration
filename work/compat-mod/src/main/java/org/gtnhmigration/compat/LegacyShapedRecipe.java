@@ -32,8 +32,8 @@ import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 /** Legacy Forge shaped-grid geometry plus the existing KubeJS crafting actions.
- * An explicit legacy-energy option runs the old energy phase. This does not
- * implement GTNH's NBT/enchantment/item-update pipeline or research gates.
+ * Explicit options run the legacy-tag keep phase and the energy phase. Native
+ * component mapping, enchantments, item updates and research gates remain separate.
  */
 public final class LegacyShapedRecipe extends ShapedKubeJSRecipe {
     private static final DeferredRegister<RecipeSerializer<?>> SERIALIZERS = DeferredRegister.create(Registries.RECIPE_SERIALIZER, "gtnh_migration");
@@ -42,17 +42,19 @@ public final class LegacyShapedRecipe extends ShapedKubeJSRecipe {
     private final ItemStack output;
     private final boolean shrink;
     private final boolean legacyEnergy;
+    private final boolean keepLegacyNbt;
 
     public static void register(IEventBus bus) { SERIALIZERS.register(bus); }
 
     public LegacyShapedRecipe(String group, CraftingBookCategory category, ShapedRecipePattern.Data source,
-            ItemStack output, boolean showNotification, boolean mirror, boolean shrink, boolean legacyEnergy,
+            ItemStack output, boolean showNotification, boolean mirror, boolean shrink, boolean legacyEnergy, boolean keepLegacyNbt,
             List<IngredientActionHolder> actions, String modifyResult) {
         super(group, category, pattern(source, shrink), output, showNotification, mirror, actions, modifyResult);
         this.source = source;
         this.output = output;
         this.shrink = shrink;
         this.legacyEnergy = legacyEnergy;
+        this.keepLegacyNbt = keepLegacyNbt;
     }
 
     private static ShapedRecipePattern pattern(ShapedRecipePattern.Data data, boolean shrink) {
@@ -74,10 +76,12 @@ public final class LegacyShapedRecipe extends ShapedKubeJSRecipe {
 
     @Override public ItemStack assemble(CraftingInput input, HolderLookup.Provider registries) {
         ItemStack assembled = super.assemble(input, registries);
+        if (keepLegacyNbt) assembled = LegacyCraftingNbt.keep(input, assembled);
         return legacyEnergy ? LegacyCraftingEnergy.transfer(input, assembled) : assembled;
     }
 
     @Override public boolean matches(CraftingInput input, Level level) {
+        if (keepLegacyNbt && !LegacyCraftingNbt.matches(input)) return false;
         if (shrink) return super.matches(input, level);
         if (input.isEmpty()) return false;
         // Forge 10.13.4.1614 uses a logical 3x3 grid even for the 2x2 player
@@ -119,6 +123,7 @@ public final class LegacyShapedRecipe extends ShapedKubeJSRecipe {
                 Codec.BOOL.optionalFieldOf(MIRROR_KEY, true).forGetter(LegacyShapedRecipe::kjs$getMirror),
                 Codec.BOOL.optionalFieldOf("kubejs:shrink", true).forGetter(recipe -> recipe.shrink),
                 Codec.BOOL.optionalFieldOf("gtnh:legacy_energy", false).forGetter(recipe -> recipe.legacyEnergy),
+                Codec.BOOL.optionalFieldOf("gtnh:keep_legacy_nbt", false).forGetter(recipe -> recipe.keepLegacyNbt),
                 IngredientActionHolder.LIST_CODEC.optionalFieldOf(INGREDIENT_ACTIONS_KEY, List.of()).forGetter(LegacyShapedRecipe::kjs$getIngredientActions),
                 Codec.STRING.optionalFieldOf(MODIFY_RESULT_KEY, "").forGetter(LegacyShapedRecipe::kjs$getModifyResult)
         ).apply(instance, LegacyShapedRecipe::new));

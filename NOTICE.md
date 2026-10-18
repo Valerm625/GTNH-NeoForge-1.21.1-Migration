@@ -2,7 +2,7 @@
 
 本仓库是非官方、未完成的迁移研发检查点，不是原作者背书的产品。没有为整个仓库擅自指定统一的新许可证。
 
-- `work/compat-mod/src/main/resources/LICENSE` 保留现有本地适配器 MIT 声明，只适用于对应适配器；下述旧 Forge 有序合成及 GT5 电量移植类除外。
+- `work/compat-mod/src/main/resources/LICENSE` 保留现有本地适配器 MIT 声明，只适用于对应适配器；下述旧 Forge 有序合成及 GT5 电量/NBT 移植类除外。
 - 转换和校验工具引用原模块名称、API 形状、版本、配置值与有限源码锚点；完整上游源码与资源没有上传。任何有版权的上游片段仍受其原许可约束，不能因为存放在本仓库而重新许可。
 - CoreMod 2.9.84 来源为 GTNewHorizons/NewHorizonsCoreMod（GPLv3）；GT5U 5.09.54.205 为 GTNewHorizons/GT5-Unofficial（LGPLv3）；BetterQuesting 3.8.89-GTNH 为 GTNewHorizons/BetterQuesting（MIT）。来源提交和归档哈希见 `locks/sources/`。
 - Railcraft、FTB 以及各现代模组遵循各自上游声明。没有把它们视作自动可再分发的内容。本仓库只保存公开版本/下载来源/哈希元数据，不包含它们的二进制、完整源码或资源。
@@ -12,3 +12,5 @@
 - `LegacyCraftingEnergy.java` 的电量阶段移植自 GT5U `5.09.54.205` 的 `GTShapedRecipe` 和 `GTModHandler`，该文件及编译类沿用 LGPL-3.0。固定表达式来源见 `locks/legacy-crafting-energy-source.json`，许可文本位于兼容模组资源的 [LGPL-3.0.txt](work/compat-mod/src/main/resources/LGPL-3.0.txt) 与 [GPL-3.0.txt](work/compat-mod/src/main/resources/GPL-3.0.txt)。本地源码对照类亦包含这些受原许可约束的表达式，测试桥接不构成重新许可。
 
 公开前排除了账户凭据、机器绝对路径、原包 ZIP、游戏/JDK/模组 JAR、原任务正文、纹理、音频与存档。此仓库公开不等于宣布整合包完成或许可审计完成；扩大分发范围前应逐项检查权利与归属。
+
+- `LegacyCraftingNbt.java` 中的保留阶段沿用固定 GT5 `GTShapedRecipe` 的 LGPL-3.0；原样提取的测试表达式同样保留该许可。`LegacyItemTag.java` 为本地原创 MIT 二进制适配器。对照使用的官方 Minecraft 1.7.10 服务端 JAR 仅作本地测试输入，不包含在公开检查点中。

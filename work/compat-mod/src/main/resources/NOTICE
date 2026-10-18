@@ -32,3 +32,9 @@ preserving the source request bounds, simulated input queries and int addition.
 It is an energy-phase adapter, not an IC2 or complete crafting implementation.
 Modified source and build tools are available in the migration repository above;
 locks/legacy-crafting-energy-source.json records the exact source expressions.
+
+LegacyCraftingNbt.java ports the keeping-NBT phases of the same fixed GT5
+GTShapedRecipe under LGPL-3.0. The source comparison expressions retain this
+licence. LegacyItemTag.java is an original local binary adapter under MIT.
+The comparison loads NBT classes from the official Minecraft 1.7.10 server
+in an isolated class loader; that third-party binary is not redistributed.

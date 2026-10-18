@@ -17,6 +17,7 @@ from build_gtceu_kubejs_bridge import build, classpath, R, O, OUT, PATCH, read, 
 from gtceu_artifact import runtime_jar, original_jar
 from build_legacy_shaped_oracle import build as build_shaped_oracle
 from build_legacy_energy_reference import build as build_energy_reference
+from build_legacy_nbt_reference import build as build_nbt_reference
 
 
 def sha(path):
@@ -71,11 +72,12 @@ def check_dump(dump):
     assert shaped["pattern"] == ["hI"] and shaped["key"]["h"] == {"tag": "gtceu:crafting_tools/hammer"}
     assert dump["shaped_behavior"] == {"source_geometry_comparisons":10395,"json_network_round_trips":22,"default_and_reset_shrink_checks":26,"remaining_item_and_action_checks":6,"cache_origin_entry_checks":4,"input_identity_checks":5,"no_world":True}
     assert dump["legacy_crafting_energy"] == {"source_comparisons":9375,"json_network_round_trips":10,"boundary_checks":6,"real_gt_capabilities":True,"input_and_template_unchanged":True,"ic2_runtime_verified":False,"world_or_player_executed":False}
-    assert sum(k.startswith("gtnh_audit:") for k in rows) == 21
+    assert sum(k.startswith("gtnh_audit:") for k in rows) == 23
+    assert dump["legacy_crafting_nbt"] == {"source_comparisons":11094,"tag_variants":43,"recipe_round_trips":4,"item_round_trips":129,"rejected_inputs":6,"original_1_7_10_nbt_classes":True,"modern_component_mapping_complete":False,"item_update_hooks_complete":False,"world_or_player_executed":False}
     expected_fuels = {v["target_id"]: v["burn_ticks"] for v in read(O / "docs/fuel-block-migration/fuel-blocks.json")["blocks"]}
     assert len(expected_fuels) == 16 and dump["fuels"] == expected_fuels
     return {"migration_machine_recipes_with_outputs": len(migrated), "migration_namespace_recipes": 170,
-            "fixture_recipes": 21, "shaped_behavior": dump["shaped_behavior"], "legacy_crafting_energy":dump["legacy_crafting_energy"], "fuel_values_verified": 16, "component_round_trips": 5,
+            "fixture_recipes": 23, "shaped_behavior": dump["shaped_behavior"], "legacy_crafting_energy":dump["legacy_crafting_energy"], "legacy_crafting_nbt":dump["legacy_crafting_nbt"], "fuel_values_verified": 16, "component_round_trips": 5,
             "boost_copy_codec_network_round_trips": 18,
             "ordinary_and_tick_directions": True, "chance_and_fraction_preserved": True,
             "replacement_counts_and_chance_preserved": True, "tool_symbol_and_no_mirror": True}
@@ -102,15 +104,16 @@ def main():
     run = OUT / ("resource-check-" + str(uuid.uuid4()))
     classes = run / "classes"
     classes.mkdir(parents=True)
-    sources = [R / "work/migration" / n for n in ("NativeResourceAuditLaunchHandler.java", "NativeResourceAuditMain.java", "NativeShapedRecipeCheck.java", "NativeCraftingEnergyCheck.java")]
+    sources = [R / "work/migration" / n for n in ("NativeResourceAuditLaunchHandler.java", "NativeResourceAuditMain.java", "NativeShapedRecipeCheck.java", "NativeCraftingEnergyCheck.java", "NativeCraftingNbtCheck.java")]
     reference = build_energy_reference(run)
+    nbt_reference, legacy_nbt_jar = build_nbt_reference(run)
     library_pin = read(R / "locks/library-client-callbacks.json")
     ldlib = (R / positive["jar"]).parent / Path(library_pin["ldlib_entry"]).name
     assert sha(ldlib) == library_pin["ldlib_sha256"]
     cp = os.pathsep.join(p.resolve().as_posix() for p in classpath()+[ldlib])
     argfile = run / "compile.args"
     arguments(argfile, ["-proc:none", "--release", "21", "-encoding", "UTF-8", "-cp", cp,
-                        "-d", str(classes)] + [str(p) for p in sources+[reference]], True)
+                        "-d", str(classes)] + [str(p) for p in sources+[reference,nbt_reference]], True)
     result = subprocess.run([str(java.with_name("javac.exe")), "-J-Duser.language=en", "-J-Duser.country=US", "@" + str(argfile)], capture_output=True, timeout=60)
     assert result.returncode == 0, result.stderr.decode(errors="replace")
     negative_energy = run / "negative-energy"
@@ -120,6 +123,13 @@ def main():
     arguments(negative_energy / 'compile.args', ['-proc:none','--release','21','-encoding','UTF-8','-cp',cp,'-d',str(negative_energy),str(no_op)], True)
     result = subprocess.run([str(java.with_name('javac.exe')), '-J-Duser.language=en', '@'+str(negative_energy/'compile.args')], capture_output=True, timeout=60)
     assert result.returncode == 0, result.stderr.decode(errors='replace')
+    negative_nbt = run / 'negative-nbt'
+    negative_nbt.mkdir()
+    no_nbt = negative_nbt / 'LegacyCraftingNbt.java'
+    no_nbt.write_text('package org.gtnhmigration.compat; public final class LegacyCraftingNbt { public static boolean matches(net.minecraft.world.item.crafting.CraftingInput input) {return true;} public static net.minecraft.world.item.ItemStack keep(net.minecraft.world.item.crafting.CraftingInput input, net.minecraft.world.item.ItemStack result) {return result.copy();} }',encoding='utf-8')
+    arguments(negative_nbt/'compile.args',['-proc:none','--release','21','-encoding','UTF-8','-cp',cp,'-d',str(negative_nbt),str(no_nbt)],True)
+    result=subprocess.run([str(java.with_name('javac.exe')),'-J-Duser.language=en','@'+str(negative_nbt/'compile.args')],capture_output=True,timeout=60)
+    assert result.returncode==0,result.stderr.decode(errors='replace')
     launcher = run / "resource-audit-launcher.jar"
     with zipfile.ZipFile(launcher, "w") as output:
         name = "org/gtnhmigration/audit/launcher/NativeResourceAuditLaunchHandler.class"
@@ -134,7 +144,7 @@ def main():
     launch_text = (O / "libraries/net/neoforged/neoforge/21.1.262/win_args.txt").read_text(encoding="utf-8")
     cases = {}
     details = None
-    for case, bridge in (("ported", positive), ("old_output", negative), ("original_api", None), ("without_grid_origin", positive), ("without_cache_origin", positive), ("without_energy_transfer",positive)):
+    for case, bridge in (("ported", positive), ("old_output", negative), ("original_api", None), ("without_grid_origin", positive), ("without_cache_origin", positive), ("without_energy_transfer",positive), ("without_legacy_nbt",positive)):
         directory = run / case
         directory.mkdir()
         for folder in ("mods", "config", "kubejs"):
@@ -147,7 +157,7 @@ def main():
             copied.unlink()
             control = R / bridge["jar"] if bridge else original_jar()
             shutil.copy2(control, directory / "mods" / control.name)
-        if case in ("without_grid_origin", "without_cache_origin", "without_energy_transfer"):
+        if case in ("without_grid_origin", "without_cache_origin", "without_energy_transfer", "without_legacy_nbt"):
             copied_compat = directory / "mods/gtnh-migration-compat-0.1.0.jar"
             replacement_compat = directory / "compat-without-grid.tmp"
             with zipfile.ZipFile(copied_compat) as before_jar, zipfile.ZipFile(replacement_compat, "w") as after_jar:
@@ -155,13 +165,16 @@ def main():
                     data = before_jar.read(info.filename)
                     if case == 'without_energy_transfer' and info.filename == 'org/gtnhmigration/compat/LegacyCraftingEnergy.class':
                         data = (negative_energy / info.filename).read_bytes()
-                    elif case != 'without_energy_transfer' and info.filename == "gtnh_migration_compat.mixins.json":
+                    elif case == 'without_legacy_nbt' and info.filename == 'org/gtnhmigration/compat/LegacyCraftingNbt.class':
+                        data = (negative_nbt / info.filename).read_bytes()
+                    elif case not in ('without_energy_transfer','without_legacy_nbt') and info.filename == "gtnh_migration_compat.mixins.json":
                         config = json.loads(data)
                         config["mixins"].remove("LegacyCraftingGridMixin" if case == "without_grid_origin" else "LegacyCraftingCacheMixin")
                         data = json.dumps(config).encode()
                     after_jar.writestr(info, data)
             replacement_compat.replace(copied_compat)
         shutil.copy2(oracle, directory / "shaped-oracle.json")
+        shutil.copy2(legacy_nbt_jar, directory / "legacy-nbt-reference.jar")
         shutil.copy2(testmod, directory / "mods" / testmod.name)
         shutil.copy2(R / "work/migration/KubeJSBridgeFixtures.js", directory / "kubejs/server_scripts/99_gtnh_bridge_audit.js")
         replacement = directory / "kubejs/data/gtnh_audit/recipe/assembler/replacement.json"
@@ -203,6 +216,9 @@ def main():
         elif case == "without_cache_origin":
             assert result.returncode != 0 and "Crafting cache retained a position-dependent entry" in log
             entry["rejected_missing_cache_origin_invalidation"] = True
+        elif case == 'without_legacy_nbt':
+            assert result.returncode != 0 and 'Legacy NBT match differs from fixed GT5 source' in log
+            entry['rejected_missing_legacy_nbt'] = True
         elif case == 'without_energy_transfer':
             assert result.returncode != 0 and 'Legacy energy transfer differs from fixed GT5 source' in log
             entry['rejected_missing_legacy_energy_transfer'] = True
@@ -239,6 +255,9 @@ def main():
                               R / "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyCraftingGrid.java",
                               R / "work/compat-mod/src/main/java/org/gtnhmigration/compat/mixin/LegacyCraftingGridMixin.java",
                               R / "work/compat-mod/src/main/java/org/gtnhmigration/compat/mixin/LegacyCraftingCacheMixin.java"]
+    source_paths += [R / name for name in ['work/migration/build_legacy_nbt_reference.py','locks/legacy-crafting-nbt-source.json',
+                       'work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyItemTag.java',
+                       'work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyCraftingNbt.java']]
     report = {"passed": True, "scope": "installed source-built artifact copied into isolated resource checks; no game world",
               "checks": details, "cases": cases, "derived_jar_sha256": positive["jar_sha256"],
               "preserved_original_entries": positive["unchanged_original_entries"],
