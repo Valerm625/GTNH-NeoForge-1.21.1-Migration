@@ -51,6 +51,14 @@ Phase 5 新增 `test_legacy_retrieval_inventory_bridge.py`：真实Inventory/Ite
 
 以下五个 `work/migration/` 文件仅是历史第三方本地取证输入，并非项目自编源码：`GTRecipeSchema.java`、`MaterialIconSet.java`、`MaterialIconType.java`、`OreBlockRenderer.java`、`OreProperty.java`。它们可在本地恢复使用（其中 `port_resources.py` 读取 `MaterialIconSet.java`），已按精确路径加入 `.gitignore`，不得因恢复而混入公开源码检查点。项目自编 Java 适配器和测试仍正常跟踪。
 
-## 上传范围
+## 2026-10-18 当前状态上传：Phase 6 开发中
+
+本次按用户要求保存当前进展，新增 `LegacyRetrievalTransactionJournal.java`、对应 Java 检查及 `test_legacy_retrieval_transaction_journal.py`。独立 runner 已通过36项断言和7个进程中断恢复场景；公开报告为 `evidence/quests/LegacyRetrievalTransactionJournalCheck.json`，源码摘要与本次提交逐项对应。
+
+此 runner 尚未加入 `rebuild_current_phase.py`，已有24项完整汇总及兼容JAR锁仍是Phase 5历史结果。新增日志类没有完成与库存桥接、真实PlayerDataStorage、世界生命周期、UI或奖励的连接；不要直接激活或把历史JAR报告解释为新增类已打包验证。
+
+继续时先阅读[事务日志检查点及边界](docs/retrieval-transaction-journal.zh-CN.md)。在保留本地依赖的工作区单独运行 `python -u work/migration/test_legacy_retrieval_transaction_journal.py`。后续需要审查调用锁顺序、实现库存桥接到日志的组合测试，固定原生玩家保存/读回协议，再把检查纳入完整重建、重新编译并刷新JAR锁及证据。合成文件写入器的结果不能代替原生保存和游戏验证。
+
+## 上传内容边界
 
 此仓库排除了原任务正文、生成纹理、原包/第三方源码归档、JDK、Minecraft、模组 JAR、存档和密钥。恢复这些输入需依据各自来源与许可，而不是从本仓库获得。

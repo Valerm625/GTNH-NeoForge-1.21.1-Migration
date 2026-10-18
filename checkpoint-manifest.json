@@ -1,8 +1,8 @@
 {
-  "created_at": "2026-10-18T12:11:12.875433+08:00",
+  "created_at": "2026-10-18T12:26:16.141822+08:00",
   "scope": "source-only public checkpoint; third-party game inputs excluded",
   "hash_scope": "Git index canonical blobs, not Windows checkout line endings",
-  "base_commit": "353e452cc791b2d4a75afcf412d51a3fe250b468",
+  "base_commit": "81a6edbfa605a43b0e667f30a4a201be5f43b744",
   "files": [
     {
       "path": ".gitattributes",
@@ -26,18 +26,18 @@
     },
     {
       "path": "README.md",
-      "bytes": 7059,
-      "sha256": "81808ebffe1b1ba90b216710a0401d9a8b2322e41e8fae3153e8a04934089c47"
+      "bytes": 7694,
+      "sha256": "1047cb11bc2899d641e985cd4caaaac6fa2ed361b6d2527230f39dff2e1f67b7"
     },
     {
       "path": "RESUME.md",
-      "bytes": 10067,
-      "sha256": "356d3d409f175b76f112f96f40be5360c7d1cda9ffc895b386d722f33b088d42"
+      "bytes": 11278,
+      "sha256": "76e2b109d83d3ea705498071b1c96883e7d8777f424fa2c0e620bca7cf0f1648"
     },
     {
       "path": "STATUS.zh-CN.md",
-      "bytes": 18492,
-      "sha256": "9ab2f535f271d960cf8a09edbe8e2e0abbfb5882889812b0d32a3c7716e759bc"
+      "bytes": 18894,
+      "sha256": "25d58c62fa6229b46f4c0517617bf7f01461754574fee360ccc6b29a5dbca845"
     },
     {
       "path": "docs/inventory-detection-timing.zh-CN.md",
@@ -88,6 +88,11 @@
       "path": "docs/retrieval-runtime-bridge-design.zh-CN.md",
       "bytes": 21796,
       "sha256": "ff623f050b6c80135b316646f7091776484d2528352103ec93da88c3b91170f3"
+    },
+    {
+      "path": "docs/retrieval-transaction-journal.zh-CN.md",
+      "bytes": 3628,
+      "sha256": "38c31eab362c016d9cf6abc3419ec7b660003468864168bbf17a2ab82958f5de"
     },
     {
       "path": "docs/typed-nbt-json-reader.zh-CN.md",
@@ -325,6 +330,11 @@
       "sha256": "ad7caa455b6dba7130302282fff3591a91635c360abf50661c96939b14f39d08"
     },
     {
+      "path": "evidence/quests/LegacyRetrievalTransactionJournalCheck.json",
+      "bytes": 4324,
+      "sha256": "828e5615bc296195384aeb74075ec28d177247fd1c5ce7a77b960507055daba9"
+    },
+    {
       "path": "evidence/quests/LegacyTypedNbtJsonReaderCheck.json",
       "bytes": 4987,
       "sha256": "c1cc4bf018bafd71969498ba5e2ac204b532e66889bb700c2da3072a10096454"
@@ -545,6 +555,11 @@
       "sha256": "5a33162382b6b47e64c16c2ff499d9976d4491ad55ad4ee7df843b5d93fe439c"
     },
     {
+      "path": "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalTransactionJournal.java",
+      "bytes": 18511,
+      "sha256": "eac9379691c65baf2acacf4d004048ed4da638d1cf1f808ce9d8f0684d5cf331"
+    },
+    {
       "path": "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyTaskLoginTimingMixin.java",
       "bytes": 822,
       "sha256": "d1aef60a59dfa0a3a22f925fa07bbbcb8405b3d0c34fa6e8ab5a03de256a4c57"
@@ -658,6 +673,11 @@
       "path": "work/migration/LegacyRetrievalStackMatcherCheck.java",
       "bytes": 10217,
       "sha256": "6262a87f87d36ebe7d4c2b6df3bcb51f0191fd695dc54199326d0dc2473a7cca"
+    },
+    {
+      "path": "work/migration/LegacyRetrievalTransactionJournalCheck.java",
+      "bytes": 15014,
+      "sha256": "9e15c654029e4eb34847e80bad78679d8a49b99a97f3c6a68d6232608298fb13"
     },
     {
       "path": "work/migration/LegacyTypedNbtJsonReaderCheck.java",
@@ -1000,6 +1020,11 @@
       "sha256": "6d90de446dac357a0047d44f20b4f62e02e37be462ad7d8c46c7966d86152310"
     },
     {
+      "path": "work/migration/test_legacy_retrieval_transaction_journal.py",
+      "bytes": 4632,
+      "sha256": "01d7b7a4866a006e80a2a9015515bc64e5ad5e5b2ad8072b422ed35a7e798511"
+    },
+    {
       "path": "work/migration/test_legacy_typed_nbt_json_reader.py",
       "bytes": 9348,
       "sha256": "2e141a532183c8797043ba619565829123236ed4bb79366f23fae5bb37544e7f"
@@ -1150,9 +1175,9 @@
       "sha256": "0e33fcbc145b7e005e9909f13a00f12c4c2b223de3d2cf5a9d3e858fb7990fa7"
     }
   ],
-  "file_count": 229,
+  "file_count": 234,
   "source_archive_inputs_included": false,
   "runtime_binaries_included": false,
   "full_parity": false,
-  "continuation": "active full-fidelity goal; real Inventory count bridge and independent UUID ledger verified separately; next implement authenticated world lifecycle and durable player inventory/progress recovery, exact ore identities, party/completion/UI without discarding unsupported content"
+  "continuation": "User-requested current-state upload: Phase 5 validated baseline plus independently tested Phase 6 transaction journal work in progress; native player persistence, full rebuild integration and complete migration remain unfinished."
 }

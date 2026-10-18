@@ -22,6 +22,8 @@ Phase 4 新增[独立 UUID 文件账本](docs/quest-progress-file-store.zh-CN.md
 
 Phase 5 新增[真实库存桥接](docs/retrieval-inventory-bridge.zh-CN.md)：旧40槽深快照、整个quest计划后的actor计数应用、完整槽位复核、回滚与不确定库存隔离。1,465项断言通过，包括1,332个原版默认物品栈往返。当前使用真实Inventory对象但没有世界或Player实例，物品谓词仍为明确的原版测试夹具；未接入游戏提交或持久化库存事务。
 
+当前上传同时保留 Phase 6 的[事务日志开发中检查点](docs/retrieval-transaction-journal.zh-CN.md)：新增准备记录、玩家文件标记和恢复决策模型，独立测试通过36项断言与7个进程中断恢复场景。玩家NBT和写入器是合成夹具，未接入真实玩家存档、库存桥接、完整重建检查汇总或游戏入口；现有兼容JAR与24项汇总证据仍对应Phase 5，不能代表这份新增源码已完成运行时集成。
+
 依赖闭合并实际导出的任务仍为 **2 / 3814**；结构候选为 **47**，物品身份映射仍为 **720 / 8388**。本阶段修复没有冒充新增完整任务覆盖。
 
 ## 复现与证据
@@ -32,6 +34,7 @@ Phase 5 完整重建的24份汇总检查通过，纯模型编译类与兼容 JAR
 
 - evidence/source-archive-audit.json：输入 SHA256、版本证据、任务身份差异和资源数量。
 - evidence/phase-2026-10-18-task-semantics.json：当前阶段测试与边界。
+- evidence/quests/LegacyRetrievalTransactionJournalCheck.json：Phase 6开发中源码的独立夹具测试；不属于上述Phase 5完整重建结果。
 - evidence/quests/：实际物品匹配、任务谓词与编译产物检查。
 - [多物品检索设计](docs/multi-retrieval-design.zh-CN.md)：下一主线任务 0:2 的槽预算、多人进度、按钮顺序与原木矿辞缺口。
 - [进度持久化 codec](docs/retrieval-progress-persistence.zh-CN.md)与[顺序规划器](docs/quest-retrieval-planner.zh-CN.md)：已实现模型、源对照方法和未接入的运行时边界。

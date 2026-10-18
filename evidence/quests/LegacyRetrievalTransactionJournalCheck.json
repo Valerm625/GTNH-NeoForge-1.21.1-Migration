@@ -1,0 +1,88 @@
+{
+  "test": "durable_inventory_progress_journal",
+  "passed": true,
+  "assertions": 36,
+  "actual_player_save_fixtures": 0,
+  "runtime_integrated": false,
+  "export_enabled": false,
+  "game_runtime_verified": false,
+  "native_player_save_verified": false,
+  "synthetic_player_nbt_used": true,
+  "source_sha256": {
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalEngine.java": "974899a867d5f9b2b18295e02c3fc56827064bdfa19c863158ea4b06b0a45758",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalProgressCodec.java": "596a64ed0ed06bad0f70731773078376ea9ab7ec3cba7dacdd8c10faac0fe856",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestProgressEnvelope.java": "43ed5abb2ed2595efa101b9e89d8d8409f84b62ca01cd9c62191ea5e92b9b9a0",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestProgressStoreCodec.java": "7e610faa9cd32b56cf1302c0d62189884defbc8746c393bcf423bd84cd5f2e94",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestProgressFileStore.java": "9830ea6c0ccf297d796b2ba2ed127a9ce0ec4df7a5b74fd0e3e0840eac6c89a2",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalTransactionJournal.java": "eac9379691c65baf2acacf4d004048ed4da638d1cf1f808ce9d8f0684d5cf331",
+    "work/migration/LegacyRetrievalTransactionJournalCheck.java": "9e15c654029e4eb34847e80bad78679d8a49b99a97f3c6a68d6232608298fb13",
+    "work/migration/test_legacy_retrieval_transaction_journal.py": "01d7b7a4866a006e80a2a9015515bc64e5ad5e5b2ad8072b422ed35a7e798511"
+  },
+  "minecraft_jar_sha256": "26ca9c40d7e1681190b428583c38816852218e78df3f8bdb60a59a78503aec71",
+  "process_crash_checks": [
+    {
+      "boundary": "PREPARE_TEMP",
+      "child_exit_code": 72,
+      "committed": false,
+      "player_file_unchanged_by_recovery": true,
+      "prior_ledger_frames_retained": true,
+      "second_recovery_idempotent": true
+    },
+    {
+      "boundary": "PREPARED",
+      "child_exit_code": 72,
+      "committed": false,
+      "player_file_unchanged_by_recovery": true,
+      "prior_ledger_frames_retained": true,
+      "second_recovery_idempotent": true
+    },
+    {
+      "boundary": "PLAYER_TEMP",
+      "child_exit_code": 72,
+      "committed": false,
+      "player_file_unchanged_by_recovery": true,
+      "prior_ledger_frames_retained": true,
+      "second_recovery_idempotent": true
+    },
+    {
+      "boundary": "PLAYER_PUBLISHED",
+      "child_exit_code": 72,
+      "committed": true,
+      "player_file_unchanged_by_recovery": true,
+      "prior_ledger_frames_retained": true,
+      "second_recovery_idempotent": true
+    },
+    {
+      "boundary": "RESOLVE_TEMP",
+      "child_exit_code": 72,
+      "committed": true,
+      "player_file_unchanged_by_recovery": true,
+      "prior_ledger_frames_retained": true,
+      "second_recovery_idempotent": true
+    },
+    {
+      "boundary": "RESOLVE_PUBLISHED",
+      "child_exit_code": 72,
+      "committed": true,
+      "player_file_unchanged_by_recovery": true,
+      "prior_ledger_frames_retained": true,
+      "second_recovery_idempotent": true
+    },
+    {
+      "boundary": "RESOLVED",
+      "child_exit_code": 72,
+      "committed": true,
+      "player_file_unchanged_by_recovery": true,
+      "prior_ledger_frames_retained": true,
+      "second_recovery_idempotent": true
+    }
+  ],
+  "limitations": [
+    "Synthetic full player NBT and a fixture atomic file writer, not native PlayerDataStorage or a world.",
+    "The journal never writes player inventory; an actual coordinator must persist marker+inventory together, read back the authoritative file without dat_old fallback, and gate normal play until resolved.",
+    "Accepted before/after player inventories and progress states must come from independently verified runtime snapshots and planning; this journal is not item matching, authorization or inventory validation.",
+    "Aborting a pending transaction does not undo a live in-memory inventory; a future coordinator must restore/reload it before play resumes.",
+    "Death/clone/logout, native-save failure/readback, power loss, reward events, party and networking remain unverified.",
+    "The existing append-only ledger retains source and transaction bytes; limits/compaction and manual removal of a complete history tail remain unresolved."
+  ]
+}
