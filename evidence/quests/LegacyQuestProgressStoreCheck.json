@@ -1,0 +1,52 @@
+{
+  "test": "versioned_uuid_progress_store",
+  "passed": true,
+  "assertions": 436,
+  "rejected_codec_mutations": 25,
+  "binary_nbt_roundtrips": 64,
+  "actual_player_save_fixtures": 0,
+  "runtime_integrated": false,
+  "export_enabled": false,
+  "game_runtime_verified": false,
+  "inventory_transaction_verified": false,
+  "source_sha256": {
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalEngine.java": "974899a867d5f9b2b18295e02c3fc56827064bdfa19c863158ea4b06b0a45758",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalProgressCodec.java": "596a64ed0ed06bad0f70731773078376ea9ab7ec3cba7dacdd8c10faac0fe856",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestProgressEnvelope.java": "43ed5abb2ed2595efa101b9e89d8d8409f84b62ca01cd9c62191ea5e92b9b9a0",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestProgressStoreCodec.java": "7e610faa9cd32b56cf1302c0d62189884defbc8746c393bcf423bd84cd5f2e94",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestProgressFileStore.java": "9830ea6c0ccf297d796b2ba2ed127a9ce0ec4df7a5b74fd0e3e0840eac6c89a2",
+    "work/migration/LegacyQuestProgressStoreCheck.java": "66ab19ea7d86301a7d67d01c91cb7b21efafb0fa429193e250d85ce59e3f73c2",
+    "work/migration/test_legacy_quest_progress_store.py": "29825e710de12925ffa5a32766dfcedd60a9331848a5321d3725cdd9923dd3f9"
+  },
+  "minecraft_jar_sha256": "26ca9c40d7e1681190b428583c38816852218e78df3f8bdb60a59a78503aec71",
+  "process_crash_checks": [
+    {
+      "boundary": "TEMP_OPENED",
+      "child_exit_code": 71,
+      "verified_revision_after_restart": 1,
+      "prior_frame_unchanged": true,
+      "pending_files_preserved": 1
+    },
+    {
+      "boundary": "TEMP_FORCED",
+      "child_exit_code": 71,
+      "verified_revision_after_restart": 1,
+      "prior_frame_unchanged": true,
+      "pending_files_preserved": 1
+    },
+    {
+      "boundary": "PUBLISHED",
+      "child_exit_code": 71,
+      "verified_revision_after_restart": 2,
+      "prior_frame_unchanged": true,
+      "pending_files_preserved": 0
+    }
+  ],
+  "limitations": [
+    "Synthetic UUID progress, no real player save fixture or server lifecycle registration.",
+    "Archive stores exact source bytes but does not assert that arbitrary bytes were imported successfully.",
+    "No inventory, reward, party, network or FTB transaction was executed.",
+    "Process-halt recovery on this filesystem does not prove machine-power-loss durability or detect manual removal of the entire latest tail.",
+    "All immutable frames are retained; compaction and ledgers exceeding 64 MiB per frame are not supported and are never silently truncated."
+  ]
+}

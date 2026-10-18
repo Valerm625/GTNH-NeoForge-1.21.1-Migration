@@ -1,5 +1,5 @@
 {
-  "created_at": "2026-10-17T17:50:29.280168+00:00",
+  "created_at": "2026-10-18T03:54:01.033335+00:00",
   "files": [
     {
       "path": "runtime/zulu21.52.203-ca-crac-jdk21.0.12.1-win_x64/bin/api-ms-win-core-console-l1-1-0.dll",
@@ -3498,8 +3498,8 @@
     },
     {
       "path": "mods/gtnh-migration-compat-0.1.0.jar",
-      "bytes": 73290,
-      "sha256": "243b9117436e6d9f27ebd8a8af7a26f168a5a13f934284e8766238d741007ae6"
+      "bytes": 93831,
+      "sha256": "b86227de2ed902291a9fea1d540fdf5328898a289c2f166170aa7a2897ffbfaf"
     },
     {
       "path": "mods/guideme-21.1.19.jar",

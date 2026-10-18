@@ -1,6 +1,6 @@
 # 多要求检索的运行时接入设计与实际 API 边界
 
-本文基于锁定的 FTB Quests、BetterQuesting 源码和当前安装的 NeoForge/FTB Teams/Minecraft 类签名，研究把 `LegacyRetrievalEngine`、`LegacyQuestRetrievalPlanner` 接入独立任务类型的最小路线。本文没有注册新任务、接入存档、发送网络消息或运行游戏。现有 2/3,814 项任务和 47 个候选的边界不变；纯模型及隔离测试不能增加迁移完成数。
+本文基于锁定的 FTB Quests、BetterQuesting 源码和当前安装的 NeoForge/FTB Teams/Minecraft 类签名，研究把 `LegacyRetrievalEngine`、`LegacyQuestRetrievalPlanner` 接入独立任务类型的最小路线。本文没有注册新任务、接入世界存档、发送网络消息或运行游戏。Phase 4 已新增独立文件账本，见[文件存储与恢复](quest-progress-file-store.zh-CN.md)；下文 SavedData 是已研究的适配选项，当前实现使用独立文件层。现有 2/3,814 项任务和 47 个候选的边界不变；纯模型及隔离测试不能增加迁移完成数。
 
 可行路线是：新建 `Task` 子类，保持旧 quest UUID、原 task index 和 factory ID；使用独立的 UUID 进度账本；从服务端一次执行整个旧 quest 的 planner；另行同步每位查看者的显示数据。不能通过继承 `ItemTask` 或调用 `TeamData.setProgress` 来代替这几层。完整激活还缺少旧式完成/奖励、队伍生命周期、身份映射和可恢复库存事务，以下逐项说明具体原因。
 
@@ -98,7 +98,7 @@ FTB `quest/TeamData.java:77` 的 `taskProgress` 是 taskId 到 long 的队伍共
 
 `saveIfChanged()`（`:146`）将队伍数据写到世界的 `ftbquests/<teamId>.snbt`。`PerPlayerData` 不是检索状态容器，只有编辑权限、自动置顶及置顶任务等字段。`CustomTask` 的 progress 回调最终也委托到相同共享标量；它的定义同步不是个人进度扩展协议。
 
-推荐使用世界级、独立命名的 `SavedData` 账本，由 overworld 的 `ServerLevel.getDataStorage()` 管理，避免维度切换生成多个账本。以下签名已由 MC JAR 核验：
+账本必须为世界级唯一实例，不能随维度切换生成多个副本。最初研究了由 overworld 的 `ServerLevel.getDataStorage()` 管理的独立 `SavedData`；Phase 4 因其异常加载回退及异步写入完成边界，先实现显式失败的独立文件层，尚未注册世界生命周期。以下签名已由 MC JAR 核验：
 
 ```java
 abstract CompoundTag SavedData.save(CompoundTag tag, HolderLookup.Provider registries)
@@ -111,7 +111,7 @@ SavedData.Factory<T>(Supplier<T> constructor,
 void DimensionDataStorage.save()
 ```
 
-实际实现还需确认自有存储的 data fixer 配置和异常加载策略；这里不把未核验的构造参数默认值写成可直接运行的样例。账本以原 quest UUID、task index、factory ID 定位原状态，任务内部保存完整 UUID 进度行与完成集合。配置版本/身份映射版本和事务序号放在自有外层元数据，不能覆盖旧字段或改写旧完成集合。离线 UUID、仅有完成标记的 UUID 和当前不在队伍的历史 UUID 都不能因一次同步或成员筛选而删除。
+Phase 4 已对实际 NeoForge server JAR 核验：null DataFixTypes 跳过 fixer，但加载异常仍被捕获并可能经 computeIfAbsent 新建空值；save 交给 IOUtilities worker。因此不能以 deserializer 抛错或 setDirty 直接证明迁移存档安全，具体结果见文件账本文档。账本以原 quest UUID、task index、factory ID 定位原状态，任务内部保存完整 UUID 进度行与完成集合。配置版本/身份映射版本和事务序号放在自有外层元数据，不能覆盖旧字段或改写旧完成集合。离线 UUID、仅有完成标记的 UUID 和当前不在队伍的历史 UUID 都不能因一次同步或成员筛选而删除。
 
 新 typed JSON reader 与 progress envelope 是导入/写回层；即使其纯测试通过，也仍须把原始数据和解析结果绑定到同一配置版本，保存未知字段，并对无效原 NBT 采用拒绝激活及保留原件的策略。不能把有限模型重新序列化后当作完整原存档的替代品。
 

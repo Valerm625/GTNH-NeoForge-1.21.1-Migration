@@ -14,6 +14,7 @@ I=R/'work/migration/inventory-observer-check'
 J=R/'work/migration/typed-nbt-json-check'
 G=R/'work/migration/quest-progress-envelope-check'
 T=R/'work/migration/progress-import-pipeline-check'
+S=R/'work/migration/quest-progress-store-check'
 
 
 def read(path):
@@ -61,7 +62,7 @@ for name,expected in observer['adapter_source_sha256'].items():
     assert sha(R/'work/compat-mod/src/main/java/org/gtnhmigration/compat'/(name+'.java'))==expected,name
 assert observer['test_source_sha256']==sha(R/'work/migration/LegacyInventoryObserverCheck.java')
 assert observer['runner_sha256']==sha(R/'work/migration/test_legacy_inventory_observer.py')
-for directory,name in [(J,'LegacyTypedNbtJsonReaderCheck'),(G,'LegacyQuestProgressEnvelopeCheck'),(T,'LegacyProgressImportPipelineCheck')]:
+for directory,name in [(J,'LegacyTypedNbtJsonReaderCheck'),(G,'LegacyQuestProgressEnvelopeCheck'),(S,'LegacyQuestProgressStoreCheck'),(T,'LegacyProgressImportPipelineCheck')]:
     value=read(directory/(name+'.json'))
     assert value['passed'] and not value['runtime_integrated'] and not value['export_enabled'],name
     for relative,expected in value['source_sha256'].items():
@@ -80,7 +81,7 @@ for relative, expected in hunt['source_sha256'].items():
     assert sha(R/relative)==expected,relative
 assert matcher['adapter_source_sha256']==sha(R/'work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalStackMatcher.java')
 with zipfile.ZipFile(jar) as compiled:
-    for directory,prefix in [(C,'LegacyRetrievalProgressCodec'),(L,'LegacyQuestRetrievalPlanner'),(J,'LegacyTypedNbtJsonReader'),(G/'classes','LegacyQuestProgressEnvelope')]:
+    for directory,prefix in [(C,'LegacyRetrievalProgressCodec'),(L,'LegacyQuestRetrievalPlanner'),(J,'LegacyTypedNbtJsonReader'),(G/'classes','LegacyQuestProgressEnvelope'),(S,'LegacyQuestProgressStoreCodec'),(S,'LegacyQuestProgressFileStore')]:
         classes=sorted((directory/'org/gtnhmigration/compat').glob(prefix+'*.class'))
         assert classes,prefix
         expected_entries={path.relative_to(directory).as_posix() for path in classes}
@@ -103,7 +104,7 @@ with zipfile.ZipFile(jar) as compiled:
 checks={}
 for name in ['IsolatedMixinTransformationCheck','LegacyRetrievalEngineCheck','LegacyRetrievalStackMatcherCheck','LegacyCraftingShapeCheck','LegacyHuntAdapterCheck',
              'LegacyRetrievalProgressCodecCheck','LegacyQuestRetrievalPlannerCheck','LegacyInventoryObserverCheck',
-             'LegacyTypedNbtJsonReaderCheck','LegacyQuestProgressEnvelopeCheck','LegacyProgressImportPipelineCheck',
+             'LegacyTypedNbtJsonReaderCheck','LegacyQuestProgressEnvelopeCheck','LegacyQuestProgressStoreCheck','LegacyProgressImportPipelineCheck',
              'QuestAdapterShapeCheck','LegacyRetrievalCounterCheck','QuestSnbtCheck',
              'checkpoint-verification','crafting-task-adapter','hunt-task-adapter','location-task-boundary']:
     checks[name]=read(Q/(name+'.json'))
@@ -134,7 +135,7 @@ assert compat_row['sha256']==sha(jar)
 assert 'eula=false' in (O/'eula.txt').read_text(encoding='utf-8')
 report={
     'phase_date_shanghai':'2026-10-18',
-    'phase':'typed legacy JSON and exact progress identity models; composed retrieval planning; unresolved source asset collisions',
+    'phase':'versioned UUID progress ledger with original source archives and process-halt recovery; composed retrieval persistence',
     'checks':checks,
     'compat_jar_sha256':sha(jar),
     'source_quests':manifest['source_quests'],
@@ -147,6 +148,9 @@ report={
     'isolated_mixin_transformation_verified':True,
     'tested_model_classes_match_packaged_jar':True,
     'typed_json_envelope_planner_composition_verified':True,
+    'independent_uuid_ledger_file_roundtrip_verified':True,
+    'ledger_process_halt_recovery_verified':True,
+    'inventory_and_progress_transaction_verified':False,
     'live_mixin_transformation_verified':False,
     'neoforge_transform_chain_verified':False,
     'client_visuals_verified':False,
@@ -162,7 +166,8 @@ metadata['validation_state'].update({
     'quest_retrieval_planner':'source-compared ordered model; no inventory transaction',
     'inventory_observer':'source queue comparison and actual menu/compiled bridge checks; game events unverified',
     'ore_resource_subset':'34 exact primary-source PNGs and 34 transparent derived layers; rendering unverified',
-    'legacy_progress_import':'typed JSON and identity envelope composed with planner in memory; synthetic player progress, no world/file-save import',
+    'legacy_progress_import':'typed JSON and identity envelope composed with planner and independent ledger reload; synthetic player progress, no world import',
+    'uuid_progress_ledger':'versioned append-only NBT snapshots and source bytes preserved; process-halt recovery verified, no world lifecycle or inventory transaction',
     'source_asset_collisions':'four exact archives checked; all same-path candidates retained, precedence unresolved',
     'full_feature_parity':False,'client_rendering_verified':False,
 })
@@ -179,7 +184,9 @@ text+=f"\n多物品检索纯引擎通过 {engine['source_comparisons']} 次锁�
 text+=f"\n新增进度编解码模型通过 {codec['source_comparisons']} 次源码对照与 {codec['binary_nbt_roundtrips']} 次真实 1.21 NBT 往返；有序任务规划模型通过 {planner['source_comparisons']} 次源码对照。两者仍未接入游戏存档、库存事务或导出。\n"
 text+='\n已接入标记检索任务的库存变化排队：包含空槽变化及初始监听器同步，在 Pre tick 重新扫描。完整游戏事件执行仍未验证。\n'
 text+=f"\n{ore['primary_base_pngs_verified_from_archive_through_target']} 张矿石基础图已与锁定主线源码归档逐字节一致；另外 {ore['derived_secondary_pngs_verified_transparent']} 张透明派生层不算原图。仍需客户端渲染、加载优先级及材质着色验证。\n"
-text+='\n旧格式 typed JSON、完整 quest UUID/task index/factory 进度外层与纯规划器已串联验证；真实任务定义参与检查，玩家进度仍为合成数据。未知字段或身份整份拒绝并保留原件；未实现世界存档导入、库存事务或 FTB 完成/奖励桥接。现代 NBT 负零归一化仍是明确拒绝的值域缺口。\n'
+text+='\n旧格式 typed JSON、完整 quest UUID/task index/factory 进度外层、纯规划器与独立文件账本已串联验证；真实任务定义参与检查，玩家进度仍为合成数据。未知字段或身份整份拒绝并保留原件；未实现世界存档导入、库存事务或 FTB 完成/奖励桥接。现代 NBT 负零归一化仍是明确拒绝的值域缺口。\n'
+ledger=checks['LegacyQuestProgressStoreCheck']
+text+=f"\n独立 UUID 账本通过 {ledger['assertions']} 项断言、{ledger['rejected_codec_mutations']} 个格式拒绝案例及 {len(ledger['process_crash_checks'])} 个独立 JVM 中断恢复场景。保留完整原输入字节、历史帧和离线 UUID；损坏、未知版本、配置变化或链缺口明确阻止加载。尚未证明机器掉电恢复或与玩家库存跨文件原子性。\n"
 text+=f"\n四份锁定旧源码共有 {collisions['source_resource_occurrences']} 个资源出现记录；{collisions['same_path_groups']} 组同路径候选中 {collisions['same_path_different_content_groups']} 组字节不同，双方来源均保留，未猜测加载优先级或覆盖目标资源。\n"
 status.write_text(text,encoding='utf-8')
 print(json.dumps({k:v for k,v in report.items() if k!='checks'},ensure_ascii=False))

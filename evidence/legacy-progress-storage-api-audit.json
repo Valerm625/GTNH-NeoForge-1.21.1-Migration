@@ -1,0 +1,14 @@
+{
+  "scope": "manual bytecode review of pinned NeoForge patched server classes, not executed game IO or a general API test",
+  "patched_server_jar_sha256": "f57ce3018e21459d24b50508e8c1b4fd5c16324ec1dc5f316c192aa0130e7fe0",
+  "javap_output_sha256": {
+    "net.minecraft.world.level.storage.DimensionDataStorage": "a4e3591a6f38da4a1f49e102b6b78e5208c9ca49cfb8cb3d2d3d5d1b652d05b1",
+    "net.minecraft.world.level.saveddata.SavedData": "36870a329e756a575f703674071427afb66be8c2f0b3de738924e5c01a573d35"
+  },
+  "findings": [
+    "NeoForge guards nullable DataFixTypes; vanilla implementation differs.",
+    "readSavedData catches Exception and returns null; computeIfAbsent may create a new value.",
+    "Patched SavedData copies NBT then dispatches IOUtilities.withIOWorker; compressed IO exceptions are logged."
+  ],
+  "world_execution_verified": false
+}

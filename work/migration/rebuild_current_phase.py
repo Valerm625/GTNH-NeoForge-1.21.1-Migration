@@ -10,7 +10,7 @@ for step in ['audit_exact_resource_collisions.py', 'test_exact_resource_collisio
     steps.insert(steps.index('material_catalog.py'), step)
 for step in ['test_legacy_retrieval_progress_codec.py', 'test_legacy_quest_retrieval_planner.py', 'test_legacy_inventory_observer.py']:
     steps.insert(steps.index('test_legacy_retrieval_matcher.py'), step)
-for step in ['test_legacy_typed_nbt_json_reader.py', 'test_legacy_quest_progress_envelope.py', 'test_legacy_progress_import_pipeline.py']:
+for step in ['test_legacy_typed_nbt_json_reader.py', 'test_legacy_quest_progress_envelope.py', 'test_legacy_quest_progress_store.py', 'test_legacy_progress_import_pipeline.py']:
     steps.insert(steps.index('test_legacy_retrieval_matcher.py'), step)
 for step in ['verify_exact_ore_resources.py', 'test_exact_ore_resources.py']:
     steps.insert(steps.index('verify_migration.py'), step)

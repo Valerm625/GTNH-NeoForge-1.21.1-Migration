@@ -1,6 +1,6 @@
 {
   "phase_date_shanghai": "2026-10-18",
-  "phase": "typed legacy JSON and exact progress identity models; composed retrieval planning; unresolved source asset collisions",
+  "phase": "versioned UUID progress ledger with original source archives and process-halt recovery; composed retrieval persistence",
   "checks": {
     "IsolatedMixinTransformationCheck": {
       "test": "isolated_real_sponge_mixin_transformation",
@@ -30,7 +30,7 @@
           "missing_injection_detected": true
         }
       },
-      "compat_jar_sha256": "243b9117436e6d9f27ebd8a8af7a26f168a5a13f934284e8766238d741007ae6",
+      "compat_jar_sha256": "b86227de2ed902291a9fea1d540fdf5328898a289c2f166170aa7a2897ffbfaf",
       "source_sha256": {
         "work/migration/OfflineMixinService.java": "a7ea57ef2ea959f69885cca79076690724e82a17c768df2d4521e23fddc897df",
         "work/migration/OfflineProperties.java": "10ad2622af4698009243667fac346ad23621d38f86c583aebcb99593059f9f3d",
@@ -126,7 +126,7 @@
       "wrong_class_mapping_mutation_rejected": true,
       "actual_mixin_transformation_verified": false,
       "game_runtime_verified": false,
-      "compat_jar_sha256": "243b9117436e6d9f27ebd8a8af7a26f168a5a13f934284e8766238d741007ae6",
+      "compat_jar_sha256": "b86227de2ed902291a9fea1d540fdf5328898a289c2f166170aa7a2897ffbfaf",
       "source_sha256": {
         "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyHuntTaskMixin.java": "62e74aa7175a44471a99fefb5ef09374c51fcec548238a4c49c84aafaafb9a93",
         "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyHuntEntityMatcher.java": "1435b87ae0bf98e2a44d31eae9262041cd9d610214d6412839496ada8b5c48d8",
@@ -279,7 +279,7 @@
       "test_source_sha256": "aed919c8f8caccf54a5c619b0f5b5294859ce8522c35398f941d146903f99d41",
       "runner_sha256": "fb6d375d4f805b0bc8393e3211d9b2eaf04d50ab9dea744a2dc20393b848fe65",
       "oracle_fixture_sha256": "24c3d959554108708f56ba755d089edfabd2f3a828af050169081b1c08953ab9",
-      "compat_jar_sha256": "243b9117436e6d9f27ebd8a8af7a26f168a5a13f934284e8766238d741007ae6",
+      "compat_jar_sha256": "b86227de2ed902291a9fea1d540fdf5328898a289c2f166170aa7a2897ffbfaf",
       "ftb_artifact_sha256": "6a39982c4b3afc00b1e788041a4f0d394e1659e3b3a6e5d078cd790bc36d0018",
       "minecraft_artifact_sha256": "26ca9c40d7e1681190b428583c38816852218e78df3f8bdb60a59a78503aec71",
       "packaged_bridge_matches_sources": true,
@@ -431,10 +431,62 @@
         "Raw NBT tree preservation does not assert identical serialized/compressed bytes."
       ]
     },
+    "LegacyQuestProgressStoreCheck": {
+      "test": "versioned_uuid_progress_store",
+      "passed": true,
+      "assertions": 436,
+      "rejected_codec_mutations": 25,
+      "binary_nbt_roundtrips": 64,
+      "actual_player_save_fixtures": 0,
+      "runtime_integrated": false,
+      "export_enabled": false,
+      "game_runtime_verified": false,
+      "inventory_transaction_verified": false,
+      "source_sha256": {
+        "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalEngine.java": "974899a867d5f9b2b18295e02c3fc56827064bdfa19c863158ea4b06b0a45758",
+        "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalProgressCodec.java": "596a64ed0ed06bad0f70731773078376ea9ab7ec3cba7dacdd8c10faac0fe856",
+        "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestProgressEnvelope.java": "43ed5abb2ed2595efa101b9e89d8d8409f84b62ca01cd9c62191ea5e92b9b9a0",
+        "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestProgressStoreCodec.java": "7e610faa9cd32b56cf1302c0d62189884defbc8746c393bcf423bd84cd5f2e94",
+        "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestProgressFileStore.java": "9830ea6c0ccf297d796b2ba2ed127a9ce0ec4df7a5b74fd0e3e0840eac6c89a2",
+        "work/migration/LegacyQuestProgressStoreCheck.java": "66ab19ea7d86301a7d67d01c91cb7b21efafb0fa429193e250d85ce59e3f73c2",
+        "work/migration/test_legacy_quest_progress_store.py": "29825e710de12925ffa5a32766dfcedd60a9331848a5321d3725cdd9923dd3f9"
+      },
+      "minecraft_jar_sha256": "26ca9c40d7e1681190b428583c38816852218e78df3f8bdb60a59a78503aec71",
+      "process_crash_checks": [
+        {
+          "boundary": "TEMP_OPENED",
+          "child_exit_code": 71,
+          "verified_revision_after_restart": 1,
+          "prior_frame_unchanged": true,
+          "pending_files_preserved": 1
+        },
+        {
+          "boundary": "TEMP_FORCED",
+          "child_exit_code": 71,
+          "verified_revision_after_restart": 1,
+          "prior_frame_unchanged": true,
+          "pending_files_preserved": 1
+        },
+        {
+          "boundary": "PUBLISHED",
+          "child_exit_code": 71,
+          "verified_revision_after_restart": 2,
+          "prior_frame_unchanged": true,
+          "pending_files_preserved": 0
+        }
+      ],
+      "limitations": [
+        "Synthetic UUID progress, no real player save fixture or server lifecycle registration.",
+        "Archive stores exact source bytes but does not assert that arbitrary bytes were imported successfully.",
+        "No inventory, reward, party, network or FTB transaction was executed.",
+        "Process-halt recovery on this filesystem does not prove machine-power-loss durability or detect manual removal of the entire latest tail.",
+        "All immutable frames are retained; compaction and ledgers exceeding 64 MiB per frame are not supported and are never silently truncated."
+      ]
+    },
     "LegacyProgressImportPipelineCheck": {
       "test": "typed_json_envelope_planner_composition",
       "passed": true,
-      "assertions": 22,
+      "assertions": 27,
       "actual_definition_fixtures": 1,
       "actual_player_save_fixtures": 0,
       "synthetic_progress_used": true,
@@ -448,15 +500,17 @@
         "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestRetrievalPlanner.java": "bf680e9df76a8844bfed402feaf4b535624baf6644ec3de4093f0aab7b68c0e2",
         "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestProgressEnvelope.java": "43ed5abb2ed2595efa101b9e89d8d8409f84b62ca01cd9c62191ea5e92b9b9a0",
         "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyTypedNbtJsonReader.java": "39bb4cc485f6948ae43cd22445bc5b83dcbfce007c224f2536a4fe1469eba274",
-        "work/migration/LegacyProgressImportPipelineCheck.java": "ce771b954616b6aa68eea7a65a8640b747a4292c7f5b3b40e7b1fb6e10f5420d",
-        "work/migration/test_legacy_progress_import_pipeline.py": "89cc384af88085c2e1a834d3546e7bb7a64c56f2591a1d4a8429240b866d3a6c"
+        "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestProgressStoreCodec.java": "7e610faa9cd32b56cf1302c0d62189884defbc8746c393bcf423bd84cd5f2e94",
+        "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestProgressFileStore.java": "9830ea6c0ccf297d796b2ba2ed127a9ce0ec4df7a5b74fd0e3e0840eac6c89a2",
+        "work/migration/LegacyProgressImportPipelineCheck.java": "9fe238ab5bd17c2a951ae99b40751d0359b36efc74bde2dfde2229e251124a19",
+        "work/migration/test_legacy_progress_import_pipeline.py": "05f4e6cf48dc4968c9beb21493a0383e61564dbdc86fd4c2fde4a48496950d72"
       },
       "definition_fixture_sha256": "b10a26b4012b0b407dd97bb5d486fbf4d819ee85c37248ea8ab61946e2d05f6b",
       "minecraft_jar_sha256": "26ca9c40d7e1681190b428583c38816852218e78df3f8bdb60a59a78503aec71",
       "limitations": [
         "Uses a real mainline quest definition but synthetic player progress, authorization and immutable symbolic item predicates.",
         "logWood is a source-symbol fixture, not a mapped modern item tag or a verified registry membership set.",
-        "Accepted data is only an in-memory candidate; no file storage, quest completion, reward, party lifecycle or FTB operation runs.",
+        "Imported and planned UUID states survive independent ledger close/reopen; no world save, real inventory, quest completion, reward, party lifecycle or FTB operation runs.",
         "Individual fixed-source differential checks remain separate; this is a composition check, not a new original runtime oracle."
       ]
     },
@@ -553,7 +607,7 @@
         "0:456": "e6556c4a267e1bde83949d2e3a93d5ad53fed963557db2188990de3ded14e28c",
         "0:42": "cadcc2de303f04719db7e2021ae6e61b5649780d8d69d96b3c90019c5f69aced"
       },
-      "export_manifest_sha256": "eed8b14032e60e52017f3f8b3d9a29bdce8449d8ac357973a5fd0fc5bd76eade",
+      "export_manifest_sha256": "c5c4383d70dd5e24251a852f896c389e387c2d9677e490a35545acf5e7453eab",
       "verifier_sha256": "8dcf6ec98717afc21d831c641090803935abe0926fa864d4b0d85f6453e1d79c",
       "source_sha256": "96669f3e782ca8ce3a92d1225e0adddf5519595ad193e44ac52035c67235be41",
       "target_source_sha256": "ff4345ea224da2889fab822050619448e71da420eebff206218c2bfec9505b1f",
@@ -1456,7 +1510,7 @@
       "production_assets_modified": false
     }
   },
-  "compat_jar_sha256": "243b9117436e6d9f27ebd8a8af7a26f168a5a13f934284e8766238d741007ae6",
+  "compat_jar_sha256": "b86227de2ed902291a9fea1d540fdf5328898a289c2f166170aa7a2897ffbfaf",
   "source_quests": 3814,
   "structural_candidates": 47,
   "dependency_closed_active_quests": 2,
@@ -1467,6 +1521,9 @@
   "isolated_mixin_transformation_verified": true,
   "tested_model_classes_match_packaged_jar": true,
   "typed_json_envelope_planner_composition_verified": true,
+  "independent_uuid_ledger_file_roundtrip_verified": true,
+  "ledger_process_halt_recovery_verified": true,
+  "inventory_and_progress_transaction_verified": false,
   "live_mixin_transformation_verified": false,
   "neoforge_transform_chain_verified": false,
   "client_visuals_verified": false,

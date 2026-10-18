@@ -19,15 +19,17 @@
 3. 在原项目根目录运行 `python -u work/migration/rebuild_current_phase.py`。此入口重建当前支持范围，并保留功能不完整标志。
 4. 复核 `verify_quest_checkpoint.py`、Java 任务解析、匹配器与适配器测试、依赖/配方/材质源一致性与运行输入清单。当前阶段检查还包括检索引擎、进度 codec、任务顺序规划器、typed JSON 读取器、身份 envelope、模型组合、库存观察器、真实 Sponge 隔离变换，以及矿石资源重基准和源码资源冲突审计。以完整入口的本次结果为准；记录是静态、夹具、实际解析器还是实际游戏测试，不能混淆。
 5. 重建入口包含 `loader_probe.py`，仅在 EULA 未接受状态进行受限探测。任何真正世界/客户端测试需要用户自行处理条款、并另行记录真实结果。
-6. 当前检查点包含显式原版身份映射、检索/合成/狩猎匹配修复、多物品检索纯引擎、逐 UUID 进度 codec、按原任务 index 的纯提交规划器、typed JSON 读取器、任务身份 envelope 及现有单物品任务的库存时机适配。下一阶段实现实际存档和提交桥接，补齐 logWood 精确成员、已验证定义目录与原件保存、队伍生命周期、网络/UI 与崩溃恢复，再进行真实游戏验证；不得为了通过校验删除任务、放宽科技门槛或用空实现冒充等价。
+6. 当前检查点包含显式原版身份映射、检索/合成/狩猎匹配修复、多物品检索纯引擎、逐 UUID 进度 codec、按原任务 index 的纯提交规划器、typed JSON 读取器、任务身份 envelope 及现有单物品任务的库存时机适配。已有独立文件账本及进程中断恢复；下一阶段接入世界生命周期和提交桥接，补齐 logWood 精确成员、已验证定义目录、队伍生命周期、网络/UI 与库存跨文件恢复，再进行真实游戏验证；不得为了通过校验删除任务、放宽科技门槛或用空实现冒充等价。
 
 本轮模型验收基线：codec 为 **3,748 项断言 / 1,811 次源对照 / 633 次 NBT 二进制往返**；规划器为 **9,707 项断言 / 2,412 次源对照**。相关独立 runner 是 `test_legacy_retrieval_progress_codec.py`、`test_legacy_quest_retrieval_planner.py`，报告分别在 `work/migration/retrieval-progress-check/` 与 `work/migration/quest-planner-check/`。两者尚未接入存档、游戏或任务导出，依赖闭合任务仍为 **2 / 3814**、结构候选仍为 **47**。
 
-Phase 3 另有 `test_legacy_typed_nbt_json_reader.py`（**2,932 项断言 / 577 次固定源码对照 / 74 个拒绝案例**）、`test_legacy_quest_progress_envelope.py`（**4,857 项断言 / 1,017 次路由源码对照 / 567 次真实 NBT 往返 / 32 个整份拒绝案例**）和 `test_legacy_progress_import_pipeline.py`（**22 项组合断言**）。报告依次位于 `work/migration/typed-nbt-json-check/`、`quest-progress-envelope-check/`、`progress-import-pipeline-check/`。组合测试使用真实主线 `0:2` 定义、合成进度和来源符号谓词；`logWood` 没有现代成员映射，真实玩家存档 fixture 为 0。完整定义不能直接交给进度 envelope；未知 schema、placeholder、损坏记录及现代 NBT 无法保留的负零均保留原件并拒绝，不允许以局部成功替代完整输入。
+Phase 3 另有 `test_legacy_typed_nbt_json_reader.py`（**2,932 项断言 / 577 次固定源码对照 / 74 个拒绝案例**）、`test_legacy_quest_progress_envelope.py`（**4,857 项断言 / 1,017 次路由源码对照 / 567 次真实 NBT 往返 / 32 个整份拒绝案例**）和 `test_legacy_progress_import_pipeline.py`（**27 项组合断言（Phase 4 已加入独立文件保存/重开）**）。报告依次位于 `work/migration/typed-nbt-json-check/`、`quest-progress-envelope-check/`、`progress-import-pipeline-check/`。组合测试使用真实主线 `0:2` 定义、合成进度和来源符号谓词；`logWood` 没有现代成员映射，真实玩家存档 fixture 为 0。完整定义不能直接交给进度 envelope；未知 schema、placeholder、损坏记录及现代 NBT 无法保留的负零均保留原件并拒绝，不允许以局部成功替代完整输入。
 
-这里的 `accepted` 只表示内存候选可解释，不能称为保存、玩家存档导入、联网或世界运行完成。物品身份映射仍为 **720 / 8388**。读取器与运行时桥接边界见 [typed JSON 规范](docs/typed-nbt-json-reader.zh-CN.md)、[身份 envelope](docs/quest-progress-envelope-design.zh-CN.md)和[运行时桥接设计](docs/retrieval-runtime-bridge-design.zh-CN.md)。
+读取器/envelope 的 `accepted` 只表示候选可解释。Phase 4 文件层另验证独立账本保存与重新读取，仍不能称为世界玩家存档导入、联网或游戏运行完成。物品身份映射仍为 **720 / 8388**。读取器与运行时桥接边界见 [typed JSON 规范](docs/typed-nbt-json-reader.zh-CN.md)、[身份 envelope](docs/quest-progress-envelope-design.zh-CN.md)和[运行时桥接设计](docs/retrieval-runtime-bridge-design.zh-CN.md)。
 
-Phase 3 完整重建的22份汇总检查已通过，包括模型组合及纯模型编译类与兼容 JAR 对应类的逐字节一致性；当前 JAR SHA256 为 `243b9117436e6d9f27ebd8a8af7a26f168a5a13f934284e8766238d741007ae6`。恢复后必须按本地当前源码重建，不把这个历史成功结果替代新运行结果。
+Phase 4 完整重建的23份汇总检查已通过，包括模型组合及纯模型编译类与兼容 JAR 对应类的逐字节一致性；当前 JAR SHA256 为 `b86227de2ed902291a9fea1d540fdf5328898a289c2f166170aa7a2897ffbfaf`。恢复后必须按本地当前源码重建，不把这个历史成功结果替代新运行结果。
+
+Phase 4 的 `test_legacy_quest_progress_store.py` 验证独立文件账本（436项断言、25个格式拒绝案例、64次NBT往返、3个JVM中断恢复场景）。原始输入字节及所有已发布帧保留，配置变化/损坏/缺帧/分叉阻止加载；不接受后退到空进度。独立账本与实际玩家库存尚无跨文件事务，不能从进程恢复推定机器掉电安全。详情见[文件账本设计](docs/quest-progress-file-store.zh-CN.md)。
 
 `test_legacy_inventory_observer.py` 检查既有标记单物品任务的初始同步、主背包槽 9..44（含变空）及下一次 Pre tick 去重时机；真实事件总线与完整世界生命周期尚未验证。隔离 Mixin 报告当前验证 **9 个注入、7 个目标、230 个方法**，不得把它说成完整 NeoForge 转换链已通过。
 

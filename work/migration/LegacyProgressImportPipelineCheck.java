@@ -6,8 +6,8 @@ import org.gtnhmigration.compat.*;
 import org.gtnhmigration.compat.LegacyRetrievalEngine.*;
 import org.gtnhmigration.compat.LegacyQuestProgressEnvelope.*;
 
-/** Composition check only: actual definition + synthetic progress + fixture items.
- * This is not a save importer, logWood registry mapping or game inventory write.
+/** Actual definition + synthetic progress + fixture items + independent file ledger.
+ * This is not a world save importer, logWood registry mapping or inventory write.
  */
 public final class LegacyProgressImportPipelineCheck {
     static int assertions;
@@ -60,6 +60,22 @@ public final class LegacyProgressImportPipelineCheck {
         var imported=LegacyQuestProgressEnvelope.readLegacy(original,catalog,LegacyQuestProgressEnvelope.State.empty(),false);
         check(imported.accepted(),"Progress envelope rejected known identity");
         var state=imported.candidate().orElseThrow();
+        var binding=new LegacyQuestProgressStoreCodec.Binding(
+            LegacyQuestProgressStoreCodec.digest(definitionBytes),
+            LegacyQuestProgressStoreCodec.digest("unmapped-source-symbol-fixture".getBytes(StandardCharsets.UTF_8)));
+        var archive=List.of(new LegacyQuestProgressStoreCodec.SourceDocument("actual-definition",definitionBytes),
+            new LegacyQuestProgressStoreCodec.SourceDocument("synthetic-progress",progress.rawUtf8()));
+        Path storeDirectory=Path.of(args[1]);
+        String importedHead;
+        try(var store=LegacyQuestProgressFileStore.open(storeDirectory,binding,catalog)) {
+            importedHead=store.commit(Optional.empty(),state,archive).sha256();
+        }
+        try(var store=LegacyQuestProgressFileStore.open(storeDirectory,binding,catalog)) {
+            var reloaded=store.current().orElseThrow();
+            check(reloaded.frame().snapshot().state().equals(state),"Imported progress lost after file reload");
+            check(reloaded.frame().snapshot().sources().equals(archive),"Source archives lost after file reload");
+            state=reloaded.frame().snapshot().state();
+        }
         var key0=new TaskKey(questId,0,"bq_standard:retrieval");
         var key1=new TaskKey(questId,1,"bq_standard:retrieval");
         check(state.tasks().get(key0).progress().get(PLAYER).equals(List.of(1,2)),"Progress routed by JSON position instead of task index");
@@ -81,6 +97,20 @@ public final class LegacyProgressImportPipelineCheck {
         check(Arrays.equals(decoded.rawUtf8(),definitionBytes),"Original definition bytes were lost");
         var replay=LegacyQuestRetrievalPlanner.plan(quest,plan.afterStates(),new Context<>(PLAYER,List.of(PLAYER),plan.afterInventories()),gate);
         check(replay.consumed().isEmpty() && replay.afterInventories().get(PLAYER).get(1).count()==3,"Repeated submission consumed again");
+        var plannedState=new LegacyQuestProgressEnvelope.State(state.questCompletions(),
+            Map.of(key0,plan.afterStates().get(0),key1,plan.afterStates().get(1)));
+        try(var store=LegacyQuestProgressFileStore.open(storeDirectory,binding,catalog)) {
+            store.commit(Optional.of(importedHead),plannedState,archive);
+        }
+        try(var store=LegacyQuestProgressFileStore.open(storeDirectory,binding,catalog)) {
+            var reloaded=store.current().orElseThrow().frame().snapshot().state();
+            check(reloaded.equals(plannedState),"Planned UUID state did not survive reload");
+            var after=Map.of(0,reloaded.tasks().get(key0),1,reloaded.tasks().get(key1));
+            var replayAfterRestart=LegacyQuestRetrievalPlanner.plan(quest,after,
+                new Context<>(PLAYER,List.of(PLAYER),plan.afterInventories()),gate);
+            check(replayAfterRestart.consumed().isEmpty(),"Reloaded task latch lost; repeated plan would consume");
+            check(reloaded.questCompletions().get(questId).isEmpty(),"Store invented quest completion or reward");
+        }
         String bad=raw.replace("\"index:3\":1","\"index:3\":7");
         var decodedBad=decode(bad);
         check(decodedBad.accepted(),"Typed reader should not pretend to validate task identity");

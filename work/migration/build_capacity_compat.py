@@ -96,5 +96,6 @@ lock['unintegrated_helpers'] += [
  'LegacyQuestRetrievalPlanner; ordered calculation model, no inventory transaction or quest export',
  'LegacyTypedNbtJsonReader; strict typed legacy JSON decoder, retains raw bytes; no world/save import',
  'LegacyQuestProgressEnvelope; exact identity and local merge candidate, no file store or task activation',
+ 'LegacyQuestProgressStoreCodec and LegacyQuestProgressFileStore; independent append-only UUID ledger, process restart verified, no world lifecycle or inventory transaction',
 ]
 (O/'docs/compat-mod.lock.json').write_text(json.dumps(lock,indent=2),encoding='utf-8',newline='\n');print(json.dumps(lock))

@@ -125,3 +125,14 @@ start-server-test.cmd --allow-incomplete-migration
 - 四份锁定源码归档的 `src/main/resources/assets` 记录 **16,267 次资源出现、16,237 个唯一路径、30 组同路径资源（60 个候选，24 组字节不同）、0 组大小写折叠冲突**。CoreMod 的 `src/test/resources/assets` 中两个测试 XML 不属于运行资源，不计入此范围。7项独立检查（含错误注入）通过；全部候选均保留，没有选择覆盖赢家，不增加已迁移资产数。
 
 Phase 3 完整重建的22份汇总检查通过，包括模型组合和纯模型编译类与兼容 JAR 内对应类的逐字节一致性。模型保持 `runtime_integrated=false`、`export_enabled=false`；未进行世界、真实玩家存档或联网验证，未调用任务完成或领奖。实际任务导出仍为 **2 / 3814**、结构候选 **47**，物品身份仍为 **720 / 8388**。下一步需要实际 UUID 账本、提交/UI、队伍/完成/奖励、准确物品集合及跨文件崩溃恢复。详见 [typed JSON 规范](docs/typed-nbt-json-reader.zh-CN.md)、[身份外层](docs/quest-progress-envelope-design.zh-CN.md)和[运行时桥接设计](docs/retrieval-runtime-bridge-design.zh-CN.md)。
+
+
+## Phase 4：独立文件账本与中断恢复
+
+新增 `LegacyQuestProgressStoreCodec` 和 `LegacyQuestProgressFileStore`，保存完整任务身份、逐 UUID 状态、不透明 quest completion 及原始输入字节，并绑定定义/身份映射/定义目录摘要。写入采用排他进程锁、预期前帧摘要、保留历史帧、文件 force 和同目录原子发布；未知格式、配置变化、损坏、断链和分叉均阻止加载，原文件保留。
+
+独立测试通过 **436 项断言、25 个格式拒绝案例、64 次真实 NBT 往返、3 个独立 JVM 中断后恢复场景**，包含第二进程写锁拒绝和发布后异常处理。组合测试增为 **27 项断言**，真实主线 `0:2` 定义与合成玩家进度经过独立账本保存、关闭、重开，再进入 planner 并保存结果。来源符号物品谓词及库存仍是夹具，任务完成/奖励不执行。
+
+Phase 4 完整重建的23份汇总检查及新增生产类与兼容JAR字节一致性通过。没有注册世界生命周期、网络或真实库存事务；进程中断恢复不等于机器掉电持久性，也不能发现外部手工删除全部尾帧。全量原 BQ 多文件导入顺序、logWood成员、队伍/完成/奖励、玩家库存与账本跨文件恢复仍需实现。原件及历史帧不裁剪，超出单帧64MiB上限明确停止；容量扩展和整理尚未实现。
+
+任务导出仍为 **2 / 3814**，身份映射仍为 **720 / 8388**。详见[文件账本设计](docs/quest-progress-file-store.zh-CN.md)。

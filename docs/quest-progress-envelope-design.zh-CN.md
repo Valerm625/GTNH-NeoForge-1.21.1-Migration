@@ -91,7 +91,7 @@ State.tasks() -> TaskKey → 独立逐UUID检索状态
 
 `accepted=true` 仅表示该读取层产生了可解释的候选；不表示可运行存档。Catalog 必须来自独立验证的定义，不能由进度临时创建任务，同 quest 的重复 index 即使 factory 不同也拒绝。reader 可以解析完整任务定义的 typed JSON，但它没有把定义转换成进度的权限；把完整定义交给 envelope 会因未知外层字段被整份拒绝。`completed` 除 `uuid` 路由字段外是源 API 明确保留的不透明 compound，允许各种额外 Tag 类型并按 UUID 整 compound 覆盖；这里不执行或推导 claimed/timestamp、完成或领奖行为。
 
-当前没有 `writeStore/readStore` 文件存储接口，没有按文件名或时间排序的跨文件接口，也没有版本化的世界账本。单次调用只解释一个显式传入、内部有序的 NBT 文档；输入与 previous 不变，返回 NBT 也使用防御副本。后续保存必须另行实现原字节、原 NBT、定义版本与候选状态的关联及恢复协议，不能将有限模型写回后冒充完整玩家档案。
+Phase 4 已新增独立的版本化 NBT 文件账本（见[文件账本设计](quest-progress-file-store.zh-CN.md)），保留原始字节并验证重开与进程中断恢复。当前没有按文件名或时间排序的原 BQ 多文件导入接口，也没有注册世界生命周期。单次调用只解释一个显式传入、内部有序的 NBT 文档；输入与 previous 不变，返回 NBT 也使用防御副本。后续保存必须另行实现原字节、原 NBT、定义版本与候选状态的关联及恢复协议，不能将有限模型写回后冒充完整玩家档案。
 
 当前整份拒绝的情况包括：未知 schema/外层字段；不可识别、不完整或有歧义的 quest 身份；缺失、负数或不受支持类型的 index；没有对应定义；factory 不符；placeholder；损坏的完成记录；未知任务类型；内层 codec 拒绝的数据。读取器保留原字节，envelope 保留原 NBT 与定位信息；任一记录失败都不暴露部分候选。合法重复记录在单个文档中按源顺序处理；跨文件冲突还没有可执行导入接口，不能猜测排序或静默跳过。缺席 key 继续保留。
 
@@ -106,6 +106,6 @@ State.tasks() -> TaskKey → 独立逐UUID检索状态
 
 envelope oracle 原样提取固定源码的 `QuestDatabase.readProgressFromNBT`、`QuestInstance.readProgressFromNBT`、`TaskStorage.readProgressFromNBT`、`UuidValueType.tryReadId/readId` 和 `UuidConverter.convertLegacyId`；旧 NBT 方法名称代理到真实 1.21.1 NBT。内层检索存取复用已有 codec，不将其算作本测试独立的内层 oracle；定义注册表、factory 字符串和触达记录是夹具。严格拒绝有意区别于旧源码的数字强转、静默跳过及 placeholder 恢复，不冒称这些分支已兼容。
 
-`LegacyProgressImportPipelineCheck` 的 **22 项组合断言**将真实 `0:2` 定义解码后提供的身份/需求数，与合成 typed JSON 进度、envelope、codec 和 planner 连通；使用来源符号物品谓词验证 5 logs 先检测再扣 2、剩 3 及重复提交。`logWood` 只是来源符号夹具，现代成员未映射；授权与参与者也是夹具，不是游戏运行结果。完整定义误用为进度仍拒绝。
+`LegacyProgressImportPipelineCheck` 的 **27 项组合断言**将真实 `0:2` 定义解码后提供的身份/需求数，与合成 typed JSON 进度、envelope、codec 和 planner、独立文件账本保存/重开连通；使用来源符号物品谓词验证 5 logs 先检测再扣 2、剩 3 及重复提交。`logWood` 只是来源符号夹具，现代成员未映射；授权与参与者也是夹具，不是游戏运行结果。完整定义误用为进度仍拒绝。
 
-独立 runner 为 `test_legacy_typed_nbt_json_reader.py`、`test_legacy_quest_progress_envelope.py` 和 `test_legacy_progress_import_pipeline.py`，报告分别在 `work/migration/typed-nbt-json-check/`、`quest-progress-envelope-check/` 和 `progress-import-pipeline-check/`。`runtime_integrated=false`、`export_enabled=false` 保持；真实玩家存档 fixture 为 0。placeholder 恢复、全库/分片实际加载、原件持久化、跨文件冲突、队伍、联网、世界和奖励均未完成验证。下一步实现边界见 [运行时桥接设计](retrieval-runtime-bridge-design.zh-CN.md)。
+独立 runner 为 `test_legacy_typed_nbt_json_reader.py`、`test_legacy_quest_progress_envelope.py` 和 `test_legacy_progress_import_pipeline.py`，报告分别在 `work/migration/typed-nbt-json-check/`、`quest-progress-envelope-check/` 和 `progress-import-pipeline-check/`。`runtime_integrated=false`、`export_enabled=false` 保持；真实玩家存档 fixture 为 0。原始字节在独立账本中的持久化和重开已验证；placeholder 恢复、全库/分片世界导入、跨文件冲突、队伍、联网、世界和奖励仍未完成验证。下一步实现边界见 [运行时桥接设计](retrieval-runtime-bridge-design.zh-CN.md)。
