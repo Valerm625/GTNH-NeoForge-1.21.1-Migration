@@ -3,7 +3,7 @@ package org.gtnhmigration.compat;
 import java.util.*;
 import java.util.function.Predicate;
 
-/** Pure, unintegrated model of the reviewed BQ 3.8.89 retrieval subset.
+/** Pure, unintegrated model of BQ 3.8.89 retrieval detection modes.
  * No game events, quest export, persistence or item/NBT mapping are installed.
  * Caller supplies exact item predicates and ordered main+armor slot snapshots;
  * modern offhand, external inventories and unreviewed predicates are excluded
@@ -25,9 +25,6 @@ public final class LegacyRetrievalEngine {
         public Config {
             requirements = List.copyOf(requirements);
             if (requirements.isEmpty()) throw new IllegalArgumentException("Empty requirement list");
-            if (groupDetect || requireOnlyOneItem || autoConsume || consume && requirements.size() != 1) {
-                throw new IllegalArgumentException("Unreviewed retrieval mode");
-            }
         }
     }
 
@@ -74,6 +71,18 @@ public final class LegacyRetrievalEngine {
 
     public record Consumption<K>(UUID player, int slotIndex, K item, int count) {}
 
+    /** The pinned source crashes on an exhausted slot matched again during the
+     * same Detector.run call. No candidate inventory or progress is published. */
+    public static final class SourceConsumptionFailure extends IllegalStateException {
+        private final int slotIndex,requirementIndex;
+        SourceConsumptionFailure(int slotIndex,int requirementIndex) {
+            super("Source retrieval would dereference an exhausted slot: "+slotIndex+" requirement "+requirementIndex);
+            this.slotIndex=slotIndex;this.requirementIndex=requirementIndex;
+        }
+        public int slotIndex(){return slotIndex;}
+        public int requirementIndex(){return requirementIndex;}
+    }
+
     public record Result<K>(State state, Map<UUID, List<Slot<K>>> inventories,
             List<Consumption<K>> consumed, boolean progressWritten, boolean partyDirty) {
         public Result {
@@ -98,7 +107,7 @@ public final class LegacyRetrievalEngine {
 
     /** Matches BQ onInventoryChange: manual-consuming tasks are not detected. */
     public static <K> Result<K> observeInventory(Config<K> config, State previous, Context<K> context) {
-        if (config.consume()) return unchanged(previous, context);
+        if (config.consume() && !config.autoConsume()) return unchanged(previous, context);
         return detectManually(config, previous, context);
     }
 
@@ -124,7 +133,9 @@ public final class LegacyRetrievalEngine {
             }
             if (!config.consume()) {
                 for (int i = 0; i < size; i++) {
-                    if (row[i] != 0 && row[i] < config.requirements().get(i).count()) {
+                    if (config.groupDetect()) {
+                        row[i]=0;
+                    } else if (row[i] != 0 && row[i] < config.requirements().get(i).count()) {
                         row[i] = 0;
                         changed = true;
                     }
@@ -135,15 +146,19 @@ public final class LegacyRetrievalEngine {
 
         Map<UUID, List<Slot<K>>> inventories = new LinkedHashMap<>(context.inventories());
         List<Consumption<K>> consumed = new ArrayList<>();
+        boolean satisfied=false;
         for (Map.Entry<UUID, List<Slot<K>>> inventory : context.inventories().entrySet()) {
+            if(satisfied)break;
             if (config.consume() && !inventory.getKey().equals(context.actor())) continue;
             List<Slot<K>> updatedSlots = new ArrayList<>(inventory.getValue());
             for (int slotPosition = 0; slotPosition < updatedSlots.size(); slotPosition++) {
+                if(satisfied)break;
                 Slot<K> slot = updatedSlots.get(slotPosition);
                 if (slot.count() == 0) continue;
+                int available=slot.count();
                 int[] budgets = new int[rows.size()];
                 Arrays.fill(budgets, slot.count());
-                for (int i = 0; i < size; i++) {
+                requirements: for (int i = 0; i < size; i++) {
                     Requirement<K> requirement = config.requirements().get(i);
                     if (!requirement.matches().test(slot.item())) continue;
                     int memberIndex = 0;
@@ -154,19 +169,28 @@ public final class LegacyRetrievalEngine {
                         int remaining = requirement.count() - row[i];
                         if (config.consume()) {
                             if (participant.getKey().equals(context.actor())) {
-                                int removed = Math.min(remaining, slot.count());
-                                // Reviewed consuming mode has one requirement;
-                                // no second requirement can reuse a depleted slot.
+                                // The old Detector retains the original stack
+                                // reference after decrStackSize clears its slot.
+                                // A later overlapping requirement can therefore
+                                // dereference a null removal. Reject the whole
+                                // pure plan instead of applying partial writes.
+                                if(available==0)throw new SourceConsumptionFailure(slot.index(),i);
+                                int removed = Math.min(remaining, available);
+                                available-=removed;
                                 for (int[] memberRow : rows.values()) {
                                     memberRow[i] = Math.addExact(memberRow[i], removed);
                                 }
-                                updatedSlots.set(slotPosition, new Slot<>(slot.index(), slot.item(), slot.count() - removed));
+                                updatedSlots.set(slotPosition, new Slot<>(slot.index(), slot.item(), available));
                                 consumed.add(new Consumption<>(context.actor(), slot.index(), slot.item(), removed));
+                                changed=true;
+                                if(config.requireOnlyOneItem() && row[i]>=requirement.count()){satisfied=true;break requirements;}
                             }
                         } else {
                             int credited = Math.min(remaining, budgets[budgetIndex]);
                             budgets[budgetIndex] -= credited;
                             row[i] += credited;
+                            changed=true;
+                            if(config.requireOnlyOneItem() && row[i]>=requirement.count()){satisfied=true;break requirements;}
                         }
                         // Original Detector marks updated even for a zero
                         // budget or a non-runner consuming progress row.
@@ -179,10 +203,20 @@ public final class LegacyRetrievalEngine {
 
         Map<UUID, List<Integer>> progress = new LinkedHashMap<>(previous.progress());
         if (changed) rows.forEach((id, row) -> progress.put(id, Arrays.stream(row).boxed().toList()));
+        else if(!config.consume() && config.groupDetect()) {
+            // Source getBulkProgress aliases existing arrays. Group reset can
+            // change those rows even when setBulkProgress/dirty flags never run.
+            rows.forEach((id,row)->{var saved=previous.progress().get(id);
+                if(saved!=null && saved.size()==size)progress.put(id,Arrays.stream(row).boxed().toList());});
+        }
         Set<UUID> completed = new LinkedHashSet<>(previous.completed());
         boolean complete = rows.values().stream().anyMatch(row -> {
-            for (int i = 0; i < size; i++) if (row[i] < config.requirements().get(i).count()) return false;
-            return true;
+            for (int i = 0; i < size; i++) {
+                boolean done=row[i]>=config.requirements().get(i).count();
+                if(config.requireOnlyOneItem() && done)return true;
+                if(!config.requireOnlyOneItem() && !done)return false;
+            }
+            return !config.requireOnlyOneItem();
         });
         if (complete) completed.addAll(context.allMembers());
         return new Result<>(new State(progress, completed), inventories, consumed, changed, changed || complete);

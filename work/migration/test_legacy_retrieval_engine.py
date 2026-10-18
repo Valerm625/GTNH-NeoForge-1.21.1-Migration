@@ -16,6 +16,9 @@ java = Path(json.loads((inputs / 'work/migration/runtime.json').read_text(encodi
 source = inputs / 'work/exact-sources/BetterQuesting/3.8.89-GTNH/src/main/java/bq_standard/tasks/TaskRetrieval.java'
 source_hash = hashlib.sha256(source.read_bytes()).hexdigest()
 assert source_hash == '8ac57331877e643a95c5c5d39966cce8a3d854d27319df80bee8514d19a22f71', 'BQ source changed; re-audit before testing'
+base_source = source.parent / 'base/TaskProgressableBase.java'
+base_hash = hashlib.sha256(base_source.read_bytes()).hexdigest()
+assert base_hash == '6b4f2e0ff58e355ccec32c31174ef6f0fd07eafff1092ff1d797356d5b994a99'
 original = source.read_text(encoding='utf-8')
 detect = original[original.index('    public void detect('):original.index('    // region IItemTask')]
 observe_start = original.index('    public void onInventoryChange(')
@@ -163,11 +166,12 @@ def run(executable, args, name):
     return log
 
 run(java.with_name('javac.exe'), ['-proc:none', '--release', '21', '-encoding', 'UTF-8', '-d', '.', relative(engine), relative(test), oracle.name], 'compile')
-log = run(java, ['-cp', '.', 'LegacyRetrievalEngineCheck'], 'engine')
+log = run(java, ['-XX:-OmitStackTraceInFastThrow', '-cp', '.', 'LegacyRetrievalEngineCheck'], 'engine')
 evidence = json.loads(next(line for line in log.splitlines() if line.startswith('{')))
 evidence.update({
     'source_commit': '815d738923d46e9083f988421e5329193e2e5940',
     'source_file_sha256': source_hash,
+    'progress_base_source_sha256': base_hash,
     'engine_source_sha256': hashlib.sha256(engine.read_bytes()).hexdigest(),
     'test_source_sha256': hashlib.sha256(test.read_bytes()).hexdigest(),
     'runner_sha256': hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
@@ -175,12 +179,13 @@ evidence.update({
     'source_methods_extracted_unchanged': ['detect', 'checkAndComplete', 'onInventoryChange', 'Detector'],
     'oracle_fixture_boundaries': ['ItemStack and InventoryPlayer are deterministic count/slot fixtures.',
                                  'ItemComparison delegates to an injected match predicate; ore branch returns false.',
-                                 'ParticipantInfo, progress storage and completion marking are in-memory fixtures.'],
-    'supported_modes': ['AND, groupDetect=false, nonconsuming multiple requirements', 'single-requirement manual consumption'],
+                                 'ParticipantInfo, progress storage and completion marking are in-memory fixtures.',
+                                 'getBulkProgress returns existing arrays as in the separately pinned TaskProgressableBase; group reset aliases are preserved.'],
+    'supported_modes': ['all 16 consume/autoConsume/groupDetect/requireOnlyOneItem flag combinations', 'multiple positive requirements, source early stop and participant ordering'],
     'inventory_slot_selection_is_caller_contract': True,
     'limitations': ['Item/NBT/ore matching is injected; fixture predicates are not Minecraft registry evidence.',
                     'No actual game inventory writes, persistence, party lifecycle, UI or packet integration.',
-                    'groupDetect, OR, auto-consume and multi-requirement consumption are rejected.',
+                    'Source exhausted-slot null-removal crashes reject the entire pure plan; no partial live inventory writes are applied.',
                     'Positive requirements and nonnegative saved counters are required; overflow rejects the plan instead of reproducing legacy Java wraparound.'],
 })
 (out / 'LegacyRetrievalEngineCheck.json').write_text(json.dumps(evidence, indent=2), encoding='utf-8')

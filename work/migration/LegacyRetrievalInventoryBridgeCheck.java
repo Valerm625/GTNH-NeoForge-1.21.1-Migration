@@ -165,9 +165,31 @@ public final class LegacyRetrievalInventoryBridgeCheck {
         try { errorPlan.applyCountsWithoutPublishing(()->true,n->{throw new AssertionError("injected error");});throw new IllegalStateException("Error was swallowed"); }
         catch(AssertionError expected) { check(errorCase.items.get(1).getCount()==5,"Error bypassed rollback"); }
     }
+    static void modeVariants() {
+        var both=quest(task(0,true,require(Items.EMERALD,64),require(Items.BOOK,8)));
+        Inventory supplies=inventory();supplies.items.set(0,new ItemStack(Items.EMERALD,64));supplies.items.set(1,new ItemStack(Items.BOOK,10));
+        var delivery=prepare(both,supplies);check(delivery.plan().allTasksCompleteForActor(),"Actual multi-requirement plan did not complete");
+        rejects(()->delivery.applyCountsWithoutPublishing(()->true,n->{if(n==1)throw new IllegalStateException("multi-requirement rollback fixture");}),"multi-requirement write rollback");
+        check(supplies.items.get(0).getCount()==64 && supplies.items.get(1).getCount()==10,"Multi-requirement rollback lost earlier stack");
+        prepare(both,supplies).applyCountsWithoutPublishing(()->true);check(supplies.items.get(0).isEmpty() && supplies.items.get(1).getCount()==2,"Actual multi-requirement payment differs");
+        Inventory shared=inventory();shared.items.set(0,new ItemStack(Items.OAK_LOG,8));
+        prepare(quest(task(0,true,require(Items.OAK_LOG,2),require(Items.OAK_LOG,3))),shared).applyCountsWithoutPublishing(()->true);
+        check(shared.items.get(0).getCount()==3,"Same slot consumed wrong combined amount");
+        Inventory failure=inventory();failure.items.set(0,new ItemStack(Items.EMERALD,2));failure.items.set(1,new ItemStack(Items.OAK_LOG,2));
+        var fails=quest(task(0,true,require(Items.EMERALD,1)),task(1,true,require(Items.OAK_LOG,2),require(Items.OAK_LOG,3)));
+        rejects(()->prepare(fails,failure),"source exhausted-slot failure");check(failure.items.get(0).getCount()==2 && failure.items.get(1).getCount()==2,"Source failure applied earlier task consumption");
+        Inventory alternative=inventory();alternative.items.set(0,new ItemStack(Items.OAK_LOG,2));alternative.items.set(1,new ItemStack(Items.EMERALD,5));
+        var either=Task.retrieval(0,new Config<>(List.of(require(Items.OAK_LOG,2),require(Items.EMERALD,3)),true,false,false,true));
+        prepare(quest(either),alternative).applyCountsWithoutPublishing(()->true);check(alternative.items.get(0).isEmpty() && alternative.items.get(1).getCount()==5,"OR plan consumed an unnecessary alternative");
+        var group=Task.retrieval(0,new Config<>(List.of(require(Items.OAK_LOG,2)),false,false,true,false));
+        State saved=new State(Map.of(ACTOR,List.of(2)),Set.of());Inventory absent=inventory();
+        var reset=LegacyRetrievalInventoryBridge.prepare(quest(group),Map.of(0,saved),ACTOR,List.of(ACTOR),Map.of(ACTOR,absent),registries,ALLOWED);
+        check(reset.plan().afterStates().get(0).progress().get(ACTOR).equals(List.of(0)) && !reset.plan().questDirty(),"Group reset or source quest dirty behavior differs");
+        check(saved.progress().get(ACTOR).equals(List.of(2)),"Group reset mutated prior snapshot");
+    }
     public static void main(String[] args) throws Exception {
         SharedConstants.tryDetectVersion();Bootstrap.bootStrap();registries=RegistryAccess.fromRegistryOfRegistries(BuiltInRegistries.REGISTRY);
-        basic();immutability();stale();parties();failures();
+        basic();immutability();stale();parties();failures();modeVariants();
         System.out.println("{\"test\":\"actual_minecraft_inventory_bridge\",\"passed\":true,\"assertions\":"+assertions+",\"vanilla_default_stacks_roundtripped\":"+vanillaDefaults+",\"legacy_slots_checked\":40,\"actual_inventory_objects\":true,\"actual_itemstack_objects\":true,\"world_started\":false,\"runtime_integrated\":false,\"export_enabled\":false,\"inventory_transaction_verified\":false}");
     }
 }

@@ -48,5 +48,5 @@ report.update({'source_sha256':{p.relative_to(R).as_posix():sha(p) for p in sour
  'limitations':['Actual vanilla registry, ItemStack and null-owner Inventory objects; no native player/world or mod registry execution.',
  'Bound declarations cover manual task detection only. Gate and party authorization are fixtures; no quest completion, reward, UI or native inventory persistence.',
  'Source readFromNBT executes unchanged with modern NBT/list adapters; JsonToItemStack is a raw-compound adapter, not the old registry or placeholder implementation.',
- 'Nonempty compared NBT, unresolved ore unions, unsupported modes and missing registry targets reject the whole declaration; raw definitions/settings remain retained.']})
+ 'Nonempty compared NBT, unresolved ore unions, unsupported quest-level modes and missing registry targets reject the whole declaration; raw definitions/settings remain retained.']})
 (out/'LegacyRetrievalDefinitionBindingCheck.json').write_text(json.dumps(report,indent=2)+'\n',encoding='utf-8',newline='\n');print(json.dumps(report))

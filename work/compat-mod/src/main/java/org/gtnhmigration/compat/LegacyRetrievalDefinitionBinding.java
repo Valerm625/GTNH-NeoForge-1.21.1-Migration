@@ -82,10 +82,6 @@ public final class LegacyRetrievalDefinitionBinding {
                     boolean auto=flag(task,"autoConsume",path),group=flag(task,"groupDetect",path),one=flag(task,"requireOnlyOneItem",path);
                     ListTag required=list(task,"requiredItems",path);need(!required.isEmpty(),path+".requiredItems","empty_requirements");
                     int before=problems.size();
-                    if(auto)problems.add(new Problem(path+".autoConsume","unsupported_auto_consume"));
-                    if(group)problems.add(new Problem(path+".groupDetect","unsupported_group_detect"));
-                    if(one)problems.add(new Problem(path+".requireOnlyOneItem","unsupported_any_requirement"));
-                    if(consume && required.size()!=1)problems.add(new Problem(path+".requiredItems","unsupported_multi_requirement_consumption"));
                     List<Requirement<FrozenStack>> resolved=new ArrayList<>();
                     for(int item=0;item<required.size();item++) {
                         try {

@@ -62,7 +62,9 @@ public final class LegacyRetrievalDefinitionBindingCheck {
         var bulk=bind(474).requireBound();Inventory stacks=new Inventory(null);for(int i=0;i<5;i++)stacks.items.set(i,new ItemStack(Items.COBBLESTONE,64));
         var bulkPlan=prepare(bulk,stacks);check(bulkPlan.plan().consumed().stream().mapToInt(c->c.count()).sum()==256,"Large requirement was clamped");bulkPlan.applyCountsWithoutPublishing(()->true);check(stacks.items.stream().mapToInt(ItemStack::getCount).sum()==64,"Bulk source delivery lost extra stack");
         rejected(bind(2),"ore_set_mapping_missing");check(bind(2).problems().stream().noneMatch(p->p.code().equals("unsupported_empty_quest")),"Unresolved items mislabeled as empty source quest");check(archive.quest(id(2)).nbt().orElseThrow().getList("tasks",10).getCompound(0).getList("requiredItems",10).getCompound(1).getString("OreDict").equals("logWood"),"Original ore requirement lost");
-        rejected(bind(1914),"unsupported_multi_requirement_consumption");
+        var multi=bind(1914).requireBound();Inventory supplies=new Inventory(null);supplies.items.set(0,new ItemStack(Items.EMERALD,64));supplies.items.set(1,new ItemStack(Items.BOOK,10));
+        var payment=prepare(multi,supplies);check(payment.plan().allTasksCompleteForActor() && payment.plan().consumed().stream().mapToInt(c->c.count()).sum()==72,"Real multi-requirement consumption");payment.applyCountsWithoutPublishing(()->true);
+        check(supplies.items.get(0).isEmpty() && supplies.items.get(1).getCount()==2,"Source emerald/book counts differ");
         byte[] raw=bind(0).definition().bytes();raw[0]^=1;check(Arrays.equals(bind(0).definition().bytes(),archive.document(archive.questPath(id(0)))),"Definition leaked mutable raw data");
         check(dirt.binding().equals(archive.binding()) && dirt.archiveSha256().equals(archive.pin().archiveSha256()),"Binding provenance missing");
     }
@@ -83,7 +85,7 @@ public final class LegacyRetrievalDefinitionBindingCheck {
         consume.addProperty("index:3",1);check(!prepare(changed(q).requireBound(),inv).plan().allTasksCompleteForActor(),"Reverse task order no longer matters");
         JsonObject unknown=new JsonObject();unknown.addProperty("index:3",10);unknown.addProperty("taskID:8","future:unknown");q.getAsJsonObject("tasks:9").add("2:10",unknown);rejected(changed(q),"unsupported_task_type");
         q=json(0);q.getAsJsonObject("tasks:9").add("1:10",task(q).deepCopy());rejected(changed(q),"invalid_or_duplicate_task_index");
-        for(String flag:List.of("autoConsume","groupDetect","requireOnlyOneItem")){q=json(0);task(q).addProperty(flag+":1",1);rejected(changed(q),Map.of("autoConsume","unsupported_auto_consume","groupDetect","unsupported_group_detect","requireOnlyOneItem","unsupported_any_requirement").get(flag));}
+        for(String flag:List.of("autoConsume","groupDetect","requireOnlyOneItem")){q=json(0);task(q).addProperty(flag+":1",1);var cfg=changed(q).requireBound().quest().tasks().getFirst().retrieval();check(switch(flag){case "autoConsume"->cfg.autoConsume();case "groupDetect"->cfg.groupDetect();default->cfg.requireOnlyOneItem();},"Source mode flag lost");}
         for(String flag:List.of("isGlobal","simultaneous")){q=json(0);q.getAsJsonObject("properties:10").getAsJsonObject("betterquesting:10").addProperty(flag+":1",1);rejected(changed(q),flag.equals("isGlobal")?"unsupported_global":"unsupported_simultaneous");}
         q=json(0);q.getAsJsonObject("properties:10").getAsJsonObject("betterquesting:10").addProperty("repeatTime:3",0);rejected(changed(q),"unsupported_repeat");
         q=json(0);q.getAsJsonObject("properties:10").getAsJsonObject("betterquesting:10").addProperty("taskLogic:8","OR");rejected(changed(q),"unsupported_task_logic");rejected(changed(json(0),true,archive.mappedIdentities()),"unsupported_edit_mode");

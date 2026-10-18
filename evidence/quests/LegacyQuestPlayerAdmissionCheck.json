@@ -39,7 +39,7 @@
   "compiled_admission_call_order_audited": true,
   "native_client_sha256": "aff67d0c3bbd015ecd881bb37416b740ada2e1e854433501ec5bb9381dbdd1c2",
   "source_sha256": {
-    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalEngine.java": "974899a867d5f9b2b18295e02c3fc56827064bdfa19c863158ea4b06b0a45758",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalEngine.java": "c10971c2deead54483bc88fc51e02d6712d3d39b2caa8af1de1a8ce7dd4eae79",
     "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalProgressCodec.java": "596a64ed0ed06bad0f70731773078376ea9ab7ec3cba7dacdd8c10faac0fe856",
     "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestProgressEnvelope.java": "43ed5abb2ed2595efa101b9e89d8d8409f84b62ca01cd9c62191ea5e92b9b9a0",
     "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestProgressStoreCodec.java": "7e610faa9cd32b56cf1302c0d62189884defbc8746c393bcf423bd84cd5f2e94",
@@ -54,7 +54,7 @@
     "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestDefinitionArchive.java": "807c4cceff467e7d89e18caa1f86febe3e12a9e09e3417a5ee03896cfbe2c5df",
     "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestEntryPolicy.java": "11545773557758b919438cc3f33d6bbd57635052287154a10cfc3de23a9fd478",
     "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyTypedNbtJsonReader.java": "39bb4cc485f6948ae43cd22445bc5b83dcbfce007c224f2536a4fe1469eba274",
-    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalDefinitionBinding.java": "29d7b86e874378448bc8095be6807d0ad4e00064805b044ca45113acc999c5da",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalDefinitionBinding.java": "45f903d28c21009fa988bae517d1873378c2d7ec7486e4e26636c6d3079d8d7d",
     "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalInventoryBridge.java": "67567271a5a7ec7c5cd8d39d90002ea1fd3bd6f36476ab5bd599e083d2b57808",
     "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestRetrievalPlanner.java": "2f3ba0254efd00e968d5826e74aad7090e32c96e6e1ace542dbc6306b0071fe8",
     "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalStackMatcher.java": "5a33162382b6b47e64c16c2ff499d9976d4491ad55ad4ee7df843b5d93fe439c",

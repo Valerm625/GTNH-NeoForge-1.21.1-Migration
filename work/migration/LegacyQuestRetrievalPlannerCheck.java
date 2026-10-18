@@ -170,6 +170,14 @@ public final class LegacyQuestRetrievalPlannerCheck {
         try { enough.afterInventories().get(A).clear(); } catch(UnsupportedOperationException expected) { immutable=true; }
         require(immutable,"Plan inventory list is mutable");
 
+        for(int flags=0;flags<16;flags++) {
+            var base=config((flags&1)!=0,new int[]{2,3},"log","gravel");
+            var mode=new Config<>(base.requirements(),base.consume(),(flags&2)!=0,(flags&4)!=0,(flags&8)!=0);
+            var multi=quest(List.of(Task.retrieval(8,mode),Task.retrieval(2,config(false,new int[]{1},"log"))));
+            var states=Map.of(8,new State(Map.of(A,List.of(1,1),B,List.of(2,0)),Set.of()));
+            check(multi,states,context(5),OPEN);
+            check(multi,states,new Context<>(A,List.of(OFFLINE,B,A),context(5).inventories()),OPEN);
+        }
         Random random=new Random(3889210202L);
         for(int trial=0;trial<400;trial++) {
             List<Task<String>> tasks=new ArrayList<>(); Map<Integer,State> history=new LinkedHashMap<>();

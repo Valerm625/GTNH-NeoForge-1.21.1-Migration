@@ -45,7 +45,7 @@ public final class LegacyQuestCompletionPlannerCheck {
     }
     static void actual()throws Exception {
         List<BoundQuest> supported=new ArrayList<>();for(UUID q:new TreeSet<>(archive.questIds()))LegacyRetrievalDefinitionBinding.inspect(archive,q,registries).bound().ifPresent(supported::add);
-        equal(supported.size(),38,"Bound source domain changed");var policy=LegacyQuestEntryPolicy.fromArchive(archive);
+        equal(supported.size(),39,"Bound source domain changed");var policy=LegacyQuestEntryPolicy.fromArchive(archive);
         for(var def:supported) {
             List<UUID> otherQuests=new ArrayList<>(archive.questIds());otherQuests.remove(def.quest().id());var parents=completions(otherQuests,ACTOR);
             compare(archive,new State(parents,Map.of()),List.of(def),RUN);
@@ -130,6 +130,6 @@ public final class LegacyQuestCompletionPlannerCheck {
     }
     public static void main(String[] args)throws Exception {
         SharedConstants.tryDetectVersion();Bootstrap.bootStrap();registries=RegistryAccess.fromRegistryOfRegistries(BuiltInRegistries.REGISTRY);archive=LegacyQuestDefinitionArchive.loadPinned(Path.of(args[0]));actual();synthetic();inventoryAndLedger();
-        System.out.println("{\"test\":\"LegacyQuestCompletionPlannerCheck\",\"passed\":true,\"assertions\":"+assertions+",\"source_comparisons\":"+comparisons+",\"source_passes\":"+passes+",\"bound_source_quests\":38,\"runtime_integrated\":false,\"export_enabled\":false,\"game_runtime_verified\":false,\"full_parity\":false}");
+        System.out.println("{\"test\":\"LegacyQuestCompletionPlannerCheck\",\"passed\":true,\"assertions\":"+assertions+",\"source_comparisons\":"+comparisons+",\"source_passes\":"+passes+",\"bound_source_quests\":39,\"runtime_integrated\":false,\"export_enabled\":false,\"game_runtime_verified\":false,\"full_parity\":false}");
     }
 }

@@ -15,7 +15,7 @@
 
 ## 输入及拒绝边界
 
-`Quest` 必须明确给出 AND、负数 repeatTime、simultaneous/global/editMode 均为 false；globalShare 保留原始值，非全局检测中不影响算法。所有任务必须是已审查的 `bq_standard:retrieval`、ignored=false，且提供引擎接受的配置。引擎仍仅支持非消耗 AND 多要求及单要求手动消耗。
+`Quest` 必须明确给出 AND、负数 repeatTime、simultaneous/global/editMode 均为 false；globalShare 保留原始值，非全局检测中不影响算法。所有任务必须是已审查的 `bq_standard:retrieval`、ignored=false，且提供引擎接受的配置。引擎现支持[检索层全部16种标志组合](retrieval-mode-parity.zh-CN.md)，包括多要求消耗和OR；此处的AND约束是quest级任务逻辑。
 
 空 quest、重复 index、未知/非检索任务、缺少检索配置，以及上述未支持模式，都会在任何任务运行前整体拒绝。未知任务即使发起者已完成，也不能悄悄略过。`UnsupportedQuestException` 返回原声明及逐项问题；原完整 NBT/配置仍由调用方保存，不能用本模块的有限字段替换或删去原需求。
 

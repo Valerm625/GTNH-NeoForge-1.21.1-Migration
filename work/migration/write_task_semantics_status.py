@@ -175,7 +175,7 @@ assert compat_row['sha256']==sha(jar)
 assert 'eula=false' in (O/'eula.txt').read_text(encoding='utf-8')
 report={
     'phase_date_shanghai':'2026-10-18',
-    'phase':'journal preparation and recovery with installed startup/player-load call sites, source receipts, archived binary-preserving marker promotion, proven owner mirror/cache reconciliation, non-saving cleanup for pre-world recovery failures and world-bound auxiliary construction recovery; complete pinned source definition archive and native pre-recovery binding check installed; source-backed registry item predicates and manual retrieval declarations connected; source prerequisite gates evaluated from UUID quest completion records; source passive completion pass and supported active-membership projection composed with UUID ledger; native lifecycle execution and full game parity remain incomplete',
+    'phase':'journal preparation and recovery with installed startup/player-load call sites, source receipts, archived binary-preserving marker promotion, proven owner mirror/cache reconciliation, non-saving cleanup for pre-world recovery failures and world-bound auxiliary construction recovery; complete pinned source definition archive and native pre-recovery binding check installed; source-backed registry item predicates and manual retrieval declarations connected; source prerequisite gates evaluated from UUID quest completion records; source passive completion pass and supported active-membership projection composed with UUID ledger; all 16 retrieval mode flag combinations source-compared, including multi-requirement consumption and source exhausted-slot failures; native lifecycle execution and full game parity remain incomplete',
     'checks':checks,
     'compat_jar_sha256':sha(jar),
     'source_quests':manifest['source_quests'],
@@ -221,6 +221,8 @@ report={
     'source_prerequisite_and_nonrepeat_entry_policy_verified':True,
     'native_player_entry_query_compiled':True,
     'source_passive_quest_completion_plan_verified':True,
+    'all_retrieval_flag_combinations_model_verified':True,
+    'retrieval_auto_consume_native_event_registered':False,
     'quest_completion_native_tick_registered':False,
     'native_party_authorization_verified':False,
     'native_retrieval_submission_registered':False,
@@ -260,9 +262,10 @@ metadata['validation_state'].update({
     'world_bound_ledger':'immutable world-relative manifest archived at genesis; historical catalog, non-creating reopen and offline primary/mirror recovery tested; startup/admission call sites installed but not game-executed',
     'player_admission':'source receipts, loaded owner cache checks, first-login absence, native payload return identity and post-event live marker checked in fixtures; native startup/load hooks registered and isolated-transformed; no game execution or unknown cache/mirror repair',
     'player_marker_upgrade':'world-bound maintenance intents, exact before/after gzip archives, targeted binary NBT edit, atomic mirror-first publication, actual cache promotion and process-halt roll-forward tested with synthetic files; native game execution and conflict repair unverified',
-    'quest_completion_planner':'source 60-tick passive completion and active-membership expression compared for 38 bound nonrepeat retrieval declarations; per-UUID records and event/dirty/notice intents preserved; synthetic ledger reopen verified, native tick/cache/party/rewards unimplemented',
+    'retrieval_modes':'all 16 consume/autoConsume/groupDetect/requireOnlyOneItem combinations source-compared; multiple requirements, early stop and aliased group-reset state preserved; source exhausted-slot errors reject whole plans; native automatic event integration remains unavailable',
+    'quest_completion_planner':'source 60-tick passive completion and active-membership expression compared for 39 bound nonrepeat retrieval declarations; per-UUID records and event/dirty/notice intents preserved; synthetic ledger reopen verified, native tick/cache/party/rewards unimplemented',
     'quest_entry_policy':'3814 source nodes and 5460 prerequisite edges; six source logic modes and UUID/global completion presence; three missing references retained, nonrepeat gates source-compared; active-player ledger-head query compiled, no party authorization or game execution',
-    'retrieval_definition_binding':'source task flags, true task indexes and complete requirements bound to actual registry items; 38 vanilla detection declarations verified without native player/world, party authorization, quest completion or rewards',
+    'retrieval_definition_binding':'source task flags, true task indexes and complete requirements bound to actual registry items; 39 vanilla detection declarations verified without native player/world, party authorization, quest completion or rewards',
     'definition_archive':'7806 exact source files, 3814 quests, source settings and identity references retained; pinned content digest checked before bound-world recovery; retrieval progress shapes cataloged but gameplay handlers remain incomplete',
     'maintenance_initialization':'durable world/protocol intent before directory creation and separate completion witness; interrupted genesis completes without advancing main progress or changing player/world bytes; legacy ambiguous partial directories remain blocked',
     'startup_failure_shutdown':'failed loadLevel HEAD with no levels or players, terminal runServer and unwound poisoned scope only; saves skipped, actual lock reopen and unchanged synthetic files checked; native game and loaded-world failure shutdown unverified',
@@ -279,7 +282,7 @@ text+='\n\n'+heading+'\n\n'
 text+='已恢复锁定输入并重新执行本阶段验证。检索与合成的无 NBT 子集现在保留旧版耐久损耗规则，同时拒绝额外名称等不符组件；狩猎任务保留精确 ID 与子类匹配两种模式（包括牛与蘑菇牛的区别）。这些适配只作用于明确标记的迁移任务。\n\n'
 text+=f"依赖闭合的实际任务配置仍为 {report['dependency_closed_active_quests']} / {report['source_quests']}；结构候选 {report['structural_candidates']} 个。修复检测语义没有冒充新增完整任务覆盖。\n\n"
 text+=f"详细新证据见 docs/verification/task-semantics-phase.json。隔离 Sponge 服务已将 {isolated['injections_verified']} 个注入应用到 {isolated['targets_transformed']} 个真实目标类，并通过 {isolated['asm_basic_dataflow_methods']} 个方法的数据流检查和三组破坏性负例；完整 NeoForge 转换链、世界运行、多人全语义和客户端贴图仍未验证；完整迁移目标继续保留。\n"
-text+=f"\n多物品检索纯引擎通过 {engine['source_comparisons']} 次锁定原源码算法对照，支持非消耗 AND 和单要求手动消耗，覆盖同槽预算、跨轮锁定、离线成员和重复提交。物品匹配、库存、存储和参与者仍使用夹具；尚未接入游戏或任务导出，不能计入已迁移任务数。\n"
+text+=f"\n多物品检索纯引擎通过 {engine['source_comparisons']} 次锁定原源码算法对照，支持消耗/自动消耗/组检测/OR的16种组合，覆盖同槽预算、跨轮锁定、离线成员和重复提交；源耗尽槽异常整份拒绝且不写入库存。物品匹配、库存、存储和参与者仍使用夹具；尚未接入游戏或任务导出，不能计入已迁移任务数。\n"
 text+=f"\n新增进度编解码模型通过 {codec['source_comparisons']} 次源码对照与 {codec['binary_nbt_roundtrips']} 次真实 1.21 NBT 往返；有序任务规划模型通过 {planner['source_comparisons']} 次源码对照。两者仍未接入游戏存档、库存事务或导出。\n"
 text+='\n已接入标记检索任务的库存变化排队：包含空槽变化及初始监听器同步，在 Pre tick 重新扫描。完整游戏事件执行仍未验证。\n'
 text+=f"\n{ore['primary_base_pngs_verified_from_archive_through_target']} 张矿石基础图已与锁定主线源码归档逐字节一致；另外 {ore['derived_secondary_pngs_verified_transparent']} 张透明派生层不算原图。仍需客户端渲染、加载优先级及材质着色验证。\n"

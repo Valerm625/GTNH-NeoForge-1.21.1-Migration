@@ -1,8 +1,8 @@
 {
   "test": "source_differential_legacy_quest_retrieval_planner",
   "passed": true,
-  "assertions": 9716,
-  "source_comparisons": 2414,
+  "assertions": 9844,
+  "source_comparisons": 2446,
   "source_quest_detect_executed": true,
   "source_database_order_executed": true,
   "independent_input_snapshots_verified": true,
@@ -19,11 +19,11 @@
     "betterquesting/api2/storage/LookupLogic.java": "220c6021ac4edb2c6259b3650873acd3dbc3f5e458fcc97cc1df6ae3882cf60c"
   },
   "source_sha256": {
-    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalEngine.java": "974899a867d5f9b2b18295e02c3fc56827064bdfa19c863158ea4b06b0a45758",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalEngine.java": "c10971c2deead54483bc88fc51e02d6712d3d39b2caa8af1de1a8ce7dd4eae79",
     "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestRetrievalPlanner.java": "2f3ba0254efd00e968d5826e74aad7090e32c96e6e1ace542dbc6306b0071fe8",
-    "work/migration/LegacyQuestRetrievalPlannerCheck.java": "6f57668e360ef30a82af2e24397e5ab6b66917ebf37dc882c4297783e2901321",
+    "work/migration/LegacyQuestRetrievalPlannerCheck.java": "45f0a8bc7b3dfbc19655f6c370c08d11068ccea129e8ac2afd123f41f2bdd7c3",
     "work/migration/test_legacy_quest_retrieval_planner.py": "ad7cdea188a80cbc12a726086ac43636396d39a636567d2ae41fca332fbf6b2e",
-    "work/migration/test_legacy_retrieval_engine.py": "98ebede8e42c99ee285c76202f20a330b3c8d674cbedbb4b0b6c49be56fdbfd0"
+    "work/migration/test_legacy_retrieval_engine.py": "423d344d6a1a2e7715995bc813113db4927dbf3d2cd9a2d61e407a75218706f4"
   },
   "oracle_sha256": {
     "BqRetrievalReference.java": "16ce13e768f6b1fbad36f5352cedb6f7b3dff0fdf2620553ba594db65abcf1b7",

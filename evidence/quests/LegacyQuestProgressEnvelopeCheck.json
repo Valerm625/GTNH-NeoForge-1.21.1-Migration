@@ -19,7 +19,7 @@
     "work/exact-sources/BetterQuesting/3.8.89-GTNH/src/main/java/betterquesting/questing/tasks/TaskStorage.java": "2d72c4226afa772240cd883d386b0eac5c6770e6679d725e5282f4368a38b8ac",
     "work/exact-sources/BetterQuesting/3.8.89-GTNH/src/main/java/betterquesting/api/utils/NBTConverter.java": "f6a0362455bc0d226974313cd507e8be304bcb52175e3a40f9a14da8516e0db0",
     "work/exact-sources/BetterQuesting/3.8.89-GTNH/src/main/java/betterquesting/api/utils/UuidConverter.java": "5f926386eeeb753dc0c18012ba5e4a6129211668e905fc0deb6d821e3819bc9f",
-    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalEngine.java": "974899a867d5f9b2b18295e02c3fc56827064bdfa19c863158ea4b06b0a45758",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalEngine.java": "c10971c2deead54483bc88fc51e02d6712d3d39b2caa8af1de1a8ce7dd4eae79",
     "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalProgressCodec.java": "596a64ed0ed06bad0f70731773078376ea9ab7ec3cba7dacdd8c10faac0fe856",
     "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestProgressEnvelope.java": "43ed5abb2ed2595efa101b9e89d8d8409f84b62ca01cd9c62191ea5e92b9b9a0",
     "work/migration/LegacyQuestProgressEnvelopeCheck.java": "32744fee6d9cab270a455e559d4c7a36d14f67b703349236545ad0e332f34c67",

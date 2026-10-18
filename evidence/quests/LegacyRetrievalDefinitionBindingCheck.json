@@ -1,24 +1,10 @@
 {
   "test": "LegacyRetrievalDefinitionBindingCheck",
   "passed": true,
-  "assertions": 4108,
-  "source_read_comparisons": 41,
+  "assertions": 4112,
+  "source_read_comparisons": 42,
   "actual_source_quests_inspected": 3814,
-  "bound_vanilla_detection_declarations": 38,
-  "unresolved_problem_occurrences": {
-    "legacy_identity_mapping_missing": 4618,
-    "legacy_nbt_component_mapping_missing": 576,
-    "mapped_target_not_registered": 225,
-    "ore_set_mapping_missing": 75,
-    "unsupported_any_requirement": 133,
-    "unsupported_empty_quest": 1,
-    "unsupported_group_detect": 3,
-    "unsupported_multi_requirement_consumption": 39,
-    "unsupported_repeat": 93,
-    "unsupported_task_logic": 52,
-    "unsupported_task_type": 1920,
-    "wildcard_metadata_set_mapping_missing": 59
-  },
+  "bound_vanilla_detection_declarations": 39,
   "bound_detection_quest_ids": [
     "00000000-0000-0000-0000-000000000000",
     "00000000-0000-0000-0000-000000000007",
@@ -55,16 +41,28 @@
     "00000000-0000-0000-0000-000000000502",
     "00000000-0000-0000-0000-000000000727",
     "00000000-0000-0000-0000-000000000749",
+    "00000000-0000-0000-0000-00000000077a",
     "00000000-0000-0000-0000-0000000007a1",
     "00000000-0000-0000-0000-00000000086f",
     "00000000-0000-0000-0000-000000000c15"
   ],
+  "unresolved_problem_occurrences": {
+    "legacy_identity_mapping_missing": 4618,
+    "legacy_nbt_component_mapping_missing": 576,
+    "mapped_target_not_registered": 225,
+    "ore_set_mapping_missing": 75,
+    "unsupported_empty_quest": 1,
+    "unsupported_repeat": 93,
+    "unsupported_task_logic": 52,
+    "unsupported_task_type": 1920,
+    "wildcard_metadata_set_mapping_missing": 59
+  },
   "runtime_integrated": false,
   "export_enabled": false,
   "game_runtime_verified": false,
   "full_parity": false,
   "source_sha256": {
-    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalEngine.java": "974899a867d5f9b2b18295e02c3fc56827064bdfa19c863158ea4b06b0a45758",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalEngine.java": "c10971c2deead54483bc88fc51e02d6712d3d39b2caa8af1de1a8ce7dd4eae79",
     "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalProgressCodec.java": "596a64ed0ed06bad0f70731773078376ea9ab7ec3cba7dacdd8c10faac0fe856",
     "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestProgressEnvelope.java": "43ed5abb2ed2595efa101b9e89d8d8409f84b62ca01cd9c62191ea5e92b9b9a0",
     "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestProgressStoreCodec.java": "7e610faa9cd32b56cf1302c0d62189884defbc8746c393bcf423bd84cd5f2e94",
@@ -74,12 +72,12 @@
     "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestWorldStore.java": "375b2bcdcd7134f4a0b763faf39ff1e5b54eb6b1e82df75e9820f81339a460e8",
     "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestDefinitionArchive.java": "807c4cceff467e7d89e18caa1f86febe3e12a9e09e3417a5ee03896cfbe2c5df",
     "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyTypedNbtJsonReader.java": "39bb4cc485f6948ae43cd22445bc5b83dcbfce007c224f2536a4fe1469eba274",
-    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalDefinitionBinding.java": "29d7b86e874378448bc8095be6807d0ad4e00064805b044ca45113acc999c5da",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalDefinitionBinding.java": "45f903d28c21009fa988bae517d1873378c2d7ec7486e4e26636c6d3079d8d7d",
     "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalInventoryBridge.java": "67567271a5a7ec7c5cd8d39d90002ea1fd3bd6f36476ab5bd599e083d2b57808",
     "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestRetrievalPlanner.java": "2f3ba0254efd00e968d5826e74aad7090e32c96e6e1ace542dbc6306b0071fe8",
     "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalStackMatcher.java": "5a33162382b6b47e64c16c2ff499d9976d4491ad55ad4ee7df843b5d93fe439c",
-    "work/migration/LegacyRetrievalDefinitionBindingCheck.java": "ab07371c4df3d6bc95727272acca751c009468df8676ea7f5023df66b790e5a4",
-    "work/migration/test_legacy_retrieval_definition_binding.py": "04f2c466534be3c20a77de568c42ff79262291a8bb60ab768a03bd7a7d8d1c3e",
+    "work/migration/LegacyRetrievalDefinitionBindingCheck.java": "ff26eb6e4cbdb96fb04e3e247c633c220cc186f8bf148ce08d03becba49afd22",
+    "work/migration/test_legacy_retrieval_definition_binding.py": "123acf587369579b24f75ab3925f135f11c2ab776e0c0563cd5ed6cae0ac7a80",
     "work/compat-mod/src/main/resources/gtnh_migration/quest-definitions.pin": "f7f22f552f925f93686f1741a75a985d338908c3ce754bacb1877e78aa1d61f1"
   },
   "minecraft_jar_sha256": "26ca9c40d7e1681190b428583c38816852218e78df3f8bdb60a59a78503aec71",
@@ -98,6 +96,6 @@
     "Actual vanilla registry, ItemStack and null-owner Inventory objects; no native player/world or mod registry execution.",
     "Bound declarations cover manual task detection only. Gate and party authorization are fixtures; no quest completion, reward, UI or native inventory persistence.",
     "Source readFromNBT executes unchanged with modern NBT/list adapters; JsonToItemStack is a raw-compound adapter, not the old registry or placeholder implementation.",
-    "Nonempty compared NBT, unresolved ore unions, unsupported modes and missing registry targets reject the whole declaration; raw definitions/settings remain retained."
+    "Nonempty compared NBT, unresolved ore unions, unsupported quest-level modes and missing registry targets reject the whole declaration; raw definitions/settings remain retained."
   ]
 }
