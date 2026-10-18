@@ -1,6 +1,6 @@
 {
   "phase_date_shanghai": "2026-10-18",
-  "phase": "journal preparation and recovery with explicit player authority and integrated-owner cache/mirror/world coordination fixtures; native lifecycle remains unintegrated",
+  "phase": "journal preparation and recovery with native save permits and selected lifecycle entry guards; persistent admission recovery and full game parity remain incomplete",
   "checks": {
     "IsolatedMixinTransformationCheck": {
       "test": "isolated_real_sponge_mixin_transformation",
@@ -30,14 +30,15 @@
           "missing_injection_detected": true
         }
       },
-      "compat_jar_sha256": "6110c37e6f71c0800e8f84e99cb165b71939d919072a405ce733cb90dacae4f9",
+      "compat_jar_sha256": "d454392210f709ff3707f76fb3e650f42d73c99a18993f6e5d812d6b35946896",
       "source_sha256": {
         "work/migration/OfflineMixinService.java": "a7ea57ef2ea959f69885cca79076690724e82a17c768df2d4521e23fddc897df",
         "work/migration/OfflineProperties.java": "10ad2622af4698009243667fac346ad23621d38f86c583aebcb99593059f9f3d",
         "work/migration/IsolatedMixinTransformationCheck.java": "6b87ec3e4f1c26fc0e6b805b94de409a0114422c1514c11fe0afdd99e39259d7",
-        "work/migration/test_isolated_mixin_transformation.py": "356208a42e72a3fc1ac52b964a3709b14daf745f3368962a6710012edb45cda9"
+        "work/migration/test_isolated_mixin_transformation.py": "80ed47d95dfc9607225be26b223b66a3d821f5590cdb9850049011d2b6cedaf6"
       },
       "dependency_sha256": {
+        "neoforge-21.1.262-server.jar": "f57ce3018e21459d24b50508e8c1b4fd5c16324ec1dc5f316c192aa0130e7fe0",
         "sponge-mixin-0.16.4+mixin.0.8.7.jar": "921a2ca066d82d15d2939efd5eb22754e308db74b1e4277130a76625c3638dfd",
         "ftb-quests-neoforge-2101.1.36.jar": "6a39982c4b3afc00b1e788041a4f0d394e1659e3b3a6e5d078cd790bc36d0018",
         "EnderStorage-1.21.1-2.13.0.191.jar": "f52f23f9df8925c7aec26154c2f1816cc76422c67a4fa4e30fa8b80b7a854202"
@@ -46,6 +47,92 @@
         "Uses a dedicated test Mixin service, not NeoForge ModLauncher.",
         "No access transformers, other mods' Mixins, class-definition execution, game event or world is exercised.",
         "ASM BasicVerifier checks transformed method dataflow, not full JVM linkage or gameplay behavior."
+      ]
+    },
+    "NativeSaveScopeMixinCheck": {
+      "test": "native_save_scope_mixin_transformation",
+      "passed": true,
+      "assertions": 131,
+      "targets_transformed": 6,
+      "injections_verified": 30,
+      "asm_basic_dataflow_methods": 586,
+      "actual_sponge_transformer_executed": true,
+      "isolated_mixin_transformation_verified": true,
+      "neoforge_transform_chain_verified": false,
+      "game_runtime_verified": false,
+      "negative_controls": {
+        "missing_player_file_target": {
+          "passed": true,
+          "control": "missing_player_file_target",
+          "mixin_rejected_mutated_target": true
+        },
+        "missing_registration": {
+          "passed": true,
+          "control": "missing_registration",
+          "missing_injection_detected": true
+        }
+      },
+      "client_distribution_isolated_transform_verified": true,
+      "dedicated_distribution_check": {
+        "test": "native_save_scope_mixin_transformation",
+        "passed": true,
+        "assertions": 124,
+        "targets_transformed": 5,
+        "injections_verified": 29,
+        "asm_basic_dataflow_methods": 579,
+        "actual_sponge_transformer_executed": true,
+        "isolated_mixin_transformation_verified": true,
+        "neoforge_transform_chain_verified": false,
+        "game_runtime_verified": false
+      },
+      "compat_jar_sha256": "d454392210f709ff3707f76fb3e650f42d73c99a18993f6e5d812d6b35946896",
+      "source_sha256": {
+        "work/migration/OfflineMixinService.java": "a7ea57ef2ea959f69885cca79076690724e82a17c768df2d4521e23fddc897df",
+        "work/migration/OfflineProperties.java": "10ad2622af4698009243667fac346ad23621d38f86c583aebcb99593059f9f3d",
+        "work/migration/NativeSaveScopeMixinCheck.java": "f4862826176cbfdd9475b7fbcf638af10bf8cf423653752457a07a50e12fc6a4",
+        "work/migration/test_native_save_scope_mixins.py": "d6d31fa6ab5f3be5306131f0b814a3710ba37e4c8ccb62976b14af014f8caff0",
+        "work/migration/acquire_native_client_audit.py": "38aa830027cf861928db5f18f2990ed33b38052ea5f671493f05e8c825a1e366",
+        "locks/native-client-audit-inputs.json": "1542616c4c55281eec4dc906d9a2d0375e45aa50939eb29f67230d80fefa1093",
+        "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyOwnerCacheSaveScopeMixin.java": "ecdfdae475531805608691386bc92db00a521cd03e72bea51a2169d66b050e99",
+        "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyPlayerFileSaveScopeMixin.java": "5dcc727047128bd003fb9cbce3f3d7e0faed68c4ac3c6bb2ff0ed0266c670811",
+        "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyPlayerLifecycleSaveScopeMixin.java": "02959c3788d22c14730e5191bab85bfeb956c602bab5643c5d52da1778526701",
+        "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyPlayerListSaveScopeMixin.java": "418c24fb6d7bcccbad6b0cd28e3d47625fb96759dc223d74c5c8927ed4e2b1f2",
+        "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalNativeSaveScope.java": "9a5e71290f9896a4a6930ec5344962f8b270f083b8772d142d6e5c33cda70346",
+        "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalSaveScope.java": "a6d89c4632d9911a7f2c1d3b2e5c6f575990e15955769f5d6479245ece82b6b6",
+        "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyServerSaveScopeMixin.java": "3be6804be2e1ea417d9aee38a2ef5186f82fe7c0a06d7e98198b9a2f38429512",
+        "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyWorldFileSaveScopeMixin.java": "448b9eb87f8755d88295717b3bc4bc6844b9ae9a2a3673147a6549331fc75656"
+      },
+      "dependency_sha256": {
+        "neoforge-21.1.262-server.jar": "f57ce3018e21459d24b50508e8c1b4fd5c16324ec1dc5f316c192aa0130e7fe0",
+        "neoforge-21.1.262-client.jar": "aff67d0c3bbd015ecd881bb37416b740ada2e1e854433501ec5bb9381dbdd1c2",
+        "client-srg.jar": "a649bd3ce77f122d0f83ae1b37b4b303e662470f928b9bee5fbc76580805ffd4",
+        "sponge-mixin-0.16.4+mixin.0.8.7.jar": "921a2ca066d82d15d2939efd5eb22754e308db74b1e4277130a76625c3638dfd",
+        "ftb-quests-neoforge-2101.1.36.jar": "6a39982c4b3afc00b1e788041a4f0d394e1659e3b3a6e5d078cd790bc36d0018",
+        "EnderStorage-1.21.1-2.13.0.191.jar": "f52f23f9df8925c7aec26154c2f1816cc76422c67a4fa4e30fa8b80b7a854202"
+      },
+      "limitations": [
+        "Uses a dedicated test Mixin service, not NeoForge ModLauncher.",
+        "No access transformers, other mods' Mixins, class-definition execution, game event or world is exercised.",
+        "ASM BasicVerifier checks transformed method dataflow, not full JVM linkage or gameplay behavior."
+      ]
+    },
+    "LegacyRetrievalSaveScopeCheck": {
+      "test": "native_save_scope_state_machine",
+      "passed": true,
+      "assertions": 172,
+      "runtime_integrated": false,
+      "export_enabled": false,
+      "game_runtime_verified": false,
+      "durable_admission_recovery_verified": false,
+      "source_sha256": {
+        "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalSaveScope.java": "a6d89c4632d9911a7f2c1d3b2e5c6f575990e15955769f5d6479245ece82b6b6",
+        "work/migration/LegacyRetrievalSaveScopeCheck.java": "164ec48dc675fcf349ad23bcba276f4f3025679b408337bd292e8a1ec385fd6c",
+        "work/migration/test_legacy_retrieval_save_scope.py": "908b59c9aa715f76011d5cab50fb3e245c1f1d963f1d95eb7eda439eac3e004a"
+      },
+      "limitations": [
+        "Executes the production permit state machine and real Java threads; native save bodies are synthetic callbacks.",
+        "Separate Sponge tests verify actual injections on pinned bytecode, without native class definition or full NeoForge launch.",
+        "Scope quarantine is process-local. No persistent world admission binding, arbitrary mod inventory writes, external filesystem lock, power-loss recovery or complete lifecycle isolation is proven."
       ]
     },
     "LegacyRetrievalEngineCheck": {
@@ -126,7 +213,7 @@
       "wrong_class_mapping_mutation_rejected": true,
       "actual_mixin_transformation_verified": false,
       "game_runtime_verified": false,
-      "compat_jar_sha256": "6110c37e6f71c0800e8f84e99cb165b71939d919072a405ce733cb90dacae4f9",
+      "compat_jar_sha256": "d454392210f709ff3707f76fb3e650f42d73c99a18993f6e5d812d6b35946896",
       "source_sha256": {
         "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyHuntTaskMixin.java": "62e74aa7175a44471a99fefb5ef09374c51fcec548238a4c49c84aafaafb9a93",
         "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyHuntEntityMatcher.java": "1435b87ae0bf98e2a44d31eae9262041cd9d610214d6412839496ada8b5c48d8",
@@ -279,7 +366,7 @@
       "test_source_sha256": "aed919c8f8caccf54a5c619b0f5b5294859ce8522c35398f941d146903f99d41",
       "runner_sha256": "fb6d375d4f805b0bc8393e3211d9b2eaf04d50ab9dea744a2dc20393b848fe65",
       "oracle_fixture_sha256": "24c3d959554108708f56ba755d089edfabd2f3a828af050169081b1c08953ab9",
-      "compat_jar_sha256": "6110c37e6f71c0800e8f84e99cb165b71939d919072a405ce733cb90dacae4f9",
+      "compat_jar_sha256": "d454392210f709ff3707f76fb3e650f42d73c99a18993f6e5d812d6b35946896",
       "ftb_artifact_sha256": "6a39982c4b3afc00b1e788041a4f0d394e1659e3b3a6e5d078cd790bc36d0018",
       "minecraft_artifact_sha256": "26ca9c40d7e1681190b428583c38816852218e78df3f8bdb60a59a78503aec71",
       "packaged_bridge_matches_sources": true,
@@ -529,7 +616,7 @@
       "source_sha256": {
         "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalEngine.java": "974899a867d5f9b2b18295e02c3fc56827064bdfa19c863158ea4b06b0a45758",
         "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestRetrievalPlanner.java": "bf680e9df76a8844bfed402feaf4b535624baf6644ec3de4093f0aab7b68c0e2",
-        "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalInventoryBridge.java": "963cd043c8ba9e8e7ff44f4be30e9c171ec06641ec9a09652406ea00d087ab63",
+        "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalInventoryBridge.java": "67567271a5a7ec7c5cd8d39d90002ea1fd3bd6f36476ab5bd599e083d2b57808",
         "work/migration/LegacyRetrievalInventoryBridgeCheck.java": "def027c0410302e095a7f7afbb872addb6b2e3a71097d2340ca9b8f8e96a77b5",
         "work/migration/test_legacy_retrieval_inventory_bridge.py": "06b8cffb5c92e544f456f71636f917b409d147e78820aed37602ec27e871c5d1"
       },
@@ -654,7 +741,7 @@
       "source_sha256": {
         "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalEngine.java": "974899a867d5f9b2b18295e02c3fc56827064bdfa19c863158ea4b06b0a45758",
         "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestRetrievalPlanner.java": "bf680e9df76a8844bfed402feaf4b535624baf6644ec3de4093f0aab7b68c0e2",
-        "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalInventoryBridge.java": "963cd043c8ba9e8e7ff44f4be30e9c171ec06641ec9a09652406ea00d087ab63",
+        "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalInventoryBridge.java": "67567271a5a7ec7c5cd8d39d90002ea1fd3bd6f36476ab5bd599e083d2b57808",
         "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalProgressCodec.java": "596a64ed0ed06bad0f70731773078376ea9ab7ec3cba7dacdd8c10faac0fe856",
         "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestProgressEnvelope.java": "43ed5abb2ed2595efa101b9e89d8d8409f84b62ca01cd9c62191ea5e92b9b9a0",
         "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestProgressStoreCodec.java": "7e610faa9cd32b56cf1302c0d62189884defbc8746c393bcf423bd84cd5f2e94",
@@ -708,7 +795,7 @@
     "LegacyRetrievalCommitCoordinatorCheck": {
       "test": "retrieval_commit_coordinator",
       "passed": true,
-      "assertions": 164,
+      "assertions": 168,
       "runtime_integrated": false,
       "export_enabled": false,
       "native_adapter_compiled": true,
@@ -718,7 +805,7 @@
       "source_sha256": {
         "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalEngine.java": "974899a867d5f9b2b18295e02c3fc56827064bdfa19c863158ea4b06b0a45758",
         "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestRetrievalPlanner.java": "bf680e9df76a8844bfed402feaf4b535624baf6644ec3de4093f0aab7b68c0e2",
-        "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalInventoryBridge.java": "963cd043c8ba9e8e7ff44f4be30e9c171ec06641ec9a09652406ea00d087ab63",
+        "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalInventoryBridge.java": "67567271a5a7ec7c5cd8d39d90002ea1fd3bd6f36476ab5bd599e083d2b57808",
         "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalProgressCodec.java": "596a64ed0ed06bad0f70731773078376ea9ab7ec3cba7dacdd8c10faac0fe856",
         "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestProgressEnvelope.java": "43ed5abb2ed2595efa101b9e89d8d8409f84b62ca01cd9c62191ea5e92b9b9a0",
         "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestProgressStoreCodec.java": "7e610faa9cd32b56cf1302c0d62189884defbc8746c393bcf423bd84cd5f2e94",
@@ -726,17 +813,19 @@
         "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalTransactionJournal.java": "4fed33c0361a03cfdcf6e5f794257d3d76d6f14da8249a63ed12d41a37c6a149",
         "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalTransactionProposal.java": "b1412dfb9d05d4b9cb6d650166af25f081daa24591d03a277da64b1e2ee0b315",
         "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyPlayerDataFileReader.java": "42229092a2bbb9f21af22721f8734daaadbd34f55f396d9a64575c7d14d7166b",
-        "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalCommitCoordinator.java": "58a0d3c79084795e485a05cee7c842a11452ee256775d815feaf604de799e898",
-        "work/migration/LegacyRetrievalCommitCoordinatorCheck.java": "e87c5fb93736b97e23ac64bec4ce89befc12dbf6b86c8d40f9ccb62637ab2412",
-        "work/migration/test_legacy_retrieval_commit_coordinator.py": "9071ad4e2595159a5a8edfcc94360da4476fcbfea2e68f72c5e46b203660db45"
+        "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalCommitCoordinator.java": "17d763987b83a5e758ae9005ea6b07f40cc28c0288bbf7dd6da3de7b22ad5e3b",
+        "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalSaveScope.java": "a6d89c4632d9911a7f2c1d3b2e5c6f575990e15955769f5d6479245ece82b6b6",
+        "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalNativeSaveScope.java": "9a5e71290f9896a4a6930ec5344962f8b270f083b8772d142d6e5c33cda70346",
+        "work/migration/LegacyRetrievalCommitCoordinatorCheck.java": "4c3558e056085c570f9475721916c7725624041b831ffed7b46f9941bb1272f8",
+        "work/migration/test_legacy_retrieval_commit_coordinator.py": "5579feed1aef6164e088ae24c8f7402b3472bfe8a726c541a40a5b3f4a9d2cb0"
       },
       "minecraft_jar_sha256": "26ca9c40d7e1681190b428583c38816852218e78df3f8bdb60a59a78503aec71",
       "neoforge_patched_server_sha256": "f57ce3018e21459d24b50508e8c1b4fd5c16324ec1dc5f316c192aa0130e7fe0",
       "limitations": [
         "Native ServerPlayer/PlayerDataStorage adapter compiles against the pinned NeoForge server but is not executed. Test runtime uses vanilla Inventory(null), NBT codecs, real files and a synthetic save port.",
-        "Caller must implement continuous save/inventory/lifecycle exclusion and original authorization/party gates. Assertions and server-thread checks do not install a lifecycle barrier.",
+        "Native entry acquires a server/storage save scope and requires guard mixin markers. Selected native entries are protected; arbitrary inventory writes, external writers, durable admission recovery and original authorization/party gates remain the caller/integration responsibility.",
         "This UUID.dat entry still refuses the integrated owner before persistence. The separate submitIntegratedOwner entry is compiled and covered by its own synthetic cache/mirror/world protocol checks; neither native entry is game-runtime verified.",
-        "Failure quarantine blocks this store/inventory from another coordinator submission; it does not stop ordinary game ticks, saves, disconnects or admission. No hooks are registered.",
+        "Synthetic-port failures quarantine the store/inventory. Native entry additionally retains its save scope and blocks the registered save/lifecycle entry points; actual game behavior and persistent restart admission remain unverified.",
         "Only marker locations and actor count edits are changed; no full player reload, task/reward publication, UI synchronization or world import is implemented.",
         "Save failure scenarios are deterministic boundary injections, not a new JVM/power-loss test or live NeoForge callback test. Oak log predicates are fixtures, not a legacy logWood mapping."
       ]
@@ -753,7 +842,7 @@
       "source_sha256": {
         "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalEngine.java": "974899a867d5f9b2b18295e02c3fc56827064bdfa19c863158ea4b06b0a45758",
         "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestRetrievalPlanner.java": "bf680e9df76a8844bfed402feaf4b535624baf6644ec3de4093f0aab7b68c0e2",
-        "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalInventoryBridge.java": "963cd043c8ba9e8e7ff44f4be30e9c171ec06641ec9a09652406ea00d087ab63",
+        "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalInventoryBridge.java": "67567271a5a7ec7c5cd8d39d90002ea1fd3bd6f36476ab5bd599e083d2b57808",
         "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalProgressCodec.java": "596a64ed0ed06bad0f70731773078376ea9ab7ec3cba7dacdd8c10faac0fe856",
         "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestProgressEnvelope.java": "43ed5abb2ed2595efa101b9e89d8d8409f84b62ca01cd9c62191ea5e92b9b9a0",
         "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestProgressStoreCodec.java": "7e610faa9cd32b56cf1302c0d62189884defbc8746c393bcf423bd84cd5f2e94",
@@ -761,10 +850,12 @@
         "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalTransactionJournal.java": "4fed33c0361a03cfdcf6e5f794257d3d76d6f14da8249a63ed12d41a37c6a149",
         "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalTransactionProposal.java": "b1412dfb9d05d4b9cb6d650166af25f081daa24591d03a277da64b1e2ee0b315",
         "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyPlayerDataFileReader.java": "42229092a2bbb9f21af22721f8734daaadbd34f55f396d9a64575c7d14d7166b",
-        "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalCommitCoordinator.java": "58a0d3c79084795e485a05cee7c842a11452ee256775d815feaf604de799e898",
+        "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalCommitCoordinator.java": "17d763987b83a5e758ae9005ea6b07f40cc28c0288bbf7dd6da3de7b22ad5e3b",
+        "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalSaveScope.java": "a6d89c4632d9911a7f2c1d3b2e5c6f575990e15955769f5d6479245ece82b6b6",
+        "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalNativeSaveScope.java": "9a5e71290f9896a4a6930ec5344962f8b270f083b8772d142d6e5c33cda70346",
         "work/migration/LegacyPlayerDataFileReaderCheck.java": "27f47442063c7a8fa659f91f8e8e44a80076704310a810d0e09f2c61991d0932",
         "work/migration/LegacyWorldPlayerAuthorityCheck.java": "99739ede8ada26450ce25f29a62304a7951e9aac6bbd030653783b2f9e138af0",
-        "work/migration/test_legacy_world_player_authority.py": "81bee28b1206e52fc614daf3610bc0551d592a204b8a5d284756c9fd2d757743"
+        "work/migration/test_legacy_world_player_authority.py": "71ff6e9f276440ccd36d4cf8801827c57385c03ef46235ddcfad64b5a01c7d6d"
       },
       "minecraft_jar_sha256": "26ca9c40d7e1681190b428583c38816852218e78df3f8bdb60a59a78503aec71",
       "neoforge_patched_server_sha256": "f57ce3018e21459d24b50508e8c1b4fd5c16324ec1dc5f316c192aa0130e7fe0",
@@ -806,7 +897,7 @@
       "source_sha256": {
         "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalEngine.java": "974899a867d5f9b2b18295e02c3fc56827064bdfa19c863158ea4b06b0a45758",
         "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestRetrievalPlanner.java": "bf680e9df76a8844bfed402feaf4b535624baf6644ec3de4093f0aab7b68c0e2",
-        "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalInventoryBridge.java": "963cd043c8ba9e8e7ff44f4be30e9c171ec06641ec9a09652406ea00d087ab63",
+        "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalInventoryBridge.java": "67567271a5a7ec7c5cd8d39d90002ea1fd3bd6f36476ab5bd599e083d2b57808",
         "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalProgressCodec.java": "596a64ed0ed06bad0f70731773078376ea9ab7ec3cba7dacdd8c10faac0fe856",
         "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestProgressEnvelope.java": "43ed5abb2ed2595efa101b9e89d8d8409f84b62ca01cd9c62191ea5e92b9b9a0",
         "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestProgressStoreCodec.java": "7e610faa9cd32b56cf1302c0d62189884defbc8746c393bcf423bd84cd5f2e94",
@@ -814,10 +905,12 @@
         "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalTransactionJournal.java": "4fed33c0361a03cfdcf6e5f794257d3d76d6f14da8249a63ed12d41a37c6a149",
         "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalTransactionProposal.java": "b1412dfb9d05d4b9cb6d650166af25f081daa24591d03a277da64b1e2ee0b315",
         "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyPlayerDataFileReader.java": "42229092a2bbb9f21af22721f8734daaadbd34f55f396d9a64575c7d14d7166b",
-        "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalCommitCoordinator.java": "58a0d3c79084795e485a05cee7c842a11452ee256775d815feaf604de799e898",
-        "work/migration/LegacyRetrievalCommitCoordinatorCheck.java": "e87c5fb93736b97e23ac64bec4ce89befc12dbf6b86c8d40f9ccb62637ab2412",
+        "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalCommitCoordinator.java": "17d763987b83a5e758ae9005ea6b07f40cc28c0288bbf7dd6da3de7b22ad5e3b",
+        "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalSaveScope.java": "a6d89c4632d9911a7f2c1d3b2e5c6f575990e15955769f5d6479245ece82b6b6",
+        "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalNativeSaveScope.java": "9a5e71290f9896a4a6930ec5344962f8b270f083b8772d142d6e5c33cda70346",
+        "work/migration/LegacyRetrievalCommitCoordinatorCheck.java": "4c3558e056085c570f9475721916c7725624041b831ffed7b46f9941bb1272f8",
         "work/migration/LegacyIntegratedOwnerCoordinatorCheck.java": "c13e307e7778d2abe86ab77a000e497d4d5c8cccf580bd1a272f6b5a9e2bb24d",
-        "work/migration/test_legacy_integrated_owner_coordinator.py": "f222c7f524c153cc2dd315591b7a1ac794a452bb1fe351a73abd7e4ae2f8cf6b",
+        "work/migration/test_legacy_integrated_owner_coordinator.py": "cd2a8f815f6717c3f3bb4242d29a9f46efbcd68390bb57b50b3e3615c7ff07f2",
         "work/migration/acquire_native_client_audit.py": "38aa830027cf861928db5f18f2990ed33b38052ea5f671493f05e8c825a1e366",
         "locks/native-client-audit-inputs.json": "1542616c4c55281eec4dc906d9a2d0375e45aa50939eb29f67230d80fefa1093"
       },
@@ -854,7 +947,7 @@
         "native_code_executed": false
       },
       "limitations": [
-        "The compiled native owner adapter is not registered or executed. Tests use actual Inventory/ItemStack/NBT/ledger files and synthetic save boundaries, not native Player/world/client execution.",
+        "The compiled native owner adapter is not connected to a gameplay submit handler or executed; passive native guard mixins are registered. Tests use actual Inventory/ItemStack/NBT/ledger files and synthetic save boundaries, not native Player/world/client execution.",
         "The caller must continuously exclude all world/player saves, mutations and lifecycle changes on the entire server. The owner adapter calls saveEverything and abort repair may call PlayerList.saveAll, affecting all players and their native save callbacks.",
         "Only level.dat decides owner COMMIT/ABORT. Cache and UUID mirror must also agree before final resolution. Unknown mirrors/caches, failed repair or concurrent world metadata changes preserve pending intent and require isolated recovery.",
         "First world-player baseline creation, failed saves and later saves after abort are synthetic fixtures. No new JVM halt/power-loss validation, datafixer, backup fallback, login admission, role-switch recovery or EULA acceptance is claimed.",
@@ -955,7 +1048,7 @@
         "0:456": "e6556c4a267e1bde83949d2e3a93d5ad53fed963557db2188990de3ded14e28c",
         "0:42": "cadcc2de303f04719db7e2021ae6e61b5649780d8d69d96b3c90019c5f69aced"
       },
-      "export_manifest_sha256": "9abf3cd921083abe5455f382e10419e6f6b90eb929bd1ede888cafa18882f860",
+      "export_manifest_sha256": "3446890fc1b1b06ad55fa6f6c9e15a087d56c7a051efa17cd5414885834eb448",
       "verifier_sha256": "8dcf6ec98717afc21d831c641090803935abe0926fa864d4b0d85f6453e1d79c",
       "source_sha256": "96669f3e782ca8ce3a92d1225e0adddf5519595ad193e44ac52035c67235be41",
       "target_source_sha256": "ff4345ea224da2889fab822050619448e71da420eebff206218c2bfec9505b1f",
@@ -1858,7 +1951,7 @@
       "production_assets_modified": false
     }
   },
-  "compat_jar_sha256": "6110c37e6f71c0800e8f84e99cb165b71939d919072a405ce733cb90dacae4f9",
+  "compat_jar_sha256": "d454392210f709ff3707f76fb3e650f42d73c99a18993f6e5d812d6b35946896",
   "source_quests": 3814,
   "structural_candidates": 47,
   "dependency_closed_active_quests": 2,
@@ -1883,6 +1976,10 @@
   "integrated_owner_cache_and_world_save_bytecode_audited": true,
   "integrated_owner_submission_fixture_verified": true,
   "integrated_owner_native_adapter_compiled": true,
+  "native_save_permit_state_machine_verified": true,
+  "native_save_guard_mixins_isolated_verified": true,
+  "native_save_guard_game_runtime_verified": false,
+  "durable_admission_recovery_verified": false,
   "integrated_owner_native_submission_verified": false,
   "native_player_save_verified": false,
   "persistent_player_marker_scope_fixture_verified": true,

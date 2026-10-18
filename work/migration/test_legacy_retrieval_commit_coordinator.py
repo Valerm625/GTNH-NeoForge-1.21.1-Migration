@@ -15,7 +15,7 @@ assert hashlib.sha256(patched.read_bytes()).hexdigest()=='f57ce3018e21459d24b505
 def relative(path):return Path(os.path.relpath(path,out)).as_posix()
 cp=';'.join(relative(path) for path in [minecraft,extra]+libraries)
 compile_cp=';'.join(relative(path) for path in [patched,universal])+ ';'+cp
-names=['LegacyRetrievalEngine','LegacyQuestRetrievalPlanner','LegacyRetrievalInventoryBridge','LegacyRetrievalProgressCodec','LegacyQuestProgressEnvelope','LegacyQuestProgressStoreCodec','LegacyQuestProgressFileStore','LegacyRetrievalTransactionJournal','LegacyRetrievalTransactionProposal','LegacyPlayerDataFileReader','LegacyRetrievalCommitCoordinator']
+names=['LegacyRetrievalEngine','LegacyQuestRetrievalPlanner','LegacyRetrievalInventoryBridge','LegacyRetrievalProgressCodec','LegacyQuestProgressEnvelope','LegacyQuestProgressStoreCodec','LegacyQuestProgressFileStore','LegacyRetrievalTransactionJournal','LegacyRetrievalTransactionProposal','LegacyPlayerDataFileReader','LegacyRetrievalCommitCoordinator','LegacyRetrievalSaveScope','LegacyRetrievalNativeSaveScope']
 sources=[R/'work/compat-mod/src/main/java/org/gtnhmigration/compat'/(name+'.java') for name in names]
 check=R/'work/migration/LegacyRetrievalCommitCoordinatorCheck.java'
 def run(executable,arguments,name):
@@ -32,9 +32,9 @@ log=run(java,['-cp','.;'+cp,'org.gtnhmigration.compat.LegacyRetrievalCommitCoord
 report=json.loads(next(line[line.index('{'): ] for line in log.splitlines() if '{"test":' in line))
 report.update({'source_sha256':{p.relative_to(R).as_posix():hashlib.sha256(p.read_bytes()).hexdigest() for p in sources+[check,Path(__file__)]},'minecraft_jar_sha256':hashlib.sha256(minecraft.read_bytes()).hexdigest(),'neoforge_patched_server_sha256':hashlib.sha256(patched.read_bytes()).hexdigest(),
  'limitations':['Native ServerPlayer/PlayerDataStorage adapter compiles against the pinned NeoForge server but is not executed. Test runtime uses vanilla Inventory(null), NBT codecs, real files and a synthetic save port.',
- 'Caller must implement continuous save/inventory/lifecycle exclusion and original authorization/party gates. Assertions and server-thread checks do not install a lifecycle barrier.',
+ 'Native entry acquires a server/storage save scope and requires guard mixin markers. Selected native entries are protected; arbitrary inventory writes, external writers, durable admission recovery and original authorization/party gates remain the caller/integration responsibility.',
  'This UUID.dat entry still refuses the integrated owner before persistence. The separate submitIntegratedOwner entry is compiled and covered by its own synthetic cache/mirror/world protocol checks; neither native entry is game-runtime verified.',
- 'Failure quarantine blocks this store/inventory from another coordinator submission; it does not stop ordinary game ticks, saves, disconnects or admission. No hooks are registered.',
+ 'Synthetic-port failures quarantine the store/inventory. Native entry additionally retains its save scope and blocks the registered save/lifecycle entry points; actual game behavior and persistent restart admission remain unverified.',
  'Only marker locations and actor count edits are changed; no full player reload, task/reward publication, UI synchronization or world import is implemented.',
  'Save failure scenarios are deterministic boundary injections, not a new JVM/power-loss test or live NeoForge callback test. Oak log predicates are fixtures, not a legacy logWood mapping.']})
 (out/'LegacyRetrievalCommitCoordinatorCheck.json').write_text(json.dumps(report,indent=2)+'\n',encoding='utf-8',newline='\n');print(json.dumps(report))

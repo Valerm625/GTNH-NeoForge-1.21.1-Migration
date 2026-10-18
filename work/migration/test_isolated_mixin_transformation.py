@@ -13,7 +13,8 @@ out.mkdir(parents=True, exist_ok=True)
 java = Path(json.loads((R / 'work/migration/runtime.json').read_text(encoding='utf-8'))['java'])
 launch = (O / 'libraries/net/neoforged/neoforge/21.1.262/win_args.txt').read_text(encoding='utf-8')
 mc = O / 'libraries/net/minecraft/server/1.21.1-20240808.144430'
-libs = [mc / 'server-1.21.1-20240808.144430-srg.jar', mc / 'server-1.21.1-20240808.144430-extra.jar']
+patched = O / 'libraries/net/neoforged/neoforge/21.1.262/neoforge-21.1.262-server.jar'
+libs = [patched, mc / 'server-1.21.1-20240808.144430-srg.jar', mc / 'server-1.21.1-20240808.144430-extra.jar']
 libs += [O / name for name in re.search(r'^-DlegacyClassPath=(.*)$', launch, re.M).group(1).strip().split(';')]
 libs += sorted((O / 'mods').glob('*.jar'))
 libs += [O / 'libraries/net/neoforged/neoforge/21.1.262/neoforge-21.1.262-universal.jar']
@@ -32,7 +33,9 @@ with zipfile.ZipFile(compat) as jar:
     config = json.loads(jar.read('gtnh_migration_compat.mixins.json'))
     expected = {'EnderTankCapacityMixin', 'LegacyRetrievalItemTaskMixin', 'LegacyDimensionLocationTaskMixin',
                 'LegacyHuntTaskMixin', 'LegacyCraftingItemTaskMixin', 'LegacyInventoryListenerMixin', 'LegacyTaskLoginTimingMixin', 'LegacyInitialInventorySyncMixin'}
-    assert len(config['mixins']) == 8 and set(config['mixins']) == expected
+    expected |= {'LegacyServerSaveScopeMixin','LegacyPlayerListSaveScopeMixin','LegacyPlayerFileSaveScopeMixin','LegacyWorldFileSaveScopeMixin','LegacyPlayerLifecycleSaveScopeMixin'}
+    assert len(config['mixins']) == 13 and set(config['mixins']) == expected
+    assert config['client'] == ['LegacyOwnerCacheSaveScopeMixin']
     assert config['required'] and config['package'] == 'org.gtnhmigration.compat'
     config['mixins'].remove('LegacyHuntTaskMixin')
     (out / 'missing-registration.mixins.json').write_text(json.dumps(config), encoding='utf-8', newline='\n')
@@ -67,7 +70,7 @@ report.update({
     'compat_jar_sha256': sha(compat),
     'source_sha256': {source.relative_to(R).as_posix(): sha(source) for source in [*sources, Path(__file__)]},
     'dependency_sha256': {path.name: sha(path) for path in
-                          [mixin, O / 'mods/ftb-quests-neoforge-2101.1.36.jar', O / 'mods/EnderStorage-1.21.1-2.13.0.191.jar']},
+                          [patched, mixin, O / 'mods/ftb-quests-neoforge-2101.1.36.jar', O / 'mods/EnderStorage-1.21.1-2.13.0.191.jar']},
     'limitations': [
         'Uses a dedicated test Mixin service, not NeoForge ModLauncher.',
         "No access transformers, other mods' Mixins, class-definition execution, game event or world is exercised.",

@@ -11,7 +11,15 @@
     "LegacyCraftingItemTaskMixin",
     "LegacyInventoryListenerMixin",
     "LegacyTaskLoginTimingMixin",
-    "LegacyInitialInventorySyncMixin"
+    "LegacyInitialInventorySyncMixin",
+    "LegacyServerSaveScopeMixin",
+    "LegacyPlayerListSaveScopeMixin",
+    "LegacyPlayerFileSaveScopeMixin",
+    "LegacyWorldFileSaveScopeMixin",
+    "LegacyPlayerLifecycleSaveScopeMixin"
+  ],
+  "client": [
+    "LegacyOwnerCacheSaveScopeMixin"
   ],
   "injectors": {
     "defaultRequire": 1

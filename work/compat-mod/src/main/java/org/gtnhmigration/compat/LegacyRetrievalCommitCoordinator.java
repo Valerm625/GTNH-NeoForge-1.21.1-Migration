@@ -58,7 +58,7 @@ public final class LegacyRetrievalCommitCoordinator {
      */
     public Outcome submit(Prepared inventory,Optional<LegacyQuestProgressFileStore.Head> plannedHead,
             ServerPlayer player,PlayerDataStorage storage,Runnable assertExclusive,BooleanSupplier authorization)throws IOException {
-        return submit(inventory,plannedHead,new NativePlayerPort(player,storage,assertExclusive),authorization);
+        return guardedNativeSubmit(inventory,plannedHead,player,storage,assertExclusive,authorization,false);
     }
     /** Explicit integrated-owner path. The barrier must cover the entire server,
      * including other players and world saves: saveEverything saves all of them.
@@ -66,7 +66,20 @@ public final class LegacyRetrievalCommitCoordinator {
      */
     public Outcome submitIntegratedOwner(Prepared inventory,Optional<LegacyQuestProgressFileStore.Head> plannedHead,
             ServerPlayer player,PlayerDataStorage storage,Runnable assertExclusive,BooleanSupplier authorization)throws IOException {
-        return submit(inventory,plannedHead,new NativeIntegratedOwnerPort(player,storage,assertExclusive),authorization);
+        return guardedNativeSubmit(inventory,plannedHead,player,storage,assertExclusive,authorization,true);
+    }
+    private Outcome guardedNativeSubmit(Prepared inventory,Optional<LegacyQuestProgressFileStore.Head> plannedHead,
+            ServerPlayer player,PlayerDataStorage storage,Runnable assertExclusive,BooleanSupplier authorization,boolean owner)throws IOException {
+        try(var scope=LegacyRetrievalNativeSaveScope.begin(player,storage)) {
+            try {
+                Outcome result=submit(inventory,plannedHead,owner?new NativeIntegratedOwnerPort(player,storage,assertExclusive):new NativePlayerPort(player,storage,assertExclusive),authorization);
+                scope.release();return result;
+            } catch(IOException|RuntimeException|Error failure) {
+                if(recoveryRequired() || scope.recoveryRequired()) {quarantine(inventory);scope.quarantine();}
+                else scope.release();
+                throw failure;
+            }
+        }
     }
     Outcome submit(Prepared inventory,Optional<LegacyQuestProgressFileStore.Head> plannedHead,
             PlayerPort player,BooleanSupplier authorization)throws IOException {
@@ -149,6 +162,7 @@ public final class LegacyRetrievalCommitCoordinator {
         }
         require(sameCritical(actual.data(),player.capture()),"Recovered disk and live inventory/marker differ");
         player.verifySecondary(actual.data());
+        inventory.verifyBeforeResolution(decision==Decision.COMMIT);
         actual.verifyUnchanged();player.assertExclusive();
         require(store.current().orElseThrow().sha256().equals(preparedHead),"Ledger changed during player save");
         Resolution resolution=journal.resolve(actual);
@@ -232,11 +246,12 @@ public final class LegacyRetrievalCommitCoordinator {
             // for the integrated owner. UUID.dat alone cannot prove its save.
             if(player.getServer().isSingleplayerOwner(player.getGameProfile()))
                 throw new IllegalStateException("Integrated owner requires level.dat and player-cache coordination before submission");
+            LegacyRetrievalNativeSaveScope.assertHeld(player);
             barrier.run();
         }
         public CompoundTag capture(){assertExclusive();return player.saveWithoutId(new CompoundTag()).copy();}
         public void replaceMarker(CompoundTag expected,CompoundTag target)throws IOException {assertExclusive();replacePersistentMarker(player.getPersistentData(),expected,target);}
-        public void save(){assertExclusive();storage.save(player);}
+        public void save(){assertExclusive();LegacyRetrievalNativeSaveScope.savePlayer(storage,player);}
     }
     private static final class NativeIntegratedOwnerPort extends WorldPlayerPort {
         private final ServerPlayer player;private final PlayerDataStorage storage;
@@ -256,6 +271,7 @@ public final class LegacyRetrievalCommitCoordinator {
                     || server.getPlayerList().getPlayer(actor())!=player || player.connection==null
                     || !playerDirectory().toAbsolutePath().normalize().equals(server.getWorldPath(LevelResource.PLAYER_DATA_DIR).toAbsolutePath().normalize()))
                 throw new IllegalStateException("Integrated owner, active player list, or world storage changed");
+            LegacyRetrievalNativeSaveScope.assertHeld(player);
             barrier.run();
         }
         public CompoundTag capture(){assertExclusive();return player.saveWithoutId(new CompoundTag()).copy();}
@@ -264,8 +280,8 @@ public final class LegacyRetrievalCommitCoordinator {
             assertExclusive();CompoundTag cached=server.getPlayerList().getSingleplayerData();
             require(cached!=null,"Integrated owner cache is missing");return cached.copy();
         }
-        public void save(){assertExclusive();server.saveEverything(false,false,false);}
-        void savePlayers(){assertExclusive();server.getPlayerList().saveAll();}
+        public void save(){assertExclusive();LegacyRetrievalNativeSaveScope.saveOwner(server);}
+        void savePlayers(){assertExclusive();LegacyRetrievalNativeSaveScope.savePlayers(server);}
     }
     private static void require(boolean condition,String message)throws IOException {if(!condition)throw new IOException(message);}
 }

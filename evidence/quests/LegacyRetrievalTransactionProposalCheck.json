@@ -10,7 +10,7 @@
   "source_sha256": {
     "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalEngine.java": "974899a867d5f9b2b18295e02c3fc56827064bdfa19c863158ea4b06b0a45758",
     "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestRetrievalPlanner.java": "bf680e9df76a8844bfed402feaf4b535624baf6644ec3de4093f0aab7b68c0e2",
-    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalInventoryBridge.java": "963cd043c8ba9e8e7ff44f4be30e9c171ec06641ec9a09652406ea00d087ab63",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalInventoryBridge.java": "67567271a5a7ec7c5cd8d39d90002ea1fd3bd6f36476ab5bd599e083d2b57808",
     "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalProgressCodec.java": "596a64ed0ed06bad0f70731773078376ea9ab7ec3cba7dacdd8c10faac0fe856",
     "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestProgressEnvelope.java": "43ed5abb2ed2595efa101b9e89d8d8409f84b62ca01cd9c62191ea5e92b9b9a0",
     "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestProgressStoreCodec.java": "7e610faa9cd32b56cf1302c0d62189884defbc8746c393bcf423bd84cd5f2e94",

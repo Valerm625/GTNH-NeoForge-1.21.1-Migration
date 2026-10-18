@@ -11,7 +11,7 @@
   "source_sha256": {
     "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalEngine.java": "974899a867d5f9b2b18295e02c3fc56827064bdfa19c863158ea4b06b0a45758",
     "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestRetrievalPlanner.java": "bf680e9df76a8844bfed402feaf4b535624baf6644ec3de4093f0aab7b68c0e2",
-    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalInventoryBridge.java": "963cd043c8ba9e8e7ff44f4be30e9c171ec06641ec9a09652406ea00d087ab63",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalInventoryBridge.java": "67567271a5a7ec7c5cd8d39d90002ea1fd3bd6f36476ab5bd599e083d2b57808",
     "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalProgressCodec.java": "596a64ed0ed06bad0f70731773078376ea9ab7ec3cba7dacdd8c10faac0fe856",
     "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestProgressEnvelope.java": "43ed5abb2ed2595efa101b9e89d8d8409f84b62ca01cd9c62191ea5e92b9b9a0",
     "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestProgressStoreCodec.java": "7e610faa9cd32b56cf1302c0d62189884defbc8746c393bcf423bd84cd5f2e94",
@@ -19,10 +19,12 @@
     "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalTransactionJournal.java": "4fed33c0361a03cfdcf6e5f794257d3d76d6f14da8249a63ed12d41a37c6a149",
     "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalTransactionProposal.java": "b1412dfb9d05d4b9cb6d650166af25f081daa24591d03a277da64b1e2ee0b315",
     "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyPlayerDataFileReader.java": "42229092a2bbb9f21af22721f8734daaadbd34f55f396d9a64575c7d14d7166b",
-    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalCommitCoordinator.java": "58a0d3c79084795e485a05cee7c842a11452ee256775d815feaf604de799e898",
-    "work/migration/LegacyRetrievalCommitCoordinatorCheck.java": "e87c5fb93736b97e23ac64bec4ce89befc12dbf6b86c8d40f9ccb62637ab2412",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalCommitCoordinator.java": "17d763987b83a5e758ae9005ea6b07f40cc28c0288bbf7dd6da3de7b22ad5e3b",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalSaveScope.java": "a6d89c4632d9911a7f2c1d3b2e5c6f575990e15955769f5d6479245ece82b6b6",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalNativeSaveScope.java": "9a5e71290f9896a4a6930ec5344962f8b270f083b8772d142d6e5c33cda70346",
+    "work/migration/LegacyRetrievalCommitCoordinatorCheck.java": "4c3558e056085c570f9475721916c7725624041b831ffed7b46f9941bb1272f8",
     "work/migration/LegacyIntegratedOwnerCoordinatorCheck.java": "c13e307e7778d2abe86ab77a000e497d4d5c8cccf580bd1a272f6b5a9e2bb24d",
-    "work/migration/test_legacy_integrated_owner_coordinator.py": "f222c7f524c153cc2dd315591b7a1ac794a452bb1fe351a73abd7e4ae2f8cf6b",
+    "work/migration/test_legacy_integrated_owner_coordinator.py": "cd2a8f815f6717c3f3bb4242d29a9f46efbcd68390bb57b50b3e3615c7ff07f2",
     "work/migration/acquire_native_client_audit.py": "38aa830027cf861928db5f18f2990ed33b38052ea5f671493f05e8c825a1e366",
     "locks/native-client-audit-inputs.json": "1542616c4c55281eec4dc906d9a2d0375e45aa50939eb29f67230d80fefa1093"
   },
@@ -59,7 +61,7 @@
     "native_code_executed": false
   },
   "limitations": [
-    "The compiled native owner adapter is not registered or executed. Tests use actual Inventory/ItemStack/NBT/ledger files and synthetic save boundaries, not native Player/world/client execution.",
+    "The compiled native owner adapter is not connected to a gameplay submit handler or executed; passive native guard mixins are registered. Tests use actual Inventory/ItemStack/NBT/ledger files and synthetic save boundaries, not native Player/world/client execution.",
     "The caller must continuously exclude all world/player saves, mutations and lifecycle changes on the entire server. The owner adapter calls saveEverything and abort repair may call PlayerList.saveAll, affecting all players and their native save callbacks.",
     "Only level.dat decides owner COMMIT/ABORT. Cache and UUID mirror must also agree before final resolution. Unknown mirrors/caches, failed repair or concurrent world metadata changes preserve pending intent and require isolated recovery.",
     "First world-player baseline creation, failed saves and later saves after abort are synthetic fixtures. No new JVM halt/power-loss validation, datafixer, backup fallback, login admission, role-switch recovery or EULA acceptance is claimed.",

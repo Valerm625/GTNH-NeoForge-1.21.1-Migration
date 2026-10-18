@@ -96,6 +96,12 @@ public final class LegacyRetrievalInventoryBridge {
             requireSnapshot(plan.beforeInventories());
         }
         void quarantine() { synchronized (IN_FLIGHT) { RECOVERY_REQUIRED.addAll(live.values()); } }
+        /** Save callbacks may have touched any observed participant. Recheck the
+         * entire plan immediately before publishing a coordinator decision. */
+        void verifyBeforeResolution(boolean committed) {
+            if(Thread.currentThread()!=owner)throw new IllegalStateException("Inventory resolution on another thread");
+            requireSnapshot(committed?plan.afterInventories():plan.beforeInventories());
+        }
 
         /** Coordinator-only rollback after the authoritative file proves ABORT.
          * Reuses original objects and refuses any intervening inventory change.

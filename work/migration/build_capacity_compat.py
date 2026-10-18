@@ -65,7 +65,7 @@ side="BOTH"
 [[mixins]]
 config="gtnh_migration_compat.mixins.json"
 ''',encoding='utf-8',newline='\n')
-(resources/'gtnh_migration_compat.mixins.json').write_text(json.dumps({'required':True,'minVersion':'0.8','package':'org.gtnhmigration.compat','compatibilityLevel':'JAVA_21','mixins':['EnderTankCapacityMixin','LegacyRetrievalItemTaskMixin','LegacyDimensionLocationTaskMixin','LegacyHuntTaskMixin','LegacyCraftingItemTaskMixin','LegacyInventoryListenerMixin','LegacyTaskLoginTimingMixin','LegacyInitialInventorySyncMixin'],'injectors':{'defaultRequire':1}},indent=2),encoding='utf-8',newline='\n')
+(resources/'gtnh_migration_compat.mixins.json').write_text(json.dumps({'required':True,'minVersion':'0.8','package':'org.gtnhmigration.compat','compatibilityLevel':'JAVA_21','mixins':['EnderTankCapacityMixin','LegacyRetrievalItemTaskMixin','LegacyDimensionLocationTaskMixin','LegacyHuntTaskMixin','LegacyCraftingItemTaskMixin','LegacyInventoryListenerMixin','LegacyTaskLoginTimingMixin','LegacyInitialInventorySyncMixin','LegacyServerSaveScopeMixin','LegacyPlayerListSaveScopeMixin','LegacyPlayerFileSaveScopeMixin','LegacyWorldFileSaveScopeMixin','LegacyPlayerLifecycleSaveScopeMixin'],'client':['LegacyOwnerCacheSaveScopeMixin'],'injectors':{'defaultRequire':1}},indent=2),encoding='utf-8',newline='\n')
 (resources/'LICENSE').write_text('''MIT License
 Copyright (c) 2026 Local GTNH migration project
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
@@ -101,6 +101,7 @@ lock['unintegrated_helpers'] += [
  'LegacyRetrievalTransactionJournal; expected-head intent/decision records, clone-persisted marker proposals and synthetic player-file recovery, no native player save',
  'LegacyRetrievalTransactionProposal; actual inventory/player-NBT/quest-progress composition, no world coordinator',
  'LegacyPlayerDataFileReader; explicit UUID.dat or level.dat/Data/Player integrity/readback; journal binds source authority, synthetic files only; no native lifecycle isolation',
- 'LegacyRetrievalCommitCoordinator; explicit UUID-file and integrated-owner cache/mirror/world save/readback and conditional rollback protocols; native adapters compiled, fixture execution only; owner path saves all players/world and requires whole-server lifecycle exclusion, no registered game handler',
+ 'LegacyRetrievalSaveScope and LegacyRetrievalNativeSaveScope; one-use native save permits and process-local quarantine; 30 selected save/lifecycle guards, no arbitrary inventory write isolation or durable admission recovery',
+ 'LegacyRetrievalCommitCoordinator; explicit UUID-file and integrated-owner cache/mirror/world save/readback and conditional rollback protocols; native adapters compiled and acquire server/storage save permits; required save/lifecycle mixins are registered and isolated-transformed, fixture execution only; no persistent admission recovery or gameplay submit handler',
 ]
 (O/'docs/compat-mod.lock.json').write_text(json.dumps(lock,indent=2),encoding='utf-8',newline='\n');print(json.dumps(lock))

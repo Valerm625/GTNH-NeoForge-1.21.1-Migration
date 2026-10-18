@@ -15,7 +15,7 @@ assert hashlib.sha256(patched.read_bytes()).hexdigest()=='f57ce3018e21459d24b505
 def relative(path):return Path(os.path.relpath(path,out)).as_posix()
 cp=';'.join(relative(path) for path in [minecraft,extra]+libraries)
 compile_cp=';'.join(relative(path) for path in [patched,universal])+ ';'+cp
-names=['LegacyRetrievalEngine','LegacyQuestRetrievalPlanner','LegacyRetrievalInventoryBridge','LegacyRetrievalProgressCodec','LegacyQuestProgressEnvelope','LegacyQuestProgressStoreCodec','LegacyQuestProgressFileStore','LegacyRetrievalTransactionJournal','LegacyRetrievalTransactionProposal','LegacyPlayerDataFileReader','LegacyRetrievalCommitCoordinator']
+names=['LegacyRetrievalEngine','LegacyQuestRetrievalPlanner','LegacyRetrievalInventoryBridge','LegacyRetrievalProgressCodec','LegacyQuestProgressEnvelope','LegacyQuestProgressStoreCodec','LegacyQuestProgressFileStore','LegacyRetrievalTransactionJournal','LegacyRetrievalTransactionProposal','LegacyPlayerDataFileReader','LegacyRetrievalCommitCoordinator','LegacyRetrievalSaveScope','LegacyRetrievalNativeSaveScope']
 sources=[R/'work/compat-mod/src/main/java/org/gtnhmigration/compat'/(name+'.java') for name in names]
 check=R/'work/migration/LegacyIntegratedOwnerCoordinatorCheck.java'
 helper=R/'work/migration/LegacyRetrievalCommitCoordinatorCheck.java'
@@ -81,10 +81,13 @@ for class_name,needle in [(owner,'putfield'),(owner,'net/minecraft/server/player
  else:raise AssertionError('Native audit accepted missing '+needle)
 
 native=inspect(str(out),'org.gtnhmigration.compat.LegacyRetrievalCommitCoordinator$NativeIntegratedOwnerPort')
-ordered(method(native,'public void save()'),['Method assertExclusive:','MinecraftServer.saveEverything:'])
-ordered(method(native,'void savePlayers()'),['Method assertExclusive:','PlayerList.saveAll:'])
+ordered(method(native,'public void save()'),['Method assertExclusive:','LegacyRetrievalNativeSaveScope.saveOwner:'])
+ordered(method(native,'void savePlayers()'),['Method assertExclusive:','LegacyRetrievalNativeSaveScope.savePlayers:'])
 ordered(method(native,'net.minecraft.nbt.CompoundTag cachedPlayer() throws java.io.IOException'),['PlayerList.getSingleplayerData:','CompoundTag.copy:'])
 assert 'net/minecraft/client/' not in native,'Owner adapter requires client-only class linking'
+bridge=inspect(str(out),'org.gtnhmigration.compat.LegacyRetrievalNativeSaveScope')
+assert 'LegacyRetrievalSaveScope.root:' in bridge and 'MinecraftServer.saveEverything:' in bridge and 'PlayerList.saveAll:' in bridge
+
 class_hashes={}
 import zipfile
 for name in texts:
@@ -98,7 +101,7 @@ report.update({'source_sha256':{p.relative_to(R).as_posix():sha(p) for p in sour
  'minecraft_jar_sha256':sha(minecraft),'neoforge_patched_server_sha256':sha(patched),
  'native_owner_save_audit':{'class_sha256':class_hashes,'neoforge_patched_client_sha256':sha(client_patched),'client_srg_sha256':sha(client_srg),
  'cache_capture_precedes_player_file_save':True,'world_save_reads_owner_cache':True,'integrated_save_delegates_then_checks_disk_space':True,'owner_adapter_saves_all_players_then_world':True,'abort_repairs_cache_and_mirror_without_world_save':True,'client_type_linking_required':False,'negative_controls':negative_controls,'native_code_executed':False},
- 'limitations':['The compiled native owner adapter is not registered or executed. Tests use actual Inventory/ItemStack/NBT/ledger files and synthetic save boundaries, not native Player/world/client execution.',
+ 'limitations':['The compiled native owner adapter is not connected to a gameplay submit handler or executed; passive native guard mixins are registered. Tests use actual Inventory/ItemStack/NBT/ledger files and synthetic save boundaries, not native Player/world/client execution.',
  'The caller must continuously exclude all world/player saves, mutations and lifecycle changes on the entire server. The owner adapter calls saveEverything and abort repair may call PlayerList.saveAll, affecting all players and their native save callbacks.',
  'Only level.dat decides owner COMMIT/ABORT. Cache and UUID mirror must also agree before final resolution. Unknown mirrors/caches, failed repair or concurrent world metadata changes preserve pending intent and require isolated recovery.',
  'First world-player baseline creation, failed saves and later saves after abort are synthetic fixtures. No new JVM halt/power-loss validation, datafixer, backup fallback, login admission, role-switch recovery or EULA acceptance is claimed.',

@@ -173,9 +173,22 @@ public final class LegacyRetrievalCommitCoordinatorCheck {
             }
         }
     }
+    static void participantSaveMutation(Path root)throws Exception {
+        Port p=new Port(root.resolve("players"),5);Inventory peer=inventory(7);UUID member=new UUID(0,8);
+        var config=new Config<FrozenStack>(List.of(new Requirement<>(2,k->k.stack().is(Items.OAK_LOG))),true,false,false,false);
+        Quest<FrozenStack> quest=new Quest<>(QUEST,List.of(Task.retrieval(0,config)),"AND",-1,false,false,false,false);
+        try(var store=LegacyQuestProgressFileStore.open(root.resolve("ledger"),BINDING,CATALOG)) {
+            var plan=LegacyRetrievalInventoryBridge.prepare(quest,Map.of(0,LegacyRetrievalEngine.State.empty()),ACTOR,List.of(ACTOR,member),Map.of(ACTOR,p.inventory,member,peer),registries,new Gate(true,true,true,false));
+            p.onSave=()->{if(p.saves==2)peer.items.get(0).setCount(99);};
+            var c=coordinator(store);recovery(()->c.submit(plan,store.current(),p,()->true),"save callback changed another observed participant");
+            check(c.recoveryRequired() && LegacyRetrievalInventoryBridge.recoveryRequired(peer),"Other participant was not quarantined");
+            check(peer.items.get(0).getCount()==99,"Coordinator overwrote another participant");
+            check(journal(store).pending().isPresent() && state(store).tasks().isEmpty(),"Changed participant published task progress");
+        }
+    }
     public static void main(String[] args)throws Exception{
         SharedConstants.tryDetectVersion();Bootstrap.bootStrap();registries=RegistryAccess.fromRegistryOfRegistries(BuiltInRegistries.REGISTRY);
-        Path root=Path.of(args[0]);success(root.resolve("success"));saveOutcomes(root.resolve("save"));uncertainty(root.resolve("uncertain"));guards(root.resolve("guards"));ledgerFailures(root.resolve("ledger-failures"));
+        Path root=Path.of(args[0]);success(root.resolve("success"));saveOutcomes(root.resolve("save"));uncertainty(root.resolve("uncertain"));guards(root.resolve("guards"));ledgerFailures(root.resolve("ledger-failures"));participantSaveMutation(root.resolve("participant-save"));
         System.out.println("{\"test\":\"retrieval_commit_coordinator\",\"passed\":true,\"assertions\":"+assertions+",\"runtime_integrated\":false,\"export_enabled\":false,\"native_adapter_compiled\":true,\"native_player_save_verified\":false,\"game_runtime_verified\":false,\"actual_player_save_fixtures\":0}");
     }
 }

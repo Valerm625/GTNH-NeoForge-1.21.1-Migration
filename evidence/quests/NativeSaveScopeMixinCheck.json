@@ -1,0 +1,67 @@
+{
+  "test": "native_save_scope_mixin_transformation",
+  "passed": true,
+  "assertions": 131,
+  "targets_transformed": 6,
+  "injections_verified": 30,
+  "asm_basic_dataflow_methods": 586,
+  "actual_sponge_transformer_executed": true,
+  "isolated_mixin_transformation_verified": true,
+  "neoforge_transform_chain_verified": false,
+  "game_runtime_verified": false,
+  "negative_controls": {
+    "missing_player_file_target": {
+      "passed": true,
+      "control": "missing_player_file_target",
+      "mixin_rejected_mutated_target": true
+    },
+    "missing_registration": {
+      "passed": true,
+      "control": "missing_registration",
+      "missing_injection_detected": true
+    }
+  },
+  "client_distribution_isolated_transform_verified": true,
+  "dedicated_distribution_check": {
+    "test": "native_save_scope_mixin_transformation",
+    "passed": true,
+    "assertions": 124,
+    "targets_transformed": 5,
+    "injections_verified": 29,
+    "asm_basic_dataflow_methods": 579,
+    "actual_sponge_transformer_executed": true,
+    "isolated_mixin_transformation_verified": true,
+    "neoforge_transform_chain_verified": false,
+    "game_runtime_verified": false
+  },
+  "compat_jar_sha256": "d454392210f709ff3707f76fb3e650f42d73c99a18993f6e5d812d6b35946896",
+  "source_sha256": {
+    "work/migration/OfflineMixinService.java": "a7ea57ef2ea959f69885cca79076690724e82a17c768df2d4521e23fddc897df",
+    "work/migration/OfflineProperties.java": "10ad2622af4698009243667fac346ad23621d38f86c583aebcb99593059f9f3d",
+    "work/migration/NativeSaveScopeMixinCheck.java": "f4862826176cbfdd9475b7fbcf638af10bf8cf423653752457a07a50e12fc6a4",
+    "work/migration/test_native_save_scope_mixins.py": "d6d31fa6ab5f3be5306131f0b814a3710ba37e4c8ccb62976b14af014f8caff0",
+    "work/migration/acquire_native_client_audit.py": "38aa830027cf861928db5f18f2990ed33b38052ea5f671493f05e8c825a1e366",
+    "locks/native-client-audit-inputs.json": "1542616c4c55281eec4dc906d9a2d0375e45aa50939eb29f67230d80fefa1093",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyOwnerCacheSaveScopeMixin.java": "ecdfdae475531805608691386bc92db00a521cd03e72bea51a2169d66b050e99",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyPlayerFileSaveScopeMixin.java": "5dcc727047128bd003fb9cbce3f3d7e0faed68c4ac3c6bb2ff0ed0266c670811",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyPlayerLifecycleSaveScopeMixin.java": "02959c3788d22c14730e5191bab85bfeb956c602bab5643c5d52da1778526701",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyPlayerListSaveScopeMixin.java": "418c24fb6d7bcccbad6b0cd28e3d47625fb96759dc223d74c5c8927ed4e2b1f2",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalNativeSaveScope.java": "9a5e71290f9896a4a6930ec5344962f8b270f083b8772d142d6e5c33cda70346",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalSaveScope.java": "a6d89c4632d9911a7f2c1d3b2e5c6f575990e15955769f5d6479245ece82b6b6",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyServerSaveScopeMixin.java": "3be6804be2e1ea417d9aee38a2ef5186f82fe7c0a06d7e98198b9a2f38429512",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyWorldFileSaveScopeMixin.java": "448b9eb87f8755d88295717b3bc4bc6844b9ae9a2a3673147a6549331fc75656"
+  },
+  "dependency_sha256": {
+    "neoforge-21.1.262-server.jar": "f57ce3018e21459d24b50508e8c1b4fd5c16324ec1dc5f316c192aa0130e7fe0",
+    "neoforge-21.1.262-client.jar": "aff67d0c3bbd015ecd881bb37416b740ada2e1e854433501ec5bb9381dbdd1c2",
+    "client-srg.jar": "a649bd3ce77f122d0f83ae1b37b4b303e662470f928b9bee5fbc76580805ffd4",
+    "sponge-mixin-0.16.4+mixin.0.8.7.jar": "921a2ca066d82d15d2939efd5eb22754e308db74b1e4277130a76625c3638dfd",
+    "ftb-quests-neoforge-2101.1.36.jar": "6a39982c4b3afc00b1e788041a4f0d394e1659e3b3a6e5d078cd790bc36d0018",
+    "EnderStorage-1.21.1-2.13.0.191.jar": "f52f23f9df8925c7aec26154c2f1816cc76422c67a4fa4e30fa8b80b7a854202"
+  },
+  "limitations": [
+    "Uses a dedicated test Mixin service, not NeoForge ModLauncher.",
+    "No access transformers, other mods' Mixins, class-definition execution, game event or world is exercised.",
+    "ASM BasicVerifier checks transformed method dataflow, not full JVM linkage or gameplay behavior."
+  ]
+}

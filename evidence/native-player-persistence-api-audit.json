@@ -28,13 +28,14 @@
     "player_data_version": "Player.addAdditionalSaveData invokes NbtUtils.addCurrentDataVersion before Inventory.save. Checking Entity/PlayerDataStorage alone misses this call.",
     "world_player_save": "MinecraftServer.saveAllChunks supplies PlayerList.getSingleplayerData to LevelStorageAccess.saveDataTag; PrimaryLevelData stores Player inside the Data compound. Actual native saving is not executed.",
     "integrated_player_cache": "Pinned client IntegratedPlayerList.save captures owner saveWithoutId into playerData before calling PlayerList.save. getSingleplayerData returns that cache; parent saveAll dispatches virtually to save.",
-    "integrated_save_order": "MinecraftServer.saveEverything calls playerList.saveAll then saveAllChunks. IntegratedServer delegates to the base method then warns on low disk space; a late exception is not proof that world publication failed."
+    "integrated_save_order": "MinecraftServer.saveEverything calls playerList.saveAll then saveAllChunks. IntegratedServer delegates to the base method then warns on low disk space; a late exception is not proof that world publication failed.",
+    "server_pre_tick_order": "Pinned MinecraftServer.tickServer fires fireServerTickPre before tickChildren. Guards cover both entries so a quarantined submission created in Pre cannot continue through the normal child tick entry."
   },
   "limitations": [
     "Static inspection does not validate actual Player, event hooks, transformed mod behavior, crash atomicity or power-loss persistence.",
     "Proposal test uses Inventory(null), actual ItemStack codecs and fixture slot encoding; Inventory.save itself is not called.",
     "Native PlayerDataStorage save differs from asynchronous SavedData.save; do not transfer that API assumption.",
-    "Explicit owner submit adapter is compiled and its cache/mirror/world protocol is tested through synthetic save boundaries. No native owner save, all-server lifecycle isolation or admission recovery is executed or registered."
+    "Selected save/lifecycle guard mixins are registered and separately transformed against pinned client and dedicated-server bytecode. No native game execution, persistent admission recovery, arbitrary-mod inventory isolation or complete safe fault shutdown is proven."
   ],
   "native_clone_executed": false,
   "authority_audit_report": "evidence/quests/LegacyWorldPlayerAuthorityCheck.json",
@@ -69,5 +70,7 @@
     "client_type_linking_required": false,
     "negative_controls": 4,
     "native_code_executed": false
-  }
+  },
+  "save_scope_transformation_report": "evidence/quests/NativeSaveScopeMixinCheck.json",
+  "save_scope_state_machine_report": "evidence/quests/LegacyRetrievalSaveScopeCheck.json"
 }
