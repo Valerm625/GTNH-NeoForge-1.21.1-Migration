@@ -13,6 +13,7 @@ import org.gtnhmigration.compat.LegacyQuestProgressEnvelope.*;
 import org.gtnhmigration.compat.LegacyQuestProgressStoreCodec.*;
 import org.gtnhmigration.compat.LegacyRetrievalTransactionJournal.*;
 import static org.gtnhmigration.compat.LegacyRetrievalTransactionJournal.MARKER_KEY;
+import static org.gtnhmigration.compat.LegacyRetrievalTransactionJournal.PERSISTED_KEY;
 
 /** Real ledger/player-fixture files and killed JVMs; no actual Player or world. */
 public final class LegacyRetrievalTransactionJournalCheck {
@@ -61,7 +62,7 @@ public final class LegacyRetrievalTransactionJournalCheck {
             CompoundTag stamped=pending.playerDataToPersist();check(stamped.getCompound("NeoForgeData").getCompound("othermod:data").equals(before.getCompound("NeoForgeData").getCompound("othermod:data")),"Other persistent data lost");
             check(count(stamped)==3 && stamped.getString("UnrelatedField").equals("must survive"),"Player proposal changed unrelated fields");
             check(Arrays.equals(stamped.getLongArray("Opaque"),before.getLongArray("Opaque")),"Opaque player array changed");
-            stamped.getCompound("NeoForgeData").remove(MARKER_KEY);check(LegacyRetrievalTransactionJournal.readMarker(pending.playerDataToPersist()).isPresent(),"Pending accessor aliases marker");
+            stamped.getCompound("NeoForgeData").getCompound(PERSISTED_KEY).remove(MARKER_KEY);check(LegacyRetrievalTransactionJournal.readMarker(pending.playerDataToPersist()).isPresent(),"Pending accessor aliases marker");
             pending.originalPlayerData().putInt("mutated",1);check(!pending.originalPlayerData().contains("mutated"),"Original player snapshot aliases caller");
             writePlayer(base,pending.playerDataToPersist(),null);
         }
@@ -91,8 +92,8 @@ public final class LegacyRetrievalTransactionJournalCheck {
             CompoundTag noMarker=after.copy();rejects(()->journal.resolve(noMarker),"after inventory without marker");
             CompoundTag wrongCount=pending.playerDataToPersist();wrongCount.getList("Inventory",10).getCompound(0).putInt("count",4);rejects(()->journal.resolve(wrongCount),"marker with unproved inventory");
             CompoundTag wrongActor=pending.playerDataToPersist();wrongActor.putUUID("UUID",OFFLINE);rejects(()->journal.resolve(wrongActor),"foreign actor");
-            CompoundTag future=pending.playerDataToPersist();future.getCompound("NeoForgeData").getCompound(MARKER_KEY).putInt("schema_version",9);rejects(()->journal.resolve(future),"future marker schema");
-            CompoundTag extra=pending.playerDataToPersist();extra.getCompound("NeoForgeData").getCompound(MARKER_KEY).putInt("unknown",9);rejects(()->journal.resolve(extra),"unknown marker field");
+            CompoundTag future=pending.playerDataToPersist();future.getCompound("NeoForgeData").getCompound(PERSISTED_KEY).getCompound(MARKER_KEY).putInt("schema_version",9);rejects(()->journal.resolve(future),"future marker schema");
+            CompoundTag extra=pending.playerDataToPersist();extra.getCompound("NeoForgeData").getCompound(PERSISTED_KEY).getCompound(MARKER_KEY).putInt("unknown",9);rejects(()->journal.resolve(extra),"unknown marker field");
             check(store.current().orElseThrow().sha256().equals(prepared),"Rejected recovery changed ledger");
             check(journal.resolve(before).decision()==Decision.ABORT,"Unpersisted inventory did not abort");
             check(store.current().orElseThrow().frame().snapshot().state().equals(state(false)),"Abort changed original progress");
@@ -124,6 +125,51 @@ public final class LegacyRetrievalTransactionJournalCheck {
             check(one.resolve(player(5)).decision()==Decision.ABORT,"Concurrent preparation could not resolve");
         }
     }
+    // Fixture for the inspected NeoForge restoreFrom persistent-data copy
+    // scope only: no actual player, death, inventory-drop or Clone event runs.
+    static CompoundTag clonePersistentScope(CompoundTag source) {
+        CompoundTag clone=player(1),data=new CompoundTag();
+        if(source.getCompound("NeoForgeData").contains(PERSISTED_KEY))
+            data.put(PERSISTED_KEY,source.getCompound("NeoForgeData").get(PERSISTED_KEY).copy());
+        clone.put("NeoForgeData",data);return clone;
+    }
+    static void persistentMarkers(Path base)throws Exception {
+        seed(base);CompoundTag before=readPlayer(base),other=new CompoundTag();other.putLongArray("other:sticky",new long[]{Long.MIN_VALUE,9});
+        before.getCompound("NeoForgeData").put(PERSISTED_KEY,other);writePlayer(base,before,null);
+        CompoundTag legacy;
+        try(var store=LegacyQuestProgressFileStore.open(base.resolve("ledger"),BINDING,CATALOG)) {
+            var journal=journal(store);Pending pending=journal.prepare(store.current().map(LegacyQuestProgressFileStore.Head::sha256),ACTOR,before,after(before,3),state(true));
+            CompoundTag modern=pending.playerDataToPersist();CompoundTag data=modern.getCompound("NeoForgeData"),persisted=data.getCompound(PERSISTED_KEY);
+            check(!data.contains(MARKER_KEY) && persisted.getCompound(MARKER_KEY).getInt("schema_version")==2,"New marker is not in the clone-persisted namespace");
+            check(Arrays.equals(persisted.getLongArray("other:sticky"),other.getLongArray("other:sticky")),"Other persisted mod data changed");
+            legacy=modern.copy();CompoundTag oldData=legacy.getCompound("NeoForgeData");
+            CompoundTag v1=oldData.getCompound(PERSISTED_KEY).getCompound(MARKER_KEY).copy();v1.putInt("schema_version",1);
+            oldData.getCompound(PERSISTED_KEY).remove(MARKER_KEY);oldData.put(MARKER_KEY,v1);
+            check(LegacyRetrievalTransactionJournal.readMarker(legacy).equals(LegacyRetrievalTransactionJournal.readMarker(modern)),"Legacy identity no longer reads");
+            check(journal.resolve(legacy).decision()==Decision.COMMIT,"Legacy saved player cannot resolve a matching pending record");
+            writePlayer(base,legacy,null);
+        }
+        try(var store=LegacyQuestProgressFileStore.open(base.resolve("ledger"),BINDING,CATALOG)) {
+            var journal=journal(store);String head=store.current().orElseThrow().sha256();journal.verifyResolvedPlayer(legacy);
+            CompoundTag promoted=journal.proposePersistentMarker(legacy);
+            check(store.current().orElseThrow().sha256().equals(head),"Marker promotion wrote the ledger");
+            check(readPlayer(base).equals(legacy),"Marker proposal wrote a player file");
+            check(legacy.getCompound("NeoForgeData").contains(MARKER_KEY),"Legacy input was mutated");
+            check(!promoted.getCompound("NeoForgeData").contains(MARKER_KEY),"Promotion kept ambiguous marker placement");
+            check(promoted.get("Inventory").equals(legacy.get("Inventory")),"Promotion changed inventory");
+            check(promoted.getCompound("NeoForgeData").get("othermod:data").equals(legacy.getCompound("NeoForgeData").get("othermod:data")),"Promotion lost unrelated data");
+            check(promoted.equals(journal.proposePersistentMarker(promoted)),"Promotion is not idempotent");
+            journal.verifyResolvedPlayer(clonePersistentScope(promoted));check(true,"New marker did not survive the inspected clone copy scope");
+            rejects(()->journal.verifyResolvedPlayer(clonePersistentScope(legacy)),"old root marker silently lost at clone");
+            CompoundTag ambiguous=promoted.copy();ambiguous.getCompound("NeoForgeData").put(MARKER_KEY,legacy.getCompound("NeoForgeData").get(MARKER_KEY).copy());
+            rejects(()->journal.verifyResolvedPlayer(ambiguous),"two marker placements");
+            CompoundTag wrongVersion=promoted.copy();wrongVersion.getCompound("NeoForgeData").getCompound(PERSISTED_KEY).getCompound(MARKER_KEY).putInt("schema_version",1);
+            rejects(()->journal.verifyResolvedPlayer(wrongVersion),"version one in version two namespace");
+            CompoundTag badNamespace=legacy.copy();badNamespace.getCompound("NeoForgeData").putString(PERSISTED_KEY,"must not erase");
+            rejects(()->journal.proposePersistentMarker(badNamespace),"malformed persisted namespace");
+            check(store.current().orElseThrow().sha256().equals(head),"Rejected or cloned markers altered progress history");
+        }
+    }
     public static void main(String[] args)throws Exception{
         Path base=Path.of(args[1]);String mode=args[0];
         if(mode.equals("seed")){seed(base);return;}
@@ -152,7 +198,7 @@ public final class LegacyRetrievalTransactionJournalCheck {
             }
             System.out.println("RECOVERED_VERIFIED");return;
         }
-        successful(base.resolve("success"));rejection(base.resolve("rejected"));
+        successful(base.resolve("success"));rejection(base.resolve("rejected"));persistentMarkers(base.resolve("persistent-marker"));
         System.out.println("{\"test\":\"durable_inventory_progress_journal\",\"passed\":true,\"assertions\":"+assertions+",\"actual_player_save_fixtures\":0,\"runtime_integrated\":false,\"export_enabled\":false,\"game_runtime_verified\":false,\"native_player_save_verified\":false,\"synthetic_player_nbt_used\":true}");
     }
 }

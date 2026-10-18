@@ -6,7 +6,7 @@ Phase 6 已纳入完整重建和兼容JAR对应检查，但尚未完成世界运
 
 `LegacyRetrievalTransactionJournal` 在现有独立文件账本中追加事务记录，使用 `gtnh-generated-transaction:v1/` 命名空间区分生成记录与原始输入。原始字节和既有账本帧继续保留。
 
-准备阶段保存事务UUID、actor、原账本摘要、完整前后玩家NBT及前后进度；账本进度仍保持旧值。候选玩家数据在 `NeoForgeData` 下携带 `gtnh_migration:retrieval_transaction` 标记，绑定事务UUID及准备记录字节摘要。日志类本身不写玩家文件、不扣物、不发奖励。
+准备阶段保存事务UUID、actor、原账本摘要、完整前后玩家NBT及前后进度；账本进度仍保持旧值。新候选玩家数据在 `NeoForgeData.PlayerPersisted` 下携带 `gtnh_migration:retrieval_transaction` 标记，绑定事务UUID及准备记录字节摘要。日志类本身不写玩家文件、不扣物、不发奖励。
 
 恢复时由调用者提供实际持久化的玩家文件内容。新标记与预期新库存同时吻合才提交新进度；旧标记与旧库存同时吻合则取消该次事务。其他组合拒绝恢复并保留记录，不能盲目补扣、退款或清空进度。取消日志事务不会恢复已经变动的内存库存，调用层必须在恢复正常游戏前处理这一点。
 
@@ -33,7 +33,7 @@ python -u work/migration/test_legacy_retrieval_transaction_proposal.py
 
 报告位于 `evidence/quests/LegacyRetrievalTransactionJournalCheck.json`，包含本次源码SHA-256。测试使用真实NBT库及独立文件账本，但玩家NBT是合成数据，写入器是测试夹具；没有真实Player、世界或原生PlayerDataStorage调用。
 
-- 36项断言覆盖准备/提交/取消、原件与不透明字段保留、深复制、无效数据拒绝、旧标记回退拒绝和两个日志对象竞争同一账本。
+- 53项断言覆盖准备/提交/取消、原件与不透明字段保留、深复制、无效数据拒绝、旧标记回退拒绝和两个日志对象竞争同一账本。
 - 7个独立JVM进程中断边界：准备临时文件、准备发布、玩家临时文件、玩家发布、决策临时文件、决策发布、事务结束。
 - 每个中断场景由新进程恢复，再用另一进程重复恢复；既有账本帧保持不变，恢复不改写玩家文件。
 
@@ -54,4 +54,14 @@ python -u work/migration/test_legacy_retrieval_transaction_proposal.py
 
 ## 原生保存API的静态证据
 
-`evidence/native-player-persistence-api-audit.json` 固定实际NeoForge server及相关类摘要。Inventory.save的字节码在忽略常量池编号/显示空白后与原版相同。PlayerDataStorage.save同步创建临时文件、writeCompressed、safeReplaceFile并触发保存事件，捕获Exception后返回void；它不是SavedData的异步worker接口，返回也不代表成功。load可能读取dat_old备份。Entity将持久数据保存在NeoForgeData；死亡/克隆是否保留自定义标记必须另行处理和测试。本审计未执行任何实际Player方法。
+`evidence/native-player-persistence-api-audit.json` 固定实际NeoForge server及相关类摘要。Inventory.save的字节码在忽略常量池编号/显示空白后与原版相同。PlayerDataStorage.save同步创建临时文件、writeCompressed、safeReplaceFile并触发保存事件，捕获Exception后返回void；它不是SavedData的异步worker接口，返回也不代表成功。load可能读取dat_old备份。Entity将持久数据保存在NeoForgeData；锁定ServerPlayer.restoreFrom只自动保留PlayerPersisted子树，再发Clone事件。实际死亡/克隆、事件和掉落行为仍需另行测试。本审计未执行任何实际Player方法。
+
+## 保留重生标记与旧版兼容
+
+对锁定NeoForge 21.1.262的ServerPlayer.restoreFrom检查发现，根NeoForgeData里的自定义标记不会自动随玩家重建保留。新标记使用schema_version=2，位于 `NeoForgeData.PlayerPersisted.gtnh_migration:retrieval_transaction`。runner固定server JAR摘要并核对原生复制范围的15条字节码指令；NBT夹具只模拟这个范围，没有执行实际Player、Clone事件或死亡掉落。
+
+原schema_version=1及NeoForgeData直下的位置仍可读取，旧事务记录和来源字节不改写。标记身份仍由事务UUID和准备记录摘要决定，因此旧位置中已保存的匹配标记仍能解决待决事务。新旧位置同时存在、版本与位置不符、命名空间类型错误则拒绝，原数据保留。
+
+`proposePersistentMarker` 先核对已解决的账本历史，返回可保存的新布局副本；它不修改输入、库存、账本或文件，重复调用结果不变，并保留其他PlayerPersisted和NeoForgeData数据。正式协调器必须在允许旧标记玩家进入游戏前保存并读回该候选；只兼容读取旧标记无法防止它在之后重生时丢失。恢复/迁移协调器尚未接入，不能将这份候选函数宣称为实际玩家迁移完成。
+
+新增17项检查包含v1读取及待决事务恢复、升级候选不写盘、不改库存/其他数据、重复升级、新布局在模拟复制范围后校验通过、旧布局丢失后拒绝及歧义拒绝。日志累计53项断言，既有7个进程中断场景继续通过。

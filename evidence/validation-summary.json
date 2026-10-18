@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-10-18T04:47:19.405937+00:00",
+  "checked_at": "2026-10-18T04:57:43.473363+00:00",
   "top_level_artifacts": [
     {
       "filename": "CodeChickenLib-1.21.1-4.6.1.529.jar",
@@ -63,8 +63,8 @@
     },
     {
       "filename": "gtnh-migration-compat-0.1.0.jar",
-      "sha256": "eb40dd411f29bffbb8c7e8cae6f3709ad811a48c547149d2736ec7a85b9c70f1",
-      "bytes": 123330
+      "sha256": "c1adb7d4e2680071b0a0709434124d4298b37b27704bf328f0b71c3090bb0b20",
+      "bytes": 123670
     },
     {
       "filename": "guideme-21.1.19.jar",

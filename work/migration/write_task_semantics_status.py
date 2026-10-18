@@ -140,7 +140,7 @@ assert compat_row['sha256']==sha(jar)
 assert 'eula=false' in (O/'eula.txt').read_text(encoding='utf-8')
 report={
     'phase_date_shanghai':'2026-10-18',
-    'phase':'journal preparation and recovery with actual inventory-to-player-NBT proposals; native player persistence remains unintegrated',
+    'phase':'journal preparation and recovery with clone-persistent marker proposals; native player lifecycle remains unintegrated',
     'checks':checks,
     'compat_jar_sha256':sha(jar),
     'source_quests':manifest['source_quests'],
@@ -160,6 +160,8 @@ report={
     'journal_fixture_two_file_recovery_verified':True,
     'actual_inventory_to_journal_proposal_composition_verified':True,
     'native_player_save_verified':False,
+    'persistent_player_marker_scope_fixture_verified':True,
+    'native_player_clone_verified':False,
     'live_mixin_transformation_verified':False,
     'neoforge_transform_chain_verified':False,
     'client_visuals_verified':False,
@@ -178,7 +180,7 @@ metadata['validation_state'].update({
     'legacy_progress_import':'typed JSON and identity envelope composed with planner and independent ledger reload; synthetic player progress, no world import',
     'uuid_progress_ledger':'versioned append-only NBT snapshots and source bytes preserved; process-halt recovery verified, no world lifecycle or inventory transaction',
     'retrieval_inventory_bridge':'real vanilla Inventory/ItemStack snapshots, count application/rollback and native-shaped player-NBT proposals tested; no world submit handler or native player save',
-    'retrieval_transaction_journal':'expected-head preparation, immutable records and synthetic player-file recovery tested; actual inventory proposal composition verified; no native persistence or world lifecycle',
+    'retrieval_transaction_journal':'expected-head preparation, immutable records and synthetic player-file recovery tested; actual inventory proposal composition and clone-persisted marker scope verified; no native persistence or world lifecycle',
     'source_asset_collisions':'four exact archives checked; all same-path candidates retained, precedence unresolved',
     'full_feature_parity':False,'client_rendering_verified':False,
 })

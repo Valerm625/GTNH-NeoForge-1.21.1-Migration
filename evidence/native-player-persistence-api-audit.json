@@ -7,18 +7,21 @@
   "patched_class_sha256": {
     "net/minecraft/world/entity/player/Inventory.class": "8aeacbdfd1f94bf308bebd52c56c09b11bcc9b08cf54676eafc6314b6ff445b1",
     "net/minecraft/world/level/storage/PlayerDataStorage.class": "96c286bd429ca4c7249c15d033a3a27a481c08de78cbaa8b743944668c6bce21",
-    "net/minecraft/world/entity/Entity.class": "4f65b7d5d4628e9f10a6a23e5a0f68814520d8019f4bc001924cd752c00eed84"
+    "net/minecraft/world/entity/Entity.class": "4f65b7d5d4628e9f10a6a23e5a0f68814520d8019f4bc001924cd752c00eed84",
+    "net/minecraft/server/level/ServerPlayer.class": "ec7c90a8b6a771cfd53b5038f377a72314b9efbf2301ed1ce540723b7d19c6d2"
   },
   "inventory_save_method_same_after_constant_pool_index_and_spacing_normalization": true,
   "observations": {
     "inventory_save": "main slots 0..35, armor 100..103, offhand 150 as byte; skip empty stacks; ItemStack.save with Player.registryAccess; main/armor/offhand order",
     "player_save": "Direct saveWithoutId -> writeCompressed temporary -> Util.safeReplaceFile -> firePlayerSavingEvent. Method catches Exception, logs warning, returns void; return is not persistence acknowledgement.",
     "player_load": "load .dat, with .dat_old fallback after failed primary; future coordinator must verify authoritative file and transaction marker before admission.",
-    "entity_persistent_data": "getPersistentData stored under root NeoForgeData; transaction marker belongs inside that compound."
+    "entity_persistent_data": "getPersistentData stored under root NeoForgeData; transaction marker belongs inside that compound.",
+    "clone_persistent_scope": "ServerPlayer.restoreFrom preserves only getPersistentData()[PlayerPersisted] before EventHooks.onPlayerClone; journal runner checks 15 pinned bytecode instructions. V2 transaction markers belong inside this subtree."
   },
   "limitations": [
     "Static inspection does not validate actual Player, event hooks, transformed mod behavior, crash atomicity or power-loss persistence.",
     "Proposal test uses Inventory(null), actual ItemStack codecs and fixture slot encoding; Inventory.save itself is not called.",
     "Native PlayerDataStorage save differs from asynchronous SavedData.save; do not transfer that API assumption."
-  ]
+  ],
+  "native_clone_executed": false
 }

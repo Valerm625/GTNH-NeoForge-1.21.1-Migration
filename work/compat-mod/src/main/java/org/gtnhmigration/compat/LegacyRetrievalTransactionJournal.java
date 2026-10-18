@@ -13,6 +13,9 @@ import org.gtnhmigration.compat.LegacyQuestProgressStoreCodec.*;
  */
 public final class LegacyRetrievalTransactionJournal {
     public static final String MARKER_KEY = "gtnh_migration:retrieval_transaction";
+    // Pinned NeoForge Player.PERSISTED_NBT_TAG; ServerPlayer.restoreFrom copies
+    // only this compound before firing PlayerEvent.Clone.
+    public static final String PERSISTED_KEY = "PlayerPersisted";
     private static final String PREFIX = "gtnh-generated-transaction:v1/";
     private final LegacyQuestProgressFileStore store;
     private final Binding binding;
@@ -124,6 +127,18 @@ public final class LegacyRetrievalTransactionJournal {
         }
     }
 
+    /** Proposed v1 -> v2 marker placement only. The caller must persist and
+     * read it back before allowing a legacy-marked player to enter gameplay.
+     * No journal state changes and no live player/file is modified here.
+     */
+    public CompoundTag proposePersistentMarker(CompoundTag playerData) throws IOException {
+        synchronized(store) {
+            verifyResolvedPlayer(playerData);
+            Optional<Marker> marker=readMarker(playerData);
+            return marker.isPresent()?stamp(playerData,marker.orElseThrow()):playerData.copy();
+        }
+    }
+
     private Scan scan() throws IOException {
         var head=store.current();
         if(head.isEmpty()) return new Scan(Optional.empty(),Map.of());
@@ -204,15 +219,19 @@ public final class LegacyRetrievalTransactionJournal {
     public static Optional<Marker> readMarker(CompoundTag player) throws IOException {
         if(!player.contains("NeoForgeData")) return Optional.empty();
         CompoundTag data=compound(player,"NeoForgeData");
-        if(!data.contains(MARKER_KEY)) return Optional.empty();
-        CompoundTag tag=compound(data,MARKER_KEY);fields(tag,"schema_version","transaction","preparation_sha256");
-        require(tag.get("schema_version") instanceof IntTag && tag.getInt("schema_version")==1,"Unknown player marker schema");
+        CompoundTag persisted=data.contains(PERSISTED_KEY)?compound(data,PERSISTED_KEY):new CompoundTag();
+        boolean legacy=data.contains(MARKER_KEY), modern=persisted.contains(MARKER_KEY);
+        require(!(legacy && modern),"Ambiguous legacy and persistent player markers");
+        if(!legacy && !modern) return Optional.empty();
+        CompoundTag tag=compound(legacy?data:persisted,MARKER_KEY);fields(tag,"schema_version","transaction","preparation_sha256");
+        require(tag.get("schema_version") instanceof IntTag && tag.getInt("schema_version")== (legacy?1:2),"Unknown player marker schema or placement");
         return Optional.of(new Marker(uuid(string(tag,"transaction")),string(tag,"preparation_sha256")));
     }
     private static CompoundTag stamp(CompoundTag player,Marker marker) {
         CompoundTag copy=player.copy();CompoundTag data=copy.contains("NeoForgeData")?copy.getCompound("NeoForgeData"):new CompoundTag();
-        CompoundTag tag=new CompoundTag();tag.putInt("schema_version",1);tag.putString("transaction",marker.transaction.toString());tag.putString("preparation_sha256",marker.preparationSha256);
-        data.put(MARKER_KEY,tag);copy.put("NeoForgeData",data);return copy;
+        CompoundTag persisted=data.contains(PERSISTED_KEY)?data.getCompound(PERSISTED_KEY):new CompoundTag();
+        CompoundTag tag=new CompoundTag();tag.putInt("schema_version",2);tag.putString("transaction",marker.transaction.toString());tag.putString("preparation_sha256",marker.preparationSha256);
+        data.remove(MARKER_KEY);persisted.put(MARKER_KEY,tag);data.put(PERSISTED_KEY,persisted);copy.put("NeoForgeData",data);return copy;
     }
     private static UUID playerId(CompoundTag player) throws IOException {
         require(player.get("UUID") instanceof IntArrayTag && player.getIntArray("UUID").length==4,"Missing canonical player UUID");return player.getUUID("UUID");

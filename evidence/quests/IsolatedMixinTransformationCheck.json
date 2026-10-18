@@ -26,7 +26,7 @@
       "missing_injection_detected": true
     }
   },
-  "compat_jar_sha256": "eb40dd411f29bffbb8c7e8cae6f3709ad811a48c547149d2736ec7a85b9c70f1",
+  "compat_jar_sha256": "c1adb7d4e2680071b0a0709434124d4298b37b27704bf328f0b71c3090bb0b20",
   "source_sha256": {
     "work/migration/OfflineMixinService.java": "a7ea57ef2ea959f69885cca79076690724e82a17c768df2d4521e23fddc897df",
     "work/migration/OfflineProperties.java": "10ad2622af4698009243667fac346ad23621d38f86c583aebcb99593059f9f3d",

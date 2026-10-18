@@ -22,7 +22,7 @@ Phase 4 新增[独立 UUID 文件账本](docs/quest-progress-file-store.zh-CN.md
 
 Phase 5 新增[真实库存桥接](docs/retrieval-inventory-bridge.zh-CN.md)：旧40槽深快照、整个quest计划后的actor计数应用、完整槽位复核、回滚与不确定库存隔离。1,465项断言通过，包括1,332个原版默认物品栈往返。当前使用真实Inventory对象但没有世界或Player实例，物品谓词仍为明确的原版测试夹具；未接入游戏提交或持久化库存事务。
 
-Phase 6 新增[事务日志与库存候选组合](docs/retrieval-transaction-journal.zh-CN.md)：日志通过36项断言和7个进程中断恢复场景；实际Inventory到玩家NBT候选、完整UUID进度与账本准备/恢复的组合通过68项断言。准备时绑定规划所用账本摘要，旧版本计划被拒绝。两项检查及生产类与兼容JAR的逐字节一致性已纳入完整重建；玩家保存器仍是夹具，原生PlayerDataStorage与世界生命周期尚未接入。
+Phase 6 新增[事务日志与库存候选组合](docs/retrieval-transaction-journal.zh-CN.md)：日志通过53项断言和7个进程中断恢复场景；实际Inventory到玩家NBT候选、完整UUID进度与账本准备/恢复的组合通过68项断言。准备时绑定规划所用账本摘要，旧版本计划被拒绝。两项检查及生产类与兼容JAR的逐字节一致性已纳入完整重建；玩家保存器仍是夹具，原生PlayerDataStorage与世界生命周期尚未接入。
 
 依赖闭合并实际导出的任务仍为 **2 / 3814**；结构候选为 **47**，物品身份映射仍为 **720 / 8388**。本阶段修复没有冒充新增完整任务覆盖。
 

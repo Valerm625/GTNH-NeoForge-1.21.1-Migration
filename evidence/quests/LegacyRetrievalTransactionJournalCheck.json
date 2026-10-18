@@ -1,7 +1,7 @@
 {
   "test": "durable_inventory_progress_journal",
   "passed": true,
-  "assertions": 36,
+  "assertions": 53,
   "actual_player_save_fixtures": 0,
   "runtime_integrated": false,
   "export_enabled": false,
@@ -14,9 +14,9 @@
     "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestProgressEnvelope.java": "43ed5abb2ed2595efa101b9e89d8d8409f84b62ca01cd9c62191ea5e92b9b9a0",
     "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestProgressStoreCodec.java": "7e610faa9cd32b56cf1302c0d62189884defbc8746c393bcf423bd84cd5f2e94",
     "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestProgressFileStore.java": "9830ea6c0ccf297d796b2ba2ed127a9ce0ec4df7a5b74fd0e3e0840eac6c89a2",
-    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalTransactionJournal.java": "6b0a993e48341ea0d7a61fd0e36c56ed8909460c32e0758e9cb58cda2971055a",
-    "work/migration/LegacyRetrievalTransactionJournalCheck.java": "6a7bdaff92bdfd8532f8e8da73d7c7dfa7be22b652c17e85a671af726d0ba1a8",
-    "work/migration/test_legacy_retrieval_transaction_journal.py": "01d7b7a4866a006e80a2a9015515bc64e5ad5e5b2ad8072b422ed35a7e798511"
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalTransactionJournal.java": "54f8af710a25a2fdc9fea65df5e36f14812a0fac77ffb133264fe7c3369cd1b5",
+    "work/migration/LegacyRetrievalTransactionJournalCheck.java": "d92eb887f7fcfa220a2f48a14d8e312f3e364e0f6d577181ffeffa8c0c938d99",
+    "work/migration/test_legacy_retrieval_transaction_journal.py": "1d51ea1dea3fcdf61052d93bdb892cbf7d4cf05116fddc4d62045ce94f3c38ad"
   },
   "minecraft_jar_sha256": "26ca9c40d7e1681190b428583c38816852218e78df3f8bdb60a59a78503aec71",
   "process_crash_checks": [
@@ -77,12 +77,22 @@
       "second_recovery_idempotent": true
     }
   ],
+  "native_clone_verified": false,
+  "persistent_marker_scope_fixture_verified": true,
+  "clone_copy_scope_static_checks": {
+    "patched_server_sha256": "f57ce3018e21459d24b50508e8c1b4fd5c16324ec1dc5f316c192aa0130e7fe0",
+    "server_player_class_sha256": "ec7c90a8b6a771cfd53b5038f377a72314b9efbf2301ed1ce540723b7d19c6d2",
+    "method": "ServerPlayer.restoreFrom",
+    "persisted_key": "PlayerPersisted",
+    "instructions_verified": 15,
+    "execution": "Bytecode inspected; copy scope simulated with CompoundTags, no native clone executed"
+  },
   "limitations": [
     "Synthetic full player NBT and a fixture atomic file writer, not native PlayerDataStorage or a world.",
     "The journal never writes player inventory; an actual coordinator must persist marker+inventory together, read back the authoritative file without dat_old fallback, and gate normal play until resolved.",
     "Accepted before/after player inventories and progress states must come from independently verified runtime snapshots and planning; this journal is not item matching, authorization or inventory validation.",
     "Aborting a pending transaction does not undo a live in-memory inventory; a future coordinator must restore/reload it before play resumes.",
-    "Death/clone/logout, native-save failure/readback, power loss, reward events, party and networking remain unverified.",
+    "Native death/clone/logout and event side effects remain unverified; the pinned PlayerPersisted copy scope and marker v1/v2 compatibility are checked with CompoundTag fixtures. Native save/readback, power loss, rewards, party and networking remain unverified.",
     "The existing append-only ledger retains source and transaction bytes; limits/compaction and manual removal of a complete history tail remain unresolved."
   ]
 }
