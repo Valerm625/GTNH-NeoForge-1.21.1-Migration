@@ -41,7 +41,7 @@ with zipfile.ZipFile(compat) as jar:
     expected |= {'LegacyServerSaveScopeMixin','LegacyPlayerListSaveScopeMixin','LegacyPlayerFileSaveScopeMixin','LegacyWorldFileSaveScopeMixin','LegacyPlayerLifecycleSaveScopeMixin','LegacyPlayerDataLoadScopeMixin'}
     assert len(config['mixins']) == 14 and set(config['mixins']) == expected
     assert config['client'] == ['LegacyOwnerCacheSaveScopeMixin']
-    assert config['required'] and config['package'] == 'org.gtnhmigration.compat'
+    assert config['required'] and config['package'] == 'org.gtnhmigration.compat.mixin'
     config['mixins'].remove('LegacyPlayerFileSaveScopeMixin')
     (out / 'missing-registration.mixins.json').write_text(json.dumps(config), encoding='utf-8', newline='\n')
 
@@ -79,7 +79,7 @@ report.update({
     'client_distribution_isolated_transform_verified':True,
     'dedicated_distribution_check':dedicated,
     'compat_jar_sha256': sha(compat),
-    'source_sha256': {source.relative_to(R).as_posix(): sha(source) for source in [*sources,Path(__file__),R/'work/migration/acquire_native_client_audit.py',R/'locks/native-client-audit-inputs.json']+sorted((R/'work/compat-mod/src/main/java/org/gtnhmigration/compat').glob('*SaveScope*.java'))+[R/'work/compat-mod/src/main/java/org/gtnhmigration/compat'/name for name in ['LegacyPlayerDataLoadScopeMixin.java','LegacyQuestNativeLifecycle.java','LegacyQuestPlayerAdmission.java','LegacyPlayerMarkerUpgrade.java','LegacyMaintenanceInitialization.java','LegacyPlayerNbtPatch.java','LegacyOwnerTransactionRecovery.java']]},
+    'source_sha256': {source.relative_to(R).as_posix(): sha(source) for source in [*sources,Path(__file__),R/'work/migration/acquire_native_client_audit.py',R/'locks/native-client-audit-inputs.json']+sorted((R/'work/compat-mod/src/main/java/org/gtnhmigration/compat').rglob('*SaveScope*.java'))+[R/'work/compat-mod/src/main/java/org/gtnhmigration/compat'/('mixin' if name.endswith('Mixin.java') else '')/name for name in ['LegacyPlayerDataLoadScopeMixin.java','LegacyQuestNativeLifecycle.java','LegacyQuestPlayerAdmission.java','LegacyPlayerMarkerUpgrade.java','LegacyMaintenanceInitialization.java','LegacyPlayerNbtPatch.java','LegacyOwnerTransactionRecovery.java']]},
     'dependency_sha256': {path.name: sha(path) for path in
                           [patched,client/'neoforge-21.1.262-client.jar',client/'client-srg.jar', mixin, O / 'mods/ftb-quests-neoforge-2101.1.36.jar', O / 'mods/EnderStorage-1.21.1-2.13.0.191.jar']},
     'limitations': [

@@ -1,4 +1,6 @@
-package org.gtnhmigration.compat;
+package org.gtnhmigration.compat.mixin;
+
+import org.gtnhmigration.compat.*;
 
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.players.PlayerList;

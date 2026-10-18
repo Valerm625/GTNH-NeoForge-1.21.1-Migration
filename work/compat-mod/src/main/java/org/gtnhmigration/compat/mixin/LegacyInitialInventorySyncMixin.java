@@ -1,4 +1,6 @@
-package org.gtnhmigration.compat;
+package org.gtnhmigration.compat.mixin;
+
+import org.gtnhmigration.compat.*;
 import dev.ftb.mods.ftbquests.util.FTBQuestsInventoryListener;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerListener;

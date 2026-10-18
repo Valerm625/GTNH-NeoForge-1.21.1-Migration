@@ -37,7 +37,7 @@ report=json.loads(next(line for line in text.splitlines() if line.startswith('{'
 def sha(path): return hashlib.sha256(path.read_bytes()).hexdigest()
 report['compat_jar_sha256']=sha(compat)
 report['source_sha256']={relative(path):sha(path) for path in [
-    W/'compat-mod/src/main/java/org/gtnhmigration/compat/LegacyHuntTaskMixin.java',
+    W/'compat-mod/src/main/java/org/gtnhmigration/compat/mixin/LegacyHuntTaskMixin.java',
     W/'compat-mod/src/main/java/org/gtnhmigration/compat/LegacyHuntEntityMatcher.java',
     W/'migration/LegacyHuntAdapterCheck.java',Path(__file__).resolve(),
 ]}

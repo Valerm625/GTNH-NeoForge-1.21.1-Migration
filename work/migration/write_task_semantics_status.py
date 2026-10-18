@@ -77,7 +77,7 @@ for directory,name in [(C,'LegacyRetrievalProgressCodecCheck'),(L,'LegacyQuestRe
 observer=read(Q/'LegacyInventoryObserverCheck.json')
 assert observer['passed']
 for name,expected in observer['adapter_source_sha256'].items():
-    assert sha(R/'work/compat-mod/src/main/java/org/gtnhmigration/compat'/(name+'.java'))==expected,name
+    assert sha(R/'work/compat-mod/src/main/java/org/gtnhmigration/compat'/('mixin' if name.endswith('Mixin') else '')/(name+'.java'))==expected,name
 assert observer['test_source_sha256']==sha(R/'work/migration/LegacyInventoryObserverCheck.java')
 assert observer['runner_sha256']==sha(R/'work/migration/test_legacy_inventory_observer.py')
 for directory,name in [(J,'LegacyTypedNbtJsonReaderCheck'),(G,'LegacyQuestProgressEnvelopeCheck'),(S,'LegacyQuestProgressStoreCheck'),(T,'LegacyProgressImportPipelineCheck'),(B,'LegacyRetrievalInventoryBridgeCheck'),(D,'LegacyRetrievalTransactionJournalCheck'),(F,'LegacyRetrievalTransactionProposalCheck'),(H,'LegacyPlayerDataFileReaderCheck'),(K,'LegacyRetrievalCommitCoordinatorCheck'),(W,'LegacyWorldPlayerAuthorityCheck'),(N,'LegacyIntegratedOwnerCoordinatorCheck'),(U,'LegacyRetrievalSaveScopeCheck'),(X,'LegacyQuestWorldStoreCheck'),(A,'LegacyQuestPlayerAdmissionCheck'),(M,'LegacyPlayerMarkerUpgradeCheck'),(Y,'LegacyOwnerTransactionRecoveryCheck'),(Z,'LegacyStartupShutdownCheck'),(AA,'LegacyMaintenanceInitializationCheck'),(AB,'LegacyQuestDefinitionArchiveCheck'),(AC,'LegacyRetrievalDefinitionBindingCheck'),(AD,'LegacyQuestEntryPolicyCheck'),(AE,'LegacyQuestCompletionPlannerCheck')]:
@@ -126,16 +126,23 @@ with zipfile.ZipFile(jar) as compiled:
     for path in engine_classes:
         assert compiled.read(path.relative_to(E).as_posix())==path.read_bytes(), 'Packaged engine differs from tested engine'
     for name in ['LegacyRetrievalStackMatcher','LegacyCraftingStackMatcher','LegacyRetrievalItemTaskMixin','LegacyCraftingItemTaskMixin']:
-        entry='org/gtnhmigration/compat/'+name+'.class'
+        entry='org/gtnhmigration/compat/'+('mixin/' if name.endswith('Mixin') else '')+name+'.class'
         assert compiled.read(entry)==(P/entry).read_bytes(), 'Packaged class differs from tested class: '+name
 checks={}
-for name in ['IsolatedMixinTransformationCheck','NativeSaveScopeMixinCheck','LegacyRetrievalSaveScopeCheck','LegacyQuestWorldStoreCheck','LegacyQuestPlayerAdmissionCheck','LegacyPlayerMarkerUpgradeCheck','LegacyOwnerTransactionRecoveryCheck','LegacyStartupShutdownCheck','LegacyMaintenanceInitializationCheck','LegacyQuestDefinitionArchiveCheck','LegacyRetrievalDefinitionBindingCheck','LegacyQuestEntryPolicyCheck','LegacyQuestCompletionPlannerCheck','LegacyRetrievalEngineCheck','LegacyRetrievalStackMatcherCheck','LegacyCraftingShapeCheck','LegacyHuntAdapterCheck',
+for name in ['NativeRegistryDatagenCheck','IsolatedMixinTransformationCheck','NativeSaveScopeMixinCheck','LegacyRetrievalSaveScopeCheck','LegacyQuestWorldStoreCheck','LegacyQuestPlayerAdmissionCheck','LegacyPlayerMarkerUpgradeCheck','LegacyOwnerTransactionRecoveryCheck','LegacyStartupShutdownCheck','LegacyMaintenanceInitializationCheck','LegacyQuestDefinitionArchiveCheck','LegacyRetrievalDefinitionBindingCheck','LegacyQuestEntryPolicyCheck','LegacyQuestCompletionPlannerCheck','LegacyRetrievalEngineCheck','LegacyRetrievalStackMatcherCheck','LegacyCraftingShapeCheck','LegacyHuntAdapterCheck',
              'LegacyRetrievalProgressCodecCheck','LegacyQuestRetrievalPlannerCheck','LegacyInventoryObserverCheck',
              'LegacyTypedNbtJsonReaderCheck','LegacyQuestProgressEnvelopeCheck','LegacyQuestProgressStoreCheck','LegacyProgressImportPipelineCheck','LegacyRetrievalInventoryBridgeCheck','LegacyRetrievalTransactionJournalCheck','LegacyRetrievalTransactionProposalCheck','LegacyPlayerDataFileReaderCheck','LegacyRetrievalCommitCoordinatorCheck','LegacyWorldPlayerAuthorityCheck','LegacyIntegratedOwnerCoordinatorCheck',
              'QuestAdapterShapeCheck','LegacyRetrievalCounterCheck','QuestSnbtCheck',
              'checkpoint-verification','crafting-task-adapter','hunt-task-adapter','location-task-boundary']:
     checks[name]=read(Q/(name+'.json'))
     assert checks[name]['passed'],name
+native_registry=checks['NativeRegistryDatagenCheck']
+assert native_registry['compat_jar_sha256']==sha(jar)
+assert native_registry['native_mod_registration_executed'] and not native_registry['world_or_player_executed']
+assert native_registry['negative_control']['illegal_mixin_package_rejected']
+for relative,expected in native_registry['source_sha256'].items():assert sha(R/relative)==expected,relative
+for relative,expected in native_registry['runtime_inputs_sha256'].items():assert sha(O/relative)==expected,relative
+assert native_registry['registry_details_sha256']==sha(R/'work/migration/native-registry-check/registry-details.json')
 ore=read(V/'exact-ore-resource-check.json')
 ore_tests=read(V/'exact-ore-resource-tests.json')
 assert ore['passed'] and ore_tests['passed']
@@ -185,6 +192,11 @@ report={
     'runtime_inputs_hashed':len(runtime['files']),
     'full_parity':False,
     'game_runtime_verified':False,
+    'native_datagen_registration_verified':True,
+    'selected_classes_native_transform_chain_verified':True,
+    'native_datagen_bound_retrieval_declarations':native_registry['bound_retrieval_declarations'],
+    'native_datagen_upstream_identity_mappings_verified':native_registry['upstream_identity_mappings_verified'],
+    'kubejs_startup_registration_verified':False,
     'isolated_mixin_transformation_verified':True,
     'tested_model_classes_match_packaged_jar':True,
     'typed_json_envelope_planner_composition_verified':True,
@@ -246,6 +258,8 @@ report={
 metadata=read(O/'migration-metadata.json')
 metadata['last_phase']=report['phase']
 metadata['validation_state'].update({
+    'native_datagen_registry':'official NeoForge data target registered installed native mods; 492 native mapping rows resolve, 68 retrieval declarations bind; KubeJS skips startup scripts (228 identities untested); no world/player or gameplay',
+    'mixin_package_isolation':'15 Mixins moved out of runtime helper package; real ModLauncher rejects old-layout negative control and defines 16 selected classes with seven native hook interfaces; no player/world lifecycle execution',
     'quest_adapter':'actual MC/FTB matcher and isolated Sponge Mixin application verified; full NeoForge transformer chain and game unverified',
     'retrieval_progress_codec':'source-compared actual NBT model; no save bridge',
     'quest_retrieval_planner':'source-compared ordered model; no inventory transaction',
@@ -281,7 +295,8 @@ text=text.replace('**2026-10-15（上海）。','**2026-10-18（上海更新）�
 text+='\n\n'+heading+'\n\n'
 text+='已恢复锁定输入并重新执行本阶段验证。检索与合成的无 NBT 子集现在保留旧版耐久损耗规则，同时拒绝额外名称等不符组件；狩猎任务保留精确 ID 与子类匹配两种模式（包括牛与蘑菇牛的区别）。这些适配只作用于明确标记的迁移任务。\n\n'
 text+=f"依赖闭合的实际任务配置仍为 {report['dependency_closed_active_quests']} / {report['source_quests']}；结构候选 {report['structural_candidates']} 个。修复检测语义没有冒充新增完整任务覆盖。\n\n"
-text+=f"详细新证据见 docs/verification/task-semantics-phase.json。隔离 Sponge 服务已将 {isolated['injections_verified']} 个注入应用到 {isolated['targets_transformed']} 个真实目标类，并通过 {isolated['asm_basic_dataflow_methods']} 个方法的数据流检查和三组破坏性负例；完整 NeoForge 转换链、世界运行、多人全语义和客户端贴图仍未验证；完整迁移目标继续保留。\n"
+text+=f"详细新证据见 docs/verification/task-semantics-phase.json。隔离 Sponge 服务已将 {isolated['injections_verified']} 个注入应用到 {isolated['targets_transformed']} 个真实目标类，并通过 {isolated['asm_basic_dataflow_methods']} 个方法的数据流检查和三组破坏性负例。新增官方数据生成模式已执行真实 NeoForge 注册和16个选定类的加载，7个原生钩子接口存在；世界运行、多人全语义和客户端贴图仍未验证。\n"
+text+=f"\n真实加载发现并修复了普通运行时类与Mixin共用保留包导致的IllegalClassLoadError；15个Mixin移至独立子包，旧布局负例在真实ModLauncher中仍被拒绝。注册表包含 {native_registry['registries']['items']} 个物品、{native_registry['registries']['blocks']} 个方块、{native_registry['registries']['fluids']} 个流体、{native_registry['registries']['entities']} 个实体类型。492条原生物品目标均存在，68个检索声明可绑定；KubeJS在数据生成中跳过启动脚本，228条脚本物品未验证。此处不是新增完整任务或功能保真率，实际导出仍为2/3814。\n"
 text+=f"\n多物品检索纯引擎通过 {engine['source_comparisons']} 次锁定原源码算法对照，支持消耗/自动消耗/组检测/OR的16种组合，覆盖同槽预算、跨轮锁定、离线成员和重复提交；源耗尽槽异常整份拒绝且不写入库存。物品匹配、库存、存储和参与者仍使用夹具；尚未接入游戏或任务导出，不能计入已迁移任务数。\n"
 text+=f"\n新增进度编解码模型通过 {codec['source_comparisons']} 次源码对照与 {codec['binary_nbt_roundtrips']} 次真实 1.21 NBT 往返；有序任务规划模型通过 {planner['source_comparisons']} 次源码对照。两者仍未接入游戏存档、库存事务或导出。\n"
 text+='\n已接入标记检索任务的库存变化排队：包含空槽变化及初始监听器同步，在 Pre tick 重新扫描。完整游戏事件执行仍未验证。\n'

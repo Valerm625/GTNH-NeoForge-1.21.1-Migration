@@ -1,4 +1,6 @@
-package org.gtnhmigration.compat;
+package org.gtnhmigration.compat.mixin;
+
+import org.gtnhmigration.compat.*;
 
 import java.util.Optional;
 import net.minecraft.nbt.CompoundTag;

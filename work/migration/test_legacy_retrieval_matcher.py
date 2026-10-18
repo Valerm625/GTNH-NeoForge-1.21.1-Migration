@@ -40,7 +40,7 @@ for node in ast.walk(generator):
         if isinstance(target, ast.BinOp) and isinstance(target.right, ast.Constant) and node.args and isinstance(node.args[0], ast.Constant):
             generated[target.right.value] = node.args[0].value
 for name in ['LegacyRetrievalStackMatcher.java', 'LegacyRetrievalItemTaskMixin.java', 'LegacyCraftingStackMatcher.java', 'LegacyCraftingItemTaskMixin.java']:
-    actual = helper.with_name(name).read_text(encoding='utf-8')
+    actual = (helper.parent / ('mixin' if name.endswith('Mixin.java') else '') / name).read_text(encoding='utf-8')
     assert generated[name] == actual, f'Generator/source divergence: {name}'
 
 command_lengths = {}
@@ -67,13 +67,16 @@ def run(argv, name):
     return log
 
 sources = [helper, test, helper.with_name('LegacyCraftingStackMatcher.java'),
-           helper.with_name('LegacyCraftingItemTaskMixin.java'), helper.with_name('LegacyRetrievalItemTaskMixin.java'),
+           (helper.parent/'mixin/LegacyCraftingItemTaskMixin.java'), (helper.parent/'mixin/LegacyRetrievalItemTaskMixin.java'),
            helper.with_name('LegacyRetrievalCounter.java'), R / 'work/migration/QuestAdapterShapeCheck.java',
            R / 'work/migration/LegacyCraftingShapeCheck.java']
+for stale in (out/'org/gtnhmigration/compat').rglob('*.class'):
+    assert stale.resolve().is_relative_to(out.resolve())
+    stale.unlink()
 run([str(java.with_name('javac.exe')), '-proc:none', '--release', '21', '-encoding', 'UTF-8', '-cp', cp, '-d', '.'] + [relative(p) for p in sources], 'compile')
 compiled = out / 'matcher-adapters.jar'
 with zipfile.ZipFile(compiled, 'w') as jar:
-    for path in sorted((out / 'org/gtnhmigration/compat').glob('*.class')):
+    for path in sorted((out / 'org/gtnhmigration/compat').rglob('*.class')):
         jar.write(path, path.relative_to(out).as_posix())
 for check in ['QuestAdapterShapeCheck', 'LegacyCraftingShapeCheck']:
     shape_log = run([str(java), '-cp', '.;' + cp, check, relative(ftb), relative(compiled)], check)

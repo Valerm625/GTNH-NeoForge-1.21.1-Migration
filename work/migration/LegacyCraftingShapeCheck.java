@@ -27,7 +27,7 @@ public class LegacyCraftingShapeCheck {
         String desc = "(Lnet/minecraft/world/item/ItemStack;)Z";
         require(target.methods.stream().filter(m -> m.name.equals("test") && m.desc.equals(desc)).count()==1,
                 "ItemTask.test target shape changed");
-        ClassNode mixin = node(args[1], "org/gtnhmigration/compat/LegacyCraftingItemTaskMixin.class");
+        ClassNode mixin = node(args[1], "org/gtnhmigration/compat/mixin/LegacyCraftingItemTaskMixin.class");
         FieldNode field = mixin.fields.stream().filter(f -> f.name.equals("matchComponents")).findFirst().orElseThrow();
         require(target.fields.stream().anyMatch(f -> f.name.equals(field.name) && f.desc.equals(field.desc)),
                 "Missing matchComponents shadow field");

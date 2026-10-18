@@ -26,12 +26,12 @@
       "missing_injection_detected": true
     }
   },
-  "compat_jar_sha256": "7b3e811a9805a831b63c112b6b953133fe22e6e9da5b0e3766ec7d6f5522f6a7",
+  "compat_jar_sha256": "d840000cec3679510c2cc9c9de88888d93e2eac2a5bbb568e7045db9a02740a9",
   "source_sha256": {
     "work/migration/OfflineMixinService.java": "a7ea57ef2ea959f69885cca79076690724e82a17c768df2d4521e23fddc897df",
     "work/migration/OfflineProperties.java": "10ad2622af4698009243667fac346ad23621d38f86c583aebcb99593059f9f3d",
     "work/migration/IsolatedMixinTransformationCheck.java": "6b87ec3e4f1c26fc0e6b805b94de409a0114422c1514c11fe0afdd99e39259d7",
-    "work/migration/test_isolated_mixin_transformation.py": "f0b6441fd712f9c2b760256215a5d3924665772b7f1cfbcc7ed4dd7b8affca30"
+    "work/migration/test_isolated_mixin_transformation.py": "ca343514f088c1a40b7122b443ac921f70de07f2ee36d310f45228ac4a4f9422"
   },
   "dependency_sha256": {
     "neoforge-21.1.262-server.jar": "f57ce3018e21459d24b50508e8c1b4fd5c16324ec1dc5f316c192aa0130e7fe0",

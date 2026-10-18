@@ -22,30 +22,30 @@
   "adapter_source_sha256": {
     "LegacyInventoryRescanQueue": "45a9bde139aa08011803652837ca48a462381286754f3b302542d24504e75e5e",
     "LegacyInventoryObserver": "540afa5b92dab9c7208e2b334e06102b486696b524c322f4697e262647d9c99e",
-    "LegacyInventoryListenerMixin": "6b6d20089f7b3698eb5e4427c34c6e63190461b9455570532c352b65e5c2fe81",
-    "LegacyTaskLoginTimingMixin": "d1aef60a59dfa0a3a22f925fa07bbbcb8405b3d0c34fa6e8ab5a03de256a4c57",
-    "LegacyInitialInventorySyncMixin": "f56298f2176cdbb799a1d2b50359549b26f0a2944c98fda851efe86fcb9568bd"
+    "LegacyInventoryListenerMixin": "a89b7e32f75b17daba0700de9473692cd7aaf011f41ba7356f8636e85767910b",
+    "LegacyTaskLoginTimingMixin": "2f2c0fbbe6a3e14df9b1f06bdb7e358c1ed9fe826dc0736e6c19ec675ecf6990",
+    "LegacyInitialInventorySyncMixin": "dc642846dc4bfb95d4b92d3413f11d9c2318b497b9284b1b717c106dda79d570"
   },
   "source_sha256": {
     "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyInventoryRescanQueue.java": "45a9bde139aa08011803652837ca48a462381286754f3b302542d24504e75e5e",
     "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyInventoryObserver.java": "540afa5b92dab9c7208e2b334e06102b486696b524c322f4697e262647d9c99e",
-    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyInventoryListenerMixin.java": "6b6d20089f7b3698eb5e4427c34c6e63190461b9455570532c352b65e5c2fe81",
-    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyTaskLoginTimingMixin.java": "d1aef60a59dfa0a3a22f925fa07bbbcb8405b3d0c34fa6e8ab5a03de256a4c57",
-    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyInitialInventorySyncMixin.java": "f56298f2176cdbb799a1d2b50359549b26f0a2944c98fda851efe86fcb9568bd",
-    "work/migration/LegacyInventoryObserverCheck.java": "aed919c8f8caccf54a5c619b0f5b5294859ce8522c35398f941d146903f99d41",
-    "work/migration/test_legacy_inventory_observer.py": "fb6d375d4f805b0bc8393e3211d9b2eaf04d50ab9dea744a2dc20393b848fe65"
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/mixin/LegacyInventoryListenerMixin.java": "a89b7e32f75b17daba0700de9473692cd7aaf011f41ba7356f8636e85767910b",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/mixin/LegacyTaskLoginTimingMixin.java": "2f2c0fbbe6a3e14df9b1f06bdb7e358c1ed9fe826dc0736e6c19ec675ecf6990",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/mixin/LegacyInitialInventorySyncMixin.java": "dc642846dc4bfb95d4b92d3413f11d9c2318b497b9284b1b717c106dda79d570",
+    "work/migration/LegacyInventoryObserverCheck.java": "ec438f96bc51ee8a1c6941a37e28f50a55c92fb227c81be450dd9539de4b6d26",
+    "work/migration/test_legacy_inventory_observer.py": "de5603c96e4430df3673ffd41e6baabc855c9a9a1a5569ee15b018807d1e331f"
   },
   "adapter_compiled_sha256": {
     "LegacyInventoryRescanQueue": "3dcc19b1aa19298b123ec771d12a91b8b7cedc59423880b73a547c26b407618c",
     "LegacyInventoryObserver": "42c85cc14eec144ab304fc88f421f16fd3e0b8e9a6bc0f1e7cdb20dfb6396036",
-    "LegacyInventoryListenerMixin": "9f7afbead85a44aa45b53d5cce84fd44835a179926c154092dc06754e8127a25",
-    "LegacyTaskLoginTimingMixin": "a410f6ce0eb04a072ae90739e1a2e5461ec8bbbcfac5d0a51687e2313c7395d3",
-    "LegacyInitialInventorySyncMixin": "00575b282649434318968d5edeeb74079bd3d94cffb039479db6d2425b542713"
+    "LegacyInventoryListenerMixin": "485f6856c997a5c27021a2c9b6106c0cb1ff66986373a8f528cb83f8793b086d",
+    "LegacyTaskLoginTimingMixin": "d303f10e01e401cc6c654d932ebd6ce437f4a687abdff999813809bb19eedfe4",
+    "LegacyInitialInventorySyncMixin": "3e17e5a8b5459d8ca6aa0e38fd4951e7d12c4e52c92ac44ed2ab5780da6e87f6"
   },
-  "test_source_sha256": "aed919c8f8caccf54a5c619b0f5b5294859ce8522c35398f941d146903f99d41",
-  "runner_sha256": "fb6d375d4f805b0bc8393e3211d9b2eaf04d50ab9dea744a2dc20393b848fe65",
+  "test_source_sha256": "ec438f96bc51ee8a1c6941a37e28f50a55c92fb227c81be450dd9539de4b6d26",
+  "runner_sha256": "de5603c96e4430df3673ffd41e6baabc855c9a9a1a5569ee15b018807d1e331f",
   "oracle_fixture_sha256": "24c3d959554108708f56ba755d089edfabd2f3a828af050169081b1c08953ab9",
-  "compat_jar_sha256": "7b3e811a9805a831b63c112b6b953133fe22e6e9da5b0e3766ec7d6f5522f6a7",
+  "compat_jar_sha256": "d840000cec3679510c2cc9c9de88888d93e2eac2a5bbb568e7045db9a02740a9",
   "ftb_artifact_sha256": "6a39982c4b3afc00b1e788041a4f0d394e1659e3b3a6e5d078cd790bc36d0018",
   "minecraft_artifact_sha256": "26ca9c40d7e1681190b428583c38816852218e78df3f8bdb60a59a78503aec71",
   "packaged_bridge_matches_sources": true,

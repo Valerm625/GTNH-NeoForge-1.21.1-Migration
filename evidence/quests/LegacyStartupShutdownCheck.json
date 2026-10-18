@@ -26,14 +26,14 @@
     "work/migration/LegacyQuestWorldStoreCheck.java": "011a0cb89da8d7d7a559717ac3657030d0e04d51906cedc30cc2a894ba2e31d6",
     "work/migration/LegacyPlayerMarkerUpgradeCheck.java": "e9189adf569384b5144423fafe83436addf8744523b026766b75565c7907a46a",
     "work/migration/LegacyStartupShutdownCheck.java": "61de790064c8581284070ec5bf980a524c1264dbff9319aed326be2b3984d6e1",
-    "work/migration/test_legacy_startup_shutdown.py": "69c9bd07ca6d1fca52b44fac11625a7c9836444bab72c30e53eeaa59a5264925",
+    "work/migration/test_legacy_startup_shutdown.py": "4adc7c2537cd4bf03bf57d85f6a58bef3e6cf233b98c4d915af2666168b17aa4",
     "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestNativeLifecycle.java": "89eb7a82345c5c9fbf0f2bbcdc6a907c0294a548ed730c1eaa1f872057ca8ade",
-    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyServerSaveScopeMixin.java": "348b65d89d0510d372779f684cee3a23baf1c04327a3685434029284eb607d7d",
-    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyWorldFileSaveScopeMixin.java": "cbc49f1233b22fc13fa3ee8f3258a121ed6e3e0779044a7ea1aaaf95ca269875"
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/mixin/LegacyServerSaveScopeMixin.java": "a52d29809716ccb544931bf81ebbe840f15076a66ea19c2829e314316603cac3",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/mixin/LegacyWorldFileSaveScopeMixin.java": "15b764dff83993239e76ff796ef2f5c61e0923b40d6cd17bdcd796d73b83f057"
   },
   "minecraft_jar_sha256": "26ca9c40d7e1681190b428583c38816852218e78df3f8bdb60a59a78503aec71",
   "patched_native_jar_sha256": "f57ce3018e21459d24b50508e8c1b4fd5c16324ec1dc5f316c192aa0130e7fe0",
-  "compat_jar_sha256": "7b3e811a9805a831b63c112b6b953133fe22e6e9da5b0e3766ec7d6f5522f6a7",
+  "compat_jar_sha256": "d840000cec3679510c2cc9c9de88888d93e2eac2a5bbb568e7045db9a02740a9",
   "limitations": [
     "Executes production permit state machine, synthetic world/player/pending ledger, actual DirectoryLock and ledger lock. Server objects and shutdown calls are fixtures. Byte digests exclude the two locked lock files; their exclusion and reopen behavior are tested directly.",
     "Pinned native shutdown ordering and terminal runServer call sites are bytecode audited, with required isolated Mixin checks in a separate report. No Player, server loop, world or full NeoForge transformation chain executes.",

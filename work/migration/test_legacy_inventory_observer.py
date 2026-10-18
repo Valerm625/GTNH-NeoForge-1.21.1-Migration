@@ -110,7 +110,7 @@ source_dir = R / 'work/compat-mod/src/main/java/org/gtnhmigration/compat'
 names = ['LegacyInventoryRescanQueue', 'LegacyInventoryObserver', 'LegacyInventoryListenerMixin',
          'LegacyTaskLoginTimingMixin', 'LegacyInitialInventorySyncMixin']
 compat_hash = hashlib.sha256(compat.read_bytes()).hexdigest()
-adapter_source_hashes = {name: hashlib.sha256((source_dir / (name + '.java')).read_bytes()).hexdigest() for name in names}
+adapter_source_hashes = {name: hashlib.sha256((source_dir / ('mixin' if name.endswith('Mixin') else '') / (name + '.java')).read_bytes()).hexdigest() for name in names}
 recompiled = out / 'source-classes'
 recompiled.mkdir(exist_ok=True)
 
@@ -127,14 +127,14 @@ def run(executable, arguments, name):
     return log
 
 run(java.with_name('javac.exe'), ['-proc:none', '--release', '21', '-encoding', 'UTF-8', '-cp', classpath,
-    '-d', 'source-classes'] + [relative(source_dir / (name + '.java')) for name in names], 'source-compile')
+    '-d', 'source-classes'] + [relative(source_dir / ('mixin' if name.endswith('Mixin') else '') / (name + '.java')) for name in names], 'source-compile')
 compiled_hashes = {}
 with zipfile.ZipFile(compat) as jar:
     config = json.loads(jar.read('gtnh_migration_compat.mixins.json'))
     for mixin in ['LegacyInventoryListenerMixin', 'LegacyTaskLoginTimingMixin', 'LegacyInitialInventorySyncMixin']:
         assert mixin in config['mixins'], f'Bridge missing from packaged config: {mixin}'
     for name in names:
-        path = 'org/gtnhmigration/compat/' + name + '.class'
+        path = 'org/gtnhmigration/compat/' + ('mixin/' if name.endswith('Mixin') else '') + name + '.class'
         assert jar.read(path) == (recompiled / path).read_bytes(), f'Stale packaged bridge class: {name}'
         compiled_hashes[name] = hashlib.sha256(jar.read(path)).hexdigest()
 run(java.with_name('javac.exe'), ['-proc:none', '--release', '21', '-encoding', 'UTF-8', '-cp', classpath,
@@ -142,14 +142,14 @@ run(java.with_name('javac.exe'), ['-proc:none', '--release', '21', '-encoding', 
 log = run(java, ['-cp', '.;' + classpath, 'LegacyInventoryObserverCheck', relative(compat), relative(ftb), relative(minecraft)], 'observer')
 evidence = json.loads(next(line[line.index('{'): ] for line in log.splitlines() if '{"test":' in line))
 assert hashlib.sha256(compat.read_bytes()).hexdigest() == compat_hash, 'Compat JAR changed during testing; rerun'
-assert adapter_source_hashes == {name: hashlib.sha256((source_dir / (name + '.java')).read_bytes()).hexdigest() for name in names}, 'Bridge sources changed during testing; rerun'
+assert adapter_source_hashes == {name: hashlib.sha256((source_dir / ('mixin' if name.endswith('Mixin') else '') / (name + '.java')).read_bytes()).hexdigest() for name in names}, 'Bridge sources changed during testing; rerun'
 evidence.update({
     'bq_source_commit': '815d738923d46e9083f988421e5329193e2e5940',
     'ftb_source_commit': '8c53f35a97d8897c861b097f1e39f4fc3beb3a15',
     'source_file_sha256': source_hashes,
     'adapter_source_sha256': adapter_source_hashes,
     'source_sha256': {
-        **{'work/compat-mod/src/main/java/org/gtnhmigration/compat/' + name + '.java': digest for name, digest in adapter_source_hashes.items()},
+        **{'work/compat-mod/src/main/java/org/gtnhmigration/compat/' + ('mixin/' if name.endswith('Mixin') else '') + name + '.java': digest for name, digest in adapter_source_hashes.items()},
         'work/migration/LegacyInventoryObserverCheck.java': hashlib.sha256(check.read_bytes()).hexdigest(),
         'work/migration/test_legacy_inventory_observer.py': hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
     },

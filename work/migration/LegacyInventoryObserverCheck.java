@@ -126,7 +126,7 @@ public class LegacyInventoryObserverCheck {
         require(addedLate.changes==1&&addedLate.emptyChanges==1,"Vanilla must deliver changed-to-empty slot callbacks");
     }
     static void checkShapes(String compat,String ftb,String minecraft) throws Exception {
-        ClassNode listener=node(compat,BASE+"LegacyInventoryListenerMixin");
+        ClassNode listener=node(compat,BASE+"mixin/LegacyInventoryListenerMixin");
         MethodNode slot=method(listener,"gtnhMigration$queueLegacySlot");inject(slot,"slotChanged","HEAD",false);
         require(calls(slot,BASE+"LegacyInventoryRescanQueue","observesSlot")==1&&calls(slot,BASE+"LegacyInventoryObserver","schedule")==1,"Slot callback missing queue/policy");
         require(calls(slot,"net/minecraft/world/item/ItemStack","isEmpty")==0,"Empty slot callbacks were filtered");
@@ -173,12 +173,12 @@ public class LegacyInventoryObserverCheck {
         require(observer.methods.stream().anyMatch(m->calls(m,"dev/ftb/mods/ftbquests/quest/TeamData","isLocked")==1)
                 &&observer.methods.stream().anyMatch(m->calls(m,"dev/ftb/mods/ftbquests/quest/ServerQuestFile","withPlayerContext")==1),"Missing locked-team or player-context path");
 
-        ClassNode login=node(compat,BASE+"LegacyTaskLoginTimingMixin");MethodNode loginHandler=method(login,"gtnhMigration$deferLegacyLogin");
+        ClassNode login=node(compat,BASE+"mixin/LegacyTaskLoginTimingMixin");MethodNode loginHandler=method(login,"gtnhMigration$deferLegacyLogin");
         inject(loginHandler,"checkOnLogin","HEAD",true);
         require(calls(loginHandler,BASE+"LegacyInventoryObserver","isMarked")==1
                 &&calls(loginHandler,"org/spongepowered/asm/mixin/injection/callback/CallbackInfoReturnable","setReturnValue")==1
                 &&opcode(loginHandler,Opcodes.ICONST_0)&&!opcode(loginHandler,Opcodes.ICONST_1),"Login suppression is not marked-only false");
-        ClassNode initial=node(compat,BASE+"LegacyInitialInventorySyncMixin");MethodNode initialHandler=method(initial,"gtnhMigration$initialLegacyInventory");
+        ClassNode initial=node(compat,BASE+"mixin/LegacyInitialInventorySyncMixin");MethodNode initialHandler=method(initial,"gtnhMigration$initialLegacyInventory");
         inject(initialHandler,"addSlotListener","INVOKE",false);
         Map<String,Object> initialInjection=params(annotation(initialHandler,"Lorg/spongepowered/asm/mixin/injection/Inject;"));
         Map<String,Object> initialAt=params((AnnotationNode)((List<?>)initialInjection.get("at")).getFirst());

@@ -35,7 +35,7 @@ run(java.with_name('javac.exe'),['-proc:none','--release','21','-encoding','UTF-
 log=run(java,['-cp','.;'+cp,'org.gtnhmigration.compat.LegacyStartupShutdownCheck',relative(Path(tempfile.mkdtemp(prefix='run-',dir=out))),relative(patched),relative(O/'mods/gtnh-migration-compat-0.1.0.jar')],'world-store')
 report=json.loads(next(line[line.index('{'): ] for line in log.splitlines() if '{"test":' in line))
 
-report.update({'source_sha256':{p.relative_to(R).as_posix():sha(p) for p in sources+checks+[Path(__file__)]+[R/'work/compat-mod/src/main/java/org/gtnhmigration/compat'/name for name in ['LegacyQuestNativeLifecycle.java','LegacyServerSaveScopeMixin.java','LegacyWorldFileSaveScopeMixin.java']]},
+report.update({'source_sha256':{p.relative_to(R).as_posix():sha(p) for p in sources+checks+[Path(__file__)]+[R/'work/compat-mod/src/main/java/org/gtnhmigration/compat'/('mixin' if name.endswith('Mixin.java') else '')/name for name in ['LegacyQuestNativeLifecycle.java','LegacyServerSaveScopeMixin.java','LegacyWorldFileSaveScopeMixin.java']]},
  'minecraft_jar_sha256':sha(minecraft),'patched_native_jar_sha256':sha(patched),'compat_jar_sha256':sha(O/'mods/gtnh-migration-compat-0.1.0.jar'),
  'limitations':['Executes production permit state machine, synthetic world/player/pending ledger, actual DirectoryLock and ledger lock. Server objects and shutdown calls are fixtures. Byte digests exclude the two locked lock files; their exclusion and reopen behavior are tested directly.',
  'Pinned native shutdown ordering and terminal runServer call sites are bytecode audited, with required isolated Mixin checks in a separate report. No Player, server loop, world or full NeoForge transformation chain executes.',

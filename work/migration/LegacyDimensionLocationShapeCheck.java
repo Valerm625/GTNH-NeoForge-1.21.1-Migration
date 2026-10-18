@@ -10,7 +10,7 @@ public class LegacyDimensionLocationShapeCheck {
   ClassNode target=node(args[0],"dev/ftb/mods/ftbquests/quest/task/LocationTask.class");
   String desc="(Ldev/ftb/mods/ftbquests/quest/TeamData;Lnet/minecraft/server/level/ServerPlayer;)Z";
   require(target.methods.stream().anyMatch(m->m.name.equals("canSubmit")&&m.desc.equals(desc)),"LocationTask canSubmit target shape changed");
-  ClassNode mix=node(args[1],"org/gtnhmigration/compat/LegacyDimensionLocationTaskMixin.class");
+  ClassNode mix=node(args[1],"org/gtnhmigration/compat/mixin/LegacyDimensionLocationTaskMixin.class");
   MethodNode handler=null;boolean marker=false;int shadows=0;
   for(FieldNode f:mix.fields){
    if(f.visibleAnnotations!=null && f.visibleAnnotations.stream().anyMatch(a->a.desc.equals("Lorg/spongepowered/asm/mixin/Shadow;"))){

@@ -10,7 +10,7 @@ public class QuestAdapterShapeCheck {
   ClassNode target=node(args[0],"dev/ftb/mods/ftbquests/quest/task/ItemTask.class");
   String desc="(Ldev/ftb/mods/ftbquests/quest/TeamData;Lnet/minecraft/server/level/ServerPlayer;Lnet/minecraft/world/item/ItemStack;)V";
   require(target.methods.stream().filter(m->m.name.equals("submitTask")&&m.desc.equals(desc)).count()==1,"submitTask target shape changed");
-  ClassNode mixin=node(args[1],"org/gtnhmigration/compat/LegacyRetrievalItemTaskMixin.class");
+  ClassNode mixin=node(args[1],"org/gtnhmigration/compat/mixin/LegacyRetrievalItemTaskMixin.class");
   int shadows=0;MethodNode handler=null;
   for(MethodNode m:mixin.methods){
    if(m.name.equals("gtnhMigration$legacyRetrieval"))handler=m;

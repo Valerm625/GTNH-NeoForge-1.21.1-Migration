@@ -1,4 +1,6 @@
-package org.gtnhmigration.compat;
+package org.gtnhmigration.compat.mixin;
+
+import org.gtnhmigration.compat.*;
 
 import dev.ftb.mods.ftbquests.quest.TeamData;
 import dev.ftb.mods.ftbquests.quest.task.Task;

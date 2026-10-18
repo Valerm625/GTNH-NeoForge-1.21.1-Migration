@@ -17,7 +17,7 @@ public class CapacityPatchCheck {
     }
     for(FieldNode f:target.fields)if(f.name.equals("CAPACITY")) finalCapacity=f.desc.equals("I")&&(f.access&Opcodes.ACC_STATIC)!=0&&(f.access&Opcodes.ACC_FINAL)!=0;
     if(count!=1||!finalCapacity||!bucketMultiply)throw new AssertionError("Target injection shape changed");
-    ClassNode mixin=node(classBytes(args[1],"org/gtnhmigration/compat/EnderTankCapacityMixin.class"));
+    ClassNode mixin=node(classBytes(args[1],"org/gtnhmigration/compat/mixin/EnderTankCapacityMixin.class"));
     MethodNode method=mixin.methods.stream().filter(m->m.name.equals("gtnhMigration$restoreBucketCount")).findFirst().orElseThrow();
     AnnotationNode inject=method.visibleAnnotations.stream().filter(a->a.desc.equals("Lorg/spongepowered/asm/mixin/injection/ModifyConstant;")).findFirst().orElseThrow();
     Map<String,Object> params=new HashMap<>();for(int i=0;i<inject.values.size();i+=2)params.put((String)inject.values.get(i),inject.values.get(i+1));
@@ -25,7 +25,7 @@ public class CapacityPatchCheck {
     if(!((List<?>)params.get("method")).equals(List.of("<clinit>")))throw new AssertionError("Wrong injection target");
     List<?> consts=(List<?>)params.get("constant");AnnotationNode constant=(AnnotationNode)consts.getFirst();
     if(!constant.values.contains("intValue")||!constant.values.contains(16))throw new AssertionError("Wrong source constant");
-    Class<?> handler=Class.forName("org.gtnhmigration.compat.EnderTankCapacityMixin");Method fn=handler.getDeclaredMethod("gtnhMigration$restoreBucketCount",int.class);fn.setAccessible(true);
+    Class<?> handler=Class.forName("org.gtnhmigration.compat.mixin.EnderTankCapacityMixin");Method fn=handler.getDeclaredMethod("gtnhMigration$restoreBucketCount",int.class);fn.setAccessible(true);
     if(!Integer.valueOf(256).equals(fn.invoke(null,16)))throw new AssertionError("Wrong target bucket count");
     for(int wrong:new int[]{0,15,17,256}){boolean rejected=false;try{fn.invoke(null,wrong);}catch(InvocationTargetException e){rejected=e.getCause() instanceof IllegalStateException;}if(!rejected)throw new AssertionError("Unexpected target accepted "+wrong);}
     System.out.println("{\"test\":\"compiled_capacity_adapter_contract\",\"passed\":true,\"actual_target_matches\":1,\"actual_handler_output_buckets\":256,\"unexpected_originals_rejected\":4,\"actual_mixin_transformation_tested\":false,\"game_storage_verified\":false}");

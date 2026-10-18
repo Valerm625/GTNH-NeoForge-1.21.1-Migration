@@ -36,7 +36,7 @@ with zipfile.ZipFile(compat) as jar:
     expected |= {'LegacyServerSaveScopeMixin','LegacyPlayerListSaveScopeMixin','LegacyPlayerFileSaveScopeMixin','LegacyWorldFileSaveScopeMixin','LegacyPlayerLifecycleSaveScopeMixin','LegacyPlayerDataLoadScopeMixin'}
     assert len(config['mixins']) == 14 and set(config['mixins']) == expected
     assert config['client'] == ['LegacyOwnerCacheSaveScopeMixin']
-    assert config['required'] and config['package'] == 'org.gtnhmigration.compat'
+    assert config['required'] and config['package'] == 'org.gtnhmigration.compat.mixin'
     config['mixins'].remove('LegacyHuntTaskMixin')
     (out / 'missing-registration.mixins.json').write_text(json.dumps(config), encoding='utf-8', newline='\n')
 

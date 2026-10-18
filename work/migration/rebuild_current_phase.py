@@ -24,6 +24,7 @@ steps.insert(steps.index('test_legacy_retrieval_matcher.py'), 'test_legacy_quest
 steps.insert(steps.index('test_legacy_retrieval_matcher.py'), 'test_legacy_retrieval_definition_binding.py')
 steps.insert(steps.index('test_legacy_retrieval_matcher.py'), 'test_legacy_quest_entry_policy.py')
 steps.insert(steps.index('test_legacy_retrieval_matcher.py'), 'test_legacy_quest_completion_planner.py')
+steps.insert(steps.index('stage_test_runtime.py'), 'test_native_registry_datagen.py')
 for step in steps:
     print('RUN',step,flush=True)
     subprocess.run([sys.executable,'-u',str(HERE/step)],cwd=ROOT,check=True)

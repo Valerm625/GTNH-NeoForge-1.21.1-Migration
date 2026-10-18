@@ -1,7 +1,7 @@
 """Add opt-in legacy retrieval semantics for reviewed exported FTB item tasks only."""
 from pathlib import Path
 import json
-R=Path(__file__).resolve().parents[2];W=R/'work';P=W/'compat-mod/src/main/java/org/gtnhmigration/compat';P.mkdir(parents=True,exist_ok=True)
+R=Path(__file__).resolve().parents[2];W=R/'work';P=W/'compat-mod/src/main/java/org/gtnhmigration/compat';P.mkdir(parents=True,exist_ok=True);M=P/'mixin';M.mkdir(exist_ok=True)
 (P/'LegacyRetrievalCounter.java').write_text('''package org.gtnhmigration.compat;
 import java.util.Map;
 import java.util.UUID;
@@ -65,7 +65,9 @@ public final class LegacyRetrievalStackMatcher {
     }
 }
 ''',encoding='utf-8',newline='\n')
-(P/'LegacyRetrievalItemTaskMixin.java').write_text('''package org.gtnhmigration.compat;
+(M/'LegacyRetrievalItemTaskMixin.java').write_text('''package org.gtnhmigration.compat.mixin;
+
+import org.gtnhmigration.compat.*;
 import dev.ftb.mods.ftbquests.quest.TeamData;
 import dev.ftb.mods.ftbquests.quest.task.ItemTask;
 import dev.ftb.mods.ftbquests.quest.task.Task;
@@ -142,7 +144,9 @@ public final class LegacyCraftingStackMatcher {
     }
 }
 ''',encoding='utf-8',newline='\n')
-(P/'LegacyCraftingItemTaskMixin.java').write_text('''package org.gtnhmigration.compat;
+(M/'LegacyCraftingItemTaskMixin.java').write_text('''package org.gtnhmigration.compat.mixin;
+
+import org.gtnhmigration.compat.*;
 
 import dev.ftb.mods.ftbquests.integration.item_filtering.ItemMatchingSystem.ComponentMatchType;
 import dev.ftb.mods.ftbquests.quest.task.ItemTask;
@@ -174,7 +178,9 @@ public abstract class LegacyCraftingItemTaskMixin {
     }
 }
 ''',encoding='utf-8',newline='\n')
-(P/'LegacyDimensionLocationTaskMixin.java').write_text('''package org.gtnhmigration.compat;
+(M/'LegacyDimensionLocationTaskMixin.java').write_text('''package org.gtnhmigration.compat.mixin;
+
+import org.gtnhmigration.compat.*;
 import dev.ftb.mods.ftbquests.quest.TeamData;
 import dev.ftb.mods.ftbquests.quest.task.LocationTask;
 import dev.ftb.mods.ftbquests.quest.task.Task;

@@ -25,7 +25,7 @@ public final class LegacyHuntAdapterCheck {
     }
     static void verifyRegistration(String json) {
         var config=JsonParser.parseString(json).getAsJsonObject();
-        require(config.get("package").getAsString().equals("org.gtnhmigration.compat"),"actual JAR mixin package");
+        require(config.get("package").getAsString().equals("org.gtnhmigration.compat.mixin"),"actual JAR mixin package");
         int registered=0;
         for (var entry:config.getAsJsonArray("mixins")) if (entry.getAsString().equals("LegacyHuntTaskMixin")) registered++;
         require(registered==1,"hunt mixin must be registered once in actual JAR config");
@@ -138,7 +138,7 @@ public final class LegacyHuntAdapterCheck {
             ClassNode target=node(ftb,"dev/ftb/mods/ftbquests/quest/task/KillTask");
             String descriptor="(Lnet/minecraft/world/entity/LivingEntity;)Z";
             require(target.methods.stream().filter(m->m.name.equals("match") && m.desc.equals(descriptor)).count()==1,"real FTB match signature");
-            ClassNode mixin=node(compat,"org/gtnhmigration/compat/LegacyHuntTaskMixin");
+            ClassNode mixin=node(compat,"org/gtnhmigration/compat/mixin/LegacyHuntTaskMixin");
             int shadows=0;
             for (FieldNode field:mixin.fields) {
                 if (field.visibleAnnotations==null || field.visibleAnnotations.stream().noneMatch(a->a.desc.equals("Lorg/spongepowered/asm/mixin/Shadow;"))) continue;
