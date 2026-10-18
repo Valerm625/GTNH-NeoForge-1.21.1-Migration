@@ -1,7 +1,7 @@
 {
   "portable_java_21": "packaged binary -version passes",
   "neoforge_server_installation": "21.1.262 installed; actual loader stops at unaccepted EULA",
-  "modern_artifacts": "18 downloaded JARs + 1 local version-pinned adapter; 59 dependency ranges passed",
+  "modern_artifacts": "18 downloaded JARs + 1 local version-pinned adapter; 60 dependency ranges passed",
   "original_release": "2.8.4 isolated and CRC-verified",
   "currency_items": 81,
   "currency_assembler_recipes": 112,

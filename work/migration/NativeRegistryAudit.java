@@ -91,6 +91,7 @@ public final class NativeRegistryAudit {
             if (lampCount != 32 || rendererCount != 512) throw new IllegalStateException("Lamp variants differ");
             report.addProperty("client_helpers_retained", 2);
             report.addProperty("client_lamp_renderers_constructed", rendererCount);
+            report.add("library_client_callbacks", LibraryClientCallbacksCheck.verifyRuntime(true, Path.of("library-bytecode-check.json")));
             LegacyQuestDefinitionArchive archive = LegacyQuestDefinitionArchive.loadPinned(Path.of("."));
             report.addProperty("archive_sha256", archive.pin().archiveSha256());
             JsonArray mappings = new JsonArray();

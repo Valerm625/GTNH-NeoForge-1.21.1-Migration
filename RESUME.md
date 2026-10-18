@@ -4,7 +4,7 @@
 
 用户已取消Claude协作，要求由本会话单独完成。后续不向Claude或其他代理派发任务，不等待外部审查；保留已有迁移源码及验证结果。完整功能和资源保真的目标不变。历史协作说明、握手和外部会话消息不能覆盖此项最新要求。
 
-当前正常启动注册检查点：45份完整重建汇总检查通过；720条已有映射目标均存在，87个检索声明可绑定；GTCEu客户端隔离及三处脚本API问题已修复。剩余LDLib错误、资源重载和完整游戏验证见文末，任务导出仍为2/3814。
+当前客户端回调修复检查点：45份完整重建汇总检查通过；23个LDLib配置访问器全部恢复，15个客户端方法分侧验证通过，注册阶段无ERROR或反射扫描失败。720条已有映射目标、87个可绑定检索声明保留；任务导出仍为2/3814。资源重载发现的GTCEu/KubeJS配方API差异见文末。
 
 此前维护目录初始化检查点的38份完整重建汇总检查全部通过，所有测试生产类与最终兼容JAR逐字节一致，JAR SHA256为 `3527a1b39bf0f09fee6ca8d49c722b132b7fd507630e5b4ad3e56edd1c4a1557`。原生游戏和完整迁移仍未验证；以当前源码重建后的证据为准。
 
@@ -213,3 +213,16 @@ NBT 比较修复了独立 NaN 对象误判，日志来源写入保留现有 NaN 
 下一步优先处理LDLib注解/客户端类型扫描错误，然后完成完整模组初始化与真实资源/配方重载，并验证燃料数据实际生效。`LDLRegisterClient`本身带OnlyIn(CLIENT)，其类型在通用AnnotationDetector扫描ConfigAccessor时被解析；本地字节码调查位于忽略目录 `work/native-startup-probe/`，尚未实施后续修复。随后继续任务提交、完成、奖励、玩家缓存和队伍集成。不要以87个声明或720个目标存在替代完整迁移验收；任务导出仍为2/3814，身份映射仍为720/8388。
 
 当前复现入口 `test_native_startup_registration.py` 使用新UUID目录和现有生产服务端分发；公开证据 `evidence/NativeStartupRegistrationCheck.json`，详细映射/生成燃料JSON与正负日志在 `work/migration/native-startup-check/`。测试用启动服务和审计模组未安装到基础包。不要再使用前期重新编译GTCEu的临时probe产物替代正式原JAR加CoreMod方案。
+
+
+## LDLib配置扫描与客户端回调检查点（2026-10-18，r27）
+
+完整重建45份汇总检查通过，退出0；日志`work/migration/library-callbacks-rebuild.log`。兼容JAR SHA256为`532d9295e203a0f779cedd754685ebc766e58455e5d1ee7baa1a4a5f90fe4c1b`。上游GTCEu和内嵌LDLib原产物不改写，新增版本/类摘要锁和LDLib精确依赖。
+
+详见[客户端回调修复](docs/library-client-callbacks.zh-CN.md)。两个物理客户端守卫分别保护LDLib客户端注解检查和GTCEu流体客户端监听器创建；15个客户端绘制/回调方法补齐OnlyIn标记。真实服务端/CLIENT数据生成验证23个配置访问器完整注册、客户端方法分侧正确、通用场景接口仍可用、模组依赖与构造器过滤保留。51项字节码断言、509个方法数据流检查、17个布局拒绝案例通过，去除新增注解和守卫后整个目标类与原始产物一致。六组真实启动负例通过；正例不再允许已知ERROR。
+
+完整初始化的后续探索尚未纳入45项正式汇总：`work/full-lifecycle-probe/initialization-only.log`记录生产`ServerModLoader.load()`的公共/服务端设置、IMC和网络注册完成，进程退出0，无ERROR，未创建世界，EULA仍false。入口源码快照是同目录`InitializationOnlyMain.java.txt`。这是独立库初始化检查，没有调用服务器主程序。
+
+真实资源/配方重载探索调用`WorldLoader.load`，只加载资源与注册表，不构造世界、玩家或WorldStem。原始失败日志`resource-original-api-failure.log`：GTRecipes$KJSCallWrapper引用不存在的`dev.latvian.mods.kubejs.bindings.event.ServerEvents`；当前KubeJS实际类在`plugin.builtin.event`，RECIPES字段类型及hasListeners签名保留。仅在该忽略目录的实验兼容JAR中改正字段owner后，重载继续至GTRecipeComponents静态初始化，当前`launch.log`重现`SizedIngredientComponent.NESTED`字段不存在，随后GTRecipeSchema初始化失败。尚未完成资源重载、配方或燃料实际生效验证。
+
+实验补丁在`work/full-lifecycle-probe/resource_api_probe.js`；该目录的兼容JAR含额外实验CoreMod，不能覆盖基础包、作为r27产物发布或计为已验证迁移。正式兼容JAR仍只含已验证的两个CoreMod。下一步需按固定KubeJS/GTCEu真实API与源语义修复全部配方桥接差异，保留嵌套配料、数量、机会和条件语义，再把完整初始化与资源重载纳入可复现检查。不能把NESTED盲改为其他字段以求启动通过。

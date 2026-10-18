@@ -31,11 +31,11 @@
 
 KubeJS 2101 的燃料时长由内置插件生成 NeoForge `furnace_fuels` 数据映射。检查调用真实 `BuiltinKubeJSPlugin.generateData` 和 `VirtualDataPack.flush`，以真实 `FurnaceFuel.CODEC` 读取生成内容，对照16种原燃料时长，最高值1889568000 ticks。此时尚未加载资源，`ItemStack.getBurnTime` 仍为0；该值也记入报告，没有伪造已生效的燃烧结果。下一步需要真实资源重载、配方加载及炉子行为检查。
 
-四个独立负例分别取消客户端隔离、恢复双参数标签、恢复循环const、去掉材料命名空间。各自必须重现预期错误且不能生成成功结果。每次均复制当前完整模组、配置和脚本，不改变基础包输入。
+六个独立负例分别取消GTCEu客户端隔离、取消LDLib/GTCEu回调修复、仅取消流体回调创建的客户端守卫、恢复双参数标签、恢复循环const、去掉材料命名空间。各自必须重现预期错误且不能生成成功结果。每次均复制当前完整模组、配置和脚本，不改变基础包输入。
 
 ## 未解决项
 
-LDLib 配置访问器扫描仍尝试反射客户端注解；Rhino 暴露部分 LDLib/GTCEu API 时仍触发客户端类型错误。检查记录完整错误行，只接受已识别的诊断类别，新增错误使检查失败。报告 `all_startup_errors_resolved` 明确为 false，不能把注册阶段通过宣称为完整启动无错误。
+此前LDLib配置访问器扫描和Rhino反射客户端类型的问题已由[客户端回调与配置扫描修复](library-client-callbacks.zh-CN.md)处理。注册阶段日志中的ERROR和反射扫描失败全部作为失败，不再允许已知错误类别。`all_startup_errors_resolved`只表示当前注册检查没有该类错误，不代表后续完整启动已经验收。
 
 未执行后续公共/分侧初始化、完整网络生命周期、资源重载、服务器脚本配方、世界/玩家、机器运行、任务完成奖励和界面。所有剩余迁移目标继续保留。
 
@@ -43,7 +43,7 @@ LDLib 配置访问器扫描仍尝试反射客户端注解；Rhino 暴露部分 L
 
 运行 `python work/migration/test_native_startup_registration.py`，或完整入口 `python work/migration/rebuild_current_phase.py`。
 
-- `work/migration/native-startup-check/NativeStartupRegistrationCheck.json`：输入/源码摘要、统计、原客户端指令保留检查、四个负例和未解决错误。
+- `work/migration/native-startup-check/NativeStartupRegistrationCheck.json`：输入/源码摘要、统计、原客户端指令保留检查、六个负例及错误列表。
 - 同目录 `registry-details.json`：720条映射、3814项绑定诊断、实际生成燃料数据等详细结果；`launch.log` 为正例原始日志。
 - 同目录每个UUID子目录保存各次正负例及日志，不覆盖历史失败结果。
 - `evidence/NativeStartupRegistrationCheck.json`：公开检查点的汇总证据。

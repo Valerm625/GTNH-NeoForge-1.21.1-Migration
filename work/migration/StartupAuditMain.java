@@ -132,6 +132,7 @@ public final class StartupAuditMain extends CommonModLoader {
                 for (var method : Class.forName(name).getDeclaredMethods())
                     require(!method.getName().startsWith("gtnhMigration$"), "Client helper present on server");
             report.addProperty("client_helpers_stripped_on_server", true);
+            report.add("library_client_callbacks", org.gtnhmigration.audit.LibraryClientCallbacksCheck.verifyRuntime(false, Path.of("library-bytecode-check.json")));
             int capacity = Class.forName("codechicken.enderstorage.storage.EnderLiquidStorage").getField("CAPACITY").getInt(null);
             require(capacity == 256_000, "EnderStorage capacity");
             report.addProperty("ender_storage_capacity_mb", capacity);

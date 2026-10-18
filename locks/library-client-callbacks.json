@@ -1,0 +1,43 @@
+{
+  "gtceu_filename": "gtceu-1.21.1-7.0.2.jar",
+  "gtceu_sha256": "c09a550523e931342a575193cbaad2e4b643e5de2cefe280cd1de540022c6388",
+  "ldlib_entry": "META-INF/jarjar/ldlib-neoforge-1.21.1-1.0.35.a.jar",
+  "ldlib_sha256": "6e95c29c650884b248038f45f086c6f6bd54fcc2a4ae9cf1034a4080ebaea052",
+  "ldlib_version": "1.0.35.a",
+  "ldlib_sources_url": "https://maven.firstdarkdev.xyz/snapshots/com/lowdragmc/ldlib/ldlib-neoforge-1.21.1/1.0.35.a/ldlib-neoforge-1.21.1-1.0.35.a-sources.jar",
+  "ldlib_sources_sha256": "1e051d7442a4a16a810cb0fc1285cbba547c979278a963c4a0ca904ba484a0c2",
+  "classes": {
+    "com/lowdragmc/lowdraglib/gui/widget/DraggableScrollableWidgetGroup.class": {
+      "artifact": "ldlib",
+      "sha256": "cf12d4b39951c3721d8d95599cf772bf99d8f61b78033aae1446bba084757620"
+    },
+    "com/lowdragmc/lowdraglib/gui/widget/PhantomFluidWidget.class": {
+      "artifact": "ldlib",
+      "sha256": "1e9e6a4293cc837337e8bf26f637f28a60e203b8b9dc4bbd315a45ac5c565ad5"
+    },
+    "com/lowdragmc/lowdraglib/gui/widget/SceneWidget.class": {
+      "artifact": "ldlib",
+      "sha256": "b4a8f9c211da60f491cd764bd293c38d31cdc4362a40d376a281dc3fc3fed91d"
+    },
+    "com/lowdragmc/lowdraglib/gui/editor/runtime/AnnotationDetector.class": {
+      "artifact": "ldlib",
+      "sha256": "cba59ccae5482f06bfdce172a6e0ee47bb0c55c09686fbafc23641789f2faa3c"
+    },
+    "com/gregtechceu/gtceu/api/fluid/FluidBuilder.class": {
+      "artifact": "gtceu",
+      "sha256": "e393e556bdec2f0c435b11684f854c34f3191b5a193a7ead381d288fd0920f51"
+    },
+    "com/gregtechceu/gtceu/data/block/GTMaterialBlocks.class": {
+      "artifact": "gtceu",
+      "sha256": "a72087012319b43bd6b58b039259b8dfbb96f519ea77f4ea381b243e56ba24ef"
+    },
+    "com/gregtechceu/gtceu/data/item/GTMaterialItems.class": {
+      "artifact": "gtceu",
+      "sha256": "583ea65c9106dba2b57c87a6c961e46bcb89b4ab5c3c41b1c9be2befac787773"
+    },
+    "com/gregtechceu/gtceu/data/item/GTItems.class": {
+      "artifact": "gtceu",
+      "sha256": "d737a147827d1afbdd03a00bebfc76c231408c7cc2b68179f7cbda9ce4e6615e"
+    }
+  }
+}

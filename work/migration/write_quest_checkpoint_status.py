@@ -33,6 +33,8 @@ p=O/'STATUS.zh-CN.md'
 s=p.read_text(encoding='utf-8')
 s=s.replace('**479 / 8388**',f'**{mapped_total} / 8388**').replace('仍有 **7909** 种未映射',f'仍有 **{unmapped}** 种未映射')
 s=s.replace('**活动现代任务导出0**',f'**活动现代任务试导出{n}（未实机验证）**')
+s=re.sub(r'\| 任务 \| 3814任务/46章节无损中间数据、\d+种身份映射 \|', f'| 任务 | 3814任务/46章节无损中间数据、{mapped_total}种身份映射 |', s)
+s=re.sub(r'(\*\*活动现代任务试导出\d+（未实机验证）\*\*；)\d+种身份', lambda match: match[1]+str(unmapped)+'种身份', s)
 s=re.sub(r'输出目录：\d+个运行输入文件哈希、\d+条依赖区间通过',f"输出目录：{len(r['files'])}个运行输入文件哈希、{v['version_ranges_checked']}条依赖区间通过",s)
 s=re.sub(r'- 为任务物品增加 \*\*\d+种源码级身份映射\*\*。累计 \*\*\d+ / 8388\*\* 种旧物品/metadata/NBT/矿辞身份有定义映射；仍有 \*\*\d+\*\* 种未映射。',f"- 为任务物品增加 **{d.get('mapped_material_item_identities',249)}种材料源码级身份映射** 和 **{vm['newly_mapped_source_identity_count']}种显式原版身份映射**。累计 **{mapped_total} / 8388** 种旧物品/metadata/NBT/矿辞身份有定义映射；仍有 **{unmapped}** 种未映射。",s)
 for heading in ['## 原版物品身份映射检查点','## 任务试导出检查点']:

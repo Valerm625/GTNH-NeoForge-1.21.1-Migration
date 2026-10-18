@@ -1,3 +1,4 @@
 {
-  "gtnh_gtceu_client_isolation": "coremods/gtceu_client_isolation.js"
+  "gtnh_gtceu_client_isolation": "coremods/gtceu_client_isolation.js",
+  "gtnh_library_client_callbacks": "coremods/library_client_callbacks.js"
 }

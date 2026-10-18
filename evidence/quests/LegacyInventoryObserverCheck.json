@@ -45,7 +45,7 @@
   "test_source_sha256": "ec438f96bc51ee8a1c6941a37e28f50a55c92fb227c81be450dd9539de4b6d26",
   "runner_sha256": "de5603c96e4430df3673ffd41e6baabc855c9a9a1a5569ee15b018807d1e331f",
   "oracle_fixture_sha256": "24c3d959554108708f56ba755d089edfabd2f3a828af050169081b1c08953ab9",
-  "compat_jar_sha256": "9d1a011536f3bfabed560fc8bdf3729ba61b3660b4a2c1e36a5aee6b1267a88a",
+  "compat_jar_sha256": "532d9295e203a0f779cedd754685ebc766e58455e5d1ee7baa1a4a5f90fe4c1b",
   "ftb_artifact_sha256": "6a39982c4b3afc00b1e788041a4f0d394e1659e3b3a6e5d078cd790bc36d0018",
   "minecraft_artifact_sha256": "26ca9c40d7e1681190b428583c38816852218e78df3f8bdb60a59a78503aec71",
   "packaged_bridge_matches_sources": true,

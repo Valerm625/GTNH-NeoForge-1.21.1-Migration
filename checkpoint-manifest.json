@@ -1,8 +1,8 @@
 {
-  "created_at": "2026-10-18T19:22:48.717344+08:00",
+  "created_at": "2026-10-18T19:46:37.648499+08:00",
   "scope": "source-only public checkpoint; third-party game inputs excluded",
   "hash_scope": "Git index canonical blobs, not Windows checkout line endings",
-  "base_commit": "21a9e9ac9a7c5d8d6bdad39e224d607d9301e457",
+  "base_commit": "5d439768e7e997ae31ff6610440333d2f0b1ba99",
   "files": [
     {
       "path": ".gitattributes",
@@ -26,23 +26,28 @@
     },
     {
       "path": "README.md",
-      "bytes": 13868,
-      "sha256": "d34c2b7d6f2d86e7dd1a16351058ee5bf184ee1110169892c843d07a155938b5"
+      "bytes": 14034,
+      "sha256": "1124f6f97ef2152a643a30707ace68da488d1c24127cae59d9c76f5c64336c79"
     },
     {
       "path": "RESUME.md",
-      "bytes": 36864,
-      "sha256": "2bf7acb226331c271e5d9be15f9cac9fc27b093a349f1e15158714c930dac47d"
+      "bytes": 39482,
+      "sha256": "67f8667fa9a06c1ee2a0d8c8d411d8c024f09fc2156ae7fd31e3d08507db345d"
     },
     {
       "path": "STATUS.zh-CN.md",
-      "bytes": 18414,
-      "sha256": "318c49cde6f2ebaeb04d976527f06e712ad189a3c31d84ada98dd79ede4563ee"
+      "bytes": 18606,
+      "sha256": "87b1b5c9f9954e6863d7ff3f3084ce1c4ff063e6ed0e4b64bf54cf9cba10cec7"
     },
     {
       "path": "docs/inventory-detection-timing.zh-CN.md",
       "bytes": 7908,
       "sha256": "0881406696d411bed6a730bbeea37eb57fd72f260f018801c1d130bfb6b0f168"
+    },
+    {
+      "path": "docs/library-client-callbacks.zh-CN.md",
+      "bytes": 3629,
+      "sha256": "3d71d6ad2b9f7688fc246a3fc711e576a739594086efc52b24f6edd40b1da0bc"
     },
     {
       "path": "docs/local-validation-detail.zh-CN.md",
@@ -76,8 +81,8 @@
     },
     {
       "path": "docs/native-startup-registration.zh-CN.md",
-      "bytes": 5309,
-      "sha256": "d2bcffe87da5ff0f6eec12a6cfab42a8b235c8cb3421e4b2e76c0e523836a3d8"
+      "bytes": 5430,
+      "sha256": "907092964d76f5cd67335028f6599f6e49a071b1f9ece2623ccfdcdc302a3fe8"
     },
     {
       "path": "docs/owner-transaction-recovery.zh-CN.md",
@@ -196,8 +201,8 @@
     },
     {
       "path": "evidence/NativeStartupRegistrationCheck.json",
-      "bytes": 205712,
-      "sha256": "b3eedb4cb985b46f4d22b2fdb1af13f9eb9a1c51ee150de8c5bbc4054a7c808f"
+      "bytes": 196479,
+      "sha256": "8130c56318a504ebaae937ae90041356e82a5c55c4a8707438b7e10544c9a248"
     },
     {
       "path": "evidence/capacity-adapter-test.json",
@@ -217,7 +222,7 @@
     {
       "path": "evidence/compat-mod.lock.json",
       "bytes": 4559,
-      "sha256": "e649d8e66dfd605e83f84262e406c0ce8535e2cf494c51df45b763b497d8392f"
+      "sha256": "83ba904efc3d99f5b94698c3efd0f11c69a0985a91584b6b638222ebd73a0ad9"
     },
     {
       "path": "evidence/crafting-task-adapter.json",
@@ -277,7 +282,7 @@
     {
       "path": "evidence/loader-with-quest-runtime.json",
       "bytes": 347,
-      "sha256": "c4028234daf2f3d7adb01ab6570efa78ae7f327ab485e06112496f0ad1f17d50"
+      "sha256": "a602c9a47751e54344fb4a4a0cd0484bca090e773dfe16c835e374b62a169b38"
     },
     {
       "path": "evidence/location-task-boundary.json",
@@ -341,8 +346,8 @@
     },
     {
       "path": "evidence/phase-2026-10-18-task-semantics.json",
-      "bytes": 593735,
-      "sha256": "4e3044a050962338aefcfa84e47271839d1c1953e722cbf32ce278fcae3be185"
+      "bytes": 587038,
+      "sha256": "8d1ff091412ba135dd633a54d410694364f000d91cf4b8687b3d4aa82e7eca22"
     },
     {
       "path": "evidence/quest-export-summary.json",
@@ -352,7 +357,7 @@
     {
       "path": "evidence/quests/IsolatedMixinTransformationCheck.json",
       "bytes": 2204,
-      "sha256": "6aa7d4719f212647bb6b39601093dae8034097c0513b7a2fa68fc2af4f954427"
+      "sha256": "c0eea107d6999ddfc0bed9608347229cdc866f70dc5ce94cee397e1be4c9916b"
     },
     {
       "path": "evidence/quests/LegacyCraftingShapeCheck.json",
@@ -367,7 +372,7 @@
     {
       "path": "evidence/quests/LegacyHuntAdapterCheck.json",
       "bytes": 1612,
-      "sha256": "33e2f5da89989e82689e4499374b14d4d1b168b0bf755232d46ecc868a4f1ebd"
+      "sha256": "807355996bd845bde213ec9c82e985b92f43853bea8cedb6ac4c59a112b170ee"
     },
     {
       "path": "evidence/quests/LegacyIntegratedOwnerCoordinatorCheck.json",
@@ -377,7 +382,7 @@
     {
       "path": "evidence/quests/LegacyInventoryObserverCheck.json",
       "bytes": 5287,
-      "sha256": "8f72f6ac31bf8c6ff573832200b44f5acb130e0e9df70b7649ac43347823766b"
+      "sha256": "e2be1153b5318e2898e14836e1048de891be493cb024ae35609b3531619c3045"
     },
     {
       "path": "evidence/quests/LegacyMaintenanceInitializationCheck.json",
@@ -457,7 +462,7 @@
     {
       "path": "evidence/quests/LegacyRetrievalDefinitionBindingCheck.json",
       "bytes": 6924,
-      "sha256": "552b653b92ee8574ce6fc2e93b73b599c38493d58c88008db8bc8b4b4400894f"
+      "sha256": "c26fc98583d1bdd48eb1a523d4ce4e0ee9e0a08f125ebc6ac86e84f74dd268f5"
     },
     {
       "path": "evidence/quests/LegacyRetrievalEngineCheck.json",
@@ -497,7 +502,7 @@
     {
       "path": "evidence/quests/LegacyStartupShutdownCheck.json",
       "bytes": 4925,
-      "sha256": "a49799a4cfc8ee045988ee1d65aa10dc4644407011106a7fd1090946432706c2"
+      "sha256": "1ce9a2baabc3ad92690ba69d35070595814fc2b189d6014d2cb959432f459c75"
     },
     {
       "path": "evidence/quests/LegacyTypedNbtJsonReaderCheck.json",
@@ -511,13 +516,13 @@
     },
     {
       "path": "evidence/quests/NativeRegistryDatagenCheck.json",
-      "bytes": 185808,
-      "sha256": "ed0e320d1f391392226f30818159af3293ddee503d8fd2dd84fb6899f2bd66a1"
+      "bytes": 188089,
+      "sha256": "a119fa3873bc0a9373b9cdac54f9e5507d9af5d7c823745761de0963ec827a49"
     },
     {
       "path": "evidence/quests/NativeSaveScopeMixinCheck.json",
       "bytes": 5759,
-      "sha256": "03ef75fa97bbace01e9b55f00b5684593cb95e225a6ea0842daaeee927bdcd36"
+      "sha256": "a140f9dba924d16efe7fa04132e3c6252c81cdbcf3fec6105cd194f8a0ff5a53"
     },
     {
       "path": "evidence/quests/QuestAdapterShapeCheck.json",
@@ -552,12 +557,12 @@
     {
       "path": "evidence/validation-state.json",
       "bytes": 8125,
-      "sha256": "c6d3dea20264b4d7700f9f082cdb2a86ed8784f2f209c8833c65707e082ae527"
+      "sha256": "b54a555d5bd26db4d427a6daada9b8131fff299e87fdc632aadfb1e66e57a1a6"
     },
     {
       "path": "evidence/validation-summary.json",
       "bytes": 5063,
-      "sha256": "b970786b04c787fafb813e270f137bd125ff646ac0668eaa2400d3c66b14d259"
+      "sha256": "1c55d9a721690c113aaf00bd68e1f99c1663e165d5dad64ebac9af6cafff0a95"
     },
     {
       "path": "evidence/vanilla-identity-mapping.json",
@@ -582,7 +587,7 @@
     {
       "path": "locks/compat-mod.lock.json",
       "bytes": 4559,
-      "sha256": "e649d8e66dfd605e83f84262e406c0ce8535e2cf494c51df45b763b497d8392f"
+      "sha256": "83ba904efc3d99f5b94698c3efd0f11c69a0985a91584b6b638222ebd73a0ad9"
     },
     {
       "path": "locks/ftb-candidates.json",
@@ -595,9 +600,14 @@
       "sha256": "896327537e9c5903e856c2132c9e2dae3b17220de6f3c948c401f11276f5ffad"
     },
     {
+      "path": "locks/library-client-callbacks.json",
+      "bytes": 2069,
+      "sha256": "be4ce16e2fcdc9b0a913484dfa146d260ddd40b59e8c7846331aeb715c770a47"
+    },
+    {
       "path": "locks/local-runtime-file-hashes.json",
       "bytes": 418671,
-      "sha256": "13f8e08714369c6f2aa09835d12948423fac6ddb136c563c34491de39d52cfd2"
+      "sha256": "1bfb62e86dd64496c9b5d1bbcd981634b4f0212b6a83cf01972653f630ff962e"
     },
     {
       "path": "locks/modern-transport-candidates.json",
@@ -886,18 +896,23 @@
     },
     {
       "path": "work/compat-mod/src/main/resources/META-INF/coremods.json",
-      "bytes": 74,
-      "sha256": "b41da80675e1487eb033aff2a49317cde36338738fa19e99acb85985eb6783f2"
+      "bytes": 149,
+      "sha256": "62539e0b7aa9032a033c4e7456ae36d43ec56de152075e59a96b004e6b8b74e5"
     },
     {
       "path": "work/compat-mod/src/main/resources/META-INF/neoforge.mods.toml",
-      "bytes": 992,
-      "sha256": "946cd8dc2c30f5d474765dfe3403390e2084c6888131c7400b399f9f580b303a"
+      "bytes": 1116,
+      "sha256": "c6e358641fd0581d662d3146417ca53164464f60a841c9b8b61c444bb9c89579"
     },
     {
       "path": "work/compat-mod/src/main/resources/coremods/gtceu_client_isolation.js",
       "bytes": 6029,
       "sha256": "48643ff1dcc1cbf94f5242a5d8cbcf787c4db3b8f2739715b9aa3fc079ca09cd"
+    },
+    {
+      "path": "work/compat-mod/src/main/resources/coremods/library_client_callbacks.js",
+      "bytes": 6604,
+      "sha256": "334478bc8d57e236d25d93ed181d8ab034f10b4211fdd640c3f8f524737e68e8"
     },
     {
       "path": "work/compat-mod/src/main/resources/gtnh_migration/quest-definitions.pin",
@@ -1090,14 +1105,19 @@
       "sha256": "99739ede8ada26450ce25f29a62304a7951e9aac6bbd030653783b2f9e138af0"
     },
     {
+      "path": "work/migration/LibraryClientCallbacksCheck.java",
+      "bytes": 12990,
+      "sha256": "322c1ba908781e1d0d6b20e5e110ce58c09af30256e2c89fe929970c16a68d2d"
+    },
+    {
       "path": "work/migration/LongFuelRoundTrip.java",
       "bytes": 2398,
       "sha256": "d970e4ddce8ffdeae8e1128b5312cc99ec94527c4b056030e7e854f67e1f88eb"
     },
     {
       "path": "work/migration/NativeRegistryAudit.java",
-      "bytes": 8309,
-      "sha256": "d2e5618173f806e560ace65e101bbcd10b6338290a80188fd7868a076e0b8390"
+      "bytes": 8450,
+      "sha256": "2e6704046ec686eef6f143f7c7555b4162f74b10403e674fee439a98a751c68e"
     },
     {
       "path": "work/migration/NativeSaveScopeMixinCheck.java",
@@ -1131,8 +1151,8 @@
     },
     {
       "path": "work/migration/StartupAuditMain.java",
-      "bytes": 9873,
-      "sha256": "11ff569e0354bc6c4c8cb8a050f5aad1ad44d0228d9c5d929271d05506bed21c"
+      "bytes": 10039,
+      "sha256": "5f658c113127aead9cd75f6923f5092e2e73296f5f9f9e4fab7f56f8877e2f68"
     },
     {
       "path": "work/migration/acquire_exact_sources.py",
@@ -1191,8 +1211,8 @@
     },
     {
       "path": "work/migration/build_capacity_compat.py",
-      "bytes": 12209,
-      "sha256": "dd408131bde1b849d90ce9129f1d41c094adc3951ec2e62926d586dddf361683"
+      "bytes": 12967,
+      "sha256": "be48dbfb00cabe7c7af087ed1b5e62130369d892ee3f706125ade018732b9b2c"
     },
     {
       "path": "work/migration/build_quest_definition_archive.py",
@@ -1556,8 +1576,8 @@
     },
     {
       "path": "work/migration/test_native_registry_datagen.py",
-      "bytes": 12759,
-      "sha256": "691323d44721bd639b87c2eb4754a4c5608a5dd13442072e13b2d2c80d05d102"
+      "bytes": 14100,
+      "sha256": "45a6ea2e435b14cabbb6dc40b179b4f6c84a5640c50f3c63495a3b5e8ef7cc73"
     },
     {
       "path": "work/migration/test_native_save_scope_mixins.py",
@@ -1566,8 +1586,8 @@
     },
     {
       "path": "work/migration/test_native_startup_registration.py",
-      "bytes": 12836,
-      "sha256": "305fc7002e9c4b2629be9de019eb4bb48a405e62acf153a8c24f2521fc1f4801"
+      "bytes": 14664,
+      "sha256": "dacb58dc1e222603bf5ad2229de105f94fd5c3a54e1eaa53912aee9fb5fc06dd"
     },
     {
       "path": "work/migration/test_quest_export_java.py",
@@ -1691,8 +1711,8 @@
     },
     {
       "path": "work/migration/write_quest_checkpoint_status.py",
-      "bytes": 11673,
-      "sha256": "f42ce27bd482a343e1fec3b507769be987d3f625660a9d581096e9ad581cf0a8"
+      "bytes": 11994,
+      "sha256": "be9785604bcdca1d1f9938e36c01e554c2f80747d69b85fe158aff71abd3eb99"
     },
     {
       "path": "work/migration/write_status.py",
@@ -1701,13 +1721,13 @@
     },
     {
       "path": "work/migration/write_task_semantics_status.py",
-      "bytes": 39720,
-      "sha256": "f181518cce92ecb449787b8b8b2e4bc18a26439f253473497133886961bd545d"
+      "bytes": 40234,
+      "sha256": "b66be7c92e19c78726f4eeeefac46a6c761b68a42e7309fc324b61efb6e0d1c7"
     }
   ],
-  "file_count": 340,
+  "file_count": 344,
   "source_archive_inputs_included": false,
   "runtime_binaries_included": false,
   "full_parity": false,
-  "continuation": "Continue solo: resolve retained LDLib/Rhino client-type reflection failures, complete normal mod lifecycle and real resource/recipe reload, verify generated furnace fuels in behavior, then continue full quest submission/completion/rewards and all remaining GTNH feature/resource parity. Existing 720 targets registered and 87 retrieval declarations bound; full exports remain 2/3814; EULA false."
+  "continuation": "Continue solo: adapt GTCEu recipe integration to pinned KubeJS APIs (ServerEvents package and SizedIngredientComponent.NESTED), preserving all ingredient and recipe semantics; promote full mod initialization and real resource reload checks. Full parity remains false."
 }

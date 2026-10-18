@@ -14,6 +14,9 @@ OUT = R / 'work/migration/native-registry-check'
 OUT.mkdir(parents=True, exist_ok=True)
 JAVA = Path(json.loads((R/'work/migration/runtime.json').read_text(encoding='utf-8'))['java'])
 SOURCE = R/'work/migration/NativeRegistryAudit.java'
+CALLBACK_SOURCE = R/'work/migration/LibraryClientCallbacksCheck.java'
+LIBRARY_COREMOD = R/'work/compat-mod/src/main/resources/coremods/library_client_callbacks.js'
+LIBRARY_PIN = R/'locks/library-client-callbacks.json'
 COMPAT = O/'mods/gtnh-migration-compat-0.1.0.jar'
 LAUNCH = O/'libraries/net/neoforged/neoforge/21.1.262/win_args.txt'
 
@@ -93,11 +96,21 @@ classes.mkdir()
 compile_args = OUT/'compile.args'
 arguments(compile_args, ['-proc:none','--release','21','-encoding','UTF-8','-cp',
     ';'.join(p.resolve().as_posix() for p in classpath+sorted((O/'mods').glob('*.jar'))),
-    '-d',classes.resolve().as_posix(),SOURCE.resolve().as_posix()], compiler=True)
+    '-d',classes.resolve().as_posix(),SOURCE.resolve().as_posix(),CALLBACK_SOURCE.resolve().as_posix()], compiler=True)
 with (OUT/'compile.log').open('wb') as log:
     result = subprocess.run([str(JAVA.with_name('javac.exe')),'@'+str(compile_args)],
                             stdout=log,stderr=subprocess.STDOUT,timeout=60)
 assert result.returncode==0, 'Audit compilation failed; inspect native-registry-check/compile.log'
+pin=json.loads(LIBRARY_PIN.read_text(encoding='utf-8'));gtjar=O/'mods'/pin['gtceu_filename']
+assert sha(gtjar)==pin['gtceu_sha256']
+ldjar=classes/'ldlib.jar'
+with zipfile.ZipFile(gtjar) as z:ldjar.write_bytes(z.read(pin['ldlib_entry']))
+assert sha(ldjar)==pin['ldlib_sha256']
+contract=classes/'library-bytecode-check.json';contract_args=classes/'contract.args'
+arguments(contract_args,['-cp',';'.join(p.resolve().as_posix() for p in classpath+[classes]),
+    'org.gtnhmigration.audit.LibraryClientCallbacksCheck',gtjar.as_posix(),ldjar.as_posix(),LIBRARY_COREMOD.as_posix(),contract.as_posix()])
+checked=subprocess.run([str(JAVA),'@'+str(contract_args)],capture_output=True,timeout=60)
+assert checked.returncode==0,checked.stdout.decode(errors='replace')+checked.stderr.decode(errors='replace')
 audit = OUT/'gtnh-registry-audit.jar'
 with zipfile.ZipFile(audit,'w') as jar:
     for p in sorted(classes.rglob('*.class')):
@@ -119,6 +132,7 @@ def execute(mode):
     for folder in ['mods','config','kubejs']:
         shutil.copytree(O/folder,run/folder)
     shutil.copy2(audit,run/'mods'/audit.name)
+    shutil.copy2(contract,run/'library-bytecode-check.json')
     (run/'eula.txt').write_text('eula=false\n',encoding='ascii',newline='\n')
     if mode=='negative':
         # Exact reported regression: ordinary classes inside the reserved Mixin
@@ -164,6 +178,7 @@ def execute(mode):
     assert report['native_hook_interfaces_verified']==7 and len(report['defined_classes'])==16
     assert report['ender_storage_capacity_mb']==256000 and report['kubejs_data_generation_mode']
     assert report['client_helpers_retained']==2 and report['client_lamp_renderers_constructed']==512
+    assert report['library_client_callbacks']['passed'] and report['library_client_callbacks']['client_distribution']
     assert len(report['identity_mappings'])==720 and len(report['retrieval_bindings'])==3814
     upstream=[row for row in report['identity_mappings'] if not row['target'].startswith('gtnh_migration:')]
     scripted=[row for row in report['identity_mappings'] if row['target'].startswith('gtnh_migration:')]
@@ -186,9 +201,10 @@ report={
     'kubejs_data_generation_mode':details['kubejs_data_generation_mode'],
     'client_helpers_retained':details['client_helpers_retained'],
     'client_lamp_renderers_constructed':details['client_lamp_renderers_constructed'],
+    'library_client_callbacks':details['library_client_callbacks'],
     'negative_control':negative,'compat_jar_sha256':sha(COMPAT),
     'archive_sha256':details['archive_sha256'],'registry_details_sha256':sha(OUT/'registry-details.json'),
-    'source_sha256':{p.relative_to(R).as_posix():sha(p) for p in [SOURCE,Path(__file__),R/'work/migration/acquire_native_client_audit.py']},
+    'source_sha256':{p.relative_to(R).as_posix():sha(p) for p in [SOURCE,CALLBACK_SOURCE,LIBRARY_COREMOD,LIBRARY_PIN,Path(__file__),R/'work/migration/acquire_native_client_audit.py']},
     'overlay_inputs_sha256':{p.name:sha(p) for p in overlay_inputs},
     'client_library_supplement':supplement,'runtime_inputs_sha256':inputs,
     'limitations':[

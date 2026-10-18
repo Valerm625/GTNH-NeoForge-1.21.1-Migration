@@ -10,7 +10,7 @@
   "wrong_class_mapping_mutation_rejected": true,
   "actual_mixin_transformation_verified": false,
   "game_runtime_verified": false,
-  "compat_jar_sha256": "9d1a011536f3bfabed560fc8bdf3729ba61b3660b4a2c1e36a5aee6b1267a88a",
+  "compat_jar_sha256": "532d9295e203a0f779cedd754685ebc766e58455e5d1ee7baa1a4a5f90fe4c1b",
   "source_sha256": {
     "work/compat-mod/src/main/java/org/gtnhmigration/compat/mixin/LegacyHuntTaskMixin.java": "7f15573f44b15e31888922ab826399d488098d4217eed1fd823a9a0abbebf046",
     "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyHuntEntityMatcher.java": "1435b87ae0bf98e2a44d31eae9262041cd9d610214d6412839496ada8b5c48d8",
