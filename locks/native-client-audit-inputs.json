@@ -1,0 +1,57 @@
+{
+  "minecraft": "1.21.1",
+  "neoforge": "21.1.262",
+  "scope": "isolated bytecode inspection input; no client launch or EULA change",
+  "version_metadata": {
+    "url": "https://piston-meta.mojang.com/v1/packages/499680d659b7a0ccb2fa9a809c345c5baf2ace7d/1.21.1.json",
+    "sha1": "499680d659b7a0ccb2fa9a809c345c5baf2ace7d"
+  },
+  "client_download": {
+    "sha1": "30c73b1c5da787909b2f73340419fdf13b9def88",
+    "size": 26836906,
+    "url": "https://piston-data.mojang.com/v1/objects/30c73b1c5da787909b2f73340419fdf13b9def88/client.jar"
+  },
+  "client_mappings_download": {
+    "sha1": "2244b6f072256667bcd9a73df124d6c58de77992",
+    "size": 9598610,
+    "url": "https://piston-data.mojang.com/v1/objects/2244b6f072256667bcd9a73df124d6c58de77992/client.txt"
+  },
+  "installer_sha256": "e86f5d78ed310465bd1ecf79823abcbc58782699b068ac776f4c5e226d994a8f",
+  "neoform_sha256": "3fcdf0f0d115774cfceaf206a05a6dc964e2189bfd00f5b5f863e37f4b7733c7",
+  "processor_library_sha256": {
+    "net/neoforged/installertools/installertools/2.1.2/installertools-2.1.2.jar": "fc695a63f7cdc7f673f7a94d94c9f35518850594bd8fa5c933b0fff38352d8bb",
+    "net/neoforged/srgutils/1.0.0/srgutils-1.0.0.jar": "16663ae2504a0522cca386af6c11281d3fde61d25b6bd2690d7200e900b26c36",
+    "net/md-5/SpecialSource/1.11.0/SpecialSource-1.11.0.jar": "a47cd9a3db46a0cc3b769bd19a2a91d4ad0e9d019153d186f099bbaf5db16445",
+    "net/sf/jopt-simple/jopt-simple/5.0.4/jopt-simple-5.0.4.jar": "df26cc58f235f477db07f753ba5a3ab243ebe5789d9f89ecf68dd62ea9a66c28",
+    "com/google/code/gson/gson/2.8.9/gson-2.8.9.jar": "d3999291855de495c94c743761b8ab5176cfeabe281a5ab0d8e8d45326fd703e",
+    "de/siegmar/fastcsv/2.0.0/fastcsv-2.0.0.jar": "665d52cb6f35ca236919be9ac81653c208628507f91d6bf13479bc11496db616",
+    "org/ow2/asm/asm-commons/9.3/asm-commons-9.3.jar": "a347c24732db2aead106b6e5996a015b06a3ef86e790a4f75b61761f0d2f7f39",
+    "net/neoforged/installertools/cli-utils/2.1.2/cli-utils-2.1.2.jar": "023a5a0cc7579fbf10a0bdd2a47a8ac1a10046a6432fef36ec850ab1ccf5504d",
+    "com/google/guava/guava/20.0/guava-20.0.jar": "36a666e3b71ae7f0f0dca23654b67e086e6c93d192f60ba5dfd5519db6c288c8",
+    "com/opencsv/opencsv/4.4/opencsv-4.4.jar": "5d8969c14c7acecc318a9321d34b1289afd1bdd41c0e772667fd0a4f53e291a0",
+    "org/ow2/asm/asm-analysis/9.3/asm-analysis-9.3.jar": "37fd5392bb2cf4c15f202ffefd46d0e92bb34ff848c549f30d426a60d6b29495",
+    "org/ow2/asm/asm-tree/9.3/asm-tree-9.3.jar": "ae629c2609f39681ef8d140a42a23800464a94f2d23e36d8f25cd10d5e4caff4",
+    "org/ow2/asm/asm/9.3/asm-9.3.jar": "1263369b59e29c943918de11d6d6152e2ec6085ce63e5710516f8c67d368e4bc",
+    "org/apache/commons/commons-text/1.3/commons-text-1.3.jar": "8185b3a5311092d83ed1f184c2d093b3105d726bbd76867c32b3511542bb99a8",
+    "org/apache/commons/commons-lang3/3.8.1/commons-lang3-3.8.1.jar": "dac807f65b07698ff39b1b07bfef3d87ae3fd46d91bbf8a2bc02b2a831616f68",
+    "commons-beanutils/commons-beanutils/1.9.3/commons-beanutils-1.9.3.jar": "c058e39c7c64203d3a448f3adb588cb03d6378ed808485618f26e137f29dae73",
+    "org/apache/commons/commons-collections4/4.2/commons-collections4-4.2.jar": "6a594721d51444fd97b3eaefc998a77f606dedb03def494f74755aead3c9df3e",
+    "commons-logging/commons-logging/1.2/commons-logging-1.2.jar": "daddea1ea0be0f56978ab3006b8ac92834afeefbd9b7e4e6316fca57df0fa636",
+    "commons-collections/commons-collections/3.2.2/commons-collections-3.2.2.jar": "eeeae917917144a68a741d4c0dff66aa5c5c5fd85593ff217bced3fc8ca783b8",
+    "net/neoforged/installertools/jarsplitter/2.1.2/jarsplitter-2.1.2.jar": "fe98ac94c75afcf77b1b6156effcffe72140d861f7e165303c35a5abe1a4f834",
+    "net/neoforged/AutoRenamingTool/2.0.3/AutoRenamingTool-2.0.3-all.jar": "43fcb978664ba04fc0b3b1b1a14eccabb4bc87b7a415e0eb8bdd1c2f12324321",
+    "net/neoforged/installertools/binarypatcher/2.1.2/binarypatcher-2.1.2-fatjar.jar": "9d73d565b775c8ec9da83da6d2a25454c7aad95eba22f64def9261f214cc49ba"
+  },
+  "cache_files_sha256": {
+    "version-1.21.1.json": "8047141a4d8de5ce23cc8390df56373b3a6c10f063d47b7bf3ea64e8c84666e9",
+    "client-1.21.1.jar": "499f6897d1837516680f3114072d8106e11c9adcd933fe5cf051b551089b0c99",
+    "client-mappings.txt": "140c47931cccc8fc9e4c22d7603e2d714d1a953a146f51ea7397d95c955536ec",
+    "joined.tsrg": "8081431dcb7c2428db07582db7135be739fa50b123103b3eaf14b2ae16ea37a6",
+    "client.lzma": "e3ac269b126938a2fe4beb5a4a1dba6e4a597f9ef3039f78a0899f1745d659ad",
+    "merged-mappings.txt": "7bd3e2be95fa246778b90b078dbb78b5d1a7a98853baea5e1321a6c3d5383929",
+    "client-slim.jar": "93224371dda52351038d0957e392729e692dce031f55ae29ea4b47d909433a5c",
+    "client-extra.jar": "fd02f80f4eec9dfaa1714cb62595d013cbac03d52d19dd0623d1922b999c40b7",
+    "client-srg.jar": "a649bd3ce77f122d0f83ae1b37b4b303e662470f928b9bee5fbc76580805ffd4",
+    "neoforge-21.1.262-client.jar": "aff67d0c3bbd015ecd881bb37416b740ada2e1e854433501ec5bb9381dbdd1c2"
+  }
+}

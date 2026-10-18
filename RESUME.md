@@ -31,7 +31,7 @@ Phase 3 另有 `test_legacy_typed_nbt_json_reader.py`（**2,932 项断言 / 577 
 
 读取器/envelope 的 `accepted` 只表示候选可解释。Phase 4 文件层另验证独立账本保存与重新读取，仍不能称为世界玩家存档导入、联网或游戏运行完成。物品身份映射仍为 **720 / 8388**。读取器与运行时桥接边界见 [typed JSON 规范](docs/typed-nbt-json-reader.zh-CN.md)、[身份 envelope](docs/quest-progress-envelope-design.zh-CN.md)和[运行时桥接设计](docs/retrieval-runtime-bridge-design.zh-CN.md)。
 
-Phase 6 完整重建的29份汇总检查已通过，包括模型组合及生产类与兼容 JAR 对应类的逐字节一致性；当前 JAR SHA256 为 `37f91ef2ccd8baca1e35f26e253d59b31fb006a766768e5bebb45de9f6cf8fd7`。恢复后必须按本地当前源码重建，不把这个历史成功结果替代新运行结果。
+Phase 6 完整重建的30份汇总检查已通过，包括模型组合及生产类与兼容 JAR 对应类的逐字节一致性；当前 JAR SHA256 为 `6110c37e6f71c0800e8f84e99cb165b71939d919072a405ce733cb90dacae4f9`。恢复后必须按本地当前源码重建，不把这个历史成功结果替代新运行结果。
 
 Phase 4 的 `test_legacy_quest_progress_store.py` 验证独立文件账本（436项断言、25个格式拒绝案例、64次NBT往返、3个JVM中断恢复场景）。原始输入字节及所有已发布帧保留，配置变化/损坏/缺帧/分叉阻止加载；不接受后退到空进度。独立账本与实际玩家库存尚无跨文件事务，不能从进程恢复推定机器掉电安全。详情见[文件账本设计](docs/quest-progress-file-store.zh-CN.md)。
 
@@ -57,7 +57,7 @@ Phase 5 新增 `test_legacy_retrieval_inventory_bridge.py`：真实Inventory/Ite
 
 ## Phase 6 恢复入口
 
-`rebuild_current_phase.py` 已包含 `test_legacy_retrieval_transaction_journal.py`、`test_legacy_retrieval_transaction_proposal.py`、`test_legacy_player_data_file_reader.py`、`test_legacy_retrieval_commit_coordinator.py` 及 `test_legacy_world_player_authority.py`。分别通过53项断言/7个独立JVM中断恢复场景、68项实际库存组合断言、40项文件读回断言、164项协调流程断言及47项世界玩家来源断言；完整汇总为29项，生产类与兼容JAR逐字节一致。报告位于 `evidence/quests/`，源码摘要与当前检查点对应。
+`rebuild_current_phase.py` 已包含 `test_legacy_retrieval_transaction_journal.py`、`test_legacy_retrieval_transaction_proposal.py`、`test_legacy_player_data_file_reader.py`、`test_legacy_retrieval_commit_coordinator.py`、`test_legacy_world_player_authority.py` 及 `test_legacy_integrated_owner_coordinator.py`。分别通过53项断言/7个独立JVM中断恢复场景、68项实际库存组合断言、40项文件读回断言、164项普通协调流程断言、47项世界玩家来源断言及257项房主协调断言；完整汇总为30项，生产类与兼容JAR逐字节一致。报告位于 `evidence/quests/`，源码摘要与当前检查点对应。
 
 `LegacyRetrievalTransactionProposal.bind` 从已规划实际库存、同一账本Head、可信定义目录及玩家NBT快照生成候选。必须由它保留其他quest/完成数据，并将捕获的expectedHead交给日志prepare；不得在提交时临时获取新head来掩盖旧计划。玩家库存候选仅证明与规划一致，不能证明已保存。
 
@@ -67,9 +67,13 @@ Phase 5 新增 `test_legacy_retrieval_inventory_bridge.py`：真实Inventory/Ite
 
 `LegacyRetrievalCommitCoordinator` 已串联基线保存/标记升级、准备、库存应用、保存读回和条件恢复。公开入口使用ServerPlayer/PlayerDataStorage原生适配器；它已编译但未执行。保存端失败测试仍为包内夹具，正常取消恢复原物品对象，外部替换/脱离库存的对象改动会阻止恢复。准备及决策账本故障在关闭重开后按当前文件恢复，不自动退款或重扣。
 
-新增[玩家存档来源](docs/player-storage-authority.zh-CN.md)：PlayerList.load对房主且非null的世界玩家标签直接加载，其他分支才用UUID.dat。现在Reader可显式读取level.dat/Data.Player，保留完整世界压缩文档；WORLD_PLAYER准备为schema 2并绑定来源，既有PLAYER_FILE准备仍为schema 1。Pending.authority在重开后保留，错误来源即使数据相同也拒绝。Player.addAdditionalSaveData确实写入当前DataVersion，已补固定字节码核对。当前原生UUID提交适配器在写入前拒绝房主，不能把它当作已经支持单人。
+新增[玩家存档来源](docs/player-storage-authority.zh-CN.md)：PlayerList.load对房主且非null的世界玩家标签直接加载，其他分支才用UUID.dat。现在Reader可显式读取level.dat/Data.Player，保留完整世界压缩文档；WORLD_PLAYER准备为schema 2并绑定来源，既有PLAYER_FILE准备仍为schema 1。Pending.authority在重开后保留，错误来源即使数据相同也拒绝。Player.addAdditionalSaveData确实写入当前DataVersion，已补固定字节码核对。普通UUID提交适配器仍在写入前拒绝房主；房主必须选择新增的显式入口，且未完成真实游戏接入。
 
-下一步阅读[存档来源边界](docs/player-storage-authority.zh-CN.md)、[提交协调器边界](docs/retrieval-commit-coordinator.zh-CN.md)及 `evidence/native-player-persistence-api-audit.json`。补齐锁定客户端IntegratedPlayerList实现取证、房主缓存与level.dat/世界保存协调，再完成真正持续的保存/库存/生命周期隔离与待决登录恢复。单人支持是必须补齐的完整目标，不能永久用拒绝代替迁移。assertExclusive及内存quarantine不是实际事件钩子；普通断线也会保存玩家，不能把它当作隔离。原生save返回void且吞掉Exception，load可能回退旧备份；任务完成、奖励、队伍、网络/UI和真实玩家保存测试仍未接入。
+`acquire_native_client_audit.py` 在 `work/cache/native-client-audit/` 重建检查用客户端字节码，锁为 `locks/native-client-audit-inputs.json`。使用固定安装器处理器及官方固定客户端/映射；不运行Minecraft，不改现有服务端或EULA。缓存与逐处理器success记录需要一同保留；已有无成功记录或摘要不符的输出会保留并停止。完整重建的房主检查会调用此工具；首次缺少客户端输入时会从锁定官方URL下载，不改浮动平台版本。
+
+`submitIntegratedOwner` 经saveEverything先更新玩家缓存和UUID镜像，再保存世界；level.dat决定事务，但完成决策前还须核对缓存/镜像。取消时恢复原物品对象和标记，只有辅助数据是本次前态或后态才允许通过PlayerList.saveAll刷新；世界全文摘要必须保持不变。生产WorldPlayerPort逻辑由夹具直接验证，257项断言及4组字节码破坏性负例通过。NativeIntegratedOwnerPort已编译、审计且避免客户端类型引用，未实际执行；没有游戏Player或新增独立JVM中断验证。
+
+下一步阅读[存档来源边界](docs/player-storage-authority.zh-CN.md)、[提交协调器边界](docs/retrieval-commit-coordinator.zh-CN.md)及 `evidence/native-player-persistence-api-audit.json`。继续实现全服务器保存/库存/生命周期隔离（包括跨账本及保存回调重入）、待决登录前恢复、未知辅助状态修复和世界模式/房主身份变化。assertExclusive及内存quarantine不是事件钩子；普通断线会保存玩家，不能作为隔离。直接用journal解决WORLD_PLAYER只证明磁盘/账本一致，不证明缓存/镜像已同步，不可据此放行登录。原生save返回void且吞掉Exception，load可能回退旧备份；任务完成、奖励、队伍、网络/UI和真实玩家保存测试仍未接入。
 
 ## 上传内容边界
 

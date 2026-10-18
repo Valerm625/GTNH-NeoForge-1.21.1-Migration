@@ -34,7 +34,9 @@ Phase 6 另加入当前玩家文件读取层：40项断言覆盖UUID.dat完整�
 
 最新加入[提交协调器](docs/retrieval-commit-coordinator.zh-CN.md)，串联基线保存、日志准备、库存应用、保存读回和条件回滚。164项组合断言通过，含准备/决策账本写入失败后关闭重开；当前完整重建汇总为28份。原生ServerPlayer/PlayerDataStorage适配器已编译，执行的保存端仍为夹具；尚未注册游戏入口或实现持续生命周期隔离。
 
-后续核对发现单人房主可从level.dat的Data.Player加载，已补[玩家存档来源](docs/player-storage-authority.zh-CN.md)和来源绑定恢复：47项断言通过，最新完整重建汇总为29份。UUID.dat与世界玩家数据不能互相冒充。原生房主提交暂在写入前拒绝，缓存/世界保存协调仍需实现；单人支持继续属于完整目标。
+后续核对发现单人房主可从level.dat的Data.Player加载，已补[玩家存档来源](docs/player-storage-authority.zh-CN.md)和来源绑定恢复：47项断言通过，UUID.dat与世界玩家数据不能互相冒充。现又补齐显式房主提交、缓存/镜像/世界文件协调及取消修复，257项夹具断言和4组字节码破坏性负例通过。原生入口已编译和审计，尚未注册或执行；全服务器生命周期隔离、加载前恢复及真实游戏测试仍待完成，不能计作单人迁移完成。
+
+本次完整重建共30份汇总检查通过，原有检查继续保留，测试使用的生产类与兼容JAR逐字节一致。客户端取证输入锁为 `locks/native-client-audit-inputs.json`，完整客户端及映射仅保存在本地忽略目录，不随源码检查点上传。
 
 - evidence/source-archive-audit.json：输入 SHA256、版本证据、任务身份差异和资源数量。
 - evidence/phase-2026-10-18-task-semantics.json：当前阶段测试与边界。

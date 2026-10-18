@@ -16,12 +16,12 @@
     "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestProgressStoreCodec.java": "7e610faa9cd32b56cf1302c0d62189884defbc8746c393bcf423bd84cd5f2e94",
     "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestProgressFileStore.java": "9830ea6c0ccf297d796b2ba2ed127a9ce0ec4df7a5b74fd0e3e0840eac6c89a2",
     "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalTransactionJournal.java": "4fed33c0361a03cfdcf6e5f794257d3d76d6f14da8249a63ed12d41a37c6a149",
-    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalTransactionProposal.java": "178afdd9e16f7895c98d7153f3ce947cf05cf0c82c9cd10f4714e8bad6a75326",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalTransactionProposal.java": "b1412dfb9d05d4b9cb6d650166af25f081daa24591d03a277da64b1e2ee0b315",
     "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyPlayerDataFileReader.java": "42229092a2bbb9f21af22721f8734daaadbd34f55f396d9a64575c7d14d7166b",
-    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalCommitCoordinator.java": "012b0a828c159a02e800b0cc0934797cfcb599aa656815e6919b79f68d566490",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalCommitCoordinator.java": "58a0d3c79084795e485a05cee7c842a11452ee256775d815feaf604de799e898",
     "work/migration/LegacyPlayerDataFileReaderCheck.java": "27f47442063c7a8fa659f91f8e8e44a80076704310a810d0e09f2c61991d0932",
     "work/migration/LegacyWorldPlayerAuthorityCheck.java": "99739ede8ada26450ce25f29a62304a7951e9aac6bbd030653783b2f9e138af0",
-    "work/migration/test_legacy_world_player_authority.py": "e126018a4d568c64222c66beaf01082e25305eaec8e506bbdb5d7e38a905e044"
+    "work/migration/test_legacy_world_player_authority.py": "81bee28b1206e52fc614daf3610bc0551d592a204b8a5d284756c9fd2d757743"
   },
   "minecraft_jar_sha256": "26ca9c40d7e1681190b428583c38816852218e78df3f8bdb60a59a78503aec71",
   "neoforge_patched_server_sha256": "f57ce3018e21459d24b50508e8c1b4fd5c16324ec1dc5f316c192aa0130e7fe0",
@@ -44,7 +44,7 @@
   "limitations": [
     "PlayerList authority branches and world-save structure are checked in pinned native bytecode; no native class methods, world, login, logout or clone events execute.",
     "Synthetic level.dat/playerdata files and actual NBT/journal recovery prove source binding, not integrated-server save/cache synchronization.",
-    "The current native submission adapter explicitly rejects the integrated owner before persistence. Full support still needs its player cache, level.dat/world save and lifecycle exclusion; this is a tracked gap, not removal from the goal.",
+    "The UUID-only entry rejects the integrated owner. The separate owner entry has synthetic cache/mirror/world save coordination checks, but no actual native Player, world lifecycle exclusion or game-runtime verification.",
     "Explicit WORLD_PLAYER preparation is schema 2; existing UUID.dat schema 1 source records remain unchanged. The source archive namespace and resolution-record schema remain v1.",
     "Both level.dat and UUID.dat readers retain whole compressed documents; no level.dat_old or mirror fallback, no DataFixer, metadata write or real player-save fixture.",
     "Legacy bare-NBT resolve is limited to PLAYER_FILE transactions. Source-bound snapshots verify their full document digest before resolution; callers must still exclude other writers."

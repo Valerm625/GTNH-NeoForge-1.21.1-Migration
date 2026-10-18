@@ -50,5 +50,5 @@
   "retrieval_transaction_journal": "expected-head preparation, immutable records and synthetic player-file recovery tested; actual inventory proposal composition and clone-persisted marker scope verified; no native persistence or world lifecycle",
   "authoritative_player_file_readback": "strict UUID.dat integrity, immutable raw-byte snapshots and file-backed commit/abort recovery tested with synthetic data; no fallback to dat_old, native save or lifecycle barrier",
   "retrieval_commit_coordinator": "baseline/marker promotion, intent, actual inventory counts, save readback and conditional original-object rollback tested with synthetic save port; native adapter compiled, no native execution or lifecycle barrier",
-  "world_player_authority": "level.dat/Data/Player readback and source-bound journal resolution tested; native host load branch audited; integrated-owner submit is refused before writes until cache/world-save coordination exists"
+  "world_player_authority": "level.dat/Data/Player readback and source-bound journal resolution tested; pinned native owner load/cache/save bytecode audited; explicit owner adapter compiled, synthetic coordination verified; no native lifecycle or game execution"
 }

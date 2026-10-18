@@ -26,14 +26,48 @@
     "admission_order": "placeNewPlayer calls load before adding the player to its players list and before firePlayerLoggedIn; a logged-in event is too late to prevent native load fallback.",
     "removal_order": "remove invokes firePlayerLoggedOut, save, then removePlayerImmediately; ordinary disconnect is not a no-save quarantine.",
     "player_data_version": "Player.addAdditionalSaveData invokes NbtUtils.addCurrentDataVersion before Inventory.save. Checking Entity/PlayerDataStorage alone misses this call.",
-    "world_player_save": "MinecraftServer.saveAllChunks supplies PlayerList.getSingleplayerData to LevelStorageAccess.saveDataTag; PrimaryLevelData stores Player inside the Data compound. This does not verify integrated client cache implementation or actual saving."
+    "world_player_save": "MinecraftServer.saveAllChunks supplies PlayerList.getSingleplayerData to LevelStorageAccess.saveDataTag; PrimaryLevelData stores Player inside the Data compound. Actual native saving is not executed.",
+    "integrated_player_cache": "Pinned client IntegratedPlayerList.save captures owner saveWithoutId into playerData before calling PlayerList.save. getSingleplayerData returns that cache; parent saveAll dispatches virtually to save.",
+    "integrated_save_order": "MinecraftServer.saveEverything calls playerList.saveAll then saveAllChunks. IntegratedServer delegates to the base method then warns on low disk space; a late exception is not proof that world publication failed."
   },
   "limitations": [
     "Static inspection does not validate actual Player, event hooks, transformed mod behavior, crash atomicity or power-loss persistence.",
     "Proposal test uses Inventory(null), actual ItemStack codecs and fixture slot encoding; Inventory.save itself is not called.",
     "Native PlayerDataStorage save differs from asynchronous SavedData.save; do not transfer that API assumption.",
-    "IntegratedPlayerList client implementation and native owner save/cache coordination remain unverified. The compiled UUID-only submit adapter now rejects the integrated owner before writing; this is an explicit incomplete feature."
+    "Explicit owner submit adapter is compiled and its cache/mirror/world protocol is tested through synthetic save boundaries. No native owner save, all-server lifecycle isolation or admission recovery is executed or registered."
   ],
   "native_clone_executed": false,
-  "authority_audit_report": "evidence/quests/LegacyWorldPlayerAuthorityCheck.json"
+  "authority_audit_report": "evidence/quests/LegacyWorldPlayerAuthorityCheck.json",
+  "integrated_owner_audit_report": "evidence/quests/LegacyIntegratedOwnerCoordinatorCheck.json",
+  "client_input_lock": "locks/native-client-audit-inputs.json",
+  "native_owner_save_audit": {
+    "class_sha256": {
+      "net.minecraft.client.server.IntegratedPlayerList": {
+        "jar": "client-srg.jar",
+        "class_sha256": "0aaf4d99d16b08f670b1a541207224a57ba65215b944c64818bf621332473641"
+      },
+      "net.minecraft.client.server.IntegratedServer": {
+        "jar": "neoforge-21.1.262-client.jar",
+        "class_sha256": "26a16a6055bb148e1ffbe0d73bf74c38b710046a96f50600f3ae6b38a618bf5a"
+      },
+      "net.minecraft.server.MinecraftServer": {
+        "jar": "neoforge-21.1.262-client.jar",
+        "class_sha256": "3f1b7a260a249ae836d9d71bf0a0fe7575b62aff48f2b8fac10dd06aaa9efd2f"
+      },
+      "net.minecraft.server.players.PlayerList": {
+        "jar": "neoforge-21.1.262-client.jar",
+        "class_sha256": "c7ed33824878b591e2c8440d392b1a2fbecb152e51c0873ae02bf148e43de430"
+      }
+    },
+    "neoforge_patched_client_sha256": "aff67d0c3bbd015ecd881bb37416b740ada2e1e854433501ec5bb9381dbdd1c2",
+    "client_srg_sha256": "a649bd3ce77f122d0f83ae1b37b4b303e662470f928b9bee5fbc76580805ffd4",
+    "cache_capture_precedes_player_file_save": true,
+    "world_save_reads_owner_cache": true,
+    "integrated_save_delegates_then_checks_disk_space": true,
+    "owner_adapter_saves_all_players_then_world": true,
+    "abort_repairs_cache_and_mirror_without_world_save": true,
+    "client_type_linking_required": false,
+    "negative_controls": 4,
+    "native_code_executed": false
+  }
 }

@@ -1,0 +1,69 @@
+{
+  "test": "integrated_owner_coordinator",
+  "passed": true,
+  "assertions": 257,
+  "runtime_integrated": false,
+  "export_enabled": false,
+  "native_owner_adapter_compiled": true,
+  "native_player_save_verified": false,
+  "game_runtime_verified": false,
+  "actual_player_save_fixtures": 0,
+  "source_sha256": {
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalEngine.java": "974899a867d5f9b2b18295e02c3fc56827064bdfa19c863158ea4b06b0a45758",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestRetrievalPlanner.java": "bf680e9df76a8844bfed402feaf4b535624baf6644ec3de4093f0aab7b68c0e2",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalInventoryBridge.java": "963cd043c8ba9e8e7ff44f4be30e9c171ec06641ec9a09652406ea00d087ab63",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalProgressCodec.java": "596a64ed0ed06bad0f70731773078376ea9ab7ec3cba7dacdd8c10faac0fe856",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestProgressEnvelope.java": "43ed5abb2ed2595efa101b9e89d8d8409f84b62ca01cd9c62191ea5e92b9b9a0",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestProgressStoreCodec.java": "7e610faa9cd32b56cf1302c0d62189884defbc8746c393bcf423bd84cd5f2e94",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyQuestProgressFileStore.java": "9830ea6c0ccf297d796b2ba2ed127a9ce0ec4df7a5b74fd0e3e0840eac6c89a2",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalTransactionJournal.java": "4fed33c0361a03cfdcf6e5f794257d3d76d6f14da8249a63ed12d41a37c6a149",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalTransactionProposal.java": "b1412dfb9d05d4b9cb6d650166af25f081daa24591d03a277da64b1e2ee0b315",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyPlayerDataFileReader.java": "42229092a2bbb9f21af22721f8734daaadbd34f55f396d9a64575c7d14d7166b",
+    "work/compat-mod/src/main/java/org/gtnhmigration/compat/LegacyRetrievalCommitCoordinator.java": "58a0d3c79084795e485a05cee7c842a11452ee256775d815feaf604de799e898",
+    "work/migration/LegacyRetrievalCommitCoordinatorCheck.java": "e87c5fb93736b97e23ac64bec4ce89befc12dbf6b86c8d40f9ccb62637ab2412",
+    "work/migration/LegacyIntegratedOwnerCoordinatorCheck.java": "c13e307e7778d2abe86ab77a000e497d4d5c8cccf580bd1a272f6b5a9e2bb24d",
+    "work/migration/test_legacy_integrated_owner_coordinator.py": "f222c7f524c153cc2dd315591b7a1ac794a452bb1fe351a73abd7e4ae2f8cf6b",
+    "work/migration/acquire_native_client_audit.py": "38aa830027cf861928db5f18f2990ed33b38052ea5f671493f05e8c825a1e366",
+    "locks/native-client-audit-inputs.json": "1542616c4c55281eec4dc906d9a2d0375e45aa50939eb29f67230d80fefa1093"
+  },
+  "minecraft_jar_sha256": "26ca9c40d7e1681190b428583c38816852218e78df3f8bdb60a59a78503aec71",
+  "neoforge_patched_server_sha256": "f57ce3018e21459d24b50508e8c1b4fd5c16324ec1dc5f316c192aa0130e7fe0",
+  "native_owner_save_audit": {
+    "class_sha256": {
+      "net.minecraft.client.server.IntegratedPlayerList": {
+        "jar": "client-srg.jar",
+        "class_sha256": "0aaf4d99d16b08f670b1a541207224a57ba65215b944c64818bf621332473641"
+      },
+      "net.minecraft.client.server.IntegratedServer": {
+        "jar": "neoforge-21.1.262-client.jar",
+        "class_sha256": "26a16a6055bb148e1ffbe0d73bf74c38b710046a96f50600f3ae6b38a618bf5a"
+      },
+      "net.minecraft.server.MinecraftServer": {
+        "jar": "neoforge-21.1.262-client.jar",
+        "class_sha256": "3f1b7a260a249ae836d9d71bf0a0fe7575b62aff48f2b8fac10dd06aaa9efd2f"
+      },
+      "net.minecraft.server.players.PlayerList": {
+        "jar": "neoforge-21.1.262-client.jar",
+        "class_sha256": "c7ed33824878b591e2c8440d392b1a2fbecb152e51c0873ae02bf148e43de430"
+      }
+    },
+    "neoforge_patched_client_sha256": "aff67d0c3bbd015ecd881bb37416b740ada2e1e854433501ec5bb9381dbdd1c2",
+    "client_srg_sha256": "a649bd3ce77f122d0f83ae1b37b4b303e662470f928b9bee5fbc76580805ffd4",
+    "cache_capture_precedes_player_file_save": true,
+    "world_save_reads_owner_cache": true,
+    "integrated_save_delegates_then_checks_disk_space": true,
+    "owner_adapter_saves_all_players_then_world": true,
+    "abort_repairs_cache_and_mirror_without_world_save": true,
+    "client_type_linking_required": false,
+    "negative_controls": 4,
+    "native_code_executed": false
+  },
+  "limitations": [
+    "The compiled native owner adapter is not registered or executed. Tests use actual Inventory/ItemStack/NBT/ledger files and synthetic save boundaries, not native Player/world/client execution.",
+    "The caller must continuously exclude all world/player saves, mutations and lifecycle changes on the entire server. The owner adapter calls saveEverything and abort repair may call PlayerList.saveAll, affecting all players and their native save callbacks.",
+    "Only level.dat decides owner COMMIT/ABORT. Cache and UUID mirror must also agree before final resolution. Unknown mirrors/caches, failed repair or concurrent world metadata changes preserve pending intent and require isolated recovery.",
+    "First world-player baseline creation, failed saves and later saves after abort are synthetic fixtures. No new JVM halt/power-loss validation, datafixer, backup fallback, login admission, role-switch recovery or EULA acceptance is claimed.",
+    "The exact client and mappings are local audit inputs only. Their binaries/mappings and extracted native bytecode are not redistributed. Installer processor and input hashes are public provenance.",
+    "Task rewards/completion bridge, team lifecycle, UI and logWood identity mapping remain unimplemented."
+  ]
+}

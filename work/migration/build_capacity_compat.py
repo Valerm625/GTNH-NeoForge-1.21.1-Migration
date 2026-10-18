@@ -101,6 +101,6 @@ lock['unintegrated_helpers'] += [
  'LegacyRetrievalTransactionJournal; expected-head intent/decision records, clone-persisted marker proposals and synthetic player-file recovery, no native player save',
  'LegacyRetrievalTransactionProposal; actual inventory/player-NBT/quest-progress composition, no world coordinator',
  'LegacyPlayerDataFileReader; explicit UUID.dat or level.dat/Data/Player integrity/readback; journal binds source authority, synthetic files only; no native lifecycle isolation',
- 'LegacyRetrievalCommitCoordinator; baseline, inventory apply, save/readback and conditional rollback protocol; native adapter compiled and integrated-owner submission refused pending world-save/cache support; fixture execution only, no lifecycle barrier or registered game handler',
+ 'LegacyRetrievalCommitCoordinator; explicit UUID-file and integrated-owner cache/mirror/world save/readback and conditional rollback protocols; native adapters compiled, fixture execution only; owner path saves all players/world and requires whole-server lifecycle exclusion, no registered game handler',
 ]
 (O/'docs/compat-mod.lock.json').write_text(json.dumps(lock,indent=2),encoding='utf-8',newline='\n');print(json.dumps(lock))

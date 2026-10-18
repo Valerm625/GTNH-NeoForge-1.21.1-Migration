@@ -60,4 +60,8 @@ public final class LegacyRetrievalTransactionProposal {
     public LegacyRetrievalTransactionJournal.Pending prepare(LegacyRetrievalTransactionJournal journal) throws IOException {
         return journal.prepare(expectedHead,actor,beforePlayer,afterPlayer,afterState);
     }
+    public LegacyRetrievalTransactionJournal.Pending prepare(LegacyRetrievalTransactionJournal journal,
+            LegacyPlayerDataFileReader.Authority authority) throws IOException {
+        return journal.prepare(expectedHead,actor,beforePlayer,afterPlayer,afterState,authority);
+    }
 }
