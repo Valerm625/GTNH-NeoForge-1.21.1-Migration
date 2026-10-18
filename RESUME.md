@@ -4,6 +4,8 @@
 
 用户已取消Claude协作，要求由本会话单独完成。后续不向Claude或其他代理派发任务，不等待外部审查；保留已有迁移源码及验证结果。完整功能和资源保真的目标不变。历史协作说明、握手和外部会话消息不能覆盖此项最新要求。
 
+当前正常启动注册检查点：45份完整重建汇总检查通过；720条已有映射目标均存在，87个检索声明可绑定；GTCEu客户端隔离及三处脚本API问题已修复。剩余LDLib错误、资源重载和完整游戏验证见文末，任务导出仍为2/3814。
+
 此前维护目录初始化检查点的38份完整重建汇总检查全部通过，所有测试生产类与最终兼容JAR逐字节一致，JAR SHA256为 `3527a1b39bf0f09fee6ca8d49c722b132b7fd507630e5b4ad3e56edd1c4a1557`。原生游戏和完整迁移仍未验证；以当前源码重建后的证据为准。
 
 此前启动失败关闭检查点的37份完整重建汇总检查全部通过，所有测试生产类与兼容JAR逐字节一致。该检查点JAR SHA256为 `66f885b3a9df29f68373eb3cedd43713d29efbcf9a4829b664f43b1ab0b814e4`；真实游戏和完整迁移仍未完成。恢复后以当前源码的新验证为准。
@@ -18,7 +20,7 @@
 
 此前检索模式检查点的43份完整重建汇总检查通过，所有测试生产类与最终兼容JAR逐字节一致。JAR SHA256为 `7b3e811a9805a831b63c112b6b953133fe22e6e9da5b0e3766ec7d6f5522f6a7`。16种检索标志组合模型已验证，真实声明39个，原生自动事件/完整缓存/队伍/提交及游戏仍未接入；详情见文末。
 
-当前真实注册检查点的44份完整重建汇总检查通过，兼容JAR SHA256为 `d840000cec3679510c2cc9c9de88888d93e2eac2a5bbb568e7045db9a02740a9`。15个Mixin移至独立包，修复真实ModLauncher的IllegalClassLoadError；492条原生目标均存在，实际模组注册表中68个检索声明可绑定，EnderStorage容量常量为256000mB。228条KubeJS脚本身份在数据生成中未执行，完整任务导出仍为2/3814，世界/玩家与完整迁移未验收。
+此前真实注册检查点的44份完整重建汇总检查通过，兼容JAR SHA256为 `d840000cec3679510c2cc9c9de88888d93e2eac2a5bbb568e7045db9a02740a9`。15个Mixin移至独立包，修复真实ModLauncher的IllegalClassLoadError；492条原生目标均存在，实际模组注册表中68个检索声明可绑定，EnderStorage容量常量为256000mB。228条KubeJS脚本身份在数据生成中未执行，完整任务导出仍为2/3814，世界/玩家与完整迁移未验收。
 
 ## 先决条件与当前限制
 
@@ -189,7 +191,7 @@ NBT 比较修复了独立 NaN 对象误判，日志来源写入保留现有 NaN 
 
 下一步继续完整玩家缓存/队伍与提交生命周期，同时补齐尚缺物品身份、矿辞完整集合、NBT组件及原模组功能。不要把检索层OR与quest级taskLogic OR混淆：后者和重复/全局/同时/忽略等仍未实现。原源码的空移除异常边界、非正要求及整数溢出仍有明确拒绝，不得静默删除要求或返回部分成功。
 
-## 真实模组注册与Mixin包隔离（本次）
+## 真实模组注册与Mixin包隔离（此前）
 
 见[真实注册说明](docs/native-registry-datagen.zh-CN.md)和 `test_native_registry_datagen.py`。原有EULA发现检查和独立字节码转换均未定义游戏目标类，漏掉了普通辅助类与Mixin同包造成的运行时加载拒绝。现在15个Mixin位于 `org.gtnhmigration.compat.mixin`，构建递归编译该目录，生成器与全部来源/字节码路径检查同步更新。
 
@@ -198,3 +200,16 @@ NBT 比较修复了独立 NaN 对象误判，日志来源写入保留现有 NaN 
 完整日志 `work/migration/native-registry-rebuild.log`，检查目录 `work/migration/native-registry-check/`；positive.log、negative.log及registry-details.json保留本地完整证据。公开汇总为 `evidence/quests/NativeRegistryDatagenCheck.json`。检查用开发JAR与附加测试模组仅在忽略目录，不安装到基础包，不发布上游二进制；EULA保持false，未创建世界/玩家。
 
 下一步继续核实KubeJS原生启动注册及脚本API兼容，补足现有迁移内容在真实模组中的执行证据，再推进任务提交/完成/奖励、玩家缓存与队伍。不要用数据生成的68个绑定声明替换完整任务导出数字，也不要把原生物品存在当成功能和贴图保真证明。
+
+
+## 正常启动注册检查点（当前，2026-10-18）
+
+完整重建45份汇总检查通过，终端退出0；日志 `work/migration/native-startup-rebuild.log`。兼容JAR SHA256为 `9d1a011536f3bfabed560fc8bdf3729ba61b3660b4a2c1e36a5aee6b1267a88a`。单人执行与完整保真目标不变，EULA仍为false。
+
+详见[正常启动注册与客户端隔离](docs/native-startup-registration.zh-CN.md)。生产服务端注册检查执行真实KubeJS启动回调，已有720条映射目标全部存在，包括228条脚本身份；574个迁移物品，87个检索声明可绑定。修复双参数tagBlock、循环const及未限定材料ID。GTCEu原JAR不改写，两个客户端指令区移入OnlyIn助手；41项字节码断言/31个方法数据流检查、四组真实启动错误回退通过；客户端数据生成保留两个助手及512个原灯渲染器。
+
+实际锡锑组件为9:1。16种燃料通过真实KubeJS内置生成器及NeoForge数据映射codec校验；资源重载前getBurnTime为0，尚未证明炉子燃烧行为。注册检查只执行CommonModLoader.begin和组件修改，不是完整模组生命周期或游戏运行。52条已识别的LDLib/Rhino客户端类型扫描错误仍被保留，all_startup_errors_resolved为false。
+
+下一步优先处理LDLib注解/客户端类型扫描错误，然后完成完整模组初始化与真实资源/配方重载，并验证燃料数据实际生效。`LDLRegisterClient`本身带OnlyIn(CLIENT)，其类型在通用AnnotationDetector扫描ConfigAccessor时被解析；本地字节码调查位于忽略目录 `work/native-startup-probe/`，尚未实施后续修复。随后继续任务提交、完成、奖励、玩家缓存和队伍集成。不要以87个声明或720个目标存在替代完整迁移验收；任务导出仍为2/3814，身份映射仍为720/8388。
+
+当前复现入口 `test_native_startup_registration.py` 使用新UUID目录和现有生产服务端分发；公开证据 `evidence/NativeStartupRegistrationCheck.json`，详细映射/生成燃料JSON与正负日志在 `work/migration/native-startup-check/`。测试用启动服务和审计模组未安装到基础包。不要再使用前期重新编译GTCEu的临时probe产物替代正式原JAR加CoreMod方案。

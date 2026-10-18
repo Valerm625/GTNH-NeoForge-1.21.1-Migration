@@ -23,7 +23,7 @@ fixture=W/'migration/test-fixtures'/('solder-'+str(uuid.uuid4()));fixture.mkdir(
 for rel in ['docs/material-migration/soldering-alloy-adaptation.json',spec['startup_script'],spec['recipe_script']]:
  p=fixture/rel;p.parent.mkdir(parents=True,exist_ok=True);shutil.copy2(O/rel,p)
 mutations=[]
-for name,rel,old,new in [('wrong_tin_ratio',spec['startup_script'],"setComponents('9x tin'","setComponents('8x tin'"),('wrong_decomposition_time',spec['recipe_script'],'.duration(4720)','.duration(1770)'),('missing_mixer_removal',spec['recipe_script'],'event.remove({id: "gtceu:mixer/soldering_alloy"});','// removal accidentally omitted')]:
+for name,rel,old,new in [('wrong_tin_ratio',spec['startup_script'],"setComponents('9x gtceu:tin'","setComponents('8x gtceu:tin'"),('wrong_decomposition_time',spec['recipe_script'],'.duration(4720)','.duration(1770)'),('missing_mixer_removal',spec['recipe_script'],'event.remove({id: "gtceu:mixer/soldering_alloy"});','// removal accidentally omitted')]:
  p=fixture/rel;s=p.read_text(encoding='utf-8');assert old in s;p.write_text(s.replace(old,new,1),encoding='utf-8')
  try:
   r=subprocess.run(['node',str(W/'migration/test_soldering_alloy.cjs'),str(fixture)],capture_output=True,text=True,encoding='utf-8');assert r.returncode!=0,'missed '+name;mutations.append(name)

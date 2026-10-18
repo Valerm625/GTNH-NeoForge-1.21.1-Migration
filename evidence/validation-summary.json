@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-10-18T10:40:28.907457+00:00",
+  "checked_at": "2026-10-18T11:19:49.409561+00:00",
   "top_level_artifacts": [
     {
       "filename": "CodeChickenLib-1.21.1-4.6.1.529.jar",
@@ -63,8 +63,8 @@
     },
     {
       "filename": "gtnh-migration-compat-0.1.0.jar",
-      "sha256": "d840000cec3679510c2cc9c9de88888d93e2eac2a5bbb568e7045db9a02740a9",
-      "bytes": 307175
+      "sha256": "9d1a011536f3bfabed560fc8bdf3729ba61b3660b4a2c1e36a5aee6b1267a88a",
+      "bytes": 309409
     },
     {
       "filename": "guideme-21.1.19.jar",
@@ -100,7 +100,7 @@
   "active_top_level_jars": 19,
   "registered_mod_ids_listed_by_discovery": 23,
   "required_dependencies_missing": [],
-  "version_ranges_checked": 58,
+  "version_ranges_checked": 59,
   "version_range_failures": 0,
   "neoforge_compatibility_matrix_applied": true,
   "decoded_png_count": 644,

@@ -163,6 +163,7 @@ def execute(mode):
     assert report['passed'] and not report['world_or_player_executed']
     assert report['native_hook_interfaces_verified']==7 and len(report['defined_classes'])==16
     assert report['ender_storage_capacity_mb']==256000 and report['kubejs_data_generation_mode']
+    assert report['client_helpers_retained']==2 and report['client_lamp_renderers_constructed']==512
     assert len(report['identity_mappings'])==720 and len(report['retrieval_bindings'])==3814
     upstream=[row for row in report['identity_mappings'] if not row['target'].startswith('gtnh_migration:')]
     scripted=[row for row in report['identity_mappings'] if row['target'].startswith('gtnh_migration:')]
@@ -183,6 +184,8 @@ report={
     'defined_classes':details['defined_classes'],'native_hook_interfaces_verified':7,
     'ender_storage_capacity_mb':details['ender_storage_capacity_mb'],
     'kubejs_data_generation_mode':details['kubejs_data_generation_mode'],
+    'client_helpers_retained':details['client_helpers_retained'],
+    'client_lamp_renderers_constructed':details['client_lamp_renderers_constructed'],
     'negative_control':negative,'compat_jar_sha256':sha(COMPAT),
     'archive_sha256':details['archive_sha256'],'registry_details_sha256':sha(OUT/'registry-details.json'),
     'source_sha256':{p.relative_to(R).as_posix():sha(p) for p in [SOURCE,Path(__file__),R/'work/migration/acquire_native_client_audit.py']},

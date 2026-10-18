@@ -32,14 +32,15 @@ GTCEuStartupEvents.materialModification(event => {
   const current = material.getMaterialComponents();
   const signature = [];
   for (let i = 0; i < current.size(); i++) {
-    const component = current.get(i);
+    // Pinned Rhino retains a loop-local const's first value; assign each iteration.
+    var component = current.get(i);
     signature.push(String(component.material().getName()) + ':' + String(component.amount()));
   }
   const actual = signature.join(',');
   if (actual !== 'tin:6,lead:3,antimony:1' && actual !== 'tin:9,antimony:1') {
     throw new Error('[GTNH migration] Unreviewed soldering alloy definition: ' + actual);
   }
-  material.setComponents('9x tin', '1x antimony');
+  material.setComponents('9x gtceu:tin', '1x gtceu:antimony');
   // Keep generic modern decomposition from disagreeing with the explicit original recipe below.
   material.addFlags(GTMaterialFlags.DISABLE_DECOMPOSITION);
 });

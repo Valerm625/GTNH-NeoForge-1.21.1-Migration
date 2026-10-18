@@ -2,8 +2,8 @@
   "returncode": 0,
   "eula_changed_by_agent": false,
   "log": "<LOCAL_WORKSPACE>\\work\\migration\\loader-with-quest-runtime.log",
-  "timestamp": "2026-10-18T10:36:23.354013+00:00",
-  "lines": 83,
+  "timestamp": "2026-10-18T11:15:42.947833+00:00",
+  "lines": 84,
   "eula_gate_seen": true,
   "server_done_seen": false,
   "scope": "Fresh restored work/neoforge-smoke discovery probe; EULA gate only, no world."

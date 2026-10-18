@@ -2,7 +2,7 @@
   "source_sha256": {
     "work/migration/stage_test_runtime.py": "c684fc20987a1fedd5f463fdb5eb9f56812ec2fde26b511c3f9ac5c955f531b6"
   },
-  "created_at": "2026-10-18T10:40:59.972079+00:00",
+  "created_at": "2026-10-18T11:21:24.486317+00:00",
   "files": [
     {
       "path": "runtime/zulu21.52.203-ca-crac-jdk21.0.12.1-win_x64/bin/api-ms-win-core-console-l1-1-0.dll",
@@ -3501,8 +3501,8 @@
     },
     {
       "path": "mods/gtnh-migration-compat-0.1.0.jar",
-      "bytes": 307175,
-      "sha256": "d840000cec3679510c2cc9c9de88888d93e2eac2a5bbb568e7045db9a02740a9"
+      "bytes": 309409,
+      "sha256": "9d1a011536f3bfabed560fc8bdf3729ba61b3660b4a2c1e36a5aee6b1267a88a"
     },
     {
       "path": "mods/guideme-21.1.19.jar",
@@ -9716,8 +9716,8 @@
     },
     {
       "path": "kubejs/startup_scripts/06_gtnh_fuel_blocks.js",
-      "bytes": 6886,
-      "sha256": "03946b61f4d29e1e0d49d9b491311137ef0598cbd2717d6c823ae3ec87ed1d31"
+      "bytes": 7030,
+      "sha256": "5a43d1afba78cf49f851dd910b3089c5a7aeb778f6231c4bcdcfe9201d10f63e"
     },
     {
       "path": "kubejs/startup_scripts/07_gtnh_blocks_tab.js",
@@ -9726,8 +9726,8 @@
     },
     {
       "path": "kubejs/startup_scripts/08_gtnh_soldering_composition.js",
-      "bytes": 970,
-      "sha256": "a2cd0507df7c0315ce13375658228bebe874c009681fc2abc4d24121e01849bc"
+      "bytes": 1066,
+      "sha256": "3a6824a8f7cb076e6e34d2da72500c22087e9da7acda951588e9fe4bc586109c"
     },
     {
       "path": "resourcepacks/GTNH-2.8.4-Shared-Ore-Assets-1.21.1/assets/gtceu/textures/block/material_sets/diamond/ore.png",

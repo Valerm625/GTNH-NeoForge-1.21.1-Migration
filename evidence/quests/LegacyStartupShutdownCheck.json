@@ -33,7 +33,7 @@
   },
   "minecraft_jar_sha256": "26ca9c40d7e1681190b428583c38816852218e78df3f8bdb60a59a78503aec71",
   "patched_native_jar_sha256": "f57ce3018e21459d24b50508e8c1b4fd5c16324ec1dc5f316c192aa0130e7fe0",
-  "compat_jar_sha256": "d840000cec3679510c2cc9c9de88888d93e2eac2a5bbb568e7045db9a02740a9",
+  "compat_jar_sha256": "9d1a011536f3bfabed560fc8bdf3729ba61b3660b4a2c1e36a5aee6b1267a88a",
   "limitations": [
     "Executes production permit state machine, synthetic world/player/pending ledger, actual DirectoryLock and ledger lock. Server objects and shutdown calls are fixtures. Byte digests exclude the two locked lock files; their exclusion and reopen behavior are tested directly.",
     "Pinned native shutdown ordering and terminal runServer call sites are bytecode audited, with required isolated Mixin checks in a separate report. No Player, server loop, world or full NeoForge transformation chain executes.",

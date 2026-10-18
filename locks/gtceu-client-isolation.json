@@ -1,0 +1,13 @@
+{
+  "version": "7.0.2",
+  "minecraft": "1.21.1",
+  "filename": "gtceu-1.21.1-7.0.2.jar",
+  "sha256": "c09a550523e931342a575193cbaad2e4b643e5de2cefe280cd1de540022c6388",
+  "classes": {
+    "com/gregtechceu/gtceu/api/machine/feature/IFancyUIMachine.class": "2ba457566aa559e24db66614fb816af5d76fdbb15f157f73c1525ecc6ee52c60",
+    "com/gregtechceu/gtceu/common/block/LampBlock.class": "6bfcc8d531996800df33a29cc8e3c60281107bb197f0018ed67f890c143a5083"
+  },
+  "source_commit": "f6200e018582c3e26e8db06c289d9e01c8250ac8",
+  "upstream_issue": "https://github.com/GregTechCEu/GregTech-Modern/issues/4155",
+  "change": "Extract original scene instructions and lamp renderer loop into client-only helpers; retain original client instructions and common block/game logic."
+}

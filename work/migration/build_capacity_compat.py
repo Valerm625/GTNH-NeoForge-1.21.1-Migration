@@ -2,6 +2,10 @@ from pathlib import Path
 import json,subprocess,zipfile,hashlib,re,shutil
 R=Path(__file__).resolve().parents[2];W=R/'work';O=R/'outputs/GTNH-NeoForge-1.21.1-Migration-Foundation';P=W/'compat-mod';src=P/'src/main/java/org/gtnhmigration/compat';resources=P/'src/main/resources';(src/'mixin').mkdir(parents=True,exist_ok=True);src.mkdir(parents=True,exist_ok=True);(resources/'META-INF').mkdir(parents=True,exist_ok=True)
 legacy=W/'source/GT-New-Horizons-Modpack-master/config/EnderStorage.cfg';text=legacy.read_text(encoding='utf-8');buckets=int(re.search(r'^enderTankSize=(\d+)$',text,re.M).group(1));assert buckets==256
+gtpin=json.loads((R/'locks/gtceu-client-isolation.json').read_text(encoding='utf-8'));gtjar=O/'mods'/gtpin['filename']
+assert hashlib.sha256(gtjar.read_bytes()).hexdigest()==gtpin['sha256'],'Re-audit GTCEu client isolation for changed upstream artifact'
+with zipfile.ZipFile(gtjar) as z:
+ for name,digest in gtpin['classes'].items():assert hashlib.sha256(z.read(name)).hexdigest()==digest,name
 es=O/'mods/EnderStorage-1.21.1-2.13.0.191.jar';rt=json.loads((W/'migration/runtime.json').read_text(encoding='utf-8'));java=Path(rt['java']);javap=java.with_name('javap.exe')
 probe=subprocess.run([str(javap),'-classpath',str(es),'-c','-p','codechicken.enderstorage.storage.EnderLiquidStorage'],capture_output=True,timeout=20).stdout.decode(errors='replace');clinit=probe[probe.index('static {};'):];assert len(re.findall(r'\bbipush\s+16\b',clinit))==1 and 'Field codechicken/lib/fluid/FluidUtils.B:I' in clinit and 'imul' in clinit
 entry='''package org.gtnhmigration.compat;
@@ -66,6 +70,12 @@ ordering="AFTER"
 side="BOTH"
 [[mixins]]
 config="gtnh_migration_compat.mixins.json"
+[[dependencies.gtnh_migration_compat]]
+modId="gtceu"
+type="required"
+versionRange="[7.0.2]"
+ordering="AFTER"
+side="BOTH"
 ''',encoding='utf-8',newline='\n')
 (resources/'gtnh_migration_compat.mixins.json').write_text(json.dumps({'required':True,'minVersion':'0.8','package':'org.gtnhmigration.compat.mixin','compatibilityLevel':'JAVA_21','mixins':['EnderTankCapacityMixin','LegacyRetrievalItemTaskMixin','LegacyDimensionLocationTaskMixin','LegacyHuntTaskMixin','LegacyCraftingItemTaskMixin','LegacyInventoryListenerMixin','LegacyTaskLoginTimingMixin','LegacyInitialInventorySyncMixin','LegacyServerSaveScopeMixin','LegacyPlayerListSaveScopeMixin','LegacyPlayerFileSaveScopeMixin','LegacyWorldFileSaveScopeMixin','LegacyPlayerLifecycleSaveScopeMixin','LegacyPlayerDataLoadScopeMixin'],'client':['LegacyOwnerCacheSaveScopeMixin'],'injectors':{'defaultRequire':1}},indent=2),encoding='utf-8',newline='\n')
 (resources/'LICENSE').write_text('''MIT License

@@ -23,7 +23,7 @@ for enum,name,level,hardness in rows:
  tooltag={1:'minecraft:needs_stone_tool',2:'minecraft:needs_iron_tool',3:'minecraft:needs_diamond_tool'}[level]
  # 1.7.10 setHardness raises internal resistance to hardness*5; getExplosionResistance returns /5.
  resistance=hardness
- lines.extend(['  event.create('+json.dumps(id)+').translationKey('+json.dumps(key)+')','    .texture('+json.dumps(tex)+').stoneSoundType().mapColor("stone")',f'    .hardness({hardness}).resistance({resistance}).requiresTool()', '    .tagBlock("minecraft:mineable/pickaxe", '+json.dumps(tooltag)+')',f'    .item(item => {{ item.burnTime({ticks}); item.maxStackSize(64); }});'])
+ lines.extend(['  event.create('+json.dumps(id)+').translationKey('+json.dumps(key)+')','    .texture('+json.dumps(tex)+').stoneSoundType().mapColor("stone")',f'    .hardness({hardness}).resistance({resistance}).requiresTool()', '    .tagBlock("minecraft:mineable/pickaxe").tagBlock('+json.dumps(tooltag)+')',f'    .item(item => {{ item.burnTime({ticks}); item.maxStackSize(64); }});'])
  for tag in ['minecraft:mineable/pickaxe',tooltag]:tags.setdefault(tag,[]).append(id)
  save(K/f'assets/gtnh_migration/blockstates/{name.lower()}.json',{'variants':{'':{'model':'gtnh_migration:block/'+name.lower()}}})
  save(K/f'assets/gtnh_migration/models/block/{name.lower()}.json',{'parent':'minecraft:block/cube_all','textures':{'all':tex}})

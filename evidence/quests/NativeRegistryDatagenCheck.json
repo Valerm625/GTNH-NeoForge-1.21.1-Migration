@@ -132,17 +132,19 @@
   "native_hook_interfaces_verified": 7,
   "ender_storage_capacity_mb": 256000,
   "kubejs_data_generation_mode": true,
+  "client_helpers_retained": 2,
+  "client_lamp_renderers_constructed": 512,
   "negative_control": {
     "passed": true,
     "illegal_mixin_package_rejected": true,
     "exit_code": 1
   },
-  "compat_jar_sha256": "d840000cec3679510c2cc9c9de88888d93e2eac2a5bbb568e7045db9a02740a9",
+  "compat_jar_sha256": "9d1a011536f3bfabed560fc8bdf3729ba61b3660b4a2c1e36a5aee6b1267a88a",
   "archive_sha256": "cf0367344bfa10587719e9a919d04dfd2877fe1e5c2a96b24a4323e0fb7973dc",
-  "registry_details_sha256": "77c05412c13f508a1790dcb2945d1ca821562579dca80e959140ab486bd9fb7b",
+  "registry_details_sha256": "c990442ecde0d0397000a565f931d484e3db6ea8de9fcc1e618c8d680a44fb7e",
   "source_sha256": {
-    "work/migration/NativeRegistryAudit.java": "7186af7a54c9692133ea656713a3ec9ff8c313088998dded9fabeb9a21f5e994",
-    "work/migration/test_native_registry_datagen.py": "280c3f917f6015f65b09c2d5ac0469315060e1a71cda96c431b0287e3ddb0aef",
+    "work/migration/NativeRegistryAudit.java": "d2e5618173f806e560ace65e101bbcd10b6338290a80188fd7868a076e0b8390",
+    "work/migration/test_native_registry_datagen.py": "691323d44721bd639b87c2eb4754a4c5608a5dd13442072e13b2d2c80d05d102",
     "work/migration/acquire_native_client_audit.py": "38aa830027cf861928db5f18f2990ed33b38052ea5f671493f05e8c825a1e366"
   },
   "overlay_inputs_sha256": {
@@ -253,7 +255,7 @@
     "mods/ftb-quests-neoforge-2101.1.36.jar": "6a39982c4b3afc00b1e788041a4f0d394e1659e3b3a6e5d078cd790bc36d0018",
     "mods/ftb-teams-neoforge-2101.1.11.jar": "e6bcd670493624e6906df872a9c6af4a33fe6405cac57a32c59cd4cd5838c655",
     "mods/gtceu-1.21.1-7.0.2.jar": "c09a550523e931342a575193cbaad2e4b643e5de2cefe280cd1de540022c6388",
-    "mods/gtnh-migration-compat-0.1.0.jar": "d840000cec3679510c2cc9c9de88888d93e2eac2a5bbb568e7045db9a02740a9",
+    "mods/gtnh-migration-compat-0.1.0.jar": "9d1a011536f3bfabed560fc8bdf3729ba61b3660b4a2c1e36a5aee6b1267a88a",
     "mods/guideme-21.1.19.jar": "2ce254edb931c3c3cf81d69abaf8f4ce5b871bf85e64984f366bf044173bd66a",
     "mods/Jade-1.21.1-NeoForge-15.10.6.jar": "276f1f65a20d04f536989c4f311949d770b52c440c23c2b904a08860f3c93810",
     "mods/jei-1.21.1-neoforge-19.51.0.418.jar": "8bc3936d869e4040a5649c58b7e8be1c78c82a245c0dc07bdd68ab49121a222c",
@@ -1505,9 +1507,9 @@
     "kubejs/startup_scripts/03_gtnh_tooltips.js": "fc62a084a717e19f6483fafb5cd4a971e8bef4b8fa45929390ce12153c83dd15",
     "kubejs/startup_scripts/04_gtnh_fuel_overrides.js": "f748ea824e65b38453532ecbb691c5e9e672df4e1dbad53a0cb945ed02ac82bb",
     "kubejs/startup_scripts/05_gtnh_wooden_brick_form.js": "5cb57a92aa34251b2c6f9a95d1d0ff63908a52eeba2ce1802a9a44600fa6ebe2",
-    "kubejs/startup_scripts/06_gtnh_fuel_blocks.js": "03946b61f4d29e1e0d49d9b491311137ef0598cbd2717d6c823ae3ec87ed1d31",
+    "kubejs/startup_scripts/06_gtnh_fuel_blocks.js": "5a43d1afba78cf49f851dd910b3089c5a7aeb778f6231c4bcdcfe9201d10f63e",
     "kubejs/startup_scripts/07_gtnh_blocks_tab.js": "3ffc5386eb5623a94ac0c759c3a554fe0a5f9bc9268a33f48fa2470cbbe0b02e",
-    "kubejs/startup_scripts/08_gtnh_soldering_composition.js": "a2cd0507df7c0315ce13375658228bebe874c009681fc2abc4d24121e01849bc"
+    "kubejs/startup_scripts/08_gtnh_soldering_composition.js": "3a6824a8f7cb076e6e34d2da72500c22087e9da7acda951588e9fe4bc586109c"
   },
   "limitations": [
     "Official data-generator CLIENT distribution only; no server/world/player, rendering or gameplay execution.",

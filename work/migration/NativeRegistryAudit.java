@@ -68,6 +68,29 @@ public final class NativeRegistryAudit {
             boolean datagen = dev.latvian.mods.kubejs.script.PlatformWrapper.isGeneratingData();
             if (!datagen) throw new IllegalStateException("Expected KubeJS data generation mode");
             report.addProperty("kubejs_data_generation_mode", datagen);
+            // Datagen uses the CLIENT distribution: the original rendering bodies
+            // must remain available, and each lamp state must retain its renderer.
+            Class<?> fancy = Class.forName("com.gregtechceu.gtceu.api.machine.feature.IFancyUIMachine");
+            Class<?> group = Class.forName("com.lowdragmc.lowdraglib.gui.widget.WidgetGroup");
+            fancy.getDeclaredMethod("gtnhMigration$addClientScene", group);
+            Class<?> lamp = Class.forName("com.gregtechceu.gtceu.common.block.LampBlock");
+            lamp.getDeclaredMethod("gtnhMigration$initializeRenderers");
+            var renderers = lamp.getDeclaredField("renderers"); renderers.setAccessible(true);
+            int lampCount = 0, rendererCount = 0;
+            for (var block : BuiltInRegistries.BLOCK) {
+                if (!lamp.isInstance(block)) continue;
+                lampCount++;
+                Map<?,?> byState = (Map<?,?>) renderers.get(block);
+                if (byState.size() != block.getStateDefinition().getPossibleStates().size())
+                    throw new IllegalStateException("Missing client lamp renderer");
+                for (var state : block.getStateDefinition().getPossibleStates())
+                    if (byState.get(state) == null || !byState.get(state).getClass().getName().equals("com.gregtechceu.gtceu.client.renderer.block.LampRenderer"))
+                        throw new IllegalStateException("Replaced client lamp renderer");
+                rendererCount += byState.size();
+            }
+            if (lampCount != 32 || rendererCount != 512) throw new IllegalStateException("Lamp variants differ");
+            report.addProperty("client_helpers_retained", 2);
+            report.addProperty("client_lamp_renderers_constructed", rendererCount);
             LegacyQuestDefinitionArchive archive = LegacyQuestDefinitionArchive.loadPinned(Path.of("."));
             report.addProperty("archive_sha256", archive.pin().archiveSha256());
             JsonArray mappings = new JsonArray();

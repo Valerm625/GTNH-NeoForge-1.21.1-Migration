@@ -1,7 +1,7 @@
 {
   "portable_java_21": "packaged binary -version passes",
   "neoforge_server_installation": "21.1.262 installed; actual loader stops at unaccepted EULA",
-  "modern_artifacts": "18 downloaded JARs + 1 local version-pinned adapter; 58 dependency ranges passed",
+  "modern_artifacts": "18 downloaded JARs + 1 local version-pinned adapter; 59 dependency ranges passed",
   "original_release": "2.8.4 isolated and CRC-verified",
   "currency_items": 81,
   "currency_assembler_recipes": 112,
@@ -63,6 +63,7 @@
   "quest_entry_policy": "3814 source nodes and 5460 prerequisite edges; six source logic modes and UUID/global completion presence; three missing references retained, nonrepeat gates source-compared; active-player ledger-head query compiled, no party authorization or game execution",
   "quest_completion_planner": "source 60-tick passive completion and active-membership expression compared for 39 bound nonrepeat retrieval declarations; per-UUID records and event/dirty/notice intents preserved; synthetic ledger reopen verified, native tick/cache/party/rewards unimplemented",
   "retrieval_modes": "all 16 consume/autoConsume/groupDetect/requireOnlyOneItem combinations source-compared; multiple requirements, early stop and aliased group-reset state preserved; source exhausted-slot errors reject whole plans; native automatic event integration remains unavailable",
-  "native_datagen_registry": "official NeoForge data target registered installed native mods; 492 native mapping rows resolve, 68 retrieval declarations bind; KubeJS skips startup scripts (228 identities untested); no world/player or gameplay",
-  "mixin_package_isolation": "15 Mixins moved out of runtime helper package; real ModLauncher rejects old-layout negative control and defines 16 selected classes with seven native hook interfaces; no player/world lifecycle execution"
+  "native_datagen_registry": "official NeoForge data target registered installed native mods; 492 native mapping rows resolve, 68 retrieval declarations bind; KubeJS skips startup scripts in this mode; two client helpers and 512 original lamp renderers retained; no rendering or world/player",
+  "mixin_package_isolation": "15 Mixins moved out of runtime helper package; real ModLauncher rejects old-layout negative control and defines 16 selected classes with seven native hook interfaces; no player/world lifecycle execution",
+  "native_startup_registration": "production server distribution executes ordinary KubeJS startup; 574 custom items and all 720 mapped targets registered; 87 retrieval declarations bind; tin:9/antimony:1 actual material and 16 generated fuel data-map entries checked; LDLib reflection errors unresolved; no resource reload, world/player, complete lifecycle or gameplay"
 }

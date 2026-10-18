@@ -1,13 +1,13 @@
 {
-  "created_at": "2026-10-18T18:42:09.581837+08:00",
+  "created_at": "2026-10-18T19:22:48.717344+08:00",
   "scope": "source-only public checkpoint; third-party game inputs excluded",
   "hash_scope": "Git index canonical blobs, not Windows checkout line endings",
-  "base_commit": "14d3e0ce79ce801c729e709e0aea8768588718fe",
+  "base_commit": "21a9e9ac9a7c5d8d6bdad39e224d607d9301e457",
   "files": [
     {
       "path": ".gitattributes",
-      "bytes": 120,
-      "sha256": "f451ecc30c1db14ca1db645211ad835f8877ea52fde6f131db448217ddf9a447"
+      "bytes": 137,
+      "sha256": "fd52a02baf7b8643850b0c58be27cc67d6d314213d0acea0455cc312060ec51b"
     },
     {
       "path": ".gitignore",
@@ -26,18 +26,18 @@
     },
     {
       "path": "README.md",
-      "bytes": 13450,
-      "sha256": "0f9b6217f0ab9f6c7c77f6a1ed54f7cffb05d2b685657540aec232ea15da364c"
+      "bytes": 13868,
+      "sha256": "d34c2b7d6f2d86e7dd1a16351058ee5bf184ee1110169892c843d07a155938b5"
     },
     {
       "path": "RESUME.md",
-      "bytes": 34321,
-      "sha256": "4fa9a68fdfd6f392237014f2bee49c25cfe49f984351682a66fbee4411610637"
+      "bytes": 36864,
+      "sha256": "2bf7acb226331c271e5d9be15f9cac9fc27b093a349f1e15158714c930dac47d"
     },
     {
       "path": "STATUS.zh-CN.md",
-      "bytes": 17774,
-      "sha256": "cc9d568d9f686706269d20f0fb8fd75cf4d532598f0ede9364e010c79d0098da"
+      "bytes": 18414,
+      "sha256": "318c49cde6f2ebaeb04d976527f06e712ad189a3c31d84ada98dd79ede4563ee"
     },
     {
       "path": "docs/inventory-detection-timing.zh-CN.md",
@@ -66,13 +66,18 @@
     },
     {
       "path": "docs/native-registry-datagen.zh-CN.md",
-      "bytes": 4476,
-      "sha256": "b89af97228eee00382e54a1bb9ec5c9de3fef9b04d368f39721e0e2950ba7680"
+      "bytes": 4742,
+      "sha256": "09d77f19f8d7edd0eb991748ede1b20272dde5f78f1b9382f8fe980e11667db6"
     },
     {
       "path": "docs/native-save-scope.zh-CN.md",
       "bytes": 6673,
       "sha256": "b43e85ed179e3d60144b07a527430ea8297211c10ceb51cc8d5bace987a9f438"
+    },
+    {
+      "path": "docs/native-startup-registration.zh-CN.md",
+      "bytes": 5309,
+      "sha256": "d2bcffe87da5ff0f6eec12a6cfab42a8b235c8cb3421e4b2e76c0e523836a3d8"
     },
     {
       "path": "docs/owner-transaction-recovery.zh-CN.md",
@@ -190,6 +195,11 @@
       "sha256": "e1c0ad728983d8a57335e52cf1064f1affd1d454173d8cebd3ed8b4a72b48704"
     },
     {
+      "path": "evidence/NativeStartupRegistrationCheck.json",
+      "bytes": 205712,
+      "sha256": "b3eedb4cb985b46f4d22b2fdb1af13f9eb9a1c51ee150de8c5bbc4054a7c808f"
+    },
+    {
       "path": "evidence/capacity-adapter-test.json",
       "bytes": 258,
       "sha256": "aae8b467d91abaf84b88bd36754cf512c9cacbdf29bd9c850403985b4e5f202d"
@@ -207,7 +217,7 @@
     {
       "path": "evidence/compat-mod.lock.json",
       "bytes": 4559,
-      "sha256": "50443a5af6db88a0dbc64cb2ba4e79c092114e01b248f09fea72bb38d2e980ca"
+      "sha256": "e649d8e66dfd605e83f84262e406c0ce8535e2cf494c51df45b763b497d8392f"
     },
     {
       "path": "evidence/crafting-task-adapter.json",
@@ -267,7 +277,7 @@
     {
       "path": "evidence/loader-with-quest-runtime.json",
       "bytes": 347,
-      "sha256": "bc271556a2ce289cc0c3200b37794e6d7f6ba85164250fe25aee4f75ad1e7e2e"
+      "sha256": "c4028234daf2f3d7adb01ab6570efa78ae7f327ab485e06112496f0ad1f17d50"
     },
     {
       "path": "evidence/location-task-boundary.json",
@@ -331,8 +341,8 @@
     },
     {
       "path": "evidence/phase-2026-10-18-task-semantics.json",
-      "bytes": 381547,
-      "sha256": "129f3ba0e7a39cfc03466fd44b1eb596f8b6f72de61fd54dcf9f7d4c0f253b53"
+      "bytes": 593735,
+      "sha256": "4e3044a050962338aefcfa84e47271839d1c1953e722cbf32ce278fcae3be185"
     },
     {
       "path": "evidence/quest-export-summary.json",
@@ -342,7 +352,7 @@
     {
       "path": "evidence/quests/IsolatedMixinTransformationCheck.json",
       "bytes": 2204,
-      "sha256": "b88fef1435b7d7238c85ad925fa757ce1b8c581b0683e31f4632b035b358e5f0"
+      "sha256": "6aa7d4719f212647bb6b39601093dae8034097c0513b7a2fa68fc2af4f954427"
     },
     {
       "path": "evidence/quests/LegacyCraftingShapeCheck.json",
@@ -357,7 +367,7 @@
     {
       "path": "evidence/quests/LegacyHuntAdapterCheck.json",
       "bytes": 1612,
-      "sha256": "251bbe4e1865596a4b47b56c9f2fd6542af285613655a9106c8dd7cd720596ed"
+      "sha256": "33e2f5da89989e82689e4499374b14d4d1b168b0bf755232d46ecc868a4f1ebd"
     },
     {
       "path": "evidence/quests/LegacyIntegratedOwnerCoordinatorCheck.json",
@@ -367,7 +377,7 @@
     {
       "path": "evidence/quests/LegacyInventoryObserverCheck.json",
       "bytes": 5287,
-      "sha256": "c38f0e6cb69789bde5387062ea204f571946ef1f896613fbf013e77b0fadb108"
+      "sha256": "8f72f6ac31bf8c6ff573832200b44f5acb130e0e9df70b7649ac43347823766b"
     },
     {
       "path": "evidence/quests/LegacyMaintenanceInitializationCheck.json",
@@ -447,7 +457,7 @@
     {
       "path": "evidence/quests/LegacyRetrievalDefinitionBindingCheck.json",
       "bytes": 6924,
-      "sha256": "c26fc98583d1bdd48eb1a523d4ce4e0ee9e0a08f125ebc6ac86e84f74dd268f5"
+      "sha256": "552b653b92ee8574ce6fc2e93b73b599c38493d58c88008db8bc8b4b4400894f"
     },
     {
       "path": "evidence/quests/LegacyRetrievalEngineCheck.json",
@@ -487,7 +497,7 @@
     {
       "path": "evidence/quests/LegacyStartupShutdownCheck.json",
       "bytes": 4925,
-      "sha256": "c9385bfef85c74d3ccfb787968d9855a125b74b020a2c7bedd36146b43231ba5"
+      "sha256": "a49799a4cfc8ee045988ee1d65aa10dc4644407011106a7fd1090946432706c2"
     },
     {
       "path": "evidence/quests/LegacyTypedNbtJsonReaderCheck.json",
@@ -501,13 +511,13 @@
     },
     {
       "path": "evidence/quests/NativeRegistryDatagenCheck.json",
-      "bytes": 185732,
-      "sha256": "ce512f45e0537950051c9d0d2b814614fb454ffbae647f00762c3d63b7bcf909"
+      "bytes": 185808,
+      "sha256": "ed0e320d1f391392226f30818159af3293ddee503d8fd2dd84fb6899f2bd66a1"
     },
     {
       "path": "evidence/quests/NativeSaveScopeMixinCheck.json",
       "bytes": 5759,
-      "sha256": "591a44f48a032debcb1caa61710fdb66d55569d520dd2d4ad7aab5e76547ae41"
+      "sha256": "03ef75fa97bbace01e9b55f00b5684593cb95e225a6ea0842daaeee927bdcd36"
     },
     {
       "path": "evidence/quests/QuestAdapterShapeCheck.json",
@@ -541,13 +551,13 @@
     },
     {
       "path": "evidence/validation-state.json",
-      "bytes": 7705,
-      "sha256": "6bf518793f56b557f7a0f5b8cd3bce6322106cb3208ec0c8b2183331c2a26290"
+      "bytes": 8125,
+      "sha256": "c6d3dea20264b4d7700f9f082cdb2a86ed8784f2f209c8833c65707e082ae527"
     },
     {
       "path": "evidence/validation-summary.json",
       "bytes": 5063,
-      "sha256": "e1c80148a51050647137e451362f257fcad8eba5ad59ffbf0e58749cfb7c802d"
+      "sha256": "b970786b04c787fafb813e270f137bd125ff646ac0668eaa2400d3c66b14d259"
     },
     {
       "path": "evidence/vanilla-identity-mapping.json",
@@ -572,7 +582,7 @@
     {
       "path": "locks/compat-mod.lock.json",
       "bytes": 4559,
-      "sha256": "50443a5af6db88a0dbc64cb2ba4e79c092114e01b248f09fea72bb38d2e980ca"
+      "sha256": "e649d8e66dfd605e83f84262e406c0ce8535e2cf494c51df45b763b497d8392f"
     },
     {
       "path": "locks/ftb-candidates.json",
@@ -580,9 +590,14 @@
       "sha256": "eb3ba3b48b75a4e78cef7eeb8b99b5c571a6578c63f6b9c3ec1c4a52efaec8d4"
     },
     {
+      "path": "locks/gtceu-client-isolation.json",
+      "bytes": 764,
+      "sha256": "896327537e9c5903e856c2132c9e2dae3b17220de6f3c948c401f11276f5ffad"
+    },
+    {
       "path": "locks/local-runtime-file-hashes.json",
-      "bytes": 418670,
-      "sha256": "ad6911250bad8af243f7a63fa944b4ad72cb6e27f6e403ba7d76eda629889bf8"
+      "bytes": 418671,
+      "sha256": "13f8e08714369c6f2aa09835d12948423fac6ddb136c563c34491de39d52cfd2"
     },
     {
       "path": "locks/modern-transport-candidates.json",
@@ -870,9 +885,19 @@
       "sha256": "83880a3eb22deedd0e08c817aa32690af1684ce7d2db893903fea015fede98fd"
     },
     {
+      "path": "work/compat-mod/src/main/resources/META-INF/coremods.json",
+      "bytes": 74,
+      "sha256": "b41da80675e1487eb033aff2a49317cde36338738fa19e99acb85985eb6783f2"
+    },
+    {
       "path": "work/compat-mod/src/main/resources/META-INF/neoforge.mods.toml",
-      "bytes": 871,
-      "sha256": "4db01a29757b278dde7eb97a9888a9031528c66510a3bca17e9b098d4da6b62a"
+      "bytes": 992,
+      "sha256": "946cd8dc2c30f5d474765dfe3403390e2084c6888131c7400b399f9f580b303a"
+    },
+    {
+      "path": "work/compat-mod/src/main/resources/coremods/gtceu_client_isolation.js",
+      "bytes": 6029,
+      "sha256": "48643ff1dcc1cbf94f5242a5d8cbcf787c4db3b8f2739715b9aa3fc079ca09cd"
     },
     {
       "path": "work/compat-mod/src/main/resources/gtnh_migration/quest-definitions.pin",
@@ -898,6 +923,11 @@
       "path": "work/migration/EnderConfigRoundTrip.java",
       "bytes": 1338,
       "sha256": "9844fabddee13908d4d10d9243bee4ea1e8ad407cff90ea8907f77d77ccff6b0"
+    },
+    {
+      "path": "work/migration/GtceuClientIsolationCheck.java",
+      "bytes": 6102,
+      "sha256": "5d9170f2b63d15b1836544ef4524f083a563fdecd24f3a822025f490e2dd4999"
     },
     {
       "path": "work/migration/IsolatedMixinTransformationCheck.java",
@@ -1066,8 +1096,8 @@
     },
     {
       "path": "work/migration/NativeRegistryAudit.java",
-      "bytes": 6514,
-      "sha256": "7186af7a54c9692133ea656713a3ec9ff8c313088998dded9fabeb9a21f5e994"
+      "bytes": 8309,
+      "sha256": "d2e5618173f806e560ace65e101bbcd10b6338290a80188fd7868a076e0b8390"
     },
     {
       "path": "work/migration/NativeSaveScopeMixinCheck.java",
@@ -1093,6 +1123,16 @@
       "path": "work/migration/QuestSnbtCheck.java",
       "bytes": 3125,
       "sha256": "8650fb77e923871f285fca1d99eb14b010f600b72617b793f641d53f91cada78"
+    },
+    {
+      "path": "work/migration/StartupAuditLaunchHandler.java",
+      "bytes": 691,
+      "sha256": "1e7306476f0e13ba6c5a602331b0122d716753256f777b487e22426bf747ca9d"
+    },
+    {
+      "path": "work/migration/StartupAuditMain.java",
+      "bytes": 9873,
+      "sha256": "11ff569e0354bc6c4c8cb8a050f5aad1ad44d0228d9c5d929271d05506bed21c"
     },
     {
       "path": "work/migration/acquire_exact_sources.py",
@@ -1151,8 +1191,8 @@
     },
     {
       "path": "work/migration/build_capacity_compat.py",
-      "bytes": 11694,
-      "sha256": "595e9d8c50bd4b36a2f4eb072752f382d9d7eda0c8a79a53f63ae54963a01921"
+      "bytes": 12209,
+      "sha256": "dd408131bde1b849d90ce9129f1d41c094adc3951ec2e62926d586dddf361683"
     },
     {
       "path": "work/migration/build_quest_definition_archive.py",
@@ -1261,8 +1301,8 @@
     },
     {
       "path": "work/migration/port_fuel_blocks.py",
-      "bytes": 10510,
-      "sha256": "fc0bbb034b07a5df85117b9d600f603552ec028ce599b59741dbc7f14b2cf17c"
+      "bytes": 10519,
+      "sha256": "a53d227a23c8ab30ba5b4a94a53ef0cc2447061457cf4f83635451443cc07437"
     },
     {
       "path": "work/migration/port_material_bridges.py",
@@ -1281,8 +1321,8 @@
     },
     {
       "path": "work/migration/port_soldering_alloy.py",
-      "bytes": 8624,
-      "sha256": "6d3e024b7bf0f38681b3810a96b3d224c9bdcfa5249b78ee4b08833ccb8cfeec"
+      "bytes": 8719,
+      "sha256": "d37864f2a537e2641fae21dd79e56ee72c616ce8c019f9854dc6383e26c49667"
     },
     {
       "path": "work/migration/port_wooden_form.py",
@@ -1291,8 +1331,8 @@
     },
     {
       "path": "work/migration/rebuild_current_phase.py",
-      "bytes": 4071,
-      "sha256": "4da9b75d462382d0521cc6b412bf42432b85a2fc6dad35934e3d8d239ae0510d"
+      "bytes": 4161,
+      "sha256": "f91064c26a6e77030b6ced4afe9bf693c4f87e927446ca0fbf7ac64f2ab74939"
     },
     {
       "path": "work/migration/recover_java.py",
@@ -1346,8 +1386,8 @@
     },
     {
       "path": "work/migration/test_fuel_blocks.cjs",
-      "bytes": 3757,
-      "sha256": "e3c625c305e13baabf23bb427836f363e08cca33acf00b7366f8136c5969f417"
+      "bytes": 3828,
+      "sha256": "7e0a457f8a800b147ecf92e1c2ca0164ec69ef1eda39d43038aa46c24404e89b"
     },
     {
       "path": "work/migration/test_generated_regressions.py",
@@ -1516,13 +1556,18 @@
     },
     {
       "path": "work/migration/test_native_registry_datagen.py",
-      "bytes": 12506,
-      "sha256": "280c3f917f6015f65b09c2d5ac0469315060e1a71cda96c431b0287e3ddb0aef"
+      "bytes": 12759,
+      "sha256": "691323d44721bd639b87c2eb4754a4c5608a5dd13442072e13b2d2c80d05d102"
     },
     {
       "path": "work/migration/test_native_save_scope_mixins.py",
       "bytes": 6714,
       "sha256": "5c5a0b20513c54f5a45a8c25825e3a03c860887397fc22077ceafa781ee17f75"
+    },
+    {
+      "path": "work/migration/test_native_startup_registration.py",
+      "bytes": 12836,
+      "sha256": "305fc7002e9c4b2629be9de019eb4bb48a405e62acf153a8c24f2521fc1f4801"
     },
     {
       "path": "work/migration/test_quest_export_java.py",
@@ -1541,8 +1586,8 @@
     },
     {
       "path": "work/migration/test_soldering_alloy.cjs",
-      "bytes": 3468,
-      "sha256": "ce2427e94ce55245e498f3a4d4293265afd06141f4c1809c28de7300934bae8f"
+      "bytes": 3489,
+      "sha256": "1986e4239c3db16a2c30b7c4a388b12c921b4101ff7ae4c0a9a37e8b851da44b"
     },
     {
       "path": "work/migration/test_source_archive_audit.py",
@@ -1621,8 +1666,8 @@
     },
     {
       "path": "work/migration/verify_soldering_alloy.py",
-      "bytes": 4069,
-      "sha256": "582725ba6f7b223b561b2718c8c91a320c0cc369a8afe4007ec53014d370c0cc"
+      "bytes": 4081,
+      "sha256": "94a58b6acefbe9de8bbfadca06504dccdb7bb031ad1e6963caff817a16c06063"
     },
     {
       "path": "work/migration/verify_vanilla_identity_mapping.py",
@@ -1656,13 +1701,13 @@
     },
     {
       "path": "work/migration/write_task_semantics_status.py",
-      "bytes": 37380,
-      "sha256": "34ad88e64fc16783f76bde55546a36601b69dec90822ce4ac4e81a6ab788df67"
+      "bytes": 39720,
+      "sha256": "f181518cce92ecb449787b8b8b2e4bc18a26439f253473497133886961bd545d"
     }
   ],
-  "file_count": 331,
+  "file_count": 340,
   "source_archive_inputs_included": false,
   "runtime_binaries_included": false,
   "full_parity": false,
-  "continuation": "Continue full GTNH parity: validate KubeJS startup registrations and script APIs, connect native quest lifecycle and retain all content; 68 datagen-bound declarations are not completed quests."
+  "continuation": "Continue solo: resolve retained LDLib/Rhino client-type reflection failures, complete normal mod lifecycle and real resource/recipe reload, verify generated furnace fuels in behavior, then continue full quest submission/completion/rewards and all remaining GTNH feature/resource parity. Existing 720 targets registered and 87 retrieval declarations bound; full exports remain 2/3814; EULA false."
 }
