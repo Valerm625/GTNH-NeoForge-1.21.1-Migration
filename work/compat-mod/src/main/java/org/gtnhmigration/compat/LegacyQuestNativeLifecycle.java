@@ -22,8 +22,8 @@ public final class LegacyQuestNativeLifecycle {
     private static final ThreadLocal<MinecraftServer> STOP_ATTEMPT=new ThreadLocal<>();
     private static final Set<MinecraftServer> FAILED_BEFORE_LEVELS=Collections.newSetFromMap(new IdentityHashMap<>());
     private static final class Mount {
-        final LegacyQuestWorldStore world;final LegacyQuestDefinitionArchive definitions;boolean ready;
-        Mount(LegacyQuestWorldStore world,LegacyQuestDefinitionArchive definitions){this.world=world;this.definitions=definitions;}
+        final LegacyQuestWorldStore world;final LegacyQuestDefinitionArchive definitions;final LegacyQuestEntryPolicy entryPolicy;boolean ready;
+        Mount(LegacyQuestWorldStore world,LegacyQuestDefinitionArchive definitions,LegacyQuestEntryPolicy entryPolicy){this.world=world;this.definitions=definitions;this.entryPolicy=entryPolicy;}
     }
     private record Load(ServerPlayer player,PlayerList list,LegacyRetrievalSaveScope.Lease scope,LegacyQuestPlayerAdmission.Receipt receipt) {}
     private LegacyQuestNativeLifecycle(){}
@@ -33,9 +33,10 @@ public final class LegacyQuestNativeLifecycle {
         try(var scope=LegacyRetrievalNativeSaveScope.beginServer(server)){
             try{
                 var definitions=LegacyQuestDefinitionArchive.loadPinned(server.getServerDirectory());
-                if(!hasMetadata(server)){var empty=new Mount(null,definitions);synchronized(WORLDS){WORLDS.put(server,empty);}scope.release();empty.ready=true;return;}
+                var entryPolicy=LegacyQuestEntryPolicy.fromArchive(definitions);
+                if(!hasMetadata(server)){var empty=new Mount(null,definitions,entryPolicy);synchronized(WORLDS){WORLDS.put(server,empty);}scope.release();empty.ready=true;return;}
                 requireEmpty(server);var world=LegacyQuestWorldStore.open(server.getWorldPath(LevelResource.ROOT));
-                var mount=new Mount(world,definitions);synchronized(WORLDS){WORLDS.put(server,mount);}
+                var mount=new Mount(world,definitions,entryPolicy);synchronized(WORLDS){WORLDS.put(server,mount);}
                 world.verifyCurrent(definitions.binding(),definitions.progressCatalog());
                 Runnable barrier=()->{
                     scope.assertHeld();requireThread(server);requireEmpty(server);
@@ -106,6 +107,26 @@ public final class LegacyQuestNativeLifecycle {
      * This is a declaration lookup, not a submission or authorization API. */
     public static LegacyRetrievalDefinitionBinding.Result retrievalDefinition(MinecraftServer server,UUID quest){
         return LegacyRetrievalDefinitionBinding.inspect(definitions(server),quest,server.registryAccess());
+    }
+    /** Consistent read of this active player's source gate at one ledger head.
+     * No party authorization, quest cache or reusable submission permit exists. */
+    public record RetrievalEntry(UUID actor,UUID worldId,LegacyQuestProgressFileStore.Head head,
+            LegacyRetrievalDefinitionBinding.BoundQuest definition,LegacyQuestEntryPolicy.Status status) {}
+    public static RetrievalEntry retrievalEntry(ServerPlayer player,UUID quest)throws IOException {
+        MinecraftServer server=player.server;requireThread(server);
+        LegacyRetrievalSaveScope.denyLifecycle(server,null,"quest entry lookup");
+        if(server.getPlayerList().getPlayer(player.getUUID())!=player)throw new IllegalStateException("Quest entry requires the active server player identity");
+        LegacyQuestWorldStore world=world(server).orElseThrow(()->new IllegalStateException("Quest progress has not been bound to this world"));
+        Mount mount;synchronized(WORLDS){mount=WORLDS.get(server);}
+        synchronized(world.ledger()){
+            world.verifyCurrent(mount.definitions.binding(),mount.definitions.progressCatalog());
+            var journal=new LegacyRetrievalTransactionJournal(world.ledger(),world.binding(),world.catalog());
+            if(journal.pending().isPresent())throw new IOException("Unresolved transaction prevents entry snapshot");
+            var head=world.ledger().current().orElseThrow(()->new IOException("World quest progress is unavailable"));
+            var definition=retrievalDefinition(server,quest).requireBound();
+            var status=mount.entryPolicy.view(head.frame().snapshot().state(),player.getUUID()).manualStatus(definition);
+            return new RetrievalEntry(player.getUUID(),world.storageId(),head,definition,status);
+        }
     }
     public static Optional<CompoundTag> load(PlayerList list,ServerPlayer player){
         MinecraftServer server=player.server;

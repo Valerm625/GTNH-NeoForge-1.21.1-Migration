@@ -5,6 +5,20 @@
   "source_read_comparisons": 41,
   "actual_source_quests_inspected": 3814,
   "bound_vanilla_detection_declarations": 38,
+  "unresolved_problem_occurrences": {
+    "legacy_identity_mapping_missing": 4618,
+    "legacy_nbt_component_mapping_missing": 576,
+    "mapped_target_not_registered": 225,
+    "ore_set_mapping_missing": 75,
+    "unsupported_any_requirement": 133,
+    "unsupported_empty_quest": 1,
+    "unsupported_group_detect": 3,
+    "unsupported_multi_requirement_consumption": 39,
+    "unsupported_repeat": 93,
+    "unsupported_task_logic": 52,
+    "unsupported_task_type": 1920,
+    "wildcard_metadata_set_mapping_missing": 59
+  },
   "bound_detection_quest_ids": [
     "00000000-0000-0000-0000-000000000000",
     "00000000-0000-0000-0000-000000000007",
@@ -45,20 +59,6 @@
     "00000000-0000-0000-0000-00000000086f",
     "00000000-0000-0000-0000-000000000c15"
   ],
-  "unresolved_problem_occurrences": {
-    "legacy_identity_mapping_missing": 4618,
-    "legacy_nbt_component_mapping_missing": 576,
-    "mapped_target_not_registered": 225,
-    "ore_set_mapping_missing": 75,
-    "unsupported_any_requirement": 133,
-    "unsupported_empty_quest": 1,
-    "unsupported_group_detect": 3,
-    "unsupported_multi_requirement_consumption": 39,
-    "unsupported_repeat": 93,
-    "unsupported_task_logic": 52,
-    "unsupported_task_type": 1920,
-    "wildcard_metadata_set_mapping_missing": 59
-  },
   "runtime_integrated": false,
   "export_enabled": false,
   "game_runtime_verified": false,
